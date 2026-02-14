@@ -10,6 +10,7 @@ import Safety from './pages/Safety';
 import Partners from './pages/Partners';
 import Company from './pages/Company';
 import Contact from './pages/Contact';
+import Perspective from './pages/Perspective';
 import './styles/global.css';
 import './App.css';
 
@@ -42,6 +43,7 @@ function AppShell() {
           <Route path="/en/partners" element={<Partners />} />
           <Route path="/en/company" element={<Company />} />
           <Route path="/en/contact" element={<Contact />} />
+          <Route path="/en/perspective" element={<Perspective />} />
           <Route path="/fa" element={<Home />} />
           <Route path="/fa/technology" element={<Technology />} />
           <Route path="/fa/science" element={<Science />} />
@@ -49,6 +51,7 @@ function AppShell() {
           <Route path="/fa/partners" element={<Partners />} />
           <Route path="/fa/company" element={<Company />} />
           <Route path="/fa/contact" element={<Contact />} />
+          <Route path="/fa/perspective" element={<Perspective />} />
           <Route path="*" element={<Navigate to="/en" replace />} />
         </Routes>
       </div>

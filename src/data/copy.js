@@ -9,6 +9,7 @@ export const copy = {
       company: "Company",
       contact: "Contact",
       switchLang: "فارسی",
+      perspective: "Perspective",
     },
     home: {
       heroH1: "The Future of Autonomous Driving Starts with Physics",
@@ -166,6 +167,20 @@ export const copy = {
       pressEmail: "press@ghostautonomy.com",
       successMsg: "Thank you. We will be in touch shortly.",
     },
+    perspective: {
+      heroEyebrow: "Founder's Perspective",
+      heroH1: "Commercializing a Microchip Architecture",
+      heroSub: "From the Principles of Physics to the Capital Markets",
+      subtitle: "From Fluids to Fluids, with a Hint of Planets",
+      paragraphs: [
+        "Physics attempts to explain the world around us. The entire cosmos is composed of atoms existing in gaseous, liquid, and solid forms. Among these, fluid is a more enigmatic state, possessing a mixture of both liquid and gas properties.",
+        "Petroleum engineering is, in essence, the study of fluid behavior. This behavior is examined in the most complex environments, including underground reservoirs, multiphase surface distribution networks, and reactors that convert them into higher-value products.",
+        "Chemical engineering goes a step further, applying the laws governing the transformation of materials and energy not only on the scale of pipes and reactors but as a universal language for describing any condensed system. Wherever mass and energy are involved, balance equations and conservation laws are paramount. This is the language a chemical engineer grows up with, gradually developing a deep intuition for it. This intuition is the root of entering fields seemingly far from classical expertise, such as the semiconductor industry and microchip design.",
+        "Dr. Mohsen Dirbaz, with two decades of experience in this field, sought to solve the puzzle of biomass gasification (an extremely heterogeneous fuel structurally) in his doctoral dissertation at the Illinois Institute of Technology (IIT). It was a highly nonlinear, multiphase system with high dimensions. His solution, however, went beyond conventional modeling. By employing elliptic integrals—the same mathematical tools Laplace and Gauss used to calculate planetary orbits—he succeeded in discovering a \"bilinear mapping\" that established the conservation laws of mass and energy within the model with astonishing precision and extraordinary computational efficiency. As a result, the gain parameter calculated by these integrals, for hundreds of different experimental samples, fell within a numerical range between 10⁻³⁷ and 10⁻⁶⁰. This is precisely the range of the cosmological constant (Λ) in Einstein's field equations. A chemical engineer, relying on the principles of his field, had arrived at a number that theoretical physicists call the vacuum energy scale of the entire universe.",
+        "This discovery was not a theoretical pastime. It demonstrated that the mathematics governing conservation in a reactor shares fundamental commonalities with the mathematics governing the structure of the universe. It was here that the bridge between chemical engineering and fundamental physics was built stronger than ever.",
+      ],
+      ctaBtn: "Explore Our Technology",
+    },
     footer: {
       tagline: "Physics-Enforced. Silicon-Realized.",
       pages: "Pages",
@@ -185,6 +200,7 @@ export const copy = {
       company: "شرکت",
       contact: "تماس",
       switchLang: "English",
+      perspective: "دیدگاه",
     },
     home: {
       heroH1: "آینده رانندگی خودمختار با فیزیک آغاز می‌شود",
@@ -341,6 +357,24 @@ export const copy = {
       generalEmail: "contact@ghostautonomy.com",
       pressEmail: "press@ghostautonomy.com",
       successMsg: "متشکریم. به زودی با شما در تماس خواهیم بود.",
+    },
+    perspective: {
+      heroEyebrow: "دیدگاه بنیانگذار",
+      heroH1: "روایت تجاری‌سازی یک معماری ریزتراشه",
+      heroSub: "از اصول فیزیک تا بازار سرمایه",
+      subtitle: "از سیالات تا سیالات با چاشنیِ سیارات",
+      paragraphs: [
+        "فیزیک، پیرامون را تلاش میکند توضیح دهد. تمامی کائناتی که از اتم تشکیل شده و به فرم های گاز و مایع و جامد وجود دارد. در این میان سیال یک حالت ناشناخته تری است، مخلوطی از خواص مایع وگاز را باهم داراست.",
+        "مهندسی نفت در واقع مطالعه ی رفتار سیالات است. این رفتار در پیچیده ترین محیط ها بررسی می شوند من جمله مخازن زیرزمینی، شبکه های توزیع چند فازی روی زمین، و راکتورهایی که آنها را به محصولات پر ارزش تری تبدیل می کنند.",
+        "مهندسی شیمی فراتر از آن میرود و قوانین حاکم بر تبدیل مواد و انرژی را نه فقط در مقیاس لوله ها و راکتورها، بلکه به عنوان یک زبان جهانی برای توصیف هر سیستم متراکمی به کار میگیرد. هر جا پای جرم و انرژی در میان باشد، معادلات موازنه و قوانین پایستگی حرف اول را میزنند. این همان زبانی است که مهندس شیمی با آن بزرگ میشود و به مرور به شهود عمیقی از آن دست مییابد. این شهود، ریشه ی ورود به حوزه های به ظاهر دور از تخصص کلاسیک، مانند صنعت نیمه هادی ها و طراحی ریزتراشه هاست.",
+        "دکتر محسن دیرباز، با دو دهه تجربه در این میدان، در رساله دکترای خود در مؤسسه فناوری ایلینوی (IIT) به دنبال حل معمای گازیسازی زیست توده بود (سوختی به شدت ناهمگن از لحاظ ساختاری). سیستمی به شدت غیرخطی، چندفازی، و با ابعاد بالا. راه حل او اما فراتر از یک مدلسازی معمولی بود. او با به کارگیری انتگرالهای بیضوی - همان ابزار ریاضی که لاپلاس و گاوس برای محاسبه مدار سیارات از آن استفاده میکردند - موفق به کشف یک «نگاشت دوخطی» شد که با دقتی حیرت انگیز و کارایی محاسباتی فوق العاده، قوانین پایستگی جرم و انرژی را در مدل برقرار میکرد. نتیجه این شد که پارامتر بهره ی محاسبه شده توسط این انتگرالها، برای صدها نمونه آزمایشی مختلف، در بازه ای عددی بین ۱۰⁻³⁷ تا ۱۰⁻⁶۰ قرار گرفت. این، دقیقاً محدوده ی ثابت کیهانشناختی (Λ) در معادلات میدان اینشتین است. یک مهندس شیمی، با تکیه بر اصول رشتۀ خود، به عددی دست یافته بود که فیزیکدانان نظری آن را مقیاس انرژی خلأ در کل کیهان می نامند.",
+        "این کشف، یک سرگرمی نظری نبود. این کشف، نشان داد که ریاضیات حاکم بر پایستگی در یک راکتور، با ریاضیات حاکم بر ساختار عالم، نقاط اشتراک بنیادینی دارد. اینجا بود که پل بین مهندسی شیمی و فیزیک بنیادین محکمتر از همیشه زده شد.",
+        "حال، این مسیر چگونه به صنعت ریزتراشه ها گره میخورد؟ پاسخ در ماهیت تولید نیمه هادی ها نهفته است. ساخت یک تراشه، چیزی نیست جز مجموعه ای بینهایت دقیق از عملیات مهندسی شیمی در مقیاس نانو. رسوبدهی لایه های نازک (CVD)، اچ کردن انتخابی با پلاسما، پالیش شیمیایی-مکانیکی (CMP)، و حتی خالصسازی ویفرهای سیلیکونی، همگی فرآیندهایی هستند که با معادلات انتقال جرم، حرارت، سینتیک واکنش، و ترمودینامیک سطح توصیف میشوند. اصولی که مهندس شیمی برای بهینه سازی یک راکتور گازیساز به کار میگیرد، دقیقاً همان اصولی هستند که برای کنترل یکنواختی ضخامت یک لایه اکسید روی یک ویفر ۳۰۰ میلیمتری ضروریاند.",
+        "ماجرا به همینجا ختم نمیشود. پیچیدگی محاسباتی در طراحی تراشه های مدرن، به ویژه برای سیستمهای خودمختار، به نقطه ای رسیده که معماریهای سنتی فون نویمان دیگر پاسخگو نیستند. اینجا بود که نگاشت دوخطی کشف شده توسط دکتر دیرباز، کاربرد استراتژیک خود را نشان داد. این روش که توانایی کاهش ابعاد و استخراج ویژگیهای ناوردا (تغییر ناپذیر) با کمترین هزینه محاسباتی را دارد، به هسته ی معماری جدیدی به نام EPU تبدیل شد. معماری ای که در آن، محاسبات سنگین کنترل پیشبینانه (MPC)، پردازش سیگنال، و حتی الگوریتمهای مقاوم به خطای بیزانسی (BFT) با بهره گیری از انتگرالهای بیضوی و میانگین حسابی-هندسی (AGM) با سرعتی بین ۱۰۰۰۰۰ تا یک میلیون برابر سریعتر از روشهای متداول انجام میشوند.",
+        "شرکت Ghost Autonomy که بر پایه ی همین معماری شکل گرفته، صرفاً یک پروژه نرم افزاری نیست. این پروژه، تجسم فیزیکی یک دهه تحقیق عمیق است. پیوستهای فنی این سند، شامل مشخصات دقیق ISA جدید (PICAPD)، مدل های حافظه، و پروتکل های اجماع، همگی نشان از یک نقشه راه مهندسی شده و دقیق برای تولید محصولی دارند که از معدن سیلیس با خلوص بالا در ایران تا بازارهای نیمه هادی در کره جنوبی و هند را پوشش میدهد. این یک ادعای توخالی نیست؛ این یک زنجیره مستند از ریاضیات محض تا طراحی سختافزار و تحلیل بازار است.",
+        "پس، ورود به حوزه ی صنایع هادی، نه یک انحراف، بلکه نقطه ی اوج یک مسیر پژوهشی مستمر است. مسیری که از مطالعه سیالات در مخازن نفت آغاز شد، با قوانین پایستگی در یک راکتور گازیساز عمق یافت، و نهایتاً به کشف زبانی ریاضی انجامید که میتواند معماری محاسبات نسل آینده را متحول کند. این، قدرت واقعی مهندسی شیمی است: توانایی تشخیص الگوهای عمیق در پیچیدگی ها و استفاده از آنها برای حل بزرگترین چالشهای فناوری.",
+      ],
+      ctaBtn: "فناوری ما را کاوش کنید",
     },
     footer: {
       tagline: "فیزیک‌مدار. سیلیکون‌شده.",

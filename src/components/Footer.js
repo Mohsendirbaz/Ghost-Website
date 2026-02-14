@@ -15,6 +15,7 @@ export default function Footer() {
     { label: t.nav.partners, to: `/${lang}/partners` },
     { label: t.nav.company, to: `/${lang}/company` },
     { label: t.nav.contact, to: `/${lang}/contact` },
+    { label: t.nav.perspective, to: `/${lang}/perspective` },
   ];
 
   return (

@@ -29,6 +29,7 @@ export default function Header() {
     { label: t.partners, to: `/${lang}/partners` },
     { label: t.company, to: `/${lang}/company` },
     { label: t.contact, to: `/${lang}/contact` },
+    { label: t.perspective, to: `/${lang}/perspective` },
   ];
 
   return (
