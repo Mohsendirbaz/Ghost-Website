@@ -1,0 +1,121 @@
+.hero {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0f1e 0%, #001a3a 50%, #0d1a2e 100%);
+  padding-block: var(--space-16) var(--space-12);
+}
+
+/* ── Background FX ── */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.hero__orb--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  top: -200px;
+  inset-inline-end: -100px;
+  animation: floatOrb 8s ease-in-out infinite alternate;
+}
+
+.hero__orb--2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+  bottom: -150px;
+  inset-inline-start: -50px;
+  animation: floatOrb 10s ease-in-out infinite alternate-reverse;
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+@keyframes floatOrb {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ── Content ── */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.hero__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.hero__h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.hero__sub {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin-bottom: var(--space-5);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 520px;
+    padding-block: var(--space-12) var(--space-8);
+  }
+
+  .hero__h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .hero__sub {
+    font-size: var(--text-base);
+  }
+
+  .hero__orb--1 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .hero__orb--2 {
+    width: 300px;
+    height: 300px;
+  }
+}
