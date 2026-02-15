@@ -180,6 +180,16 @@ export const copy = {
         "This discovery was not a theoretical pastime. It demonstrated that the mathematics governing conservation in a reactor shares fundamental commonalities with the mathematics governing the structure of the universe. It was here that the bridge between chemical engineering and fundamental physics was built stronger than ever.",
       ],
       ctaBtn: "Explore Our Technology",
+      hypeEyebrow: "An Excerpt",
+      hypeSubtitle: "The Disconnect Between AI Narratives and Technical Realities",
+      hypeParas: [
+        "The rhetoric operates at this sweeping, transformational scale—\"coast-to-coast autonomous vehicles,\" \"general intelligence,\" \"revolutionizing everything\"—while the actual deployed capabilities are incredibly narrow and brittle.",
+        "The robotic arm example is perfect: these systems can maybe handle a controlled warehouse environment with predictable objects on standardized shelves, but we're selling the story as if we're on the verge of robots that can navigate the full complexity of human environments. Meanwhile, the same systems that are supposedly approaching human-level reasoning struggle with basic logical consistency or fail completely when presented with slightly novel scenarios.",
+        "This gap between marketing narrative and technical reality has real consequences. Resources get allocated based on the inflated promises rather than the incremental progress. Investment flows toward maintaining the mythology rather than solving the unglamorous but essential problems—like making these systems actually reliable within their narrow domains before expanding scope.",
+        "The \"thousands of miles\" point is crucial—every mile of that distance contains edge cases, regulatory variations, infrastructure inconsistencies, weather patterns, and human behavioral unpredictability that these systems simply can't handle. But acknowledging that complexity would deflate the narrative that keeps funding flowing.",
+        "What we need is a return to engineering honesty: define specific, measurable problems, build systems that reliably solve those problems, then gradually expand capability based on demonstrated competence rather than theoretical potential. But that methodical approach doesn't generate the kind of excitement that sustains hype cycles and billion-dollar valuations.",
+        "The agenda has indeed been hijacked by the need to maintain momentum rather than deliver substance.",
+      ],
     },
     footer: {
       tagline: "Physics-Enforced. Silicon-Realized.",
@@ -375,6 +385,16 @@ export const copy = {
         "پس، ورود به حوزه ی صنایع هادی، نه یک انحراف، بلکه نقطه ی اوج یک مسیر پژوهشی مستمر است. مسیری که از مطالعه سیالات در مخازن نفت آغاز شد، با قوانین پایستگی در یک راکتور گازیساز عمق یافت، و نهایتاً به کشف زبانی ریاضی انجامید که میتواند معماری محاسبات نسل آینده را متحول کند. این، قدرت واقعی مهندسی شیمی است: توانایی تشخیص الگوهای عمیق در پیچیدگی ها و استفاده از آنها برای حل بزرگترین چالشهای فناوری.",
       ],
       ctaBtn: "فناوری ما را کاوش کنید",
+      hypeEyebrow: "برگی از یک نوشته",
+      hypeSubtitle: "فاصله‌ی میان روایت‌های هوش مصنوعی و واقعیت‌های فنی",
+      hypeParas: [
+        "گفتمان رایج در مقیاسی کلان و دگرگون‌کننده عمل می‌کند—«وسایل نقلیه خودران در سراسر کشور»، «هوش عمومی»، «انقلابی در همه چیز»—در حالی که قابلیت‌های واقعیِ به‌کارگرفته‌شده، به شدت محدود و شکننده هستند.",
+        "مثال بازوی رباتیک عالی است: این سیستم‌ها شاید بتوانند در یک محیط انبار کنترل‌شده، با اشیاء قابل پیش‌بینی و قفسه‌های استاندارد کار کنند، اما ما داستان را طوری روایت می‌کنیم که گویی در آستانه ربات‌هایی هستیم که می‌توانند در پیچیدگی کامل محیط‌های انسانی حرکت کنند. در همین حال، همان سیستم‌هایی که ظاهراً به استدلال در سطح انسان نزدیک می‌شوند، در ثبات منطقی پایه مشکل دارند یا با اندکی تغییر در سناریوهای جدید، به‌کلی از کار می‌افتند.",
+        "این شکاف بین روایت بازاریابی و واقعیت فنی، پیامدهای واقعی دارد. منابع بر اساس وعده‌های اغراق‌آمیز تخصیص می‌یابند، نه پیشرفت تدریجی. سرمایه‌گذاری به سمت حفظ اسطوره‌شناسی هدایت می‌شود، به جای حل مسائل کم‌جذابیت اما اساسی—مانند قابل اعتماد کردن این سیستم‌ها در همان حوزه‌های محدودشان، پیش از گسترش دامنه.",
+        "نکته «هزاران مایل» بسیار حیاتی است—هر مایل از این مسافت شامل موارد استثنایی، تغییرات نظارتی، ناهماهنگی‌های زیرساختی، الگوهای آب‌وهوایی و غیرقابل پیش‌بینی بودن رفتار انسانی است که این سیستم‌ها به سادگی نمی‌توانند از عهده آن‌ها برآیند. اما پذیرش این پیچیدگی، روایتی را که باعث تداوم جریان سرمایه می‌شود، از بین می‌برد.",
+        "آنچه ما نیاز داریم، بازگشت به صداقت مهندسی است: تعریف مسائل مشخص و قابل اندازه‌گیری، ساخت سیستم‌هایی که آن مسائل را به طور قابل اعتماد حل کنند، و سپس گسترش تدریجی قابلیت‌ها بر اساس شایستگی اثبات‌شده، نه پتانسیل نظری. اما این رویکرد روشمند، هیجانی را که چرخه‌های تبلیغاتی و ارزش‌گذاری‌های میلیاردی را حفظ می‌کند، ایجاد نمی‌کند.",
+        "دستور کار واقعاً توسط نیاز به حفظ شتاب ربوده شده است، به جای ارائه محتوای واقعی.",
+      ],
     },
     footer: {
       tagline: "فیزیک‌مدار. سیلیکون‌شده.",

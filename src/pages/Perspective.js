@@ -27,6 +27,18 @@ export default function Perspective() {
         </div>
       </article>
 
+      <article className="essay essay--alt">
+        <div className="container essay__inner">
+          <p className="essay__eyebrow">{t.hypeEyebrow}</p>
+          <p className="essay__subtitle">{t.hypeSubtitle}</p>
+          <div className="essay__body">
+            {t.hypeParas.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </div>
+      </article>
+
       <CTABand
         title={lang === 'en'
           ? 'Want to see how this research became silicon?'
