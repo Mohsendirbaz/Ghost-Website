@@ -16,6 +16,7 @@ export default function Footer() {
     { label: t.nav.company, to: `/${lang}/company` },
     { label: t.nav.contact, to: `/${lang}/contact` },
     { label: t.nav.perspective, to: `/${lang}/perspective` },
+    { label: t.nav.architecture, to: `/${lang}/architecture` },
   ];
 
   return (
