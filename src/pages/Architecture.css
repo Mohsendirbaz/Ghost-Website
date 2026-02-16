@@ -1,0 +1,8 @@
+.architecture-gallery-section {
+  padding: 0 0 var(--space-8);
+  background: var(--color-bg);
+}
+
+.architecture-gallery-section .container {
+  max-width: 1400px;
+}
