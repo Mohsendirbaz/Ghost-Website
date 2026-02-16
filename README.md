@@ -13,10 +13,11 @@ Corporate website for Ghost Autonomy, a deep-tech startup building physics-enfor
 5. [Internationalization](#internationalization)
 6. [Content Management](#content-management)
 7. [Component Library](#component-library)
-8. [Design System](#design-system)
-9. [Adding a New Page](#adding-a-new-page)
-10. [Adding a New Language String](#adding-a-new-language-string)
-11. [Deployment](#deployment)
+8. [Carousel for Perusal](#carousel-for-perusal)
+9. [Design System](#design-system)
+10. [Adding a New Page](#adding-a-new-page)
+11. [Adding a New Language String](#adding-a-new-language-string)
+12. [Deployment](#deployment)
 
 ---
 
@@ -300,6 +301,109 @@ import { EpuVisual, SafetyLayersVisual, PhysicsAbstraction } from '../components
 | `EpuVisual` | EPU data-flow diagram (Input → Process → Validate → Output) | Technology |
 | `SafetyLayersVisual` | Four-layer safety architecture cards | Safety |
 | `PhysicsAbstraction` | Radial gradient physics field illustration | Home, Science |
+
+---
+
+## Carousel for Perusal
+
+The **Carousel for Perusal** is a visual gallery system built to display technical diagrams and visualizations from the PICAPD architecture documentation. It provides an accessible, bilingual, and performance-optimized way to browse complex Mermaid diagrams extracted from the following technical documents:
+
+- `01_Architecture_Reconstruction_Plan.md` — PICAPD-KTE reconstruction and operational architecture
+- `02_PICAPD_ISA_Official_Specification.md` — Official instruction set architecture specification
+- `03_PICAPD_Visualization_Suite.md` — Visualization suite and diagram catalog
+
+### Key Features
+
+#### Build-Time Rendering
+- All Mermaid diagrams are **pre-rendered at build time** into SVG (desktop) and optimized PNG (mobile) formats
+- No client-side Mermaid runtime required, ensuring fast page loads and consistent rendering
+- Diagrams are stored in `public/assets/diagrams/` and referenced from `copy.js`
+
+#### Bilingual & RTL Support
+- Full English and Persian translations for all diagram titles, descriptions, and alt text
+- Proper RTL layout using CSS logical properties (`margin-inline-start`, `text-align: start`)
+- Language-specific diagram variants when directionality affects meaning (e.g., time arrows, sequence flows)
+
+#### Accessibility First
+- Every diagram includes semantic `<title>` and `<desc>` elements embedded in SVG
+- Meaningful alt text for all images, stored in `copy.js` and rendered via `alt` attributes
+- Keyboard navigation support with proper focus management
+- Tested with `axe-core` for WCAG compliance
+
+#### Performance Optimization
+- **Lazy loading** via `IntersectionObserver` — diagrams load only when scrolled into view
+- **Virtualized galleries** for pages with many diagrams (using `react-window` or similar)
+- Progressive image loading: placeholder thumbnails swap to high-res on focus/open
+- Click-to-zoom and modal study mode for detailed examination
+
+#### Diagram Complexity Management
+- Large diagrams (>50 nodes) are split into smaller, navigable sub-diagrams
+- Progressive disclosure for complex state machines and hierarchical flows
+- Representative subgraphs for repeated structures (e.g., "Workers 1–3 shown; 4–100 follow same pattern")
+
+#### Search & Filtering
+- Filter by diagram type: flowchart, state diagram, sequence diagram, gantt, pie, bar, line, scatter
+- Filter by source document: Doc01, Doc02, Doc03
+- Filter by language availability: EN only, FA only, or both
+- Search across titles, descriptions, tags, and diagram source code
+
+### Architecture
+
+The carousel system follows a three-layer model:
+
+1. **Asset (logical item)**: Metadata including `assetId`, `title`, `summary` (EN/FA), `tags`, `collectionId`, `type`
+2. **Artifact (versioned output)**: Language-specific rendered files (`v1.0-en.svg`, `v1.0-fa.svg`) with checksums and render profiles
+3. **Dependency record**: Pinned Mermaid CLI version, theme tokens, and rendering options for reproducibility
+
+### Rendering Pipeline
+
+```bash
+# Render all Mermaid diagrams to SVG/PNG
+npm run render-diagrams
+```
+
+The build script:
+1. Reads `.mmd` source files from `src/assets/mermaid/`
+2. Applies site theme tokens and accessibility metadata
+3. Renders to SVG (with `--accessibility` flag) and optimized PNG
+4. Outputs to `public/assets/diagrams/`
+5. Updates `copy.js` with asset references
+
+### Component Usage
+
+```jsx
+import DiagramViewer from './components/DiagramViewer';
+
+<DiagramViewer
+  src="/assets/diagrams/architecture-overview-en.svg"
+  alt={copy[lang].diagrams.architectureOverview.alt}
+  title={copy[lang].diagrams.architectureOverview.title}
+  description={copy[lang].diagrams.architectureOverview.description}
+  zoomable={true}
+  lazyLoad={true}
+/>
+```
+
+### File Naming Convention
+
+Diagram source files follow the pattern: `{slug}_v{version}_{lang}.mmd`
+
+Examples:
+- `epu-hierarchy_v1_en.mmd`
+- `epu-hierarchy_v1_fa.mmd`
+- `constraint-flow_v2_en.mmd`
+
+Each diagram includes a companion `manifest.yml` with:
+- Mermaid CLI version and rendering options
+- Theme token references
+- Accessibility metadata (title, description)
+- Dependency information
+
+### Testing
+
+- **Accessibility**: `axe-core` integration tests verify alt text, lang/dir attributes, and contrast
+- **RTL validation**: Screenshot tests at key breakpoints for both English and Persian
+- **Performance**: Lighthouse audits ensure lazy loading and virtualization work correctly
 
 ---
 

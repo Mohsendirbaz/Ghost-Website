@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-16T00:00:00.000Z",
+  "facts": [
+    {
+      "id": "F-000001",
+      "text": {
+        "en": "Perfect fluid theorem states perfect fluids are solutions to Einstein Equations (General Relativity). And we are Fluid Experts.",
+        "fa": ""
+      },
+      "type": "evergreen",
+      "tags": ["physics", "general-relativity", "fluids"],
+      "featured": true,
+      "weight": 5,
+      "cta": null
+    }
+  ]
+}

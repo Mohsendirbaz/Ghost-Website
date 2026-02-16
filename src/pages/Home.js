@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
@@ -5,10 +6,12 @@ import ThreePillars from '../components/ThreePillars';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
 import { PhysicsAbstraction } from '../components/AbstractVisual';
+import FactEngine from '../FactEngine';
 import './Page.css';
 
 export default function Home() {
   const { lang } = useLang();
+  const navigate = useNavigate();
   const t = copy[lang].home;
 
   const pillars = [
@@ -58,6 +61,15 @@ export default function Home() {
             <span className="proof-item__label">Purpose-Built EPU</span>
           </div>
         </div>
+      </section>
+
+      <section className="fact-engine-section container">
+        <FactEngine
+          lang={lang}
+          dir={lang === 'fa' ? 'rtl' : 'ltr'}
+          context={{ tags: ['physics', 'fluids', 'general-relativity'], path: `/${lang}` }}
+          onNavigate={(path) => navigate(path)}
+        />
       </section>
 
       <CTABand

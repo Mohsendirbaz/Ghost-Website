@@ -1,3 +1,8 @@
+/* ─── Fact Engine section wrapper ─── */
+.fact-engine-section {
+  padding-block: var(--space-8);
+}
+
 /* ─── Proof Strip ─── */
 .proof-strip {
   background: var(--color-bg-secondary);
