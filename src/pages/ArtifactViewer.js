@@ -188,9 +188,12 @@ export default function ArtifactViewer() {
                                 </div>
                             )}
 
-                            {/* The iframe — always mounted so onLoad fires */}
+                            {/* The iframe — always mounted so onLoad fires.
+                                src points to our server-side proxy which strips
+                                X-Frame-Options / frame-ancestors from the upstream
+                                claude.ai response so the browser allows the embed. */}
                             <iframe
-                                src={externalUrl}
+                                src={`/api/artifact-proxy?id=${artifact.id}`}
                                 className="artifact-iframe"
                                 title={title}
                                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
