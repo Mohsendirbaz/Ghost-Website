@@ -23,7 +23,7 @@ import '../styles/knowledgeBase.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function useSiblings(partSlug, chapterSlug, sectionSlug) {
+function useSiblings(partSlug, chapterSlug, sectionSlug, lang) {
     return useMemo(() => {
         const flatParts     = KB_PARTS;
         const partIdx       = flatParts.findIndex((p) => p.slug === partSlug);
@@ -35,8 +35,8 @@ function useSiblings(partSlug, chapterSlug, sectionSlug) {
             const prev = flatParts[partIdx - 1];
             const next = flatParts[partIdx + 1];
             return {
-                prev: prev ? { title: prev.title, href: buildPath('en', prev.slug) } : null,
-                next: next ? { title: next.title, href: buildPath('en', next.slug) } : null,
+                prev: prev ? { title: prev.title, href: buildPath(lang, prev.slug) } : null,
+                next: next ? { title: next.title, href: buildPath(lang, next.slug) } : null,
             };
         }
 
@@ -51,8 +51,8 @@ function useSiblings(partSlug, chapterSlug, sectionSlug) {
             const prevPart = prevCh ? flatParts.find((p) => (p.chapters || []).some((c) => c.slug === prevCh.slug)) : null;
             const nextPart = nextCh ? flatParts.find((p) => (p.chapters || []).some((c) => c.slug === nextCh.slug)) : null;
             return {
-                prev: prevCh && prevPart ? { title: prevCh.title, href: buildPath('en', prevPart.slug, prevCh.slug) } : null,
-                next: nextCh && nextPart ? { title: nextCh.title, href: buildPath('en', nextPart.slug, nextCh.slug) } : null,
+                prev: prevCh && prevPart ? { title: prevCh.title, href: buildPath(lang, prevPart.slug, prevCh.slug) } : null,
+                next: nextCh && nextPart ? { title: nextCh.title, href: buildPath(lang, nextPart.slug, nextCh.slug) } : null,
             };
         }
 
@@ -61,10 +61,10 @@ function useSiblings(partSlug, chapterSlug, sectionSlug) {
         const prevSec  = sections[secIdx - 1];
         const nextSec  = sections[secIdx + 1];
         return {
-            prev: prevSec ? { title: prevSec.title, href: buildPath('en', partSlug, chapterSlug, prevSec.slug) } : null,
-            next: nextSec ? { title: nextSec.title, href: buildPath('en', partSlug, chapterSlug, nextSec.slug) } : null,
+            prev: prevSec ? { title: prevSec.title, href: buildPath(lang, partSlug, chapterSlug, prevSec.slug) } : null,
+            next: nextSec ? { title: nextSec.title, href: buildPath(lang, partSlug, chapterSlug, nextSec.slug) } : null,
         };
-    }, [partSlug, chapterSlug, sectionSlug]);
+    }, [partSlug, chapterSlug, sectionSlug, lang]);
 }
 
 // ─── TOC Navigator (left column) ─────────────────────────────────────────────
@@ -209,7 +209,14 @@ function ReaderAside({ node, part, chapter, lang }) {
                     <div className="kb-aside__heading">{isRtl ? 'مرتبط' : 'Related'}</div>
                     <ul className="kb-aside__related-list">
                         {related.map((n) => {
-                            const relHref  = buildPath(lang, n.partSlug || n.slug, n.chapterSlug, n.sectionSlug);
+                            // Resolve slugs per node type:
+                            // - parts:    slug lives in n.slug
+                            // - chapters: own slug in n.slug, parent in n.partSlug
+                            // - sections: own slug in n.slug, parents in n.partSlug / n.chapterSlug
+                            const partSl    = n.partSlug    || (n.nodeType === 'part'    ? n.slug : undefined);
+                            const chapterSl = n.chapterSlug || (n.nodeType === 'chapter' ? n.slug : undefined);
+                            const sectionSl = n.sectionSlug || (n.nodeType === 'section' ? n.slug : undefined);
+                            const relHref  = buildPath(lang, partSl, chapterSl, sectionSl);
                             const relTitle = isRtl ? n.title.fa : n.title.en;
                             return (
                                 <li key={n.id} className="kb-aside__related-item">
@@ -473,7 +480,7 @@ export default function KnowledgeBaseReader() {
         ? (chapter.sections || []).find((s) => s.slug === sectionSlug)
         : null;
 
-    const { prev, next } = useSiblings(partSlug, chapterSlug, sectionSlug);
+    const { prev, next } = useSiblings(partSlug, chapterSlug, sectionSlug, lang);
 
     // 404-guard
     useEffect(() => {

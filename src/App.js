@@ -14,6 +14,8 @@ import Perspective from './pages/Perspective';
 import Architecture from './pages/Architecture';
 import KnowledgeBase from './pages/KnowledgeBase';
 import KnowledgeBaseReader from './pages/KnowledgeBaseReader';
+import Artifacts from './pages/Artifacts';
+import ArtifactViewer from './pages/ArtifactViewer';
 import './styles/global.css';
 import './App.css';
 
@@ -58,6 +60,11 @@ function AppShell() {
           <Route path="/fa/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
           <Route path="/en/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
           <Route path="/fa/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
+          {/* Artifact library */}
+          <Route path="/en/artifacts" element={<Artifacts />} />
+          <Route path="/fa/artifacts" element={<Artifacts />} />
+          <Route path="/en/artifacts/:slug" element={<ArtifactViewer />} />
+          <Route path="/fa/artifacts/:slug" element={<ArtifactViewer />} />
           <Route path="/fa" element={<Home />} />
           <Route path="/fa/technology" element={<Technology />} />
           <Route path="/fa/science" element={<Science />} />

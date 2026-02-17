@@ -12,6 +12,7 @@ export const copy = {
       perspective: "Perspective",
       architecture: "Architecture",
       knowledgeBase: "Knowledge Base",
+      artifacts: "Asset Library",
     },
     home: {
       heroH1: "The Future of Autonomous Driving Starts with Physics",
@@ -246,6 +247,10 @@ export const copy = {
       heroTitle: "Ghost Autonomy Documentation",
       heroSub: "8 parts · 47 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations",
     },
+    artifacts: {
+      heroTitle: "Interactive Artifacts",
+      heroSub: "Visualizations, diagrams, and interactive tools related to Ghost Autonomy architecture",
+    },
   },
   fa: {
     nav: {
@@ -260,6 +265,7 @@ export const copy = {
       perspective: "دیدگاه",
       architecture: "معماری",
       knowledgeBase: "پایگاه دانش",
+      artifacts: "کتابخانه دارایی‌ها",
     },
     home: {
       heroH1: "آینده رانندگی خودمختار با فیزیک آغاز می‌شود",
@@ -497,6 +503,10 @@ export const copy = {
     knowledgeBase: {
       heroTitle: "مستندات Ghost Autonomy",
       heroSub: "۸ بخش · ۴۷ فصل · معماری PICAPD ISA، کندوی ملکه و مبانی فیزیک‌الهام‌گرفته",
+    },
+    artifacts: {
+      heroTitle: "دارایی‌های تعاملی",
+      heroSub: "تصویرسازی‌ها، نمودارها و ابزارهای تعاملی مرتبط با معماری Ghost Autonomy",
     },
   },
 };
