@@ -31,6 +31,7 @@ export default function Header() {
     { label: t.contact, to: `/${lang}/contact` },
     { label: t.perspective, to: `/${lang}/perspective` },
     { label: t.architecture, to: `/${lang}/architecture` },
+    { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },
   ];
 
   return (

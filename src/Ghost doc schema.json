@@ -1,0 +1,296 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ghost-autonomy.io/assets/schemas/document-toc.schema.json",
+  "title": "GhostDocumentAsset",
+  "description": "Schema for the Ghost Autonomy bilingual technical document, suitable for website navigation, search indexing, and structured rendering.",
+  "type": "object",
+
+  "definitions": {
+
+    "BilingualLabel": {
+      "type": "object",
+      "description": "A label with both Persian (fa) and English (en) representations.",
+      "required": ["fa", "en"],
+      "additionalProperties": false,
+      "properties": {
+        "fa": {
+          "type": "string",
+          "description": "Persian (Farsi) label — rendered RTL."
+        },
+        "en": {
+          "type": "string",
+          "description": "English label — rendered LTR."
+        }
+      }
+    },
+
+    "Slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "URL-safe identifier derived from the English label."
+    },
+
+    "NodeType": {
+      "type": "string",
+      "enum": ["part", "chapter", "section", "subsection", "appendix"],
+      "description": "Hierarchical level of the document node."
+    },
+
+    "PartId": {
+      "type": "string",
+      "enum": [
+        "part:executive",
+        "part:philosophy",
+        "part:strategic",
+        "part:technical",
+        "part:architecture",
+        "part:financial",
+        "part:validation",
+        "part:appendices"
+      ],
+      "description": "Canonical part identifier matching LaTeX label convention."
+    },
+
+    "DomainTag": {
+      "type": "string",
+      "enum": [
+        "executive", "market", "product", "strategy", "risk",
+        "philosophy", "design-principles", "safety-case",
+        "scientific-provenance", "vertical-integration", "partnership",
+        "physics", "mathematics", "signal-processing", "control-theory",
+        "uncertainty", "neural-networks",
+        "isa", "architecture", "silicon", "byzantine-fault-tolerance",
+        "business-model", "funding", "ipo", "ip", "valuation",
+        "validation", "benchmark", "experimental-results", "safety-validation",
+        "appendix"
+      ],
+      "description": "Semantic domain tag for filtering and faceted search."
+    },
+
+    "Subsection": {
+      "type": "object",
+      "required": ["id", "type", "label", "slug"],
+      "additionalProperties": false,
+      "properties": {
+        "id":          { "$ref": "#/definitions/Slug" },
+        "type":        { "const": "subsection" },
+        "label":       { "$ref": "#/definitions/BilingualLabel" },
+        "slug":        { "$ref": "#/definitions/Slug" },
+        "allocatePages": {
+          "type": "boolean",
+          "default": false,
+          "description": "True when the source document uses \\allocatepages for this node — content is deferred/generated."
+        },
+        "tags":        {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DomainTag" },
+          "uniqueItems": true
+        },
+        "anchorHash": {
+          "type": "string",
+          "description": "Fragment identifier for in-page navigation, e.g. '#agm-elliptic-instructions'."
+        }
+      }
+    },
+
+    "Section": {
+      "type": "object",
+      "required": ["id", "type", "label", "slug"],
+      "additionalProperties": false,
+      "properties": {
+        "id":           { "$ref": "#/definitions/Slug" },
+        "type":         { "const": "section" },
+        "label":        { "$ref": "#/definitions/BilingualLabel" },
+        "slug":         { "$ref": "#/definitions/Slug" },
+        "allocatePages": {
+          "type": "boolean",
+          "default": false
+        },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DomainTag" },
+          "uniqueItems": true
+        },
+        "anchorHash": { "type": "string" },
+        "subsections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Subsection" },
+          "default": []
+        }
+      }
+    },
+
+    "Chapter": {
+      "type": "object",
+      "required": ["id", "type", "chapterNumber", "label", "slug"],
+      "additionalProperties": false,
+      "properties": {
+        "id":            { "$ref": "#/definitions/Slug" },
+        "type":          {
+          "type": "string",
+          "enum": ["chapter", "appendix"]
+        },
+        "chapterNumber": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            {
+              "type": "string",
+              "pattern": "^[A-F]$",
+              "description": "Appendix letter (A–F)."
+            }
+          ]
+        },
+        "label":         { "$ref": "#/definitions/BilingualLabel" },
+        "slug":          { "$ref": "#/definitions/Slug" },
+        "allocatePages": {
+          "type": "boolean",
+          "default": false
+        },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DomainTag" },
+          "uniqueItems": true
+        },
+        "researchCoverage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Chapter includes an inline research-coverage list block."
+        },
+        "anchorHash": { "type": "string" },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Section" },
+          "default": []
+        }
+      }
+    },
+
+    "Part": {
+      "type": "object",
+      "required": ["id", "type", "partNumber", "partId", "label", "slug", "chapters"],
+      "additionalProperties": false,
+      "properties": {
+        "id":         { "$ref": "#/definitions/Slug" },
+        "type":       { "const": "part" },
+        "partNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "partId":     { "$ref": "#/definitions/PartId" },
+        "label":      { "$ref": "#/definitions/BilingualLabel" },
+        "slug":       { "$ref": "#/definitions/Slug" },
+        "accentColor": {
+          "type": "string",
+          "pattern": "^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$",
+          "description": "Optional hex color for UI theming of this part's navigation rail."
+        },
+        "chapters": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Chapter" }
+        }
+      }
+    }
+  },
+
+  "required": [
+    "documentId",
+    "version",
+    "meta",
+    "i18n",
+    "parts"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "documentId": {
+      "type": "string",
+      "description": "Stable unique identifier for this document asset.",
+      "example": "ghost-autonomy-technical-doc-v1"
+    },
+
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this schema instance (not the document version).",
+      "example": "1.0.0"
+    },
+
+    "meta": {
+      "type": "object",
+      "required": ["title", "organization", "totalParts", "totalChapters"],
+      "additionalProperties": false,
+      "properties": {
+        "title":        { "$ref": "#/definitions/BilingualLabel" },
+        "subtitle":     { "$ref": "#/definitions/BilingualLabel" },
+        "organization": {
+          "type": "string",
+          "description": "Issuing organization.",
+          "example": "Ghost Autonomy"
+        },
+        "confidentiality": {
+          "type": "string",
+          "enum": ["public", "internal", "confidential", "restricted"],
+          "default": "internal"
+        },
+        "createdAt":  { "type": "string", "format": "date" },
+        "updatedAt":  { "type": "string", "format": "date" },
+        "totalParts": { "type": "integer", "minimum": 1 },
+        "totalChapters": { "type": "integer", "minimum": 1 },
+        "sourceFormat": {
+          "type": "string",
+          "enum": ["latex", "markdown", "docx"],
+          "default": "latex"
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Flat keyword list for site search metadata.",
+          "example": [
+            "PICAPD ISA", "Queen Bee", "Byzantine Fault Tolerance",
+            "Bilinear Form", "Autonomous Computing", "HPC", "ASIL-D"
+          ]
+        }
+      }
+    },
+
+    "i18n": {
+      "type": "object",
+      "required": ["primaryLanguage", "secondaryLanguage", "rtlLanguages"],
+      "additionalProperties": false,
+      "description": "Internationalisation configuration for bilingual rendering.",
+      "properties": {
+        "primaryLanguage": {
+          "type": "string",
+          "enum": ["fa", "en"],
+          "description": "Language shown first / used as canonical for slugs."
+        },
+        "secondaryLanguage": {
+          "type": "string",
+          "enum": ["fa", "en"]
+        },
+        "rtlLanguages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ISO 639-1 codes that require right-to-left rendering.",
+          "default": ["fa", "ar"]
+        },
+        "defaultDisplayLanguage": {
+          "type": "string",
+          "enum": ["fa", "en"],
+          "description": "Language the UI renders by default before the user toggles."
+        }
+      }
+    },
+
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": { "$ref": "#/definitions/Part" },
+      "description": "Ordered list of document parts, each containing chapters."
+    }
+  }
+}

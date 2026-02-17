@@ -12,6 +12,8 @@ import Company from './pages/Company';
 import Contact from './pages/Contact';
 import Perspective from './pages/Perspective';
 import Architecture from './pages/Architecture';
+import KnowledgeBase from './pages/KnowledgeBase';
+import KnowledgeBaseReader from './pages/KnowledgeBaseReader';
 import './styles/global.css';
 import './App.css';
 
@@ -46,6 +48,16 @@ function AppShell() {
           <Route path="/en/contact" element={<Contact />} />
           <Route path="/en/perspective" element={<Perspective />} />
           <Route path="/en/architecture" element={<Architecture />} />
+          {/* Knowledge Base — browse index */}
+          <Route path="/en/knowledge-base" element={<KnowledgeBase />} />
+          <Route path="/fa/knowledge-base" element={<KnowledgeBase />} />
+          {/* Knowledge Base — reader (Part → Chapter → Section) */}
+          <Route path="/en/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/fa/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/en/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/en/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
           <Route path="/fa" element={<Home />} />
           <Route path="/fa/technology" element={<Technology />} />
           <Route path="/fa/science" element={<Science />} />

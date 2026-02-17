@@ -14,10 +14,11 @@ Corporate website for Ghost Autonomy, a deep-tech startup building physics-enfor
 6. [Content Management](#content-management)
 7. [Component Library](#component-library)
 8. [Carousel for Perusal](#carousel-for-perusal)
-9. [Design System](#design-system)
-10. [Adding a New Page](#adding-a-new-page)
-11. [Adding a New Language String](#adding-a-new-language-string)
-12. [Deployment](#deployment)
+9. [Visitor Retention Booster (Fact Engine)](#visitor-retention-booster-fact-engine)
+10. [Design System](#design-system)
+11. [Adding a New Page](#adding-a-new-page)
+12. [Adding a New Language String](#adding-a-new-language-string)
+13. [Deployment](#deployment)
 
 ---
 
@@ -404,6 +405,194 @@ Each diagram includes a companion `manifest.yml` with:
 - **Accessibility**: `axe-core` integration tests verify alt text, lang/dir attributes, and contrast
 - **RTL validation**: Screenshot tests at key breakpoints for both English and Persian
 - **Performance**: Lighthouse audits ensure lazy loading and virtualization work correctly
+
+---
+
+## Visitor Retention Booster (Fact Engine)
+
+The **Fact Engine** is a visitor retention system that displays curated, educational facts about Ghost Autonomy's technology, science, and architecture. It provides a non-intrusive way to engage visitors with bite-sized insights while respecting user preferences and accessibility standards.
+
+### Overview
+
+The Fact Engine displays facts from a static JSON bundle (`/data/facts.bundle.json`) with full bilingual support (English/Persian). Visitors can save interesting facts to a personal board, dismiss facts temporarily, or opt out entirely. The system is designed to be:
+
+- **Visitor-safe**: Read-only fact pool; no global state mutation
+- **Privacy-respecting**: All preferences stored locally; no tracking or analytics
+- **Accessibility-first**: Respects `prefers-reduced-motion`, proper ARIA labels, keyboard navigation
+- **Bilingual**: Full English and Persian support with RTL layout
+- **Static-friendly**: No runtime APIs; works entirely with static JSON
+
+### Key Features
+
+#### Fact Display & Interaction
+- **Collapsible UI**: Click header to expand/collapse the fact panel
+- **Save to Board**: Pin interesting facts to a personal saved board (localStorage)
+- **Generate Another**: Request a new random fact from the pool
+- **Never Show**: Opt out of fact display entirely (respects user choice)
+- **Call-to-Action**: Optional "Learn more" button linking to relevant pages
+
+#### Smart Selection Algorithm
+- **Weighted random selection**: Facts have configurable weights (1–10)
+- **Featured boost**: Featured facts get +3 weight bonus
+- **Context-aware**: Facts tagged with page-specific keywords get boosted on relevant pages
+- **No repetition**: Tracks shown facts in session to avoid immediate repeats
+
+#### Fact Types
+- `evergreen` — Timeless technical insights
+- `study_tip` — Learning aids and conceptual frameworks
+- `contextual` — Page-specific deep dives
+- `dependency_insight` — Architecture and design rationale
+
+#### Visitor Preferences (localStorage)
+- `ga_fact_engine_collapsed_v1` — Collapsed/expanded state
+- `ga_retention_opt_in_v1` — Opt-in/opt-out preference
+- `ga_retention_never_show_v1` — Permanent dismissal flag
+- `ga_retention_dismissed_until_v1` — Temporary dismissal timestamp
+- `ga_saved_facts_board_v1` — Personal saved facts collection
+- `ga_retention_shown_session_v1` — Session-based repetition tracking
+
+### Architecture
+
+The system consists of two separate components:
+
+1. **Visitor Component** (`src/FactEngine.js`)
+   - Reads facts from static bundle at `/data/facts.bundle.json`
+   - Manages visitor preferences in localStorage
+   - Renders collapsible fact panel with save/dismiss actions
+   - Fully bilingual with RTL support
+
+2. **Admin Tool** (`tools/facts-admin/`)
+   - Standalone Vite app for content management (never shipped to production)
+   - CRUD interface for fact creation and editing
+   - Draft auto-save to browser localStorage
+   - Export to `facts.bundle.json` for deployment
+
+### Facts Bundle Schema
+
+The static bundle at `public/data/facts.bundle.json` follows this structure:
+
+```json
+{
+  "version": 1,
+  "generatedAt": "2026-02-16T00:00:00.000Z",
+  "facts": [
+    {
+      "id": "F-000001",
+      "text": {
+        "en": "English fact text",
+        "fa": "متن فارسی"
+      },
+      "type": "evergreen",
+      "tags": ["physics", "fluids"],
+      "featured": true,
+      "weight": 5,
+      "cta": {
+        "path": "/science",
+        "label": { "en": "Learn more", "fa": "بیشتر" }
+      }
+    }
+  ]
+}
+```
+
+### Component Usage
+
+```jsx
+import FactEngine from '../FactEngine';
+import { useLang } from '../context/LanguageContext';
+
+function HomePage() {
+  const { lang } = useLang();
+  
+  return (
+    <div>
+      {/* Page content */}
+      
+      <FactEngine
+        lang={lang}
+        pageTags={['home', 'intro']}  // Context-aware boosting
+      />
+    </div>
+  );
+}
+```
+
+### Managing Facts (Admin Tool)
+
+The admin tool is a separate application for content editors:
+
+```bash
+# From project root:
+cd tools/facts-admin
+npm install
+npm run dev  # Opens at http://localhost:3100
+```
+
+#### Workflow:
+
+1. **Load existing bundle**: Admin tool fetches `/data/facts.bundle.json` from the main dev server (port 3000) or local copy
+2. **Edit facts**: Add, edit, or delete facts using the CRUD interface
+3. **Auto-save draft**: Changes saved to browser localStorage (`ga_fact_admin_draft_v1`)
+4. **Export bundle**: Click "↓ Export facts.bundle.json" to download updated bundle
+5. **Deploy**: Copy exported file to `public/data/facts.bundle.json`, commit, and push
+
+```bash
+# After exporting from admin tool:
+cp ~/Downloads/facts.bundle.json public/data/facts.bundle.json
+git add public/data/facts.bundle.json
+git commit -m "content: update facts bundle"
+git push
+```
+
+Vercel automatically redeploys; visitors see updated facts on next page load.
+
+### Fact Fields (Admin Tool)
+
+| Field | Description | Required |
+|---|---|---|
+| **English Text** | Fact text in English | At least one language required |
+| **Persian Text** | Fact text in Persian (متن فارسی) | At least one language required |
+| **Type** | `evergreen`, `study_tip`, `contextual`, or `dependency_insight` | Yes |
+| **Weight** | Selection weight (1–10, higher = shown more often) | Yes (default: 1) |
+| **Featured** | Boosts weight by +3; shows star in admin list | No |
+| **Tags** | Comma-separated keywords for context-aware boosting | No |
+| **CTA Path** | Optional link path (e.g., `/science`) | No |
+| **CTA Label (EN)** | English button label (e.g., "Learn more") | If CTA path provided |
+| **CTA Label (FA)** | Persian button label (e.g., "بیشتر") | If CTA path provided |
+
+### Accessibility Features
+
+- **Reduced motion**: Respects `prefers-reduced-motion` media query
+- **Keyboard navigation**: Full keyboard support for all interactions
+- **Screen readers**: Proper ARIA labels and semantic HTML
+- **RTL support**: Correct text direction and layout for Persian
+- **Focus management**: Clear focus indicators and logical tab order
+
+### Privacy & User Control
+
+- **No tracking**: No analytics, no external requests, no cookies
+- **Local-only storage**: All preferences stored in browser localStorage
+- **Opt-out respected**: "Never show" preference permanently disables the component
+- **Dismissal cooldown**: Temporary dismissal (24 hours default) for less intrusive UX
+- **No global mutation**: Visitor actions never modify the shared fact pool
+
+### Testing
+
+```bash
+# Run component tests
+npm test -- FactEngine
+
+# Test with different languages
+# Navigate to /en or /fa and interact with the Fact Engine panel
+```
+
+### Separation Guarantee
+
+The admin tool is **never included in production builds**:
+- Located in `tools/facts-admin/` (outside `src/` and `public/`)
+- Not referenced by any production code
+- Uses separate `package.json` and dependencies
+- CRA build (`npm run build`) never includes `tools/` directory
 
 ---
 
