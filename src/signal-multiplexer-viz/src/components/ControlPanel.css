@@ -74,7 +74,8 @@
 }
 
 .signal-injection,
-.disturbance-control {
+.disturbance-control,
+.mode-control {
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: #f9f9f9;
@@ -82,7 +83,8 @@
 }
 
 .signal-injection h4,
-.disturbance-control h4 {
+.disturbance-control h4,
+.mode-control h4 {
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
   color: #555;
@@ -148,13 +150,47 @@
   transform: translateY(-1px);
 }
 
-.disturbance-description {
+.disturbance-description,
+.mode-description {
   margin: 0.75rem 0 0 0;
   font-size: 0.85rem;
   color: #666;
   text-align: center;
   font-style: italic;
 }
+
+/* Mode selector buttons */
+.mode-buttons {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-mode {
+  flex: 1;
+  padding: 0.55rem 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #e8e8e8;
+  color: #555;
+}
+
+.btn-mode:hover {
+  transform: translateY(-1px);
+}
+
+.btn-mode.mode-slow         { border-color: #2196F3; }
+.btn-mode.mode-slow.active  { background: #2196F3; color: white; box-shadow: 0 2px 8px rgba(33,150,243,0.35); }
+
+.btn-mode.mode-normal        { border-color: #4CAF50; }
+.btn-mode.mode-normal.active { background: #4CAF50; color: white; box-shadow: 0 2px 8px rgba(76,175,80,0.35); }
+
+.btn-mode.mode-fast          { border-color: #FF9800; }
+.btn-mode.mode-fast.active   { background: #FF9800; color: white; box-shadow: 0 2px 8px rgba(255,152,0,0.35); }
 
 .control-info {
   padding: 1rem;

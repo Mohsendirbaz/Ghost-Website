@@ -1,0 +1,149 @@
+/* ── SignalRegimePlot.css ───────────────────────────────────────────────────── */
+
+.signal-regime-plot {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #0d1628;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #1e2d50;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
+.srp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: #111c35;
+  border-bottom: 1px solid #1e2d50;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.srp-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.srp-title-main {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #d0e4ff;
+  letter-spacing: 0.02em;
+}
+
+.srp-title-sub {
+  font-size: 0.72rem;
+  color: #4a6080;
+  font-family: monospace;
+  letter-spacing: 0.03em;
+}
+
+/* ── Math formula ────────────────────────────────────────────────────────────── */
+
+.srp-formula {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.srp-formula-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.82rem;
+  color: #5b9bd5;
+  background: rgba(77, 163, 255, 0.07);
+  border: 1px solid rgba(77, 163, 255, 0.18);
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+  white-space: nowrap;
+}
+
+.srp-formula-text sub {
+  font-size: 0.62rem;
+  vertical-align: sub;
+}
+
+.srp-formula-sep {
+  color: #2a3d5a;
+  font-size: 1.1rem;
+}
+
+/* ── Canvas wrapper ──────────────────────────────────────────────────────────── */
+
+.srp-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  background: #0b1120;
+}
+
+.srp-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Paused overlay */
+.srp-paused-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 17, 32, 0.72);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.srp-paused-overlay span {
+  font-size: 0.9rem;
+  color: #3a5070;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  border: 1px dashed #2a3d5a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+}
+
+/* ── Footer / regime key ─────────────────────────────────────────────────────── */
+
+.srp-footer {
+  padding: 0.65rem 1.25rem;
+  background: #111c35;
+  border-top: 1px solid #1e2d50;
+}
+
+.srp-regime-key {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.srp-regime-label {
+  font-size: 0.72rem;
+  color: #4a6080;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.srp-regime-item {
+  font-size: 0.72rem;
+  font-family: monospace;
+  padding: 0.18rem 0.55rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.srp-slow   { color: #2196F3; background: rgba(33, 150, 243, 0.1);  border: 1px solid rgba(33, 150, 243, 0.25); }
+.srp-normal { color: #4CAF50; background: rgba(76, 175, 80,  0.1);  border: 1px solid rgba(76, 175, 80,  0.25); }
+.srp-fast   { color: #FF9800; background: rgba(255,152,  0, 0.1);   border: 1px solid rgba(255,152,  0, 0.25); }
+.srp-impulse{ color: #E91E63; background: rgba(233, 30, 99, 0.1);   border: 1px solid rgba(233, 30, 99, 0.25); }

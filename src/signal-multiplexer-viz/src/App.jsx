@@ -9,6 +9,7 @@ import PerformanceMetrics from './components/PerformanceMetrics';
 import ControlPanel from './components/ControlPanel';
 import CodePanel from './components/CodePanel';
 import DemultiplexerVisualization from './components/DemultiplexerVisualization';
+import SignalRegimePlot from './components/SignalRegimePlot';
 import './App.css';
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [state, setState] = useState(engine.getState());
   const [isRunning, setIsRunning] = useState(false);
   const [showCode, setShowCode] = useState(false);
+  const [simulationMode, setSimulationMode] = useState('normal'); // 'slow' | 'normal' | 'fast'
+  const [lastDisturbanceTime, setLastDisturbanceTime] = useState(null);
   const optimizationInterval = useRef(null);
   const processingInterval = useRef(null);
   const visualizationInterval = useRef(null);
@@ -128,13 +131,14 @@ function App() {
   };
 
   const injectDisturbance = () => {
-    // Inject a burst of critical signals
+    // Inject a burst of critical signals (Dirac delta impulse event)
     for (let i = 0; i < 10; i++) {
       engine.sendSignal('channel-3', {
         priority: 'CRITICAL',
         data: `disturbance-signal-${i}`
       });
     }
+    setLastDisturbanceTime(Date.now());
   };
 
   return (
@@ -184,6 +188,8 @@ function App() {
               onInjectSignal={injectSignal}
               onInjectDisturbance={injectDisturbance}
               channels={state.channels}
+              simulationMode={simulationMode}
+              onModeChange={setSimulationMode}
             />
           </section>
 
@@ -211,6 +217,18 @@ function App() {
         <DemultiplexerVisualization
           channels={state.channels}
           demuxState={state.demuxState}
+        />
+      </section>
+
+      <section className="section full-width">
+        <h2 style={{ padding: '0 0 0.75rem 0', margin: 0, color: '#c8d8f0', fontSize: '1.1rem' }}>
+          Signal Regime Plot
+        </h2>
+        <SignalRegimePlot
+          channels={state.channels}
+          isRunning={isRunning}
+          simulationMode={simulationMode}
+          lastDisturbanceTime={lastDisturbanceTime}
         />
       </section>
 

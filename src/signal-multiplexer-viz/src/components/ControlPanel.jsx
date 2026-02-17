@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ControlPanel.css';
 
-function ControlPanel({ isRunning, onToggle, onInjectSignal, onInjectDisturbance, channels }) {
+function ControlPanel({ isRunning, onToggle, onInjectSignal, onInjectDisturbance, channels, simulationMode = 'normal', onModeChange }) {
   const [selectedChannel, setSelectedChannel] = useState('channel-1');
   const [selectedPriority, setSelectedPriority] = useState('NORMAL');
 
@@ -70,7 +70,25 @@ function ControlPanel({ isRunning, onToggle, onInjectSignal, onInjectDisturbance
           ⚡ Inject Traffic Burst
         </button>
         <p className="disturbance-description">
-          Injects 10 critical signals to test system adaptation
+          Injects 10 critical signals — triggers Dirac δ impulse on signal plot
+        </p>
+      </div>
+
+      <div className="mode-control">
+        <h4>Signal Regime Mode</h4>
+        <div className="mode-buttons">
+          {['slow', 'normal', 'fast'].map(mode => (
+            <button
+              key={mode}
+              onClick={() => onModeChange && onModeChange(mode)}
+              className={`btn-mode ${simulationMode === mode ? 'active' : ''} mode-${mode}`}
+            >
+              {mode.charAt(0).toUpperCase() + mode.slice(1)}
+            </button>
+          ))}
+        </div>
+        <p className="mode-description">
+          Sets signal waveform frequency on the regime plot
         </p>
       </div>
 
