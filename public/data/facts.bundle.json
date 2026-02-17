@@ -39,6 +39,24 @@
       }
     },
     {
+      "id": "F-002",
+      "text": {
+        "en": "$280B TAM governing 1 billion concurrent agents—Ghost's constitutional framework makes this provably safe. Competitors can't guarantee constraint satisfaction; we enforce it in silicon.",
+        "fa": "TAM ۲۸۰ میلیارد دلاری برای مدیریت ۱ میلیارد عامل همزمان—چارچوب قانون‌اساسی Ghost این را به‌طور قابل اثبات ایمن می‌کند. رقبا نمی‌توانند رضایت محدودیت را تضمین کنند؛ ما آن را در سیلیکون اعمال می‌کنیم."
+      },
+      "type": "evergreen",
+      "tags": ["market", "safety", "silicon"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "Explore provable safety",
+          "fa": "ایمنی اثبات‌پذیر را کاوش کنید"
+        }
+      }
+    },
+    {
       "id": "F-003",
       "text": {
         "en": "$45B autonomous vehicle market demands 10^8 vehicles × 1000 decisions/sec. Ghost's 3.4ns latency with Unknown Registry beats every competitor—we know what we don't know.",

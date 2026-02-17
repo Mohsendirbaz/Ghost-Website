@@ -19,6 +19,7 @@ import {
     injectJsonLd, removeJsonLd,
     buildPartGraph, buildChapterGraph, buildSectionGraph,
 } from '../utils/jsonld';
+import AddToCartButton from '../components/AddToCartButton';
 import '../styles/knowledgeBase.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -245,6 +246,30 @@ function ReaderAside({ node, part, chapter, lang }) {
                     <div className="kb-aside__cite-block">
                         <p className="kb-aside__cite-text">{canonicalUrl}</p>
                     </div>
+                </div>
+            )}
+
+            {chapter && (
+                <div className="kb-aside__section">
+                    <div className="kb-aside__heading">{isRtl ? 'دانلود' : 'Download'}</div>
+                    <AddToCartButton
+                        item={{
+                            id: `kb-${chapter.id}`,
+                            filename: `${chapter.slug}.pdf`,
+                            path: `docs/pdf/${chapter.slug}.pdf`,
+                            type: 'pdf',
+                            title: chapter.title,
+                            category: part.slug,
+                            keywords: chapter.tags || [],
+                            sizeBytes: undefined,
+                            sourceNode: {
+                                partSlug: part.slug,
+                                chapterSlug: chapter.slug,
+                            },
+                            addedAt: Date.now(),
+                        }}
+                        variant="compact"
+                    />
                 </div>
             )}
         </aside>

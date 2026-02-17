@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چارچوب کاهش شرایط مسابقه</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #080c15;
+            color: #f1f5f9;
+        }
+        .jetbrains-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 border-b border-slate-800 pb-6">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+                <span class="text-xs tracking-widest text-slate-500 uppercase">چارچوب کاهش شرایط مسابقه</span>
+            </div>
+            <h1 class="text-3xl font-light tracking-tight mb-2 jetbrains-mono">
+                اصل حداکثر پونتریاگین برای <span class="text-blue-400">سیستم‌های هم‌روند</span>
+            </h1>
+            <p class="text-slate-400 text-sm max-w-2xl">
+                اعمال نظریه کنترل بهینه از مدل‌های عامل‌بنیاد برای هماهنگ‌سازی رشته‌ها،
+                با در نظر گرفتن عامل‌های محاسباتی به عنوان ذرات تحت میدان‌های سرعت تأخیر.
+            </p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="flex gap-2 mb-8 flex-wrap" id="tabs-nav">
+            <button data-tab="overview" class="tab-btn px-4 py-2 text-sm rounded-md transition-all bg-blue-500/20 text-blue-400 border border-blue-500/30">نمای کلی چارچوب</button>
+            <button data-tab="mapping" class="tab-btn px-4 py-2 text-sm rounded-md transition-all bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:border-slate-600">نگاشت عامل-ذره</button>
+            <button data-tab="velocity" class="tab-btn px-4 py-2 text-sm rounded-md transition-all bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:border-slate-600">میدان‌های سرعت به عنوان تأخیر</button>
+            <button data-tab="control" class="tab-btn px-4 py-2 text-sm rounded-md transition-all bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:border-slate-600">استراتژی کنترل بهینه</button>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Left Panel - Visualization -->
+            <div class="space-y-6">
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-sm font-medium text-slate-300 jetbrains-mono">شبیه‌سازی ذرات عامل</h2>
+                        <button id="toggle-sim" class="px-3 py-1 text-xs rounded bg-red-500/20 text-red-400">■ توقف</button>
+                    </div>
+                    <canvas id="particleCanvas" width="600" height="300" class="w-full rounded-lg border border-slate-700/50"></canvas>
+                    <div class="flex gap-4 mt-4 text-xs">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-slate-400">ایمن</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <span class="text-slate-400">در انتظار</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <span class="text-slate-400">بحرانی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <h2 class="text-sm font-medium text-slate-300 mb-4 jetbrains-mono">فضای فاز همیلتونی</h2>
+                    <div id="hamiltonian-container"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Theory -->
+            <div id="tab-content" class="space-y-6">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 pt-6 border-t border-slate-800 text-center">
+            <p class="text-xs text-slate-500">
+                برگرفته از "اصل حداکثر پونتریاگین برای مدل‌های عامل‌بنیاد با فضای حالت محدب"<br>
+                آلمی، دوراستانتی و سولمبرینو (arXiv:2402.13680v2، مارس ۲۰۲۵)
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // State
+        let activeTab = 'overview';
+        let simulationRunning = true;
+        let agents = [
+            { id: 0, x: 100, y: 150, vx: 2, vy: 1, radius: 8, state: 'safe', label: 'خواننده' },
+            { id: 1, x: 300, y: 100, vx: -1, vy: 2, radius: 8, state: 'waiting', label: 'نویسنده' },
+            { id: 2, x: 450, y: 200, vx: 1, vy: -1, radius: 8, state: 'safe', label: 'خواننده' },
+            { id: 3, x: 200, y: 250, vx: 2, vy: -2, radius: 8, state: 'critical', label: 'نویسنده' },
+        ];
+
+        // Constants
+        const CRITICAL_REGION = { x1: 250, x2: 350, y1: 100, y2: 200 };
+        const NEAR_CRITICAL_REGION = { x1: 200, x2: 400, y1: 50, y2: 250 };
+
+        // DOM Elements
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        const tabContent = document.getElementById('tab-content');
+        const toggleSimBtn = document.getElementById('toggle-sim');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        // Particle System
+        function drawParticles() {
+            ctx.fillStyle = 'rgba(8, 12, 21, 0.15)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw velocity field grid
+            ctx.strokeStyle = 'rgba(99, 179, 237, 0.08)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 40) {
+                for (let y = 0; y < canvas.height; y += 40) {
+                    const angle = Math.sin(x * 0.02 + Date.now() * 0.001) * Math.cos(y * 0.02);
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + Math.cos(angle) * 15, y + Math.sin(angle) * 15);
+                    ctx.stroke();
+                }
+            }
+
+            // Draw agents as particles
+            agents.forEach((agent, i) => {
+                const fieldInfluence = Math.sin(agent.x * 0.01 + Date.now() * 0.002) * 0.5;
+                const glowColor = agent.state === 'critical' ? '#ef4444' :
+                                agent.state === 'waiting' ? '#f59e0b' :
+                                agent.state === 'safe' ? '#22c55e' : '#3b82f6';
+
+                const gradient = ctx.createRadialGradient(agent.x, agent.y, 0, agent.x, agent.y, agent.radius * 3);
+                gradient.addColorStop(0, glowColor + 'cc');
+                gradient.addColorStop(0.5, glowColor + '44');
+                gradient.addColorStop(1, 'transparent');
+
+                ctx.beginPath();
+                ctx.arc(agent.x, agent.y, agent.radius * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(agent.x, agent.y, agent.radius, 0, Math.PI * 2);
+                ctx.fillStyle = glowColor;
+                ctx.fill();
+
+                ctx.strokeStyle = glowColor + '88';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(agent.x, agent.y);
+                ctx.lineTo(agent.x + agent.vx * 15 + fieldInfluence * 10, agent.y + agent.vy * 15);
+                ctx.stroke();
+
+                ctx.font = '10px JetBrains Mono, monospace';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(`T${i}`, agent.x - 6, agent.y - agent.radius - 8);
+            });
+
+            if (simulationRunning) {
+                updateAgents();
+            }
+            requestAnimationFrame(drawParticles);
+        }
+
+        function updateAgents() {
+            agents = agents.map(agent => {
+                const latencyField = Math.sin(agent.x * 0.01 + Date.now() * 0.001) * 0.3;
+                let newX = agent.x + agent.vx + latencyField;
+                let newY = agent.y + agent.vy;
+
+                if (newX < 30 || newX > 570) agent.vx *= -1;
+                if (newY < 30 || newY > 270) agent.vy *= -1;
+
+                newX = Math.max(30, Math.min(570, newX));
+                newY = Math.max(30, Math.min(270, newY));
+
+                const inCritical = newX > CRITICAL_REGION.x1 && newX < CRITICAL_REGION.x2 && 
+                                  newY > CRITICAL_REGION.y1 && newY < CRITICAL_REGION.y2;
+                const nearCritical = newX > NEAR_CRITICAL_REGION.x1 && newX < NEAR_CRITICAL_REGION.x2 && 
+                                    newY > NEAR_CRITICAL_REGION.y1 && newY < NEAR_CRITICAL_REGION.y2;
+
+                let newState = 'safe';
+                if (inCritical) newState = 'critical';
+                else if (nearCritical) newState = 'waiting';
+
+                return { ...agent, x: newX, y: newY, state: newState };
+            });
+        }
+
+        // SVG Renderers
+        function renderHamiltonian() {
+            const container = document.getElementById('hamiltonian-container');
+            container.innerHTML = `
+                <svg viewBox="0 0 500 300" class="w-full h-48">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#3b82f6">
+                            <polygon points="0 0, 10 3.5, 0 7" />
+                        </marker>
+                    </defs>
+                    <g stroke="#1e293b" stroke-width="1">
+                        ${Array.from({length: 10}).map((_, i) => `
+                            <line x1="${50 + i * 45}" y1="20" x2="${50 + i * 45}" y2="280" />
+                            <line x1="30" y1="${20 + i * 28}" x2="470" y2="${20 + i * 28}" />
+                        `).join('')}
+                    </g>
+                    ${[
+                        { d: "M 50 150 Q 150 50 250 150 Q 350 250 450 150", color: "#3b82f6" },
+                        { d: "M 50 170 Q 150 90 250 170 Q 350 270 450 170", color: "#22c55e" },
+                        { d: "M 50 130 Q 150 10 250 130 Q 350 230 450 130", color: "#f59e0b" },
+                    ].map((path, i) => `
+                        <g>
+                            <path d="${path.d}" fill="none" stroke="${path.color}" stroke-width="2" stroke-dasharray="8,4" opacity="0.6">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="${2 + i * 0.5}s" repeatCount="indefinite" />
+                            </path>
+                            <circle r="6" fill="${path.color}">
+                                <animateMotion dur="${3 + i}s" repeatCount="indefinite" path="${path.d}" />
+                            </circle>
+                        </g>
+                    `).join('')}
+                    <text x="250" y="295" fill="#64748b" text-anchor="middle" font-size="11" font-family="JetBrains Mono">حالت c(t) - موقعیت منبع</text>
+                    <text x="15" y="150" fill="#64748b" text-anchor="middle" font-size="11" font-family="JetBrains Mono" transform="rotate(-90, 15, 150)">هم‌حالت p(t) - اولویت قفل</text>
+                    <rect x="180" y="80" width="140" height="140" fill="#ef4444" opacity="0.1" rx="8"/>
+                    <text x="250" y="160" fill="#ef4444" text-anchor="middle" font-size="10" font-family="JetBrains Mono">بخش بحرانی</text>
+                </svg>
+            `;
+        }
+
+        function renderControlFlow() {
+            return `
+                <svg viewBox="0 0 500 200" class="w-full h-40">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    ${[
+                        { x: 50, y: 100, label: "μ₀", desc: "توزیع اولیه", color: "#3b82f6" },
+                        { x: 150, y: 60, label: "A(Ψ,c,u)", desc: "میدان سرعت", color: "#8b5cf6" },
+                        { x: 250, y: 100, label: "∇H", desc: "جریان همیلتونی", color: "#22c55e" },
+                        { x: 350, y: 60, label: "u*(t)", desc: "کنترل بهینه", color: "#f59e0b" },
+                        { x: 450, y: 100, label: "μ(T)", desc: "حالت ایمن", color: "#10b981" },
+                    ].map((node, i) => `
+                        <g filter="url(#glow)">
+                            <circle cx="${node.x}" cy="${node.y}" r="25" fill="#0f172a" stroke="${node.color}" stroke-width="2"/>
+                            <text x="${node.x}" y="${node.y + 4}" fill="${node.color}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${node.label}</text>
+                            <text x="${node.x}" y="${node.y + 40}" fill="#64748b" text-anchor="middle" font-size="8" font-family="system-ui">${node.desc}</text>
+                        </g>
+                    `).join('')}
+                    ${[
+                        { x1: 75, y1: 90, x2: 125, y2: 70 },
+                        { x1: 175, y1: 70, x2: 225, y2: 90 },
+                        { x1: 275, y1: 90, x2: 325, y2: 70 },
+                        { x1: 375, y1: 70, x2: 425, y2: 90 },
+                    ].map(arrow => `
+                        <line x1="${arrow.x1}" y1="${arrow.y1}" x2="${arrow.x2}" y2="${arrow.y2}" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    `).join('')}
+                    <path d="M 450 125 Q 450 180 250 180 Q 50 180 50 125" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.6"/>
+                    <text x="250" y="195" fill="#ef4444" text-anchor="middle" font-size="9" opacity="0.8">بازخورد معادله الحاقی (تشخیص شرایط مسابقه)</text>
+                </svg>
+            `;
+        }
+
+        // Tab Content Injection
+        const contentData = {
+            overview: `
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <h2 class="text-lg font-medium text-slate-200 mb-4">نمای کلی چارچوب</h2>
+                    <div class="space-y-4 text-sm text-slate-400">
+                        <p>مقاله آلمی، دوراستانتی و سولمبرینو یک <span class="text-blue-400">اصل حداکثر پونتریاگین</span> برای سیستم‌های عامل‌بنیاد در حال تکامل در فضاهای حالت محدب ارائه می‌دهد. این چارچوب به طور مستقیم به کاهش شرایط مسابقه قابل نگاشت است:</p>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
+                            <h3 class="text-slate-300 font-medium mb-2">ساختار ریاضی اصلی</h3>
+                            <div class="font-mono text-xs space-y-1">
+                                <div><span class="text-blue-400">حالت:</span> c(t) = (x, λ) ∈ ℝᵈ × P(K)</div>
+                                <div><span class="text-green-400">تکامل:</span> dc/dt = A(t, c(t), u(t))</div>
+                                <div><span class="text-yellow-400">الحاقی:</span> dp/dt = -D*ₖA[p(t)]</div>
+                                <div><span class="text-purple-400">بهینگی:</span> max H(t, c, p, u)</div>
+                            </div>
+                        </div>
+                        <p>در سیستم‌های هم‌روند، رشته‌ها <span class="text-green-400">عامل‌هایی</span> هستند که حالت آن‌ها شامل موقعیت (نقطه دسترسی به منبع) و <span class="text-yellow-400">برچسب جمعیت</span> (وضعیت خواننده/نویسنده) است.</p>
+                    </div>
+                </div>
+            `,
+            mapping: `
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <h2 class="text-lg font-medium text-slate-200 mb-4">نگاشت عامل ↔ ذره</h2>
+                    <div class="space-y-4">
+                        <table class="w-full text-sm text-right">
+                            <thead>
+                                <tr class="border-b border-slate-700 text-xs uppercase tracking-wider">
+                                    <th class="py-2 text-blue-400">موجودیت ریاضی</th>
+                                    <th class="py-2 text-green-400">سیستم هم‌روند</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-400">
+                                <tr class="border-b border-slate-800"><td class="py-2">ذره عامل cᵢ</td><td class="py-2">رشته/فرایند Tᵢ</td></tr>
+                                <tr class="border-b border-slate-800"><td class="py-2">موقعیت x ∈ ℝᵈ</td><td class="py-2">حالت دسترسی به منبع</td></tr>
+                                <tr class="border-b border-slate-800"><td class="py-2">برچسب λ ∈ P(K)</td><td class="py-2">احتمال مالکیت قفل</td></tr>
+                                <tr class="border-b border-slate-800"><td class="py-2">جمعیت μ(t)</td><td class="py-2">توزیع رشته‌های سیستم</td></tr>
+                                <tr class="border-b border-slate-800"><td class="py-2">مجموعه محدب C</td><td class="py-2">حالت‌های معتبر همگام‌سازی</td></tr>
+                                <tr><td class="py-2">کنترل u(t)</td><td class="py-2">خط‌مشی زمان‌بند</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20 text-xs text-blue-300">
+                            <strong>نکته کلیدی:</strong> دینامیک رهبر-پیرو مقاله (§5.1) به طور مستقیم قفل‌های خواننده-نویسنده را مدل‌سازی می‌کند، جایی که "رهبران" نویسندگان با دسترسی انحصاری و "پیروان" خوانندگان هستند.
+                        </div>
+                    </div>
+                </div>
+            `,
+            velocity: `
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <h2 class="text-lg font-medium text-slate-200 mb-4">میدان‌های سرعت به عنوان تأخیر</h2>
+                    <div class="space-y-4 text-sm text-slate-400">
+                        <p>میدان سرعت <span class="font-mono text-purple-400">A(Ψ, c, u)</span> از معادله (۵.۳) تأخیر را رمزگذاری می‌کند:</p>
+                        <div class="bg-slate-800/50 rounded-lg p-4 font-mono text-xs">
+                            <div class="text-yellow-400 mb-2">A(Ψ, c, u) := (v_Ψ(c) + h_Ψ(c)·u, T_Ψ(c))</div>
+                            <div class="text-slate-500 mt-3 space-y-1">
+                                <div>• v_Ψ(c) — رانش طبیعی (تأخیر سیستم)</div>
+                                <div>• h_Ψ(c)·u — مداخله کنترل‌شده (زمان‌بند)</div>
+                                <div>• T_Ψ(c) — انتقال برچسب (تغییر حالت قفل)</div>
+                            </div>
+                        </div>
+                        <div class="space-y-3 mt-4">
+                            <div class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-500 mt-1.5"></div><div><span class="text-slate-300">تأخیر شبکه</span> → اختلال در سرعت موقعیت v_Ψ</div></div>
+                            <div class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-green-500 mt-1.5"></div><div><span class="text-slate-300">تأخیر دریافت قفل</span> → نرخ انتقال α_L, α_F</div></div>
+                            <div class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-yellow-500 mt-1.5"></div><div><span class="text-slate-300">سربار تغییر زمینه</span> → اندازه کنترل h_Ψ</div></div>
+                        </div>
+                        <div class="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/20 text-xs text-yellow-300 mt-4">
+                            <strong>جلوگیری از شرایط مسابقه:</strong> وقتی بردارهای سرعت چند عامل به طور همزمان به سمت بخش بحرانی نشانه می‌روند، شرط بیشینه‌سازی همیلتونی توالی بهینه را برای جلوگیری از تداخل شناسایی می‌کند.
+                        </div>
+                    </div>
+                </div>
+            `,
+            control: `
+                <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-800">
+                    <h2 class="text-lg font-medium text-slate-200 mb-4">استراتژی کنترل بهینه</h2>
+                    ${renderControlFlow()}
+                    <div class="space-y-4 text-sm text-slate-400 mt-4">
+                        <p><span class="text-green-400">اصل حداکثر پونتریاگین</span> (قضیه ۴.۱۰) شرایط لازم برای زمان‌بندی بهینه رشته‌ها را فراهم می‌کند:</p>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 font-mono text-xs space-y-2">
+                            <div class="text-green-400">شرط بیشینگی:</div>
+                            <div class="pl-4">⟨p(t), A(t,c(t),u(t))⟩ = max{⟨p(t), A(t,c(t),ω)⟩}</div>
+                            <div class="text-slate-500 text-xs mt-2">→ رشته‌ای را زمان‌بندی کن که اجرای آن پیشرفت را در جهت هم‌حالت بیشینه کند</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="bg-green-500/10 rounded-lg p-3 border border-green-500/20"><div class="text-green-400 font-medium text-xs mb-1">پیشگیری</div><div class="text-xs">محدودیت c(t) ∈ C تنها حالت‌های معتبر همگام‌سازی را تضمین می‌کند</div></div>
+                            <div class="bg-blue-500/10 rounded-lg p-3 border border-blue-500/20"><div class="text-blue-400 font-medium text-xs mb-1">تشخیص</div><div class="text-xs">هم‌حالت p(t) حساسیت به شرایط مسابقه را ردیابی می‌کند</div></div>
+                            <div class="bg-yellow-500/10 rounded-lg p-3 border border-yellow-500/20"><div class="text-yellow-400 font-medium text-xs mb-1">رفع</div><div class="text-xs">کنترل u(t) ترتیب بهینه قفل‌ها را پیاده‌سازی می‌کند</div></div>
+                            <div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20"><div class="text-purple-400 font-medium text-xs mb-1">بازیابی</div><div class="text-xs">جریان همیلتونی سیستم را به حالت‌های ایمن بازمی‌گرداند</div></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        const protocolCard = `
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-5 border border-slate-700">
+                <h3 class="text-sm font-medium text-slate-300 mb-3 jetbrains-mono">پروتکل پیاده‌سازی</h3>
+                <ol class="text-xs text-slate-400 space-y-2">
+                    <li class="flex gap-2"><span class="text-blue-400 font-mono">۰۱</span><span>مدل‌سازی رشته‌ها به عنوان عامل در فضای حالت C = ℝᵈ × P(K)</span></li>
+                    <li class="flex gap-2"><span class="text-blue-400 font-mono">۰۲</span><span>رمزگذاری ویژگی‌های تأخیر در میدان سرعت A(Ψ, c, u)</span></li>
+                    <li class="flex gap-2"><span class="text-blue-400 font-mono">۰۳</span><span>محاسبه هم‌حالت p(t) از طریق معادله الحاقی برای اولویت</span></li>
+                    <li class="flex gap-2"><span class="text-blue-400 font-mono">۰۴</span><span>اعمال شرط بیشینگی PMP برای انتخاب زمان‌بندی بهینه u*(t)</span></li>
+                    <li class="flex gap-2"><span class="text-blue-400 font-mono">۰۵</span><span>اعمال محدودیت‌های محدب برای تضمین اجرای بدون مسابقه</span></li>
+                </ol>
+            </div>
+        `;
+
+        function updateTabContent() {
+            tabContent.innerHTML = contentData[activeTab] + protocolCard;
+            
+            // Re-render control flow if active tab is control
+            if (activeTab === 'control') {
+                // The SVG is already in the string, no extra action needed unless we want to dynamic inject parts.
+            }
+        }
+
+        // Event Listeners
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeTab = btn.getAttribute('data-tab');
+                tabBtns.forEach(b => {
+                    b.classList.remove('bg-blue-500/20', 'text-blue-400', 'border-blue-500/30');
+                    b.classList.add('bg-slate-800/50', 'text-slate-400', 'border-slate-700/50');
+                });
+                btn.classList.add('bg-blue-500/20', 'text-blue-400', 'border-blue-500/30');
+                btn.classList.remove('bg-slate-800/50', 'text-slate-400', 'border-slate-700/50');
+                updateTabContent();
+            });
+        });
+
+        toggleSimBtn.addEventListener('click', () => {
+            simulationRunning = !simulationRunning;
+            toggleSimBtn.textContent = simulationRunning ? '■ توقف' : '▶ اجرا';
+            toggleSimBtn.className = `px-3 py-1 text-xs rounded ${simulationRunning ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}`;
+        });
+
+        // Initialize
+        updateTabContent();
+        renderHamiltonian();
+        drawParticles();
+
+    </script>
+</body>
+</html>

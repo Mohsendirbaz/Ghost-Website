@@ -411,46 +411,88 @@ Each diagram includes a companion `manifest.yml` with:
 
 ## Visitor Retention Booster (Fact Engine)
 
-The **Fact Engine** is a visitor retention system that displays curated, educational facts about Ghost Autonomy's technology, science, and architecture. It provides a non-intrusive way to engage visitors with bite-sized insights while respecting user preferences and accessibility standards.
+The **Fact Engine** is a visitor retention system designed to engage visitors who might be considering leaving the website. It displays curated, competitive advantage facts about Ghost Autonomy's technology, market position, and technical superiority—showing visitors why the content is worth their time.
 
 ### Overview
 
-The Fact Engine displays facts from a static JSON bundle (`/data/facts.bundle.json`) with full bilingual support (English/Persian). Visitors can save interesting facts to a personal board, dismiss facts temporarily, or opt out entirely. The system is designed to be:
+The Fact Engine displays facts **immediately** from a static JSON bundle (`/data/facts.bundle.json`) with full bilingual support (English/Persian). The system follows a simple three-feature model:
+
+1. **Show a fact** → Visitor sees a compelling reason to stay
+2. **Save to board** → Visitor pins interesting facts to a personal collection
+3. **Display saved board** → Visitor can review and manage their saved facts
+
+The system is designed to be:
 
 - **Visitor-safe**: Read-only fact pool; no global state mutation
-- **Privacy-respecting**: All preferences stored locally; no tracking or analytics
+- **Privacy-respecting**: Minimal localStorage usage (saved facts only); no tracking or analytics
 - **Accessibility-first**: Respects `prefers-reduced-motion`, proper ARIA labels, keyboard navigation
-- **Bilingual**: Full English and Persian support with RTL layout
+- **Bilingual**: Complete English and Persian support with clean language separation
 - **Static-friendly**: No runtime APIs; works entirely with static JSON
 
-### Key Features
+### Core Features
 
-#### Fact Display & Interaction
-- **Collapsible UI**: Click header to expand/collapse the fact panel
-- **Save to Board**: Pin interesting facts to a personal saved board (localStorage)
-- **Generate Another**: Request a new random fact from the pool
-- **Never Show**: Opt out of fact display entirely (respects user choice)
-- **Call-to-Action**: Optional "Learn more" button linking to relevant pages
+#### 1. Immediate Fact Display
+- Facts display **automatically** on page load (no opt-in required)
+- Weighted random selection with context-aware boosting
+- Duplicate prevention: saved facts excluded from random selection
+- Optional "Learn more" CTA button linking to relevant pages
 
-#### Smart Selection Algorithm
-- **Weighted random selection**: Facts have configurable weights (1–10)
-- **Featured boost**: Featured facts get +3 weight bonus
-- **Context-aware**: Facts tagged with page-specific keywords get boosted on relevant pages
-- **No repetition**: Tracks shown facts in session to avoid immediate repeats
+#### 2. Save to Personal Board
+- **"💾 Save this"** button pins current fact to personal collection
+- Button changes to **"✓ Saved"** (green, disabled) after saving
+- Saved facts persist in localStorage (`ga_saved_facts_board_v1`)
+- Maximum 200 saved facts per visitor
 
-#### Fact Types
-- `evergreen` — Timeless technical insights
+#### 3. Saved Facts Board Display
+- **"📌 Saved Facts Board"** section displays all pinned facts
+- Shows complete fact text (not just IDs)
+- Individual **"✕ Remove"** button on each saved fact
+- Count badge shows total saved facts
+- **"🔄 Reset"** button clears entire board and generates new fact
+
+#### Additional Controls
+- **"Another"** button: Generate new random fact (avoids current fact and saved facts)
+- **Optional CTA**: "Learn more" button (if fact includes CTA path)
+
+### Smart Selection Algorithm
+
+**Weighted Random Selection**:
+- Each fact has a weight (1–10, higher = shown more often)
+- Featured facts get +3 bonus weight
+- Context-aware boosting: facts with tags matching page context get up to +3 additional points
+- Roulette wheel selection ensures variety while respecting weights
+
+**Duplicate Prevention**:
+- Saved facts are excluded from random selection pool
+- Avoids showing the same fact twice in a row
+- Fallback: if all facts are saved, allows re-showing (excluding current fact only)
+
+**Context Integration**:
+- Accepts optional `context` prop with tags, path, dependencies
+- Example: On homepage with `tags: ['physics', 'fluids']`, physics-related facts appear more frequently
+
+### Fact Types
+- `evergreen` — Timeless competitive advantages and technical insights
 - `study_tip` — Learning aids and conceptual frameworks
 - `contextual` — Page-specific deep dives
 - `dependency_insight` — Architecture and design rationale
 
-#### Visitor Preferences (localStorage)
-- `ga_fact_engine_collapsed_v1` — Collapsed/expanded state
-- `ga_retention_opt_in_v1` — Opt-in/opt-out preference
-- `ga_retention_never_show_v1` — Permanent dismissal flag
-- `ga_retention_dismissed_until_v1` — Temporary dismissal timestamp
-- `ga_saved_facts_board_v1` — Personal saved facts collection
-- `ga_retention_shown_session_v1` — Session-based repetition tracking
+### Visitor Preferences (localStorage)
+
+The Fact Engine uses **only one localStorage key**:
+
+- `ga_saved_facts_board_v1` — Personal saved facts collection (fact IDs + metadata)
+
+**Saved board entry structure**:
+```json
+[
+  {
+    "factId": "F-001",
+    "savedAt": 1739750400,
+    "contextRef": { "path": "/en" }
+  }
+]
+```
 
 ### Architecture
 
@@ -470,40 +512,75 @@ The system consists of two separate components:
 
 ### Facts Bundle Schema
 
-The static bundle at `public/data/facts.bundle.json` follows this structure:
+The static bundle at `public/data/facts.bundle.json` contains **20 competitive advantage facts** (F-001 through F-020) covering:
+
+- Market size and revenue potential ($25T market, $280B TAM, $45B SAM)
+- Power efficiency advantages (23× power reduction, 700W→10W)
+- Technical superiority (3.4ns latency, 10,000:1 compression, Unknown Registry)
+- Capital efficiency (50× better than GPU fabs, $500K NRE)
+- Regulatory advantages (5× faster approval, constitutional governance)
+- Manufacturing advantages (95% yield, 7nm TSMC process)
+- First-mover advantages (10-year patent moat, physics-based computing)
+
+**Bundle structure**:
 
 ```json
 {
   "version": 1,
-  "generatedAt": "2026-02-16T00:00:00.000Z",
+  "generatedAt": "2026-02-17T00:00:00.000Z",
   "facts": [
     {
-      "id": "F-000001",
+      "id": "F-001",
       "text": {
-        "en": "English fact text",
-        "fa": "متن فارسی"
+        "en": "$25 trillion autonomous systems market requires 10^15 operations/sec. Ghost delivers this through hardware-enforced physics constraints—impossible with traditional GPUs burning 23× more power.",
+        "fa": "بازار سیستم‌های خودمختار ۲۵ تریلیون دلاری نیازمند ۱۰^۱۵ عملیات در ثانیه است. Ghost این را از طریق محدودیت‌های فیزیکی اعمال‌شده در سخت‌افزار ارائه می‌دهد—غیرممکن با GPU های سنتی که ۲۳ برابر بیشتر انرژی مصرف می‌کنند."
       },
       "type": "evergreen",
-      "tags": ["physics", "fluids"],
+      "tags": ["market", "physics", "advantage"],
       "featured": true,
-      "weight": 5,
+      "weight": 10,
       "cta": {
-        "path": "/science",
-        "label": { "en": "Learn more", "fa": "بیشتر" }
+        "path": "/technology",
+        "label": {
+          "en": "See the physics advantage",
+          "fa": "مزیت فیزیک را ببینید"
+        }
       }
     }
   ]
 }
 ```
 
+**Field descriptions**:
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Unique fact identifier (e.g., "F-001") |
+| `text.en` | string | English fact text (required) |
+| `text.fa` | string | Persian fact text (required) |
+| `type` | string | Fact category: `evergreen`, `study_tip`, `contextual`, `dependency_insight` |
+| `tags` | array | Keywords for context-aware boosting (e.g., `["market", "physics"]`) |
+| `featured` | boolean | If `true`, adds +3 to selection weight |
+| `weight` | number | Base selection weight (1–10, higher = shown more often) |
+| `cta.path` | string | Optional link path (e.g., `/technology`) |
+| `cta.label.en` | string | English CTA button label |
+| `cta.label.fa` | string | Persian CTA button label |
+
+**Language separation**: The `normalizeFactText(fact, lang)` function ensures clean language separation:
+- When `lang='en'`: Returns `fact.text.en` only
+- When `lang='fa'`: Returns `fact.text.fa` only
+- No language mixing within a single page view
+
 ### Component Usage
 
 ```jsx
 import FactEngine from '../FactEngine';
 import { useLang } from '../context/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const { lang } = useLang();
+  const navigate = useNavigate();
   
   return (
     <div>
@@ -511,12 +588,30 @@ function HomePage() {
       
       <FactEngine
         lang={lang}
-        pageTags={['home', 'intro']}  // Context-aware boosting
+        dir={lang === 'fa' ? 'rtl' : 'ltr'}
+        context={{ 
+          tags: ['physics', 'fluids', 'general-relativity'], 
+          path: `/${lang}` 
+        }}
+        onNavigate={(path) => navigate(path)}
       />
     </div>
   );
 }
 ```
+
+**Props**:
+
+| Prop | Type | Description |
+|---|---|---|
+| `lang` | `'en' \| 'fa'` | Language for fact text and UI labels |
+| `dir` | `'ltr' \| 'rtl'` | Text direction (optional, defaults based on content) |
+| `context` | `object` | Optional context for fact boosting: `{ tags: [], path: string }` |
+| `onNavigate` | `function` | Optional callback for CTA button clicks: `(path) => void` |
+
+**Context-aware boosting example**:
+- Homepage with `tags: ['physics', 'fluids']` → physics-related facts (F-001, F-006, F-009) appear more frequently
+- Technology page with `tags: ['architecture', 'silicon']` → architecture facts (F-002, F-007, F-008) get boosted
 
 ### Managing Facts (Admin Tool)
 
@@ -572,10 +667,10 @@ Vercel automatically redeploys; visitors see updated facts on next page load.
 ### Privacy & User Control
 
 - **No tracking**: No analytics, no external requests, no cookies
-- **Local-only storage**: All preferences stored in browser localStorage
-- **Opt-out respected**: "Never show" preference permanently disables the component
-- **Dismissal cooldown**: Temporary dismissal (24 hours default) for less intrusive UX
+- **Minimal storage**: Only saved facts stored in localStorage (single key)
+- **User control**: Reset button clears all saved facts and generates new fact
 - **No global mutation**: Visitor actions never modify the shared fact pool
+- **Graceful degradation**: If localStorage blocked, features still work (just don't persist)
 
 ### Testing
 

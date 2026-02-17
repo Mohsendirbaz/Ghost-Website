@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LanguageProvider, useLang } from './context/LanguageContext';
+import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CartWidget from './components/CartWidget';
 import Home from './pages/Home';
 import Technology from './pages/Technology';
 import Science from './pages/Science';
@@ -38,6 +40,7 @@ function AppShell() {
       <LangSync />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
+      <CartWidget />
       <div className="page-wrapper">
         <Routes>
           <Route path="/" element={<Navigate to="/en" replace />} />
@@ -86,7 +89,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <AppShell />
+        <CartProvider>
+          <AppShell />
+        </CartProvider>
       </LanguageProvider>
     </BrowserRouter>
   );

@@ -18,6 +18,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useLang } from '../context/LanguageContext';
 import { ARTIFACT_BY_SLUG, ARTIFACT_CATEGORIES, artifactUrl } from '../data/artifacts';
+import AddToCartButton from '../components/AddToCartButton';
 import '../styles/artifacts.css';
 
 const TAB_PREVIEW = 'preview';
@@ -237,6 +238,25 @@ export default function ArtifactViewer() {
                             </a>
                         )}
                     </div>
+
+                    {isLocal && (
+                        <div className="artifact-viewer-meta" style={{ marginTop: 'var(--space-2)' }}>
+                            <div className="kb-aside__heading">{isRtl ? 'دانلود' : 'Download'}</div>
+                            <AddToCartButton
+                                item={{
+                                    id: `artifact-${artifact.id}`,
+                                    filename: lf.filename || `${artifact.slug}.${lf.type}`,
+                                    path: lf.path.replace(/^\//, ''),
+                                    type: lf.type,
+                                    title: { en: artifact.en.title, fa: artifact.fa.title },
+                                    category: artifact.category,
+                                    keywords: artifact.tags || [],
+                                    addedAt: Date.now(),
+                                }}
+                                variant="compact"
+                            />
+                        </div>
+                    )}
                 </aside>
 
                 {/* ── Right: content area ── */}
