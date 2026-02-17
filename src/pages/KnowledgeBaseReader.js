@@ -69,68 +69,83 @@ function useSiblings(partSlug, chapterSlug, sectionSlug, lang) {
 
 // ─── TOC Navigator (left column) ─────────────────────────────────────────────
 
-function TocNav({ part, activeChapterSlug, activeSectionSlug, lang }) {
+function TocNav({ part, chapter, section, activeChapterSlug, activeSectionSlug, lang }) {
     const isRtl = lang === 'fa';
     if (!part) return null;
 
+    // Hierarchy-aware back navigation: section→chapter, chapter→part, part→KB index
+    const backHref = section
+        ? buildPath(lang, part.slug, activeChapterSlug)
+        : activeChapterSlug
+            ? buildPath(lang, part.slug)
+            : `/${lang}/knowledge-base`;
+    const backLabel = section
+        ? (isRtl ? chapter?.title?.fa : chapter?.title?.en)
+        : activeChapterSlug
+            ? (isRtl ? part.title.fa : part.title.en)
+            : (isRtl ? 'همه بخش‌ها' : 'All parts');
+
+    const partTitle = isRtl ? part.title.fa : part.title.en;
+
     return (
         <nav className="kb-toc-nav" aria-label={isRtl ? 'جدول محتوا' : 'Table of contents'}>
-            <Link to={`/${lang}/knowledge-base`} className="kb-toc__back">
+            <Link to={backHref} className="kb-toc__back">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <polyline points="15 18 9 12 15 6" />
                 </svg>
-                {isRtl ? 'همه بخش‌ها' : 'All parts'}
+                {backLabel}
             </Link>
 
-            <div
+            <Link
+                to={buildPath(lang, part.slug)}
                 className="kb-toc__part-label"
                 style={{ '--kb-accent': part.accentColor || 'var(--color-primary)' }}
             >
-                Part {part.number}
-            </div>
+                Part {part.number} · {partTitle}
+            </Link>
 
             <ul className="kb-toc__list">
-                {(part.chapters || []).map((chapter) => {
-                    const isChActive = chapter.slug === activeChapterSlug;
-                    const chHref     = buildPath(lang, part.slug, chapter.slug);
-                    const title      = isRtl ? chapter.title.fa : chapter.title.en;
+                {(part.chapters || []).map((ch) => {
+                    const isChActive = ch.slug === activeChapterSlug;
+                    const chHref     = buildPath(lang, part.slug, ch.slug);
+                    const chTitle    = isRtl ? ch.title.fa : ch.title.en;
 
                     return (
-                        <li key={chapter.id} className="kb-toc__item">
+                        <li key={ch.id} className="kb-toc__item">
                             <Link
                                 to={chHref}
-                                className={`kb-toc__link${isChActive && !activeSectionSlug ? ' active' : ''}`}
+                                className={`kb-toc__link${isChActive && !activeSectionSlug ? ' active' : isChActive && activeSectionSlug ? ' ancestor' : ''}`}
                                 data-depth="0"
                                 aria-current={isChActive && !activeSectionSlug ? 'page' : undefined}
                             >
-                                <span className="kb-toc__number">{chapter.number}.</span>
-                                {title}
+                                <span className="kb-toc__number">{ch.number}.</span>
+                                {chTitle}
                             </Link>
 
                             {/* Show sections when chapter is active */}
-                            {isChActive && (chapter.sections || []).length > 0 && (
+                            {isChActive && (ch.sections || []).length > 0 && (
                                 <ul className="kb-toc__list">
-                                    {chapter.sections.map((section) => {
-                                        const isSecActive = section.slug === activeSectionSlug;
-                                        const secHref     = buildPath(lang, part.slug, chapter.slug, section.slug);
-                                        const secTitle    = isRtl ? section.title.fa : section.title.en;
+                                    {ch.sections.map((sec) => {
+                                        const isSecActive = sec.slug === activeSectionSlug;
+                                        const secHref     = buildPath(lang, part.slug, ch.slug, sec.slug);
+                                        const secTitle    = isRtl ? sec.title.fa : sec.title.en;
 
                                         return (
-                                            <li key={section.id} className="kb-toc__item">
+                                            <li key={sec.id} className="kb-toc__item">
                                                 <Link
                                                     to={secHref}
                                                     className={`kb-toc__link${isSecActive ? ' active' : ''}`}
                                                     data-depth="1"
                                                     aria-current={isSecActive ? 'page' : undefined}
                                                 >
-                                                    <span className="kb-toc__number">{section.number}</span>
+                                                    <span className="kb-toc__number">{sec.number}</span>
                                                     {secTitle}
                                                 </Link>
 
                                                 {/* Subsections when section is active */}
-                                                {isSecActive && (section.subsections || []).length > 0 && (
+                                                {isSecActive && (sec.subsections || []).length > 0 && (
                                                     <ul className="kb-toc__list">
-                                                        {section.subsections.map((sub) => {
+                                                        {sec.subsections.map((sub) => {
                                                             const subTitle = isRtl ? sub.title.fa : sub.title.en;
                                                             return (
                                                                 <li key={sub.id} className="kb-toc__item">
@@ -541,6 +556,8 @@ export default function KnowledgeBaseReader() {
                 {/* Left: TOC */}
                 <TocNav
                     part={part}
+                    chapter={chapter}
+                    section={section}
                     activeChapterSlug={chapterSlug}
                     activeSectionSlug={sectionSlug}
                     lang={lang}
