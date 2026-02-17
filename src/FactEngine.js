@@ -1,35 +1,22 @@
-// FactEngine.js (Revised: visitor-safe, read-only pool, preference-respecting, optional saved board)
+// FactEngine.js (Simplified: visitor retention with single-button UX)
 //
-// Key changes vs current:
-// - NO writing of fact pool to localStorage (removes teaSpaceFacts persistence/mutation).
-// - Reads facts from a public bundle: /data/facts.bundle.json (static-friendly).
-// - Visitor "Save" goes to a personal board (localStorage) without altering global facts.
-// - Adds "Never show again" + cooldown + reduced-motion compliance.
-// - Keeps optional collapsed UI state, but all interruptions are opt-in-safe.
+// Design philosophy:
+// - Show a fact immediately to engage visitors who might leave
+// - Single primary action: "Save this" to keep facts they like
+// - No opt-in/opt-out complexity, no "never show" nagging
+// - Simple localStorage: only saved facts (IDs only)
+// - Reset button to clear saved facts
 //
-// NOTE: Wire your UI strings to copy.js if your site is bilingual; this file supports a `lang` prop.
-//       Ensure the admin tool does NOT ship to public routes.
+// Reads facts from: /data/facts.bundle.json (static bundle, never mutated)
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './styles/FactEngine.css';
 
 const FACTS_BUNDLE_URL = '/data/facts.bundle.json';
 
-// Visitor preference keys (namespaced; does not store the pool)
+// Simplified localStorage keys
 const LS = {
-    COLLAPSED: 'ga_fact_engine_collapsed_v1',
-    NEVER_SHOW: 'ga_retention_never_show_v1',
-    DISMISSED_UNTIL: 'ga_retention_dismissed_until_v1',
-    OPT_IN: 'ga_retention_opt_in_v1',
-    SAVED_BOARD: 'ga_saved_facts_board_v1',
-    SHOWN_SESSION: 'ga_retention_shown_session_v1'
-};
-
-// Defaults (tune to your UX policy)
-const DEFAULTS = {
-    // Facts display by default; visitors can opt out via "Never show" button
-    optInDefault: true,
-    dismissedHours: 24
+    SAVED_BOARD: 'ga_saved_facts_board_v1'
 };
 
 // Utilities (safe localStorage)
@@ -110,24 +97,16 @@ function clampInt(n, min, max) {
 }
 
 const FactEngine = ({
-                        // Optional integration points for your larger website model:
                         lang = 'en', // 'en' | 'fa'
-                        dir,         // if you want to set dir at container level; else rely on <html dir="...">
-                        context = null, // optional: { tags:[], collectionId, diagramType, path, dependencies:[] }
-                        onNavigate = null // optional: (path) => void; if absent, uses window.location.assign
+                        dir,         // optional: set dir at container level
+                        context = null, // optional: { tags:[], path, ... } for context-aware fact selection
+                        onNavigate = null // optional: (path) => void for CTA navigation
                     }) => {
     const [facts, setFacts] = useState([]);
     const [currentFact, setCurrentFact] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Collapsed UI state (not sensitive)
-    const [isCollapsed, setIsCollapsed] = useState(safeGet(LS.COLLAPSED, 'false') === 'true');
-
-    // Preference state
-    const [neverShow, setNeverShow] = useState(safeGet(LS.NEVER_SHOW, 'false') === 'true');
-    const [optIn, setOptIn] = useState(safeGet(LS.OPT_IN, String(DEFAULTS.optInDefault)) === 'true');
-
-    // Visitor board (personal)
+    // Visitor saved facts (personal board - IDs only)
     const [savedBoard, setSavedBoard] = useState(() => safeGetJSON(LS.SAVED_BOARD, []));
 
     const reducedMotion = useMemo(() => prefersReducedMotion(), []);
@@ -174,36 +153,31 @@ const FactEngine = ({
         };
     }, []);
 
-    // Persist simple preferences
-    useEffect(() => safeSet(LS.COLLAPSED, String(isCollapsed)), [isCollapsed]);
-    useEffect(() => safeSet(LS.NEVER_SHOW, String(neverShow)), [neverShow]);
-    useEffect(() => safeSet(LS.OPT_IN, String(optIn)), [optIn]);
+    // Persist saved board only
     useEffect(() => safeSetJSON(LS.SAVED_BOARD, savedBoard), [savedBoard]);
 
-    const dismissedUntilMs = useMemo(() => {
-        const raw = safeGet(LS.DISMISSED_UNTIL, null);
-        const v = raw ? Number(raw) : null;
-        return Number.isFinite(v) ? v : null;
-    }, []);
-
-    const isSuppressed = useMemo(() => {
-        if (neverShow) return true;
-        if (!optIn) return true; // strict mode: no prompts unless explicitly enabled
-        if (dismissedUntilMs && dismissedUntilMs > nowMs()) return true;
-        return false;
-    }, [neverShow, optIn, dismissedUntilMs]);
-
-    const setDismissCooldown = useCallback((hours = DEFAULTS.dismissedHours) => {
-        const until = nowMs() + hours * 60 * 60 * 1000;
-        safeSet(LS.DISMISSED_UNTIL, String(until));
-    }, []);
-
     // Weighted selection with light context preference (optional)
+    // Excludes already-saved facts to prevent duplicates
     const pickFact = useCallback((avoidId = null) => {
         if (!facts || facts.length === 0) return null;
 
-        const usable = facts.filter(f => String(f.id) !== String(avoidId || ''));
-        if (usable.length === 0) return facts[0];
+        // Build set of saved fact IDs for efficient lookup
+        const savedIds = new Set(savedBoard.map(x => String(x.factId)));
+
+        // Filter out: current fact (avoidId) AND already-saved facts
+        const usable = facts.filter(f => {
+            const fid = String(f.id);
+            return fid !== String(avoidId || '') && !savedIds.has(fid);
+        });
+
+        // If all facts are saved, allow showing them again (fallback)
+        if (usable.length === 0) {
+            const fallback = facts.filter(f => String(f.id) !== String(avoidId || ''));
+            if (fallback.length === 0) return facts[0];
+            // Pick from fallback without saved-filter
+            const randomFallback = fallback[Math.floor(Math.random() * fallback.length)];
+            return randomFallback;
+        }
 
         // Context boost (general, optional; keeps module reusable)
         const ctxTags = Array.isArray(context?.tags) ? new Set(context.tags.map(String)) : null;
@@ -228,7 +202,7 @@ const FactEngine = ({
             if (r <= 0) return x.f;
         }
         return scored[scored.length - 1].f;
-    }, [facts, context]);
+    }, [facts, context, savedBoard]);
 
     const showNewFact = useCallback((nextFact) => {
         setCurrentFact(nextFact);
@@ -243,14 +217,13 @@ const FactEngine = ({
         }
     }, [reducedMotion]);
 
-    // Initialize first fact if allowed
+    // Initialize first fact on load
     useEffect(() => {
         if (loading) return;
-        if (isSuppressed) return;
         if (!currentFact && facts.length > 0) {
             showNewFact(pickFact(null));
         }
-    }, [loading, isSuppressed, currentFact, facts.length, pickFact, showNewFact]);
+    }, [loading, currentFact, facts.length, pickFact, showNewFact]);
 
     // Visitor board helpers
     const isSaved = useCallback((factId) => {
@@ -271,11 +244,10 @@ const FactEngine = ({
         setSavedBoard(prev => [entry, ...prev].slice(0, 200)); // cap to prevent unbounded growth
     }, [currentFact, isSaved, context]);
 
-    const handleRemoveFromBoard = useCallback(() => {
-        if (!currentFact) return;
-        const id = String(currentFact.id);
+    const handleRemoveFromBoard = useCallback((factId) => {
+        const id = String(factId);
         setSavedBoard(prev => prev.filter(x => String(x.factId) !== id));
-    }, [currentFact]);
+    }, []);
 
     const handleGenerateAnother = useCallback(() => {
         if (!currentFact) {
@@ -286,42 +258,15 @@ const FactEngine = ({
         showNewFact(next);
     }, [currentFact, pickFact, showNewFact]);
 
-    const handleNeverShow = useCallback(() => {
-        setNeverShow(true);
-        setDismissCooldown(24 * 365 * 10); // effectively forever without needing another key
-        setCurrentFact(null);
-    }, [setDismissCooldown]);
-
-    const handleToggleOptIn = useCallback(() => {
-        setOptIn(v => {
-            const newValue = !v;
-            // If turning on, generate a new fact; if turning off, clear current fact
-            if (newValue && facts.length > 0) {
-                showNewFact(pickFact(null));
-            } else {
-                setCurrentFact(null);
-            }
-            return newValue;
-        });
-    }, [facts, pickFact, showNewFact]);
-
     const handleReset = useCallback(() => {
-        // Clear all localStorage keys
+        // Clear saved board
         try {
-            localStorage.removeItem(LS.COLLAPSED);
-            localStorage.removeItem(LS.NEVER_SHOW);
-            localStorage.removeItem(LS.DISMISSED_UNTIL);
-            localStorage.removeItem(LS.OPT_IN);
             localStorage.removeItem(LS.SAVED_BOARD);
-            localStorage.removeItem(LS.SHOWN_SESSION);
         } catch {
             // ignore (private mode / blocked storage)
         }
 
-        // Reset state to defaults
-        setIsCollapsed(false);
-        setNeverShow(false);
-        setOptIn(DEFAULTS.optInDefault);
+        // Reset state
         setSavedBoard([]);
 
         // Generate a new fact if facts are available
@@ -347,70 +292,27 @@ const FactEngine = ({
     const factText = useMemo(() => normalizeFactText(currentFact, lang), [currentFact, lang]);
     const ctaLabel = useMemo(() => normalizeCtaLabel(currentFact?.cta, lang), [currentFact, lang]);
 
-    // If suppressed, render a minimal opt-in toggle (no interruption)
-    if (isSuppressed) {
-        return (
-            <div className="fact-engine-container" dir={dir}>
-                <div className="fact-engine-header" onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <h3>Fact Engine</h3>
-                    <div className={`fact-engine-toggle ${isCollapsed ? 'collapsed' : ''}`}>▼</div>
-                </div>
-
-                <div className={`fact-engine-body ${isCollapsed ? 'collapsed' : ''}`}>
-                    <div className="fact-card">
-                        <p className="fact-text">
-                            {lang === 'fa'
-                                ? 'اگر دوست دارید، هنگام خروج یک نکته آموزشی کوتاه نمایش داده شود.'
-                                : 'If you want, we can show a short learning note when you’re leaving.'}
-                        </p>
-
-                        <div className="fact-footer">
-                            <div className="fact-actions">
-                                <button className="fact-btn pin-btn" onClick={handleToggleOptIn}>
-                                    {optIn ? (lang === 'fa' ? 'غیرفعال' : 'Disable') : (lang === 'fa' ? 'فعال‌سازی' : 'Enable')}
-                                </button>
-                                <button className="fact-btn unpin-btn" onClick={handleNeverShow}>
-                                    {lang === 'fa' ? 'دیگر نشان نده' : 'Never show'}
-                                </button>
-                                <button className="fact-btn" onClick={handleReset}>
-                                    {lang === 'fa' ? 'بازنشانی' : 'Reset'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    // Normal (opted-in) view
+    // Simplified single-view UI
     return (
         <div className="fact-engine-container" dir={dir}>
-            <div className="fact-engine-header" onClick={() => setIsCollapsed(!isCollapsed)}>
-                <h3>Fact Engine</h3>
-                <div className={`fact-engine-toggle ${isCollapsed ? 'collapsed' : ''}`}>▼</div>
+            <div className="fact-engine-header">
+                <h3>{lang === 'fa' ? 'نکته‌ای برای شما' : 'A fact for you'}</h3>
             </div>
 
-            <div className={`fact-engine-body ${isCollapsed ? 'collapsed' : ''}`}>
+            <div className="fact-engine-body">
                 {!loading && currentFact && (
                     <div className={`fact-card ${isNewFact ? 'new-fact' : ''}`}>
                         <p className="fact-text" dir="auto">{factText}</p>
 
                         <div className="fact-footer">
                             <div className="fact-actions">
-                                {currentFact?.cta?.path && (
-                                    <button className="fact-btn pin-btn" onClick={handleCTA}>
-                                        {ctaLabel || (lang === 'fa' ? 'بیشتر' : 'Learn more')}
-                                    </button>
-                                )}
-
                                 {!isSaved(currentFact.id) ? (
                                     <button className="fact-btn pin-btn" onClick={handleSaveToBoard}>
-                                        {lang === 'fa' ? 'ذخیره' : 'Save'}
+                                        {lang === 'fa' ? '💾 ذخیره این' : '💾 Save this'}
                                     </button>
                                 ) : (
-                                    <button className="fact-btn unpin-btn" onClick={handleRemoveFromBoard}>
-                                        {lang === 'fa' ? 'حذف از ذخیره‌ها' : 'Remove'}
+                                    <button className="fact-btn saved-btn" disabled>
+                                        {lang === 'fa' ? '✓ ذخیره شد' : '✓ Saved'}
                                     </button>
                                 )}
 
@@ -418,30 +320,49 @@ const FactEngine = ({
                                     {lang === 'fa' ? 'یکی دیگر' : 'Another'}
                                 </button>
 
-                                <button className="fact-btn unpin-btn" onClick={handleNeverShow}>
-                                    {lang === 'fa' ? 'دیگر نشان نده' : 'Never show'}
-                                </button>
+                                {currentFact?.cta?.path && (
+                                    <button className="fact-btn cta-btn" onClick={handleCTA}>
+                                        {ctaLabel || (lang === 'fa' ? 'بیشتر' : 'Learn more')}
+                                    </button>
+                                )}
 
-                                <button className="fact-btn" onClick={handleReset}>
-                                    {lang === 'fa' ? 'بازنشانی' : 'Reset'}
+                                <button className="fact-btn reset-btn" onClick={handleReset}>
+                                    {lang === 'fa' ? '🔄 بازنشانی' : '🔄 Reset'}
                                 </button>
                             </div>
                         </div>
                     </div>
                 )}
 
-                {/* Optional: quick link to saved board, if your site provides a route */}
                 {savedBoard.length > 0 && (
-                    <div className="pinned-facts-section">
-                        <div className="pinned-facts-header">
-                            {lang === 'fa' ? 'یادداشت‌های ذخیره‌شده' : 'Saved Facts'}
-                        </div>
-                        <div className="fact-card pinned">
-                            <p className="fact-text">
+                    <div className="saved-facts-board">
+                        <div className="board-header">
+                            <h4>{lang === 'fa' ? '📌 نکته‌های ذخیره شده' : '📌 Saved Facts Board'}</h4>
+                            <span className="board-count">
                                 {lang === 'fa'
-                                    ? `${savedBoard.length} مورد ذخیره شده دارید.`
-                                    : `You have ${savedBoard.length} saved facts.`}
-                            </p>
+                                    ? `${savedBoard.length} نکته`
+                                    : `${savedBoard.length} fact${savedBoard.length > 1 ? 's' : ''}`}
+                            </span>
+                        </div>
+                        <div className="board-items">
+                            {savedBoard.map((entry) => {
+                                const savedFact = facts.find(f => String(f.id) === String(entry.factId));
+                                if (!savedFact) return null;
+                                const savedFactText = normalizeFactText(savedFact, lang);
+                                
+                                return (
+                                    <div key={entry.factId} className="board-item">
+                                        <p className="board-item-text" dir="auto">{savedFactText}</p>
+                                        <button 
+                                            className="board-item-remove" 
+                                            onClick={() => handleRemoveFromBoard(entry.factId)}
+                                            aria-label={lang === 'fa' ? 'حذف' : 'Remove'}
+                                        >
+                                            {lang === 'fa' ? '✕ حذف' : '✕ Remove'}
+                                        </button>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 )}

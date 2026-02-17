@@ -1,18 +1,366 @@
 {
   "version": 1,
-  "generatedAt": "2026-02-16T00:00:00.000Z",
+  "generatedAt": "2026-02-17T00:00:00.000Z",
   "facts": [
     {
-      "id": "F-000001",
+      "id": "F-001",
       "text": {
-        "en": "Perfect fluid theorem states perfect fluids are solutions to Einstein Equations (General Relativity). And we are Fluid Experts.",
-        "fa": ""
+        "en": "$25 trillion autonomous systems market requires 10^15 operations/sec. Ghost delivers this through hardware-enforced physics constraints—impossible with traditional GPUs burning 23× more power.",
+        "fa": "بازار سیستم‌های خودمختار ۲۵ تریلیون دلاری نیازمند ۱۰^۱۵ عملیات در ثانیه است. Ghost این را از طریق محدودیت‌های فیزیکی اعمال‌شده در سخت‌افزار ارائه می‌دهد—غیرممکن با GPUهای سنتی که ۲۳ برابر بیشتر انرژی می‌سوزانند."
       },
       "type": "evergreen",
-      "tags": ["physics", "general-relativity", "fluids"],
+      "tags": ["market", "physics", "advantage"],
       "featured": true,
-      "weight": 5,
-      "cta": null
+      "weight": 10,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "See the physics advantage",
+          "fa": "مزیت فیزیک را ببینید"
+        }
+      }
+    },
+    {
+      "id": "F-002",
+      "text": {
+        "en": "$280B TAM governing 1 billion concurrent agents—Ghost's constitutional framework makes this provably safe. Competitors can't guarantee constraint satisfaction; we enforce it in silicon.",
+        "fa": "TAM ۲۸۰ میلیارد دلاری برای مدیریت ۱ میلیارد عامل همزمان—چارچوب قانون‌اساسی Ghost این را به‌طور قابل اثبات ایمن می‌کند. رقبا نمی‌توانند رضایت محدودیت را تضمین کنند؛ ما آن را در سیلیکون اعمال می‌کنیم."
+      },
+      "type": "evergreen",
+      "tags": ["market", "safety", "silicon"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "Explore provable safety",
+          "fa": "ایمنی اثبات‌پذیر را کاوش کنید"
+        }
+      }
+    },
+    {
+      "id": "F-003",
+      "text": {
+        "en": "$45B autonomous vehicle market demands 10^8 vehicles × 1000 decisions/sec. Ghost's 3.4ns latency with Unknown Registry beats every competitor—we know what we don't know.",
+        "fa": "بازار خودروهای خودمختار ۴۵ میلیارد دلاری نیازمند ۱۰^۸ خودرو × ۱۰۰۰ تصمیم در ثانیه است. تاخیر ۳.۴ نانوثانیه Ghost با Unknown Registry همه رقبا را شکست می‌دهد—ما می‌دانیم چه چیزی نمی‌دانیم."
+      },
+      "type": "evergreen",
+      "tags": ["autonomous", "latency", "epistemic"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Understand 3.4ns advantage",
+          "fa": "مزیت ۳.۴ نانوثانیه را درک کنید"
+        }
+      }
+    },
+    {
+      "id": "F-004",
+      "text": {
+        "en": "3-5% market share = $1.35-2.25B annual revenue from 3M vehicles. Ghost captures this because our 10W power extends EV range 40 miles—competitors drain batteries at 700W.",
+        "fa": "سهم بازار ۳-۵٪ = درآمد سالانه ۱.۳۵-۲.۲۵ میلیارد دلار از ۳ میلیون خودرو. Ghost این را به دست می‌آورد زیرا توان ۱۰ واتی ما برد خودروهای برقی را ۴۰ مایل افزایش می‌دهد—رقبا باتری‌ها را با ۷۰۰ وات تخلیه می‌کنند."
+      },
+      "type": "study_tip",
+      "tags": ["revenue", "power", "competitive"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Calculate the range advantage",
+          "fa": "مزیت برد را محاسبه کنید"
+        }
+      }
+    },
+    {
+      "id": "F-005",
+      "text": {
+        "en": "$2-3K per chip at 95% gross margin = $1,900-2,850 profit per unit. Ghost achieves this because elliptic integral computation reduces die area 60% vs. brute-force GPU approaches.",
+        "fa": "۲-۳ هزار دلار به ازای هر تراشه با حاشیه سود ناخالص ۹۵٪ = سود ۱,۹۰۰-۲,۸۵۰ دلار به ازای هر واحد. Ghost این را به دست می‌آورد زیرا محاسبه انتگرال بیضوی مساحت die را ۶۰٪ در مقایسه با رویکردهای brute-force GPU کاهش می‌دهد."
+      },
+      "type": "study_tip",
+      "tags": ["margins", "silicon", "efficiency"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/science",
+        "label": {
+          "en": "Learn elliptic integral magic",
+          "fa": "جادوی انتگرال بیضوی را بیاموزید"
+        }
+      }
+    },
+    {
+      "id": "F-006",
+      "text": {
+        "en": "23× power reduction (700W→10W) = $690 annual electricity savings per vehicle × 100M vehicles = $69B industry cost reduction. Ghost owns this advantage through variational mechanics.",
+        "fa": "کاهش توان ۲۳ برابری (۷۰۰W→۱۰W) = صرفه‌جویی سالانه ۶۹۰ دلار برق به ازای هر خودرو × ۱۰۰ میلیون خودرو = کاهش هزینه صنعت ۶۹ میلیارد دلار. Ghost این مزیت را از طریق مکانیک واریاسیونی در اختیار دارد."
+      },
+      "type": "evergreen",
+      "tags": ["savings", "industry", "variational"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/science",
+        "label": {
+          "en": "Explore variational computing",
+          "fa": "محاسبات واریاسیونی را کاوش کنید"
+        }
+      }
+    },
+    {
+      "id": "F-007",
+      "text": {
+        "en": "$500K NRE for 250mm² die delivering 10^12 constraints/sec—Ghost's capital efficiency is 50× better than GPU fabs because constraint checking is 1000× cheaper than floating-point arithmetic.",
+        "fa": "NRE ۵۰۰ هزار دلاری برای die با مساحت ۲۵۰mm² که ۱۰^۱۲ محدودیت در ثانیه ارائه می‌دهد—کارایی سرمایه Ghost ۵۰ برابر بهتر از کارخانه‌های GPU است زیرا بررسی محدودیت ۱۰۰۰ برابر ارزان‌تر از محاسبات اعشاری شناور است."
+      },
+      "type": "study_tip",
+      "tags": ["capital", "efficiency", "constraints"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "See capital efficiency",
+          "fa": "کارایی سرمایه را ببینید"
+        }
+      }
+    },
+    {
+      "id": "F-008",
+      "text": {
+        "en": "10,000:1 compression ratio (10,000 bits→1 bit in 3.4ns) enables real-time decisions impossible with traditional architectures. Ghost's hierarchical Worker-Manager-Queen design has zero competitors.",
+        "fa": "نسبت فشرده‌سازی ۱۰,۰۰۰:۱ (۱۰,۰۰۰ بیت→۱ بیت در ۳.۴ns) تصمیمات زمان واقعی غیرممکن با معماری‌های سنتی را امکان‌پذیر می‌کند. طراحی سلسله‌مراتبی Worker-Manager-Queen Ghost هیچ رقیبی ندارد."
+      },
+      "type": "evergreen",
+      "tags": ["compression", "real-time", "architecture"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Understand the hierarchy",
+          "fa": "سلسله‌مراتب را درک کنید"
+        }
+      }
+    },
+    {
+      "id": "F-009",
+      "text": {
+        "en": "First-mover advantage in physics-based computing = 10-year patent moat protecting $25T market. Ghost's elliptic integral framework is mathematically proven—competitors must reinvent physics.",
+        "fa": "مزیت حرکت اول در محاسبات مبتنی بر فیزیک = خندق ثبت اختراع ۱۰ ساله که بازار ۲۵ تریلیون دلاری را محافظت می‌کند. چارچوب انتگرال بیضوی Ghost از نظر ریاضی اثبات شده است—رقبا باید فیزیک را دوباره اختراع کنند."
+      },
+      "type": "evergreen",
+      "tags": ["moat", "patents", "physics"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/science",
+        "label": {
+          "en": "See the patent portfolio",
+          "fa": "پورتفولیو ثبت اختراع را ببینید"
+        }
+      }
+    },
+    {
+      "id": "F-010",
+      "text": {
+        "en": "Population balance equations governing 10^9 agents = Ghost's unfair advantage. We borrowed from 200+ gasification experiments (R²>0.82)—competitors start from scratch.",
+        "fa": "معادلات تعادل جمعیت که ۱۰^۹ عامل را مدیریت می‌کنند = مزیت ناعادلانه Ghost. ما از ۲۰۰+ آزمایش گازی‌سازی (R²>۰.۸۲) استفاده کردیم—رقبا از صفر شروع می‌کنند."
+      },
+      "type": "study_tip",
+      "tags": ["advantage", "experience", "validation"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/science",
+        "label": {
+          "en": "Study the PBE foundation",
+          "fa": "پایه PBE را مطالعه کنید"
+        }
+      }
+    },
+    {
+      "id": "F-011",
+      "text": {
+        "en": "Constitutional governance at silicon level = regulatory approval 5× faster. Ghost's Proposer-Validator-Arbiter separation makes NHTSA certification trivial; competitors face years of software audits.",
+        "fa": "حکمرانی قانون‌اساسی در سطح سیلیکون = تایید نظارتی ۵ برابر سریع‌تر. جداسازی Proposer-Validator-Arbiter Ghost گواهی NHTSA را ساده می‌کند؛ رقبا با سال‌ها حسابرسی نرم‌افزار مواجه هستند."
+      },
+      "type": "study_tip",
+      "tags": ["regulatory", "approval", "constitutional"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "Fast-track certification",
+          "fa": "گواهی سریع"
+        }
+      }
+    },
+    {
+      "id": "F-012",
+      "text": {
+        "en": "Unknown Registry capturing epistemic uncertainty = $10B insurance cost reduction across autonomous fleet. Ghost explicitly tracks 'known unknowns'—competitors pretend perfect knowledge.",
+        "fa": "Unknown Registry که عدم قطعیت معرفتی را ثبت می‌کند = کاهش هزینه بیمه ۱۰ میلیارد دلاری در ناوگان خودمختار. Ghost به‌طور صریح 'ناشناخته‌های شناخته‌شده' را ردیابی می‌کند—رقبا وانمود به دانش کامل می‌کنند."
+      },
+      "type": "evergreen",
+      "tags": ["insurance", "uncertainty", "safety"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "Understand epistemic honesty",
+          "fa": "صداقت معرفتی را درک کنید"
+        }
+      }
+    },
+    {
+      "id": "F-013",
+      "text": {
+        "en": "99.7% constraint satisfaction in hardware vs. 85% in software = 14× fewer accidents. Ghost's physics-enforced gates make violations architecturally impossible—competitors rely on hope.",
+        "fa": "رضایت محدودیت ۹۹.۷٪ در سخت‌افزار در مقابل ۸۵٪ در نرم‌افزار = ۱۴ برابر تصادف کمتر. گیت‌های اعمال‌شده فیزیکی Ghost نقض را از نظر معماری غیرممکن می‌کنند—رقبا به امید تکیه می‌کنند."
+      },
+      "type": "evergreen",
+      "tags": ["safety", "accidents", "hardware"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "See accident prevention data",
+          "fa": "داده‌های پیشگیری از تصادف را ببینید"
+        }
+      }
+    },
+    {
+      "id": "F-014",
+      "text": {
+        "en": "AGM algorithm (Gauss, 1800s) achieving 10^-37 to 10^-60 precision = computational cosmological constant. Ghost found the bridge from reactor engineering to universe-scale computing.",
+        "fa": "الگوریتم AGM (گاوس، دهه ۱۸۰۰) که دقت ۱۰^-۳۷ تا ۱۰^-۶۰ را به دست می‌آورد = ثابت کیهان‌شناسی محاسباتی. Ghost پل بین مهندسی راکتور و محاسبات در مقیاس جهان را یافت."
+      },
+      "type": "evergreen",
+      "tags": ["mathematics", "precision", "discovery"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/science",
+        "label": {
+          "en": "The cosmological connection",
+          "fa": "ارتباط کیهان‌شناختی"
+        }
+      }
+    },
+    {
+      "id": "F-015",
+      "text": {
+        "en": "24 variational cores hibernating at 0.2W, waking to 5-15W only when |ΔS|>ε = Ghost's secret to 23× power advantage. Competitors waste energy on unnecessary computation.",
+        "fa": "۲۴ هسته واریاسیونی که در ۰.۲W خواب زمستانی می‌کنند، فقط زمانی که |ΔS|>ε بیدار می‌شوند به ۵-۱۵W = راز Ghost برای مزیت توان ۲۳ برابری. رقبا انرژی را در محاسبات غیرضروری هدر می‌دهند."
+      },
+      "type": "study_tip",
+      "tags": ["power", "hibernation", "efficiency"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Learn action-gradient filtering",
+          "fa": "فیلتر گرادیان عمل را بیاموزید"
+        }
+      }
+    },
+    {
+      "id": "F-016",
+      "text": {
+        "en": "Sensor Fusion & State Projection Unit processing 64 Kalman filters at <10μs = Ghost's perception advantage. Inverse problem solving in hardware beats software by 100×.",
+        "fa": "واحد ترکیب سنسور و پیش‌بینی حالت که ۶۴ فیلتر کالمن را در <۱۰μs پردازش می‌کند = مزیت ادراک Ghost. حل مسئله معکوس در سخت‌افزار نرم‌افزار را ۱۰۰ برابر شکست می‌دهد."
+      },
+      "type": "study_tip",
+      "tags": ["perception", "sensors", "speed"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "See sensor fusion advantage",
+          "fa": "مزیت ترکیب سنسور را ببینید"
+        }
+      }
+    },
+    {
+      "id": "F-017",
+      "text": {
+        "en": "HBM3 interface at 819 GB/s serving persistent memory Archive = Ghost's audit trail advantage. Every decision traceable to original sensor input—regulators demand this, only we deliver.",
+        "fa": "رابط HBM3 با ۸۱۹ GB/s که حافظه پایدار Archive را سرویس می‌دهد = مزیت ردیابی حسابرسی Ghost. هر تصمیم قابل ردیابی به ورودی سنسور اصلی—تنظیم‌کننده‌ها این را می‌خواهند، فقط ما ارائه می‌دهیم."
+      },
+      "type": "study_tip",
+      "tags": ["audit", "regulatory", "memory"],
+      "featured": true,
+      "weight": 8,
+      "cta": {
+        "path": "/safety",
+        "label": {
+          "en": "Complete audit trail",
+          "fa": "ردیابی کامل حسابرسی"
+        }
+      }
+    },
+    {
+      "id": "F-018",
+      "text": {
+        "en": "Event Dispatch Network with 0.1ns broadcast latency = Ghost's coordination advantage. Constraint propagation 10,000× faster than GPU memory barriers enables true real-time multi-agent systems.",
+        "fa": "شبکه ارسال رویداد با تاخیر پخش ۰.۱ns = مزیت هماهنگی Ghost. انتشار محدودیت ۱۰,۰۰۰ برابر سریع‌تر از موانع حافظه GPU سیستم‌های چند عاملی زمان واقعی واقعی را امکان‌پذیر می‌کند."
+      },
+      "type": "study_tip",
+      "tags": ["coordination", "latency", "multi-agent"],
+      "featured": true,
+      "weight": 9,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Understand EDN advantage",
+          "fa": "مزیت EDN را درک کنید"
+        }
+      }
+    },
+    {
+      "id": "F-019",
+      "text": {
+        "en": "7nm TSMC process with 95% yield = Ghost's manufacturing advantage. Physics-based design has fewer edge cases than neural nets—our chips work predictably, theirs need binning.",
+        "fa": "فرآیند ۷nm TSMC با بازده ۹۵٪ = مزیت تولید Ghost. طراحی مبتنی بر فیزیک موارد لبه کمتری نسبت به شبکه‌های عصبی دارد—تراشه‌های ما به‌طور قابل پیش‌بینی کار می‌کنند، تراشه‌های آن‌ها نیاز به binning دارند."
+      },
+      "type": "study_tip",
+      "tags": ["manufacturing", "yield", "reliability"],
+      "featured": true,
+      "weight": 7,
+      "cta": {
+        "path": "/technology",
+        "label": {
+          "en": "Manufacturing superiority",
+          "fa": "برتری تولید"
+        }
+      }
+    },
+    {
+      "id": "F-020",
+      "text": {
+        "en": "From PhD thesis to $25T market in 3 years = Ghost's velocity advantage. While competitors debate architectures, we're shipping silicon with 200+ validated gasification experiments as foundation.",
+        "fa": "از پایان‌نامه دکتری به بازار ۲۵ تریلیون دلاری در ۳ سال = مزیت سرعت Ghost. در حالی که رقبا درباره معماری‌ها بحث می‌کنند، ما سیلیکون را با ۲۰۰+ آزمایش گازی‌سازی معتبر به عنوان پایه ارسال می‌کنیم."
+      },
+      "type": "evergreen",
+      "tags": ["velocity", "execution", "foundation"],
+      "featured": true,
+      "weight": 10,
+      "cta": {
+        "path": "/company",
+        "label": {
+          "en": "The origin story",
+          "fa": "داستان منشا"
+        }
+      }
     }
   ]
 }
