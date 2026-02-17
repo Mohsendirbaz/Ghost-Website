@@ -293,10 +293,44 @@ const FactEngine = ({
     }, [setDismissCooldown]);
 
     const handleToggleOptIn = useCallback(() => {
-        setOptIn(v => !v);
-        // If turning off, clear any current fact and suppress
-        setCurrentFact(null);
-    }, []);
+        setOptIn(v => {
+            const newValue = !v;
+            // If turning on, generate a new fact; if turning off, clear current fact
+            if (newValue && facts.length > 0) {
+                showNewFact(pickFact(null));
+            } else {
+                setCurrentFact(null);
+            }
+            return newValue;
+        });
+    }, [facts, pickFact, showNewFact]);
+
+    const handleReset = useCallback(() => {
+        // Clear all localStorage keys
+        try {
+            localStorage.removeItem(LS.COLLAPSED);
+            localStorage.removeItem(LS.NEVER_SHOW);
+            localStorage.removeItem(LS.DISMISSED_UNTIL);
+            localStorage.removeItem(LS.OPT_IN);
+            localStorage.removeItem(LS.SAVED_BOARD);
+            localStorage.removeItem(LS.SHOWN_SESSION);
+        } catch {
+            // ignore (private mode / blocked storage)
+        }
+
+        // Reset state to defaults
+        setIsCollapsed(false);
+        setNeverShow(false);
+        setOptIn(DEFAULTS.optInDefault);
+        setSavedBoard([]);
+
+        // Generate a new fact if facts are available
+        if (facts.length > 0) {
+            showNewFact(pickFact(null));
+        } else {
+            setCurrentFact(null);
+        }
+    }, [facts, pickFact, showNewFact]);
 
     const handleCTA = useCallback(() => {
         if (!currentFact?.cta?.path) return;
@@ -337,6 +371,9 @@ const FactEngine = ({
                                 </button>
                                 <button className="fact-btn unpin-btn" onClick={handleNeverShow}>
                                     {lang === 'fa' ? 'دیگر نشان نده' : 'Never show'}
+                                </button>
+                                <button className="fact-btn" onClick={handleReset}>
+                                    {lang === 'fa' ? 'بازنشانی' : 'Reset'}
                                 </button>
                             </div>
                         </div>
@@ -383,6 +420,10 @@ const FactEngine = ({
 
                                 <button className="fact-btn unpin-btn" onClick={handleNeverShow}>
                                     {lang === 'fa' ? 'دیگر نشان نده' : 'Never show'}
+                                </button>
+
+                                <button className="fact-btn" onClick={handleReset}>
+                                    {lang === 'fa' ? 'بازنشانی' : 'Reset'}
                                 </button>
                             </div>
                         </div>
