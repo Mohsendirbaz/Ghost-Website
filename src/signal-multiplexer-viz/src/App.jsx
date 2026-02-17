@@ -1,13 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MultiplexerEngine } from './simulation/MultiplexerEngine';
-import OptimizationLoop from './components/OptimizationLoop';
-import ChannelVisualization from './components/ChannelVisualization';
-import ProblemFormulation from './components/ProblemFormulation';
-import SolverVisualization from './components/SolverVisualization';
-import ConstraintPanel from './components/ConstraintPanel';
-import PerformanceMetrics from './components/PerformanceMetrics';
 import ControlPanel from './components/ControlPanel';
-import CodePanel from './components/CodePanel';
+import ChannelVisualization from './components/ChannelVisualization';
 import DemultiplexerVisualization from './components/DemultiplexerVisualization';
 import SignalRegimePlot from './components/SignalRegimePlot';
 import './App.css';
@@ -16,7 +10,6 @@ function App() {
   const [engine] = useState(() => new MultiplexerEngine());
   const [state, setState] = useState(engine.getState());
   const [isRunning, setIsRunning] = useState(false);
-  const [showCode, setShowCode] = useState(false);
   const [simulationMode, setSimulationMode] = useState('normal'); // 'slow' | 'normal' | 'fast'
   const [lastDisturbanceTime, setLastDisturbanceTime] = useState(null);
   const optimizationInterval = useRef(null);
@@ -148,89 +141,48 @@ function App() {
         <p className="subtitle">
           Real-time visualization of intelligent coordination through continuous optimization
         </p>
-        <div className="header-actions">
-          <button onClick={() => setShowCode(!showCode)} className="btn-secondary">
-            {showCode ? 'Hide' : 'Show'} Java Implementation
-          </button>
-        </div>
       </header>
 
-      {showCode && <CodePanel />}
-
       <div className="main-content">
-        <div className="left-panel">
-          <section className="section">
-            <h2>Optimization Loop (100ms cycle)</h2>
-            <OptimizationLoop state={state} />
-          </section>
+        <section className="section">
+          <h2>Control Panel</h2>
+          <ControlPanel
+            isRunning={isRunning}
+            onToggle={toggleSimulation}
+            onInjectSignal={injectSignal}
+            onInjectDisturbance={injectDisturbance}
+            channels={state.channels}
+            simulationMode={simulationMode}
+            onModeChange={setSimulationMode}
+          />
+        </section>
 
-          <section className="section">
-            <h2>Problem Formulation</h2>
-            <ProblemFormulation problem={state.currentProblem} />
-          </section>
+        <section className="section">
+          <h2>Signal Regime Plot</h2>
+          <SignalRegimePlot
+            channels={state.channels}
+            isRunning={isRunning}
+            simulationMode={simulationMode}
+            lastDisturbanceTime={lastDisturbanceTime}
+          />
+        </section>
 
-          <section className="section">
-            <h2>Solver Selection & Execution</h2>
-            <SolverVisualization
-              structure={state.currentStructure}
-              solver={state.selectedSolver}
-              solution={state.currentSolution}
-            />
-          </section>
-        </div>
+        <section className="section">
+          <h2>System State</h2>
+          <ChannelVisualization
+            channels={state.channels}
+            resourceState={state.resourceState}
+          />
+        </section>
 
-        <div className="right-panel">
-          <section className="section">
-            <h2>Control Panel</h2>
-            <ControlPanel
-              isRunning={isRunning}
-              onToggle={toggleSimulation}
-              onInjectSignal={injectSignal}
-              onInjectDisturbance={injectDisturbance}
-              channels={state.channels}
-              simulationMode={simulationMode}
-              onModeChange={setSimulationMode}
-            />
-          </section>
-
-          <section className="section">
-            <h2>System State</h2>
-            <ChannelVisualization
-              channels={state.channels}
-              resourceState={state.resourceState}
-            />
-          </section>
-
-          <section className="section">
-            <h2>Physics-Informed Constraints</h2>
-            <ConstraintPanel constraints={state.constraints} />
-          </section>
-
-          <section className="section">
-            <h2>Performance Metrics</h2>
-            <PerformanceMetrics metrics={state.performanceMetrics} />
-          </section>
-        </div>
+        <section className="section">
+          <h2>Signal Demultiplexing &amp; Recovery</h2>
+          <DemultiplexerVisualization
+            channels={state.channels}
+            demuxState={state.demuxState}
+          />
+        </section>
       </div>
-
-      <section className="section full-width">
-        <DemultiplexerVisualization
-          channels={state.channels}
-          demuxState={state.demuxState}
-        />
-      </section>
-
-      <section className="section full-width">
-        <h2 style={{ padding: '0 0 0.75rem 0', margin: 0, color: '#c8d8f0', fontSize: '1.1rem' }}>
-          Signal Regime Plot
-        </h2>
-        <SignalRegimePlot
-          channels={state.channels}
-          isRunning={isRunning}
-          simulationMode={simulationMode}
-          lastDisturbanceTime={lastDisturbanceTime}
-        />
-      </section>
 
       <footer className="app-footer">
         <p>
