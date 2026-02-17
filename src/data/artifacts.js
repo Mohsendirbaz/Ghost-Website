@@ -81,6 +81,37 @@ export const ARTIFACTS = [
         },
     },
 
+    // ── Signal Multiplexer Interactive Visualization ──────────────────────────
+
+    {
+        id: 'signal-multiplexer-viz',
+        slug: 'signal-multiplexer-viz',
+        category: 'interactive',
+        tags: ['signal-processing', 'multiplexing', 'optimization', 'real-time', 'TDM', 'FDM', 'CDM', 'PICAPD-ISA', 'physics-enforced'],
+        localFile: {
+            type: 'html',
+            // Single technical visualization — same file for both languages
+            paths: {
+                en: '/docs/html/signal-multiplexer-viz.html',
+                fa: '/docs/html/signal-multiplexer-viz.html',
+            },
+            filenames: {
+                en: 'Signal_Multiplexer_Viz.html',
+                fa: 'Signal_Multiplexer_Viz.html',
+            },
+        },
+        en: {
+            title: 'Adaptive Signal Multiplexer Visualization',
+            description:
+                'Interactive real-time simulation of the Ghost Autonomy adaptive signal multiplexer — a 7-step optimization loop (OBSERVE → FORMULATE → DETECT → SELECT → SYNTHESIZE → SOLVE → APPLY) for dynamic bandwidth allocation across TDM, FDM, and CDM channels with physics-enforced constraints.',
+        },
+        fa: {
+            title: 'تصویرسازی مالتی‌پلکسر سیگنال تطبیقی',
+            description:
+                'شبیه‌سازی تعاملی و بلادرنگ مالتی‌پلکسر سیگنال تطبیقی Ghost Autonomy — یک حلقه بهینه‌سازی ۷ مرحله‌ای برای تخصیص پویای پهنای باند با محدودیت‌های اجبارشده توسط فیزیک در کانال‌های TDM، FDM و CDM.',
+        },
+    },
+
     // ── HTML Dashboards (bilingual) ───────────────────────────────────────────
 
     {
