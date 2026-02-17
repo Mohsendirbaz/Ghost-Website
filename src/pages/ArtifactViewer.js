@@ -3,22 +3,127 @@
  * Single artifact viewer
  * Route: /[lang]/artifacts/:slug
  *
- * Embeds the Claude public artifact in an iframe with:
- *  - "Preview" tab — sandboxed iframe
- *  - "Info"    tab — metadata (title, description, tags)
- *  - "Open in new tab" always visible as fallback
+ * Content strategy:
+ *   localFile.type === 'markdown' → MarkdownViewer (react-markdown + remark-gfm)
+ *   localFile.type === 'pdf'      → PdfViewer (native embed + download button)
+ *   (no localFile)                → ExternalViewer (direct Claude link)
  *
- * If the iframe is blocked by the host's CSP/X-Frame-Options, the error
- * state is shown automatically with a direct link.
+ * Tabs:
+ *   Preview — the document content
+ *   Info    — metadata; external links show "Not available" for local files
  */
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useLang } from '../context/LanguageContext';
 import { ARTIFACT_BY_SLUG, ARTIFACT_CATEGORIES, artifactUrl } from '../data/artifacts';
 import '../styles/artifacts.css';
 
 const TAB_PREVIEW = 'preview';
 const TAB_INFO    = 'info';
+
+// ─── Markdown viewer ──────────────────────────────────────────────────────────
+
+function MarkdownViewer({ path, isRtl }) {
+    const [state,   setState]   = useState('loading'); // 'loading' | 'ready' | 'error'
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+        setState('loading');
+        setContent('');
+        fetch(path)
+            .then((r) => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
+            })
+            .then((text) => { setContent(text); setState('ready'); })
+            .catch(() => setState('error'));
+    }, [path]);
+
+    if (state === 'loading') {
+        return (
+            <div className="artifact-doc-overlay" aria-live="polite">
+                <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
+                <p>{isRtl ? 'در حال بارگذاری سند...' : 'Loading document…'}</p>
+            </div>
+        );
+    }
+
+    if (state === 'error') {
+        return (
+            <div className="artifact-doc-overlay artifact-doc-overlay--error" aria-live="assertive">
+                <p>{isRtl ? 'خطا در بارگذاری سند.' : 'Failed to load document.'}</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="artifact-md-wrap" dir={isRtl ? 'rtl' : 'ltr'}>
+            <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                    // Wrap every table in a scrollable container
+                    table: ({ node, ...props }) => (
+                        <div className="artifact-md-table-scroll">
+                            <table {...props} />
+                        </div>
+                    ),
+                    // Open external links in new tab
+                    a: ({ node, children, ...props }) => (
+                        <a {...props} target="_blank" rel="noopener noreferrer">{children}</a>
+                    ),
+                }}
+            >
+                {content}
+            </ReactMarkdown>
+        </div>
+    );
+}
+
+// ─── PDF viewer ───────────────────────────────────────────────────────────────
+
+function PdfViewer({ path, filename, title, isRtl }) {
+    return (
+        <div className="artifact-pdf-wrap">
+            <div className="artifact-pdf-toolbar">
+                <a
+                    href={path}
+                    download={filename || true}
+                    className="artifact-pdf-download"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    {isRtl ? 'دانلود PDF' : 'Download PDF'}
+                </a>
+            </div>
+            <object
+                data={path}
+                type="application/pdf"
+                className="artifact-pdf-embed"
+                title={title}
+                aria-label={title}
+            >
+                {/* Fallback for browsers that can't embed PDFs */}
+                <div className="artifact-doc-overlay">
+                    <p>
+                        {isRtl
+                            ? 'مرورگر شما نمایش PDF را پشتیبانی نمی‌کند.'
+                            : 'Your browser cannot display PDFs inline.'}
+                    </p>
+                    <a href={path} download={filename || true} className="btn btn-primary">
+                        {isRtl ? 'دانلود PDF' : 'Download PDF'}
+                    </a>
+                </div>
+            </object>
+        </div>
+    );
+}
+
+// ─── Main viewer ──────────────────────────────────────────────────────────────
 
 export default function ArtifactViewer() {
     const { lang }    = useLang();
@@ -28,22 +133,17 @@ export default function ArtifactViewer() {
 
     const artifact = ARTIFACT_BY_SLUG[slug];
 
-    const [tab,          setTab]          = useState(TAB_PREVIEW);
-    const [iframeState,  setIframeState]  = useState('loading'); // 'loading' | 'ready' | 'error'
+    const [tab, setTab] = useState(TAB_PREVIEW);
 
     // 404 guard
     useEffect(() => {
         if (!artifact) navigate(`/${lang}/artifacts`, { replace: true });
     }, [artifact, navigate, lang]);
 
-    // Reset iframe state on slug change
+    // Reset tab on slug change
     useEffect(() => {
-        setIframeState('loading');
         setTab(TAB_PREVIEW);
     }, [slug]);
-
-    const handleLoad  = useCallback(() => setIframeState('ready'),  []);
-    const handleError = useCallback(() => setIframeState('error'), []);
 
     if (!artifact) return null;
 
@@ -52,7 +152,14 @@ export default function ArtifactViewer() {
     const catKey  = artifact.category;
     const cat     = ARTIFACT_CATEGORIES[catKey];
     const catLabel = cat ? (isRtl ? cat.fa : cat.en) : catKey;
-    const externalUrl = artifactUrl(artifact.id);
+    const lf      = artifact.localFile; // null for Claude artifacts
+    const isLocal = !!lf;
+
+    // External Claude URL — only valid for UUID-identified artifacts
+    const externalUrl = !isLocal ? artifactUrl(artifact.id) : null;
+
+    // Topbar action for local files: open the file directly in a new tab
+    const openHref = isLocal ? lf.path : externalUrl;
 
     return (
         <main id="main-content" className="artifact-viewer-page">
@@ -69,7 +176,7 @@ export default function ArtifactViewer() {
 
                 <div className="artifact-viewer-topbar__actions">
                     <a
-                        href={externalUrl}
+                        href={openHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="artifact-external-btn"
@@ -115,18 +222,24 @@ export default function ArtifactViewer() {
 
                     <div className="artifact-viewer-meta">
                         <div className="kb-aside__heading">{isRtl ? 'منبع' : 'Source'}</div>
-                        <a
-                            href={externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="artifact-viewer-source-link"
-                        >
-                            Claude Artifact · {artifact.id.slice(0, 8)}…
-                        </a>
+                        {isLocal ? (
+                            <span className="artifact-viewer-source-label">
+                                {lf.type === 'pdf' ? 'PDF Document' : 'Markdown Document'}
+                            </span>
+                        ) : (
+                            <a
+                                href={externalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="artifact-viewer-source-link"
+                            >
+                                Claude Artifact · {artifact.id.slice(0, 8)}…
+                            </a>
+                        )}
                     </div>
                 </aside>
 
-                {/* ── Right: iframe area ── */}
+                {/* ── Right: content area ── */}
                 <div className="artifact-viewer-main">
 
                     {/* Tabs */}
@@ -151,31 +264,29 @@ export default function ArtifactViewer() {
 
                     {/* Preview panel */}
                     {tab === TAB_PREVIEW && (
-                        <div className="artifact-iframe-wrap" role="tabpanel">
-                            {/* Loading spinner */}
-                            {iframeState === 'loading' && (
-                                <div className="artifact-iframe-overlay" aria-live="polite">
-                                    <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
-                                    <p>{isRtl ? 'در حال بارگذاری دارایی...' : 'Loading artifact…'}</p>
-                                </div>
+                        <div className="artifact-content-panel" role="tabpanel">
+                            {isLocal && lf.type === 'markdown' && (
+                                <MarkdownViewer path={lf.path} isRtl={isRtl} />
                             )}
-
-                            {/* Error fallback */}
-                            {iframeState === 'error' && (
-                                <div className="artifact-iframe-overlay artifact-iframe-overlay--error" aria-live="assertive">
-                                    <svg className="kb-empty__icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <line x1="12" y1="8" x2="12" y2="12" />
-                                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                            {isLocal && lf.type === 'pdf' && (
+                                <PdfViewer
+                                    path={lf.path}
+                                    filename={lf.filename}
+                                    title={title}
+                                    isRtl={isRtl}
+                                />
+                            )}
+                            {!isLocal && (
+                                <div className="artifact-doc-overlay">
+                                    <svg viewBox="0 0 24 24" className="artifact-ext-icon" aria-hidden="true">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                        <polyline points="15 3 21 3 21 9" />
+                                        <line x1="10" y1="14" x2="21" y2="3" />
                                     </svg>
-                                    <div className="kb-empty__title">
-                                        {isRtl ? 'نمی‌توان در اینجا نمایش داد' : 'Cannot preview here'}
-                                    </div>
-                                    <p>
+                                    <p className="artifact-ext-label">
                                         {isRtl
-                                            ? 'این دارایی در iframe نمایش داده نمی‌شود. آن را در تب جدید باز کنید.'
-                                            : 'This artifact cannot be embedded. Open it directly to view.'
-                                        }
+                                            ? 'این دارایی در Claude قابل مشاهده است'
+                                            : 'This artifact is hosted on Claude'}
                                     </p>
                                     <a
                                         href={externalUrl}
@@ -187,21 +298,6 @@ export default function ArtifactViewer() {
                                     </a>
                                 </div>
                             )}
-
-                            {/* The iframe — always mounted so onLoad fires.
-                                src points to our server-side proxy which strips
-                                X-Frame-Options / frame-ancestors from the upstream
-                                claude.ai response so the browser allows the embed. */}
-                            <iframe
-                                src={`/api/artifact-proxy?id=${artifact.id}`}
-                                className="artifact-iframe"
-                                title={title}
-                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                loading="lazy"
-                                onLoad={handleLoad}
-                                onError={handleError}
-                                style={{ visibility: iframeState === 'ready' ? 'visible' : 'hidden' }}
-                            />
                         </div>
                     )}
 
@@ -216,19 +312,32 @@ export default function ArtifactViewer() {
                                 <dt>{isRtl ? 'دسته‌بندی' : 'Category'}</dt>
                                 <dd>{catLabel}</dd>
 
-                                <dt>{isRtl ? 'شناسه' : 'Artifact ID'}</dt>
+                                <dt>{isRtl ? 'نوع' : 'Type'}</dt>
+                                <dd>
+                                    {isLocal
+                                        ? (lf.type === 'pdf' ? 'PDF Document' : 'Markdown Document')
+                                        : 'Claude Artifact'}
+                                </dd>
+
+                                <dt>{isRtl ? 'شناسه' : 'ID'}</dt>
                                 <dd className="artifact-info-dl__mono">{artifact.id}</dd>
 
                                 <dt>{isRtl ? 'لینک مستقیم' : 'Direct link'}</dt>
                                 <dd>
-                                    <a
-                                        href={externalUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="artifact-info-link"
-                                    >
-                                        {externalUrl}
-                                    </a>
+                                    {isLocal ? (
+                                        <span className="artifact-info-na">
+                                            {isRtl ? 'در دسترس نیست' : 'Not available'}
+                                        </span>
+                                    ) : (
+                                        <a
+                                            href={externalUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="artifact-info-link"
+                                        >
+                                            {externalUrl}
+                                        </a>
+                                    )}
                                 </dd>
 
                                 {desc && (

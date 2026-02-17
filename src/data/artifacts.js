@@ -1,21 +1,23 @@
 /**
  * src/data/artifacts.js
- * Registry of public Claude artifacts embedded in the Ghost Autonomy asset library.
+ * Registry of artifacts in the Ghost Autonomy asset library.
  *
- * Each entry references a publicly shareable Claude artifact by its ID.
- * The viewer renders the artifact at:
- *   https://claude.ai/public/artifacts/<id>
+ * Artifacts can be one of two kinds:
+ *
+ *   Claude artifact — rendered from a public claude.ai URL
+ *     { id: '<uuid>', ... }
+ *
+ *   Local document — a Markdown or PDF file served from /public/docs/
+ *     { localFile: { type: 'markdown'|'pdf', path: '/docs/...', filename: '...' }, ... }
+ *     Use a descriptive slug as the id; the id field is still required for routing.
  *
  * ── How to add a new artifact ────────────────────────────────────────────────
- * 1. Share the Claude artifact publicly (Share → Make public → Copy link).
- * 2. Extract the UUID from the URL:
- *      https://claude.ai/public/artifacts/<uuid>
- * 3. Append an entry to ARTIFACTS below, following the existing shape.
- * 4. Run `npm run build` — no other changes required.
+ * Claude:  id = UUID from https://claude.ai/public/artifacts/<uuid>
+ * Local:   place file in public/docs/md/ or public/docs/pdf/, add localFile block
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-/** Canonical viewer URL for a given artifact ID */
+/** Canonical viewer URL for a Claude artifact ID */
 export const artifactUrl = (id) => `https://claude.ai/public/artifacts/${id}`;
 
 // ─── Artifact categories ─────────────────────────────────────────────────────
@@ -38,6 +40,11 @@ export const ARTIFACTS = [
         slug: 'picapd-architecture-overview',
         category: 'visualization',
         tags: ['PICAPD-ISA', 'architecture', 'Queen-Bee', 'overview'],
+        // Rendered from local Markdown document
+        localFile: {
+            type: 'markdown',
+            path: '/docs/md/truth_governance_matrix.md',
+        },
         en: {
             title: 'PICAPD Architecture Overview',
             description:
@@ -50,12 +57,39 @@ export const ARTIFACTS = [
         },
     },
 
+    {
+        id: 'postdoc-fellowship-report',
+        slug: 'postdoctoral-fellowship-report',
+        category: 'reference',
+        tags: ['research', 'postdoctoral', 'fellowship', 'report'],
+        // Rendered from local PDF document
+        localFile: {
+            type: 'pdf',
+            path: '/docs/pdf/postdoc-fellowship-report.pdf',
+            filename: 'Postdoctoral_Fellowship_Final_Report.pdf',
+        },
+        en: {
+            title: 'Postdoctoral Fellowship Final Report',
+            description:
+                'Final report from the postdoctoral fellowship, covering research outcomes, methodology, and findings.',
+        },
+        fa: {
+            title: 'گزارش نهایی فرصت مطالعاتی پسادکتری',
+            description:
+                'گزارش نهایی دوره فرصت مطالعاتی پسادکتری، شامل نتایج پژوهشی، روش‌شناسی و یافته‌ها.',
+        },
+    },
+
     // ── Add further entries here ──────────────────────────────────────────────
     // {
-    //   id: '<uuid>',
+    //   id: '<uuid-or-slug>',
     //   slug: '<url-friendly-slug>',
     //   category: '<key from ARTIFACT_CATEGORIES>',
     //   tags: ['tag1', 'tag2'],
+    //   // For Claude artifact:
+    //   //   (no localFile field — id must be a UUID)
+    //   // For local document:
+    //   //   localFile: { type: 'markdown'|'pdf', path: '/docs/...', filename: '...' },
     //   en: { title: '...', description: '...' },
     //   fa: { title: '...', description: '...' },
     // },
