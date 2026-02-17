@@ -27,9 +27,8 @@ const LS = {
 
 // Defaults (tune to your UX policy)
 const DEFAULTS = {
-    // For strictest spec compliance: default to false.
-    // If you want a *single* gentle prompt once ever, implement that in the retention controller, not here.
-    optInDefault: false,
+    // Facts display by default; visitors can opt out via "Never show" button
+    optInDefault: true,
     dismissedHours: 24
 };
 

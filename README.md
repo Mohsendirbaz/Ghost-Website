@@ -15,10 +15,11 @@ Corporate website for Ghost Autonomy, a deep-tech startup building physics-enfor
 7. [Component Library](#component-library)
 8. [Carousel for Perusal](#carousel-for-perusal)
 9. [Visitor Retention Booster (Fact Engine)](#visitor-retention-booster-fact-engine)
-10. [Design System](#design-system)
-11. [Adding a New Page](#adding-a-new-page)
-12. [Adding a New Language String](#adding-a-new-language-string)
-13. [Deployment](#deployment)
+10. [Knowledge Base](#knowledge-base)
+11. [Design System](#design-system)
+12. [Adding a New Page](#adding-a-new-page)
+13. [Adding a New Language String](#adding-a-new-language-string)
+14. [Deployment](#deployment)
 
 ---
 
@@ -593,6 +594,420 @@ The admin tool is **never included in production builds**:
 - Not referenced by any production code
 - Uses separate `package.json` and dependencies
 - CRA build (`npm run build`) never includes `tools/` directory
+
+---
+
+## Knowledge Base
+
+The **Knowledge Base** is a comprehensive documentation browser for Ghost Autonomy's technical architecture, business strategy, and scientific foundations. It provides a hierarchical, searchable, and filterable interface to navigate 8 parts, 47 chapters, and hundreds of sections covering PICAPD ISA, Queen Bee architecture, physics-inspired computing, and global partnerships.
+
+### Overview
+
+The Knowledge Base module transforms the company's technical documentation into an interactive, bilingual web experience with:
+
+- **Hierarchical structure**: Document → Part → Chapter → Section → Subsection
+- **Deep linking**: Every node is independently addressable via URL slugs
+- **Full-text search**: Real-time search across titles, descriptions, and tags
+- **Faceted filtering**: Filter by topic tags (technical, business, regional, domain)
+- **Bilingual content**: Complete English and Persian translations with RTL support
+- **Structured data**: JSON-LD markup for search engine discoverability
+- **Netflix-style UI**: Horizontal carousel lanes for browsing, vertical lists for search results
+
+### Key Features
+
+#### Hierarchical Navigation
+- **5-level hierarchy**: Document → Part (8) → Chapter (47) → Section → Subsection
+- **Breadcrumb trails**: Always visible, showing current location in the hierarchy
+- **Sibling navigation**: Previous/Next links to adjacent chapters and sections
+- **Table of contents**: Expandable TOC in reader view for quick jumping
+
+#### Search & Discovery
+- **Global search bar**: Searches across all titles, descriptions, and tags
+- **Scope filters**: Refine search to Parts, Chapters, or Sections only
+- **Tag-based filtering**: 20+ topic tags across 5 categories (domain, technical, business, regional, content)
+- **Real-time results**: Instant filtering as you type or select tags
+- **Result highlighting**: Matching nodes show type badge, breadcrumb, and description
+
+#### Browse Experience
+- **Five curated lanes** (when no search/filter active):
+  - All Parts — Complete 8-part overview
+  - Core Architecture — PICAPD ISA, Queen Bee, Byzantine Fault Tolerance
+  - Validation & Results — Benchmarks, simulations, case studies
+  - Strategy & Partnerships — Market analysis, global partnerships, roadmap
+  - Technical Foundations — Physics, mathematics, control theory
+- **Horizontal scrolling**: Netflix-style carousels with smooth scroll behavior
+- **Card-based design**: Each card shows title, description, page range, and tags
+
+#### Reader View
+- **Clean reading interface**: Focused content area with minimal distractions
+- **Sticky breadcrumbs**: Always visible for context and quick navigation
+- **Expandable TOC**: Collapsible table of contents for current part/chapter
+- **Prev/Next navigation**: Quick links to adjacent content
+- **Accent colors**: Each part has a unique accent color for visual distinction
+
+#### Bilingual & RTL Support
+- **Complete translations**: All content available in English and Persian
+- **RTL layout**: Proper right-to-left layout for Persian using CSS logical properties
+- **Language-aware routing**: `/en/knowledge-base` and `/fa/knowledge-base` routes
+- **Synchronized navigation**: Language toggle preserves current location in hierarchy
+
+#### Structured Data (JSON-LD)
+- **WebSite schema**: Defines the knowledge base as a searchable website section
+- **BreadcrumbList**: Hierarchical breadcrumb markup for search engines
+- **Article schema**: Each chapter/section marked up as an Article with metadata
+- **Search action**: Enables direct search from Google search results
+
+### Architecture
+
+The Knowledge Base consists of four main components:
+
+1. **Data Model** (`src/data/knowledgeBase.js`)
+   - Canonical hierarchical structure with 8 parts and 47 chapters
+   - Tag taxonomy across 5 categories (domain, technical, business, regional, content)
+   - Utility functions: `flattenNodes()`, `buildPath()`, node lookup helpers
+   - Page number references from authoritative PDF source
+
+2. **Browse Page** (`src/pages/KnowledgeBase.js`)
+   - Hero section with global search and scope filters
+   - Left rail with faceted tag filtering
+   - Main area with 5 horizontal carousel lanes (browse mode) or vertical result list (search mode)
+   - Real-time filtering and search with URL state sync (`useSearchParams`)
+
+3. **Reader Page** (`src/pages/KnowledgeBaseReader.js`)
+   - Dynamic routing: handles Part, Chapter, and Section URLs
+   - Breadcrumb navigation with full hierarchy
+   - Expandable table of contents for current context
+   - Previous/Next sibling navigation
+   - Accent color theming per part
+
+4. **JSON-LD Utility** (`src/utils/jsonld.js`)
+   - Generates structured data for WebSite, BreadcrumbList, and Article schemas
+   - Injected into `<head>` via React Helmet or direct script tags
+   - Enhances SEO and enables rich search results
+
+### Content Structure
+
+The Knowledge Base covers 8 major parts:
+
+| Part | Title | Chapters | Focus |
+|---|---|---|---|
+| **I** | Executive & Strategic | 7 | Market analysis, product strategy, competitive advantage, roadmap, team, risk management |
+| **II** | Philosophy, Design & Conception | 6 | Design principles, abstraction layers, uncertainty handling, documentation philosophy |
+| **III** | PICAPD ISA Core | 8 | Instruction set architecture, EPU design, constraint primitives, memory model |
+| **IV** | Queen Bee Architecture | 6 | Worker-Manager-Queen hierarchy, Byzantine fault tolerance, event propagation |
+| **V** | Physics & Mathematics | 7 | Elliptic integrals, bilinear forms, conservation laws, realizability constraints |
+| **VI** | Validation & Results | 5 | Benchmarks, simulations, case studies, performance metrics |
+| **VII** | Global Partnerships | 4 | Regional strategies (India, South Korea, Iran, Middle East), OEM partnerships |
+| **VIII** | Appendices | 4 | Glossary, notation, references, acknowledgments |
+
+### Tag Taxonomy
+
+Tags are organized into 5 categories for precise filtering:
+
+```js
+const TAG_GROUPS = {
+  domain: ['autonomous-driving', 'semiconductor', 'AI', 'robotics'],
+  technical: [
+    'PICAPD-ISA', 'Queen-Bee', 'Byzantine-fault-tolerance',
+    'bilinear-form', 'physics-computing', 'control-theory',
+    'signal-processing', 'neural-networks', 'moment-compression',
+    'uncertainty-quantification', 'ASIL-D'
+  ],
+  business: ['strategy', 'market', 'IPO', 'IP', 'funding', 'valuation'],
+  regional: ['India', 'South-Korea', 'Iran', 'US', 'Europe', 'Middle-East'],
+  content: ['architecture', 'validation', 'benchmark', 'simulation', 'derivation']
+};
+```
+
+### URL Structure
+
+Every node in the hierarchy is addressable via clean URL slugs:
+
+```
+/en/knowledge-base                                    → Browse index
+/en/knowledge-base/executive-strategic                → Part I landing
+/en/knowledge-base/executive-strategic/market-analysis → Chapter 2 reader
+/en/knowledge-base/executive-strategic/market-analysis/market-size → Section 2.1 reader
+```
+
+Persian routes follow the same pattern with `/fa/` prefix.
+
+### Component Usage
+
+#### Adding Knowledge Base to Navigation
+
+The Knowledge Base link is added to both Header and Footer:
+
+```jsx
+// In Header.js and Footer.js
+const navLinks = [
+  { label: t.home, to: `/${lang}` },
+  { label: t.technology, to: `/${lang}/technology` },
+  { label: t.science, to: `/${lang}/science` },
+  { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },  // NEW
+  // ... other links
+];
+```
+
+#### Routing Configuration
+
+```jsx
+// In App.js
+import KnowledgeBase from './pages/KnowledgeBase';
+import KnowledgeBaseReader from './pages/KnowledgeBaseReader';
+
+<Routes>
+  {/* Browse index */}
+  <Route path="/en/knowledge-base" element={<KnowledgeBase />} />
+  <Route path="/fa/knowledge-base" element={<KnowledgeBase />} />
+  
+  {/* Reader (Part → Chapter → Section) */}
+  <Route path="/en/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
+  <Route path="/fa/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
+  <Route path="/en/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
+  <Route path="/fa/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
+  <Route path="/en/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
+  <Route path="/fa/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
+</Routes>
+```
+
+#### Content Strings in copy.js
+
+```js
+// In src/data/copy.js
+export const copy = {
+  en: {
+    nav: {
+      knowledgeBase: "Knowledge Base",
+      // ... other nav items
+    },
+    knowledgeBase: {
+      heroTitle: "Ghost Autonomy Documentation",
+      heroSub: "8 parts · 47 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations",
+      searchPlaceholder: "Search documentation...",
+      allParts: "All Parts",
+      coreArchitecture: "Core Architecture",
+      validation: "Validation & Results",
+      strategy: "Strategy & Global Partnerships",
+      technicalFoundations: "Technical Foundations",
+      resultsFound: "results found",
+      noResults: "No results found",
+      filterLabel: "Refine",
+      topicsLabel: "Topics",
+      clearFilters: "Clear filters",
+      scopeAll: "All",
+      scopeParts: "Parts",
+      scopeChapters: "Chapters",
+      scopeSections: "Sections",
+    },
+  },
+  fa: {
+    // Complete Persian translations
+  },
+};
+```
+
+### Data Model Example
+
+```js
+// In src/data/knowledgeBase.js
+export const KB_PARTS = [
+  {
+    id: 'part-i',
+    slug: 'executive-strategic',
+    number: 'I',
+    pageStart: 13,
+    title: { en: 'Executive & Strategic', fa: 'اجرایی و استراتژیک' },
+    description: {
+      en: 'Market positioning, business strategy, competitive advantage...',
+      fa: 'جایگاه‌یابی بازار، استراتژی کسب‌وکار...'
+    },
+    tags: ['strategy', 'market', 'business'],
+    accentColor: 'var(--kb-accent-executive)',
+    chapters: [
+      {
+        id: 'ch-1',
+        slug: 'executive-summary',
+        number: '1',
+        pageStart: 15,
+        title: { en: 'Executive Summary', fa: 'خلاصه اجرایی' },
+        description: { en: '...', fa: '...' },
+        tags: ['strategy', 'PICAPD-ISA'],
+        sections: [
+          {
+            id: 'sec-1-1',
+            slug: 'vision',
+            number: '1.1',
+            pageStart: 15,
+            title: { en: 'Vision', fa: 'چشم‌انداز' },
+            tags: ['strategy'],
+            subsections: [
+              {
+                id: 'sub-1-1-1',
+                slug: 'mathematical-universality',
+                number: '1.1.1',
+                pageStart: 15,
+                title: { en: 'Mathematical Universality', fa: 'جهانی بودن ریاضی' },
+                tags: ['physics-computing']
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+```
+
+### Search & Filter Implementation
+
+The browse page uses React state and URL search params for filtering:
+
+```jsx
+const [searchParams, setSearchParams] = useSearchParams();
+const query = searchParams.get('q') || '';
+const scope = searchParams.get('scope') || 'all';
+const activeTags = searchParams.get('tags')?.split(',').filter(Boolean) || [];
+
+// Filter nodes based on query, scope, and tags
+const filteredNodes = useMemo(() => {
+  let nodes = flattenNodes(KB_PARTS);
+  
+  // Apply scope filter
+  if (scope !== 'all') {
+    nodes = nodes.filter(n => n.nodeType === scope);
+  }
+  
+  // Apply tag filter
+  if (activeTags.length > 0) {
+    nodes = nodes.filter(n => 
+      n.tags?.some(tag => activeTags.includes(tag))
+    );
+  }
+  
+  // Apply search query
+  if (query) {
+    const lowerQuery = query.toLowerCase();
+    nodes = nodes.filter(n =>
+      n.title[lang]?.toLowerCase().includes(lowerQuery) ||
+      n.description?.[lang]?.toLowerCase().includes(lowerQuery) ||
+      n.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
+    );
+  }
+  
+  return nodes;
+}, [query, scope, activeTags, lang]);
+```
+
+### Accessibility Features
+
+- **Semantic HTML**: Proper heading hierarchy (`<h1>` → `<h2>` → `<h3>`)
+- **ARIA labels**: Search inputs, filter buttons, and navigation links have descriptive labels
+- **Keyboard navigation**: All interactive elements are keyboard-accessible
+- **Focus management**: Clear focus indicators and logical tab order
+- **Screen reader support**: Breadcrumbs, result counts, and filter states announced properly
+- **RTL support**: Correct text direction and layout for Persian content
+
+### Performance Optimization
+
+- **Memoized filtering**: `useMemo` prevents unnecessary recalculations
+- **URL state sync**: Search and filter state persisted in URL for shareability
+- **Lazy rendering**: Only visible carousel items rendered initially
+- **CSS containment**: `contain: layout style` on cards for faster repaints
+- **Debounced search**: Optional debouncing for search input (can be added)
+
+### SEO & Structured Data
+
+The Knowledge Base includes comprehensive JSON-LD markup:
+
+```js
+// WebSite schema with search action
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Ghost Autonomy Knowledge Base",
+  "url": "https://ghostautonomy.com/en/knowledge-base",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ghostautonomy.com/en/knowledge-base?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+
+// BreadcrumbList for hierarchy
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "..." },
+    { "@type": "ListItem", "position": 2, "name": "Knowledge Base", "item": "..." },
+    { "@type": "ListItem", "position": 3, "name": "Executive & Strategic", "item": "..." }
+  ]
+}
+
+// Article schema for chapters
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Executive Summary",
+  "description": "Vision, strategic goals, value proposition...",
+  "author": { "@type": "Organization", "name": "Ghost Autonomy" },
+  "publisher": { "@type": "Organization", "name": "Ghost Autonomy" },
+  "inLanguage": "en"
+}
+```
+
+### Testing
+
+```bash
+# Run component tests
+npm test -- KnowledgeBase
+npm test -- KnowledgeBaseReader
+
+# Manual testing checklist:
+# 1. Browse all 8 parts and verify carousel lanes
+# 2. Search for keywords and verify results
+# 3. Apply tag filters and verify filtering
+# 4. Navigate through Part → Chapter → Section hierarchy
+# 5. Test breadcrumb and Prev/Next navigation
+# 6. Switch languages and verify translations
+# 7. Test RTL layout in Persian mode
+# 8. Verify URL state sync (refresh preserves search/filters)
+# 9. Test keyboard navigation (Tab, Enter, Escape)
+# 10. Validate JSON-LD markup with Google Rich Results Test
+```
+
+### File Structure
+
+```
+src/
+├── data/
+│   └── knowledgeBase.js          # Canonical data model (8 parts, 47 chapters)
+├── pages/
+│   ├── KnowledgeBase.js          # Browse page (search, filter, carousel lanes)
+│   └── KnowledgeBaseReader.js    # Reader page (Part/Chapter/Section view)
+├── styles/
+│   └── knowledgeBase.css         # All KB-specific styles
+└── utils/
+    └── jsonld.js                 # JSON-LD structured data generators
+```
+
+### Design Tokens
+
+The Knowledge Base uses custom CSS properties for theming:
+
+```css
+:root {
+  --kb-accent-executive: #3b82f6;      /* Blue */
+  --kb-accent-philosophy: #8b5cf6;     /* Purple */
+  --kb-accent-picapd: #10b981;         /* Green */
+  --kb-accent-queenbee: #f59e0b;       /* Amber */
+  --kb-accent-physics: #ef4444;        /* Red */
+  --kb-accent-validation: #06b6d4;     /* Cyan */
+  --kb-accent-partnerships: #ec4899;   /* Pink */
+  --kb-accent-appendices: #6b7280;     /* Gray */
+}
+```
 
 ---
 
