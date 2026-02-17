@@ -82,6 +82,32 @@ function MarkdownViewer({ path, isRtl }) {
     );
 }
 
+// ─── HTML dashboard viewer ────────────────────────────────────────────────────
+
+function HtmlViewer({ path, title, isRtl }) {
+    const [loaded, setLoaded] = useState(false);
+
+    return (
+        <div className="artifact-html-wrap">
+            {!loaded && (
+                <div className="artifact-doc-overlay" aria-live="polite">
+                    <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
+                    <p>{isRtl ? 'در حال بارگذاری داشبورد...' : 'Loading dashboard…'}</p>
+                </div>
+            )}
+            <iframe
+                src={path}
+                title={title}
+                className="artifact-html-embed"
+                style={{ display: loaded ? 'block' : 'none' }}
+                onLoad={() => setLoaded(true)}
+                sandbox="allow-scripts allow-same-origin"
+                aria-label={title}
+            />
+        </div>
+    );
+}
+
 // ─── PDF viewer ───────────────────────────────────────────────────────────────
 
 function PdfViewer({ path, filename, title, isRtl }) {
@@ -159,8 +185,13 @@ export default function ArtifactViewer() {
     // External Claude URL — only valid for UUID-identified artifacts
     const externalUrl = !isLocal ? artifactUrl(artifact.id) : null;
 
-    // Topbar action for local files: open the file directly in a new tab
-    const openHref = isLocal ? lf.path : externalUrl;
+    // For HTML artifacts the path is language-keyed; for others use lf.path
+    const localPath = isLocal
+        ? (lf.type === 'html' ? lf.paths[lang] : lf.path)
+        : null;
+
+    // Topbar action: open in new tab
+    const openHref = isLocal ? localPath : externalUrl;
 
     return (
         <main id="main-content" className="artifact-viewer-page">
@@ -225,7 +256,7 @@ export default function ArtifactViewer() {
                         <div className="kb-aside__heading">{isRtl ? 'منبع' : 'Source'}</div>
                         {isLocal ? (
                             <span className="artifact-viewer-source-label">
-                                {lf.type === 'pdf' ? 'PDF Document' : 'Markdown Document'}
+                                {{ pdf: 'PDF Document', markdown: 'Markdown Document', html: 'Interactive Dashboard' }[lf.type] || lf.type}
                             </span>
                         ) : (
                             <a
@@ -244,9 +275,15 @@ export default function ArtifactViewer() {
                             <div className="kb-aside__heading">{isRtl ? 'دانلود' : 'Download'}</div>
                             <AddToCartButton
                                 item={{
-                                    id: `artifact-${artifact.id}`,
-                                    filename: lf.filename || `${artifact.slug}.${lf.type}`,
-                                    path: lf.path.replace(/^\//, ''),
+                                    id: lf.type === 'html'
+                                        ? `artifact-${artifact.id}-${lang}`
+                                        : `artifact-${artifact.id}`,
+                                    filename: lf.type === 'html'
+                                        ? (lf.filenames?.[lang] || `${artifact.slug}-${lang}.html`)
+                                        : (lf.filename || `${artifact.slug}.${lf.type}`),
+                                    path: lf.type === 'html'
+                                        ? lf.paths[lang].replace(/^\//, '')
+                                        : lf.path.replace(/^\//, ''),
                                     type: lf.type,
                                     title: { en: artifact.en.title, fa: artifact.fa.title },
                                     category: artifact.category,
@@ -296,6 +333,13 @@ export default function ArtifactViewer() {
                                     isRtl={isRtl}
                                 />
                             )}
+                            {isLocal && lf.type === 'html' && (
+                                <HtmlViewer
+                                    path={localPath}
+                                    title={title}
+                                    isRtl={isRtl}
+                                />
+                            )}
                             {!isLocal && (
                                 <div className="artifact-doc-overlay">
                                     <svg viewBox="0 0 24 24" className="artifact-ext-icon" aria-hidden="true">
@@ -335,7 +379,7 @@ export default function ArtifactViewer() {
                                 <dt>{isRtl ? 'نوع' : 'Type'}</dt>
                                 <dd>
                                     {isLocal
-                                        ? (lf.type === 'pdf' ? 'PDF Document' : 'Markdown Document')
+                                        ? ({ pdf: 'PDF Document', markdown: 'Markdown Document', html: 'Interactive Dashboard' }[lf.type] || lf.type)
                                         : 'Claude Artifact'}
                                 </dd>
 

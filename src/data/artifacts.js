@@ -30,6 +30,7 @@ export const ARTIFACT_CATEGORIES = {
     specification:  { en: 'Specification',          fa: 'مشخصات'              },
     reference:      { en: 'Reference Card',         fa: 'کارت مرجع'           },
     interactive:    { en: 'Interactive',            fa: 'تعاملی'              },
+    dashboard:      { en: 'Dashboard',              fa: 'داشبورد'             },
 };
 
 // ─── Artifact registry ───────────────────────────────────────────────────────
@@ -77,6 +78,86 @@ export const ARTIFACTS = [
             title: 'گزارش نهایی فرصت مطالعاتی پسادکتری',
             description:
                 'گزارش نهایی دوره فرصت مطالعاتی پسادکتری، شامل نتایج پژوهشی، روش‌شناسی و یافته‌ها.',
+        },
+    },
+
+    // ── HTML Dashboards (bilingual) ───────────────────────────────────────────
+
+    {
+        id: 'dashboard-av-data-stream',
+        slug: 'av-data-stream-architecture',
+        category: 'dashboard',
+        tags: ['architecture', 'data-stream', 'sensors', 'real-time', 'autonomous-vehicle'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Dashboard1-English.html',
+                fa: '/docs/html/Dashboard1-Farsi.html',
+            },
+            filenames: {
+                en: 'AV_Data_Stream_Architecture_EN.html',
+                fa: 'AV_Data_Stream_Architecture_FA.html',
+            },
+        },
+        en: {
+            title: 'Autonomous Vehicle Data Stream Architecture',
+            description: 'Complete data pipeline from sensor to actuator with real-time constraints — visualizing the full AV information flow across perception, planning, and control layers.',
+        },
+        fa: {
+            title: 'معماری جریان داده خودروی خودران',
+            description: 'خط لوله داده کامل از حسگر تا محرک با محدودیت‌های بلادرنگ — تصویرسازی جریان اطلاعات در لایه‌های ادراک، برنامه‌ریزی و کنترل.',
+        },
+    },
+
+    {
+        id: 'dashboard-av-info-architecture',
+        slug: 'av-information-architecture',
+        category: 'dashboard',
+        tags: ['architecture', 'information', 'autonomous-vehicle', 'PICAPD', 'system-design'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Dashboard2-English.html',
+                fa: '/docs/html/Dashboard2-Farsi.html',
+            },
+            filenames: {
+                en: 'AV_Information_Architecture_EN.html',
+                fa: 'AV_Information_Architecture_FA.html',
+            },
+        },
+        en: {
+            title: 'Autonomous Vehicle Information Architecture',
+            description: 'System-level information architecture for autonomous vehicles, detailing data flows, processing layers, and control hierarchies within the Ghost Autonomy framework.',
+        },
+        fa: {
+            title: 'معماری اطلاعات خودروی خودران',
+            description: 'معماری اطلاعات در سطح سیستم برای خودروهای خودران، شامل جریان‌های داده، لایه‌های پردازش و سلسله‌مراتب کنترل در چارچوب Ghost Autonomy.',
+        },
+    },
+
+    {
+        id: 'dashboard-race-condition-mitigation',
+        slug: 'race-condition-mitigation-framework',
+        category: 'dashboard',
+        tags: ['safety', 'race-condition', 'real-time', 'fault-tolerance', 'formal-verification'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Dashboard3-English.html',
+                fa: '/docs/html/Dashboard3-Farsi.html',
+            },
+            filenames: {
+                en: 'Race_Condition_Mitigation_EN.html',
+                fa: 'Race_Condition_Mitigation_FA.html',
+            },
+        },
+        en: {
+            title: 'Race Condition Mitigation Framework',
+            description: 'Framework for identifying and mitigating race conditions in autonomous vehicle control systems, with formal verification strategies and temporal constraint analysis.',
+        },
+        fa: {
+            title: 'چارچوب کاهش شرایط مسابقه',
+            description: 'چارچوبی برای شناسایی و کاهش شرایط مسابقه در سیستم‌های کنترل خودروی خودران، با استراتژی‌های تأیید رسمی و تحلیل محدودیت‌های زمانی.',
         },
     },
 
