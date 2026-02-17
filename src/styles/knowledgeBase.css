@@ -802,6 +802,7 @@ a.kb-chip:hover {
   color: var(--color-text-secondary);
   text-decoration: none;
   line-height: 1.4;
+  cursor: pointer;
   transition: background var(--kb-transition-fast), color var(--kb-transition-fast);
 }
 
@@ -914,10 +915,12 @@ a.kb-chip:hover {
 }
 
 .kb-aside__related-link {
+  display: block;          /* full-width click target, not inline text only */
   font-size: var(--text-xs);
   color: var(--color-text-secondary);
   text-decoration: none;
   line-height: 1.4;
+  cursor: pointer;
   transition: color var(--kb-transition-fast);
 }
 

@@ -13,7 +13,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import {
     KB_PARTS, PART_BY_SLUG, CHAPTER_BY_SLUG, ALL_NODES,
-    buildPath,
+    buildPath, resolveHref,
 } from '../data/knowledgeBase';
 import {
     injectJsonLd, removeJsonLd,
@@ -209,14 +209,7 @@ function ReaderAside({ node, part, chapter, lang }) {
                     <div className="kb-aside__heading">{isRtl ? 'مرتبط' : 'Related'}</div>
                     <ul className="kb-aside__related-list">
                         {related.map((n) => {
-                            // Resolve slugs per node type:
-                            // - parts:    slug lives in n.slug
-                            // - chapters: own slug in n.slug, parent in n.partSlug
-                            // - sections: own slug in n.slug, parents in n.partSlug / n.chapterSlug
-                            const partSl    = n.partSlug    || (n.nodeType === 'part'    ? n.slug : undefined);
-                            const chapterSl = n.chapterSlug || (n.nodeType === 'chapter' ? n.slug : undefined);
-                            const sectionSl = n.sectionSlug || (n.nodeType === 'section' ? n.slug : undefined);
-                            const relHref  = buildPath(lang, partSl, chapterSl, sectionSl);
+                            const relHref  = resolveHref(n, lang);
                             const relTitle = isRtl ? n.title.fa : n.title.en;
                             return (
                                 <li key={n.id} className="kb-aside__related-item">

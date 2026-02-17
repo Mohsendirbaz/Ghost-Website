@@ -10,7 +10,7 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import { KB_PARTS, ALL_NODES, ALL_TAGS, buildPath } from '../data/knowledgeBase';
+import { KB_PARTS, ALL_NODES, ALL_TAGS, buildPath, resolveHref } from '../data/knowledgeBase';
 import { injectJsonLd, removeJsonLd, buildIndexGraph } from '../utils/jsonld';
 import '../styles/knowledgeBase.css';
 
@@ -52,12 +52,13 @@ function DocumentCard({ node, lang, style }) {
     const titleAlt = isRtl ? node.title.en : node.title.fa;
     const desc     = node.description?.[isRtl ? 'fa' : 'en'];
 
-    const partSlug    = node.partSlug    || node.slug;
-    const chapterSlug = node.chapterSlug || (node.nodeType === 'chapter' ? node.slug : undefined);
-    const sectionSlug = node.sectionSlug || (node.nodeType === 'section' ? node.slug : undefined);
-    const href        = buildPath(lang, partSlug, chapterSlug, sectionSlug);
+    // Parts from KB_PARTS carry no nodeType — handle them explicitly.
+    // All chapter / section nodes passed here come from ALL_NODES (enriched).
+    const href = node.nodeType
+        ? resolveHref(node, lang)
+        : buildPath(lang, node.slug); // raw part from KB_PARTS lane
 
-    const isPartCard = node.nodeType === 'part';
+    const isPartCard = node.nodeType === 'part' || !node.nodeType;
 
     return (
         <Link
@@ -123,10 +124,7 @@ function ResultRow({ node, lang }) {
         .map((b) => (isRtl ? b.fa : b.en))
         .join(' › ');
 
-    const partSlug    = node.partSlug    || (node.nodeType === 'part' ? node.slug : undefined);
-    const chapterSlug = node.chapterSlug || (node.nodeType === 'chapter' ? node.slug : undefined);
-    const sectionSlug = node.sectionSlug || (node.nodeType === 'section' ? node.slug : undefined);
-    const href        = buildPath(lang, partSlug, chapterSlug, sectionSlug);
+    const href = resolveHref(node, lang);
 
     return (
         <Link to={href} className="kb-result-row">

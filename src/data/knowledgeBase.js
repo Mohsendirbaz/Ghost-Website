@@ -68,6 +68,40 @@ export function buildPath(lang, partSlug, chapterSlug, sectionSlug) {
     return path;
 }
 
+/**
+ * Canonical href resolver for any enriched node (from ALL_NODES or allChapters).
+ *
+ * Node types and their slug layout (as produced by flattenNodes):
+ *   part       — slug = own part slug,    no partSlug
+ *   chapter    — slug = own chapter slug, partSlug = parent part slug
+ *   section    — slug = own section slug, partSlug + chapterSlug = ancestors
+ *   subsection — slug = own sub slug,     partSlug + chapterSlug + sectionSlug = ancestors
+ *
+ * Raw part/chapter objects from KB_PARTS carry no nodeType; pass them to
+ * buildPath() directly with their context slugs — not to this function.
+ */
+export function resolveHref(node, lang) {
+    if (!node) return `/${lang}/knowledge-base`;
+    switch (node.nodeType) {
+        case 'part':
+            return buildPath(lang, node.slug);
+        case 'chapter':
+            return buildPath(lang, node.partSlug, node.slug);
+        case 'section':
+            return buildPath(lang, node.partSlug, node.chapterSlug, node.slug);
+        case 'subsection':
+            return buildPath(lang, node.partSlug, node.chapterSlug, node.sectionSlug);
+        default:
+            // Defensive fallback: honour whatever slugs are present.
+            return buildPath(
+                lang,
+                node.partSlug || node.slug,
+                node.chapterSlug,
+                node.sectionSlug,
+            );
+    }
+}
+
 // ─── Tag taxonomy ───────────────────────────────────────────────────────────
 export const TAG_GROUPS = {
     domain: ['autonomous-driving', 'semiconductor', 'AI', 'robotics'],
