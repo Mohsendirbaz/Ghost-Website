@@ -1,0 +1,1799 @@
+\documentclass[10pt]{report}
+
+\usepackage{anyfontsize}
+
+% ===================== GLOBAL SIZE (AFFECTS LISTS TOO) =====================
+% This redefines the size ladder, so places that force \normalsize (like some boxes/lists)
+% still become smaller. Bold remains bold.
+
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{10.2}{12.2}}
+\renewcommand\small{\@setfontsize\small{9.3}{11.2}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{8.6}{10.4}}
+\renewcommand\scriptsize{\@setfontsize\scriptsize{7.8}{9.4}}
+\renewcommand\tiny{\@setfontsize\tiny{7.0}{8.4}}
+
+\renewcommand\large{\@setfontsize\large{12.0}{14.2}}
+\renewcommand\Large{\@setfontsize\Large{14.0}{16.5}}
+\renewcommand\LARGE{\@setfontsize\LARGE{16.0}{18.8}}
+\renewcommand\huge{\@setfontsize\huge{18.0}{21.0}}
+\renewcommand\Huge{\@setfontsize\Huge{20.0}{23.0}}
+\makeatother
+
+\linespread{1.10} % keep readable (thin look without crushing)
+
+% ===================== REQUIRED PACKAGES =====================
+\usepackage{iftex}
+\ifXeTeX\else
+  \errmessage{This document must be compiled with XeLaTeX.}
+\fi
+
+\usepackage[top=2cm,bottom=2.5cm,left=3cm,right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins,theorems}
+\usepackage{fontawesome}
+\usepackage{xepersian}
+\usepackage{hyperref}
+\usepackage[letterspace=150]{microtype}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{fontawesome}
+% ===================== DYNAMIC FILE LIST SYSTEM =====================
+\newcommand{\dirfolder}[1]{\faFolderO~~\textbf{#1}\\}
+\newcommand{\dirfile}[1]{\hspace*{1em}\faFileO~~#1\\}
+\newcommand{\dirsubfolder}[1]{\hspace*{1em}\faFolderO~~#1\\}
+\newcommand{\dirsubfile}[1]{\hspace*{2em}\faFileO~~#1\\}
+\newcommand{\dirsubsubfolder}[1]{\hspace*{2em}\faFolderO~~#1\\}
+\newcommand{\dirsubsubfile}[1]{\hspace*{3em}\faFileO~~#1\\}
+\newcommand{\dirlink}[1]{\hspace*{3em}\faLink~~#1\\}
+
+% ===================== TABLE CODE ENTRY COMMAND =====================
+\newcommand{\codeentry}[2]{\texttt{#1}~~#2}
+
+% ===================== COLOR PALETTE =====================
+\definecolor{primaryBlue}{RGB}{10, 26, 55}
+\definecolor{accentBlue}{RGB}{30, 60, 114}
+\definecolor{lightBlue}{RGB}{255, 255, 255}
+\definecolor{darkText}{RGB}{20, 20, 20}
+\definecolor{accentGray}{RGB}{80, 80, 80}
+\definecolor{lightGray}{RGB}{249, 249, 249}
+\definecolor{successGreen}{RGB}{0, 0, 0}
+\definecolor{warningOrange}{RGB}{255, 140, 0}
+\definecolor{pathway1}{RGB}{235, 242, 248}
+\definecolor{pathway2}{RGB}{248, 243, 238}
+\definecolor{tableHeader}{RGB}{10, 26, 55}
+\definecolor{tableRow1}{RGB}{249, 249, 249}
+\definecolor{tableRow2}{RGB}{230, 230, 230}
+
+% ===================== HIGH-CONTRAST COLOR PALETTE =====================
+\definecolor{navyMidnight}{RGB}{0, 32, 96}
+\definecolor{crimsonAccent}{RGB}{180, 0, 45}
+\definecolor{slateCharcoal}{RGB}{60, 60, 70}
+\definecolor{iceBlue}{RGB}{240, 248, 255}
+\definecolor{goldWarm}{RGB}{255, 195, 45}
+\definecolor{forestGreen}{RGB}{0, 0, 0}
+\definecolor{plumDeep}{RGB}{90, 0, 90}
+\definecolor{sandLight}{RGB}{250, 245, 235}
+\definecolor{skyLight}{RGB}{225, 235, 245}
+\definecolor{brickRed}{RGB}{160, 40, 40}
+\definecolor{tealDark}{RGB}{0, 80, 80}
+\definecolor{amberAlert}{RGB}{255, 140, 0}
+\definecolor{ivoryCream}{RGB}{255, 250, 240}
+\definecolor{tableHeaderDark}{RGB}{0, 32, 96}
+\definecolor{tableRowLight}{RGB}{250, 250, 252}
+\definecolor{tableRowAlt}{RGB}{240, 245, 250}
+
+% ===================== PROFESSIONAL FONT SETUP =====================
+\settextfont[
+  Path=fonts/,
+  Extension=.ttf,
+  UprightFont=*,
+  BoldFont=*Bd,
+  ItalicFont=*It,
+  BoldItalicFont=*BdIt,
+  Scale=0.97
+]{XB-Yagut}
+
+\setdigitfont[
+  Path=fonts/,
+  Extension=.ttf,
+  UprightFont=*,
+  BoldFont=*Bd,
+  ItalicFont=*It,
+  BoldItalicFont=*BdIt,
+  Scale=0.97
+]{XB-Yagut}
+
+\setlatintextfont[
+  BoldFont=TeX Gyre Termes Bold,
+  Scale=0.97
+]{TeX Gyre Termes}
+
+\SetTracking{encoding=*, shape=sc}{8}
+
+% ===================== HYPERREF SETUP =====================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryBlue,
+    urlcolor=accentBlue,
+    citecolor=primaryBlue,
+    pdftitle={اعلان رسمی گروه متخصصین},
+    pdfauthor={مدیریت گروه},
+    pdfproducer={XeLaTeX با xepersian},
+    pdfcreator={},
+    pdfpagemode=UseOutlines,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    pdfborder={0 0 0},
+    pdfhighlight=/O,
+    linkbordercolor=primaryBlue,
+    urlbordercolor=accentBlue,
+    citebordercolor=primaryBlue,
+    pdfstartview=FitH
+}
+
+% ===================== ENHANCED BOX STYLES (ORIGINAL - NOT CHANGED) =====================
+\newtcolorbox{mainbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=primaryBlue,
+  colbacktitle=primaryBlue,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title={\textcolor{white}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.6pt,
+  left=8mm,
+  right=8mm,
+  top=4mm,
+  bottom=4mm,
+  toprule at break=0.6pt,
+  bottomrule at break=0.6pt,
+  before skip=12pt,
+  after skip=12pt,
+  drop fuzzy shadow,
+  #1
+}
+
+\newtcolorbox{infobox}[2][]{
+  enhanced,
+  colback=lightBlue!20,
+  colframe=accentBlue,
+  fonttitle=\bfseries\small,
+  title={\textcolor{accentBlue}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.4pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  before skip=10pt,
+  after skip=10pt,
+  #1
+}
+
+\newtcolorbox{simpleframe}[1][]{
+  enhanced,
+  colback=lightGray!50,
+  colframe=primaryBlue!30,
+  breakable,
+  sharp corners,
+  boxrule=0.4pt,
+  left=6mm,
+  right=6mm,
+  top=4mm,
+  bottom=4mm,
+  before skip=10pt,
+  after skip=10pt,
+  #1
+}
+
+\newtcolorbox{actionbox}[2][]{
+  enhanced,
+  colback=iceBlue!35,
+  colframe=tealDark!85!black,
+  colbacktitle=tealDark!85!black,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=0.5pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  before skip=10pt,
+  after skip=10pt,
+  #1
+}
+
+\newtcolorbox{warningbox}[2][]{
+  enhanced,
+  colback=lightGray!70,
+  colframe=warningOrange,
+  fonttitle=\bfseries\small,
+  title={\textcolor{warningOrange}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.5pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  before skip=10pt,
+  after skip=10pt,
+  #1
+}
+
+\newtcolorbox{navyBox}[2][]{
+  enhanced,
+  colback=iceBlue!30,
+  colframe=navyMidnight,
+  colbacktitle=navyMidnight,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title={\textcolor{white}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.8pt,
+  left=8mm,
+  right=8mm,
+  top=4mm,
+  bottom=4mm,
+  drop fuzzy shadow={navyMidnight!20},
+  #1
+}
+
+\newtcolorbox{crimsonAlert}[2][]{
+  enhanced,
+  colback=ivoryCream,
+  colframe=crimsonAccent,
+  fonttitle=\bfseries\small,
+  title={\textcolor{crimsonAccent}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.6pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  drop fuzzy shadow={crimsonAccent!10},
+  #1
+}
+
+\newtcolorbox{goldHighlight}[2][]{
+  enhanced,
+  colback=goldWarm!10,
+  colframe=goldWarm!70,
+  fonttitle=\bfseries\small,
+  title={\textcolor{goldWarm!90!black}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.5pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+\newtcolorbox{greenSuccess}[2][]{
+  enhanced,
+  colback=tealDark!6,
+  colframe=tealDark!85!black,
+  colbacktitle=tealDark!85!black,
+  coltitle=white,
+  fonttitle=\bfseries\small,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=0.5pt,
+  left=6mm,
+  right=6mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+\newtcolorbox{announcementbox}[2][]{
+  enhanced,
+  colback=white,
+  colframe=primaryBlue,
+  colbacktitle=primaryBlue,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title={\textcolor{white}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.6pt,
+  left=8mm,
+  right=8mm,
+  top=4mm,
+  bottom=4mm,
+  toprule at break=0.6pt,
+  bottomrule at break=0.6pt,
+  before skip=12pt,
+  after skip=12pt,
+  drop fuzzy shadow,
+  #1
+}
+
+% ===================== CUSTOM COMMANDS =====================
+\newcommand{\subtle}[1]{\textcolor{accentGray}{\small #1}}
+\newcommand{\membername}[1]{\textbf{\textcolor{primaryBlue}{#1}}}
+\newcommand{\memberdetail}[1]{\textcolor{accentGray}{\footnotesize (#1)}}
+\newcommand{\highlight}[1]{\textcolor{primaryBlue}{\textbf{#1}}}
+\newcommand{\techterm}[1]{\textcolor{accentBlue}{\texttt{#1}}}
+\newcommand{\pathwaybox}[2]{
+  \begin{tcolorbox}[
+    enhanced,
+    colback=#1,
+    colframe=primaryBlue,
+    sharp corners,
+    boxrule=0.4pt,
+    left=4mm,
+    right=4mm,
+    top=2mm,
+    bottom=2mm,
+    fontupper=\small
+  ]
+  #2
+  \end{tcolorbox}
+}
+
+% ===================== LISTINGS SETUP =====================
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  framesep=2pt,
+  xleftmargin=10pt,
+  xrightmargin=10pt,
+  backgroundcolor=\color{lightGray!30},
+  rulecolor=\color{gray!50},
+  showstringspaces=false
+}
+% ===================== NEW BOX STYLES =====================
+\newtcolorbox{netzerobox}[2][]{
+  enhanced,
+  colback=forestGreen!10,
+  colframe=forestGreen!80!black,
+  colbacktitle=forestGreen!80!black,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title={\textcolor{white}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.6pt,
+  left=8mm,
+  right=8mm,
+  top=4mm,
+  bottom=4mm,
+  toprule at break=0.6pt,
+  bottomrule at break=0.6pt,
+  before skip=12pt,
+  after skip=12pt,
+  drop fuzzy shadow={forestGreen!20},
+  #1
+}
+
+\newtcolorbox{securitybox}[2][]{
+  enhanced,
+  colback=brickRed!10,
+  colframe=brickRed,
+  colbacktitle=brickRed,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title={\textcolor{white}{#2}},
+  breakable,
+  sharp corners,
+  boxrule=0.6pt,
+  left=8mm,
+  right=8mm,
+  top=4mm,
+  bottom=4mm,
+  toprule at break=0.6pt,
+  bottomrule at break=0.6pt,
+  before skip=12pt,
+  after skip=12pt,
+  drop fuzzy shadow={brickRed!20},
+  #1
+}
+\begin{document}
+
+% ===================== FARSI PART =====================
+% ===================== ENHANCED TITLE SECTION =====================
+\begin{center}
+\vspace*{1.5cm}
+
+{\Huge\textcolor{primaryBlue}{\textbf{اعلان رسمی}}}\\[0.4cm]
+{\Large\textcolor{accentBlue}{هماهنگی اولیه گروه متخصصین}}\\[0.8cm]
+
+\begin{tikzpicture}
+\draw[primaryBlue, line width=1.5pt] (0,0) -- (0.7\linewidth,0);
+\end{tikzpicture}
+
+\vspace{1.2cm}
+\end{center}
+
+% ===================== 1) ENHANCED GREETINGS =====================
+\begin{infobox}{سلام و درود خدمت تمامی اعضای گروه}
+\vspace{0.8em}
+ابتدا از اعتماد و پذیرش شما در این جمع متشکریم. این چت با هدف هماهنگی اولیه و فاز غربالگری، به صورت \highlight{موقتی (حداکثر چهار هفته)} ایجاد شده است، صرفاً برای تبادل نظر مقدماتی پیرامون یک فرصت منحصربه‌فرد (۱۰-۳۰ میلیارد دلار) در حوزه‌ی هوش مصنوعی. در صورت اثبات صحت و سقم جنبه‌ی فنی، این گروه ظرفیت تجاری‌سازی را در بالاترین سطح دارد.
+\vspace{0.8em}
+\end{infobox}
+
+% ===================== 2) ENHANCED ABOUT GROUP =====================
+\begin{mainbox}{درباره اعضا و هدف گروه}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+اعضای حاضر بر اساس سه معیار \highlight{تخصص، سرمایه‌گذاری و پشتیبانی} انتخاب شده‌اند. هدف نهایی، یافتن راهکاری برای \highlight{تشخیص صلاحیت فنی و در ادامه، تجاری‌سازی یک ایده‌ی ریزتراشه‌ی مبتنی بر فیزیک و یادگیری ماشین} است.
+\end{minipage}
+\end{center}
+
+\vspace{0.8em}
+
+\noindent\begin{minipage}{\textwidth}
+\paragraph{پیشینه فناوری:} 
+هسته فناوری این ایده از پژوهش‌های دوره دکتری من در حوزه سامانه‌های تبدیل ترموشیمیایی شکل گرفته است، جایی که «انتگرال‌های کامل» به عنوان \highlight{«هسته‌های فیزیکی» کارآمد} برای مدل‌سازی سامانه‌های دینامیکی پیچیده شناسایی شدند. این رویکرد بدون قربانی کردن دقت فیزیکی، بهبودهایی در \highlight{حد چندین مرتبه بزرگی} در سرعت و پایستگی قوانین فیزیک فراهم می‌آورد.
+\end{minipage}
+
+\vspace{0.8em}
+
+\noindent\begin{minipage}{\textwidth}
+\paragraph{مزیت رقابتی:}
+سامانه‌های خودرانِ مرسوم معمولاً با پردازشِ پیوسته و فریم‌به‌فریم نیازمند توان‌های بالا (در حد ده‌ها تا صدها وات) هستند؛ در حالی‌که رویکرد ما با \highlight{محاسبات رویدادمحور} و \highlight{حافظه‌ی ناوردایی}، بخش پایدار صحنه را \highlight{کم‌هزینه} نگه می‌دارد و تنها در مواجهه با «اغتشاش» (مانع، تغییر معنی‌دار یا عدم‌قطعیتِ واجد شرایط) هسته‌های تصمیم‌گیری را فعال می‌کند.
+\end{minipage}
+
+\vspace{0.8em}
+
+\noindent\begin{minipage}{\textwidth}
+\paragraph{نتیجه مطلوب:} 
+بهینه‌سازی شاخص‌های کلیدی استاندارد صنعت مثل \highlight{«انرژی به ازای هر تصمیم در هر مایل»}.
+
+\vspace{0.5em}
+دو سال گذشته بر روی توسعه یک شرکت نوپا در حوزه \highlight{سامانه‌های خودروهای خودران قابل راستی‌آزمایی و ایمن} با تکیه بر \highlight{«محاسبات مبتنی بر فیزیک»} متمرکز بوده‌ام و این فرصت را با شما به اشتراک خواهم گذاشت.
+\end{minipage}
+\end{mainbox}
+
+% ===================== 3) ENHANCED MEMBERS LIST =====================
+\begin{mainbox}{اعضای حاضر در این گفت‌وگو}
+\begin{center}
+\begin{tabular}{@{}p{0.45\textwidth}@{\hspace{0.1\textwidth}}p{0.45\textwidth}@{}}
+\membername{امیر امیرزاده} & \membername{علی دیرباز} \\
+\membername{حسن امیرزاده} & \membername{ارشاد گنجی} \memberdetail{مهندسی نفت دانشگاه صنعتی شریف} \\
+\membername{مجتبی دیرباز} & \membername{سعید کمالی نیا} \memberdetail{مهندسی برق دانشگاه تهران، دکترا دانشگاه شیکاگو} \\
+\membername{سیاوش پیرسیاوش} \memberdetail{فعال حوزه نفت و گاز با تجربه بین‌المللی، مقیم نروژ، مدیریت فناوری، فعال در پروژه هوش مصنوعی} & \membername{محمد امیرزاده} \memberdetail{نایب رئیس اتاق بازرگانی ایران} \\
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\clearpage
+
+% ===================== ENHANCED ACTION SECTION =====================
+\begin{actionbox}{اقدام اولیه و ضروری (طی یک هفته)}
+برای تسهیل اشتراک‌گذاری مطالب فنی (شامل مستندات، ارائه‌ها، شبیه‌سازی‌ها و داده‌های اولیه)، لازم است همه اعضا اپلیکیشن \highlight{Dropbox} را روی تلفن همراه خود نصب و دسترسی اولیه را تست نمایند.
+\end{actionbox}
+
+% ===================== ENHANCED INSTALLATION INSTRUCTIONS =====================
+\begin{warningbox}{دستورالعمل نصب و راه‌اندازی}
+\begin{enumerate}[leftmargin=*,label=\textcolor{primaryBlue}{\textbf{\arabic*.}}, itemsep=10pt, parsep=5pt]
+  \item \highlight{نصب اپلیکیشن Dropbox}
+  
+  \textbf{برای نصب مستقیم روی موبایل:}
+  
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item \textbf{iPhone:} \\
+    \url{https://apps.apple.com/app/dropbox/id327630330}
+    
+    \item \textbf{Android:} \\
+    \url{https://play.google.com/store/apps/details?id=com.dropbox.android}
+  \end{itemize}
+  
+  \vspace{6pt}
+  \item \highlight{تست دسترسی}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item لطفاً پس از نصب، این پیوند آزمایشی را باز کنید تا از عملکرد صحیح اطمینان حاصل شود:\\
+    \url{https://tinyurl.com/4bxrmbev}
+  \end{itemize}
+  
+  \vspace{6pt}
+  \item \highlight{در صورت نیاز به راهنمایی}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item اگر در نصب یا تست با مشکل مواجه شدید، تنها از طریق ارسال پیام مستقیم به مدیر گروه اطلاع دهید تا راهنمایی فردی ارائه شود.
+  \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
+\begin{simpleframe}
+\textbf{توجه:}
+\begin{itemize}[label={\textcolor{warningOrange}{\textbullet}}]
+  \item در صورت عدم تمایل به ادامه، اطلاع‌رسانی به مدیر ضروری نیست.
+  \item لطفاً به‌منظور حفظ نظم گروه و تمرکز بر مباحث، تنها از طریق پیام مستقیم با مدیریت گروه در ارتباط باشید.
+  \item پس از دو هفته، گروه جدیدی با اطلاعات تکمیل‌تر، منحصراً برای افراد علاقمند تشکیل خواهد شد.
+\end{itemize}
+\end{simpleframe}
+\end{warningbox}
+
+\clearpage
+
+% ===================== ENHANCED DOCUMENTS SECTION =====================
+\begin{mainbox}{دسترسی به فایل‌ها (ساختار کامل)}
+اعضای محترم می‌توانند برای دریافت نمونه‌های مورد نظر خود، کد مربوطه را مستقیماً برای مدیریت گروه ارسال نمایید.
+
+\vspace{1em}
+\begin{center}
+\begin{minipage}{0.95\textwidth}
+\centering\textbf{فهرست کدهای مستندات شخصی}
+\vspace{0.5em}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|>{\raggedleft}P{0.45\textwidth}|>{\raggedleft}P{0.45\textwidth}|}
+\hline
+\rowcolor{tableHeader}
+\multicolumn{2}{|c|}{\textcolor{white}{\textbf{ترجمه کتاب‌ها}}} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{P11}{ترجمه کتاب (۶ زبان)} & \codeentry{P14}{ترجمه کتاب – فارسی} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{P13}{ترجمه کتاب – نروژی} & \codeentry{P15}{ترجمه کتاب – اردو} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{P17}{ترجمه کتاب – ترکی} & \codeentry{P16}{ترجمه کتاب – روسی} \\
+\hline
+\end{tabular}
+\end{minipage}
+\end{center}
+\end{mainbox}
+
+% ===================== ENHANCED TECHNICAL DOCUMENTS =====================
+\begin{mainbox}{مستندات فنی — پیشنهاد چیپ هوش مصنوعی}
+\vspace{0.8em}
+
+\begin{center}
+\begin{minipage}{0.95\textwidth}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|>{\raggedleft}P{0.45\textwidth}|>{\raggedleft}P{0.45\textwidth}|}
+\hline
+\rowcolor{tableHeader}
+\multicolumn{2}{|c|}{\textcolor{white}{\textbf{مستندات فنی اصلی}}} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{T02}{جوهره رساله} & \codeentry{T13}{پایداری، بازیابی و پایش} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{T03}{پیش‌نویس مقاله رساله} & \codeentry{T14}{معماری سخت‌افزار واحد پردازش اثبات} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{T04}{شواهد قضیه سیال کامل} & \codeentry{T15}{معماری ملکه زنبور} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{T05}{اصول اولیه چشم‌انداز} & \codeentry{T16}{جدول اصلاح اصلی} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{T06}{عامل‌های مدل زبانی بزرگ} & \codeentry{T17}{مهندسی تبدیل دانش} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{T07}{محاسبات آگاه از فیزیک} & \codeentry{T18}{برنامه زمان‌بندی اصلاح} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{T08}{جریان خط لوله داده‌های بلادرنگ} & \codeentry{T19}{مهندسی تبدیل دانش – نگارش ۱} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{T09}{پشته ادراک مرسدس‌بنز} & \codeentry{T20}{فیلتر کالمان به زبان ساده} \\
+\hline
+\rowcolor{tableRow1}
+\codeentry{T10}{معماری جریان داده خودروی مستقل} & \codeentry{T21}{بهره کالمان} \\
+\hline
+\rowcolor{tableRow2}
+\codeentry{T11}{پروتکل انتقال بسته مکانیکی} & \codeentry{T12}{مسیریابی چندگذری} \\
+\hline
+\end{tabular}
+\end{minipage}
+\end{center}
+\end{mainbox}
+
+% ===================== ENHANCED OVERLAYS SECTION =====================
+\begin{mainbox}{روی‌نگارهای حجم کنترل واحد پردازش اثبات (۶۴ تصویر)}
+\small
+\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*, label=\textcolor{primaryBlue}{\textbf{\arabic*.}}, itemsep=2pt, parsep=1pt]
+  \item مدار مجتمع – حجم کنترل
+  \item مدار مجتمع – حوزه‌های خرابی
+  \item مدار مجتمع – قراردادهای جریان داده
+  \item مدار مجتمع – توان حرارتی
+  \item مدار مجتمع – حوزه‌های کلاک و کنترل تغییر حوزه
+  \item مدار مجتمع – تهدیدات اعتماد
+  \item مدار مجتمع – قلاب‌های آزمون اعتبارسنجی
+  \item مدار مجتمع – عامل‌های سراسری و محلی
+  \item مدار مجتمع – حافظه فقط‌خواندنی شاهدی چندگذری
+  \item مدار مجتمع – حلقه کشف وابستگی
+  \item مدار مجتمع – رابط‌ها و پروتکل‌ها
+  \item مدار مجتمع – اعتبارسنجی خودرو (حلقه سخت‌افزاری / نرم‌افزاری)
+  \item مدار مجتمع – حکمرانی حجم فضایی
+  \item مدار مجتمع – قراردادهای ذخیره‌سازی یادگیری
+  \item مدار مجتمع – شبکه یکنواختی شاهد
+  \item مدار مجتمع – حوزه‌های قابلیت انتقال
+  \item مدار مجتمع – دسته‌های سفارشی‌سازی سخت‌افزار
+  \item مدار مجتمع – مرزهای صحه‌گذاری
+  \item مدار مجتمع – درگاه‌های تزریق شبیه‌سازی
+  \item مدار مجتمع – حافظه حالت گذرا
+  \item مدار مجتمع – حکمرانی به‌مثابه هندسه عامل‌های سراسری و محلی
+  \item مدار مجتمع – قاب‌های پارچه زمینه فضایی
+  \item مدار مجتمع – حلقه یادگیری تقویتی ایمن
+  \item مدار مجتمع – بسته‌های قابلیت انتقال حوزه‌ای
+  \item مدار مجتمع – ارابه شبیه‌سازی دوقلوی دیجیتال
+  \item مدار مجتمع – به‌روزرسانی هوایی و عقب‌گرد تحت حکمرانی
+  \item مدار مجتمع – خط لوله بودجه تأخیر
+  \item مدار مجتمع – تجزیه مورد ایمنی
+  \item مدار مجتمع – محدودیت‌های شاهد در یادگیری تقویتی ایمن
+  \item مدار مجتمع – شبکه حکمرانی فضایی عامل‌های سراسری و محلی
+  \item مدار مجتمع – تبدیل‌های مختصاتی قراردادهای قاب
+  \item مدار مجتمع – شاهد چندگذری دوسوخطی
+  \item مدار مجتمع – حکمرانی عامل مدل زبانی بزرگ با امکان‌پذیری فیزیکی
+  \item مدار مجتمع – قالب قابلیت انتقال حوزه
+  \item مدار مجتمع – زنجیره حفاظت به‌روزرسانی ایمن
+  \item مدار مجتمع – تقسیم‌بندی عامل‌های سراسری و محلی
+  \item مدار مجتمع – بودجه خط لوله تأخیر به‌مثابه هندسه
+  \item مدار مجتمع – نقشه پوشش قرارداد
+  \item مدار مجتمع – توپولوژی تزریق خرابی
+  \item مدار مجتمع – ساعت‌برداری همگام‌سازی چندنرخی
+  \item مدار مجتمع – خط لوله جبر شاهد
+  \item مدار مجتمع – حکمرانی فضایی عامل‌های سراسری در برابر محلی
+  \item مدار مجتمع – صفحه‌های مرزی بدون‌حافظه
+  \item مدار مجتمع – ردیابی‌پذیری قرارداد از مشخصه تا آزمون
+  \item مدار مجتمع – پلی‌توپ امکان‌پذیر پاکت ایمنی
+  \item مدار مجتمع – گراف قاب پارچه زمینه فضایی
+  \item مدار مجتمع – بسته‌های محدودیت محلی حوزه‌های سیاست فضایی
+  \item مدار مجتمع – توپولوژی تأخیر انتهایی
+  \item مدار مجتمع – ناوردای‌های منیفولد حافظه شاهد
+  \item مدار مجتمع – حلقه بازیابی کشف وابستگی
+  \item مدار مجتمع – نقاط اتصال ارابه شبیه‌سازی
+  \item مدار مجتمع – سیستم نوع عمل حکمرانی
+  \item مدار مجتمع – عامل‌های محدودشده فضایی (سراسری / محلی)
+  \item مدار مجتمع – قاب‌های پارچه زمینه فضایی
+  \item مدار مجتمع – شواهد در برابر حالت گذرا
+  \item مدار مجتمع – حجم امکان‌پذیر سیاست به‌مثابه هندسه
+  \item مدار مجتمع – ناوردای‌های قابل انتقال بسته‌های حوزه
+  \item مدار مجتمع – حلقه بهبود یادگیری تقویتی ایمن
+  \item مدار مجتمع – قصدهای فیزیکی تایپ‌شده در حکمرانی عامل مدل زبانی بزرگ
+  \item مدار مجتمع – گراف قاب مختصات پارچه زمینه فضایی
+  \item مدار مجتمع – ناحیه‌های حکمرانی فضایی عامل‌های سراسری و محلی
+  \item مدار مجتمع – قراردادهای چندلایه ایمنی محاسبات
+  \item مدار مجتمع – همگرایی شواهد و سیاست‌های کنترلی
+  \item مدار مجتمع – نمای نهایی معماری حکمرانی حجم کنترل
+\end{enumerate}
+\end{multicols}
+\normalsize
+\end{mainbox}
+
+\clearpage
+
+% ===================== ENHANCED DOCUMENTATION SERVICE =====================
+\begin{mainbox}{خدمت مستندسازی هدفمند برای اعضا}
+اعضای محترم می‌توانند جهت ارائه به ذینفعان شخصی، مشاوران، یا مؤسسات ثالث، درخواست مستندات سفارشی‌شده دهند.
+
+\vspace{1em}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\centering\textbf{کاربردهای اصلی}
+\vspace{0.5em}
+
+\begin{tabular}{@{}p{0.45\textwidth}@{\hspace{0.05\textwidth}}p{0.45\textwidth}@{}}
+\textcolor{accentBlue}{•} ارائه به سرمایه‌گذاران & \textcolor{accentBlue}{•} ارزیابی توسط مؤسسات \\
+\textcolor{accentBlue}{•} تشریح برای مشاوران & \textcolor{accentBlue}{•} معرفی به شرکای استراتژیک \\
+\textcolor{accentBlue}{•} اخذ بازخورد تخصصی & \textcolor{accentBlue}{•} تسهیل تصمیم‌گیری‌های کلیدی
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\vspace{1em}
+
+\begin{actionbox}{قالب درخواست (طرح تک‌خطی)}
+\textbf{موضوع درخواست + زمینه استفاده + مخاطب هدف + حوزه‌های کلیدی مدنظر}
+\end{actionbox}
+
+\vspace{1em}
+
+\textbf{نمونه‌های عملی:}
+
+\begin{enumerate}[leftmargin=*, label=\textcolor{primaryBlue}{\textbf{\arabic*.}}, itemsep=8pt, parsep=4pt]
+    \item \textbf{درخواست:} ما چه جای خالی را قرار است پرکنیم؟ عدم وجود چه سرویسی دقیقاً ضرورت حضور شرکتی است که به دنبال ایجاد آن هستیم؟
+    
+    \textbf{برای:} ارائه به شکاکان ایده
+    
+    \textbf{تأکید بر:} وجود غول‌هایی مثل تسلا چه اهمیتی برای کسب‌وکار ما دارد؟
+    
+    \textbf{پاسخ:}
+    
+    \begin{infobox}{لغزش‌های مدیریتی و وعده‌های محقق‌نشده}
+    \begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}]
+      \item ۲۰۱۶ — ادعای «سخت‌افزار کامل خودران»؛ محقق نشد
+      \item ۲۰۱۷ — وعدهٔ رانندگی خودران «ساحل به ساحل»؛ محقق نشد
+      \item ۲۰۱۸ — پیش‌بینی «رباتاکسی تا ۲۰۲۰»؛ محقق نشد
+      \item ۲۰۱۹ — وعدهٔ «یک میلیون رباتاکسی»؛ محقق نشد
+      \item ۲۰۲۰ — ادعای «سطح ۵»؛ محقق نشد
+    \end{itemize}
+    \end{infobox}
+    
+    \begin{center}
+    \begin{tabularx}{0.9\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|*{4}{>{\centering\arraybackslash}X|}}
+    \hline
+    \rowcolor{tableHeader}
+    \color{white}\textbf{جنبه} &
+    \color{white}\textbf{تسلا} &
+    \color{white}\textbf{مرسدس‌بنز} &
+    \color{white}\textbf{بی‌ام‌دبلیو} &
+    \color{white}\textbf{سازندگان چینی} \\
+    \hline
+    \textbf{گواهی سطح ۳} & ندارد & دارد & دارد & دارند \\
+    \hline
+    \textbf{مسئولیت‌پذیری} & اجتناب می‌کند & می‌پذیرد & می‌پذیرد & می‌پذیرند \\
+    \hline
+    \textbf{سنسورها} & فقط دوربین & لیدار، دوربین، رادار & لیدار، دوربین، رادار & لیدار یا دوربین \\
+    \hline
+    \textbf{افزونگی} & محدود & کامل & کامل & الزامی \\
+    \hline
+    \textbf{تعریف قلمرو عملیاتی} & نامحدود ادعا شده & محدود و مشخص & محدود و مشخص & محدود و مشخص \\
+    \hline
+    \textbf{وضعیت تجاری} & فقط سطح ۲ & فروش فعال & فروش فعال & در حال آزمایش \\
+    \hline
+    \end{tabularx}
+    \end{center}
+    
+    \vspace{0.5em}
+    \subtle{بسیاری از این حقایق از جریان طبیعی اخبار و بازارهای سرمایه کتمان شده‌اند. دوستانی که قصد دارند مدهوش هنرنمایی این فرد باشند و ترجیحشان نادیده گرفتن عملکرد تسلا باشد، به طور طبیعی فیت مناسبی برای این پروژه نخواهند بود.}
+
+    \item \textbf{درخواست:} طراحی فلسفه معماری و مقایسه با هوش مصنوعی متداول
+    
+    \textbf{برای:} ارائه به مدیر فنی (مهندس برق)
+    
+    \textbf{تأکید بر:} محاسبات مبتنی بر فیزیک و بهینه‌سازی انرژی
+    
+    \item \textbf{درخواست:} توجیه اقتصادی فناوری مبتنی بر هسته‌های فیزیکی
+    
+    \textbf{برای:} ارائه به سرمایه‌گذار خطرپذیر
+    
+    \textbf{تأکید بر:} کاهش هزینه‌های سخت‌افزاری و مقیاس‌پذیری
+    
+    \item \textbf{درخواست:} تحلیل ریسک‌های ایمنی در سامانه‌های خودران مبتنی بر رویداد
+    
+    \textbf{برای:} ارزیابی مؤسسه استاندارد بین‌المللی
+    
+    \textbf{تأکید بر:} قابلیت راستی‌آزمایی و انطباق با استانداردهای ایزو ۲۶۲۶۲
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{فرآیند درخواست:}
+\begin{enumerate}[leftmargin=*, label=\textcolor{primaryBlue}{\textbf{\arabic*.}}, itemsep=6pt, parsep=3pt]
+    \item ارسال درخواست با قالب تک‌خطی به مدیریت گروه
+    \item مستندات درخواستی همان روز رسیدگی می‌شوند.
+    \item تحویل پیش‌نویس برای بازخورد اولیه
+    \item تحویل نسخه نهایی با قابلیت ارائه به فارسی/انگلیسی
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{مزایای این خدمت:}
+\begin{itemize}[leftmargin=*, label=\textcolor{successGreen}{\small\faCheck}, itemsep=6pt, parsep=3pt]
+    \item تسهیل شبکه‌سازی حرفه‌ای
+    \item تسریع فرآیند ارزیابی فنی
+    \item تقویت گفت‌وگو با ذینفعان
+    \item امکان شخصی‌سازی بر اساس نیاز دقیق
+\end{itemize}
+\end{mainbox}
+
+% ===================== ENHANCED STOCK DISCUSSION =====================
+\begin{mainbox}{اطلاعات مربوط به ورود به بورس‌های بین‌المللی}
+صرفاً جهت اطلاع دوستان، برخلاف تصور رایج، ارزش‌گذاری نجومی شرط ورود به بورس‌های معتبر آمریکا نیست. شرط قطعی، ارائه سه سال صورت‌های مالی حسابرسی‌شده مطابق استانداردهای حسابداری آمریکا یا بین‌المللی به‌همراه \highlight{حداقل‌هایی قابل تأمین} است.
+
+\vspace{1em}
+برای یک شرکت سودآور پنج‌ساله، کوتاه‌ترین زمان نظری مطلق از تصمیم رسمی «شروع» تا اولین روز معامله در بورس نیویورک یا نزدک حدوداً چند ماه است. این زمان‌بندی فرض می‌کند فرآیندی بی‌نقص، کاملاً مدیریت‌شده، بدون تأخیر و با فشرده‌سازی مراحل و همکاری بورس انجام شود.
+
+\vspace{1.5em}
+\begin{center}
+\color{primaryBlue}\rule{0.8\textwidth}{0.8pt}
+\end{center}
+
+\vspace{0.8em}
+
+\paragraph{الزامات واقعی بازار جهانی نزدک:}
+چهار مسیر مجزا وجود دارد که حداقل‌های نظری آنها از پانزده میلیون دلار تا هفتاد و پنج میلیون دلار متغیر است. الزامات مشترک تمام مسیرها عبارتند از:
+
+\vspace{0.5em}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}]
+  \item سه سال صورت‌های مالی حسابرسی‌شده مطابق استانداردهای حسابداری آمریکا یا بین‌المللی
+  \item یک میلیون و یکصد هزار سهم عمومی شناور آزاد
+  \item چهارصد سهامدار مستقل
+  \item قیمت پیشنهادی حداقل چهار دلار
+\end{itemize}
+
+\vspace{1.5em}
+
+\begin{pathwaybox}{pathway1}{\textbf{مسیر ۱ — مسیر درآمدی:}}
+\textbf{حداقل‌های نظری:}
+\begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+  \item پانزده میلیون دلار حقوق صاحبان سهام
+  \item یک میلیون دلار سود سالانه پیش از مالیات
+  \item پانزده میلیون دلار ارزش بازار سهام عمومی
+\end{itemize}
+
+\textbf{مزیت کلیدی:} با اثبات سودآوری واقعی می‌توان با سرمایه نسبتاً متوسط وارد بازار شد زیرا ریسک کمتری برای سرمایه‌گذاران ایجاد می‌کند.
+\end{pathwaybox}
+
+\vspace{1em}
+
+\begin{pathwaybox}{pathway2}{\textbf{مسیر ۲ — مسیر سرمایه:}}
+\textbf{حداقل‌های نظری:}
+\begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+  \item سی میلیون دلار حقوق صاحبان سهام
+  \item دو سال سابقه عملیاتی (مانع زمانی مطلق و غیرقابل کاهش)
+  \item هجده میلیون دلار ارزش بازار سهام عمومی
+\end{itemize}
+
+\textbf{مزیت کلیدی:} با جذب سی میلیون دلار از طریق تعهدات و ضمانت‌های مالی می‌توان بدون نیاز به سودآوری وارد شد، اما دو سال سابقه یک الزام زمانی مطلق است.
+
+\textbf{کاربرد بهینه:} برای شرکت‌های فناوری پیشرفته و متمرکز بر تحقیق و توسعه که درآمد کوتاه‌مدت ندارند اما پتانسیل بلندمدت بالایی دارند، ایده‌آل است.
+\end{pathwaybox}
+
+\vspace{1em}
+
+سندی مفصل‌تر نیز در همین مورد تهیه گردیده است که تقدیم حضورتان می‌گردد.
+
+\vspace{1.5em}
+
+\begin{center}
+با سپاس از همکاری و تعهد شما.
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+\color{primaryBlue}\textbf{با احترام،}
+
+\color{primaryBlue}\textbf{مدیریت گروه}
+\end{center}
+\end{mainbox}
+
+\clearpage
+
+% ===================== ENHANCED COMMERCIAL NARRATIVE =====================
+\begin{mainbox}{روایت تجاری‌سازی یک معماری ریزتراشه: از اصول فیزیک تا بازار سرمایه}
+\begin{center}
+{\LARGE\textcolor{primaryBlue}{\textbf{سفر تکاملی یک ایده از رساله دکترا تا بازار جهانی}}}
+\end{center}
+
+\vspace{1.5em}
+
+% ===================== ENHANCED TIMELINE DIAGRAM =====================
+\begin{center}
+\begin{tikzpicture}[
+    stage/.style={
+        rectangle,
+        rounded corners=4pt,
+        minimum width=2.2cm,
+        minimum height=1.2cm,
+        align=center,
+        font=\bfseries,
+        text=white,
+        inner sep=6pt,
+        drop shadow={opacity=0.3, shadow xshift=2pt, shadow yshift=-2pt}
+    },
+    stageLabel/.style={
+        text=slateCharcoal,
+        font=\small,
+        yshift=-8pt
+    },
+    arrow/.style={
+        -{Latex[length=3mm]},
+        line width=1.2pt,
+        color=slateCharcoal!60
+    }
+]
+
+% Define stage colors
+\def\stageA{navyMidnight}
+\def\stageB{crimsonAccent}
+\def\stageC{forestGreen}
+\def\stageD{plumDeep}
+
+% Stage nodes
+\node[stage, fill=\stageA] (stage1) at (0,0) {پیدایش};
+\node[stage, fill=\stageB] (stage2) at (3.5,0) {توسعه};
+\node[stage, fill=\stageC] (stage3) at (7,0) {تجاری‌سازی};
+\node[stage, fill=\stageD] (stage4) at (10.5,0) {بازار};
+
+% Arrows
+\draw[arrow] (stage1.east) -- (stage2.west);
+\draw[arrow] (stage2.east) -- (stage3.west);
+\draw[arrow] (stage3.east) -- (stage4.west);
+
+% Labels below stages
+\node[stageLabel] at (stage1.south) {\textcolor{slateCharcoal}{\smallرساله دکترا}};
+\node[stageLabel] at (stage2.south) {\textcolor{slateCharcoal}{\smallنمونه اولیه}};
+\node[stageLabel] at (stage3.south) {\textcolor{slateCharcoal}{\smallتولید انبوه}};
+\node[stageLabel] at (stage4.south) {\textcolor{slateCharcoal}{\small NASDAQ}};
+
+% Optional: Add connecting curve above
+\draw[slateCharcoal!30, line width=0.8pt, dashed] 
+    (stage1.north) .. controls +(0,0.5) and +(0,0.5) .. (stage4.north);
+
+% Optional: Add timeline progression indicator
+\draw[slateCharcoal!40, line width=8pt, line cap=round, opacity=0.2] 
+    (stage1.west) -- (stage4.east);
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5em}
+
+\paragraph{بخش اول: پیدایش — از رساله دکترا تا صفر و یک کامپیوتر}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}, leftmargin=*, itemsep=4pt, parsep=2pt]
+  \item \textbf{فصل ۱ — بن‌بست محاسباتی}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item شکست معماری‌های موازی سنتی در حفظ قوانین فیزیک
+    \item لحظه کشف: انتگرال‌های کامل به مثابه هسته‌های فیزیکی
+    \item معضل انرژی در سامانه‌های خودران: چرا صدها وات؟
+  \end{itemize}
+  
+  \item \textbf{فصل ۲ — عملیاتی‌سازی نظریه}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item از ترمودینامیک به دینامیک وسایل نقلیه: قیاس بنیادین
+    \item مفهوم «محاسبات رویدادمحور»
+    \item شبیه‌سازی اولیه: بهبود سه مرتبه بزرگی در مصرف انرژی
+  \end{itemize}
+  
+  \item \textbf{فصل ۳ — معماری ضمانت‌پذیر/تغییرناپذیر/پایا™}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item چرا سخت‌افزار به‌عنوان ضامن ایمنی؟
+    \item حافظه پایا: طراحی مفهومی
+    \item شصت‌وچهار نگاره: نقشه‌راه تقریبی یک تراشه
+  \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+
+\paragraph{بخش دوم: بازار و رقابت — چشم‌انداز استراتژیک}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}, leftmargin=*, itemsep=4pt, parsep=2pt]
+  \item \textbf{فصل ۴ — نقشه میدان رقابت}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item بازیگران اصلی: NVIDIA، Qualcomm، Mobileye، Tesla
+    \item موقعیت‌یابی استراتژیک: «فیزیک‌محور» در برابر «فقط مبتنی بر داده»
+  \end{itemize}
+  
+  \item \textbf{فصل ۵ — تحلیل TAM/SAM/SOM}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item بازار کل قابل دسترس: ۲۸۰ میلیارد دلار (خودروهای خودران تا ۲۰۳۵)
+    \item بازار قابل خدمت: ۴۵ میلیارد دلار (تراشه‌های پردازشی L3/L4)
+    \item سهم قابل کسب: ۳–۵٪ در پنج سال اول
+    \item استراتژی محصول‌به‌بازار
+    \item نقاط عطف قابل‌اندازه‌گیری
+  \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+
+\paragraph{بخش سوم: تجاری‌سازی — از نمونه به محصول}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}, leftmargin=*, itemsep=4pt, parsep=2pt]
+  \item \textbf{فصل ۶ — ساخت نخستین نمونه فیزیکی}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item انتخاب فاندری: TSMC ۷nm در برابر Samsung ۵nm
+    \item نود روز تا اولین تراشه
+    \item آزمون در شرایط واقعی: نصب در خودروی پیش‌تولید
+  \end{itemize}
+  
+  \item \textbf{فصل ۷ — طراحی برای تولید: DFM/DFT/DFA}
+  
+  \item \textbf{فصل ۸ — زنجیره تأمین و تولید}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item تأمین‌کنندگان دوم: چین، تایوان، کره، اروپا
+    \item برنامه افزایش تولید: از ۱۰ هزار به ۱ میلیون واحد سالانه
+  \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+
+\paragraph{بخش چهارم: مسیر NASDAQ — از دفتر ثبت تا تابلوی الکترونیکی}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}, leftmargin=*, itemsep=4pt, parsep=2pt]
+  \item \textbf{فصل ۹ — انتخاب مسیر پذیرش}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item تحلیل چهار مسیر: درآمد، سرمایه، ارزش بازار، دارایی
+    \item انتخاب «مسیر درآمدی»: مزایا برای شرکت سودآور
+    \item برآورد ارزش‌گذاری
+  \end{itemize}
+  
+  \item \textbf{فصل ۱۰ — فرآیند S-1 و بررسی SEC}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item تهیه سند ثبت: ریسک‌ها، مالی، رقابت،
+    \item نظرات SEC و پاسخ‌ها: سه دور بازبینی متوسط
+    \item تعیین بازه قیمت
+  \end{itemize}
+  
+  \item \textbf{فصل ۱۱ — Roadshow و تقاضای سرمایه‌گذاران}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item سفر سه‌هفته‌ای: نیویورک، بوستون، سانفرانسیسکو، لندن، هنگ‌کنگ
+    \item ملاقات با سرمایه‌گذاران نهادی: Fidelity، BlackRock، Vanguard
+  \end{itemize}
+  
+  \item \textbf{فصل ۱۲ — روز پذیرش و معامله اول}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item قیمت‌گذاری نهایی
+    \item زنگ افتتاح NASDAQ: لحظه تاریخی
+    \item عملکرد روز اول
+  \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+
+\paragraph{بخش پنجم: رشد پایدار}
+\begin{itemize}[label={\textcolor{primaryBlue}{\textbullet}}, leftmargin=*, itemsep=4pt, parsep=2pt]
+ 
+  \item \textbf{فصل ۱۳ — گسترش محصول و بازار}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item نسل دوم تراشه: پردازش ۵nm با توان ۵۰٪ کمتر
+    \item ورود به بازارهای جدید: رباتیک، پهپادها، لبه IoT
+  \end{itemize}
+  
+  \item \textbf{فصل ۱۴ — چشم‌انداز ده‌ساله}
+  \begin{itemize}[label={\textcolor{accentBlue}{\textbullet}}]
+    \item اهداف ۲۰۳۵: ۵ میلیارد دلار درآمد، ۲۰٪ سهم بازار L5
+    \item مسیر تحقیق: محاسبات کوانتومی-کلاسیک ترکیبی
+    \item میراث: تغییر پارادایم از محاسبات داده‌محور به فیزیک‌محور
+  \end{itemize}
+\end{itemize}
+\end{mainbox}
+
+\clearpage
+% ===================== ۹) اتصال نقاط: از انتگرال‌ها تا کیهان =====================
+\begin{announcementbox}{اتصال نقاط: از انتگرال‌ها تا کیهان}
+\vspace{0.8em}
+
+\noindent
+انتگرال را می‌توان به‌راستی «الماس درخشان تاج ریاضیات» نامید. 
+
+\vspace{0.8em}
+
+\noindent
+این مفهوم که در نگاه نخست ابزاری برای محاسبه‌ی نمودارها به‌نظر می‌رسد، در حقیقت پلی استوار بین دنیای ریاضیات ناب، قوانین ژرف فیزیک و فناوری‌های پیشرفته‌ی امروزی بنا می‌کند.
+
+\vspace{0.5em}
+
+\noindent
+ابزارهایی ظریف و قدرتمند که با دقتی حیرت‌انگیز رفتار سامانه‌های پیچیده و نوسانی طبیعت را مدل می‌کنند.
+
+\vspace{0.8em}
+\noindent
+پیاده‌سازی چنین مدل‌های پیچیده و «فیزیک‌آگاهی»، نیازمند رایانشی فراتر از توان سخت‌افزارهای مرسوم است.
+
+\vspace{0.8em}
+\noindent
+چرا این پیوند، تحول‌آفرین است؟
+زیرا سه قلمرو به ظاهر مجزا—ریاضیات انتزاعی، فیزیک بنیادی و مهندسی سخت‌افزار—را در یک مسیر همگرا می‌کند. این همگرایی، نه تنها درک ما از جهان را عمیق‌تر می‌سازد، بلکه نسل جدیدی از هوش مصنوعی کمّی را ممکن می‌سازد—هوش‌مصنوعی‌هایی که می‌توانند مسائل دنیای واقعی را با رعایت ذاتی قوانین طبیعت، طراحی و بهینه‌سازی کنند.
+
+\vspace{0.8em}
+
+\noindent
+ این همان چیزی است که پروژه‌ی حاضر را به طرحی بی‌نظیر و آینده‌ساز تبدیل کرده است.
+\vspace{1em}
+\end{announcementbox}
+
+% ===================== نقشه گنج ریاضی: از انتگرال‌ها تا کهکشان‌ها =====================
+\begin{mainbox}{نقشه گنج ریاضی: از انتگرال‌ها تا کهکشان‌ها}
+
+\begin{center}
+{\Large\textcolor{primaryBlue}{\textbf{کشفِ نادیدنی‌ها با ریاضیات}}}\\[0.3cm]
+{\small\textcolor{accentGray}{چگونه یک مفهوم ریاضی مسیر علم را تغییر داد}}
+\end{center}
+
+\vspace{1em}
+
+% ===================== ENGAGING INTRODUCTION =====================
+\begin{tcolorbox}[
+    enhanced,
+    colback=iceBlue!20,
+    colframe=navyMidnight,
+    sharp corners,
+    boxrule=0.6pt,
+    left=8mm,
+    right=8mm,
+    top=4mm,
+    bottom=4mm,
+    fontupper=\normalsize
+]
+\centering
+\faLightbulbO~~\textbf{سوال بنیادی:} اگر به شما بگوییم یک فرمول ریاضی می‌تواند همزمان\\
+۱) رفتار پیچیده‌ترین سیستم‌های فیزیکی را مدل کند \\
+۲) معماری هوش مصنوعی آینده را بازتعریف کند \\
+۳) و رازی از کیهان را فاش سازد \\
+پاسخ شما چیست؟\\[0.5em]
+{\small این داستان «انتگرال‌های کامل» است --- الماس درخشان تاج ریاضیات.}
+\end{tcolorbox}
+
+\vspace{1em}
+
+% ===================== VISUAL CONNECTION DIAGRAM =====================
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    concept/.style={
+        rectangle,
+        rounded corners=4pt,
+        minimum width=2.8cm,
+        minimum height=1.8cm,
+        align=center,
+        font=\bfseries\small,
+        text=white,
+        inner sep=8pt,
+        drop shadow={opacity=0.3}
+    },
+    connection/.style={
+        -{Latex[length=3mm]},
+        line width=1.2pt,
+        color=slateCharcoal!60
+    }
+]
+
+% Define nodes
+\node[concept, fill=navyMidnight] (math) {ریاضیات\\انتزاعی};
+\node[concept, fill=forestGreen, right=of math] (physics) {فیزیک\\بنیادی};
+\node[concept, fill=plumDeep, right=of physics] (engineering) {مهندسی\\سخت‌افزار};
+
+% Central bridge node
+\node[concept, fill=crimsonAccent, above=1.2cm of physics] (integral) {\faStar\\انتگرال‌های کامل};
+
+% Connect nodes
+\draw[connection] (math.north) -- (integral.south);
+\draw[connection] (physics.north) -- (integral.south);
+\draw[connection] (engineering.north) -- (integral.south);
+
+% Add titles
+\node[below=0.2cm of math, font=\small\bfseries, text=slateCharcoal] {قلمرو ۱};
+\node[below=0.2cm of physics, font=\small\bfseries, text=slateCharcoal] {قلمرو ۲};
+\node[below=0.2cm of engineering, font=\small\bfseries, text=slateCharcoal] {قلمرو ۳};
+
+% Add highlights
+\begin{scope}[on background layer]
+    \node[fill=goldWarm!20, draw=goldWarm!70, line width=1pt, rounded corners=6pt, fit=(math) (physics) (engineering), inner sep=0.6cm] {};
+    \node[above=0.1cm of integral, font=\large\bfseries, text=navyMidnight] {\faLink~~همگرایی سه‌گانه};
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5em}
+
+% ===================== CORE IDEA IN SIMPLE TERMS =====================
+\begin{infobox}{\faMagic ~~ قصه‌ی ما به زبان ساده}
+فرض کنید یک دستگاه جادویی دارید که:
+\begin{itemize}[label={\textcolor{crimsonAccent}{\faCheck}}, leftmargin=*, itemsep=6pt]
+    \item \textbf{سرعت محاسبات} را ۱۰۰۰ برابر می‌کند
+    \item \textbf{مصرف انرژی} را ۱۰۰ برابر کاهش می‌دهد
+    \item و در عین حال \textbf{قوانین فیزیک} را کاملاً رعایت می‌کند
+\end{itemize}
+این دستگاه جادویی چیزی نیست جز «انتگرال‌های کامل» --- ابزاری ریاضی که رفتار سیستم‌های پیچیده را با دقت حیرت‌انگیزی مدل می‌کند. الگوریتم میانگین حسابی-هندسی (AGM) این انتگرال‌ها را در تنها ۵ تکرار به دقت ماشین محاسبه می‌کند --- سرعتی چندین مرتبه بزرگی بیشتر از روش‌های مرسوم.
+\end{infobox}
+
+% ===================== THE DISCOVERY STORY =====================
+\section*{\faHistory ~~ کشف اتفاقی: از آزمایشگاه تا کیهان}
+\vspace{0.5em}
+
+\textbf{سال ۲۰۱۸ --- آزمایشگاه گازی‌سازی زیست‌توده:}
+\par
+در حین مدل‌سازی فرآیندهای شیمیایی پیچیده، الگویی عددی ظاهر شد که...
+\begin{center}
+\color{navyMidnight}\rule{0.8\textwidth}{0.4pt}
+\end{center}
+\par
+\color{accentGray}
+...با یکی از اسرارآمیزترین ثابت‌های کیهان --- \textbf{ثابت کیهانی} --- هم‌خوانی داشت!
+\color{darkText}
+
+\vspace{0.8em}
+
+\begin{warningbox}{\faExclamationTriangle ~~ چرا این مهم است؟}
+این هم‌خوانی تصادفی \textbf{نیست}. بلکه نشان‌دهنده‌ی \textbf{وحدت بنیادی قوانین طبیعت} است --- از کوچک‌ترین مقیاس‌های شیمیایی تا بزرگ‌ترین ابعاد کیهانی. این ساختار ریاضی مشترک با بیش از ۲۰۰ آزمایش گازی‌سازی اعتبارسنجی شده و ضریب تعیین بالاتر از ۰.۸۲ را به‌دست آورده است.
+\end{warningbox}
+
+% ===================== PRACTICAL APPLICATION =====================
+\section*{\faRocket ~~ تحول در عمل: معماری EPU}
+\vspace{0.5em}
+
+ترکیب این سه عنصر، معماری جدیدی خلق کرد:
+
+\begin{center}
+\begin{tabular}{@{}p{0.3\textwidth}p{0.65\textwidth}@{}}
+\faCogs~~\textbf{هسته ریاضیاتی} & انتگرال‌های کامل --- مدل‌سازی دقیق سیستم‌های دینامیکی \\
+\faGlobe~~\textbf{اصل فیزیکی} & ارتباط با ثابت کیهانی --- وحدت قوانین طبیعت \\
+\faMicrochip~~\textbf{سخت‌افزار} & واحد پردازش اثبات (EPU) --- معماری بهینه برای محاسبات فیزیک‌محور
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ===================== VISION SECTION =====================
+\begin{greenSuccess}{\faEye ~~ چشم‌انداز: تولد نسل جدید هوش مصنوعی}
+\begin{center}
+\Large\textcolor{forestGreen}{\textbf{هوش مصنوعی کمّی}}
+\end{center}
+\par
+نسل جدیدی از مدل‌های هوش مصنوعی که:
+\begin{itemize}[label={\textcolor{forestGreen}{\faArrowRight}}, leftmargin=*, itemsep=6pt]
+    \item نه تنها متن را می‌فهمند
+    \item بلکه \textbf{محاسبات کمّی واقعی} انجام می‌دهند
+    \item با \textbf{رعایت کامل قوانین فیزیک}
+    \item و \textbf{سرعت و دقت بی‌سابقه}
+\end{itemize}
+\par
+\begin{center}
+\faLightbulbO~~تصور کنید: یک هوش مصنوعی که همزمان می‌تواند مسائل پیچیده مهندسی، زیستی و مالی را حل کند!
+\end{center}
+\end{greenSuccess}
+
+% ===================== JOURNEY TIMELINE =====================
+\section*{\faRoad ~~ سفر تکاملی یک ایده}
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[
+    milestone/.style={
+        circle,
+        minimum size=2.2cm,
+        align=center,
+        font=\bfseries\small,
+        text=white,
+        inner sep=4pt
+    },
+    year/.style={
+        font=\footnotesize\bfseries,
+        text=slateCharcoal,
+        yshift=-15pt
+    },
+    desc/.style={
+        font=\scriptsize,
+        text=accentGray,
+        yshift=-28pt,
+        align=center,
+        text width=2.5cm
+    }
+]
+
+% Define milestone positions
+\def\ypos{0}
+\def\xsep{3}
+
+% Milestone 1
+\node[milestone, fill=navyMidnight] (m1) at (0,\ypos) {\faGraduationCap\\رساله};
+\node[year] at (m1.south) {۲۰۱۶};
+\node[desc] at (m1.south) {کشف هسته‌های\\فیزیکی};
+
+% Milestone 2
+\node[milestone, fill=forestGreen] (m2) at (\xsep,\ypos) {\faFlask\\آزمایش};
+\node[year] at (m2.south) {۲۰۱۸};
+\node[desc] at (m2.south) {هم‌خوانی با\\ثابت کیهانی};
+
+% Milestone 3
+\node[milestone, fill=plumDeep] (m3) at (2*\xsep,\ypos) {\faMicrochip\\طراحی};
+\node[year] at (m3.south) {۲۰۲۴};
+\node[desc] at (m3.south) {معماری EPU\\و PICAPD ISA};
+
+% Milestone 4
+\node[milestone, fill=crimsonAccent] (m4) at (3*\xsep,\ypos) {\faRocket\\اعتبارسنجی};
+\node[year] at (m4.south) {۲۰۲۶};
+\node[desc] at (m4.south) {نمونه‌سازی FPGA\\راه‌اندازی شرکت};
+
+% Connect milestones
+\draw[->, line width=1.2pt, color=slateCharcoal!40] (m1.east) -- (m2.west);
+\draw[->, line width=1.2pt, color=slateCharcoal!40] (m2.east) -- (m3.west);
+\draw[->, line width=1.2pt, color=slateCharcoal!40] (m3.east) -- (m4.west);
+
+\end{tikzpicture}
+\end{center}
+
+% ===================== CALL TO ACTION =====================
+\begin{crimsonAlert}{\faUsers ~~ شما در کجای این داستان هستید؟}
+این فقط یک پروژه فنی نیست --- یک \textbf{تحول پارادایم} است. ما در آستانه انقلابی هستیم که:
+\begin{itemize}[label={\textcolor{crimsonAccent}{\faArrowCircleRight}}, leftmargin=*, itemsep=6pt]
+    \item ریاضیات، فیزیک و سخت‌افزار را با هم هماهنگ می‌کند
+    \item هوش مصنوعی را از قلمرو نمادها به اعداد واقعی منتقل می‌کند
+    \item و صنعت خودروهای خودران را متحول می‌سازد
+\end{itemize}
+
+\vspace{0.5em}
+\centering
+\end{crimsonAlert}
+
+\end{mainbox}
+
+\clearpage
+
+% ===================== موقعیت‌یابی رقابتی =====================
+\begin{mainbox}{\faBarChart ~~ موقعیت‌یابی رقابتی: چهار خوشه متمایز}
+
+\begin{center}
+{\Large\textcolor{navyMidnight}{\textbf{نقشه رقابت صنعت خودروهای خودران}}}\\[0.3cm]
+{\small\textcolor{accentGray}{چرا جای ما در میان غول‌ها خالی است}}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{0.95\textwidth}{|>{\centering\arraybackslash}p{0.22\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{tableHeaderDark}
+\color{white}\textbf{بعد فنی} & \color{white}\textbf{Ghost} & \color{white}\textbf{Tesla} & \color{white}\textbf{Waymo} & \color{white}\textbf{Mobileye} \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{تأخیر تصمیم} & \textcolor{forestGreen}{\textbf{۱.۵ میکروثانیه}} & ۵۰-۱۰۰ میلی‌ثانیه & ۵۰-۱۰۰ میلی‌ثانیه & ۴۰-۸۰ میلی‌ثانیه \\
+\hline
+\rowcolor{tableRowAlt}
+\textbf{تحمل خطای بیزانسی} & \textcolor{forestGreen}{\textbf{بله (توزیع‌شده)}} & خیر & خیر & خیر \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{معماری تصمیم} & \textcolor{forestGreen}{\textbf{حکمرانی جمعیت}} & یادگیری سرتاسری & قاعده+یادگیری & ماژولار \\
+\hline
+\rowcolor{tableRowAlt}
+\textbf{مقیاس‌پذیری} & \textcolor{forestGreen}{\textbf{O(1) گشتاوری}} & یکپارچه & خطی & خطی \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{نوع محاسبات} & \textcolor{forestGreen}{\textbf{EPU اختصاصی}} & ASIC سفارشی & ناهمگن & ASIC سفارشی \\
+\hline
+\rowcolor{tableRowAlt}
+\textbf{ارتباطات} & \textcolor{forestGreen}{\textbf{اجماع بیزانسی زیرمیکروثانیه}} & CAN محلی & ۱-۵ میلی‌ثانیه & زیر ۱۰۰ نانوثانیه روی تراشه \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{goldHighlight}{\faTrophy ~~ امتیاز منحصربه‌فردی}
+از ۱۲ بعد فنی ارزیابی‌شده، Ghost در \textbf{۶ بعد} جایگاه کاملاً منحصربه‌فرد دارد: تأخیر فیزیکی زیرمیکروثانیه، تحمل خطای بیزانسی توزیع‌شده، معماری حکمرانی جمعیت، محاسبات اختصاصی EPU، ارتباطات فوق‌سریع، و مقیاس‌پذیری \texttt{\latintext{O(1)}}. هیچ رقیبی حتی در یکی از این ابعاد حضور ندارد.
+\end{goldHighlight}
+
+\end{mainbox}
+\clearpage
+% ===================== معماری EPU: انقلاب به زبان مهندسی =====================
+\begin{mainbox}{\faCogs ~~ معماری EPU: انقلاب به زبان مهندسی}
+
+\begin{center}
+{\Large\textcolor{navyMidnight}{\textbf{معماری‌های پردازشی: یک نبرد رو در رو}}}\\[0.3cm]
+{\small\textcolor{accentGray}{چرا EPU بازی را تغییر می‌دهد؟}}
+\end{center}
+
+\vspace{1em}
+
+% ===================== QUICK COMPARISON TABLE =====================
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{0.95\textwidth}{|>{\centering\arraybackslash}p{0.18\textwidth}|*{4}{>{\centering\arraybackslash}X|}}
+\hline
+\rowcolor{tableHeaderDark}
+\multicolumn{5}{|c|}{\color{white}\textbf{مقایسه معماری‌های پردازشی}} \\
+\hline
+\rowcolor{iceBlue!30}
+\textbf{ویژگی} & \textbf{CPU} & \textbf{GPU} & \textbf{NPU} & \textbf{EPU} \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{طراحی شده برای} & برنامه‌های ترتیبی & گرافیک/داده‌ها & شبکه‌های عصبی & \textbf{سیستم‌های رویدادمحور} \\
+\hline
+\rowcolor{tableRowAlt}
+\textbf{همگام‌سازی} & قفل‌ها/سمافورها & SIMD & عملیات تنسور & \textbf{رویدادهای سخت‌افزاری} \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{مصرف انرژی} & زیاد & بسیار زیاد & متوسط & \textbf{کم‌ترین} \\
+\hline
+\rowcolor{tableRowAlt}
+\textbf{مثال کاربردی} & سیستم‌عامل & بازی‌های کامپیوتری & تشخیص تصویر & \textbf{خودروهای خودران} \\
+\hline
+\rowcolor{tableRowLight}
+\textbf{نقاط قوت} & همه‌کاره & موازی‌سازی داده & محاسبات ماتریسی & \textbf{هماهنگی واقعی} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1.5em}
+\clearpage
+\faExclamationCircle ~~ مشکل کلیدی: هزینه همگام‌سازی}
+\begin{center}
+\textbf{معماری‌های فعلی چقدر برای هماهنگی هزینه می‌پردازند؟}
+\end{center}
+\par
+در CPU/GPU مرسوم:
+\begin{itemize}[label={\textcolor{goldWarm}{\faBan}}, leftmargin=*, itemsep=6pt]
+    \item \textbf{زمان:} ۱۰۰-۵۰۰ نانوثانیه برای بررسی هر قفل
+    \item \textbf{انرژی:} ۱۰۰-۱۰۰۰ پیکوژول برای هر عملیات همگام‌سازی
+    \item \textbf{پیچیدگی:} خطر deadlock، race condition، و خطاهای همزمانی
+\end{itemize}
+\par
+\begin{center}
+\faArrowDown~~\textbf{نتیجه:} هدررفت ۳۰-۵۰٪ از منابع فقط برای هماهنگی!
+\end{center}
+
+
+\vspace{1em}
+
+% ===================== EPU SOLUTION =====================
+\section*{\faLightbulbO ~~ راه‌حل EPU: هماهنگی در سطح سخت‌افزار}
+\vspace{0.5em}
+
+EPU این مشکلات را با سه نوآوری بنیادی حل می‌کند:
+
+\begin{center}
+\begin{tabular}{@{}p{0.3\textwidth}p{0.65\textwidth}@{}}
+\faDatabase~~\textbf{ثبات‌های رویداد} & 
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{اندازه:} فقط ۱ بیت (۰ یا ۱)
+    \item \textbf{معنی:} «پیش‌شرط برآورده شد/نشد»
+    \item \textbf{مقیاس‌پذیری:} ۵۱۲ ثبات در مشخصات PICAPD ISA
+\end{itemize}
+\end{minipage}
+\\
+\faCalculator~~\textbf{واحد پردازش همگام‌سازی} &
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{دستورات:} SET, WAIT, CHECK, AND/OR Gate
+    \item \textbf{هزینه:} ۰.۱ نانوثانیه، ۱۰ پیکوژول
+    \item \textbf{خروجی:} تغییر حالت، نه نتیجه عددی
+\end{itemize}
+\end{minipage}
+\\
+\faShareAlt~~\textbf{شبکه پخش رویداد} &
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{عملکرد:} پخش خودکار رویداد به همه هسته‌ها
+    \item \textbf{تأخیر:} ۱۰ نانوثانیه (محدود سرعت نور)
+    \item \textbf{انرژی:} ۱۰ پیکوژول (۱۰۰ برابر بهینه‌تر)
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\end{center}
+
+% ===================== POWER EFFICIENCY =====================
+\vspace{1em}
+\begin{infobox}{\faBolt ~~ تحلیل بازده توان: EPU در برابر GPU}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{0.85\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{tableHeaderDark}
+\color{white}\textbf{نوع عملیات} & \color{white}\textbf{GPU (پیکوژول)} & \color{white}\textbf{EPU (پیکوژول)} \\
+\hline
+بررسی محدودیت باینری & ۱۰ & \textbf{۰.۰۱} \\
+\hline
+پخش رویداد & ۱۰۰ & \textbf{۰.۱} \\
+\hline
+همگام‌سازی چندحوزه‌ای & ۵۰۰ & \textbf{۰.۵} \\
+\hline
+\end{tabularx}
+\end{center}
+\par
+\begin{center}
+\textbf{مزیت ۱۰۰۰ برابری} در عملیات محدودیت ناشی از فیزیک بنیادی است: انتقال حالت تک‌بیتی ۱۰۰۰ برابر کمتر از عملیات ممیز شناور ۶۴ بیتی بار الکتریکی جابه‌جا می‌کند.
+\end{center}
+\end{infobox}
+\end{mainbox}
+\clearpage
+
+% ===================== NET ZERO STRATEGY SECTION =====================
+
+\clearpage
+\begin{netzerobox}{استراتژی صفر خالص: معماری کم‌کربن برای خودروهای خودران}
+
+\begin{center}
+{\Large\textcolor{forestGreen}{\textbf{محاسبات ممیستوری: انقلاب در شدت کربن سیستم‌های خودران}}}\\[0.3cm]
+{\small\textcolor{gray}{از معماری EPU تا کاهش 90٪ ردپای کربن عملیاتی}}
+\end{center}
+
+\vspace{1em}
+
+% ===================== PROBLEM STATEMENT =====================
+\section*{\faExclamationTriangle ~~ چالش کربن در خودروهای خودران امروزی}
+\vspace{0.5em}
+
+خودروهای خودران نسل فعلی با معماری ابر-محور (Cloud-Centric) با دو مشکل کربنی عمده مواجهند:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{0.95\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{0.4\textwidth}|>{\centering\arraybackslash}p{0.4\textwidth}|}
+\hline
+\rowcolor{tableHeader}
+\color{white}\textbf{مؤلفه} & \color{white}\textbf{معماری مرسوم (GPU/Cloud)} & \color{white}\textbf{شدت کربن تخمینی (gCO₂e/km)} \\
+\hline
+\rowcolor{tableRow1}
+\textbf{محاسبات ادراکی} & GPU متداول (10-100 pJ/MAC) & 5-15 گرم \\
+\hline
+\rowcolor{tableRow2}
+\textbf{بازآموزی ابری} & انتقال مدل + بازآموزی دوره‌ای & 3-8 گرم \\
+\hline
+\rowcolor{tableRow1}
+\textbf{ارتباطات V2X} & آپلود مداوم سنسورهای خام & 10-25 گرم \\
+\hline
+\rowcolor{tableRow2}
+\textbf{توزیع مدل} & دانلود دوره‌ای مدل‌های کامل & 2-5 گرم \\
+\hline
+\rowcolor{tableRow1}
+\textbf{مجموع عملیاتی} & & \textbf{20-53 گرم/کیلومتر} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\noindent\textbf{نکته بحرانی:} در یک خودروی خودران با عمر مفید 500,000 کیلومتر، این به معنای \textbf{10-26 تن CO₂e} صرفاً برای محاسبات است!
+
+% ===================== EPU-MEMRISTOR SOLUTION =====================
+\section*{\faLightbulbO ~~ راه‌حل EPU مبتنی بر ممیستور: سه انقلاب همزمان}
+\vspace{0.5em}
+
+معماری EPU با ممیستور سه تحول بنیادی ایجاد می‌کند:
+
+\begin{center}
+\begin{tabular}{@{}p{0.3\textwidth}p{0.65\textwidth}@{}}
+\faBolt~~\textbf{انقلاب ۱: کارایی انرژی} & 
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{ممیستور:} 0.01-0.1 pJ/MAC (1000× بهتر از GPU)
+    \item \textbf{معماری Crossbar:} محاسبات در-حافظه، حذف انتقال داده
+    \item \textbf{بهبود گشتاور:} $E_{\text{compute}}^{\text{mem}} \ll E_{\text{compute}}^{\text{digital}}$
+\end{itemize}
+\end{minipage}
+\\
+\faNetworkWired~~\textbf{انقلاب ۲: کاهش ارتباطات} &
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{یادگیری لبه:} به‌روزرسانی افزایشی وزن‌ها (بدون Backprop)
+    \item \textbf{حذف آپلود:} 90٪ کاهش داده سنسورهای خام
+    \item \textbf{قاعده تجربی:} حذف 1GB آپلود سلولی > هزاران استنتاج محلی
+\end{itemize}
+\end{minipage}
+\\
+\faLeaf~~\textbf{انقلاب ۳: هوشمندی کربنی} &
+\begin{minipage}[t]{0.6\textwidth}
+\begin{itemize}[label={}, leftmargin=*, itemsep=2pt]
+    \item \textbf{زمان‌بندی تطبیقی:} محاسبات بیشتر در ساعات شبکه سبز
+    \item \textbf{بهینه‌سازی مسیر:} ترکیب مصرف انرژی و شدت کربن شبکه
+    \item \textbf{مدل‌های سبک:} کاهش سایز مدل در مناطق پرمصرف
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\end{center}
+
+% ===================== CARBON INTENSITY MODEL =====================
+\vspace{1em}
+\begin{infobox}{\faCalculator ~~ مدل ریاضی شدت کربن}
+\vspace{0.5em}
+
+شدت کربن عملیاتی (gCO₂e/km) برای خودروی خودران:
+
+\[
+CI = \frac{E_{\text{drive}} + E_{\text{compute}} + E_{\text{comm}}}{\text{km}} \times \gamma_{\text{grid}} + CI_{\text{embodied}}
+\]
+
+\noindent\textbf{تأثیر ممیستور:}
+\begin{itemize}[label={\textcolor{forestGreen}{\faArrowDown}}, leftmargin=*, itemsep=4pt]
+    \item $E_{\text{compute}}^{\text{mem}} \approx 0.01 \times E_{\text{compute}}^{\text{GPU}}$ (بهبود 100 برابری)
+    \item $E_{\text{comm}}^{\text{mem}} \approx 0.1 \times E_{\text{comm}}^{\text{cloud}}$ (بهبود 10 برابری)
+    \item $\gamma_{\text{grid}}$: حساسیت زمانی (تطبیق با ساعات سبز)
+\end{itemize}
+\end{infobox}
+
+% ===================== LIFECYCLE ANALYSIS =====================
+\section*{\faRecycle ~~ تحلیل چرخه عمر: معادله کربن تجسم‌یافته}
+\vspace{0.5em}
+
+\noindent\textbf{چالش اصلی:} کربن تولیدی ممیستور بیشتر از CMOS است:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{tableHeader}
+\color{white}\textbf{پارامتر} & \color{white}\textbf{CMOS سنتی} & \color{white}\textbf{ممیستور (امروز)} \\
+\hline
+\rowcolor{tableRow1}
+کربن تولید (kg CO₂e) & 50-100 & 150-300 \\
+\hline
+\rowcolor{tableRow2}
+بازده تولید & 90-95\% & 60-75\% \\
+\hline
+\rowcolor{tableRow1}
+عمر مفید (ساعت) & 50,000 & 40,000 \\
+\hline
+\rowcolor{tableRow2}
+تعمیرپذیری & بالا & متوسط \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.8em}
+
+\noindent\textbf{راه‌حل: اقتصاد دورانی و بهره‌وری بالا}
+
+\[
+CI_{\text{embodied}}^{\text{per km}} = \frac{CI_{\text{manufacture}}}{\text{vehicle lifetime km}}
+\]
+
+\begin{itemize}[label={\textcolor{forestGreen}{\faCheck}}, leftmargin=*, itemsep=4pt]
+    \item \textbf{خودروهای تجاری (رباتاکسی):} 200,000 کیلومتر/سال → بازگشت کربن در 1-2 سال
+    \item \textbf{خودروهای شخصی:} 15,000 کیلومتر/سال → بازگشت کربن در 8-10 سال
+    \item \textbf{استراتژی:} اولویت‌دهی به ناوگان‌های پرکاربرد
+\end{itemize}
+
+% ===================== IMPLEMENTATION ROADMAP =====================
+\section*{\faRoad ~~ نقشه راه اجرایی: 5 مرحله تا صفر خالص}
+\vspace{0.5em}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{0.95\textwidth}{|>{\centering\arraybackslash}p{0.12\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{0.2\textwidth}|}
+\hline
+\rowcolor{tableHeader}
+\color{white}\textbf{مرحله} & \color{white}\textbf{اقدامات کلیدی} & \color{white}\textbf{اهداف کربنی} \\
+\hline
+\rowcolor{tableRow1}
+\textbf{۲۰۲۶-۲۰۲۷} & نمونه‌سازی FPGA + ممیستور & 40٪ کاهش مصرف \\
+\hline
+\rowcolor{tableRow2}
+\textbf{۲۰۲۸-۲۰۲۹} & استقرار در ناوگان تجاری & 70٪ کاهش عملیاتی \\
+\hline
+\rowcolor{tableRow1}
+\textbf{۲۰۳۰-۲۰۳۲} & تولید انبوه ASIC ممیستوری & 90٪ کاهش محاسباتی \\
+\hline
+\rowcolor{tableRow2}
+\textbf{۲۰۳۳-۲۰۳۵} & شبکه V2G + شارژ سبز & خنثی‌سازی کربن تولیدی \\
+\hline
+\rowcolor{tableRow1}
+\textbf{۲۰۳۵+} & چرخه کامل اقتصاد دورانی & \textbf{صفر خالص} \\
+\hline
+\end{tabularx}
+\end{center}
+
+% ===================== POLICY RECOMMENDATIONS =====================
+\vspace{1em}
+\begin{warningbox}{\faBalanceScale ~~ توصیه‌های سیاستی برای تنظیم‌گران}
+\begin{enumerate}[leftmargin=*, label=\textcolor{brickRed}{\textbf{\arabic*.}}, itemsep=8pt]
+    \item \textbf{استانداردهای کربن محاسباتی:}
+    \begin{itemize}[label={$\bullet$}]
+        \item الزام گزارش‌دهی gCO₂e/km شامل محاسبات و ارتباطات
+        \item معیارهای کارایی برای سیستم‌های یادگیری لبه
+    \end{itemize}
+    
+    \item \textbf{مشوق‌های داده‌کاهی:}
+    \begin{itemize}[label={$\bullet$}]
+        \item اعتبار کربن برای کاهش آپلود داده سنسورها
+        \item یارانه برای معماری‌های کم‌ارتباطات
+    \end{itemize}
+    
+    \item \textbf{استقرار ناوگان‌اول:}
+    \begin{itemize}[label={$\bullet$}]
+        \item الزام محاسبات ممیستوری برای رباتاکسی‌ها
+        \item معافیت‌های مالیاتی برای بازگشت سریع کربن
+    \end{itemize}
+    
+    \item \textbf{هوشمندی شبکه:}
+    \begin{itemize}[label={$\bullet$}]
+        \item API شدت کربن زمان‌واقعی شبکه
+        \item مسیریابی ترکیبی (زمان، انرژی، کربن)
+    \end{itemize}
+\end{enumerate}
+\end{warningbox}
+
+
+% ===================== CONCLUSION =====================
+\vspace{1em}
+\begin{simpleframe}
+\centering\Large\textbf{نتیجه‌گیری یک‌خطی}\\[0.5em]
+\large\textcolor{forestGreen}{ممیستور در معماری EPU شدت کربن خودروهای خودران را با کاهش 90٪‌ای انرژی محاسبات و ارتباطات کاهش می‌دهد. کربن تولیدی تنها در خودروهای کم‌کاربرد چالش‌برانگیز است.}
+\end{simpleframe}
+
+\end{netzerobox}
+
+
+\begin{mainbox}{استراتژی صفر خالص: بهینه‌سازی کربن در سیستم‌های خودران مبتنی بر سخت‌افزار مم‌رسیستور}
+
+\textbf{مقدمه:}
+افزایش کربن ناشی از محاسبات ابری در سیستم‌های خودران امروزی به چالشی اساسی تبدیل شده است. راهکار Ghost Autonomy مبتنی بر معماری EPU و سخت‌افزار مم‌رسیستور، رویکردی بنیادین برای کاهش شدت کربن (gCO₂e/km) از طریق بهینه‌سازی سه‌جانبهٔ مصرف انرژی، ارتباطات و چرخهٔ عمر سخت‌افزار ارائه می‌دهد.
+
+\textbf{بهینه‌سازی مصرف انرژی محاسباتی:}
+مم‌رسیستورها با انجام عملیات ضرب ماتریس-بردار به صورت آنالوگ درون حافظه، نیاز به جابه‌جایی داده بین حافظه و پردازنده (معضل Von Neumann) را حذف می‌کنند. این امر منجر به بهبود چشمگیر کارایی انرژی می‌شود:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|>{\centering\arraybackslash}p{0.35\textwidth}|>{\centering\arraybackslash}p{0.25\textwidth}|}
+\hline
+\textbf{فناوری پردازش} & \textbf{انرژی هر MAC (pJ)} \\
+\hline
+GPU (محاسبات ابری) & ۱۰–۱۰۰ \\
+\hline
+ASIC دیجیتال لبه‌ای & ۱–۱۰ \\
+\hline
+\textbf{مم‌رسیستور آنالوگ (EPU)} & \textbf{۰.۰۱–۰.۱} \\
+\hline
+\end{tabular}
+\end{center}
+
+این بهبود ۱۰۰ تا ۱۰۰۰ برابری، به ویژه در سناریوهای پردازش مداوم (ادراک چندحسی، به‌روزرسانی آنلاین مدل) حیاتی است.
+
+\textbf{کاهش وابستگی به ارتباطات ابری:}
+معماری EPU با قابلیت یادگیری آنلاین و تطبیق محلی، نیاز به آپلود داده‌های خام سنسور و به‌روزرسانی دوره‌ای مدل‌های کامل را به شدت کاهش می‌دهد. این امر منجر به صرفه‌جویی قابل توجه در انرژی ارتباطات (V2X و سلولار) می‌شود که سهم عمده‌ای در انتشار کربن دارد. بر اساس مطالعات سیستمی، حذف هر ۱ گیگابایت آپلود سلولاری معادل کاهش چندین هزار محاسبهٔ محلی از نظر انتشار CO₂ است.
+
+\textبررسی کربن نهفته در چرخهٔ عمر:}
+اگرچه تولید مم‌رسیستورها در حال حاضر شامل مواد خاص و بازدهی کمتر است (کربن نهفتهٔ بالاتر)، در سناریوهای ناوگان خودران با کاربرد بالا (مانند رباتاکسی و حمل‌ونقل باری شهری)، صرفه‌جویی عملیاتی در ۱ تا ۳ سال اول، این افزایش اولیه را جبران می‌کند. برای خودروهای شخصی با کاربرد کم، این تعادل اقتصادی‌تر و زیست‌محیطی‌تر است.
+
+\textbf{پیامدهای سیاستی:}
+این تحلیل نشان می‌دهد که استانداردهای کربن آینده باید مبتنی بر کل چرخهٔ عمر (شامل محاسبات و ارتباطات) باشند. مشوق‌های تنظیمی باید بر کاهش داده‌های ارسالی به ازای هر کیلومتر متمرکز شوند، و استقرار فناوری‌های محاسبهٔ لبه‌ای (Edge Computing) برای ناوگان تجاری در اولویت قرار گیرد.
+
+\textbf{جمع‌بندی:}
+معماری EPU مبتنی بر مم‌رسیستور، شدت کربن سیستم‌های خودران را از طریق کاهش همزمان انرژی محاسباتی و ارتباطی به حداقل می‌رساند، و مسیری عملی برای تحقق هدف «صفر خالص» در صنعت خودروهای خودران ارائه می‌دهد.
+
+\end{mainbox}
+\clearpage
+% ===================== Public Security =====================
+\begin{mainbox}
+    
+\begin{securitybox}{امنیت عمومی: تضمین قابلیت اطمینان و ایمنی در سیستم‌های خودران}
+
+\textbf{چالش امنیت عمومی در خودروهای خودران:}
+سیستم‌های خودران به عنوان بخشی از زیرساخت حیاتی جامعه، باید در برابر حملات سایبری، خطاهای سخت‌افزاری، و شرایط غیرمنتظره مقاوم باشند. معماری Ghost Autonomy با طراحی چندلایه، امنیت عمومی را در سه سطح تضمین می‌کند.
+
+\textbf{سطح ۱: تحمل خطای بیزانسی توزیع‌شده}
+معماری Queen Bee (ملکه زنبور) با پروتکل اجماع ۳-مرحله‌ای بیزانسی، امکان تحمل تا ⌊(n-1)/3⌋ گره خرابکار یا معیوب را فراهم می‌آورد. این پروتکل شامل:
+\begin{itemize}[label=\textcolor{warningRed}{\textbullet}]
+  \item فاز Broadcast: انتشار تصمیم اولیه
+  \item فاز Echo: تأیید تصمیم توسط گره‌ها
+  \item فاز Ready: نهایی‌سازی اجماع
+\end{itemize}
+با تأخیر کل کمتر از ۱.۵ میکروثانیه، این سیستم حتی در حضور حملات هماهنگ نیز تصمیمات ایمن تولید می‌کند.
+
+\textbf{سطح ۲: معماری ایمنی غیرقابل رمزگذاری/مسیریابی/مجوز}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.3\textwidth}|>{\raggedright\arraybackslash}p{0.6\textwidth}|}
+\hline
+\textbf{اصول طراحی} & \textbf{تأثیر امنیتی} \\
+\hline
+غیرقابل رمزگذاری & جلوگیری از تزریق کد مخرب از طریق ورودی‌های نامعتبر \\
+\hline
+غیرقابل مسیریابی & ممانعت از هدایت ترافیک به گره‌های مخرب \\
+\hline
+غیرقابل مجوز & حذف امکان اسکالپریلیشن از طریق نقص‌های مجوز \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{سطح ۳: انطباق با استانداردهای ایمنی عملکردی}
+معماری EPU به گونه‌ای طراحی شده است که الزامات ASIL-D استاندارد ISO 26262 را برآورده می‌کند، شامل:
+\begin{itemize}[label=\textcolor{warningRed}{\textbullet}]
+  \item اعتبارسنجی مداوم از طریق تست‌های تزریق خطا
+  \item مکانیزم‌های بازیابی خودکار (Safety Rollback)
+  \item لاگ‌های امنیتی Write-Ahead با قابلیت ممیزی کامل
+\end{itemize}
+
+\textbf{حفاظت از حریم خصوصی داده‌ها:}
+با کاهش وابستگی به ابر و پردازش محلی داده‌های حساس (مانند تصاویر دوربین‌ها)، معماری EPU خطر نشت اطلاعات شخصی را به حداقل می‌رساند. مدل‌های یادگیری آنلاین تنها بر روی ویژگی‌های انتزاعی (Moments) کار می‌کنند، نه داده‌های خام.
+
+\textbf{نتیجه‌گیری:}
+رویکرد چندلایهٔ Ghost Autonomy—ترکیب تحمل خطای بیزانسی، اصول طراحی امنیتی سخت‌افزار-محور، و انطباق با استانداردهای صنعتی—چارچوبی جامع برای تضمین امنیت عمومی در عصر خودروهای خودران ارائه می‌دهد.
+
+\end{securitybox}
+\end{mainbox}
+
+\end{document}

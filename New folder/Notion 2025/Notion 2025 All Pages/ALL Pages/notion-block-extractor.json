@@ -1,0 +1,91 @@
+{
+  "name": "Notion Block URL Extractor",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notion-blocks",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "notion-blocks"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract page ID from Notion URL\nconst body = $input.item.json.body;\nconst url = body.url;\n\nif (!url) {\n  return { json: { error: 'No URL provided' } };\n}\n\n// Extract page ID from various Notion URL formats\nlet pageId;\nconst patterns = [\n  /notion\\.so\\/([a-zA-Z0-9]+)(?:\\?|#|$)/,\n  /notion\\.so\\/.*-([a-f0-9]{32})(?:\\?|#|$)/,\n];\n\nfor (const pattern of patterns) {\n  const match = url.match(pattern);\n  if (match) {\n    pageId = match[1];\n    break;\n  }\n}\n\nif (!pageId) {\n  return { json: { error: 'Could not extract page ID from URL', url } };\n}\n\nreturn { json: { pageId, originalUrl: url } };"
+      },
+      "id": "extract-page-id",
+      "name": "Extract Page ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "resource": "block",
+        "operation": "getAll",
+        "blockId": "={{ $json.pageId }}",
+        "returnAll": true
+      },
+      "id": "get-all-blocks",
+      "name": "Get All Blocks",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [690, 300],
+      "credentials": {
+        "notionApi": {
+          "id": "your-notion-credential-id",
+          "name": "Notion API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process blocks and create URLs\nconst pageId = $('Extract Page ID').item.json.pageId;\nconst blocks = $input.all();\n\nconst blockData = blocks.map(block => {\n  const blockJson = block.json;\n  const blockId = blockJson.id.replace(/-/g, ''); // Remove hyphens\n  const blockUrl = `https://www.notion.so/${pageId}#${blockId}`;\n  \n  return {\n    blockId: blockJson.id,\n    blockUrl,\n    type: blockJson.type,\n    // Extract text content based on block type\n    content: extractContent(blockJson),\n    hasChildren: blockJson.has_children\n  };\n});\n\nfunction extractContent(block) {\n  const type = block.type;\n  \n  // Handle different block types\n  if (block[type]?.rich_text) {\n    return block[type].rich_text\n      .map(rt => rt.plain_text)\n      .join('');\n  }\n  \n  // For other types, return a description\n  switch(type) {\n    case 'table':\n      return `Table with ${block[type]?.table_width || 0} columns`;\n    case 'equation':\n      return block[type]?.expression || 'Equation';\n    case 'divider':\n      return '---';\n    case 'child_page':\n      return block[type]?.title || 'Child page';\n    default:\n      return `${type} block`;\n  }\n}\n\nreturn blockData.map(data => ({ json: data }));"
+      },
+      "id": "format-block-urls",
+      "name": "Format Block URLs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { blocks: $json } }}",
+        "options": {}
+      },
+      "id": "respond-to-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1130, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{ "node": "Extract Page ID", "type": "main", "index": 0 }]]
+    },
+    "Extract Page ID": {
+      "main": [[{ "node": "Get All Blocks", "type": "main", "index": 0 }]]
+    },
+    "Get All Blocks": {
+      "main": [[{ "node": "Format Block URLs", "type": "main", "index": 0 }]]
+    },
+    "Format Block URLs": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  },
+  "pinData": {},
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-05T00:00:00.000Z",
+  "versionId": "1"
+}

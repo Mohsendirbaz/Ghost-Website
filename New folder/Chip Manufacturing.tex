@@ -1,0 +1,1005 @@
+% !TEX program = xelatex
+\documentclass[10pt]{report}
+\usepackage{anyfontsize}
+\AtBeginDocument{\fontsize{8.5}{10.6}\selectfont}
+
+% ===================== ENGINE GUARD =====================
+\usepackage{iftex}
+\ifXeTeX\else
+  \errmessage{This document must be compiled with XeLaTeX.}
+\fi
+
+% ===================== PAGE LAYOUT =====================
+\usepackage[top=2cm,bottom=2.5cm,left=3cm,right=2cm]{geometry}
+\setlength{\headheight}{15pt}
+
+% ===================== CORE PACKAGES =====================
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ragged2e}
+
+% ===================== VISUAL DESIGN =====================
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins,theorems}
+\usepackage{framed}
+
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+% ===================== HEADER/FOOTER STYLING =====================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE]{\nouppercase{\rightmark}}
+\fancyhead[LO]{\nouppercase{\leftmark}}
+\fancyhead[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ===================== TIKZ =====================
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc,decorations.pathreplacing}
+
+% ===================== PERSIAN (XeLaTeX) =====================
+\usepackage{xepersian}
+
+% ============ LATIN FONT SETUP ============
+\setlatintextfont[
+  Scale=0.95,
+  Numbers=Lining,
+  Ligatures=TeX
+]{TeX Gyre Termes}
+
+% ============ PERSIAN FONT SETUP ============
+\settextfont[
+  Path=fonts/,
+  Extension=.ttf,
+  UprightFont=*,
+  BoldFont=*Bd,
+  ItalicFont=*It,
+  BoldItalicFont=*BdIt,
+  Script=Arabic,
+  Language=Persian
+]{XB-Yagut}
+
+\setdigitfont[
+  Path=fonts/,
+  Extension=.ttf,
+  UprightFont=*,
+  BoldFont=*Bd,
+  ItalicFont=*It,
+  BoldItalicFont=*BdIt,
+  Numbers=Proportional,
+  Script=Arabic,
+  Language=Persian
+]{XB-Yagut}
+
+\setmathdigitfont[
+  Path=fonts/,
+  Extension=.ttf,
+  Script=Arabic,
+  Language=Persian
+]{XB-Khoramshahr}
+
+\DefaultMathsDigits
+
+% ============ CHAPTER/TITLE FORMATTING ============
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{headerColor}}
+  {\flushright\chaptertitlename\ \thechapter}
+  {20pt}
+  {\Huge\flushright}
+\titlespacing*{\chapter}{0pt}{-20pt}{30pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{headerColor}}
+  {\thesection}{1em}{}
+
+% ============ TABLE OF CONTENTS STYLING ============
+\renewcommand{\cftchapfont}{\bfseries\color{headerColor}}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{6pt}
+\renewcommand{\contentsname}{\hfill\Large\bfseries\color{headerColor}فهرست مطالب\hfill}
+
+% ============ ENHANCED MACROS FOR BILINGUAL CONTENT ============
+\newcommand{\lat}[1]{\lr{#1}}
+\newcommand{\latinterm}[1]{\lr{\textit{#1}}}
+\newcommand{\latinbold}[1]{\lr{\textbf{#1}}}
+\newcommand{\latinnum}[1]{\lr{#1}}
+\newcommand{\USD}[1]{\lr{\$#1}}
+\newcommand{\percent}[1]{\lr{#1\%}}
+\newcommand{\technical}[1]{\lr{\textsc{#1}}}
+
+% ============ TABLE COLUMN TYPES FOR RTL ============
+\newcolumntype{P}[1]{>{\RaggedRight}p{#1}}
+\newcolumntype{H}[1]{>{\bfseries\color{headerColor}\RaggedRight}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ============ LINE SPACING ============
+\linespread{1.15}
+
+% ============ HYPERREF SETUP ============
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=headerColor,
+    citecolor=headerColor,
+    filecolor=headerColor,
+    urlcolor=headerColor,
+    pdftitle={تسلا اتوپایلوت: تحلیل ساختار میکروچیپ و فناوری خودران},
+    pdfauthor={},
+    pdfsubject={بررسی فنی ساخت میکروچیپ و فناوری‌های خودران},
+    pdfkeywords={Tesla, Autopilot, میکروچیپ, EUV, لیتوگرافی},
+    bookmarksopen=true,
+    pdfpagemode=UseOutlines
+}
+
+% ===================== PROFESSIONAL COLOR SCHEME =====================
+\definecolor{headerColor}{RGB}{44,62,80}
+\definecolor{accentColor}{RGB}{90, 70, 70}
+\definecolor{pathwayIncome}{RGB}{235, 242, 248}
+\definecolor{pathwayEquity}{RGB}{248, 243, 238}
+\definecolor{pathwayMarket}{RGB}{238, 246, 240}
+\definecolor{pathwayAssets}{RGB}{250, 248, 238}
+\definecolor{conceptBox}{RGB}{240, 244, 248}
+\definecolor{warningBox}{RGB}{250, 246, 240}
+\definecolor{exampleBox}{RGB}{242, 248, 244}
+\definecolor{summaryBox}{RGB}{248, 246, 242}
+\definecolor{processBox}{RGB}{242, 248, 250}
+\definecolor{requirementBox}{RGB}{245, 245, 250}
+\definecolor{tableHeader}{RGB}{44, 62, 80}
+\definecolor{tableRow1}{RGB}{255, 255, 255}
+\definecolor{tableRow2}{RGB}{248, 249, 250}
+\definecolor{frameBlue}{RGB}{70, 90, 120}
+\definecolor{frameGreen}{RGB}{80, 110, 90}
+\definecolor{frameOrange}{RGB}{150, 110, 70}
+\definecolor{framePurple}{RGB}{100, 85, 120}
+\definecolor{statusReady}{RGB}{80, 120, 90}
+\definecolor{statusGap}{RGB}{150, 100, 70}
+\definecolor{statusBlock}{RGB}{130, 70, 70}
+
+% ===================== PROFESSIONAL TCOLORBOX STYLES =====================
+\newtcolorbox{summarybox}[2][]{
+  enhanced,
+  colback=summaryBox,
+  colframe=frameOrange,
+  fonttitle=\bfseries,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  left=4mm,
+  right=4mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+\newtcolorbox{warningbox}[2][]{
+  enhanced,
+  colback=warningBox,
+  colframe=accentColor,
+  fonttitle=\bfseries,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=0.75pt,
+  left=4mm,
+  right=4mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+\newtcolorbox{processbox}[2][]{
+  enhanced,
+  colback=processBox,
+  colframe=frameBlue,
+  fonttitle=\bfseries,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=0.75pt,
+  left=4mm,
+  right=4mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+\newtcolorbox{conceptbox}[2][]{
+  enhanced,
+  colback=conceptBox,
+  colframe=frameGreen,
+  fonttitle=\bfseries,
+  title={#2},
+  breakable,
+  sharp corners,
+  boxrule=0.75pt,
+  left=4mm,
+  right=4mm,
+  top=3mm,
+  bottom=3mm,
+  #1
+}
+
+% ===================== LIST SPACING =====================
+\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=4pt, parsep=0pt}
+
+% ===================== SECTION NUMBERING =====================
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% ===================== NAVIGATION SYSTEM =====================
+\newcommand{\returnhome}{\vspace{0.5em}\noindent\protect\hyperlink{home}{\colorbox{conceptBox}{\color{headerColor}\textbf{بازگشت به فهرست}}}\par}
+
+\begin{document}
+
+% ===================== TITLE PAGE =====================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.2cm}
+
+{\Huge\bfseries\color{headerColor} فناوری‌های پیشرفته: میکروچیپ‌ها}
+
+\vspace{0.8cm}
+
+\vspace{0.8cm}
+{\color{gray}\rule{0.8\textwidth}{0.75pt}}
+\vspace{0.6cm}
+
+{\Large\bfseries تحلیل تطبیقی معماری سخت‌افزار و نرم‌افزار}
+
+\vspace{0.4cm}
+{\large نسخه تهیه‌شده: فوریه ۲۰۲۴}
+
+\vfill
+{\small\color{gray} این سند برای استفاده پژوهشی/سیاستی تهیه شده و بر تحلیل فنی فناوری‌های پیشرفته تمرکز دارد.}
+
+\end{center}
+\clearpage
+
+% ===================== TABLE OF CONTENTS =====================
+\hypertarget{home}{}
+\tableofcontents
+\clearpage
+
+% ===================== MAIN CONTENT =====================
+
+\begin{summarybox}{چکیده اجرایی}
+این گزارش سه حوزه فناوری پیشرفته را بررسی می‌کند: ۱) معماری فیزیکی و ساخت میکروچیپ‌ها ۲) فناوری لیتوگرافی برای چاپ الگوهای نانومتری ۳) منطق درونی و معماری پردازنده‌ها. هر بخش با تشبیه‌های ساده و جداول مقایسه‌ای ارائه شده تا درک فنی‌های پیچیده را تسهیل نماید.
+\end{summarybox}
+\clearpage
+\section{معماری فیزیکی و کارخانه ساخت (\lat{The Fab \& The Structure})}
+\subsection{بررسی فرآیند فیزیکی ساخت و لایه‌بندی چیپ}
+
+\begin{summarybox}{کارخانه‌های ساخت میکروچیپ}
+فرآیند ساخت میکروچیپ در محیطی فوق پیشرفته به نام \lat{\textbf{Fab}} (مخفف \lat{Fabrication Plant}) انجام می‌شود. این محیط حاوی صدها دستگاه گران‌قیمت است که در اتاق‌های تمیز (\lat{Clean Rooms}) با کنترل دقیق دما، رطوبت و ذرات معلق کار می‌کنند.
+\end{summarybox}
+
+\begin{processbox}{مراحل کلیدی تولید میکروچیپ}
+ساخت یک چیپ مدرن شبیه به ساخت کیکی با ۸۰ لایه متفاوت است که نیازمند حدود ۱۰۰۰ مرحله دقیق در طول ۳ ماه می‌باشد. مراحل اصلی شامل:
+\begin{enumerate}
+    \item \textbf{رسوب‌دهی (\lat{Deposition}):} نشاندن لایه‌هایی از مواد مختلف (مانند فلزات رسانا یا عایق‌ها) روی ویفر سیلیکونی
+    \item \textbf{اچ کردن (\lat{Etching}):} حذف دقیق مواد اضافی با استفاده از مواد شیمیایی یا پلاسما برای ایجاد الگوها
+    \item \textbf{مسطح‌سازی (\lat{CMP - Chemical Mechanical Planarization}):} ساییدن و صیقل دادن سطح ویفر برای ایجاد سطحی کاملاً صاف
+    \item \textbf{کاشت یونی (\lat{Ion Implantation}):} شلیک اتم‌هایی مانند فسفر به عمق ساختار برای تغییر خواص الکتریکی
+\end{enumerate}
+\end{processbox}
+
+\begin{table}[H]
+\centering
+\caption{ابعاد و مقیاس‌های ساخت میکروچیپ}
+\label{tab:dimensions_scale}
+\begin{threeparttable}
+\begin{tabularx}{0.95\textwidth}{H{3.5cm} X}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{مقیاس}} & \textcolor{white}{\textbf{توضیح و تشبیه}} \\
+\midrule
+\rowcolor{tableRow1}
+ضخامت لایه‌ها & ۱ نانومتر = قرار دادن ۳ اتم کنار هم \\
+\rowcolor{tableRow2}
+اندازه ترانزیستور & ۵ نانومتر = ۲۰,۰۰۰ بار کوچک‌تر از قطر موی انسان \\
+\rowcolor{tableRow1}
+ویفر سیلیکونی & قطر ۳۰۰ میلی‌متر (۱۲ اینچ) - مانند یک پیتزای بزرگ \\
+\rowcolor{tableRow2}
+چیپ‌های روی ویفر & ۱۰۰-۵۰۰ چیپ روی هر ویفر بسته به اندازه \\
+\rowcolor{tableRow1}
+زمان تولید کامل & ۹۰-۱۲۰ روز برای ۱۰۰۰ مرحله پردازش \\
+\rowcolor{tableRow2}
+دستگاه‌های مورد نیاز & ۲۰۰-۳۰۰ دستگاه مختلف در خط تولید \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\begin{warningbox}{نکات حساس در تولید}
+\begin{itemize}
+    \item \textbf{حساسیت به ذرات:} حتی یک ذره غبار ۱۰۰ نانومتری می‌تواند کل چیپ را معیوب کند
+    \item \textbf{کنترل محیطی:} دمای ثابت (±۰.۱°C) و رطوبت کنترل‌شده (±۲٪)
+    \item \textbf{هزینه سرمایه‌گذاری:} ساخت یک \lat{Fab} مدرن ۱۰-۲۰ میلیارد دلار هزینه دارد
+    \item \textbf{بازدهی (\lat{Yield}):} معمولاً ۷۰-۹۰٪ چیپ‌های تولیدی سالم هستند
+\end{itemize}
+\end{warningbox}
+
+\section{قلم نوری و هنر چاپ نانوسکوپی (\lat{The Lithography \& The Light})}
+\subsection{فناوری پیچیده چاپ الگوهای نانومتری}
+
+\begin{summarybox}{قلب تولید: لیتوگرافی \lat{EUV}}
+فتولیتوگرافی \lat{EUV} (فرابنفش شدید) حیاتی‌ترین و پیچیده‌ترین مرحله در ساخت میکروچیپ‌های مدرن است. این فناوری مانند یک «دستگاه فتوکپی نانومقیاس» عمل می‌کند که الگوهای مداری پیچیده را با دقت اتمی چاپ می‌نماید.
+\end{summarybox}
+
+\begin{conceptbox}{چگونگی تولید نور \lat{EUV}}
+نور \lat{EUV} با طول موج ۱۳.۵ نانومتر به طور طبیعی در دسترس نیست. برای تولید آن:
+\begin{enumerate}
+    \item قطرات ریز قلع مذاب با سرعت ۷۰ متر بر ثانیه از نازل خارج می‌شوند
+    \item لیزر پرقدرت \lat{CO₂} با توان ۲۵ کیلووات به قطرات شلیک می‌شود
+    \item قلع تبخیر شده و به پلاسمای با دمای ۲۲۰,۰۰۰ درجه سانتی‌گراد تبدیل می‌شود
+    \item این پلاسما نور \lat{EUV} ساطع می‌کند
+    \item فرآیند ۵۰,۰۰۰ بار در ثانیه تکرار می‌شود
+\end{enumerate}
+\end{conceptbox}
+
+\begin{table}[H]
+\centering
+\caption{مقایسه فناوری‌های لیتوگرافی \lat{DUV} و \lat{EUV}}
+\label{tab:lithography_comparison}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{H{3.5cm} X X}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{پارامتر}} & \textcolor{white}{\textbf{\lat{DUV} (قدیمی)}} & \textcolor{white}{\textbf{\lat{EUV} (مدرن)}} \\
+\midrule
+\rowcolor{tableRow1}
+طول موج & ۱۹۳ نانومتر & ۱۳.۵ نانومتر \\
+\rowcolor{tableRow2}
+دقت چاپ & ۴۰ نانومتر & ۵-۷ نانومتر \\
+\rowcolor{tableRow1}
+تعداد ماسک‌ها & ۵۰-۶۰ ماسک & ۱۰-۱۵ ماسک \\
+\rowcolor{tableRow2}
+سرعت تولید & ۱۰۰ ویفر در ساعت & ۱۵۰ ویفر در ساعت \\
+\rowcolor{tableRow1}
+قدرت لیزر & ۶۰ وات & ۲۵۰ وات \\
+\rowcolor{tableRow2}
+هزینه دستگاه & ۵۰ میلیون دلار & ۱۵۰ میلیون دلار \\
+\rowcolor{tableRow1}
+بازدهی انرژی & ۲٪ & ۰.۰۲٪ \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\begin{processbox}{مکانیسم آینه‌های \lat{Bragg}}
+از آنجا که شیشه معمولی نور \lat{EUV} را جذب می‌کند، دستگاه‌های \lat{EUV} نمی‌توانند از لنز استفاده کنند. در عوض از آینه‌های ویژه‌ای استفاده می‌شود:
+\begin{itemize}
+    \item هر آینه از ۱۰۰ لایه متناوب سیلیکون و مولیبدن ساخته شده
+    \item ضخامت هر لایه: ۳.۵ نانومتر (سیلیکون) و ۴.۲ نانومتر (مولیبدن)
+    \item صافی سطح: انحراف کمتر از ۰.۱ نانومتر (صاف‌تر از یک توپ بیلیارد به اندازه زمین زمین)
+    \item بازتاب‌دهی: هر آینه فقط ۷۰٪ نور را بازتاب می‌دهد
+    \item تعداد آینه‌ها: ۱۰-۱۲ آینه در مسیر نوری
+\end{itemize}
+\end{processbox}
+
+\section{منطق درونی و دی‌ان‌ای تکنولوژیک (\lat{The Logic \& The Architecture})}
+\subsection{پردازش اطلاعات در میکروچیپ‌های مدرن}
+
+\begin{summarybox}{اصول بنیادین همه پردازنده‌ها}
+تمام پردازنده‌ها، از \lat{Intel 8086} سال ۱۹۷۸ تا \lat{Apple M3} سال ۲۰۲۳، بر اساس اصول بنیادین یکسانی عمل می‌کنند. این «دی‌ان‌ای تکنولوژیک» شامل استفاده از ترانزیستورها به عنوان سوئیچ‌های الکترونیکی و گیت‌های منطقی برای انجام محاسبات است.
+\end{summarybox}
+
+\begin{processbox}{چرخه اجرای دستورات \lat{Fetch-Decode-Execute}}
+این چرخه قلب تپنده منطقی همه سی‌پی‌یوها است که میلیاردها بار در ثانیه تکرار می‌شود:
+\begin{enumerate}
+    \item \textbf{واکشی (\lat{Fetch}):}
+    \begin{itemize}
+        \item آدرس دستورالعمل بعدی از شمارنده برنامه (\lat{PC}) خوانده می‌شود
+        \item دستور از حافظه کش (\lat{L1 Cache}) واکشی می‌شود
+        \item اگر در کش نباشد، از حافظه اصلی (\lat{DRAM}) خوانده می‌شود
+    \end{itemize}
+    
+    \item \textbf{رمزگشایی (\lat{Decode}):}
+    \begin{itemize}
+        \item دستور باینری (مثلاً \lr{1000110010101100}) تفسیر می‌شود
+        \item واحد کنترل (\lat{Control Unit}) سیگنال‌های لازم را تولید می‌کند
+        \item مشخص می‌شود کدام واحد اجرایی باید فعال شود
+    \end{itemize}
+    
+    \item \textbf{اجرا (\lat{Execute}):}
+    \begin{itemize}
+        \item واحد محاسبات (\lat{ALU}) عملیات ریاضی/منطقی را انجام می‌دهد
+        \item یا واحد ممیز شناور (\lat{FPU}) برای محاسبات اعشاری
+        \item یا واحد بارگذاری/ذخیره (\lat{LSU}) برای دسترسی به حافظه
+    \end{itemize}
+    
+    \item \textbf{نوشتن (\lat{Writeback}):}
+    \begin{itemize}
+        \item نتیجه در رجیسترهای داخلی ذخیره می‌شود
+        \item یا در حافظه نوشته می‌شود
+        \item شمارنده برنامه برای دستور بعدی به‌روزرسانی می‌شود
+    \end{itemize}
+\end{enumerate}
+\end{processbox}
+
+\begin{table}[H]
+\centering
+\caption{سلسله مراتب حافظه در معماری کامپیوتر}
+\label{tab:memory_hierarchy}
+\begin{threeparttable}
+\begin{tabularx}{0.95\textwidth}{H{3cm} X C{2.2cm} C{2.2cm}}
+\toprule
+\rowcolor{tableHeader}
+\multicolumn{4}{c}{\color{white}\textbf{سلسله مراتب حافظه: تشبیه کتابخانه}} \\
+\midrule
+\rowcolor{tableRow1}
+\textbf{نوع حافظه} & \textbf{تشبیه} & \textbf{ظرفیت معمول} & \textbf{زمان دسترسی} \\
+\rowcolor{tableRow2}
+رجیسترها & دستان شما & ۱۰۰-۵۰۰ بایت & ۰.۱-۰.۳ نانوثانیه \\
+\rowcolor{tableRow1}
+کش سطح ۱ (\lat{L1}) & میز کار شما & ۳۲-۶۴ کیلوبایت & ۰.۵-۱ نانوثانیه \\
+\rowcolor{tableRow2}
+کش سطح ۲ (\lat{L2}) & کمد کنار میز & ۲۵۶-۵۱۲ کیلوبایت & ۳-۵ نانوثانیه \\
+\rowcolor{tableRow1}
+کش سطح ۳ (\lat{L3}) & کتابخانه شخصی & ۱۶-۶۴ مگابایت & ۱۰-۲۰ نانوثانیه \\
+\rowcolor{tableRow2}
+حافظه اصلی (\lat{DRAM}) & کتابخانه شهر & ۱۶-۶۴ گیگابایت & ۵۰-۱۰۰ نانوثانیه \\
+\rowcolor{tableRow1}
+ذخیره‌سازی (\lat{SSD}) & آرشیو ملی & ۵۰۰ گیگابایت-۲ ترابایت & ۱۰-۱۰۰ میکروثانیه \\
+\rowcolor{tableRow2}
+هارددیسک (\lat{HDD}) & بایگانی تاریخی & ۱-۱۰ ترابایت & ۵-۱۰ میلی‌ثانیه \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\begin{warningbox}{ترجمه کد به سخت‌افزار: سفر از انتزاع به فیزیک}
+\begin{enumerate}
+    \item \textbf{سطح بالا:} برنامه‌نویس کد می‌نویسد (Python/Java/C++)
+    \item \textbf{کامپایل:} کامپایلر کد را به زبان ماشین ترجمه می‌کند
+    \item \textbf{اسمبلی:} دستورات سطح پایین (مانند \lat{ADD, MOV, JMP})
+    \item \textbf{باینری:} کد ماشین (صفر و یک) برای اجرای مستقیم
+    \item \textbf{سخت‌افزار:} ترانزیستورها روشن/خاموش می‌شوند
+\end{enumerate}
+
+\textbf{مثال:} کد \lat{C++} مانند \lat{x = y + 5} تبدیل می‌شود به:
+\begin{latin}
+\begin{verbatim}
+LOAD R1, [address_of_y]  # Load y into register 1
+ADD R1, R1, 5            # Add 5 to register 1
+STORE [address_of_x], R1 # Store result in x
+\end{verbatim}
+\end{latin}
+که به صورت باینری: \lat{10001101 10110010 00110100 ...} اجرا می‌شود.
+\end{warningbox}
+
+\begin{table}[H]
+\centering
+\caption{مقایسه معماری‌های مختلف پردازنده}
+\label{tab:cpu_arch_comparison}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{H{2.5cm} X X X}
+\toprule
+\rowcolor{tableHeader}
+\multicolumn{4}{c}{\color{white}\textbf{مقایسه معماری‌های مختلف پردازنده}} \\
+\midrule
+\rowcolor{tableRow1}
+\textbf{ویژگی} & \textbf{\lat{x86} (Intel/AMD)} & \textbf{\lat{ARM} (موبایل/Apple)} & \textbf{\lat{RISC-V} (متن‌باز)} \\
+\rowcolor{tableRow2}
+تعداد دستورات & ۱۰۰۰-۱۵۰۰ دستور & ۵۰-۱۰۰ دستور & ۴۰-۱۰۰ دستور \\
+\rowcolor{tableRow1}
+عرض دستور & متغیر (۱-۱۵ بایت) & ثابت (۴ بایت) & ثابت (۴ بایت) \\
+\rowcolor{tableRow2}
+مجوز & اختصاصی & مجوز فروشی & متن‌باز \\
+\rowcolor{tableRow1}
+کاربرد اصلی & سرور/دسکتاپ & موبایل/گجت & اینترنت اشیا/تحقیقات \\
+\rowcolor{tableRow2}
+مصرف انرژی & بالا (۳۵-۱۵۰ وات) & پایین (۱-۱۰ وات) & بسیار پایین \\
+\rowcolor{tableRow1}
+پیچیدگی سخت‌افزار & بسیار پیچیده & متوسط & ساده/قابل تنظیم \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\begin{summarybox}{جمع‌بندی: از شنبه تا یکپارچه}
+\begin{itemize}
+    \item \textbf{ساخت فیزیکی:} کارخانه‌های چند میلیارد دلاری با فرآیندهای نانومتری
+    \item \textbf{چاپ نانومتری:} فناوری \lat{EUV} با نور ۱۳.۵ نانومتر و آینه‌های اتمی
+    \item \textbf{منطق پردازش:} چرخه \lat{Fetch-Decode-Execute} در همه پردازنده‌ها مشترک است
+    \item \textbf{سلسله مراتب حافظه:} از رجیسترهای نانوثانیه‌ای تا هارددیسک‌های میلی‌ثانیه‌ای
+    \item \textbf{ترجمه نرم‌افزار:} سفر از کد سطح بالا به کلیدزنی ترانزیستورها
+\end{itemize}
+\end{summarybox}
+
+\begin{processbox}{اطلاعات سند}
+تهیه سند: فوریه ۲۰۲۴\\
+وضعیت: تحلیل فنی - نسخه ۱.۰\\
+منابع: \lat{IEEE, ASML Technical Papers, Intel Architecture Manuals}
+\end{processbox}
+
+\returnhome
+% ===================== APPENDICES =====================
+\section{پیوست‌ها}
+
+\subsection{پیوست الف: اصول مهندسی شیمی در ساخت نیمه‌هادی}
+
+\begin{table}[H]
+\centering
+\caption{اصول مهندسی شیمی در ساخت نیمه‌هادی}
+\label{tab:chem_eng_principles}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{H{3.5cm} X}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{اصل مهندسی شیمی}} & \textcolor{white}{\textbf{کاربرد/مراحل در ساخت نیمه‌هادی}} \\
+\midrule
+\rowcolor{tableRow1}
+انتقال جرم & انتشار دوپانت‌ها (کاشت یونی)، رسوب‌دهی شیمیایی از فاز بخار (\lat{CVD})، اچ کردن، تمیزکاری. \\
+\rowcolor{tableRow2}
+انتقال حرارت & بازپخت، اکسیداسیون حرارتی، پخت مقاوم نوری، خنک‌کاری. \\
+\rowcolor{tableRow1}
+دینامیک سیالات & پوشش‌دهی چرخشی مقاوم نوری، مسطح‌سازی شیمیایی-مکانیکی (\lat{CMP})، تمیز کردن ویفر با آب فوق خالص. \\
+\rowcolor{tableRow2}
+مهندسی واکنش و سینتیک & اچ پلاسما، \lat{CVD}، اکسیداسیون، ظهور مقاوم. \\
+\rowcolor{tableRow1}
+ترمودینامیک & تغییر فاز در رسوب‌دهی، سیستم‌های خلأ، کنترل دما. \\
+\rowcolor{tableRow2}
+پدیده‌های انتقال & کاشت یونی، دوپینگ، یکنواختی در رسوب‌دهی مواد. \\
+\rowcolor{tableRow1}
+کنترل فرآیند و دینامیک & پایش آنی، حلقه‌های بازخورد، کنترل یکنواختی. \\
+\rowcolor{tableRow2}
+علم سطح و کاتالیست & بهبود چسبندگی، آماده‌سازی سطح، رشد لایه نازک. \\
+\rowcolor{tableRow1}
+علم مواد و خوردگی & انتخاب محلول اچ، سازگاری مواد، برداشتن مقاوم نوری. \\
+\rowcolor{tableRow2}
+فرآیندهای جداسازی & خالص‌سازی مواد شیمیایی، فیلتراسیون، جداسازی گاز. \\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\subsection{پیوست ب: توالی تفصیلی فرضی برای یک لایه فلزی و اصول مهندسی شیمی حاکم}
+
+% جدول اول: مراحل 1-4
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{توالی تفصیلی فرضی برای یک لایه فلزی (مراحل ۱ تا ۴)}
+\label{tab:detailed_sequence_chem_part1}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{0.8cm}|>{\centering\arraybackslash}m{2.7cm}|X|}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{\rl{شماره}}} & 
+\textcolor{white}{\textbf{\rl{نام مرحله}}} & 
+\textcolor{white}{\textbf{\rl{جزئیات فرآیند}}} \\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۱}} & \multirow{6}{*}{\centering\rl{تمیزکاری اولیه}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item قرار دادن ویفر در حمام اولتراسونیک با محلول \lat{APM} (\lat{Ammonia Peroxide Mixture})
+    \item شستشو با آب فوق خالص (\lat{UPW}) به صورت پاششی
+    \item چرخش و خشک‌کردن با گاز \lat{N₂} داغ
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال جرم، دینامیک سیالات، علم سطح\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} حذف ذرات، باقی‌مانده‌های آلی و یون‌ها\\
+& & \textbf{کنترل:} غلظت، دما، زمان، قدرت امواج فراصوت\\
+& & \textbf{حساسیت:} حضور هرگونه آلاینده چسبندگی لایه‌های بعدی را مختل می‌کند\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۲}} & \multirow{6}{*}{\centering\rl{رسوب‌دهی عایق}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item بارگذاری ویفر در کوره \lat{CVD} (\lat{Chemical Vapor Deposition})
+    \item پمپ کردن و ایجاد خلأ بالا ($\sim10^{-6}$ تور)
+    \item افزایش دما تا $\sim$۷۰۰°C با نرخ کنترل‌شده
+    \item تزریق گازهای پیش‌ماده (\lat{SiH₄ + O₂})
+    \item انجام واکنش شیمیایی و رسوب لایه \lat{SiO₂}
+    \item خنک‌کردن کنترل‌شده و تخلیه گازهای باقی‌مانده
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال جرم، واکنش‌شناسی، انتقال حرارت، ترمودینامیک\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} ایجاد لایه عایق یکنواخت با ضخامت کنترل‌شده\\
+& & \textbf{کنترل:} دما ($\pm1°C$)، فشار، نرخ جریان گاز، زمان\\
+& & \textbf{چالش:} یکنواختی ضخامت در کل ویفر ($< \pm2\%$)\\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۳}} & \multirow{6}{*}{\centering\rl{پوشش‌دهی مقاوم}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item اعمال آداپتور چسبندگی (\lat{HMDS - Hexamethyldisilazane})
+    \item چکاندن مقاوم فوتوری‌سیست مایع در مرکز ویفر
+    \item چرخش ویفر با شتاب کنترل‌شده تا $\sim$۳۰۰۰ دور بر دقیقه
+    \item پخت نرم (\lat{Soft Bake}) روی صفحه داغ ($\sim$۱۰۰°C برای ۶۰ ثانیه)
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & دینامیک سیالات، انتقال حرارت، علم سطح، رئولوژی\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} ایجاد لایه نازک، یکنواخت و چسبنده از مقاوم\\
+& & \textbf{کنترل:} سرعت چرخش ($\pm10$ دور)، شتاب، ویسکوزیته، دمای پخت\\
+& & \textbf{ضخامت هدف:} ۲۰۰-۵۰۰ نانومتر با یکنواختی $< \pm3\%$\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۴}} & \multirow{6}{*}{\centering\rl{لیتوگرافی}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item تراز دقیق ویفر با ماسک (\lat{Mask Alignment}) با دقت نانومتری
+    \item اکسپوژر مقاوم با نور \lat{UV} (طول موج ۱۹۳ یا ۲۴۸ نانومتر)
+    \item کنترل شدت نور و زمان اکسپوژر برای دوز مناسب
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & اپتیک، فوتوشیمی، کنترل دقیق\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} انتقال الگوی مدار به مقاوم با دقت نانومتری\\
+& & \textbf{کنترل:} شدت نور ($\pm2\%$)، زمان اکسپوژر، تراز ($< \pm5$ نانومتر)\\
+& & \textbf{حساسیت:} هرگونه خطای تراز موجب اتصال کوتاه یا قطعی می‌شود\\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+% جدول دوم: مراحل 5-8
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{توالی تفصیلی فرضی برای یک لایه فلزی (مراحل ۵ تا ۸)}
+\label{tab:detailed_sequence_chem_part2}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{0.8cm}|>{\centering\arraybackslash}m{2.7cm}|X|}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{\rl{شماره}}} & 
+\textcolor{white}{\textbf{\rl{نام مرحله}}} & 
+\textcolor{white}{\textbf{\rl{جزئیات فرآیند}}} \\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۵}} & \multirow{6}{*}{\centering\rl{پخت پس از اکسپوژر}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item گرم کردن ویفر روی صفحه داغ ($\sim$۱۱۰°C برای ۹۰ ثانیه)
+    \item کنترل دقیق دمای سطح ویفر
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال حرارت، واکنش‌شناسی، سینتیک پلیمر\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} تثبیت الگوی ایجاد شده و بهبود کنتراست شیمیایی\\
+& & \textbf{کنترل:} دمای دقیق ($\pm0.5°C$)، زمان، یکنواختی حرارتی\\
+& & \textbf{مکانیسم:} تکمیل واکنش‌های زنجیره‌ای در مقاوم اکسپوژر شده\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۶}} & \multirow{6}{*}{\centering\rl{ظهور مقاوم}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item غوطه‌وری ویفر در محلول قلیایی ظهوردهنده (\lat{TMAH 2.38\%})
+    \item شستشو با آب فوق خالص (\lat{UPW}) برای توقف واکنش
+    \item خشک‌کردن با اسپری گاز \lat{N₂} خالص
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال جرم، علم سطح، سینتیک انحلال\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} حذف مناطق اکسپوژر شده و آشکار کردن الگوی مدار\\
+& & \textbf{کنترل:} غلظت ظهوردهنده، دما ($\pm0.5°C$)، زمان ظهور\\
+& & \textbf{چالش:} جلوگیری از حمله جانبی و حفظ دیواره‌های عمودی\\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۷}} & \multirow{6}{*}{\centering\rl{پخت سخت}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item گرم کردن ویفر در دمای بالاتر ($\sim$۱۲۰-۱۳۰°C برای ۱۲۰ ثانیه)
+    \item اطمینان از پخت کامل مقاوم در کل سطح
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال حرارت، علم پلیمر، ترمودینامیک\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} افزایش مقاومت شیمیایی و مکانیکی مقاوم برای مرحله اچ\\
+& & \textbf{کنترل:} دمای نهایی، زمان پخت، نرخ افزایش دما\\
+& & \textbf{مکانیسم:} افزایش اتصالات عرضی در شبکه پلیمری مقاوم\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۸}} & \multirow{6}{*}{\centering\rl{اچ عایق}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item قرار دادن ویفر در محفظه اچ پلاسما (\lat{RIE})
+    \item ایجاد خلأ بالا ($10^{-3}$ تا $10^{-5}$ تور)
+    \item تزریق گازهای واکنشی (\lat{CF₄ + O₂} یا \lat{CHF₃ + Ar})
+    \item ایجاد پلاسما با توان \lat{RF} (۱۳.۵۶ مگاهرتز)
+    \item اچ انتخابی \lat{SiO₂} در مناطق بدون محافظ مقاوم
+    \item نظارت بر پایان اچ با طیف‌سنجی جرمی (\lat{OES})
+    \item خاموش کردن پلاسما و تخلیه گازهای واکنشی
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & واکنش‌شناسی پلاسما، انتقال جرم، انتقال حرارت، دینامیک گازها\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} ایجاد حفره‌های عمودی با نسبت ابعاد بالا\\
+& & \textbf{کنترل:} نسبت گازها، فشار ($\pm5\%$)، توان \lat{RF}، دما\\
+& & \textbf{حساسیت:} تشخیص نقطه پایان برای جلوگیری از اچ بیش از حد\\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+% جدول سوم: مراحل 9-12
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{توالی تفصیلی فرضی برای یک لایه فلزی (مراحل ۹ تا ۱۲)}
+\label{tab:detailed_sequence_chem_part3}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{0.8cm}|>{\centering\arraybackslash}m{2.7cm}|X|}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{\rl{شماره}}} & 
+\textcolor{white}{\textbf{\rl{نام مرحله}}} & 
+\textcolor{white}{\textbf{\rl{جزئیات فرآیند}}} \\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۹}} & \multirow{6}{*}{\centering\rl{برداشتن مقاوم}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item قرار دادن ویفر در محفظه پلاسما اکسیدکننده (\lat{Asher})
+    \item استفاده از پلاسمای \lat{O₂} برای اکسید کردن و تبخیر مقاوم
+    \item تنظیم توان و زمان برای حذف کامل
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & واکنش‌شناسی، انتقال جرم، احتراق پلاسما\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} پاکسازی کامل مقاوم باقی‌مانده بدون آسیب به لایه زیرین\\
+& & \textbf{کنترل:} نرخ حذف، نسبت \lat{O₂} به گازهای کمکی، دما\\
+& & \textbf{چالش:} حذف کامل پسماندهای پلیمری کربنی (\lat{PCR})\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۱۰}} & \multirow{6}{*}{\centering\rl{تمیزکاری پس از اچ}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item تمیزکاری شیمیایی مرطوب با محلول \lat{SC-1} (آمونیاک، پراکسید، آب)
+    \item شستشو با آب فوق خالص به صورت آبشاری
+    \item خشک‌کردن با روش مارانگونی (نیروی مویینگی)
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & انتقال جرم، علم سطح، دینامیک سیالات، شیمی کلوئیدی\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} آماده‌سازی سطح کاملاً تمیز برای رسوب فلز\\
+& & \textbf{کنترل:} زمان تماس، دما، کیفیت آب (مقاومت $>18$ مگااهم)\\
+& & \textbf{حساسیت:} هرگونه آلودگی سطحی کاهش چسبندگی فلز می‌دهد\\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۱۱}} & \multirow{6}{*}{\centering\rl{رسوب لایه چسبنده/مانع}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item رسوب لایه نازک تیتانیم (\lat{Ti}) با روش \lat{PVD} (پاشش کاتدی)
+    \item رسوب لایه نیترید تیتانیم (\lat{TiN}) با روش \lat{PVD} یا \lat{ALD}
+    \item کنترل ضخامت و استوکیومتری لایه‌ها
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & ترمودینامیک، علم سطح، انتقال جرم، سینتیک رشد لایه\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} بهبود چسبندگی فلز اصلی و جلوگیری از نفوذ\\
+& & \textbf{کنترل:} ضخامت ($\pm5\%$)، یکنواختی، استوکیومتری، تنش لایه\\
+& & \textbf{وظایف:} \lat{Ti} برای چسبندگی، \lat{TiN} به عنوان مانع نفوذ\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۱۲}} & \multirow{6}{*}{\centering\rl{رسوب فلز اصلی}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item رسوب لایه بذر (\lat{Seed Layer}) مس با \lat{PVD} (ضخامت $\sim$۵۰ نانومتر)
+    \item الکتروپلیتینگ (\lat{ECP}) مس برای پر کردن حفره‌ها
+    \item تنظیم ترکیب الکترولیت (\lat{CuSO₄ + H₂SO₄ + افزودنی‌ها})
+    \item اعمال جریان الکتریکی با پروفیل کنترل شده
+    \item آنیل (بازپخت) برای تبلور مجدد مس ($\sim$۲۵۰°C)
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & الکتروشیمی، انتقال جرم، واکنش‌شناسی، انتقال حرارت، سینتیک تبلور\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} پر کردن بدون خلأ حفره‌های با نسبت ابعاد بالا\\
+& & \textbf{کنترل:} ترکیب الکترولیت، چگالی جریان، دما، افزودنی‌ها\\
+& & \textbf{چالش:} جلوگیری از تشکیل حفره در ساختارهای نانومتری\\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+% جدول چهارم: مراحل 13-15
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{توالی تفصیلی فرضی برای یک لایه فلزی (مراحل ۱۳ تا ۱۵)}
+\label{tab:detailed_sequence_chem_part4}
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{0.8cm}|>{\centering\arraybackslash}m{2.7cm}|X|}
+\toprule
+\rowcolor{tableHeader}
+\textcolor{white}{\textbf{\rl{شماره}}} & 
+\textcolor{white}{\textbf{\rl{نام مرحله}}} & 
+\textcolor{white}{\textbf{\rl{جزئیات فرآیند}}} \\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۱۳}} & \multirow{6}{*}{\centering\rl{مسطح‌سازی شیمیایی-مکانیکی}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item قرار دادن ویفر روی پد ساینده (\lat{Polishing Pad})
+    \item اعمال فشار کنترل شده (۲-۵ \lat{psi})
+    \item تزریق سوسپانسیون شیمیایی (\lat{Slurry}) حاوی ساینده و مواد شیمیایی
+    \item چرخش پلت و نگهدارنده ویفر با سرعت متغیر
+    \item شستشو و خشک‌کردن نهایی برای حذف باقی‌مانده سوسپانسیون
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & دینامیک سیالات، سینتیک سایش شیمیایی-مکانیکی، انتقال جرم، تریبولوژی\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} حذف مس اضافی و تراز کردن سطح\\
+& & \textbf{کنترل:} فشار، سرعت چرخش، \lat{pH}، ترکیب سوسپانسیون، دما\\
+& & \textbf{انتخاب‌پذیری:} نرخ حذف متفاوت برای مس، \lat{TiN} و \lat{SiO₂}\\
+\midrule
+\rowcolor{tableRow2}
+\multirow{6}{*}{\centering\rl{۱۴}} & \multirow{6}{*}{\centering\rl{تمیزکاری نهایی}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item تمیزکاری با برس نرم و مواد شیمیایی ملایم (\lat{DHF} رقیق)
+    \item شستشو با آب فوق خالص به صورت پاششی چند مرحله‌ای
+    \item خشک‌کردن با گاز فوق خالص و بدون ذره
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & علم سطح، دینامیک سیالات، شیمی کلوئیدی، کنترل آلودگی\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} حذف هرگونه ذره یا بقایای سوسپانسیون از سطح\\
+& & \textbf{کنترل:} زمان تماس، دما، کیفیت مواد شیمیایی، تعداد چرخه شستشو\\
+& & \textbf{حساسیت:} جلوگیری از خوردگی مس و باقی‌ماندن ذرات ساینده\\
+\midrule
+\rowcolor{tableRow1}
+\multirow{6}{*}{\centering\rl{۱۵}} & \multirow{6}{*}{\centering\rl{بازرسی و مترولوژی}} & 
+\textbf{\rl{زیرمرحله‌های فنی (با جزئیات):}}\\
+& & \begin{enumerate}[label=\arabic*-, rightmargin=*, itemsep=0pt, parsep=2pt, topsep=2pt, leftmargin=1.5em]
+    \item اندازه‌گیری ضخامت لایه‌ها با طیف‌سنجی نوری (\lat{SE})
+    \item بررسی عیوب سطحی با میکروسکوپ نوری (\lat{OM}) و الکترونی (\lat{SEM})
+    \item اندازه‌گیری مقاومت خطوط با پراب چهار نقطۀ
+    \item تحلیل آماری نتایج و مقایسه با مشخصات فنی
+\end{enumerate}\\
+\cline{3-3}
+& & \textbf{\rl{اصول مهندسی شیمی:}}\\
+& & کنترل فرآیند، آمار و احتمالات، اپتیک، الکترومغناطیس\\
+\cline{3-3}
+& & \textbf{\rl{توضیح و پارامترهای کنترلی:}}\\
+& & \textbf{هدف:} اطمینان از کیفیت لایه قبل از مراحل بعدی\\
+& & \textbf{کنترل:} دقت اندازه‌گیری، تکرارپذیری، تطابق با مشخصات\\
+& & \textbf{کاربرد:} داده‌ها برای تنظیم پارامترهای مراحل بعدی\\
+& & \textbf{ابزارها:} \lat{SEM, AFM, XRD, Four-point probe, Ellipsometry}\\
+\bottomrule
+\end{tabularx}
+\end{threeparttable}
+\end{table}
+
+\normalsize
+
+\returnhome
+
+\clearpage
+% ===================== 4C) OVERLAYS — COMPLETE 64 =====================
+\begin{announcementbox}{روی‌نگارهای حجم کنترل واحد پردازش اثبات (۶۴ تصویر)}
+\small
+\begin{enumerate}[leftmargin=*, label=\textcolor{primaryBlue}{\textbf{\arabic*.}}, itemsep=1pt, parsep=0pt]
+  \item مدار مجتمع – حجم کنترل
+  \item مدار مجتمع – حوزه‌های خرابی
+  \item مدار مجتمع – قراردادهای جریان داده
+  \item مدار مجتمع – توان حرارتی
+  \item مدار مجتمع – حوزه‌های کلاک و کنترل تغییر حوزه
+  \item مدار مجتمع – تهدیدات اعتماد
+  \item مدار مجتمع – قلاب‌های آزمون اعتبارسنجی
+  \item مدار مجتمع – عامل‌های سراسری و محلی
+  \item مدار مجتمع – حافظه فقط‌خواندنی شاهدی چندگذری
+  \item مدار مجتمع – حلقه کشف وابستگی
+  \item مدار مجتمع – رابط‌ها و پروتکل‌ها
+  \item مدار مجتمع – اعتبارسنجی خودرو (حلقه سخت‌افزاری / نرم‌افزاری)
+  \item مدار مجتمع – حکمرانی حجم فضایی
+  \item مدار مجتمع – قراردادهای ذخیره‌سازی یادگیری
+  \item مدار مجتمع – شبکه یکنواختی شاهد
+  \item مدار مجتمع – حوزه‌های قابلیت انتقال
+  \item مدار مجتمع – دسته‌های سفارشی‌سازی سخت‌افزار
+  \item مدار مجتمع – مرزهای صحه‌گذاری
+  \item مدار مجتمع – درگاه‌های تزریق شبیه‌سازی
+  \item مدار مجتمع – حافظه حالت گذرا
+  \item مدار مجتمع – حکمرانی به‌مثابه هندسه عامل‌های سراسری و محلی
+  \item مدار مجتمع – قاب‌های پارچه زمینه فضایی
+  \item مدار مجتمع – حلقه یادگیری تقویتی ایمن
+  \item مدار مجتمع – بسته‌های قابلیت انتقال حوزه‌ای
+  \item مدار مجتمع – ارابه شبیه‌سازی دوقلوی دیجیتال
+  \item مدار مجتمع – به‌روزرسانی هوایی و عقب‌گرد تحت حکمرانی
+  \item مدار مجتمع – خط لوله بودجه تأخیر
+  \item مدار مجتمع – تجزیه مورد ایمنی (GSN)
+  \item مدار مجتمع – محدودیت‌های شاهد در یادگیری تقویتی ایمن
+  \item مدار مجتمع – شبکه حکمرانی فضایی عامل‌های سراسری و محلی
+  \item مدار مجتمع – تبدیل‌های مختصاتی قراردادهای قاب
+  \item مدار مجتمع – شاهد چندگذری دوسوخطی
+  \item مدار مجتمع – حکمرانی عامل مدل زبانی بزرگ با امکان‌پذیری فیزیکی
+  \item مدار مجتمع – قالب قابلیت انتقال حوزه
+  \item مدار مجتمع – زنجیره حفاظت به‌روزرسانی ایمن
+  \item مدار مجتمع – تقسیم‌بندی عامل‌های سراسری و محلی
+  \item مدار مجتمع – بودجه خط لوله تأخیر به‌مثابه هندسه
+  \item مدار مجتمع – نقشه پوشش قرارداد
+  \item مدار مجتمع – توپولوژی تزریق خرابی
+  \item مدار مجتمع – ساعت‌برداری همگام‌سازی چندنرخی
+  \item مدار مجتمع – خط لوله جبر شاهد
+  \item مدار مجتمع – حکمرانی فضایی عامل‌های سراسری در برابر محلی
+  \item مدار مجتمع – صفحه‌های مرزی بدون‌حافظه
+  \item مدار مجتمع – ردیابی‌پذیری قرارداد از مشخصه تا آزمون
+  \item مدار مجتمع – پلی‌توپ امکان‌پذیر پاکت ایمنی
+  \item مدار مجتمع – گراف قاب پارچه زمینه فضایی
+  \item مدار مجتمع – بسته‌های محدودیت محلی حوزه‌های سیاست فضایی
+  \item مدار مجتمع – توپولوژی تأخیر انتهایی
+  \item مدار مجتمع – ناوردای‌های منیفولد حافظه شاهد
+  \item مدار مجتمع – حلقه بازیابی کشف وابستگی
+  \item مدار مجتمع – نقاط اتصال ارابه شبیه‌سازی
+  \item مدار مجتمع – سیستم نوع عمل حکمرانی
+  \item مدار مجتمع – عامل‌های محدودشده فضایی (سراسری / محلی)
+  \item مدار مجتمع – قاب‌های پارچه زمینه فضایی
+  \item مدار مجتمع – شواهد در برابر حالت گذرا
+  \item مدار مجتمع – حجم امکان‌پذیر سیاست به‌مثابه هندسه
+  \item مدار مجتمع – ناوردای‌های قابل انتقال بسته‌های حوزه
+  \item مدار مجتمع – حلقه بهبود یادگیری تقویتی ایمن
+  \item مدار مجتمع – قصدهای فیزیکی تایپ‌شده در حکمرانی عامل LLM
+  \item مدار مجتمع – گراف قاب مختصات پارچه زمینه فضایی
+  \item مدار مجتمع – ناحیه‌های حکمرانی فضایی عامل‌های سراسری و محلی
+  \item مدار مجتمع – قراردادهای چندلایه ایمنی محاسبات
+  \item مدار مجتمع – همگرایی شواهد و سیاست‌های کنترلی
+  \item مدار مجتمع – نمای نهایی معماری حکمرانی حجم کنترل
+\end{enumerate}
+\normalsize
+
+\vspace{0.6em}
+\clearpage
+\end{document}
