@@ -186,7 +186,6 @@ function CategoryPanel({ files, lang, categoryId }) {
 
     const handlePageChange = (n) => {
         setPage(n);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     if (files.length === 0) {
