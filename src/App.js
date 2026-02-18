@@ -19,6 +19,7 @@ import KnowledgeBaseReader from './pages/KnowledgeBaseReader';
 import Artifacts from './pages/Artifacts';
 import ArtifactViewer from './pages/ArtifactViewer';
 import LibraryAssets from './pages/LibraryAssets';
+import MultiAgentSystem from './pages/MultiAgentSystem';
 import './styles/global.css';
 import './App.css';
 
@@ -72,6 +73,9 @@ function AppShell() {
           {/* Library Assets */}
           <Route path="/en/library/assets" element={<LibraryAssets />} />
           <Route path="/fa/library/assets" element={<LibraryAssets />} />
+          {/* Multi-Agent System */}
+          <Route path="/en/multi-agent-system" element={<MultiAgentSystem />} />
+          <Route path="/fa/multi-agent-system" element={<MultiAgentSystem />} />
           <Route path="/fa" element={<Home />} />
           <Route path="/fa/technology" element={<Technology />} />
           <Route path="/fa/science" element={<Science />} />

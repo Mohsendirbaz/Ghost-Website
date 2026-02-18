@@ -14,6 +14,7 @@ export const copy = {
       knowledgeBase: "Knowledge Base",
       artifacts: "Asset Library",
       libraryAssets: "Library Assets",
+      multiAgentSystem: "Multi-Agent System",
     },
     home: {
       heroH1: "The Future of Autonomous Driving Starts with Physics",
@@ -297,6 +298,7 @@ export const copy = {
       knowledgeBase: "پایگاه دانش",
       artifacts: "کتابخانه دارایی‌ها",
       libraryAssets: "کتابخانه دارایی‌ها",
+      multiAgentSystem: "سیستم چند-عامله",
     },
     home: {
       heroH1: "آینده رانندگی خودمختار با فیزیک آغاز می‌شود",
