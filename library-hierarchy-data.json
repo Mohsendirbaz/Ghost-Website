@@ -1,0 +1,490 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "generated": "2026-02-18",
+    "totalFiles": 1775,
+    "analysisDocuments": [
+      "notion-2025-analysis-for-ghost-autonomy-website.md",
+      "new-folder-root-analysis-for-ghost-autonomy.md"
+    ],
+    "compactView": "library-hierarchy-compact-view.md"
+  },
+  "summary": {
+    "tiers": [
+      {
+        "id": "tier-0",
+        "name": { "en": "CRITICAL", "fa": "بحرانی" },
+        "count": 18,
+        "percentage": 1.0,
+        "priority": "P0",
+        "timeline": "Weeks 1-2",
+        "status": "in_progress"
+      },
+      {
+        "id": "tier-1",
+        "name": { "en": "HIGH", "fa": "بالا" },
+        "count": 71,
+        "percentage": 4.0,
+        "priority": "P1-P2",
+        "timeline": "Weeks 3-8",
+        "status": "queued"
+      },
+      {
+        "id": "tier-2",
+        "name": { "en": "MEDIUM", "fa": "متوسط" },
+        "count": 211,
+        "percentage": 11.9,
+        "priority": "P3-P4",
+        "timeline": "Weeks 9-20",
+        "status": "queued"
+      },
+      {
+        "id": "tier-3",
+        "name": { "en": "Archive", "fa": "بایگانی" },
+        "count": 1475,
+        "percentage": 83.1,
+        "priority": "P7",
+        "timeline": "Reference only",
+        "status": "archived"
+      }
+    ],
+    "languages": {
+      "en": { "count": 1527, "percentage": 86 },
+      "fa": { "count": 248, "percentage": 14 },
+      "technicalBilingualPairs": 21,
+      "nonTechnicalFarsi": 227
+    },
+    "fileTypes": {
+      "md": 92,
+      "pdf": 34,
+      "docx": 8,
+      "tex": 15
+    }
+  },
+  "tiers": [
+    {
+      "id": "tier-0-critical",
+      "name": { "en": "CRITICAL", "fa": "بحرانی" },
+      "count": 18,
+      "priority": "P0",
+      "timeline": "Weeks 1-2",
+      "urlBase": "/knowledge-base/picapd-isa/* and /company/*",
+      "categories": [
+        {
+          "id": "picapd-isa-family",
+          "name": { "en": "PICAPD ISA Family", "fa": "خانواده PICAPD ISA" },
+          "count": 13,
+          "subcategories": [
+            {
+              "id": "english-specifications",
+              "name": { "en": "English Specifications", "fa": "مشخصات انگلیسی" },
+              "count": 8,
+              "files": [
+                {
+                  "id": "picapd-isa-core",
+                  "filename": "PICAPD INSTRUCTION SET ARCHITECTURE.md",
+                  "type": "md",
+                  "lang": "en",
+                  "size": "large",
+                  "tableCount": 175,
+                  "targetUrl": "/knowledge-base/picapd-isa/core-specification",
+                  "status": "ready",
+                  "statusIcon": "✅",
+                  "processingEstimate": "3 days",
+                  "notes": "Needs table extraction + LaTeX formatting (booktabs)",
+                  "bilateralPair": "مجموعه دستورالعمل PICAPD.md",
+                  "priority": 1
+                },
+                {
+                  "id": "hardware-isa-pdf",
+                  "filename": "Hardware ISA.pdf",
+                  "type": "pdf",
+                  "lang": "en",
+                  "size": "54 pages",
+                  "targetUrl": "/knowledge-base/picapd-isa/hardware-reference",
+                  "status": "needs-review",
+                  "statusIcon": "⚠️",
+                  "processingEstimate": "2 days",
+                  "notes": "247× GPU speedup benchmarks | Needs PDF→web conversion + figure extraction",
+                  "bilateralPair": null,
+                  "priority": 2
+                },
+                {
+                  "id": "picapd-silicon",
+                  "filename": "PICAPD_Silicon.md",
+                  "type": "md",
+                  "lang": "en",
+                  "size": "large",
+                  "targetUrl": "/knowledge-base/picapd-isa/silicon-implementation",
+                  "status": "ready",
+                  "statusIcon": "✅",
+                  "processingEstimate": "2 days",
+                  "notes": "28nm process | 24-core layout | Too large (>25K tokens), needs chunking",
+                  "bilateralPair": "PICAPDسیلیکون فارسی.md",
+                  "priority": 3
+                },
+                {
+                  "id": "isa-pdf",
+                  "filename": "ISA.pdf",
+                  "type": "pdf",
+                  "lang": "en",
+                  "targetUrl": "/knowledge-base/picapd-isa/isa-specification-alt",
+                  "status": "needs-review",
+                  "statusIcon": "⚠️",
+                  "processingEstimate": "1 day",
+                  "notes": "Alternative ISA version | Verify uniqueness, potential duplicate",
+                  "bilateralPair": "دستورالعمل.pdf",
+                  "priority": 4
+                },
+                {
+                  "id": "picapd-compressed-pdf",
+                  "filename": "PICAPD_compressed.pdf",
+                  "type": "pdf",
+                  "lang": "en",
+                  "targetUrl": "/knowledge-base/picapd-isa/compressed-reference",
+                  "status": "needs-review",
+                  "statusIcon": "⚠️",
+                  "processingEstimate": "1 day",
+                  "notes": "Compressed distribution format | Quick reference",
+                  "priority": 5
+                },
+                {
+                  "id": "isa-rectification",
+                  "filename": "PICAPD_ISA_Rectification_Main_Context.md",
+                  "type": "md",
+                  "lang": "en",
+                  "targetUrl": "/knowledge-base/picapd-isa/errata-context",
+                  "status": "ready",
+                  "statusIcon": "✅",
+                  "processingEstimate": "4 hours",
+                  "notes": "ISA corrections and evolution history",
+                  "priority": 6
+                },
+                {
+                  "id": "isa-v1-0-1-errata",
+                  "filename": "PICAPD_v1_0_1_Errata_PatchText.md",
+                  "type": "md",
+                  "lang": "en",
+                  "targetUrl": "/knowledge-base/picapd-isa/v1-0-1-errata",
+                  "status": "ready",
+                  "statusIcon": "✅",
+                  "processingEstimate": "4 hours",
+                  "notes": "Official errata for v1.0.1",
+                  "priority": 7
+                },
+                {
+                  "id": "isa-v1-1-annex",
+                  "filename": "PICAPD_v1_1_Annex_Drafts.md",
+                  "type": "md",
+                  "lang": "en",
+                  "targetUrl": "/knowledge-base/picapd-isa/v1-1-annex-drafts",
+                  "status": "ready",
+                  "statusIcon": "✅",
+                  "processingEstimate": "4 hours",
+                  "notes": "Draft annexes for next version roadmap",
+                  "priority": 8
+                }
+              ]
+            },
+            {
+              "id": "persian-specifications",
+              "name": { "en": "Persian Specifications", "fa": "مشخصات فارسی" },
+              "count": 5,
+              "files": [
+                {
+                  "id": "picapd-isa-core-fa",
+                  "filename": "مجموعه دستورالعمل PICAPD.md",
+                  "type": "md",
+                  "lang": "fa",
+                  "size": "large",
+                  "targetUrl": "/fa/knowledge-base/picapd-isa/core-specification",
+                  "status": "in-progress",
+                  "statusIcon": "🔄",
+                  "processingEstimate": "3 days",
+                  "notes": "PICAPD instruction set (Farsi) | Needs RTL layout + bidirectional table formatting",
+                  "bilateralPair": "PICAPD INSTRUCTION SET ARCHITECTURE.md",
+                  "priority": 1
+                },
+                {
+                  "id": "picapd-silicon-fa",
+                  "filename": "PICAPDسیلیکون فارسی.md",
+                  "type": "md",
+                  "lang": "fa",
+                  "targetUrl": "/fa/knowledge-base/picapd-isa/silicon-implementation",
+                  "status": "in-progress",
+                  "statusIcon": "🔄",
+                  "processingEstimate": "2 days",
+                  "notes": "Silicon documentation (Farsi) | RTL layout + Persian numeral handling",
+                  "bilateralPair": "PICAPD_Silicon.md",
+                  "priority": 2
+                },
+                {
+                  "id": "competitive-analysis-fa",
+                  "filename": "تحلیل رقابتی فنی یکپارچه.md",
+                  "type": "md",
+                  "lang": "fa",
+                  "targetUrl": "/fa/company/competitive-analysis",
+                  "status": "in-progress",
+                  "statusIcon": "🔄",
+                  "processingEstimate": "2 days",
+                  "notes": "Competitive technical analysis (Farsi) | RTL layout + technical term glossary",
+                  "bilateralPair": "Ghost_Autonomy_Unified_Technical_Analysis_V4.md",
+                  "priority": 3
+                },
+                {
+                  "id": "silicon-pdf-fa",
+                  "filename": "سیلیکون.pdf",
+                  "type": "pdf",
+                  "lang": "fa",
+                  "targetUrl": "/fa/knowledge-base/picapd-isa/silicon-reference",
+                  "status": "needs-review",
+                  "statusIcon": "⚠️",
+                  "processingEstimate": "1 day",
+                  "notes": "Silicon documentation PDF (Farsi) | PDF→web + RTL formatting",
+                  "priority": 4
+                },
+                {
+                  "id": "instruction-manual-fa",
+                  "filename": "دستورالعمل.pdf",
+                  "type": "pdf",
+                  "lang": "fa",
+                  "targetUrl": "/fa/knowledge-base/picapd-isa/instruction-manual",
+                  "status": "needs-review",
+                  "statusIcon": "⚠️",
+                  "processingEstimate": "1 day",
+                  "notes": "Instruction manual PDF (Farsi) | Likely pair of ISA.pdf",
+                  "bilateralPair": "ISA.pdf",
+                  "priority": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "strategic-analysis",
+          "name": { "en": "Strategic & Competitive Analysis", "fa": "تحلیل استراتژیک و رقابتی" },
+          "count": 5,
+          "files": [
+            {
+              "id": "competitive-analysis-v4",
+              "filename": "Ghost_Autonomy_Unified_Technical_Analysis_V4.md",
+              "type": "md",
+              "lang": "en",
+              "size": "large",
+              "targetUrl": "/company/competitive-analysis",
+              "status": "ready",
+              "statusIcon": "✅",
+              "processingEstimate": "2 days",
+              "notes": "Latest unified competitive analysis (V4) | Too large (>25K tokens), needs chunking",
+              "bilateralPair": "تحلیل رقابتی فنی یکپارچه.md",
+              "priority": 1
+            },
+            {
+              "id": "competitive-analysis-v4-pdf",
+              "filename": "Ghost Autonomy - Unified Technical Competitive Analysis V4.pdf",
+              "type": "pdf",
+              "lang": "en",
+              "targetUrl": "/company/competitive-analysis-pdf",
+              "status": "needs-review",
+              "statusIcon": "⚠️",
+              "processingEstimate": "1 day",
+              "notes": "PDF version of V4 analysis | Distribution format",
+              "priority": 2
+            },
+            {
+              "id": "isa-priority-improvements",
+              "filename": "Highest-impact spec fixes for ISA.md",
+              "type": "md",
+              "lang": "en",
+              "targetUrl": "/knowledge-base/picapd-isa/priority-improvements",
+              "status": "ready",
+              "statusIcon": "✅",
+              "processingEstimate": "4 hours",
+              "notes": "Priority ISA specification improvements | Technical debt tracking",
+              "priority": 3
+            },
+            {
+              "id": "stop-5-automotive-perception",
+              "filename": "PICAPD_Platform_Profile_STOP5_Automotive_Perception.md",
+              "type": "md",
+              "lang": "en",
+              "targetUrl": "/technology/stop-5-automotive-perception",
+              "status": "ready",
+              "statusIcon": "✅",
+              "processingEstimate": "6 hours",
+              "notes": "STOP-5 automotive perception use case demonstration",
+              "priority": 4
+            },
+            {
+              "id": "stop-5-bitvector",
+              "filename": "STOP_5_Bitvector_Index.md",
+              "type": "md",
+              "lang": "en",
+              "targetUrl": "/technology/stop-5-bitvector-indexing",
+              "status": "ready",
+              "statusIcon": "✅",
+              "processingEstimate": "4 hours",
+              "notes": "Bitvector indexing algorithm for STOP-5 pipeline",
+              "priority": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tier-1-high",
+      "name": { "en": "HIGH", "fa": "بالا" },
+      "count": 71,
+      "priority": "P1-P2",
+      "timeline": "Weeks 3-8",
+      "urlBase": "/technology/*, /science/*, /knowledge-base/*",
+      "categories": [
+        {
+          "id": "av-research-notion",
+          "name": { "en": "Autonomous Vehicles Research (Notion 2025)", "fa": "تحقیقات خودروهای خودران" },
+          "count": 45,
+          "source": "Notion 2025",
+          "detailsLink": "notion-2025-analysis-for-ghost-autonomy-website.md",
+          "topFiles": [
+            "Autonomous Vehicles — Research Note.md",
+            "Physics-Informed Architecture: Equation-Sensor-Control Trichotomy.md",
+            "Adaptive Signal Multiplexer with Dynamic Problem Formulation.md",
+            "Invariant Discovery & Validation.md",
+            "Optimization Algorithm: Leaving no stone unturned.md"
+          ]
+        },
+        {
+          "id": "l4-av-applications-root",
+          "name": { "en": "L4 AV Applications (Root)", "fa": "برنامه‌های L4 AV" },
+          "count": 26,
+          "source": "Root Directory",
+          "detailsLink": "new-folder-root-analysis-for-ghost-autonomy.md",
+          "topFiles": [
+            "Advanced and Emerging Technologies for L4 Autonomous Vehicles.docx",
+            "Processor & Computing Architectures for L4 Autonomous Vehicles.docx",
+            "Sensors & Sensing Technologies for Level 4 Autonomous Vehicles.docx",
+            "Functional Safety & Standards for L4 Autonomous Systems.docx",
+            "Automotive-Specific Systems & Applications for L4 Autonomy.docx"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tier-2-medium",
+      "name": { "en": "MEDIUM", "fa": "متوسط" },
+      "count": 211,
+      "priority": "P3-P4",
+      "timeline": "Weeks 9-20",
+      "urlBase": "/resources/*, /background/*",
+      "categories": [
+        {
+          "id": "chip-manufacturing",
+          "name": { "en": "Chip Manufacturing", "fa": "تولید تراشه" },
+          "count": 31,
+          "source": "Root",
+          "topics": ["Manufacturing processes", "Transcripts", "Educational videos"]
+        },
+        {
+          "id": "quality-frameworks",
+          "name": { "en": "Quality Frameworks", "fa": "چارچوب‌های کیفیت" },
+          "count": 50,
+          "source": "Notion",
+          "topics": ["QA methodologies", "Automated evaluation", "Rubrics"]
+        },
+        {
+          "id": "multi-agent-systems",
+          "name": { "en": "Multi-Agent Systems", "fa": "سیستم‌های چند عامله" },
+          "count": 40,
+          "source": "Notion",
+          "topics": ["Coordination patterns", "Memory architectures", "Agent specs"]
+        }
+      ]
+    },
+    {
+      "id": "tier-3-archive",
+      "name": { "en": "Archive", "fa": "بایگانی" },
+      "count": 1475,
+      "priority": "P7",
+      "timeline": "Reference only",
+      "action": "Archive for reference, do not process for website",
+      "exclusionCategories": [
+        {
+          "id": "book-chapters",
+          "name": { "en": "Book Chapters", "fa": "فصل‌های کتاب" },
+          "count": 262,
+          "reason": "Not relevant to Ghost Autonomy"
+        },
+        {
+          "id": "source-code-docs",
+          "name": { "en": "Source Code Documentation", "fa": "مستندات کد منبع" },
+          "count": 208,
+          "reason": "Internal development, not public-facing"
+        },
+        {
+          "id": "personal-documents",
+          "name": { "en": "Personal Documents", "fa": "اسناد شخصی" },
+          "count": 150,
+          "reason": "Personal/academic records"
+        }
+      ]
+    }
+  ],
+  "urlMappings": {
+    "tier0": {
+      "picapdIsa": {
+        "urlPattern": "/knowledge-base/picapd-isa/*",
+        "websiteSection": "Knowledge Base → Part III",
+        "fileCount": 13
+      },
+      "strategicAnalysis": {
+        "urlPattern": "/company/competitive-analysis",
+        "websiteSection": "Company → Competitive Positioning",
+        "fileCount": 5
+      }
+    },
+    "tier1": {
+      "avDecisionMaking": {
+        "urlPattern": "/science/av-*",
+        "websiteSection": "Science → Autonomous Reasoning",
+        "fileCount": 3
+      },
+      "physicsComputing": {
+        "urlPattern": "/technology/physics-*",
+        "websiteSection": "Technology → Physics-Informed",
+        "fileCount": 12
+      },
+      "l4AvDocumentation": {
+        "urlPattern": "/technology/l4-*, /safety/l4-*",
+        "websiteSection": "Technology + Safety",
+        "fileCount": 6
+      }
+    }
+  },
+  "statusLegend": {
+    "ready": {
+      "icon": "✅",
+      "meaning": "Markdown, minimal processing needed",
+      "stage": "Weeks 1-2: Direct publish"
+    },
+    "in-progress": {
+      "icon": "🔄",
+      "meaning": "Conversion underway, partial completion",
+      "stage": "Weeks 2-4: DOCX/PDF pipeline"
+    },
+    "queued": {
+      "icon": "⏳",
+      "meaning": "Scheduled for processing, not started",
+      "stage": "Weeks 5-8: Batch processing"
+    },
+    "needs-review": {
+      "icon": "⚠️",
+      "meaning": "Format unclear, requires investigation",
+      "stage": "Weeks 9-12: Manual triage"
+    },
+    "blocked": {
+      "icon": "❌",
+      "meaning": "Dependency missing, technical issue",
+      "stage": "Ad-hoc: Unblock before proceeding"
+    }
+  }
+}

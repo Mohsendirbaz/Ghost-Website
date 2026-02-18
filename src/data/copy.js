@@ -13,6 +13,7 @@ export const copy = {
       architecture: "Architecture",
       knowledgeBase: "Knowledge Base",
       artifacts: "Asset Library",
+      libraryAssets: "Library Assets",
     },
     home: {
       heroH1: "The Future of Autonomous Driving Starts with Physics",
@@ -295,6 +296,7 @@ export const copy = {
       architecture: "معماری",
       knowledgeBase: "پایگاه دانش",
       artifacts: "کتابخانه دارایی‌ها",
+      libraryAssets: "کتابخانه دارایی‌ها",
     },
     home: {
       heroH1: "آینده رانندگی خودمختار با فیزیک آغاز می‌شود",
