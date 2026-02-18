@@ -11,7 +11,8 @@
   padding-bottom: var(--space-8);
 }
 
-/* ── Brand ── */
+/* ─── Brand ──────────────────────────────────────────────────────────────────── */
+
 .footer__brand {
   display: flex;
   flex-direction: column;
@@ -59,7 +60,8 @@
   color: var(--color-primary);
 }
 
-/* ── Columns ── */
+/* ─── Columns ────────────────────────────────────────────────────────────────── */
+
 .footer__col-title {
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
@@ -68,6 +70,70 @@
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: var(--space-3);
 }
+
+/* ─── Icon nav ───────────────────────────────────────────────────────────────── */
+
+.footer__col--nav {
+  /* let it shrink naturally — icon nav wraps well */
+}
+
+.footer__icon-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer__icon-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-2);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.footer__icon-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer__icon-link:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Tooltip */
+.footer__icon-link::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--radius-1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.footer__icon-link:hover::after {
+  opacity: 1;
+}
+
+/* ─── Legal col ──────────────────────────────────────────────────────────────── */
 
 .footer__links {
   list-style: none;
@@ -95,7 +161,8 @@
   gap: var(--space-1);
 }
 
-/* ── Bottom ── */
+/* ─── Bottom ─────────────────────────────────────────────────────────────────── */
+
 .footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-3) 0;
@@ -106,10 +173,19 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
-/* ── Mobile ── */
+/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
   .footer__inner {
     grid-template-columns: 1fr;
     gap: var(--space-6);
+  }
+
+  /* On mobile tooltips can overflow; position them to the right of icon */
+  .footer__icon-link::after {
+    left: calc(100% + 6px);
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
