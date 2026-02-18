@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useLang } from '../contexts/LanguageContext';
+import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import {
     SYSTEM_INFO,
