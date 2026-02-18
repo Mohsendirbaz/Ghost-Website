@@ -34,6 +34,7 @@ export default function Header() {
     { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },
     { label: t.artifacts, to: `/${lang}/artifacts` },
     { label: t.libraryAssets, to: `/${lang}/library/assets` },
+    { label: t.documentArchive, to: `/${lang}/library` },
   ];
 
   return (

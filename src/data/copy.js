@@ -12,8 +12,9 @@ export const copy = {
       perspective: "Perspective",
       architecture: "Architecture",
       knowledgeBase: "Knowledge Base",
-      artifacts: "Asset Library",
-      libraryAssets: "Library Assets",
+      artifacts: "Artifact Gallery",
+      libraryAssets: "Technical Library",
+      documentArchive: "Document Archive",
       multiAgentSystem: "Multi-Agent System",
     },
     home: {
@@ -296,8 +297,9 @@ export const copy = {
       perspective: "دیدگاه",
       architecture: "معماری",
       knowledgeBase: "پایگاه دانش",
-      artifacts: "کتابخانه دارایی‌ها",
-      libraryAssets: "کتابخانه دارایی‌ها",
+      artifacts: "گالری آثار",
+      libraryAssets: "کتابخانه فنی",
+      documentArchive: "آرشیو مستندات",
       multiAgentSystem: "سیستم چند-عامله",
     },
     home: {
