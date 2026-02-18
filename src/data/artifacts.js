@@ -81,6 +81,29 @@ export const ARTIFACTS = [
         },
     },
 
+    {
+        id: 'temporal-state-management',
+        slug: 'temporal-state-management',
+        category: 'specification',
+        tags: ['temporal', 'state-management', 'real-time', 'PICAPD-ISA', 'control-theory'],
+        // Rendered from local PDF document
+        localFile: {
+            type: 'pdf',
+            path: '/docs/pdf/Temporal State Management.pdf',
+            filename: 'Temporal_State_Management.pdf',
+        },
+        en: {
+            title: 'Temporal State Management',
+            description:
+                'Comprehensive specification for temporal state management in autonomous vehicle systems, covering real-time state tracking, temporal consistency, and control-theoretic foundations.',
+        },
+        fa: {
+            title: 'مدیریت حالت زمانی',
+            description:
+                'مشخصات جامع برای مدیریت حالت زمانی در سیستم‌های خودروی خودران، شامل ردیابی حالت بلادرنگ، سازگاری زمانی و مبانی نظریه کنترل.',
+        },
+    },
+
     // ── HTML Dashboards (bilingual) ───────────────────────────────────────────
 
     {

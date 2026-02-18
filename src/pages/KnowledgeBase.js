@@ -373,38 +373,6 @@ export default function KnowledgeBase() {
                                 isParts
                             />
 
-                            <CarouselLane
-                                title={isRtl ? 'معماری هسته' : 'Core Architecture'}
-                                nodes={techChapters.slice(0, 8)}
-                                lang={lang}
-                                accent="var(--kb-accent-architecture)"
-                            />
-
-                            <CarouselLane
-                                title={isRtl ? 'اعتبارسنجی و نتایج' : 'Validation & Results'}
-                                nodes={validationChapters.slice(0, 8)}
-                                lang={lang}
-                                accent="var(--kb-accent-validation)"
-                            />
-
-                            <CarouselLane
-                                title={isRtl ? 'استراتژی و مشارکت‌های جهانی' : 'Strategy & Global Partnerships'}
-                                nodes={allChapters
-                                    .filter((ch) => (ch.tags || []).some((t) => ['strategy', 'India', 'South-Korea', 'Iran'].includes(t)))
-                                    .slice(0, 8)}
-                                lang={lang}
-                                accent="var(--kb-accent-strategic)"
-                            />
-
-                            <CarouselLane
-                                title={isRtl ? 'پایه‌های فنی' : 'Technical Foundations'}
-                                nodes={allChapters
-                                    .filter((ch) => (ch.tags || []).some((t) => ['bilinear-form', 'physics-computing', 'uncertainty-quantification', 'control-theory'].includes(t)))
-                                    .slice(0, 8)}
-                                lang={lang}
-                                accent="var(--kb-accent-technical)"
-                            />
-
                         </div>
                     )}
 
