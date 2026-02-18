@@ -253,7 +253,7 @@
 
 .lb-view-link:hover { text-decoration: underline; }
 
-/* Empty / pagination */
+/* Empty */
 .lb-empty {
     text-align: center;
     padding: var(--space-12);
@@ -261,32 +261,169 @@
     font-size: var(--text-sm);
 }
 
+/* ─── Pagination bar ─────────────────────────────────────────────────────────── */
+
 .lb-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-2);
     margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
 }
 
+/* Page window — tight row of numbered buttons */
+.lb-page-window {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Base page button */
 .lb-page-btn {
-    width: 36px;
-    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 var(--space-1);
     border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-2);
     background: var(--color-bg);
     cursor: pointer;
-    font-size: 1.2rem;
-    color: var(--color-text);
-    transition: background .15s;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+    line-height: 1;
+    font-family: inherit;
 }
 
-.lb-page-btn:hover:not(:disabled) { background: var(--color-surface); }
-.lb-page-btn:disabled { opacity: .4; cursor: not-allowed; }
-.lb-page-label { font-size: var(--text-sm); color: var(--color-text-muted); }
+.lb-page-btn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.lb-page-btn:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* Active / current page */
+.lb-page-btn--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    font-weight: var(--weight-bold);
+    cursor: default;
+}
+
+.lb-page-btn--active:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+/* Arrow buttons — slightly wider for the chevron SVG */
+.lb-page-btn--arrow {
+    min-width: 36px;
+    padding: 0 10px;
+}
+
+.lb-page-btn--arrow svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* Ellipsis */
+.lb-page-ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 36px;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    user-select: none;
+}
+
+/* Jump-to form */
+.lb-jump {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: var(--space-2);
+    padding-left: var(--space-2);
+    border-left: 1px solid var(--color-border);
+}
+
+[dir="rtl"] .lb-jump {
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: var(--space-2);
+    padding-right: var(--space-2);
+    border-left: none;
+    border-right: 1px solid var(--color-border);
+}
+
+.lb-jump__label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.lb-jump__input {
+    width: 60px;
+    height: 36px;
+    padding: 0 var(--space-1);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-2);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    transition: border-color var(--transition-fast);
+    /* hide spinner arrows */
+    -moz-appearance: textfield;
+}
+
+.lb-jump__input::-webkit-inner-spin-button,
+.lb-jump__input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.lb-jump__input:focus { border-color: var(--color-primary); }
+
+.lb-jump__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-2);
+    background: var(--color-bg);
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.lb-jump__btn svg { width: 14px; height: 14px; }
+
+.lb-jump__btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    .lb-jump { margin-left: 0; padding-left: 0; border-left: none; }
+    .lb-jump__label { display: none; }
+}
 
 /* Search results */
 .lb-search-results { }

@@ -6,7 +6,7 @@
  * Layout: hero → [category tabs | file grid]
  * Search switches the grid into a flat results list.
  */
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';
@@ -70,6 +70,109 @@ function FileCard({ file, lang }) {
     );
 }
 
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+function buildPageWindow(current, total) {
+    if (total <= 1) return [];
+    const pages = [];
+    const add = (n) => { if (!pages.includes(n)) pages.push(n); };
+
+    add(1);
+    if (current - 2 > 2) add('…left');
+    for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) add(i);
+    if (current + 2 < total - 1) add('…right');
+    if (total > 1) add(total);
+
+    return pages;
+}
+
+function Pagination({ page, totalPages, onChange, lang }) {
+    const [jumpValue, setJumpValue] = useState('');
+    const isRtl = lang === 'fa';
+    const window = buildPageWindow(page, totalPages);
+
+    const handleJump = (e) => {
+        e?.preventDefault();
+        const n = parseInt(jumpValue, 10);
+        if (n >= 1 && n <= totalPages) {
+            onChange(n);
+            setJumpValue('');
+        }
+    };
+
+    if (totalPages <= 1) return null;
+
+    const first = (page - 1) * 50 + 1;
+    const last  = Math.min(page * 50, (totalPages - 1) * 50 + 50); // approximate
+
+    return (
+        <div className="lb-pagination">
+            {/* Prev */}
+            <button
+                className="lb-page-btn lb-page-btn--arrow"
+                disabled={page === 1}
+                onClick={() => onChange(page - 1)}
+                aria-label={isRtl ? 'صفحه قبل' : 'Previous page'}
+            >
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="10 3 5 8 10 13" />
+                </svg>
+            </button>
+
+            {/* Page window */}
+            <div className="lb-page-window" role="group" aria-label={isRtl ? 'صفحات' : 'Pages'}>
+                {window.map((item, idx) =>
+                    typeof item === 'number' ? (
+                        <button
+                            key={item}
+                            className={`lb-page-btn${item === page ? ' lb-page-btn--active' : ''}`}
+                            onClick={() => onChange(item)}
+                            aria-current={item === page ? 'page' : undefined}
+                            aria-label={`${isRtl ? 'صفحه' : 'Page'} ${item}`}
+                        >
+                            {item}
+                        </button>
+                    ) : (
+                        <span key={item + idx} className="lb-page-ellipsis" aria-hidden="true">…</span>
+                    )
+                )}
+            </div>
+
+            {/* Next */}
+            <button
+                className="lb-page-btn lb-page-btn--arrow"
+                disabled={page === totalPages}
+                onClick={() => onChange(page + 1)}
+                aria-label={isRtl ? 'صفحه بعد' : 'Next page'}
+            >
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 3 11 8 6 13" />
+                </svg>
+            </button>
+
+            {/* Jump-to */}
+            <form className="lb-jump" onSubmit={handleJump} aria-label={isRtl ? 'رفتن به صفحه' : 'Jump to page'}>
+                <span className="lb-jump__label">{isRtl ? 'برو به:' : 'Go to:'}</span>
+                <input
+                    type="number"
+                    className="lb-jump__input"
+                    min={1}
+                    max={totalPages}
+                    value={jumpValue}
+                    onChange={(e) => setJumpValue(e.target.value)}
+                    aria-label={isRtl ? 'شماره صفحه' : 'Page number'}
+                    placeholder={`1–${totalPages}`}
+                />
+                <button type="submit" className="lb-jump__btn" aria-label={isRtl ? 'برو' : 'Go'}>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 3 11 8 6 13" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    );
+}
+
 // ─── Category tab panel ───────────────────────────────────────────────────────
 
 function CategoryPanel({ files, lang, categoryId }) {
@@ -77,6 +180,14 @@ function CategoryPanel({ files, lang, categoryId }) {
     const PER_PAGE = 50;
     const totalPages = Math.ceil(files.length / PER_PAGE);
     const visible = files.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
+    // Reset to page 1 when category or files change
+    useEffect(() => { setPage(1); }, [categoryId, files.length]);
+
+    const handlePageChange = (n) => {
+        setPage(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     if (files.length === 0) {
         return (
@@ -90,8 +201,8 @@ function CategoryPanel({ files, lang, categoryId }) {
         <div>
             <p className="lb-count">
                 {lang === 'fa'
-                    ? <><strong>{files.length}</strong> فایل</>
-                    : <><strong>{files.length}</strong> file{files.length !== 1 ? 's' : ''}</>
+                    ? <><strong>{files.length}</strong> فایل · صفحه <strong>{page}</strong> از <strong>{totalPages}</strong></>
+                    : <><strong>{files.length}</strong> files · page <strong>{page}</strong> of <strong>{totalPages}</strong></>
                 }
             </p>
             <div className="lb-file-grid">
@@ -99,25 +210,7 @@ function CategoryPanel({ files, lang, categoryId }) {
                     <FileCard key={f.id} file={f} lang={lang} />
                 ))}
             </div>
-            {totalPages > 1 && (
-                <div className="lb-pagination">
-                    <button
-                        className="lb-page-btn"
-                        disabled={page === 1}
-                        onClick={() => setPage((p) => p - 1)}
-                    >
-                        ‹
-                    </button>
-                    <span className="lb-page-label">{page} / {totalPages}</span>
-                    <button
-                        className="lb-page-btn"
-                        disabled={page === totalPages}
-                        onClick={() => setPage((p) => p + 1)}
-                    >
-                        ›
-                    </button>
-                </div>
-            )}
+            <Pagination page={page} totalPages={totalPages} onChange={handlePageChange} lang={lang} />
         </div>
     );
 }
