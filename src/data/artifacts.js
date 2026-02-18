@@ -212,28 +212,6 @@ export const ARTIFACTS = [
         },
     },
 
-    // ── Forensic Case of Tesla ────────────────────────────────────────────────
-
-    {
-        id: 'forensic-case-tesla',
-        slug: 'forensic-case-tesla',
-        category: 'analysis',
-        tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving', 'safety'],
-        localFile: {
-            type: 'pdf',
-            path: '/docs/pdf/forensic_case_of_Tesla.pdf',
-            filename: 'Forensic_Case_of_Tesla.pdf',
-        },
-        en: {
-            title: 'Forensic Case of Tesla',
-            description: 'Forensic analysis and case study of Tesla autonomous driving systems, examining safety incidents, system behavior, and technical implications for autonomous vehicle development.',
-        },
-        fa: {
-            title: 'مورد پزشکی قانونی تسلا',
-            description: 'تحلیل پزشکی قانونی و مطالعه موردی سیستم‌های رانندگی خودکار تسلا، با بررسی حوادث ایمنی، رفتار سیستم و پیامدهای فنی برای توسعه خودروی خودران.',
-        },
-    },
-
     // ── Still a Worm ───────────────────────────────────────────────────────────
 
     {
