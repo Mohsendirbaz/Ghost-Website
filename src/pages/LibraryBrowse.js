@@ -72,18 +72,20 @@ function FileCard({ file, lang }) {
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
+// Always returns exactly 7 slots so the bar never changes width.
+// null = invisible ghost placeholder to fill the slot.
 function buildPageWindow(current, total) {
     if (total <= 1) return [];
-    const pages = [];
-    const add = (n) => { if (!pages.includes(n)) pages.push(n); };
 
-    add(1);
-    if (current - 2 > 2) add('…left');
-    for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) add(i);
-    if (current + 2 < total - 1) add('…right');
-    if (total > 1) add(total);
+    if (total <= 7) {
+        const pages = Array.from({ length: total }, (_, i) => i + 1);
+        while (pages.length < 7) pages.push(null);
+        return pages;
+    }
 
-    return pages;
+    if (current <= 4)          return [1, 2, 3, 4, 5, '…', total];
+    if (current >= total - 3)  return [1, '…', total - 4, total - 3, total - 2, total - 1, total];
+    return                            [1, '…', current - 1, current, current + 1, '…', total];
 }
 
 function Pagination({ page, totalPages, onChange, lang }) {
@@ -121,8 +123,14 @@ function Pagination({ page, totalPages, onChange, lang }) {
 
             {/* Page window */}
             <div className="lb-page-window" role="group" aria-label={isRtl ? 'صفحات' : 'Pages'}>
-                {window.map((item, idx) =>
-                    typeof item === 'number' ? (
+                {window.map((item, idx) => {
+                    if (item === null) {
+                        return <span key={`ghost-${idx}`} className="lb-page-btn lb-page-btn--ghost" aria-hidden="true" />;
+                    }
+                    if (typeof item === 'string') {
+                        return <span key={`ell-${idx}`} className="lb-page-ellipsis" aria-hidden="true">…</span>;
+                    }
+                    return (
                         <button
                             key={item}
                             className={`lb-page-btn${item === page ? ' lb-page-btn--active' : ''}`}
@@ -132,10 +140,8 @@ function Pagination({ page, totalPages, onChange, lang }) {
                         >
                             {item}
                         </button>
-                    ) : (
-                        <span key={item + idx} className="lb-page-ellipsis" aria-hidden="true">…</span>
-                    )
-                )}
+                    );
+                })}
             </div>
 
             {/* Next */}

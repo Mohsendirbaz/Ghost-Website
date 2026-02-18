@@ -274,11 +274,15 @@
     border-top: 1px solid var(--color-border);
 }
 
-/* Page window — tight row of numbered buttons */
+/* Page window — always 7 fixed slots, never changes width */
 .lb-page-window {
     display: flex;
     align-items: center;
     gap: 4px;
+    /* 7 × 36px buttons + 6 × 4px gaps = 276px — fixed */
+    width: 276px;
+    flex-shrink: 0;
+    justify-content: center;
 }
 
 /* Base page button */
@@ -337,6 +341,12 @@
     width: 14px;
     height: 14px;
     flex-shrink: 0;
+}
+
+/* Ghost placeholder — invisible but holds space */
+.lb-page-btn--ghost {
+    visibility: hidden;
+    pointer-events: none;
 }
 
 /* Ellipsis */
