@@ -89,7 +89,7 @@ export const ARTIFACTS = [
         // Rendered from local PDF document
         localFile: {
             type: 'pdf',
-            path: '/docs/pdf/Temporal State Management.pdf',
+            path: '/docs/pdf/temporal-state-management.pdf',
             filename: 'Temporal_State_Management.pdf',
         },
         en: {
