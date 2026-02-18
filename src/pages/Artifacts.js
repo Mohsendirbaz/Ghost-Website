@@ -7,9 +7,10 @@
  * Each card links to the per-artifact viewer at /[lang]/artifacts/[slug].
  */
 import { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
+import AddToCartButton from '../components/AddToCartButton';
 import {
     ARTIFACTS, ARTIFACT_CATEGORIES, ALL_ARTIFACT_TAGS,
 } from '../data/artifacts';
@@ -18,18 +19,36 @@ import '../styles/artifacts.css';
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
 function ArtifactCard({ artifact, lang }) {
-    const isRtl  = lang === 'fa';
-    const title  = isRtl ? artifact.fa.title  : artifact.en.title;
-    const desc   = isRtl ? artifact.fa.description : artifact.en.description;
-    const catKey = artifact.category;
-    const cat    = ARTIFACT_CATEGORIES[catKey];
+    const navigate = useNavigate();
+    const isRtl    = lang === 'fa';
+    const title    = isRtl ? artifact.fa.title  : artifact.en.title;
+    const desc     = isRtl ? artifact.fa.description : artifact.en.description;
+    const catKey   = artifact.category;
+    const cat      = ARTIFACT_CATEGORIES[catKey];
     const catLabel = cat ? (isRtl ? cat.fa : cat.en) : catKey;
 
+    const cartItem = artifact.localFile ? {
+        id:       `artifact-${artifact.id}`,
+        filename:  artifact.localFile.type === 'html'
+            ? (artifact.localFile.filenames?.[lang] || `${artifact.slug}-${lang}.html`)
+            : (artifact.localFile.filename || `${artifact.slug}.${artifact.localFile.type}`),
+        path:      artifact.localFile.type === 'html'
+            ? artifact.localFile.paths?.[lang]
+            : artifact.localFile.path,
+        type:      artifact.localFile.type,
+        title:     { en: artifact.en.title, fa: artifact.fa.title },
+        category:  artifact.category,
+        keywords:  artifact.tags || [],
+    } : null;
+
     return (
-        <Link
-            to={`/${lang}/artifacts/${artifact.slug}`}
+        <div
             className="artifact-card"
+            role="button"
+            tabIndex={0}
             aria-label={title}
+            onClick={() => navigate(`/${lang}/artifacts/${artifact.slug}`)}
+            onKeyDown={(e) => e.key === 'Enter' && navigate(`/${lang}/artifacts/${artifact.slug}`)}
         >
             <div className="artifact-card__preview" aria-hidden="true">
                 <svg className="artifact-card__preview-icon" viewBox="0 0 24 24">
@@ -58,8 +77,13 @@ function ArtifactCard({ artifact, lang }) {
                         <polyline points="9 18 15 12 9 6" />
                     </svg>
                 </span>
+                {cartItem && (
+                    <div onClick={(e) => e.stopPropagation()}>
+                        <AddToCartButton item={cartItem} variant="compact" />
+                    </div>
+                )}
             </div>
-        </Link>
+        </div>
     );
 }
 

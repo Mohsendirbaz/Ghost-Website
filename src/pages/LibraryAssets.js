@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { copy } from '../data/copy';
+import AddToCartButton from '../components/AddToCartButton';
 import {
     CRITICAL_ASSETS,
     HIGH_ASSETS,
@@ -122,6 +123,20 @@ export default function LibraryAssets() {
                 <span className="asset-estimate">
                     ⏱️ {asset.processingEstimate}
                 </span>
+                {(asset.type === 'pdf' || asset.type === 'md' || asset.type === 'html') && (
+                    <AddToCartButton
+                        item={{
+                            id:       `library-${asset.id}`,
+                            filename:  asset.filename,
+                            path:      asset.targetUrl || `/library/${asset.type}/${asset.filename}`,
+                            type:      asset.type,
+                            title:     asset.title,
+                            category:  asset.categoryId || 'library',
+                            keywords:  asset.tags || [],
+                        }}
+                        variant="compact"
+                    />
+                )}
             </div>
         </div>
     );

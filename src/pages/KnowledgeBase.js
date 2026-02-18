@@ -7,9 +7,10 @@
  * Search switches the lanes into a results list.
  */
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
+import AddToCartButton from '../components/AddToCartButton';
 import { KB_PARTS, ALL_NODES, ALL_TAGS, buildPath, resolveHref } from '../data/knowledgeBase';
 import { injectJsonLd, removeJsonLd, buildIndexGraph } from '../utils/jsonld';
 import '../styles/knowledgeBase.css';
@@ -47,24 +48,25 @@ function matchesScope(node, scope) {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function DocumentCard({ node, lang, style }) {
-    const isRtl = lang === 'fa';
+    const navigate = useNavigate();
+    const isRtl    = lang === 'fa';
     const title    = isRtl ? node.title.fa : node.title.en;
     const titleAlt = isRtl ? node.title.en : node.title.fa;
     const desc     = node.description?.[isRtl ? 'fa' : 'en'];
 
     // Parts from KB_PARTS carry no nodeType — handle them explicitly.
-    // All chapter / section nodes passed here come from ALL_NODES (enriched).
-    const href = node.nodeType
-        ? resolveHref(node, lang)
-        : buildPath(lang, node.slug); // raw part from KB_PARTS lane
-
+    const href       = node.nodeType ? resolveHref(node, lang) : buildPath(lang, node.slug);
     const isPartCard = node.nodeType === 'part' || !node.nodeType;
+    const isChapter  = node.nodeType === 'chapter';
 
     return (
-        <Link
-            to={href}
+        <div
             className={`kb-card${isPartCard ? ' kb-card--part' : ''}`}
-            style={{ '--kb-accent': node.accentColor || 'var(--color-primary)', ...style }}
+            style={{ '--kb-accent': node.accentColor || 'var(--color-primary)', cursor: 'pointer', ...style }}
+            role="button"
+            tabIndex={0}
+            onClick={() => navigate(href)}
+            onKeyDown={(e) => e.key === 'Enter' && navigate(href)}
         >
             {!isPartCard && <div className="kb-card__accent-bar" />}
             <div className="kb-card__body">
@@ -92,11 +94,27 @@ function DocumentCard({ node, lang, style }) {
                     <span className="kb-card__page">p. {node.pageStart}</span>
                     <span className="kb-card__type"
                           style={{ '--kb-accent': node.accentColor || 'var(--color-primary)' }}>
-            {node.nodeType}
-          </span>
+                        {node.nodeType}
+                    </span>
+                    {isChapter && node.downloadPath && (
+                        <div onClick={(e) => e.stopPropagation()}>
+                            <AddToCartButton
+                                item={{
+                                    id:       `kb-${node.id}`,
+                                    filename:  `${node.slug}.pdf`,
+                                    path:      node.downloadPath,
+                                    type:      'pdf',
+                                    title:     { en: node.title.en, fa: node.title.fa },
+                                    category:  node.partSlug || 'knowledge-base',
+                                    keywords:  node.tags || [],
+                                }}
+                                variant="compact"
+                            />
+                        </div>
+                    )}
                 </div>
             )}
-        </Link>
+        </div>
     );
 }
 
