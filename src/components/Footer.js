@@ -19,6 +19,7 @@ export default function Footer() {
     { label: t.nav.architecture, to: `/${lang}/architecture` },
     { label: t.nav.knowledgeBase, to: `/${lang}/knowledge-base` },
     { label: t.nav.artifacts, to: `/${lang}/artifacts` },
+    { label: t.nav.libraryAssets, to: `/${lang}/library/assets` },
   ];
 
   return (

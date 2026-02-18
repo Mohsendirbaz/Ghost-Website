@@ -33,6 +33,7 @@ export default function Header() {
     { label: t.architecture, to: `/${lang}/architecture` },
     { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },
     { label: t.artifacts, to: `/${lang}/artifacts` },
+    { label: t.libraryAssets, to: `/${lang}/library/assets` },
   ];
 
   return (
