@@ -192,6 +192,34 @@ export const ARTIFACTS = [
         },
     },
 
+    // ── Mercedes Benz Autonomous Vehicle Perception Stack ─────────────────────
+
+    {
+        id: 'mercedes-benz-av-perception-stack',
+        slug: 'mercedes-benz-perception-stack',
+        category: 'visualization',
+        tags: ['Mercedes-Benz', 'perception', 'autonomous-vehicle', 'sensor-fusion', 'computer-vision'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Mercedes Benz Autonomous Vehicle Perception Stack_v2.html',
+                fa: '/docs/html/Mercedes Benz Autonomous Vehicle Perception Stack_v2-Farsi.html',
+            },
+            filenames: {
+                en: 'Mercedes_Benz_AV_Perception_Stack_v2.html',
+                fa: 'Mercedes_Benz_AV_Perception_Stack_v2_Farsi.html',
+            },
+        },
+        en: {
+            title: 'Mercedes Benz Autonomous Vehicle Perception Stack',
+            description: 'Comprehensive visualization of the Mercedes Benz autonomous vehicle perception stack, detailing sensor fusion, computer vision pipelines, and real-time object detection and tracking systems.',
+        },
+        fa: {
+            title: 'پشته ادراک خودروی خودران مرسدس بنز',
+            description: 'تصویرسازی جامع پشته ادراک خودروی خودران مرسدس بنز، شامل ترکیب حسگرها، خطوط لوله بینایی کامپیوتری و سیستم‌های تشخیص و ردیابی اشیاء بلادرنگ.',
+        },
+    },
+
     // ── Add further entries here ──────────────────────────────────────────────
     // {
     //   id: '<uuid-or-slug>',
