@@ -212,6 +212,74 @@ export const ARTIFACTS = [
         },
     },
 
+    // ── Forensic Case of Tesla ────────────────────────────────────────────────
+
+    {
+        id: 'forensic-case-tesla',
+        slug: 'forensic-case-tesla',
+        category: 'analysis',
+        tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving', 'safety'],
+        localFile: {
+            type: 'pdf',
+            path: '/docs/pdf/forensic_case_of_Tesla.pdf',
+            filename: 'Forensic_Case_of_Tesla.pdf',
+        },
+        en: {
+            title: 'Forensic Case of Tesla',
+            description: 'Forensic analysis and case study of Tesla autonomous driving systems, examining safety incidents, system behavior, and technical implications for autonomous vehicle development.',
+        },
+        fa: {
+            title: 'مورد پزشکی قانونی تسلا',
+            description: 'تحلیل پزشکی قانونی و مطالعه موردی سیستم‌های رانندگی خودکار تسلا، با بررسی حوادث ایمنی، رفتار سیستم و پیامدهای فنی برای توسعه خودروی خودران.',
+        },
+    },
+
+    // ── Still a Worm ───────────────────────────────────────────────────────────
+
+    {
+        id: 'still-a-worm',
+        slug: 'still-a-worm',
+        category: 'reference',
+        tags: ['security', 'malware', 'worm', 'cybersecurity', 'analysis'],
+        localFile: {
+            type: 'pdf',
+            path: '/docs/pdf/Still a Worm.pdf',
+            filename: 'Still_a_Worm.pdf',
+        },
+        en: {
+            title: 'Still a Worm',
+            description: 'Technical analysis and research on worm malware, covering propagation mechanisms, detection strategies, and security implications for autonomous systems.',
+        },
+        fa: {
+            title: 'هنوز یک کرم',
+            description: 'تحلیل فنی و تحقیق در مورد بدافزار کرم، شامل مکانیزم‌های انتشار، استراتژی‌های تشخیص و پیامدهای امنیتی برای سیستم‌های خودران.',
+        },
+    },
+
+    // ── Civic Discipline of Truth ─────────────────────────────────────────────
+
+    {
+        id: 'civic-discipline-of-truth',
+        slug: 'civic-discipline-of-truth',
+        category: 'reference',
+        tags: ['epistemology', 'truth', 'civic', 'governance', 'analysis'],
+        localFile: {
+            type: 'pdf',
+            path: '/docs/pdf/Civic Discipline of Truth.pdf',
+            filename: 'Civic_Discipline_of_Truth.pdf',
+        },
+        en: {
+            title: 'Civic Discipline of Truth',
+            description:
+                'An examination of truth as a civic and epistemic discipline, exploring governance frameworks, institutional accountability, and the structural conditions required for truth to function in public life.',
+        },
+        fa: {
+            title: 'انضباط مدنی حقیقت',
+            description:
+                'بررسی حقیقت به‌عنوان یک انضباط مدنی و معرفتی، با کاوش در چارچوب‌های حکمرانی، پاسخگویی نهادی و شرایط ساختاری لازم برای عملکرد حقیقت در زندگی عمومی.',
+        },
+    },
+
     // ── Add further entries here ──────────────────────────────────────────────
     // {
     //   id: '<uuid-or-slug>',

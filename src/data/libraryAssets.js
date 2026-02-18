@@ -33,12 +33,12 @@ export const STATUS_ICONS = {
     [ASSET_STATUS.BLOCKED]: '❌'
 };
 
-// ─── TIER 0: CRITICAL ASSETS (18 files) ────────────────────────────────────
+// ─── TIER 0: CRITICAL ASSETS (20 files) ────────────────────────────────────
 
 export const CRITICAL_ASSETS = {
     id: LIBRARY_TIERS.CRITICAL,
     name: { en: 'CRITICAL', fa: 'بحرانی' },
-    count: 18,
+    count: 20,
     priority: 'P0',
     timeline: 'Weeks 1-2',
     description: {
@@ -335,7 +335,7 @@ export const CRITICAL_ASSETS = {
         {
             id: 'strategic-analysis',
             name: { en: 'Strategic Analysis', fa: 'تحلیل استراتژیک' },
-            count: 5,
+            count: 7,
             assets: [
                 {
                     id: 'competitive-analysis-v4',
@@ -438,6 +438,46 @@ export const CRITICAL_ASSETS = {
                     processingEstimate: '4 hours',
                     tags: ['autonomous-driving', 'bitvector', 'STOP-5', 'algorithm'],
                     priority: 5
+                },
+                {
+                    id: 'forensic-case-tesla',
+                    filename: 'forensic_case_of_Tesla.pdf',
+                    slug: 'forensic-case-tesla',
+                    title: {
+                        en: 'Forensic Case of Tesla',
+                        fa: 'مورد پزشکی قانونی تسلا'
+                    },
+                    description: {
+                        en: 'Forensic analysis and case study of Tesla autonomous driving systems',
+                        fa: 'تحلیل پزشکی قانونی و مطالعه موردی سیستم‌های رانندگی خودکار تسلا'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/forensic_case_of_Tesla.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: '2 hours',
+                    tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving'],
+                    priority: 6
+                },
+                {
+                    id: 'still-a-worm',
+                    filename: 'Still a Worm.pdf',
+                    slug: 'still-a-worm',
+                    title: {
+                        en: 'Still a Worm',
+                        fa: 'هنوز یک کرم'
+                    },
+                    description: {
+                        en: 'Technical analysis and research on worm malware and cybersecurity implications',
+                        fa: 'تحلیل فنی و تحقیق در مورد بدافزار کرم و پیامدهای امنیت سایبری'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/Still a Worm.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: '2 hours',
+                    tags: ['security', 'malware', 'worm', 'cybersecurity', 'analysis'],
+                    priority: 7
                 }
             ]
         }
@@ -803,11 +843,11 @@ export const ALL_TIERS = [CRITICAL_ASSETS, HIGH_ASSETS];
 
 // Export summary statistics
 export const LIBRARY_STATS = {
-    totalAssets: 89,
-    critical: 18,
+    totalAssets: 91,
+    critical: 20,
     high: 71,
     bilingualPairs: 21,
-    readyAssets: 15,
+    readyAssets: 17,
     inProgressAssets: 3,
     needsReviewAssets: 5
 };
