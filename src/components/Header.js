@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
 import SearchOverlay from './SearchOverlay';
 import './Header.css';
@@ -117,6 +118,24 @@ const Icons = {
       <line x1="15" y1="5" x2="5" y2="15" />
     </svg>
   ),
+  sun: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="10" cy="10" r="3.5" />
+      <line x1="10" y1="2" x2="10" y2="4" />
+      <line x1="10" y1="16" x2="10" y2="18" />
+      <line x1="2" y1="10" x2="4" y2="10" />
+      <line x1="16" y1="10" x2="18" y2="10" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="14.36" y1="14.36" x2="15.78" y2="15.78" />
+      <line x1="15.78" y1="4.22" x2="14.36" y2="5.64" />
+      <line x1="5.64" y1="14.36" x2="4.22" y2="15.78" />
+    </svg>
+  ),
+  moon: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 12.5A7 7 0 0 1 7.5 3a7 7 0 1 0 9.5 9.5z" />
+    </svg>
+  ),
 };
 
 // ─── Mega-menu panel ──────────────────────────────────────────────────────────
@@ -177,6 +196,7 @@ function MegaMenuPanel({ open, groups, onClose, lang }) {
 
 export default function Header() {
   const { lang, toggleLang } = useLang();
+  const { isDark, toggleTheme } = useTheme();
   const t = copy[lang].nav;
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -295,6 +315,19 @@ export default function Header() {
             <span className="header__search-btn-label header__search-label-desktop">{t.search}</span>
           </button>
 
+          <button
+            className="header__theme-btn"
+            onClick={toggleTheme}
+            aria-label={t.themeToggleAriaLabel}
+            aria-pressed={isDark}
+          >
+            <span className="header__theme-btn-icon">
+              {isDark ? Icons.sun : Icons.moon}
+            </span>
+            <span className="header__theme-btn-label header__search-label-desktop">
+              {isDark ? t.switchToLight : t.switchToDark}
+            </span>
+          </button>
           <button
             className="header__lang-btn"
             onClick={toggleLang}

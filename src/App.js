@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { useEffect } from 'react';
 import { LanguageProvider, useLang } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
@@ -129,11 +130,13 @@ function AppShell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <LanguageProvider>
-        <CartProvider>
-          <AppShell />
-        </CartProvider>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <AppShell />
+          </CartProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

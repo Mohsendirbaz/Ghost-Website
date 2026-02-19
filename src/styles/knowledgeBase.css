@@ -23,7 +23,7 @@
   --kb-reader-max-width:   720px;
 
   /* Card styling */
-  --kb-card-radius:        12px;
+  --kb-card-radius:        var(--radius-lg);
   --kb-card-border:        1px solid var(--color-border);
 
   /* Animation timing */
@@ -31,7 +31,7 @@
   --kb-transition-med:     250ms ease;
 
   /* Hero */
-  --kb-hero-bg:            #0A0E1A;
+  --kb-hero-bg:            var(--hero-surface-start);
 }
 
 /* ── Global KB resets ──────────────────────────────────────────────────────── */
@@ -93,7 +93,7 @@
 
 .kb-hero__sub {
   font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--hero-text-dim);
   margin: 0 0 var(--space-4);
   line-height: 1.6;
 }
@@ -110,7 +110,7 @@
 .kb-search {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: var(--surface-base);
   border-radius: var(--radius-full, 9999px);
   border: 2px solid transparent;
   overflow: hidden;
@@ -146,7 +146,7 @@
   border: none;
   cursor: pointer;
   flex-shrink: 0;
-  color: #fff;
+  color: var(--text-inverse);
   transition: background var(--kb-transition-fast);
 }
 
@@ -174,9 +174,9 @@
 .kb-scope-tab {
   padding: 5px 14px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--hero-tab-border);
   background: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--hero-text-dim);
   font-size: var(--text-sm);
   font-family: inherit;
   cursor: pointer;
@@ -184,15 +184,15 @@
 }
 
 .kb-scope-tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.4);
+  background: var(--hero-tab-hover-bg);
+  color: var(--text-inverse);
+  border-color: var(--hero-tab-hover-border);
 }
 
 .kb-scope-tab.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--text-inverse);
 }
 
 /* ── Body two-column layout ────────────────────────────────────────────────── */
@@ -376,7 +376,7 @@
 
 .kb-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  box-shadow: var(--shadow-lg);
 }
 
 .kb-card:focus-visible {
@@ -489,7 +489,7 @@
 
 a.kb-chip:hover {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--text-inverse);
   border-color: var(--color-primary);
 }
 
@@ -522,7 +522,7 @@ a.kb-chip:hover {
 
 .kb-result-row:hover {
   background: var(--color-bg-secondary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .kb-result-row:focus-visible {
@@ -543,22 +543,22 @@ a.kb-chip:hover {
 }
 
 .kb-result-row__type-badge--part {
-  background: rgba(255, 107, 53, 0.12);
-  color: #CC5529;
+  background: rgba(var(--color-primary-rgb), 0.12);
+  color: var(--color-primary-hover);
 }
 
 .kb-result-row__type-badge--chapter {
-  background: rgba(0, 78, 137, 0.10);
+  background: rgba(var(--color-secondary-rgb), 0.10);
   color: var(--color-secondary);
 }
 
 .kb-result-row__type-badge--section {
-  background: rgba(16, 185, 129, 0.10);
-  color: #065F46;
+  background: rgba(var(--color-success-rgb), 0.10);
+  color: var(--color-success);
 }
 
 .kb-result-row__type-badge--subsection {
-  background: rgba(107, 114, 128, 0.10);
+  background: rgba(var(--text-secondary-rgb), 0.10);
   color: var(--color-text-secondary);
 }
 
@@ -899,7 +899,7 @@ a.kb-chip:hover {
 }
 
 .kb-toc__link.active {
-  background: rgba(255, 107, 53, 0.08);
+  background: rgba(var(--color-primary-rgb), 0.08);
   color: var(--color-primary);
   font-weight: var(--weight-semibold);
   border-inline-start: 2px solid var(--color-primary);
@@ -981,7 +981,7 @@ a.kb-chip:hover {
 
 .kb-aside__tag:hover {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--text-inverse);
   border-color: var(--color-primary);
 }
 

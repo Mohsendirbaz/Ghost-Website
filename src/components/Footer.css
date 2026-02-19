@@ -1,6 +1,6 @@
 .footer {
-  background: var(--color-text-primary);
-  color: var(--color-text-inverse);
+  background: var(--footer-bg);
+  color: var(--footer-text);
   padding-top: var(--space-fluid-lg);
 }
 
@@ -50,27 +50,56 @@
 
 .footer__logo .logo-mark {
   background: var(--color-primary);
-  color: white;
+  color: var(--text-inverse);
 }
 
 .footer__logo .logo-word {
-  color: var(--color-text-inverse);
+  color: var(--text-inverse);
 }
 
 .footer__tagline {
   font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--footer-text-dim);
   font-style: italic;
+}
+
+/* ─── Footer toggles container ──────────────────────────────────────────────── */
+
+.footer__toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.footer__theme-btn {
+  align-self: flex-start;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--footer-btn-border);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--footer-text);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  min-height: 44px;
+}
+
+.footer__theme-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .footer__lang-btn {
   align-self: flex-start;
   padding: 8px 18px;
   border-radius: var(--radius-full);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border: 1.5px solid var(--footer-btn-border);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--footer-text);
   background: transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -90,7 +119,7 @@
   font-weight: var(--weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);  /* raised from 0.4 for WCAG AA */
+  color: var(--footer-text-muted);
   margin-bottom: var(--space-3);
 }
 
@@ -114,14 +143,14 @@
   padding: 6px var(--space-1);
   border-radius: var(--radius-2);
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--footer-text);
   transition: background var(--transition-fast), color var(--transition-fast);
   min-height: 36px;
 }
 
 .footer__nav-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: var(--footer-hover-bg);
+  color: var(--text-inverse);
 }
 
 .footer__nav-item[aria-current="page"] {
@@ -160,14 +189,14 @@
 
 .footer__link {
   font-size: var(--text-sm);
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--footer-text-link);
   text-decoration: none;
   transition: color var(--transition-fast);
   cursor: pointer;
 }
 
 .footer__link:hover {
-  color: var(--color-text-inverse);
+  color: var(--text-inverse);
 }
 
 .footer__contact {
@@ -180,14 +209,14 @@
 /* ─── Bottom ─────────────────────────────────────────────────────────────────── */
 
 .footer__bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--footer-border);
   padding-block: var(--space-3);
   /* padding-bottom handled by global.css safe-area-inset */
 }
 
 .footer__copy {
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--footer-text-faint);
 }
 
 /* ─── Touch targets on coarse devices ───────────────────────────────────────── */

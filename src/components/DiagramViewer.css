@@ -4,13 +4,13 @@
   flex-direction: column;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .diagram-card:hover {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
@@ -37,13 +37,13 @@
 }
 
 .diagram-card__badge--collection {
-  background: #EEF2FF;
-  color: #3730A3;
+  background: var(--badge-collection-bg);
+  color: var(--badge-collection-text);
 }
 
 .diagram-card__badge--type {
-  background: #F0FDF4;
-  color: #166534;
+  background: var(--badge-type-bg);
+  color: var(--badge-type-text);
 }
 
 .diagram-card__title {
@@ -157,7 +157,7 @@
   position: absolute;
   inset-block-end: var(--space-2);
   inset-inline-end: var(--space-2);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(var(--surface-base-rgb), 0.9);
   border: 1px solid var(--color-border);
   border-radius: 6px;
   padding: 4px 6px;
@@ -202,8 +202,8 @@
 
 .diagram-card__claim {
   font-size: var(--text-xs);
-  color: #92400E;
-  background: #FEF3C7;
+  color: var(--badge-claim-text);
+  background: var(--badge-claim-bg);
   border-radius: 20px;
   padding: 2px 8px;
   font-weight: 500;
@@ -217,7 +217,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.65);
+  background: var(--overlay-bg);
   padding: var(--space-4);
   animation: modal-in 0.2s ease;
 }
@@ -229,14 +229,14 @@
 
 .diagram-modal__inner {
   background: var(--color-bg);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   width: 100%;
   max-width: 1080px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-2xl);
   animation: modal-slide 0.2s ease;
 }
 
@@ -299,7 +299,7 @@
 .diagram-modal__svg-wrap {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: var(--neu-radius-md);
   padding: var(--space-4);
   overflow: auto;
 }

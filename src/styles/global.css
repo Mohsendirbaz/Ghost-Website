@@ -3,7 +3,11 @@
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap');
-@import './tokens.css';
+@import './tokens/base.css';
+@import './tokens/light-theme.css';
+@import './tokens/dark-theme.css';
+@import './tokens/aliases.css';
+@import './components.css';
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -99,11 +103,11 @@ button {
 .btn-secondary {
   background: transparent;
   color: var(--color-text-inverse);
-  border-color: rgba(255,255,255,0.5);
+  border-color: var(--btn-secondary-border);
 }
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.8);
+  background: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-border);
 }
 
 .btn-outline {
@@ -173,6 +177,18 @@ button {
   color: var(--color-primary-light);  /* #FF8F66 — passes 4.5:1 on near-black */
 }
 
+/* ─── Global focus ring — keyboard navigation ─── */
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -186,7 +202,15 @@ button {
   }
 
   .pillar-card:hover,
+  .kb-card:hover,
+  .diagram-card:hover,
+  .artifact-card:hover,
   .architecture-layer:hover {
+    transform: none;
+  }
+
+  .btn:active,
+  .btn-primary:active {
     transform: none;
   }
 }

@@ -3,7 +3,12 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a0f1e 0%, #001a3a 50%, #0d1a2e 100%);
+  background: linear-gradient(
+    135deg,
+    var(--hero-surface-start) 0%,
+    var(--hero-surface-mid) 50%,
+    var(--hero-surface-end) 100%
+  );
   /* Aspect-ratio aware height — mobile-first */
   min-height: calc(100vh - 72px);                   /* fallback */
   min-height: calc(100svh - 72px - env(safe-area-inset-top, 0px));
@@ -79,7 +84,7 @@
   font-size: var(--text-4xl);
   font-weight: var(--weight-bold);
   line-height: 1.1;
-  color: var(--color-text-inverse);
+  color: var(--text-inverse);
   margin-bottom: var(--space-3);
   letter-spacing: -0.02em;
 }

@@ -1,0 +1,265 @@
+/* =============================================
+   GHOST AUTONOMY — COMPONENT VARIABLE LAYER
+   Phase 4: Per-component tokens + neumorphic
+   application overrides.
+
+   Import order: after tokens/, before component
+   CSS files. Applies neumorphic shadows to the
+   target component categories as specified in
+   the neumorphic styling directive.
+
+   Target components:
+   - Cards (pillar-card, kb-card, artifact-card,
+     asset-card, diagram-card)
+   - Buttons (all .btn variants)
+   - Form inputs (contact page)
+   - Modal containers
+   - Navigation active indicators
+
+   NOT applied to: header bar, footer, breadcrumbs,
+   badges, tooltips, inline links.
+   ============================================= */
+
+/* ── Card component variables ─────────────────── */
+:root {
+  --card-padding:    var(--spacing-xl);        /* 32px */
+  --card-padding-sm: var(--spacing-lg);        /* 24px */
+  --card-radius:    var(--radius-lg);          /* 12px */
+  --card-border:    1px solid var(--color-border);
+
+  /* Neumorphic card shadow states */
+  --card-shadow-default:  var(--neu-shadow-raised);
+  --card-shadow-hover:    var(--neu-shadow-elevated);
+  --card-shadow-active:   var(--neu-shadow-pressed);
+
+  /* Button shadow states */
+  --btn-shadow-default:   var(--neu-shadow-raised);
+  --btn-shadow-hover:     var(--neu-shadow-elevated);
+  --btn-shadow-active:    var(--neu-shadow-pressed);
+
+  /* Input shadow (pressed/inset appearance) */
+  --input-shadow-default: var(--neu-shadow-pressed);
+  --input-shadow-focus:   var(--neu-shadow-pressed);
+
+  /* Modal shadow (most elevated) */
+  --modal-shadow:         var(--neu-shadow-prominent);
+}
+
+/* ─────────────────────────────────────────────────
+   CARDS — neumorphic raised shadow
+   Applied to: pillar-card, kb-card, artifact-card,
+   asset-card, diagram-card, layer-card
+   ───────────────────────────────────────────────── */
+
+/* Pillar cards */
+.pillar-card {
+  background: var(--color-bg);
+  border: none;
+  box-shadow: var(--card-shadow-default);
+  border-radius: var(--neu-radius-lg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pillar-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-3px);
+    border-color: transparent;
+  }
+}
+
+.pillar-card:active {
+  box-shadow: var(--card-shadow-active);
+  transform: translateY(0);
+}
+
+/* Knowledge Base cards */
+.kb-card {
+  box-shadow: var(--card-shadow-default);
+  border: none;
+  border-radius: var(--neu-radius-md);
+}
+
+.kb-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.kb-card:active {
+  box-shadow: var(--card-shadow-active);
+  transform: translateY(0);
+}
+
+/* Artifact browse cards */
+.artifact-card {
+  box-shadow: var(--card-shadow-default);
+  border: none;
+  border-radius: var(--neu-radius-lg);
+}
+
+.artifact-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Library asset cards */
+.asset-card {
+  box-shadow: var(--card-shadow-default);
+  border: none;
+}
+
+.asset-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Diagram cards */
+.diagram-card {
+  box-shadow: var(--card-shadow-default);
+  border: none;
+}
+
+.diagram-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Layer cards (safety page) */
+.layer-card {
+  box-shadow: var(--card-shadow-default);
+  border-inline-start: 4px solid var(--color-primary); /* keep accent stripe */
+  border-block-start: none;
+  border-block-end: none;
+  border-inline-end: none;
+}
+
+.layer-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ─────────────────────────────────────────────────
+   BUTTONS — neumorphic raised/pressed
+   ───────────────────────────────────────────────── */
+
+.btn {
+  box-shadow: var(--btn-shadow-default);
+  position: relative;
+}
+
+.btn:active {
+  box-shadow: var(--btn-shadow-active);
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  /* Keep brand color — neumorphic shadow uses color-aware shadows */
+  background: var(--color-primary);
+  box-shadow: 3px 3px 6px rgba(var(--color-primary-rgb), 0.35),
+              -2px -2px 5px rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:hover {
+  box-shadow: 5px 5px 10px rgba(var(--color-primary-rgb), 0.4),
+              -3px -3px 8px rgba(255, 255, 255, 0.12);
+}
+
+.btn-primary:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2),
+              inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transform: translateY(1px);
+}
+
+/* Outline and ghost buttons use neutral neumorphic */
+.btn-outline,
+.btn-outline-dark {
+  box-shadow: var(--btn-shadow-default);
+}
+
+.btn-outline:active,
+.btn-outline-dark:active {
+  box-shadow: var(--btn-shadow-active);
+}
+
+/* btn-secondary lives on dark backgrounds — neumorphic not applied
+   (flat UI chrome by directive) */
+.btn-secondary {
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────────
+   FORM INPUTS — pressed/inset appearance
+   ───────────────────────────────────────────────── */
+
+.form-input,
+.form-select,
+.form-textarea {
+  box-shadow: var(--input-shadow-default);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  box-shadow: var(--input-shadow-focus),
+              0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+  border-color: var(--color-primary);
+}
+
+/* KB search input (on dark bg) — skip neumorphic */
+.kb-search .kb-search__input {
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────────
+   MODAL CONTAINERS — most elevated
+   ───────────────────────────────────────────────── */
+
+.diagram-modal__inner {
+  box-shadow: var(--modal-shadow),
+              0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* ─────────────────────────────────────────────────
+   NAVIGATION ACTIVE INDICATORS
+   ───────────────────────────────────────────────── */
+
+/* Mega-menu active item */
+.megamenu__item[aria-current="page"],
+.megamenu__item--active {
+  box-shadow: var(--neu-shadow-pressed);
+  background: var(--header-nav-active-bg);
+}
+
+/* KB TOC active link — subtle pressed state */
+.kb-toc__link.active {
+  box-shadow: inset 2px 2px 4px var(--neu-dark-shadow),
+              inset -1px -1px 3px var(--neu-light-shadow);
+}
+
+/* Artifact tab active */
+.artifact-tab.active {
+  border-bottom-color: var(--color-primary);
+  /* no shadow — flat chrome element */
+}
+
+/* ─────────────────────────────────────────────────
+   CONTACT / KB REFINE SIDEBAR — panel elevation
+   ───────────────────────────────────────────────── */
+
+.contact-form,
+.kb-refine,
+.artifact-refine {
+  box-shadow: var(--card-shadow-default);
+}
+
+/* Founder card */
+.founder-card {
+  box-shadow: var(--card-shadow-default);
+}
+
+/* ─────────────────────────────────────────────────
+   COMPONENT-SPECIFIC SURFACE ALIASES
+   ───────────────────────────────────────────────── */
+:root {
+  /* Neumorphic gradient backgrounds (replaces flat bg where neumorphic is active) */
+  --neu-card-bg:       var(--neu-gradient-raised);
+  --neu-card-bg-hover: var(--neu-gradient-pressed);
+}

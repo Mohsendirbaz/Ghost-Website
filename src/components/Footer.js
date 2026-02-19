@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
 import './Footer.css';
 
@@ -109,6 +110,7 @@ function buildPages(t, lang) {
 
 export default function Footer() {
   const { lang, toggleLang } = useLang();
+  const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
   const t = copy[lang];
   const pages = buildPages(t, lang);
@@ -124,9 +126,19 @@ export default function Footer() {
             <span className="logo-word">Ghost Autonomy</span>
           </Link>
           <p className="footer__tagline">{t.footer.tagline}</p>
-          <button className="footer__lang-btn" onClick={toggleLang}>
-            {t.nav.switchLang}
-          </button>
+          <div className="footer__toggles">
+            <button
+              className="footer__theme-btn"
+              onClick={toggleTheme}
+              aria-label={t.nav.themeToggleAriaLabel}
+              aria-pressed={isDark}
+            >
+              {isDark ? t.nav.switchToLight : t.nav.switchToDark}
+            </button>
+            <button className="footer__lang-btn" onClick={toggleLang}>
+              {t.nav.switchLang}
+            </button>
+          </div>
         </div>
 
         {/* Labelled icon nav */}

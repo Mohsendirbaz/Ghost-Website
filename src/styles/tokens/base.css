@@ -1,0 +1,141 @@
+/* =============================================
+   GHOST AUTONOMY — BASE TOKENS (Theme-Independent)
+   System B canonical names. Theme-independent tokens:
+   spacing, typography, radii, flat shadows, transitions,
+   z-index, container, font stacks, neumorphic shadow structure.
+   ============================================= */
+
+:root {
+  /* ── Spacing — semantic scale (System B canonical) ── */
+  --spacing-2xs: 0.125rem;   /* 2px */
+  --spacing-xs:  0.25rem;    /* 4px */
+  --spacing-sm:  0.5rem;     /* 8px */
+  --spacing-md:  1rem;       /* 16px */
+  --spacing-lg:  1.5rem;     /* 24px */
+  --spacing-xl:  2rem;       /* 32px */
+  --spacing-2xl: 3rem;       /* 48px */
+  --spacing-3xl: 4rem;       /* 64px */
+  --spacing-4xl: 5rem;       /* 80px */
+  --spacing-5xl: 6rem;       /* 96px */
+  --spacing-6xl: 8rem;       /* 128px */
+
+  /* Fluid section spacing */
+  --space-fluid-sm: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+  --space-fluid-md: clamp(1rem, 2vw + 0.5rem, 2rem);
+  --space-fluid-lg: clamp(2rem, 4vw + 0.5rem, 4rem);
+  --space-fluid-xl: clamp(3rem, 6vw + 0.5rem, 6rem);
+
+  /* ── Typography — fluid scale (System B names, extends to 5xl) ── */
+  --font-size-xs:   clamp(0.6875rem, 0.65rem + 0.1vw, 0.75rem);     /* 11–12px */
+  --font-size-sm:   clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);   /* 13–14px */
+  --font-size-base: clamp(0.9375rem, 0.88rem + 0.25vw, 1rem);       /* 15–16px */
+  --font-size-md:   clamp(0.9375rem, 0.88rem + 0.25vw, 1rem);       /* alias for base */
+  --font-size-lg:   clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);     /* 17–20px */
+  --font-size-xl:   clamp(1.25rem, 1.05rem + 0.85vw, 1.563rem);     /* 20–25px */
+  --font-size-2xl:  clamp(1.5rem, 1.15rem + 1.5vw, 1.953rem);       /* 24–31px */
+  --font-size-3xl:  clamp(1.75rem, 1.2rem + 2.3vw, 2.441rem);       /* 28–39px */
+  --font-size-4xl:  clamp(2rem, 1.2rem + 3.4vw, 3.052rem);          /* 32–49px */
+  --font-size-5xl:  clamp(2.25rem, 1.1rem + 4.8vw, 3.815rem);       /* 36–61px */
+  /* Note: 5xl extends System B cap (2.25rem) to match System A top end */
+
+  /* ── Font weights ── */
+  --font-weight-light:    300;
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ── Line heights ── */
+  --line-height-tight:   1.25;
+  --line-height-normal:  1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ── Font stacks (bilingual — preserved from System A) ── */
+  --font-primary-latin:   'Inter', system-ui, -apple-system, sans-serif;
+  --font-primary-persian: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+
+  /* ── Border radius ── */
+  --radius-sm:   0.25rem;   /* 4px */
+  --radius-md:   0.5rem;    /* 8px */
+  --radius-lg:   0.75rem;   /* 12px */
+  --radius-xl:   1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* Neumorphic-specific radii (slightly larger) */
+  --neu-radius-sm: 0.5rem;      /* 8px */
+  --neu-radius-md: 0.625rem;    /* 10px */
+  --neu-radius-lg: 0.9375rem;   /* 15px */
+
+  /* ── Flat shadows — dual-layer (System B) ── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.10);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.20), 0 4px 6px rgba(0,0,0,0.15);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.18);
+  --shadow-2xl: 0 24px 80px rgba(0,0,0,0.25), 0 12px 24px rgba(0,0,0,0.18);
+
+  /* ── Overlay ── */
+  --overlay-bg: rgba(0, 0, 0, 0.65);
+
+  /* ── On-dark surface helpers (hero, KB hero, CTA — always dark bg) ── */
+  --hero-text-dim:         rgba(255, 255, 255, 0.6);
+  --hero-text-muted:       rgba(255, 255, 255, 0.4);
+  --hero-tab-border:       rgba(255, 255, 255, 0.2);
+  --hero-tab-hover-bg:     rgba(255, 255, 255, 0.08);
+  --hero-tab-hover-border: rgba(255, 255, 255, 0.4);
+
+  /* ── Button on-dark variants (btn-secondary on hero/CTA backgrounds) ── */
+  --btn-secondary-border:        rgba(255, 255, 255, 0.5);
+  --btn-secondary-hover-bg:      rgba(255, 255, 255, 0.1);
+  --btn-secondary-hover-border:  rgba(255, 255, 255, 0.8);
+
+  /* ── Neumorphic shadow color anchors — defaults match light theme ── */
+  /* Overridden per theme in light-theme.css / dark-theme.css */
+  --neu-dark-shadow:  rgba(163, 177, 198, 0.5);
+  --neu-light-shadow: rgba(255, 255, 255, 0.8);
+
+  /* ── Neumorphic shadow structures (reference theme color anchors above) ── */
+  --neu-shadow-flat:     0 0 0 transparent;
+  --neu-shadow-raised:   3px 3px 6px var(--neu-dark-shadow),
+                        -3px -3px 6px var(--neu-light-shadow);
+  --neu-shadow-pressed:  inset 4px 4px 8px var(--neu-dark-shadow),
+                        inset -4px -4px 8px var(--neu-light-shadow);
+  --neu-shadow-elevated: 5px 5px 10px var(--neu-dark-shadow),
+                        -5px -5px 10px var(--neu-light-shadow);
+  --neu-shadow-prominent: 8px 8px 16px var(--neu-dark-shadow),
+                         -8px -8px 16px var(--neu-light-shadow);
+
+  /* ── Transitions ── */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   350ms ease;
+  --transition-fast-dur:   0.15s;
+  --transition-base-dur:   0.25s;
+  --transition-medium-dur: 0.3s;
+  --transition-slow-dur:   0.5s;
+  --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:          cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:         cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:      cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-bounce:      cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Z-index scale ── */
+  --z-index-base:           0;
+  --z-index-dropdown:       1000;
+  --z-index-sticky:         1020;
+  --z-index-fixed:          1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal:          1050;
+  --z-index-popover:        1060;
+  --z-index-tooltip:        1070;
+
+  /* ── Container ── */
+  --container-max:     1440px;
+  --container-padding: clamp(1rem, 3vw, 3rem);
+
+  /* ── Breakpoint reference values (for JS usage — cannot be used in @media) ── */
+  --breakpoint-sm:  480px;
+  --breakpoint-md:  744px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1440px;
+  --breakpoint-xxl: 1920px;
+}

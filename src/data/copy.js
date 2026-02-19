@@ -22,6 +22,9 @@ export const copy = {
       searchPlaceholder: "Search…",
       searchAriaLabel: "Search site",
       switchLangAriaLabel: "Switch to Persian",
+      switchToDark: "Dark",
+      switchToLight: "Light",
+      themeToggleAriaLabel: "Toggle color theme",
       navGroups: {
         explore: "Explore",
         learn: "Learn",
@@ -343,6 +346,9 @@ export const copy = {
       searchPlaceholder: "جستجو…",
       searchAriaLabel: "جستجو در سایت",
       switchLangAriaLabel: "تغییر به انگلیسی",
+      switchToDark: "تاریک",
+      switchToLight: "روشن",
+      themeToggleAriaLabel: "تغییر رنگ‌بندی",
       navGroups: {
         explore: "کاوش",
         learn: "یادگیری",
