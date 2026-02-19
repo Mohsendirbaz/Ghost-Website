@@ -7,7 +7,7 @@
  * Search switches the lanes into a results list.
  */
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';

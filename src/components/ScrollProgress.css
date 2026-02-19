@@ -1,0 +1,33 @@
+/* ─── Scroll Progress Component ──────────────────────────────────────────── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  background: var(--color-primary);
+  transform-origin: left;
+  transition: transform 100ms ease-out;
+  will-change: transform;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress__bar {
+    transition: none;
+  }
+}
+
+/* RTL support */
+[dir="rtl"] .scroll-progress__bar {
+  transform-origin: right;
+}

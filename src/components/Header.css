@@ -29,6 +29,12 @@
   justify-content: space-between;
   height: 72px;
   gap: var(--space-2);
+  transition: height var(--transition-base);
+}
+
+/* Collapse height when scrolled */
+.header--scrolled .header__inner {
+  height: 60px;
 }
 
 /* ─── Logo ──────────────────────────────────────────────────────────────────── */

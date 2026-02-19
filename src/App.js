@@ -8,6 +8,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
 import Home from './pages/Home';
 import Technology from './pages/Technology';
 import Science from './pages/Science';
@@ -73,9 +75,11 @@ function AppShell() {
   return (
     <>
       <LangSync />
+      <ScrollProgress />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
       <CartWidget />
+      <BackToTop />
       <div className="page-wrapper">
         <Routes>
           <Route path="/" element={<Navigate to="/en" replace />} />
