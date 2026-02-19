@@ -32,6 +32,7 @@ export default function Safety() {
         <div className="container">
           <p className="section-eyebrow">{t.layersEyebrow}</p>
           <h2 className="section-title">{t.layersTitle}</h2>
+          {t.layersIntro && <p className="section-block__body">{t.layersIntro}</p>}
           <div className="safety-layers__grid">
             {[
               { num: lang === 'en' ? 'Layer 1' : 'لایه ۱', title: t.layer1Title, body: t.layer1Body },
@@ -46,6 +47,7 @@ export default function Safety() {
               </div>
             ))}
           </div>
+          {t.layersOutro && <p className="section-block__body">{t.layersOutro}</p>}
         </div>
       </section>
 
@@ -54,6 +56,7 @@ export default function Safety() {
         title={t.validationTitle}
         body={t.validationBody}
         points={t.validationPoints}
+        note={t.validationNote}
         gray
         alt
       />
@@ -66,7 +69,8 @@ export default function Safety() {
       <FAQAccordion title={t.faqTitle} items={t.faqs} />
 
       <CTABand
-        title={lang === 'en' ? 'Safety is our foundation. Let\'s discuss yours.' : 'ایمنی پایه ماست. بیایید در مورد پایه شما صحبت کنیم.'}
+        title={lang === 'en' ? 'Safety is an engineering commitment, not a feature set.' : 'ایمنی یک تعهد مهندسی است، نه یک مجموعه ویژگی.'}
+        body={lang === 'en' ? 'If you are building systems where that distinction matters, we would like to talk.' : 'اگر شما در حال ساخت سیستم‌هایی هستید که این تمایز در آنها اهمیت دارد، خوشحال می‌شویم گفتگو کنیم.'}
         cta1={lang === 'en' ? 'Safety Inquiry' : 'پرس‌وجوی ایمنی'}
         cta1To={`/${lang}/contact`}
       />

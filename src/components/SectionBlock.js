@@ -7,7 +7,9 @@ export default function SectionBlock({ eyebrow, title, body, points, note, child
         <div className="section-block__text">
           {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
           {title && <h2 className="section-title">{title}</h2>}
-          {body && <p className="section-block__body">{body}</p>}
+          {body && (Array.isArray(body)
+            ? body.map((para, i) => <p key={i} className="section-block__body">{para}</p>)
+            : <p className="section-block__body">{body}</p>)}
           {points && (
             <ul className="section-block__points">
               {points.map((pt, i) => (
