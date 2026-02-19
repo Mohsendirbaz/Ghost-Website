@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider, useLang } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -134,6 +136,8 @@ export default function App() {
         <LanguageProvider>
           <CartProvider>
             <AppShell />
+            <Analytics />
+            <SpeedInsights />
           </CartProvider>
         </LanguageProvider>
       </ThemeProvider>
