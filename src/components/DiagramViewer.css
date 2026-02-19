@@ -65,10 +65,10 @@
   overflow: hidden;
 }
 
-/* Canvas */
+/* Canvas — aspect-ratio preserved with horizontal scroll for complex diagrams */
 .diagram-card__canvas {
   position: relative;
-  min-height: 220px;
+  aspect-ratio: 16 / 10;
   background: var(--color-bg-secondary);
   border-block: 1px solid var(--color-border);
   cursor: default;
@@ -84,13 +84,35 @@
   outline-offset: -2px;
 }
 
+/* Scrollable container for complex diagrams — prevents squishing */
 .diagram-card__svg-wrap {
   padding: var(--space-3);
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 .diagram-card__svg-wrap svg {
+  min-width: 600px;    /* Ensure diagrams don't compress below legibility */
   max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Diagram scroll container (used in KB reader) */
+.diagram-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  background: var(--color-bg-secondary);
+}
+
+.diagram-scroll-container svg {
+  min-width: 600px;
   height: auto;
   display: block;
 }

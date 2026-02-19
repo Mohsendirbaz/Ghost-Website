@@ -1,6 +1,7 @@
 .pillars {
-  padding-block: var(--space-12);
+  padding-block: var(--space-fluid-xl);
   background: var(--color-bg);
+  container-type: inline-size;
 }
 
 .pillars__header {
@@ -12,10 +13,39 @@
   margin-inline: auto;
 }
 
+/* Mobile-first: single column */
 .pillars__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: 1fr;
+  gap: var(--space-fluid-md);
+  container-type: inline-size;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 600px) {
+  .pillars__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Center the third card when there are exactly 3 items in 2-col grid */
+  .pillar-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .pillars__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pillar-card:last-child:nth-child(odd) {
+    grid-column: auto;
+    max-width: none;
+    justify-self: auto;
+  }
 }
 
 .pillar-card {
@@ -27,10 +57,21 @@
   box-shadow: var(--shadow-sm);
 }
 
-.pillar-card:hover {
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+/* Hover only on pointer:fine devices (not touch) */
+@media (hover: hover) and (pointer: fine) {
+  .pillar-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+}
+
+/* Touch active state instead of hover */
+@media (hover: none) {
+  .pillar-card:active {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .pillar-card__icon {
@@ -59,10 +100,19 @@
   line-height: 1.6;
 }
 
-@media (max-width: 900px) {
-  .pillars__grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin-inline: auto;
+/* Container query: adapt card when container is narrow */
+@container (max-width: 300px) {
+  .pillar-card {
+    padding: var(--space-3);
+  }
+
+  .pillar-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .pillar-card__title {
+    font-size: var(--text-lg);
   }
 }

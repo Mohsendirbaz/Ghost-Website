@@ -1,6 +1,7 @@
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
+import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABand from '../components/CTABand';
@@ -13,6 +14,10 @@ export default function Safety() {
 
   return (
     <main id="main-content">
+      <Breadcrumb crumbs={[
+        { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+        { label: copy[lang].breadcrumb.safety },
+      ]} />
       <Hero
         eyebrow={lang === 'en' ? 'Safety' : 'ایمنی'}
         h1={t.heroH1}

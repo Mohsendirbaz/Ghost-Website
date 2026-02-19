@@ -1,14 +1,36 @@
 .footer {
   background: var(--color-text-primary);
   color: var(--color-text-inverse);
-  padding-top: var(--space-10);
+  padding-top: var(--space-fluid-lg);
 }
+
+/* ─── Adaptive grid — mobile-first ──────────────────────────────────────────── */
 
 .footer__inner {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--space-8);
-  padding-bottom: var(--space-8);
+  grid-template-columns: 1fr;
+  gap: var(--space-fluid-md);
+  padding-bottom: var(--space-fluid-lg);
+}
+
+@media (min-width: 600px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;   /* Brand spans full width at 2-col */
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__inner {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: auto;      /* Brand returns to first column */
+  }
 }
 
 /* ─── Brand ──────────────────────────────────────────────────────────────────── */
@@ -53,6 +75,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: inherit;
+  min-height: 44px;
 }
 
 .footer__lang-btn:hover {
@@ -67,70 +90,63 @@
   font-weight: var(--weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);  /* raised from 0.4 for WCAG AA */
   margin-bottom: var(--space-3);
 }
 
-/* ─── Icon nav ───────────────────────────────────────────────────────────────── */
+/* ─── Labelled nav list ──────────────────────────────────────────────────────── */
 
 .footer__col--nav {
-  /* let it shrink naturally — icon nav wraps well */
+  /* let it grow naturally */
 }
 
-.footer__icon-nav {
+.footer__nav-list {
+  list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.footer__icon-link {
-  position: relative;
+.footer__nav-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+  gap: var(--space-1);
+  padding: 6px var(--space-1);
   border-radius: var(--radius-2);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
   transition: background var(--transition-fast), color var(--transition-fast);
-  flex-shrink: 0;
+  min-height: 36px;
 }
 
-.footer__icon-link svg {
-  width: 18px;
-  height: 18px;
-}
-
-.footer__icon-link:hover {
-  background: var(--color-primary);
+.footer__nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
 
-/* Tooltip */
-.footer__icon-link::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--color-text-primary);
-  font-size: 11px;
-  font-weight: var(--weight-semibold);
-  white-space: nowrap;
-  padding: 4px 8px;
-  border-radius: var(--radius-1);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+.footer__nav-item[aria-current="page"] {
+  color: var(--color-primary-light);
 }
 
-.footer__icon-link:hover::after {
-  opacity: 1;
+.footer__nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.footer__nav-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.footer__nav-label {
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
 /* ─── Legal col ──────────────────────────────────────────────────────────────── */
@@ -165,7 +181,8 @@
 
 .footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: var(--space-3) 0;
+  padding-block: var(--space-3);
+  /* padding-bottom handled by global.css safe-area-inset */
 }
 
 .footer__copy {
@@ -173,19 +190,10 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
-/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
+/* ─── Touch targets on coarse devices ───────────────────────────────────────── */
 
-@media (max-width: 768px) {
-  .footer__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  /* On mobile tooltips can overflow; position them to the right of icon */
-  .footer__icon-link::after {
-    left: calc(100% + 6px);
-    bottom: auto;
-    top: 50%;
-    transform: translateY(-50%);
+@media (pointer: coarse) {
+  .footer__nav-item {
+    min-height: 44px;
   }
 }

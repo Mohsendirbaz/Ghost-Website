@@ -710,30 +710,89 @@ a.kb-chip:hover {
   stroke-linecap: round;
 }
 
-/* ── Three-column reader grid ──────────────────────────────────────────────── */
+/* ── Three-column reader grid — mobile-first ───────────────────────────────── */
 
 .kb-reader-grid {
   display: grid;
-  grid-template-columns: var(--kb-toc-width) 1fr var(--kb-aside-width);
+  grid-template-columns: 1fr;   /* Mobile: single column */
   gap: 0;
   max-width: 1440px;
   margin: 0 auto;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100svh - 120px);
   align-items: start;
 }
 
-/* ── TOC navigator (left column) ───────────────────────────────────────────── */
+/* Tablet: TOC + content */
+@media (min-width: 744px) {
+  .kb-reader-grid {
+    grid-template-columns: var(--kb-toc-width) 1fr;
+  }
+}
+
+/* Desktop: full 3-column */
+@media (min-width: 1200px) {
+  .kb-reader-grid {
+    grid-template-columns: var(--kb-toc-width) 1fr var(--kb-aside-width);
+  }
+}
+
+/* ── TOC navigator (left column) — mobile-first ────────────────────────────── */
 
 .kb-toc-nav {
-  position: sticky;
-  top: 60px;
-  height: calc(100vh - 60px);
+  position: static;
+  height: auto;
+  max-height: 300px;
   overflow-y: auto;
   padding: var(--space-3) var(--space-2);
-  border-inline-end: var(--kb-card-border);
+  border-inline-end: none;
+  border-bottom: var(--kb-card-border);
   background: var(--color-surface);
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
+}
+
+/* Tablet: sticky sidebar TOC — slide-in overlay between 744–1199px */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .kb-toc-nav {
+    position: fixed;
+    inset-block: calc(72px + env(safe-area-inset-top, 0px)) 0;
+    inset-inline-start: 0;
+    width: var(--kb-toc-width);
+    height: auto;
+    max-height: none;
+    z-index: 100;
+    background: var(--color-bg);
+    box-shadow: var(--shadow-xl);
+    transform: translateX(-100%);
+    transition: transform var(--kb-transition-med);
+    border-bottom: none;
+    border-inline-end: var(--kb-card-border);
+  }
+
+  [dir="rtl"] .kb-toc-nav {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    transform: translateX(100%);
+  }
+
+  .kb-toc-nav.open {
+    transform: translateX(0);
+  }
+}
+
+/* Desktop: sticky inline */
+@media (min-width: 1200px) {
+  .kb-toc-nav {
+    position: sticky;
+    top: calc(72px + env(safe-area-inset-top, 0px));
+    height: calc(100svh - 72px - env(safe-area-inset-top, 0px));
+    max-height: none;
+    overflow-y: auto;
+    border-inline-end: var(--kb-card-border);
+    border-bottom: none;
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .kb-toc-nav::-webkit-scrollbar {
@@ -1286,17 +1345,14 @@ a.kb-chip:hover {
    RESPONSIVE LAYOUT
    ============================================================================= */
 
-@media (max-width: 1024px) {
-  .kb-reader-grid {
-    grid-template-columns: var(--kb-toc-width) 1fr;
-  }
-
+/* Aside hidden below 1200px (handled in reader grid above) */
+@media (max-width: 1199px) {
   .kb-aside {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 743px) {
   /* Browse page */
   .kb-body {
     grid-template-columns: 1fr;
@@ -1308,10 +1364,6 @@ a.kb-chip:hover {
     order: -1;
   }
 
-  .kb-hero__title {
-    font-size: var(--text-2xl);
-  }
-
   .kb-lane__track {
     grid-auto-columns: 220px;
   }
@@ -1321,18 +1373,6 @@ a.kb-chip:hover {
   }
 
   /* Reader page */
-  .kb-reader-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .kb-toc-nav {
-    position: static;
-    height: auto;
-    max-height: 300px;
-    border-inline-end: none;
-    border-bottom: var(--kb-card-border);
-  }
-
   .kb-reader-surface {
     padding: var(--space-3);
   }

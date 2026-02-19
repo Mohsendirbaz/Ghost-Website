@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
+import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
 import './Page.css';
@@ -12,6 +13,10 @@ export default function Company() {
 
   return (
     <main id="main-content">
+      <Breadcrumb crumbs={[
+        { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+        { label: copy[lang].breadcrumb.company },
+      ]} />
       <Hero
         eyebrow={lang === 'en' ? 'Company' : 'شرکت'}
         h1={t.heroH1}

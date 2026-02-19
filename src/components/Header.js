@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
+import SearchOverlay from './SearchOverlay';
 import './Header.css';
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -91,6 +92,12 @@ const Icons = {
       <path d="M7 12h6" />
     </svg>
   ),
+  search: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="9" r="6" />
+      <path d="M13.5 13.5L17 17" />
+    </svg>
+  ),
   menu: (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
       <circle cx="6" cy="6" r="1.2" fill="currentColor" stroke="none" />
@@ -116,6 +123,16 @@ const Icons = {
 
 function MegaMenuPanel({ open, groups, onClose, lang }) {
   const location = useLocation();
+  const panelRef = useRef(null);
+
+  // Focus trap within the open panel
+  useEffect(() => {
+    if (!open || !panelRef.current) return;
+    const focusableEls = panelRef.current.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex="0"]'
+    );
+    if (focusableEls.length) focusableEls[0].focus();
+  }, [open]);
 
   return (
     <>
@@ -123,6 +140,7 @@ function MegaMenuPanel({ open, groups, onClose, lang }) {
         <div className="header__backdrop" onClick={onClose} aria-hidden="true" />
       )}
       <nav
+        ref={panelRef}
         className={`megamenu${open ? ' megamenu--open' : ''}`}
         aria-label="Site navigation"
         aria-hidden={!open}
@@ -138,6 +156,7 @@ function MegaMenuPanel({ open, groups, onClose, lang }) {
                   className={`megamenu__item${location.pathname === link.to ? ' active' : ''}`}
                   onClick={onClose}
                   tabIndex={open ? 0 : -1}
+                  aria-current={location.pathname === link.to ? 'page' : undefined}
                 >
                   <span className="megamenu__item-icon">{Icons[link.iconKey]}</span>
                   <span className="megamenu__item-text">
@@ -160,11 +179,12 @@ export default function Header() {
   const { lang, toggleLang } = useLang();
   const t = copy[lang].nav;
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   // Close on route change
-  useEffect(() => { setMenuOpen(false); }, [location]);
+  useEffect(() => { setMenuOpen(false); setSearchOpen(false); }, [location]);
 
   // Scroll shadow
   useEffect(() => {
@@ -175,7 +195,7 @@ export default function Header() {
 
   // ESC to close
   const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Escape') setMenuOpen(false);
+    if (e.key === 'Escape') { setMenuOpen(false); setSearchOpen(false); }
   }, []);
 
   useEffect(() => {
@@ -183,40 +203,55 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Nav groups
+  // Task-oriented nav groups
   const isRtl = lang === 'fa';
   const navGroups = [
     {
-      id: 'company',
-      label: isRtl ? 'شرکت' : 'Company',
+      id: 'explore',
+      label: t.navGroups.explore,
       links: [
-        { label: t.home,        to: `/${lang}`,             iconKey: 'home',        desc: isRtl ? 'صفحه اصلی' : 'Start here' },
-        { label: t.technology,  to: `/${lang}/technology`,  iconKey: 'technology',  desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
-        { label: t.science,     to: `/${lang}/science`,     iconKey: 'science',     desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
-        { label: t.safety,      to: `/${lang}/safety`,      iconKey: 'safety',      desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
-        { label: t.partners,    to: `/${lang}/partners`,    iconKey: 'partners',    desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
-        { label: t.company,     to: `/${lang}/company`,     iconKey: 'company',     desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
-        { label: t.contact,     to: `/${lang}/contact`,     iconKey: 'contact',     desc: isRtl ? 'تماس با ما' : 'Get in touch' },
+        { label: t.home,        to: `/${lang}`,            iconKey: 'home',        desc: isRtl ? 'صفحه اصلی' : 'Start here' },
+        { label: t.technology,  to: `/${lang}/technology`, iconKey: 'technology',  desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
+        { label: t.science,     to: `/${lang}/science`,    iconKey: 'science',     desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
+        { label: t.safety,      to: `/${lang}/safety`,     iconKey: 'safety',      desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
       ],
     },
     {
-      id: 'research',
-      label: isRtl ? 'تحقیق و دانش' : 'Research',
+      id: 'learn',
+      label: t.navGroups.learn,
       links: [
-        { label: t.perspective,   to: `/${lang}/perspective`,   iconKey: 'perspective',   desc: isRtl ? 'دیدگاه صنعت' : 'Industry perspective' },
-        { label: t.architecture,  to: `/${lang}/architecture`,  iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
-        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`,iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۷ فصل' : '8 parts · 47 chapters' },
+        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۷ فصل' : '8 parts · 47 chapters' },
+        { label: t.architecture,  to: `/${lang}/architecture`,   iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
+        { label: t.perspective,   to: `/${lang}/perspective`,    iconKey: 'perspective',   desc: isRtl ? 'دیدگاه صنعت' : 'Industry perspective' },
+        { label: t.artifacts,     to: `/${lang}/artifacts`,      iconKey: 'artifacts',     desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
       ],
     },
     {
-      id: 'resources',
-      label: isRtl ? 'منابع' : 'Resources',
+      id: 'connect',
+      label: t.navGroups.connect,
       links: [
-        { label: t.artifacts,        to: `/${lang}/artifacts`,      iconKey: 'artifacts',        desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
-        { label: t.libraryAssets,    to: `/${lang}/library/assets`, iconKey: 'libraryAssets',    desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
-        { label: t.documentArchive,  to: `/${lang}/library`,        iconKey: 'documentArchive',  desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
+        { label: t.company,  to: `/${lang}/company`,  iconKey: 'company',  desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
+        { label: t.partners, to: `/${lang}/partners`, iconKey: 'partners', desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
+        { label: t.contact,  to: `/${lang}/contact`,  iconKey: 'contact',  desc: isRtl ? 'تماس با ما' : 'Get in touch' },
       ],
     },
+    {
+      id: 'library',
+      label: t.navGroups.library,
+      links: [
+        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
+        { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
+      ],
+    },
+  ];
+
+  // Flat top-level links for desktop primary nav (Explore group)
+  const primaryNavLinks = [
+    { label: t.technology, to: `/${lang}/technology` },
+    { label: t.science,    to: `/${lang}/science` },
+    { label: t.safety,     to: `/${lang}/safety` },
+    { label: t.partners,   to: `/${lang}/partners` },
+    { label: t.company,    to: `/${lang}/company` },
   ];
 
   return (
@@ -227,6 +262,20 @@ export default function Header() {
           <span className="logo-word">Ghost Autonomy</span>
         </Link>
 
+        {/* Desktop primary nav — hidden below 900px */}
+        <nav className="header__primary-nav" aria-label="Primary navigation">
+          {primaryNavLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`header__nav-link${location.pathname === link.to ? ' active' : ''}`}
+              aria-current={location.pathname === link.to ? 'page' : undefined}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
         <MegaMenuPanel
           open={menuOpen}
           groups={navGroups}
@@ -235,10 +284,21 @@ export default function Header() {
         />
 
         <div className="header__actions">
+          {/* Search trigger */}
+          <button
+            className="header__search-btn"
+            onClick={() => setSearchOpen(o => !o)}
+            aria-label={t.searchAriaLabel}
+            aria-expanded={searchOpen}
+          >
+            <span className="header__search-btn-icon">{Icons.search}</span>
+            <span className="header__search-btn-label header__search-label-desktop">{t.search}</span>
+          </button>
+
           <button
             className="header__lang-btn"
             onClick={toggleLang}
-            aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
+            aria-label={t.switchLangAriaLabel}
           >
             {t.switchLang}
           </button>
@@ -248,18 +308,26 @@ export default function Header() {
           <button
             className={`header__menu-btn${menuOpen ? ' open' : ''}`}
             onClick={() => setMenuOpen(o => !o)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? t.close : t.menu}
             aria-expanded={menuOpen}
           >
             <span className="header__menu-btn-icon">
               {menuOpen ? Icons.close : Icons.menu}
             </span>
             <span className="header__menu-btn-label">
-              {menuOpen ? (isRtl ? 'بستن' : 'Close') : (isRtl ? 'منو' : 'Menu')}
+              {menuOpen ? t.close : t.menu}
             </span>
           </button>
         </div>
       </div>
+
+      {/* Search overlay */}
+      {searchOpen && (
+        <SearchOverlay
+          lang={lang}
+          onClose={() => setSearchOpen(false)}
+        />
+      )}
     </header>
   );
 }

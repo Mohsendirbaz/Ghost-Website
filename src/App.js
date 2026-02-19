@@ -24,6 +24,8 @@ import MultiAgentSystem from './pages/MultiAgentSystem';
 import './styles/global.css';
 import './App.css';
 
+const BASE_URL = 'https://ghost-website-kappa.vercel.app';
+
 function LangSync() {
   const { setLang } = useLang();
   const location = useLocation();
@@ -33,6 +35,33 @@ function LangSync() {
     if (segment === 'fa') setLang('fa');
     else if (segment === 'en') setLang('en');
   }, [location.pathname, setLang]);
+
+  // Inject hreflang alternate links for SEO
+  useEffect(() => {
+    const pathname = location.pathname;
+    // Swap /en/ ↔ /fa/ for alternate
+    const enPath = pathname.startsWith('/fa')
+      ? pathname.replace(/^\/fa/, '/en')
+      : pathname.startsWith('/en') ? pathname : `/en${pathname}`;
+    const faPath = pathname.startsWith('/en')
+      ? pathname.replace(/^\/en/, '/fa')
+      : pathname.startsWith('/fa') ? pathname : `/fa${pathname}`;
+
+    // Remove any existing hreflang links
+    document.querySelectorAll('link[hreflang]').forEach((el) => el.remove());
+
+    const addLink = (hreflang, href) => {
+      const link = document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = hreflang;
+      link.href = `${BASE_URL}${href}`;
+      document.head.appendChild(link);
+    };
+
+    addLink('en', enPath);
+    addLink('fa', faPath);
+    addLink('x-default', enPath);
+  }, [location.pathname]);
 
   return null;
 }

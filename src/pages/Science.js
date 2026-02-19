@@ -1,6 +1,7 @@
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
+import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
 import { PhysicsAbstraction } from '../components/AbstractVisual';
@@ -12,6 +13,10 @@ export default function Science() {
 
   return (
     <main id="main-content">
+      <Breadcrumb crumbs={[
+        { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+        { label: copy[lang].breadcrumb.science },
+      ]} />
       <Hero
         eyebrow={lang === 'en' ? 'Science' : 'علم'}
         h1={t.heroH1}

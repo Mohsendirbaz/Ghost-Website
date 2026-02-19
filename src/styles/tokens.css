@@ -2,6 +2,19 @@
    GHOST AUTONOMY — DESIGN TOKENS
    ============================================= */
 
+/*
+ * BREAKPOINT SYSTEM (min-width, mobile-first)
+ * ──────────────────────────────────────────────
+ * --bp-sm:   480px   (large phones, landscape phones)
+ * --bp-md:   744px   (iPad Mini portrait — first 2-col)
+ * --bp-lg:   1024px  (iPad landscape / small laptop)
+ * --bp-xl:   1440px  (default laptop / container-max)
+ * --bp-xxl:  1920px  (large desktop / external monitor)
+ *
+ * USAGE: @media (min-width: 744px) { ... }
+ * All component CSS should be authored MOBILE-FIRST.
+ */
+
 :root {
   /* Brand Colors */
   --color-primary: #FF6B35;
@@ -41,16 +54,24 @@
   --space-12: 96px;
   --space-16: 128px;
 
-  /* Typography */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.563rem;
-  --text-2xl: 1.953rem;
-  --text-3xl: 2.441rem;
-  --text-4xl: 3.052rem;
-  --text-5xl: 3.815rem;
+  /* Fluid spacing for section padding and container gutters */
+  --space-fluid-sm: clamp(8px, 1vw + 4px, 16px);       /* 8–16px */
+  --space-fluid-md: clamp(16px, 2vw + 8px, 32px);      /* 16–32px */
+  --space-fluid-lg: clamp(32px, 4vw + 8px, 64px);      /* 32–64px */
+  --space-fluid-xl: clamp(48px, 6vw + 8px, 96px);      /* 48–96px */
+
+  /* Fluid Typography: clamp(min, preferred, max)
+     Preferred uses viewport-relative units for smooth scaling.
+     Min = value at 375px viewport, Max = value at 1440px viewport. */
+  --text-xs:   clamp(0.6875rem, 0.65rem + 0.1vw, 0.75rem);      /* 11–12px */
+  --text-sm:   clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);     /* 13–14px */
+  --text-base: clamp(0.9375rem, 0.88rem + 0.25vw, 1rem);         /* 15–16px */
+  --text-lg:   clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);       /* 17–20px */
+  --text-xl:   clamp(1.25rem, 1.05rem + 0.85vw, 1.563rem);       /* 20–25px */
+  --text-2xl:  clamp(1.5rem, 1.15rem + 1.5vw, 1.953rem);         /* 24–31px */
+  --text-3xl:  clamp(1.75rem, 1.2rem + 2.3vw, 2.441rem);         /* 28–39px */
+  --text-4xl:  clamp(2rem, 1.2rem + 3.4vw, 3.052rem);            /* 32–49px */
+  --text-5xl:  clamp(2.25rem, 1.1rem + 4.8vw, 3.815rem);         /* 36–61px */
 
   --weight-regular: 400;
   --weight-medium: 500;
@@ -88,13 +109,19 @@
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
 
-  /* Container */
+  /* Container — fluid padding replaces hard breakpoint toggle */
   --container-max: 1440px;
-  --container-padding: var(--space-6);
+  --container-padding: clamp(16px, 3vw, 48px);
 }
 
-@media (max-width: 768px) {
-  :root {
-    --container-padding: var(--space-2);
-  }
+/* Persian-specific type scale adjustment:
+   Vazirmatn renders slightly larger at the same point size as Inter */
+[lang="fa"] {
+  --text-scale-adjust: 0.94;
+}
+
+[lang="fa"] .hero__h1,
+[lang="fa"] .section-title,
+[lang="fa"] .pillar-card__title {
+  font-size: calc(var(--text-4xl) * var(--text-scale-adjust, 1));
 }

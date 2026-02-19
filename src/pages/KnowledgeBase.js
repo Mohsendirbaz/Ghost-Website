@@ -11,6 +11,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';
+import Breadcrumb from '../components/Breadcrumb';
 import { KB_PARTS, ALL_NODES, ALL_TAGS, buildPath, resolveHref } from '../data/knowledgeBase';
 import { injectJsonLd, removeJsonLd, buildIndexGraph } from '../utils/jsonld';
 import '../styles/knowledgeBase.css';
@@ -261,6 +262,10 @@ export default function KnowledgeBase() {
 
     return (
         <main id="main-content" className="kb-browse">
+            <Breadcrumb crumbs={[
+                { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+                { label: copy[lang].breadcrumb.knowledgeBase },
+            ]} />
 
             {/* ── Hero band ── */}
             <div className="kb-hero">

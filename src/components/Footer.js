@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import './Footer.css';
@@ -109,6 +109,7 @@ function buildPages(t, lang) {
 
 export default function Footer() {
   const { lang, toggleLang } = useLang();
+  const location = useLocation();
   const t = copy[lang];
   const pages = buildPages(t, lang);
 
@@ -128,22 +129,28 @@ export default function Footer() {
           </button>
         </div>
 
-        {/* Icon nav */}
+        {/* Labelled icon nav */}
         <div className="footer__col footer__col--nav">
           <h3 className="footer__col-title">{t.footer.pages}</h3>
-          <div className="footer__icon-nav">
-            {pages.map((p) => (
-              <Link
-                key={p.to}
-                to={p.to}
-                className="footer__icon-link"
-                aria-label={p.label}
-                data-tooltip={p.label}
-              >
-                {NAV_ICONS[p.iconKey]}
-              </Link>
-            ))}
-          </div>
+          <nav aria-label="Footer navigation">
+            <ul className="footer__nav-list">
+              {pages.map((p) => (
+                <li key={p.to}>
+                  <Link
+                    to={p.to}
+                    className="footer__nav-item"
+                    aria-label={p.label}
+                    aria-current={location.pathname === p.to ? 'page' : undefined}
+                  >
+                    <span className="footer__nav-icon" aria-hidden="true">
+                      {NAV_ICONS[p.iconKey]}
+                    </span>
+                    <span className="footer__nav-label">{p.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         {/* Legal + contact */}

@@ -10,6 +10,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';
+import Breadcrumb from '../components/Breadcrumb';
 import {
     useLibraryManifest,
     useFileSearch,
@@ -264,6 +265,10 @@ export default function LibraryBrowse() {
 
     return (
         <main id="main-content" className="lb-browse">
+            <Breadcrumb crumbs={[
+                { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+                { label: copy[lang].breadcrumb.documentArchive },
+            ]} />
 
             {/* ── Hero band ── */}
             <div className="lb-hero">

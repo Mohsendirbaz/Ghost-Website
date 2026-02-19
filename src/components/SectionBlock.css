@@ -1,5 +1,5 @@
 .section-block {
-  padding-block: var(--space-12);
+  padding-block: var(--space-fluid-xl);
   background: var(--color-bg);
 }
 
@@ -7,11 +7,28 @@
   background: var(--color-bg-secondary);
 }
 
+/* Mobile-first: single column */
 .section-block__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
+  grid-template-columns: 1fr;
+  gap: var(--space-fluid-md);
   align-items: center;
+}
+
+/* Two-column from iPad Mini portrait onward */
+@media (min-width: 744px) {
+  .section-block__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-fluid-lg);
+  }
+}
+
+/* Constrain max content width on ultra-wide */
+@media (min-width: 1440px) {
+  .section-block__inner {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
 }
 
 .section-block--alt .section-block__inner {
@@ -83,11 +100,16 @@
   justify-content: center;
 }
 
-@media (max-width: 900px) {
-  .section-block__inner {
-    grid-template-columns: 1fr;
-  }
+/* ── AbstractVisual sizing ── */
+.abstract-visual {
+  width: 100%;
+  max-width: clamp(280px, 30vw + 100px, 480px);
+  aspect-ratio: 4 / 3;
+  margin-inline: auto;
+}
 
+/* ── Collapse alt-text ordering on single-column ── */
+@media (max-width: 743px) {
   .section-block--alt .section-block__text {
     order: unset;
   }

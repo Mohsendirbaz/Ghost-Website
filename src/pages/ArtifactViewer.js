@@ -203,7 +203,7 @@ export default function ArtifactViewer() {
                         {isRtl ? 'کتابخانه دارایی‌ها' : 'Asset Library'}
                     </Link>
                     <span className="kb-breadcrumb__sep" aria-hidden="true">›</span>
-                    <span className="kb-breadcrumb__item kb-breadcrumb__item--current">{title}</span>
+                    <span className="kb-breadcrumb__item kb-breadcrumb__item--current" aria-current="page">{title}</span>
                 </nav>
 
                 <div className="artifact-viewer-topbar__actions">

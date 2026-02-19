@@ -3,6 +3,7 @@ import { useLang } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';
+import Breadcrumb from '../components/Breadcrumb';
 import {
     CRITICAL_ASSETS,
     HIGH_ASSETS,
@@ -237,6 +238,10 @@ export default function LibraryAssets() {
 
     return (
         <main id="main-content" className="library-assets-page">
+            <Breadcrumb crumbs={[
+                { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+                { label: copy[lang].breadcrumb.libraryAssets },
+            ]} />
             {/* Hero Section */}
             <section className="library-hero">
                 <div className="container">

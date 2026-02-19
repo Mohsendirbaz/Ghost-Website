@@ -556,7 +556,7 @@ export default function KnowledgeBaseReader() {
                             {i < breadcrumbs.length - 1 ? (
                                 <Link to={crumb.href} className="kb-breadcrumb__item">{crumb.label}</Link>
                             ) : (
-                                <span className="kb-breadcrumb__item kb-breadcrumb__item--current">{crumb.label}</span>
+                                <span className="kb-breadcrumb__item kb-breadcrumb__item--current" aria-current="page">{crumb.label}</span>
                             )}
             </span>
                     ))}

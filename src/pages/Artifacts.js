@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import AddToCartButton from '../components/AddToCartButton';
+import Breadcrumb from '../components/Breadcrumb';
 import {
     ARTIFACTS, ARTIFACT_CATEGORIES, ALL_ARTIFACT_TAGS,
 } from '../data/artifacts';
@@ -123,6 +124,10 @@ export default function Artifacts() {
 
     return (
         <main id="main-content" className="artifact-browse">
+            <Breadcrumb crumbs={[
+                { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+                { label: copy[lang].breadcrumb.artifacts },
+            ]} />
 
             {/* ── Hero ── */}
             <div className="artifact-hero">

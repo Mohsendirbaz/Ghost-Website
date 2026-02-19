@@ -1,11 +1,14 @@
 .hero {
   position: relative;
-  min-height: 620px;
   display: flex;
   align-items: center;
   overflow: hidden;
   background: linear-gradient(135deg, #0a0f1e 0%, #001a3a 50%, #0d1a2e 100%);
-  padding-block: var(--space-16) var(--space-12);
+  /* Aspect-ratio aware height — mobile-first */
+  min-height: calc(100vh - 72px);                   /* fallback */
+  min-height: calc(100svh - 72px - env(safe-area-inset-top, 0px));
+  min-height: min(calc(100svh - 72px), 800px);      /* cap at 800px on tall screens */
+  padding-block: var(--space-fluid-xl);
 }
 
 /* ── Background FX ── */
@@ -20,11 +23,12 @@
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.35;
+  will-change: transform;
 }
 
 .hero__orb--1 {
-  width: 600px;
-  height: 600px;
+  width: clamp(250px, 40vw, 600px);
+  height: clamp(250px, 40vw, 600px);
   background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
   top: -200px;
   inset-inline-end: -100px;
@@ -32,8 +36,8 @@
 }
 
 .hero__orb--2 {
-  width: 500px;
-  height: 500px;
+  width: clamp(200px, 35vw, 500px);
+  height: clamp(200px, 35vw, 500px);
   background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
   bottom: -150px;
   inset-inline-start: -50px;
@@ -46,7 +50,7 @@
   background-image:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-size: clamp(30px, 4vw, 60px) clamp(30px, 4vw, 60px);
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
 }
 
@@ -67,7 +71,7 @@
   font-weight: var(--weight-semibold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  /* Color set by global.css .hero__eyebrow rule for dark bg contrast */
   margin-bottom: var(--space-2);
 }
 
@@ -94,28 +98,24 @@
   gap: var(--space-2);
 }
 
-/* ── Mobile ── */
-@media (max-width: 768px) {
+/* ── Tablet portrait: shorter hero ── */
+@media (min-width: 744px) and (max-aspect-ratio: 3/4) {
   .hero {
-    min-height: 520px;
-    padding-block: var(--space-12) var(--space-8);
+    min-height: 60svh;
   }
+}
 
-  .hero__h1 {
-    font-size: var(--text-3xl);
+/* ── Landscape tablets and laptops ── */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: clamp(520px, 55vh, 720px);
   }
+}
 
-  .hero__sub {
-    font-size: var(--text-base);
-  }
-
-  .hero__orb--1 {
-    width: 350px;
-    height: 350px;
-  }
-
-  .hero__orb--2 {
-    width: 300px;
-    height: 300px;
+/* ── Ultra-wide ── */
+@media (min-width: 1920px) {
+  .hero {
+    min-height: 600px;
+    max-height: 720px;
   }
 }

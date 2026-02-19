@@ -1,6 +1,7 @@
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
+import Breadcrumb from '../components/Breadcrumb';
 import CTABand from '../components/CTABand';
 import DiagramGallery from '../components/DiagramGallery';
 import './Page.css';
@@ -12,6 +13,10 @@ export default function Architecture() {
 
   return (
     <main id="main-content">
+      <Breadcrumb crumbs={[
+        { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+        { label: copy[lang].breadcrumb.architecture },
+      ]} />
       <Hero
         eyebrow={t.heroEyebrow}
         h1={t.heroH1}
