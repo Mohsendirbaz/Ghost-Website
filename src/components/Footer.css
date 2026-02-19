@@ -1,36 +1,14 @@
 .footer {
   background: var(--footer-bg);
   color: var(--footer-text);
-  padding-top: var(--space-fluid-lg);
+  padding-top: var(--space-10);
 }
-
-/* ─── Adaptive grid — mobile-first ──────────────────────────────────────────── */
 
 .footer__inner {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-fluid-md);
-  padding-bottom: var(--space-fluid-lg);
-}
-
-@media (min-width: 600px) {
-  .footer__inner {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer__brand {
-    grid-column: 1 / -1;   /* Brand spans full width at 2-col */
-  }
-}
-
-@media (min-width: 1024px) {
-  .footer__inner {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  .footer__brand {
-    grid-column: auto;      /* Brand returns to first column */
-  }
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-8);
+  padding-bottom: var(--space-8);
 }
 
 /* ─── Brand ──────────────────────────────────────────────────────────────────── */
@@ -63,8 +41,6 @@
   font-style: italic;
 }
 
-/* ─── Footer toggles container ──────────────────────────────────────────────── */
-
 .footer__toggles {
   display: flex;
   flex-wrap: wrap;
@@ -72,26 +48,7 @@
   align-items: center;
 }
 
-.footer__theme-btn {
-  align-self: flex-start;
-  padding: 8px 18px;
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--footer-btn-border);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  color: var(--footer-text);
-  background: transparent;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  font-family: inherit;
-  min-height: 44px;
-}
-
-.footer__theme-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
+.footer__theme-btn,
 .footer__lang-btn {
   align-self: flex-start;
   padding: 8px 18px;
@@ -107,6 +64,7 @@
   min-height: 44px;
 }
 
+.footer__theme-btn:hover,
 .footer__lang-btn:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -123,59 +81,66 @@
   margin-bottom: var(--space-3);
 }
 
-/* ─── Labelled nav list ──────────────────────────────────────────────────────── */
+/* ─── Icon nav grid (36×36 icons with CSS tooltip) ──────────────────────────── */
 
 .footer__col--nav {
-  /* let it grow naturally */
+  /* let it shrink naturally — icon nav wraps well */
 }
 
-.footer__nav-list {
-  list-style: none;
+.footer__icon-nav {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.footer__nav-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  padding: 6px var(--space-1);
-  border-radius: var(--radius-2);
-  text-decoration: none;
-  color: var(--footer-text);
-  transition: background var(--transition-fast), color var(--transition-fast);
-  min-height: 36px;
-}
-
-.footer__nav-item:hover {
-  background: var(--footer-hover-bg);
-  color: var(--text-inverse);
-}
-
-.footer__nav-item[aria-current="page"] {
-  color: var(--color-primary-light);
-}
-
-.footer__nav-icon {
+.footer__icon-link {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-2);
+  background: var(--footer-hover-bg);
+  color: var(--footer-text-dim);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
   flex-shrink: 0;
-  color: inherit;
 }
 
-.footer__nav-icon svg {
-  width: 16px;
-  height: 16px;
+.footer__icon-link svg {
+  width: 18px;
+  height: 18px;
 }
 
-.footer__nav-label {
-  font-size: var(--text-sm);
-  line-height: 1.3;
+.footer__icon-link:hover {
+  background: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+/* Tooltip on hover */
+.footer__icon-link::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
   white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--radius-1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.footer__icon-link:hover::after {
+  opacity: 1;
 }
 
 /* ─── Legal col ──────────────────────────────────────────────────────────────── */
@@ -219,10 +184,19 @@
   color: var(--footer-text-faint);
 }
 
-/* ─── Touch targets on coarse devices ───────────────────────────────────────── */
+/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
 
-@media (pointer: coarse) {
-  .footer__nav-item {
-    min-height: 44px;
+@media (max-width: 768px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* On mobile tooltips can overflow; position them to the right of icon */
+  .footer__icon-link::after {
+    left: calc(100% + 6px);
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
