@@ -223,55 +223,40 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Task-oriented nav groups
+  // Original 3-column nav groups (Company / Research / Resources)
   const isRtl = lang === 'fa';
   const navGroups = [
     {
-      id: 'explore',
-      label: t.navGroups.explore,
+      id: 'company',
+      label: isRtl ? 'شرکت' : 'Company',
       links: [
-        { label: t.home,        to: `/${lang}`,            iconKey: 'home',        desc: isRtl ? 'صفحه اصلی' : 'Start here' },
-        { label: t.technology,  to: `/${lang}/technology`, iconKey: 'technology',  desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
-        { label: t.science,     to: `/${lang}/science`,    iconKey: 'science',     desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
-        { label: t.safety,      to: `/${lang}/safety`,     iconKey: 'safety',      desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
+        { label: t.home,       to: `/${lang}`,            iconKey: 'home',       desc: isRtl ? 'صفحه اصلی' : 'Start here' },
+        { label: t.technology, to: `/${lang}/technology`, iconKey: 'technology', desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
+        { label: t.science,    to: `/${lang}/science`,    iconKey: 'science',    desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
+        { label: t.safety,     to: `/${lang}/safety`,     iconKey: 'safety',     desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
+        { label: t.partners,   to: `/${lang}/partners`,   iconKey: 'partners',   desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
+        { label: t.company,    to: `/${lang}/company`,    iconKey: 'company',    desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
+        { label: t.contact,    to: `/${lang}/contact`,    iconKey: 'contact',    desc: isRtl ? 'تماس با ما' : 'Get in touch' },
       ],
     },
     {
-      id: 'learn',
-      label: t.navGroups.learn,
+      id: 'research',
+      label: isRtl ? 'تحقیق و دانش' : 'Research',
       links: [
-        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۷ فصل' : '8 parts · 47 chapters' },
-        { label: t.architecture,  to: `/${lang}/architecture`,   iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
         { label: t.perspective,   to: `/${lang}/perspective`,    iconKey: 'perspective',   desc: isRtl ? 'دیدگاه صنعت' : 'Industry perspective' },
-        { label: t.artifacts,     to: `/${lang}/artifacts`,      iconKey: 'artifacts',     desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
+        { label: t.architecture,  to: `/${lang}/architecture`,   iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
+        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۷ فصل' : '8 parts · 47 chapters' },
       ],
     },
     {
-      id: 'connect',
-      label: t.navGroups.connect,
+      id: 'resources',
+      label: isRtl ? 'منابع' : 'Resources',
       links: [
-        { label: t.company,  to: `/${lang}/company`,  iconKey: 'company',  desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
-        { label: t.partners, to: `/${lang}/partners`, iconKey: 'partners', desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
-        { label: t.contact,  to: `/${lang}/contact`,  iconKey: 'contact',  desc: isRtl ? 'تماس با ما' : 'Get in touch' },
-      ],
-    },
-    {
-      id: 'library',
-      label: t.navGroups.library,
-      links: [
-        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
+        { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
         { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
+        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
       ],
     },
-  ];
-
-  // Flat top-level links for desktop primary nav (Explore group)
-  const primaryNavLinks = [
-    { label: t.technology, to: `/${lang}/technology` },
-    { label: t.science,    to: `/${lang}/science` },
-    { label: t.safety,     to: `/${lang}/safety` },
-    { label: t.partners,   to: `/${lang}/partners` },
-    { label: t.company,    to: `/${lang}/company` },
   ];
 
   return (
@@ -281,20 +266,6 @@ export default function Header() {
           <span className="logo-mark">GA</span>
           <span className="logo-word">Ghost Autonomy</span>
         </Link>
-
-        {/* Desktop primary nav — hidden below 900px */}
-        <nav className="header__primary-nav" aria-label="Primary navigation">
-          {primaryNavLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`header__nav-link${location.pathname === link.to ? ' active' : ''}`}
-              aria-current={location.pathname === link.to ? 'page' : undefined}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
 
         <MegaMenuPanel
           open={menuOpen}
