@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import Hero from '../components/Hero';
+import { HeroPrimary } from '../components/Hero';
 import ThreePillars from '../components/ThreePillars';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <main id="main-content">
-      <Hero
+      <HeroPrimary
         h1={t.heroH1}
         subhead={t.heroSub}
         cta1={t.cta1}

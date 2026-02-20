@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import Hero from '../components/Hero';
+import { HeroMinimal } from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import './Page.css';
 
@@ -24,8 +24,7 @@ export default function Contact() {
         { label: copy[lang].breadcrumb.home, to: `/${lang}` },
         { label: copy[lang].breadcrumb.contact },
       ]} />
-      <Hero
-        eyebrow={lang === 'en' ? 'Contact' : 'تماس'}
+      <HeroMinimal
         h1={t.heroH1}
         subhead={t.heroSub}
       />
