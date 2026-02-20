@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import Hero from '../components/Hero';
+import { HeroSecondary } from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
+import SectionBlockFullBleed from '../components/SectionBlockFullBleed';
+import Timeline from '../components/Timeline';
 import CTABand from '../components/CTABand';
 import './Page.css';
 
@@ -17,7 +19,7 @@ export default function Company() {
         { label: copy[lang].breadcrumb.home, to: `/${lang}` },
         { label: copy[lang].breadcrumb.company },
       ]} />
-      <Hero
+      <HeroSecondary
         eyebrow={lang === 'en' ? 'Company' : 'شرکت'}
         h1={t.heroH1}
         subhead={t.heroSub}
@@ -44,6 +46,43 @@ export default function Company() {
           </div>
         </div>
       </section>
+
+      <SectionBlockFullBleed
+        eyebrow={lang === 'en' ? 'Our Journey' : 'سفر ما'}
+        title={lang === 'en' ? 'Building the Future of Autonomy' : 'ساخت آینده خودکاری'}
+        overlay={true}
+      >
+        <Timeline items={[
+          {
+            year: '2017',
+            title: lang === 'en' ? 'Founded at IIT' : 'تأسیس در IIT',
+            description: lang === 'en'
+              ? 'Ghost Autonomy born from breakthrough physics research at Illinois Institute of Technology'
+              : 'Ghost Autonomy از تحقیقات پیشرفته فیزیک در موسسه فناوری ایلینوی متولد شد',
+          },
+          {
+            year: '2019',
+            title: lang === 'en' ? 'EPU Prototype' : 'نمونه اولیه EPU',
+            description: lang === 'en'
+              ? 'First Euler Processing Unit prototype demonstrates 100x efficiency gains over traditional approaches'
+              : 'اولین نمونه اولیه واحد پردازش اویلر 100 برابر بهبود کارایی را نسبت به رویکردهای سنتی نشان داد',
+          },
+          {
+            year: '2021',
+            title: lang === 'en' ? 'Production Architecture' : 'معماری تولید',
+            description: lang === 'en'
+              ? 'EPU architecture finalized and ready for automotive integration'
+              : 'معماری EPU نهایی شد و برای ادغام خودرو آماده شد',
+          },
+          {
+            year: '2024',
+            title: lang === 'en' ? 'Global Expansion' : 'توسعه جهانی',
+            description: lang === 'en'
+              ? 'Partnerships with leading automotive manufacturers across three continents'
+              : 'مشارکت با تولیدکنندگان خودرو پیشرو در سه قاره',
+          },
+        ]} />
+      </SectionBlockFullBleed>
 
       <SectionBlock
         eyebrow={t.careersEyebrow}

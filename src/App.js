@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider, useLang } from './context/LanguageContext';
@@ -10,6 +11,7 @@ import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
+import { FactPanel, SavedFactsBoard } from './components/FactEngine';
 import Home from './pages/Home';
 import Technology from './pages/Technology';
 import Science from './pages/Science';
@@ -71,7 +73,24 @@ function LangSync() {
   return null;
 }
 
+// Page transition wrapper
+function PageTransition({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function AppShell() {
+  const location = useLocation();
+  const [savedFactsOpen, setSavedFactsOpen] = useState(false);
+
   return (
     <>
       <LangSync />
@@ -80,53 +99,57 @@ function AppShell() {
       <Header />
       <CartWidget />
       <BackToTop />
+      <FactPanel onOpenSaved={() => setSavedFactsOpen(true)} />
+      <SavedFactsBoard open={savedFactsOpen} onClose={() => setSavedFactsOpen(false)} />
       <div className="page-wrapper">
-        <Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Navigate to="/en" replace />} />
-          <Route path="/en" element={<Home />} />
-          <Route path="/en/technology" element={<Technology />} />
-          <Route path="/en/science" element={<Science />} />
-          <Route path="/en/safety" element={<Safety />} />
-          <Route path="/en/partners" element={<Partners />} />
-          <Route path="/en/company" element={<Company />} />
-          <Route path="/en/contact" element={<Contact />} />
-          <Route path="/en/perspective" element={<Perspective />} />
-          <Route path="/en/architecture" element={<Architecture />} />
+          <Route path="/en" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/en/technology" element={<PageTransition><Technology /></PageTransition>} />
+          <Route path="/en/science" element={<PageTransition><Science /></PageTransition>} />
+          <Route path="/en/safety" element={<PageTransition><Safety /></PageTransition>} />
+          <Route path="/en/partners" element={<PageTransition><Partners /></PageTransition>} />
+          <Route path="/en/company" element={<PageTransition><Company /></PageTransition>} />
+          <Route path="/en/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/en/perspective" element={<PageTransition><Perspective /></PageTransition>} />
+          <Route path="/en/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           {/* Knowledge Base — browse index */}
-          <Route path="/en/knowledge-base" element={<KnowledgeBase />} />
-          <Route path="/fa/knowledge-base" element={<KnowledgeBase />} />
+          <Route path="/en/knowledge-base" element={<PageTransition><KnowledgeBase /></PageTransition>} />
+          <Route path="/fa/knowledge-base" element={<PageTransition><KnowledgeBase /></PageTransition>} />
           {/* Knowledge Base — reader (Part → Chapter → Section) */}
-          <Route path="/en/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
-          <Route path="/fa/knowledge-base/:partSlug" element={<KnowledgeBaseReader />} />
-          <Route path="/en/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
-          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug" element={<KnowledgeBaseReader />} />
-          <Route path="/en/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
-          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<KnowledgeBaseReader />} />
+          <Route path="/en/knowledge-base/:partSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
+          <Route path="/fa/knowledge-base/:partSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
+          <Route path="/en/knowledge-base/:partSlug/:chapterSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
+          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
+          <Route path="/en/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
+          <Route path="/fa/knowledge-base/:partSlug/:chapterSlug/:sectionSlug" element={<PageTransition><KnowledgeBaseReader /></PageTransition>} />
           {/* Artifact library */}
-          <Route path="/en/artifacts" element={<Artifacts />} />
-          <Route path="/fa/artifacts" element={<Artifacts />} />
-          <Route path="/en/artifacts/:slug" element={<ArtifactViewer />} />
-          <Route path="/fa/artifacts/:slug" element={<ArtifactViewer />} />
+          <Route path="/en/artifacts" element={<PageTransition><Artifacts /></PageTransition>} />
+          <Route path="/fa/artifacts" element={<PageTransition><Artifacts /></PageTransition>} />
+          <Route path="/en/artifacts/:slug" element={<PageTransition><ArtifactViewer /></PageTransition>} />
+          <Route path="/fa/artifacts/:slug" element={<PageTransition><ArtifactViewer /></PageTransition>} />
           {/* Library Assets */}
-          <Route path="/en/library/assets" element={<LibraryAssets />} />
-          <Route path="/fa/library/assets" element={<LibraryAssets />} />
+          <Route path="/en/library/assets" element={<PageTransition><LibraryAssets /></PageTransition>} />
+          <Route path="/fa/library/assets" element={<PageTransition><LibraryAssets /></PageTransition>} />
           {/* Document Archive */}
-          <Route path="/en/library" element={<LibraryBrowse />} />
-          <Route path="/fa/library" element={<LibraryBrowse />} />
+          <Route path="/en/library" element={<PageTransition><LibraryBrowse /></PageTransition>} />
+          <Route path="/fa/library" element={<PageTransition><LibraryBrowse /></PageTransition>} />
           {/* Multi-Agent System */}
-          <Route path="/en/multi-agent-system" element={<MultiAgentSystem />} />
-          <Route path="/fa/multi-agent-system" element={<MultiAgentSystem />} />
-          <Route path="/fa" element={<Home />} />
-          <Route path="/fa/technology" element={<Technology />} />
-          <Route path="/fa/science" element={<Science />} />
-          <Route path="/fa/safety" element={<Safety />} />
-          <Route path="/fa/partners" element={<Partners />} />
-          <Route path="/fa/company" element={<Company />} />
-          <Route path="/fa/contact" element={<Contact />} />
-          <Route path="/fa/perspective" element={<Perspective />} />
-          <Route path="/fa/architecture" element={<Architecture />} />
+          <Route path="/en/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
+          <Route path="/fa/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
+          <Route path="/fa" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/fa/technology" element={<PageTransition><Technology /></PageTransition>} />
+          <Route path="/fa/science" element={<PageTransition><Science /></PageTransition>} />
+          <Route path="/fa/safety" element={<PageTransition><Safety /></PageTransition>} />
+          <Route path="/fa/partners" element={<PageTransition><Partners /></PageTransition>} />
+          <Route path="/fa/company" element={<PageTransition><Company /></PageTransition>} />
+          <Route path="/fa/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/fa/perspective" element={<PageTransition><Perspective /></PageTransition>} />
+          <Route path="/fa/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           <Route path="*" element={<Navigate to="/en" replace />} />
-        </Routes>
+          </Routes>
+        </AnimatePresence>
       </div>
       <Footer />
     </>

@@ -1,8 +1,10 @@
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import Hero from '../components/Hero';
+import { HeroSecondary } from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
+import SectionBlockSticky from '../components/SectionBlockSticky';
+import StatsBand from '../components/StatsBand';
 import CTABand from '../components/CTABand';
 import { EpuVisual } from '../components/AbstractVisual';
 import './Page.css';
@@ -17,7 +19,7 @@ export default function Technology() {
         { label: copy[lang].breadcrumb.home, to: `/${lang}` },
         { label: copy[lang].breadcrumb.technology },
       ]} />
-      <Hero
+      <HeroSecondary
         eyebrow={lang === 'en' ? 'Technology' : 'فناوری'}
         h1={t.heroH1}
         subhead={t.heroSub}
@@ -30,14 +32,21 @@ export default function Technology() {
         gray
       />
 
-      <SectionBlock
+      <SectionBlockSticky
         eyebrow={t.approachEyebrow}
         title={t.approachTitle}
         body={t.approachBody}
-        alt
+        visualPosition="right"
       >
         <EpuVisual />
-      </SectionBlock>
+      </SectionBlockSticky>
+
+      <StatsBand stats={[
+        { value: '100', suffix: 'x', label: lang === 'en' ? 'More Efficient than GPU' : 'کارآمدتر از GPU' },
+        { value: '10', suffix: 'x', label: lang === 'en' ? 'Lower Power Consumption' : 'مصرف انرژی کمتر' },
+        { value: '1000', suffix: '+', label: lang === 'en' ? 'Physics Calculations/sec' : 'محاسبات فیزیکی در ثانیه' },
+        { value: '99.99', suffix: '%', label: lang === 'en' ? 'Reliability' : 'قابلیت اطمینان' },
+      ]} />
 
       <SectionBlock
         eyebrow={t.epuEyebrow}
