@@ -98,7 +98,7 @@
 .kb-hero__title {
     font-size: clamp(2rem, 4vw, 3.4rem);
     font-weight: 800;
-    color: #ffffff;
+    color: var(--text-inverse);
     line-height: 1.12;
     margin-bottom: var(--space-3);
     letter-spacing: -0.03em;
@@ -193,7 +193,7 @@
 
 .kb-scope-tab:hover,
 .kb-scope-tab.active {
-    color: #ffffff;
+    color: var(--text-inverse);
     background: rgba(255,107,53,0.25);
     border-color: var(--color-primary);
 }
@@ -1006,7 +1006,7 @@
 
 .kb-aside__tag:hover {
     background: var(--color-primary);
-    color: #ffffff;
+    color: var(--text-inverse);
     border-color: var(--color-primary);
 }
 

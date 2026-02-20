@@ -65,13 +65,13 @@
 
 .saved-facts-board__action-btn--export:hover {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--text-inverse);
   border-color: var(--color-primary);
 }
 
 .saved-facts-board__action-btn--clear:hover {
   background: var(--color-danger, #dc2626);
-  color: #ffffff;
+  color: var(--text-inverse);
   border-color: var(--color-danger, #dc2626);
 }
 

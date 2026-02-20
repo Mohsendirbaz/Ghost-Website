@@ -41,11 +41,11 @@
 
 .anchor-nav__item--active {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .anchor-nav__item--active .anchor-nav__dot {
-  background: #ffffff;
+  background: var(--text-inverse);
 }
 
 .anchor-nav__dot {

@@ -59,7 +59,7 @@
 }
 
 .section-block-full-bleed--overlay .section-block-full-bleed__title {
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .section-block-full-bleed__body {

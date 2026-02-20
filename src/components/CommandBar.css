@@ -91,7 +91,7 @@
 
 .command-bar__item[aria-selected="true"] {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .command-bar__item:hover {

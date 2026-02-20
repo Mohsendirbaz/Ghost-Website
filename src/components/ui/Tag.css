@@ -60,12 +60,12 @@
 
 .tag--filled.tag--success {
   background: var(--color-success, #22c55e);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .tag--filled.tag--warning {
   background: var(--color-warning, #f59e0b);
-  color: #000000;
+  color: var(--surface-base);
 }
 
 .tag--filled.tag--danger {

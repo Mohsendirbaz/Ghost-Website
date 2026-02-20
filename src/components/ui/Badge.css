@@ -49,17 +49,17 @@
 
 .badge--success {
   background: var(--color-success, #22c55e);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .badge--warning {
   background: var(--color-warning, #f59e0b);
-  color: #000000;
+  color: var(--surface-base);
 }
 
 .badge--danger {
   background: var(--color-danger, #ef4444);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .badge--neutral {

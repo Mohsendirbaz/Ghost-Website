@@ -101,13 +101,13 @@
 
 .fact-card__action--save:hover {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--text-inverse);
   border-color: var(--color-primary);
 }
 
 .fact-card__action--remove:hover {
   background: var(--color-danger, #dc2626);
-  color: #ffffff;
+  color: var(--text-inverse);
   border-color: var(--color-danger, #dc2626);
 }
 

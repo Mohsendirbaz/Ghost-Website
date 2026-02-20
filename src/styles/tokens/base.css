@@ -36,6 +36,7 @@
   --font-size-3xl:  clamp(1.75rem, 1.2rem + 2.3vw, 2.441rem);       /* 28–39px */
   --font-size-4xl:  clamp(2rem, 1.2rem + 3.4vw, 3.052rem);          /* 32–49px */
   --font-size-5xl:  clamp(2.25rem, 1.1rem + 4.8vw, 3.815rem);       /* 36–61px */
+  --font-size-6xl:  clamp(2.5rem, 1rem + 6.4vw, 4.768rem);          /* 40–76px */
   /* Note: 5xl extends System B cap (2.25rem) to match System A top end */
 
   /* ── Font weights ── */
