@@ -1,0 +1,109 @@
+/* ─── ComparisonTable ──────────────────────────────────────────────── */
+
+.comparison-table__mobile {
+  display: none;
+}
+
+.comparison-table__desktop {
+  overflow-x: auto;
+}
+
+.comparison-table__desktop table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface-base);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.comparison-table__desktop thead {
+  background: var(--surface-secondary);
+}
+
+.comparison-table__desktop th,
+.comparison-table__desktop td {
+  padding: var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.comparison-table__desktop th {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.comparison-table__desktop td {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.comparison-table__feature {
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.comparison-table__highlight {
+  background: rgba(var(--color-primary-rgb), 0.05);
+  position: relative;
+}
+
+.comparison-table__highlight::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-primary);
+}
+
+@media (max-width: 1023px) {
+  .comparison-table__desktop {
+    display: none;
+  }
+
+  .comparison-table__mobile {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .comparison-table__card {
+    background: var(--surface-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+
+  .comparison-table__card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  .comparison-table__card-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .comparison-table__card-row:last-child {
+    border-bottom: none;
+  }
+
+  .comparison-table__card-feature {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--text-primary);
+  }
+
+  .comparison-table__card-value {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+}

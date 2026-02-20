@@ -6,12 +6,15 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider, useLang } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { ToastProvider } from './components/ui/Toast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import { FactPanel, SavedFactsBoard } from './components/FactEngine';
+import CookieBanner from './components/CookieBanner';
+import CommandBar from './components/CommandBar';
 import Home from './pages/Home';
 import Technology from './pages/Technology';
 import Science from './pages/Science';
@@ -90,6 +93,14 @@ function PageTransition({ children }) {
 function AppShell() {
   const location = useLocation();
   const [savedFactsOpen, setSavedFactsOpen] = useState(false);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem('ghost-cookie-consent');
+    if (consent === 'accepted') {
+      setAnalyticsEnabled(true);
+    }
+  }, []);
 
   return (
     <>
@@ -99,8 +110,13 @@ function AppShell() {
       <Header />
       <CartWidget />
       <BackToTop />
+      <CommandBar />
       <FactPanel onOpenSaved={() => setSavedFactsOpen(true)} />
       <SavedFactsBoard open={savedFactsOpen} onClose={() => setSavedFactsOpen(false)} />
+      <CookieBanner
+        onAccept={() => setAnalyticsEnabled(true)}
+        onReject={() => setAnalyticsEnabled(false)}
+      />
       <div className="page-wrapper">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -152,6 +168,12 @@ function AppShell() {
         </AnimatePresence>
       </div>
       <Footer />
+      {analyticsEnabled && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
     </>
   );
 }
@@ -160,13 +182,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <LanguageProvider>
-          <CartProvider>
-            <AppShell />
-            <Analytics />
-            <SpeedInsights />
-          </CartProvider>
-        </LanguageProvider>
+        <ToastProvider>
+          <LanguageProvider>
+            <CartProvider>
+              <AppShell />
+            </CartProvider>
+          </LanguageProvider>
+        </ToastProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
