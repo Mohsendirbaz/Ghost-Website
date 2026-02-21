@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ShieldCheck, TrendingUp, Layers, Lock, BarChart3, CalendarClock } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLang } from "../../context/LanguageContext";
 
 const sleeves = {
   en: {
@@ -55,7 +55,7 @@ const sleeves = {
 };
 
 export function HowItWorks() {
-  const { lang } = useLanguage();
+  const { lang } = useLang();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const data = sleeves[lang];

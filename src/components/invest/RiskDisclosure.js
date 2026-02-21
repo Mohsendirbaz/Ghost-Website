@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { AlertTriangle, ExternalLink } from "lucide-react";
-import { useLanguage } from "../../context/LanguageContext";
+import { useLang } from "../../context/LanguageContext";
 
 const risks = {
   en: [
@@ -27,7 +27,7 @@ const risks = {
 };
 
 export function RiskDisclosure() {
-  const { lang } = useLanguage();
+  const { lang } = useLang();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
