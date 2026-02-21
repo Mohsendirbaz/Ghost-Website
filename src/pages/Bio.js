@@ -112,19 +112,19 @@ const Bio = () => {
               </div>
             </motion.div>
 
-            {/* Right: Bio + Navigation */}
-            <div>
+            {/* Right: Bio + Navigation + Content */}
+            <div className="flex flex-col gap-6">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-lg text-muted-foreground leading-relaxed mb-6"
+                className="text-lg text-muted-foreground leading-relaxed"
               >
                 {t(founderTagline, lang)}
               </motion.p>
 
               {/* Tab Navigation */}
-              <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+              <div className="flex gap-2 overflow-x-auto pb-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
@@ -140,15 +140,9 @@ const Bio = () => {
                   </button>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Content Sections */}
-      <section className="py-12">
-        <div className="container-ghost">
-          <div className="max-w-4xl mx-auto">
+              {/* Tab Content */}
+              <div>
               {/* Perspective Section */}
               {activeSection === "perspective" && (
                 <motion.div
@@ -298,6 +292,8 @@ const Bio = () => {
                   </div>
                 </motion.div>
               )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
