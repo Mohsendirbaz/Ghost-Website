@@ -31,7 +31,6 @@ Thumbs.db
 .gitignore
 
 # Large local folders not needed for deployment
-"New folder/"
 Documents/
 
 # Python cache (from TeaSpace nested project)

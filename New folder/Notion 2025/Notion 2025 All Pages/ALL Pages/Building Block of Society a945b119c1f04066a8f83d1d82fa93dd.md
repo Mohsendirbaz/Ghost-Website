@@ -1,1 +1,0 @@
-# Building Block of Society

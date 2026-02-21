@@ -1,8 +1,9 @@
 /**
  * scripts/organizeLibrary.js
  *
- * Classifies and copies serveable files from "New folder/" into
- * public/library/[category]/ and generates public/library/manifest.json.
+ * [DEPRECATED] Previously classified and copied serveable files into
+ * public/library/[category]/ and generated public/library/manifest.json.
+ * Source directory has been removed; library files are now maintained directly.
  *
  * Run: node scripts/organizeLibrary.js
  */
