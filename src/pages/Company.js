@@ -38,10 +38,26 @@ export default function Company() {
           <h2 className="section-title" style={{marginBottom:'var(--space-6)'}}>{lang === 'en' ? 'Leadership' : 'رهبری'}</h2>
           <div className="founder-card">
             <div className="founder-card__avatar">MD</div>
-            <div>
+            <div style={{flex: 1}}>
               <h3 className="founder-card__name">{t.founderTitle}</h3>
               <p className="founder-card__role">{t.founderRole}</p>
-              <p className="founder-card__bio">{t.founderBio}</p>
+              <p className="founder-card__bio" style={{marginBottom: 'var(--space-4)'}}>{t.founderBio}</p>
+              <Link
+                to={`/${lang}/bio`}
+                className="btn btn-secondary"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontSize: 'var(--text-sm)',
+                  padding: '10px 20px'
+                }}
+              >
+                {lang === 'en' ? 'Read Full Bio' : 'خواندن بیوگرافی کامل'}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
             </div>
           </div>
         </div>

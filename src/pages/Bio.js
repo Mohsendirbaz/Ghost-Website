@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Download, Linkedin, ExternalLink } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import { copy } from '../data/copy';
+import Breadcrumb from '../components/Breadcrumb';
 import {
   founderName,
   founderTitle,
@@ -20,7 +22,12 @@ const Bio = () => {
   const { lang } = useLanguage();
 
   return (
-    <>
+    <main id="main-content">
+      <Breadcrumb crumbs={[
+        { label: copy[lang].breadcrumb.home, to: `/${lang}` },
+        { label: copy[lang].breadcrumb.company, to: `/${lang}/company` },
+        { label: lang === 'en' ? 'Founder Bio' : 'بیوگرافی بنیان‌گذار' },
+      ]} />
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-40" />
@@ -100,7 +107,7 @@ const Bio = () => {
           </Tabs>
         </div>
       </section>
-    </>
+    </main>
   );
 };
 
