@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ShieldCheck, TrendingUp, Clock, Smile, Users, Landmark } from "lucide-react";
-import { useLang } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 const reasons = [
   {
@@ -55,7 +55,7 @@ const reasons = [
 ];
 
 export function WhyInvest() {
-  const { lang } = useLang();
+  const { lang } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 

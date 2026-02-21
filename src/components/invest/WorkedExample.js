@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useLang } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 export function WorkedExample() {
-  const { lang } = useLang();
+  const { lang } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 

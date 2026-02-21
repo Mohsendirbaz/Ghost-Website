@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
-import { useLang } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { supabase } from "../../integrations/supabase/client";
 
 export function WaitlistForm() {
-  const { lang } = useLang();
+  const { lang } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 

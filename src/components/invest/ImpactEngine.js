@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Heart, Award, GraduationCap, Briefcase, BarChart3, Users } from "lucide-react";
-import { useLang } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 const lanes = [
   {
@@ -49,7 +49,7 @@ const governance = [
 ];
 
 export function ImpactEngine() {
-  const { lang } = useLang();
+  const { lang } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 

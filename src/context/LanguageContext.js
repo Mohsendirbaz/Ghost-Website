@@ -27,3 +27,6 @@ export function LanguageProvider({ children }) {
 export function useLang() {
   return useContext(LanguageContext);
 }
+
+// Alias for compatibility with Lovable components
+export const useLanguage = useLang;

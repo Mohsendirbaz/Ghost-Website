@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Shield, Clock, TrendingUp, Heart, Star } from "lucide-react";
-import { useLang } from "../../context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 export function InvestHero() {
-  const { lang } = useLang();
+  const { lang } = useLanguage();
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">

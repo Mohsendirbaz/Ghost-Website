@@ -32,6 +32,7 @@ import LibraryAssets from './pages/LibraryAssets';
 import LibraryBrowse from './pages/LibraryBrowse';
 import MultiAgentSystem from './pages/MultiAgentSystem';
 import Invest from './pages/Invest';
+import Bio from './pages/Bio';
 import './styles/global.css';
 import './App.css';
 
@@ -158,6 +159,9 @@ function AppShell() {
           {/* Invest / Crowdsourcing */}
           <Route path="/en/invest" element={<PageTransition><Invest /></PageTransition>} />
           <Route path="/fa/invest" element={<PageTransition><Invest /></PageTransition>} />
+          {/* Bio / Founder */}
+          <Route path="/en/bio" element={<PageTransition><Bio /></PageTransition>} />
+          <Route path="/fa/bio" element={<PageTransition><Bio /></PageTransition>} />
           <Route path="/fa" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/fa/technology" element={<PageTransition><Technology /></PageTransition>} />
           <Route path="/fa/science" element={<PageTransition><Science /></PageTransition>} />
