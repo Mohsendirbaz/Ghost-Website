@@ -93,6 +93,13 @@ const Icons = {
       <path d="M7 12h6" />
     </svg>
   ),
+  invest: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="10" cy="10" r="7" />
+      <path d="M10 6v4l3 2" />
+      <path d="M6 3l1 2M14 3l-1 2M3 10h2M15 10h2" />
+    </svg>
+  ),
   search: (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="9" cy="9" r="6" />
@@ -236,6 +243,7 @@ export default function Header() {
         { label: t.safety,     to: `/${lang}/safety`,     iconKey: 'safety',     desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
         { label: t.partners,   to: `/${lang}/partners`,   iconKey: 'partners',   desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
         { label: t.company,    to: `/${lang}/company`,    iconKey: 'company',    desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
+        { label: t.invest,     to: `/${lang}/invest`,     iconKey: 'invest',     desc: isRtl ? 'سرمایه‌گذاری و تامین مالی جمعی' : 'Investment & crowdfunding' },
         { label: t.contact,    to: `/${lang}/contact`,    iconKey: 'contact',    desc: isRtl ? 'تماس با ما' : 'Get in touch' },
       ],
     },
