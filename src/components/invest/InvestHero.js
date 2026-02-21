@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Shield, Clock, TrendingUp, Heart, Star } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 export function InvestHero() {
   const { lang } = useLanguage();

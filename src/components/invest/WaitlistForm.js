@@ -1,14 +1,12 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
-
-type AccountType = "individual" | "utma" | "ugma";
+import { useLanguage } from "../../context/LanguageContext";
+import { supabase } from "../../integrations/supabase/client";
 
 export function WaitlistForm() {
   const { lang } = useLanguage();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const [form, setForm] = useState({
@@ -17,18 +15,18 @@ export function WaitlistForm() {
     phone: "",
     investment_amount_usd: "",
     message: "",
-    account_type: "individual" as AccountType,
+    account_type: "individual",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const accountTypes: { value: AccountType; en: string; fa: string }[] = [
+  const accountTypes = [
     { value: "individual", en: "Individual", fa: "فردی" },
     { value: "utma", en: "UTMA (Minor)", fa: "UTMA (زیر ۱۸)" },
     { value: "ugma", en: "UGMA (Minor)", fa: "UGMA (زیر ۱۸)" },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.full_name.trim() || !form.email.trim()) return;
 

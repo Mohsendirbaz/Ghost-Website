@@ -1,11 +1,11 @@
 import { useState, useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calculator, TrendingUp, TrendingDown, Minus, ShieldCheck } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 export function InvestSimulator() {
   const { lang } = useLanguage();
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const [investedAmount, setInvestedAmount] = useState(10000);
