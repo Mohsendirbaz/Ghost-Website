@@ -148,12 +148,7 @@ const Bio = () => {
       {/* Content Sections */}
       <section className="py-12">
         <div className="container-ghost">
-          <div className="grid lg:grid-cols-[300px_1fr] gap-8">
-            {/* Spacer for sticky sidebar alignment */}
-            <div className="hidden lg:block" />
-
-            {/* Main Content */}
-            <div>
+          <div className="max-w-4xl mx-auto">
               {/* Perspective Section */}
               {activeSection === "perspective" && (
                 <motion.div
@@ -303,7 +298,6 @@ const Bio = () => {
                   </div>
                 </motion.div>
               )}
-            </div>
           </div>
         </div>
       </section>
