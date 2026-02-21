@@ -11,7 +11,7 @@ export function InvestSimulator() {
   const [investedAmount, setInvestedAmount] = useState(10000);
   const [max365, setMax365] = useState(40);
   const [currentPrice, setCurrentPrice] = useState(90);
-  const [units, setUnits] = useState(100);
+  const [units, setUnits] = useState(250);
 
   const result = useMemo(() => {
     const redemptionPrice = Math.min(currentPrice, max365);
@@ -27,9 +27,8 @@ export function InvestSimulator() {
   const isAboveCap = currentPrice > max365;
 
   return (
-    <section className="py-24 relative" ref={ref}>
-      <div className="absolute inset-0" style={{ background: "var(--neu-gradient-raised)" }} />
-      <div className="absolute inset-0 hero-grid opacity-10" />
+    <section id="simulator" className="py-24 relative bg-gradient-to-b from-background/50 to-background" ref={ref}>
+      <div className="absolute inset-0 hero-grid opacity-5" />
 
       <div className="container-ghost relative">
         <motion.div
@@ -38,22 +37,27 @@ export function InvestSimulator() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-raised mb-4">
-            <Calculator className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">
-              {lang === "fa" ? "شبیه‌ساز Empower10" : "Empower10 Simulator"}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full neu-raised mb-6">
+            <Calculator className="w-5 h-5 text-primary" />
+            <span className="text-base font-semibold text-foreground">
+              {lang === "fa" ? "شبیه‌ساز تعاملی" : "Interactive Simulator"}
             </span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {lang === "fa" ? "سناریوی خود را محاسبه کنید" : "Model Your Scenario"}
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+            {lang === "fa" ? "سناریوی خود را محاسبه کنید" : "Calculate Your Scenario"}
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {lang === "fa"
+              ? "ببینید چگونه Max365 و حفاظت اصل سرمایه همزمان کار می‌کنند"
+              : "See how Max365 and principal protection work together"}
+          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-3xl mx-auto neu-elevated p-8 rounded-xl"
+          className="max-w-4xl mx-auto neu-elevated p-8 md:p-10 rounded-xl shadow-xl"
         >
           {/* Inputs */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

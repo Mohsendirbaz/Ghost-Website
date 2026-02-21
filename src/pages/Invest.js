@@ -4,9 +4,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import { InvestHero } from "../components/invest/InvestHero";
 import { HowItWorks } from "../components/invest/HowItWorks";
 import { WhyInvest } from "../components/invest/WhyInvest";
-import { ImpactEngine } from "../components/invest/ImpactEngine";
 import { InvestSimulator } from "../components/invest/InvestSimulator";
-import { WorkedExample } from "../components/invest/WorkedExample";
 import { RiskDisclosure } from "../components/invest/RiskDisclosure";
 import { WaitlistForm } from "../components/invest/WaitlistForm";
 
@@ -14,18 +12,39 @@ const Invest = () => {
   const { lang } = useLang();
 
   return (
-    <main id="main-content">
+    <main id="main-content" className="invest-page">
       <Breadcrumb crumbs={[
         { label: copy[lang].breadcrumb.home, to: `/${lang}` },
         { label: lang === 'en' ? 'Invest' : 'سرمایه‌گذاری' },
       ]} />
+
+      {/* Hero with compact key metrics */}
       <InvestHero />
-      <HowItWorks />
-      <WhyInvest />
-      <ImpactEngine />
+
+      {/* Two-column explainer */}
+      <section className="py-16 bg-background">
+        <div className="container-ghost">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left: How It Works */}
+            <div>
+              <HowItWorks />
+            </div>
+
+            {/* Right: Why Invest */}
+            <div className="lg:sticky lg:top-24">
+              <WhyInvest />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Simulator - Full Width, Prominent */}
       <InvestSimulator />
-      <WorkedExample />
+
+      {/* Risk Disclosure */}
       <RiskDisclosure />
+
+      {/* Waitlist Form */}
       <WaitlistForm />
     </main>
   );

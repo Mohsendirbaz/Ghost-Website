@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { AlertTriangle, ExternalLink } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 
 const risks = {
@@ -34,7 +34,7 @@ export function RiskDisclosure() {
   const items = risks[lang];
 
   return (
-    <section className="py-24" ref={ref}>
+    <section className="py-24 bg-background/50" ref={ref}>
       <div className="container-ghost">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,30 +42,33 @@ export function RiskDisclosure() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neu-raised mb-4">
-            <AlertTriangle className="w-4 h-4 text-destructive" />
-            <span className="text-sm font-medium text-muted-foreground">
-              {lang === "fa" ? "افشای ریسک" : "Key Risks & Disclosures"}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full neu-raised mb-6">
+            <AlertTriangle className="w-5 h-5 text-destructive" />
+            <span className="text-base font-semibold text-foreground">
+              {lang === "fa" ? "افشای ریسک" : "Risk Disclosure"}
             </span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {lang === "fa" ? "ریسک‌ها — باید بخوانید" : "Key Risks — Must Read"}
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+            {lang === "fa" ? "ریسک‌های کلیدی" : "Key Risks"}
           </h2>
+          <p className="text-lg text-muted-foreground">
+            {lang === "fa" ? "قبل از سرمایه‌گذاری بخوانید" : "Read before investing"}
+          </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto grid gap-3">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-4">
           {items.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="neu-raised p-5 flex gap-4"
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="neu-raised p-6 flex gap-4 hover:shadow-lg transition-shadow"
             >
               <AlertTriangle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+                <h3 className="font-display text-base font-bold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>
           ))}
