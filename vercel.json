@@ -14,7 +14,7 @@
       ]
     },
     {
-      "source": "/:asset(.*\\.(jpg|jpeg|png|gif|svg|webp|ico))",
+      "source": "/:path*.:ext(jpg|jpeg|png|gif|svg|webp|ico)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/:asset(.*\\.(js|css))",
+      "source": "/:path*.:ext(js|css)",
       "headers": [
         {
           "key": "Cache-Control",
