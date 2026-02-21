@@ -1,0 +1,9 @@
+Develop on main (or feature branch if needed)
+
+Push to main → Vercel auto-builds Production
+
+Experimental branches (optional) → use Vercel previews / deployment hooks
+
+No more master / Main-R
+
+No force-push to main

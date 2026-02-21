@@ -31,6 +31,7 @@ import ArtifactViewer from './pages/ArtifactViewer';
 import LibraryAssets from './pages/LibraryAssets';
 import LibraryBrowse from './pages/LibraryBrowse';
 import MultiAgentSystem from './pages/MultiAgentSystem';
+import Invest from './pages/Invest';
 import './styles/global.css';
 import './App.css';
 
@@ -154,6 +155,9 @@ function AppShell() {
           {/* Multi-Agent System */}
           <Route path="/en/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
           <Route path="/fa/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
+          {/* Invest / Crowdsourcing */}
+          <Route path="/en/invest" element={<PageTransition><Invest /></PageTransition>} />
+          <Route path="/fa/invest" element={<PageTransition><Invest /></PageTransition>} />
           <Route path="/fa" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/fa/technology" element={<PageTransition><Technology /></PageTransition>} />
           <Route path="/fa/science" element={<PageTransition><Science /></PageTransition>} />
