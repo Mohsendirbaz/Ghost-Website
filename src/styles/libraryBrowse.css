@@ -232,6 +232,10 @@
 .lb-badge--md   { background: #e8f4fd; color: #1d70b8; }
 .lb-badge--html { background: #e8fde8; color: #15803d; }
 
+:root.dark-theme .lb-badge--pdf  { background: rgba(239,68,68,0.18);  color: #fca5a5; }
+:root.dark-theme .lb-badge--md   { background: rgba(96,165,250,0.18); color: #93c5fd; }
+:root.dark-theme .lb-badge--html { background: rgba(74,222,128,0.18); color: #86efac; }
+
 .lb-file-card__cat  { font-size: var(--text-xs); color: var(--color-text-muted); }
 .lb-file-card__size { font-size: var(--text-xs); color: var(--color-text-muted); margin-left: auto; }
 

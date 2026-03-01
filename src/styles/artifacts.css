@@ -168,6 +168,8 @@
   width: fit-content;
 }
 
+:root.dark-theme .artifact-card__cat { background: rgba(167,139,250,0.15); color: #c4b5fd; }
+
 .artifact-card__cat--visualization { background: rgba(14, 165, 233, 0.10); color: #0284C7; }
 .artifact-card__cat--diagram       { background: rgba(16, 185, 129, 0.10); color: #059669; }
 .artifact-card__cat--analysis      { background: rgba(245, 158, 11, 0.10); color: #D97706; }
@@ -175,6 +177,14 @@
 .artifact-card__cat--specification { background: rgba(124, 58, 237, 0.10); color: #7C3AED; }
 .artifact-card__cat--reference     { background: rgba(107, 114, 128, 0.10);color: #4B5563; }
 .artifact-card__cat--interactive   { background: rgba(255, 107, 53, 0.10); color: #CC5529; }
+
+:root.dark-theme .artifact-card__cat--visualization { background: rgba(56,189,248,0.15);  color: #7dd3fc; }
+:root.dark-theme .artifact-card__cat--diagram       { background: rgba(52,211,153,0.15);  color: #6ee7b7; }
+:root.dark-theme .artifact-card__cat--analysis      { background: rgba(251,191,36,0.15);  color: #fcd34d; }
+:root.dark-theme .artifact-card__cat--simulation    { background: rgba(248,113,113,0.15); color: #fca5a5; }
+:root.dark-theme .artifact-card__cat--specification { background: rgba(167,139,250,0.15); color: #c4b5fd; }
+:root.dark-theme .artifact-card__cat--reference     { background: rgba(156,163,175,0.15); color: #9ca3af; }
+:root.dark-theme .artifact-card__cat--interactive   { background: rgba(253,186,116,0.15); color: #fdba74; }
 
 .artifact-card__title {
   font-size: var(--text-sm);

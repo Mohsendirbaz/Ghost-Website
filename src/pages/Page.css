@@ -232,6 +232,36 @@
   margin-top: var(--space-2);
 }
 
+.form-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-input--error {
+  border-color: #dc2626;
+}
+
+.form-error {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: #dc2626;
+}
+
+.form-server-error {
+  padding: var(--space-3);
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: var(--radius-2);
+  color: #dc2626;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+:root.dark-theme .form-input--error       { border-color: #f87171; }
+:root.dark-theme .form-error              { color: #f87171; }
+:root.dark-theme .form-server-error       { color: #fca5a5; background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); }
+
 .form-success {
   padding: var(--space-4);
   background: var(--color-success-dim);

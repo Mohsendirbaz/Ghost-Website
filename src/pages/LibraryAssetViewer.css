@@ -1,0 +1,304 @@
+/* ── LibraryAssetViewer ─────────────────────────────────────────────────────── */
+
+.lav-page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ── Header ── */
+
+.lav-header {
+  background: var(--surface-raised, var(--color-bg-secondary));
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) 0;
+}
+
+.lav-header__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.lav-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  padding: 0;
+  text-align: start;
+  width: fit-content;
+}
+
+.lav-back-btn:hover {
+  text-decoration: underline;
+}
+
+.lav-header__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.lav-badge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-elevated, var(--color-bg-secondary));
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.lav-badge--type.lav-badge--pdf   { background: rgba(185, 28, 28, 0.12);  color: #991b1b; }
+.lav-badge--type.lav-badge--md    { background: rgba(29, 112, 184, 0.12); color: #1d4ed8; }
+.lav-badge--type.lav-badge--html  { background: rgba(21, 128, 61, 0.12);  color: #15803d; }
+.lav-badge--priority              { background: rgba(124, 58, 237, 0.10); color: #6d28d9; }
+
+/* Dark mode badge overrides */
+:root.dark-theme .lav-badge--type.lav-badge--pdf   { background: rgba(239,68,68,0.18);   color: #fca5a5; }
+:root.dark-theme .lav-badge--type.lav-badge--md    { background: rgba(96,165,250,0.18);  color: #93c5fd; }
+:root.dark-theme .lav-badge--type.lav-badge--html  { background: rgba(74,222,128,0.18);  color: #86efac; }
+:root.dark-theme .lav-badge--priority              { background: rgba(167,139,250,0.18); color: #c4b5fd; }
+
+.lav-header__title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.lav-header__desc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.lav-header__filename {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  word-break: break-all;
+}
+
+.lav-header__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.lav-tag {
+  font-size: var(--text-xs);
+  background: var(--surface-elevated, var(--color-bg-secondary));
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.lav-header__actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.lav-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--color-primary);
+  color: var(--text-on-primary, #fff);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md, 6px);
+  text-decoration: none;
+}
+
+.lav-download-btn:hover {
+  opacity: 0.88;
+}
+
+.lav-download-link {
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ── Status Banner ── */
+
+.lav-status-banner {
+  max-width: 960px;
+  margin: var(--space-4) auto;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.lav-status-banner--in-progress  { background: rgba(245,158,11,0.10); color: #92400e; border: 1px solid rgba(245,158,11,0.3); }
+.lav-status-banner--queued        { background: rgba(99,102,241,0.08); color: #3730a3; border: 1px solid rgba(99,102,241,0.25); }
+.lav-status-banner--needs-review  { background: rgba(239,68,68,0.08);  color: #991b1b; border: 1px solid rgba(239,68,68,0.25); }
+.lav-status-banner--blocked       { background: rgba(107,114,128,0.1); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
+:root.dark-theme .lav-status-banner--in-progress { color: #fcd34d; }
+:root.dark-theme .lav-status-banner--queued       { color: #a5b4fc; }
+:root.dark-theme .lav-status-banner--needs-review { color: #fca5a5; }
+
+/* ── Viewer area ── */
+
+.lav-viewer {
+  max-width: 960px;
+  margin: var(--space-4) auto;
+  padding: 0 var(--space-4);
+}
+
+/* Shared embed container */
+.lav-embed-body {
+  position: relative;
+  min-height: 600px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 6px);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Overlay states */
+.lav-doc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: var(--surface-raised, var(--color-bg-secondary));
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  z-index: 2;
+}
+
+/* When not inside .lav-embed-body (e.g. manifest loading, file unavailable) */
+.lav-viewer > .lav-doc-overlay {
+  position: static;
+  min-height: 200px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 6px);
+}
+
+.lav-doc-overlay--error,
+.lav-doc-overlay--unavailable {
+  background: var(--surface-raised, var(--color-bg-secondary));
+}
+
+.lav-doc-overlay--error span:first-child { font-size: 2rem; }
+.lav-doc-overlay--unavailable span:first-child { font-size: 2rem; }
+
+/* Spinner */
+.lav-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: lav-spin 0.8s linear infinite;
+}
+
+@keyframes lav-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Iframes */
+.lav-pdf-embed,
+.lav-html-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Markdown */
+.lav-embed-body--md {
+  min-height: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.lav-md-content {
+  margin: 0;
+  padding: var(--space-4);
+  font-family: 'Courier New', 'Fira Code', monospace;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ── Bilateral pair notice ── */
+
+.lav-bilateral {
+  max-width: 960px;
+  margin: var(--space-3) auto var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ── Not Found ── */
+
+.lav-not-found {
+  max-width: 480px;
+  margin: var(--space-10) auto;
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.lav-not-found__icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-3);
+}
+
+.lav-not-found h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+}
+
+.lav-not-found p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .lav-header__inner,
+  .lav-status-banner,
+  .lav-viewer,
+  .lav-bilateral {
+    padding-inline: var(--space-3);
+  }
+
+  .lav-header__title { font-size: var(--text-xl); }
+  .lav-embed-body { min-height: 400px; }
+}

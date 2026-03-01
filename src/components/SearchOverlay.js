@@ -20,8 +20,11 @@ function buildPageIndex(lang) {
     { label: t.architecture,    path: `/${lang}/architecture`, type: 'page' },
     { label: t.knowledgeBase,   path: `/${lang}/knowledge-base`, type: 'page' },
     { label: t.artifacts,       path: `/${lang}/artifacts`,    type: 'page' },
-    { label: t.libraryAssets,   path: `/${lang}/library/assets`, type: 'page' },
-    { label: t.documentArchive, path: `/${lang}/library`,      type: 'page' },
+    { label: t.libraryAssets,    path: `/${lang}/library/assets`,     type: 'page' },
+    { label: t.documentArchive,  path: `/${lang}/library`,            type: 'page' },
+    { label: t.multiAgentSystem, path: `/${lang}/multi-agent-system`, type: 'page' },
+    { label: t.invest,           path: `/${lang}/invest`,             type: 'page' },
+    { label: t.bio,              path: `/${lang}/bio`,                type: 'page' },
   ];
 }
 

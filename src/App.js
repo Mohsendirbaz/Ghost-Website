@@ -29,6 +29,7 @@ import KnowledgeBaseReader from './pages/KnowledgeBaseReader';
 import Artifacts from './pages/Artifacts';
 import ArtifactViewer from './pages/ArtifactViewer';
 import LibraryAssets from './pages/LibraryAssets';
+import LibraryAssetViewer from './pages/LibraryAssetViewer';
 import LibraryBrowse from './pages/LibraryBrowse';
 import MultiAgentSystem from './pages/MultiAgentSystem';
 import Invest from './pages/Invest';
@@ -147,9 +148,12 @@ function AppShell() {
           <Route path="/fa/artifacts" element={<PageTransition><Artifacts /></PageTransition>} />
           <Route path="/en/artifacts/:slug" element={<PageTransition><ArtifactViewer /></PageTransition>} />
           <Route path="/fa/artifacts/:slug" element={<PageTransition><ArtifactViewer /></PageTransition>} />
-          {/* Library Assets */}
+          {/* Library Assets — browse */}
           <Route path="/en/library/assets" element={<PageTransition><LibraryAssets /></PageTransition>} />
           <Route path="/fa/library/assets" element={<PageTransition><LibraryAssets /></PageTransition>} />
+          {/* Library Assets — per-asset viewer */}
+          <Route path="/en/library/assets/:slug" element={<PageTransition><LibraryAssetViewer /></PageTransition>} />
+          <Route path="/fa/library/assets/:slug" element={<PageTransition><LibraryAssetViewer /></PageTransition>} />
           {/* Document Archive */}
           <Route path="/en/library" element={<PageTransition><LibraryBrowse /></PageTransition>} />
           <Route path="/fa/library" element={<PageTransition><LibraryBrowse /></PageTransition>} />

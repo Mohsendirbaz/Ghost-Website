@@ -85,9 +85,11 @@
 }
 
 .stat-card.stat-lang {
-    border-color: #8b5cf6;
+    border-color: #7c3aed;
     background: linear-gradient(to bottom, var(--surface-base), rgba(139, 92, 246, 0.08));
 }
+
+:root.dark-theme .stat-card.stat-lang { border-color: #a78bfa; }
 
 .stat-value {
     font-size: var(--text-3xl);
@@ -446,6 +448,9 @@
     color: #6b21a8;
 }
 
+:root.dark-theme .asset-lang-badge[data-lang="en"] { background: rgba(96,165,250,0.18);  color: #93c5fd; }
+:root.dark-theme .asset-lang-badge[data-lang="fa"] { background: rgba(167,139,250,0.18); color: #c4b5fd; }
+
 .asset-priority {
     padding: 2px var(--space-2);
     background: var(--color-text-primary);
@@ -498,9 +503,11 @@
     align-items: center;
     gap: var(--space-1);
     font-size: var(--text-xs);
-    color: #8b5cf6;
+    color: #7c3aed;
     font-weight: 600;
 }
+
+:root.dark-theme .asset-bilateral { color: #c4b5fd; }
 
 .bilateral-icon {
     font-size: var(--text-sm);
