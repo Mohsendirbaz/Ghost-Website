@@ -136,7 +136,7 @@
 
 .search-overlay__result:hover,
 .search-overlay__result.active {
-  background: rgba(255, 107, 53, 0.06);
+  background: rgba(var(--color-primary-rgb), 0.08);
 }
 
 .search-overlay__result-label {

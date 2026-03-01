@@ -10,7 +10,7 @@
 
 /* ─── KB-specific tokens ──────────────────────────────────────────────────── */
 :root {
-    /* Part accent colours — calibrated against the primary palette */
+    /* Part accent colours — light-theme values (dark on white) */
     --kb-accent-executive:    #004E89;    /* deep blue — authority */
     --kb-accent-philosophy:   #2D6A4F;    /* forest green — thought */
     --kb-accent-strategic:    #B5451B;    /* brick — geopolitics */
@@ -39,6 +39,18 @@
     --kb-indent-step:          16px;
 }
 
+/* Dark-theme accent overrides — must be bright enough on dark surfaces */
+:root.dark-theme {
+    --kb-accent-executive:    #60a5fa;   /* blue-400 */
+    --kb-accent-philosophy:   #4ade80;   /* green-400 */
+    --kb-accent-strategic:    #fb923c;   /* orange-400 */
+    --kb-accent-technical:    #38bdf8;   /* sky-400 */
+    --kb-accent-architecture: #ff8c5a;   /* lighter orange */
+    --kb-accent-financial:    #fbbf24;   /* amber-400 */
+    --kb-accent-validation:   #c084fc;   /* purple-400 */
+    --kb-accent-appendices:   #94a3b8;   /* slate-400 */
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BROWSE PAGE — index, lanes, search
@@ -49,9 +61,9 @@
     background: var(--color-bg);
 }
 
-/* ─── Hero band ─────────────────────────────────────────────────────────── */
+/* ─── Hero band — always dark; white text regardless of theme ───────────── */
 .kb-hero {
-    background: var(--color-text-primary);
+    background: #13161f;
     padding: var(--space-8) var(--space-6);
     position: relative;
     overflow: hidden;
@@ -162,7 +174,7 @@
     transition: background var(--kb-transition-fast);
 }
 
-.kb-search__btn:hover { background: #e05a28; }
+.kb-search__btn:hover { background: var(--color-primary-hover); }
 
 .kb-search__btn svg {
     width: 18px; height: 18px;
@@ -687,7 +699,7 @@
 .kb-toc__link.active {
     color: var(--color-primary);
     border-inline-start-color: var(--color-primary);
-    background: rgba(255,107,53,0.05);
+    background: rgba(var(--color-primary-rgb), 0.07);
     font-weight: 600;
 }
 
@@ -929,7 +941,7 @@
 
 .kb-reader-nav__btn:hover {
     border-color: var(--color-primary);
-    background: rgba(255,107,53,0.04);
+    background: rgba(var(--color-primary-rgb), 0.07);
 }
 
 .kb-reader-nav__btn--next {
@@ -1084,7 +1096,7 @@
 
 .kb-result-row:hover {
     border-color: var(--color-primary);
-    background: rgba(255,107,53,0.02);
+    background: rgba(var(--color-primary-rgb), 0.05);
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
@@ -1206,7 +1218,7 @@
 }
 
 .kb-skeleton {
-    background: linear-gradient(90deg, var(--color-bg-secondary) 25%, #e8e9ea 50%, var(--color-bg-secondary) 75%);
+    background: linear-gradient(90deg, var(--color-bg-secondary) 25%, var(--color-border) 50%, var(--color-bg-secondary) 75%);
     background-size: 200% 100%;
     animation: kb-shimmer 1.4s infinite;
     border-radius: 3px;

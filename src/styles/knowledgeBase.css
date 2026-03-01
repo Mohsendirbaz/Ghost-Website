@@ -7,7 +7,7 @@
 /* ── KB-specific design tokens ─────────────────────────────────────────────── */
 
 :root {
-  /* Per-part accent colours — calibrated against site palette */
+  /* Per-part accent colours — light-theme values (dark/saturated on white) */
   --kb-accent-executive:   #FF6B35; /* Part I  — orange (primary)              */
   --kb-accent-philosophy:  #004E89; /* Part II — blue (secondary)              */
   --kb-accent-strategic:   #F7B32B; /* Part III — gold (accent)               */
@@ -32,6 +32,18 @@
 
   /* Hero */
   --kb-hero-bg:            var(--hero-surface-start);
+}
+
+/* Dark-theme accent overrides — luminous enough on dark surfaces */
+:root.dark-theme {
+  --kb-accent-executive:   #ff8c5a;   /* lighter orange */
+  --kb-accent-philosophy:  #60a5fa;   /* blue-400 */
+  --kb-accent-strategic:   #fde68a;   /* amber-200 */
+  --kb-accent-technical:   #7dd3fc;   /* sky-300 */
+  --kb-accent-architecture:#fb923c;   /* orange-400 */
+  --kb-accent-financial:   #34d399;   /* emerald-400 */
+  --kb-accent-validation:  #c084fc;   /* purple-400 */
+  --kb-accent-appendices:  #94a3b8;   /* slate-400 */
 }
 
 /* ── Global KB resets ──────────────────────────────────────────────────────── */

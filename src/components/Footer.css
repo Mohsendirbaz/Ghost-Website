@@ -118,15 +118,16 @@
   color: var(--text-inverse);
 }
 
-/* Tooltip on hover */
+/* Tooltip on hover — explicit light/dark colours, never middle-ground */
 .footer__icon-link::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--color-text-primary);
+  /* light-theme: dark tooltip on white footer */
+  background: #1a1d23;
+  color: #ffffff;
   font-size: 11px;
   font-weight: var(--weight-semibold);
   white-space: nowrap;
@@ -135,8 +136,13 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   z-index: 10;
+}
+
+:root.dark-theme .footer__icon-link::after {
+  background: #e8eaf0;
+  color: #13161f;
 }
 
 .footer__icon-link:hover::after {

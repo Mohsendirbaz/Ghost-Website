@@ -153,8 +153,8 @@
     inset-inline-end: var(--space-3);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--color-text-secondary);
-    color: white;
+    background: #6b7280;   /* gray-500 — sufficient contrast with white in both themes */
+    color: #ffffff;
     border: none;
     border-radius: 50%;
     width: 24px;
@@ -168,7 +168,16 @@
 }
 
 .search-clear:hover {
-    background: var(--color-text-primary);
+    background: #374151;   /* gray-700 — darker on hover */
+}
+
+:root.dark-theme .search-clear {
+    background: rgba(255, 255, 255, 0.18);
+    color: #f1f5f9;
+}
+
+:root.dark-theme .search-clear:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .filter-group {

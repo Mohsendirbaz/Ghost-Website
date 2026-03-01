@@ -312,7 +312,7 @@
 .lb-page-btn:hover:not(:disabled) {
     border-color: var(--color-primary);
     color: var(--color-primary);
-    background: rgba(255, 107, 53, 0.05);
+    background: rgba(var(--color-primary-rgb), 0.07);
 }
 
 .lb-page-btn:disabled {
