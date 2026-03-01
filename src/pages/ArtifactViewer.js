@@ -86,24 +86,27 @@ function MarkdownViewer({ path, isRtl }) {
 
 function HtmlViewer({ path, title, isRtl }) {
     const [loaded, setLoaded] = useState(false);
+    // encodeURI handles spaces and special chars while preserving path slashes
+    const src = encodeURI(path);
 
     return (
         <div className="artifact-html-wrap">
-            {!loaded && (
-                <div className="artifact-doc-overlay" aria-live="polite">
-                    <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
-                    <p>{isRtl ? 'در حال بارگذاری داشبورد...' : 'Loading dashboard…'}</p>
-                </div>
-            )}
-            <iframe
-                src={path}
-                title={title}
-                className="artifact-html-embed"
-                style={{ display: loaded ? 'block' : 'none' }}
-                onLoad={() => setLoaded(true)}
-                sandbox="allow-scripts allow-same-origin"
-                aria-label={title}
-            />
+            <div className="artifact-embed-body">
+                <iframe
+                    src={src}
+                    title={title}
+                    className="artifact-html-embed"
+                    onLoad={() => setLoaded(true)}
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                    aria-label={title}
+                />
+                {!loaded && (
+                    <div className="artifact-overlay-loading" aria-live="polite">
+                        <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
+                        <p>{isRtl ? 'در حال بارگذاری داشبورد...' : 'Loading dashboard…'}</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
@@ -111,12 +114,15 @@ function HtmlViewer({ path, title, isRtl }) {
 // ─── PDF viewer ───────────────────────────────────────────────────────────────
 
 function PdfViewer({ path, filename, title, isRtl }) {
+    const [loaded, setLoaded] = useState(false);
+    const src = encodeURI(path);
+
     return (
         <div className="artifact-pdf-wrap">
             <div className="artifact-pdf-toolbar">
                 <a
                     href={path}
-                    download={filename || true}
+                    download={filename || ''}
                     className="artifact-pdf-download"
                 >
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -127,25 +133,21 @@ function PdfViewer({ path, filename, title, isRtl }) {
                     {isRtl ? 'دانلود PDF' : 'Download PDF'}
                 </a>
             </div>
-            <object
-                data={path}
-                type="application/pdf"
-                className="artifact-pdf-embed"
-                title={title}
-                aria-label={title}
-            >
-                {/* Fallback for browsers that can't embed PDFs */}
-                <div className="artifact-doc-overlay">
-                    <p>
-                        {isRtl
-                            ? 'مرورگر شما نمایش PDF را پشتیبانی نمی‌کند.'
-                            : 'Your browser cannot display PDFs inline.'}
-                    </p>
-                    <a href={path} download={filename || true} className="btn btn-primary">
-                        {isRtl ? 'دانلود PDF' : 'Download PDF'}
-                    </a>
-                </div>
-            </object>
+            <div className="artifact-embed-body">
+                <iframe
+                    src={src}
+                    className="artifact-pdf-embed"
+                    title={title}
+                    aria-label={title}
+                    onLoad={() => setLoaded(true)}
+                />
+                {!loaded && (
+                    <div className="artifact-overlay-loading" aria-live="polite">
+                        <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
+                        <p>{isRtl ? 'در حال بارگذاری PDF...' : 'Loading PDF…'}</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
