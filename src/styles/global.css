@@ -155,14 +155,14 @@ button {
   max-width: 640px;
 }
 
-/* ─── Fixed header — clears status bar / Dynamic Island ─── */
+/* ─── Fixed header — sits below the topnav bar + safe area ─── */
 .header {
-  top: env(safe-area-inset-top, 0px);
+  top: calc(var(--topbar-height) + env(safe-area-inset-top, 0px));
 }
 
-/* ─── Page wrapper — accounts for header + safe area ─── */
+/* ─── Page wrapper — accounts for topbar + header + safe area ─── */
 .page-wrapper {
-  padding-top: calc(72px + env(safe-area-inset-top, 0px));
+  padding-top: calc(var(--topbar-height) + 72px + env(safe-area-inset-top, 0px));
 }
 
 /* ─── Footer bottom — clears home indicator ─── */

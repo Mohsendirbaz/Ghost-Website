@@ -8,6 +8,7 @@ import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ToastProvider } from './components/ui/Toast';
 import Header from './components/Header';
+import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
 import ScrollProgress from './components/ScrollProgress';
@@ -108,6 +109,7 @@ function AppShell() {
   return (
     <>
       <LangSync />
+      <TopNavBar />
       <ScrollProgress />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
