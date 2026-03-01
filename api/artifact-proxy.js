@@ -32,7 +32,7 @@ const STRIP_RESPONSE_HEADERS = new Set([
   'connection',
 ]);
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // ── 1. Method guard ─────────────────────────────────────────────────────────
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
