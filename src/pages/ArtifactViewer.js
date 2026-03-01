@@ -12,7 +12,7 @@
  *   Preview — the document content
  *   Info    — metadata; external links show "Not available" for local files
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -83,48 +83,88 @@ function MarkdownViewer({ path, isRtl }) {
 }
 
 // ─── HTML dashboard viewer ────────────────────────────────────────────────────
+// Uses fetch() + srcdoc to bypass X-Frame-Options and Vercel SPA rewrites.
+// The server's X-Frame-Options header is irrelevant to fetch(); srcdoc has no
+// URL for the browser to check headers against.
 
 function HtmlViewer({ path, title, isRtl }) {
-    const [loaded, setLoaded] = useState(false);
-    // encodeURI handles spaces and special chars while preserving path slashes
-    const src = encodeURI(path);
+    const [state,   setState]   = useState('loading'); // 'loading' | 'ready' | 'error'
+    const [srcdoc,  setSrcdoc]  = useState('');
+
+    useEffect(() => {
+        setState('loading');
+        setSrcdoc('');
+        fetch(encodeURI(path))
+            .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
+            .then((html) => { setSrcdoc(html); setState('ready'); })
+            .catch(() => setState('error'));
+    }, [path]);
+
+    if (state === 'loading') {
+        return (
+            <div className="artifact-doc-overlay" aria-live="polite">
+                <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
+                <p>{isRtl ? 'در حال بارگذاری داشبورد...' : 'Loading dashboard…'}</p>
+            </div>
+        );
+    }
+
+    if (state === 'error') {
+        return (
+            <div className="artifact-doc-overlay artifact-doc-overlay--error" aria-live="assertive">
+                <p>{isRtl ? 'خطا در بارگذاری داشبورد.' : 'Failed to load dashboard.'}</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="artifact-html-wrap">
-            <div className="artifact-embed-body">
-                <iframe
-                    src={src}
-                    title={title}
-                    className="artifact-html-embed"
-                    onLoad={() => setLoaded(true)}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
-                    aria-label={title}
-                />
-                {!loaded && (
-                    <div className="artifact-overlay-loading" aria-live="polite">
-                        <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
-                        <p>{isRtl ? 'در حال بارگذاری داشبورد...' : 'Loading dashboard…'}</p>
-                    </div>
-                )}
-            </div>
+        <div className="artifact-embed-body">
+            <iframe
+                srcdoc={srcdoc}
+                title={title}
+                className="artifact-html-embed"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                aria-label={title}
+            />
         </div>
     );
 }
 
 // ─── PDF viewer ───────────────────────────────────────────────────────────────
+// Fetches the PDF as a blob and creates a local object URL so the browser's
+// native PDF viewer can render it without any server-side header restrictions.
 
 function PdfViewer({ path, filename, title, isRtl }) {
-    const [loaded, setLoaded] = useState(false);
-    const src = encodeURI(path);
+    const [state,   setState]  = useState('loading'); // 'loading' | 'ready' | 'error'
+    const [blobUrl, setBlobUrl] = useState(null);
+    const blobRef = useRef(null);
+
+    useEffect(() => {
+        setState('loading');
+        setBlobUrl(null);
+        const ctrl = new AbortController();
+
+        fetch(encodeURI(path), { signal: ctrl.signal })
+            .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.blob(); })
+            .then((blob) => {
+                if (blobRef.current) URL.revokeObjectURL(blobRef.current);
+                const url = URL.createObjectURL(blob);
+                blobRef.current = url;
+                setBlobUrl(url);
+                setState('ready');
+            })
+            .catch((err) => { if (err.name !== 'AbortError') setState('error'); });
+
+        return () => {
+            ctrl.abort();
+            if (blobRef.current) { URL.revokeObjectURL(blobRef.current); blobRef.current = null; }
+        };
+    }, [path]);
 
     return (
         <div className="artifact-pdf-wrap">
             <div className="artifact-pdf-toolbar">
-                <a
-                    href={path}
-                    download={filename || ''}
-                    className="artifact-pdf-download"
-                >
+                <a href={path} download={filename || ''} className="artifact-pdf-download">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -134,18 +174,27 @@ function PdfViewer({ path, filename, title, isRtl }) {
                 </a>
             </div>
             <div className="artifact-embed-body">
-                <iframe
-                    src={src}
-                    className="artifact-pdf-embed"
-                    title={title}
-                    aria-label={title}
-                    onLoad={() => setLoaded(true)}
-                />
-                {!loaded && (
+                {state === 'loading' && (
                     <div className="artifact-overlay-loading" aria-live="polite">
                         <div className="artifact-spinner" aria-label={isRtl ? 'در حال بارگذاری...' : 'Loading…'} />
                         <p>{isRtl ? 'در حال بارگذاری PDF...' : 'Loading PDF…'}</p>
                     </div>
+                )}
+                {state === 'error' && (
+                    <div className="artifact-doc-overlay artifact-doc-overlay--error" aria-live="assertive">
+                        <p>{isRtl ? 'خطا در بارگذاری PDF.' : 'Failed to load PDF.'}</p>
+                        <a href={path} download={filename || ''} className="btn btn-primary" style={{ marginTop: 'var(--space-2)' }}>
+                            {isRtl ? 'دانلود PDF' : 'Download PDF'}
+                        </a>
+                    </div>
+                )}
+                {blobUrl && (
+                    <iframe
+                        src={blobUrl}
+                        className="artifact-pdf-embed"
+                        title={title}
+                        aria-label={title}
+                    />
                 )}
             </div>
         </div>
