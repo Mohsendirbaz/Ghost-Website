@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, Linkedin, GraduationCap, Briefcase, Award, Mail, Sparkles, FileText } from "lucide-react";
+import { Download, Linkedin, GraduationCap, Briefcase, Award, Mail, Sparkles, FileText, BookOpen } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { copy } from '../data/copy';
 import Breadcrumb from '../components/Breadcrumb';
 import { PerspectiveEssay } from "../components/founder/PerspectiveEssay";
+import Publications from "../components/Publications";
 import {
   founderName,
   founderTitle,
@@ -28,6 +29,7 @@ const Bio = () => {
     { id: "overview", label: lang === "en" ? "Overview" : "نمای کلی", icon: GraduationCap },
     { id: "experience", label: lang === "en" ? "Experience" : "تجربه", icon: Briefcase },
     { id: "achievements", label: lang === "en" ? "Achievements" : "دستاوردها", icon: Award },
+    { id: "publications", label: lang === "en" ? "Publications" : "منتشرات", icon: BookOpen },
   ];
 
   return (
@@ -290,6 +292,16 @@ const Bio = () => {
                       ))}
                     </div>
                   </div>
+                </motion.div>
+              )}
+
+              {/* Publications Section */}
+              {activeSection === "publications" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <Publications />
                 </motion.div>
               )}
               </div>
