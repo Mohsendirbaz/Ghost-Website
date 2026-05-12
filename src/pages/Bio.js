@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";import { motion } from "framer-motion";
 import { Download, Linkedin, GraduationCap, Briefcase, Award, Mail, Sparkles, FileText, BookOpen } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { copy } from '../data/copy';
@@ -19,10 +19,44 @@ import {
   narrativeSections,
   t,
 } from "../data/founder-bio";
-
+const BIO_SECTION_IDS = [
+  "perspective",
+  "overview",
+  "experience",
+  "achievements",
+  "publications",
+];
 const Bio = () => {
   const { lang } = useLanguage();
-  const [activeSection, setActiveSection] = useState("overview");
+  const navigate = useNavigate();
+  const { section } = useParams();
+
+  const getSectionFromUrl = () => {
+    const normalized = section?.toLowerCase();
+    return BIO_SECTION_IDS.includes(normalized) ? normalized : "overview";
+  };
+
+  const [activeSection, setActiveSection] = useState(getSectionFromUrl);
+
+  useEffect(() => {
+    if (!section) {
+      setActiveSection("overview");
+      return;
+    }
+
+    const normalized = section.toLowerCase();
+
+    if (BIO_SECTION_IDS.includes(normalized)) {
+      setActiveSection(normalized);
+    } else {
+      navigate(`/${lang}/bio/overview`, { replace: true });
+    }
+  }, [section, lang, navigate]);
+
+  const handleSectionChange = (id) => {
+    setActiveSection(id);
+    navigate(`/${lang}/bio/${id}`);
+  };
 
   const navItems = [
     { id: "perspective", label: lang === "en" ? "Perspective" : "دیدگاه", icon: Sparkles },
@@ -130,8 +164,8 @@ const Bio = () => {
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => setActiveSection(item.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
+onClick={() => handleSectionChange(item.id)}                    
+  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
                       activeSection === item.id
                         ? "bg-gradient-primary text-primary-foreground shadow-lg"
                         : "neu-raised text-muted-foreground hover:text-foreground"
