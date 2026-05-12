@@ -13,7 +13,7 @@ const publications = [
       en: "Advanced mathematical framework integrating physics principles with special function theory for computational applications.",
       fa: "چارچوب ریاضی پیشرفته که اصول فیزیک را با نظریه تابع خاص برای کاربردهای محاسباتی ادغام می‌کند."
     },
-    pdfUrl: "https://github.com/Mohsendirbaz/Ghost-Website/raw/main/Asset/A_Physics_Informed_Special_Function_Framework_Paper.pdf",
+    pdfUrl: "https://raw.githubusercontent.com/Mohsendirbaz/Ghost-Website/main/Asset/A_Physics_Informed_Special_Function_Framework_Paper.pdf",
     downloadUrl: "https://github.com/Mohsendirbaz/Ghost-Website/raw/main/Asset/A_Physics_Informed_Special_Function_Framework_Paper.pdf",
     size: "486 KB",
     year: 2024
@@ -28,7 +28,7 @@ const publications = [
       en: "Comprehensive analysis of climate policy frameworks with focus on technological solutions and implementation strategies.",
       fa: "تجزیه و تحلیل جامع چارچوب‌های سیاست آب‌و‌هوایی با تمرکز بر راه‌حل‌های فناوری و استراتژی‌های اجرایی."
     },
-    pdfUrl: "https://github.com/Mohsendirbaz/Ghost-Website/raw/main/Asset/Climate_Policy_Paper.pdf",
+    pdfUrl: "https://raw.githubusercontent.com/Mohsendirbaz/Ghost-Website/main/Asset/Climate_Policy_Paper.pdf",
     downloadUrl: "https://github.com/Mohsendirbaz/Ghost-Website/raw/main/Asset/Climate_Policy_Paper.pdf",
     size: "2.3 MB",
     year: 2024
@@ -37,10 +37,6 @@ const publications = [
 
 const Publications = () => {
   const { lang } = useLanguage();
-
-  const handleViewPDF = (pdfUrl) => {
-    window.open(pdfUrl, '_blank');
-  };
 
   return (
     <div className="space-y-8">
@@ -98,13 +94,15 @@ const Publications = () => {
                 <Download className="w-4 h-4" />
                 {lang === "en" ? "Download PDF" : "دانلود PDF"}
               </a>
-              <button
-                onClick={() => handleViewPDF(pub.pdfUrl)}
+              <a
+                href={pub.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
               >
                 <ExternalLink className="w-4 h-4" />
                 {lang === "en" ? "View" : "مشاهده"}
-              </button>
+              </a>
             </div>
           </motion.div>
         ))}
