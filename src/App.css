@@ -1,0 +1,4 @@
+.page-wrapper {
+  margin-top: 72px; /* header height */
+  min-height: calc(100vh - 72px);
+}

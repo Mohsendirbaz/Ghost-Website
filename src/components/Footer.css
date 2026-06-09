@@ -1,0 +1,208 @@
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding-top: var(--space-10);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+/* ─── Brand ──────────────────────────────────────────────────────────────────── */
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  text-decoration: none;
+}
+
+.footer__logo .logo-mark {
+  background: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+.footer__logo .logo-word {
+  color: var(--text-inverse);
+}
+
+.footer__tagline {
+  font-size: var(--text-base);
+  color: var(--footer-text-dim);
+  font-style: italic;
+}
+
+.footer__toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.footer__theme-btn,
+.footer__lang-btn {
+  align-self: flex-start;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--footer-btn-border);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--footer-text);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  min-height: 44px;
+}
+
+.footer__theme-btn:hover,
+.footer__lang-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ─── Columns ────────────────────────────────────────────────────────────────── */
+
+.footer__col-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--footer-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* ─── Icon nav grid (36×36 icons with CSS tooltip) ──────────────────────────── */
+
+.footer__col--nav {
+  /* let it shrink naturally — icon nav wraps well */
+}
+
+.footer__icon-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer__icon-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-2);
+  background: var(--footer-hover-bg);
+  color: var(--footer-text-dim);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.footer__icon-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer__icon-link:hover {
+  background: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+/* Tooltip on hover — explicit light/dark colours, never middle-ground */
+.footer__icon-link::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  /* light-theme: dark tooltip on white footer */
+  background: #1a1d23;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--radius-1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+:root.dark-theme .footer__icon-link::after {
+  background: #e8eaf0;
+  color: #13161f;
+}
+
+.footer__icon-link:hover::after {
+  opacity: 1;
+}
+
+/* ─── Legal col ──────────────────────────────────────────────────────────────── */
+
+.footer__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: var(--footer-text-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.footer__link:hover {
+  color: var(--text-inverse);
+}
+
+.footer__contact {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* ─── Bottom ─────────────────────────────────────────────────────────────────── */
+
+.footer__bottom {
+  border-top: 1px solid var(--footer-border);
+  padding-block: var(--space-3);
+  /* padding-bottom handled by global.css safe-area-inset */
+}
+
+.footer__copy {
+  font-size: var(--text-xs);
+  color: var(--footer-text-faint);
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* On mobile tooltips can overflow; position them to the right of icon */
+  .footer__icon-link::after {
+    left: calc(100% + 6px);
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

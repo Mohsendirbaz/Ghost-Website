@@ -1,0 +1,357 @@
+/* ─── Diagram Card ─────────────────────────────────────────────────────── */
+.diagram-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.diagram-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Header */
+.diagram-card__header {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+}
+
+.diagram-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-block-end: var(--space-2);
+}
+
+.diagram-card__badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.diagram-card__badge--collection {
+  background: var(--badge-collection-bg);
+  color: var(--badge-collection-text);
+}
+
+.diagram-card__badge--type {
+  background: var(--badge-type-bg);
+  color: var(--badge-type-text);
+}
+
+.diagram-card__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.35;
+  margin: 0 0 var(--space-1);
+}
+
+.diagram-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Canvas — aspect-ratio preserved with horizontal scroll for complex diagrams */
+.diagram-card__canvas {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--color-bg-secondary);
+  border-block: 1px solid var(--color-border);
+  cursor: default;
+  overflow: hidden;
+}
+
+.diagram-card__canvas[role="button"] {
+  cursor: zoom-in;
+}
+
+.diagram-card__canvas[role="button"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* Scrollable container for complex diagrams — prevents squishing */
+.diagram-card__svg-wrap {
+  padding: var(--space-3);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.diagram-card__svg-wrap svg {
+  min-width: 600px;    /* Ensure diagrams don't compress below legibility */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Diagram scroll container (used in KB reader) */
+.diagram-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  background: var(--color-bg-secondary);
+}
+
+.diagram-scroll-container svg {
+  min-width: 600px;
+  height: auto;
+  display: block;
+}
+
+/* Loading state */
+.diagram-card__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary);
+  z-index: 1;
+}
+
+.diagram-card__spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-border);
+  border-block-start-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.diagram-card__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* Zoom hint */
+.diagram-card__zoom-hint {
+  position: absolute;
+  inset-block-end: var(--space-2);
+  inset-inline-end: var(--space-2);
+  background: rgba(var(--surface-base-rgb), 0.9);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 4px 6px;
+  color: var(--color-text-secondary);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.diagram-card__canvas:hover .diagram-card__zoom-hint {
+  opacity: 1;
+}
+
+/* Footer */
+.diagram-card__footer {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  background: var(--color-bg-secondary);
+}
+
+.diagram-card__category-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  padding: 2px 8px;
+  background: var(--color-border);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.diagram-card__claims {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.diagram-card__claim {
+  font-size: var(--text-xs);
+  color: var(--badge-claim-text);
+  background: var(--badge-claim-bg);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-weight: 500;
+}
+
+/* ─── Modal ────────────────────────────────────────────────────────────── */
+.diagram-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--overlay-bg);
+  padding: var(--space-4);
+  animation: modal-in 0.2s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.diagram-modal__inner {
+  background: var(--color-bg);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 1080px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl);
+  animation: modal-slide 0.2s ease;
+}
+
+@keyframes modal-slide {
+  from { transform: scale(0.96) translateY(8px); }
+  to { transform: scale(1) translateY(0); }
+}
+
+.diagram-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.diagram-modal__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.diagram-modal__close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.diagram-modal__close:hover {
+  background: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.diagram-modal__body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-4) var(--space-6);
+}
+
+.diagram-modal__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4);
+}
+
+.diagram-modal__svg-wrap {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--neu-radius-md);
+  padding: var(--space-4);
+  overflow: auto;
+}
+
+.diagram-modal__svg-wrap svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.diagram-modal__footer {
+  padding: var(--space-3) var(--space-6);
+  border-block-start: 1px solid var(--color-border);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--color-bg-secondary);
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .diagram-modal {
+    padding: var(--space-2);
+  }
+
+  .diagram-modal__header {
+    padding: var(--space-4);
+  }
+
+  .diagram-modal__body {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .diagram-modal__footer {
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .diagram-modal__title {
+    font-size: var(--text-lg);
+  }
+}
+
+/* ─── Accessibility ────────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

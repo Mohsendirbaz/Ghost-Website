@@ -1,0 +1,94 @@
+/* ─── SectionBlockFullBleed ──────────────────────────────────────────────── */
+
+.section-block-full-bleed {
+  position: relative;
+  padding: var(--space-20) 0;
+  background: var(--surface-secondary);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.section-block-full-bleed--has-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section-block-full-bleed--overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.9),
+    rgba(var(--color-secondary-rgb), 0.85)
+  );
+  z-index: 1;
+}
+
+.section-block-full-bleed__content {
+  position: relative;
+  z-index: 2;
+}
+
+.section-block-full-bleed__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.section-block-full-bleed--overlay .section-block-full-bleed__eyebrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-block-full-bleed__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-tight);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.section-block-full-bleed--overlay .section-block-full-bleed__title {
+  color: var(--text-inverse);
+}
+
+.section-block-full-bleed__body {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--line-relaxed);
+  max-width: 700px;
+  margin: 0 auto var(--space-8);
+  text-align: center;
+}
+
+.section-block-full-bleed--overlay .section-block-full-bleed__body {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.section-block-full-bleed__children {
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 768px) {
+  .section-block-full-bleed {
+    padding: var(--space-16) 0;
+  }
+
+  .section-block-full-bleed__title {
+    font-size: var(--text-2xl);
+  }
+
+  .section-block-full-bleed__body {
+    font-size: var(--text-base);
+  }
+}

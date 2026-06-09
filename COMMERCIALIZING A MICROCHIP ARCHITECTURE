@@ -1,0 +1,14 @@
+COMMERCIALIZING A MICROCHIP ARCHITECTURE: FROM THE PRINCIPLES OF PHYSICS TO THE CAPITAL MARKETS
+
+From Fluids to Fluids, with a Hint of Planets
+
+Physics attempts to explain the world around us. The entire cosmos is composed of atoms existing in gaseous, liquid, and solid forms. Among these, fluid is a more enigmatic state, possessing a mixture of both liquid and gas properties.
+
+Petroleum engineering is, in essence, the study of fluid behavior. This behavior is examined in the most complex environments, including underground reservoirs, multiphase surface distribution networks, and reactors that convert them into higher-value products.
+
+Chemical engineering goes a step further, applying the laws governing the transformation of materials and energy not only on the scale of pipes and reactors but as a universal language for describing any condensed system. Wherever mass and energy are involved, balance equations and conservation laws are paramount. This is the language a chemical engineer grows up with, gradually developing a deep intuition for it. This intuition is the root of entering fields seemingly far from classical expertise, such as the semiconductor industry and microchip design.
+
+Dr. Mohsen Dirbaz, with two decades of experience in this field, sought to solve the puzzle of biomass gasification (an extremely heterogeneous fuel structurally) in his doctoral dissertation at the Illinois Institute of Technology (IIT). It was a highly nonlinear, multiphase system with high dimensions. His solution, however, went beyond conventional modeling. By employing elliptic integrals—the same mathematical tools Laplace and Gauss used to calculate planetary orbits—he succeeded in discovering a "bilinear mapping" that established the conservation laws of mass and energy within the model with astonishing precision and extraordinary computational efficiency. As a result, the gain parameter calculated by these integrals, for hundreds of different experimental samples, fell within a numerical range between 10⁻³⁷ and 10⁻⁶⁰. This is precisely the range of the cosmological constant (Λ) in Einstein's field equations. A chemical engineer, relying on the principles of his field, had arrived at a number that theoretical physicists call the vacuum energy scale of the entire universe.
+
+This discovery was not a theoretical pastime.
+It demonstrated that the mathematics governing conservation in a reactor shares fundamental commonalities with the mathematics governing the structure of the universe. It was here that the bridge between chemical engineering and fundamental physics was built stronger than ever.

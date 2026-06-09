@@ -1,0 +1,162 @@
+/* ─── Tag Component ───────────────────────────────────────────────────────── */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.tag__label {
+  user-select: none;
+}
+
+/* Clickable tags */
+.tag--clickable {
+  cursor: pointer;
+}
+
+.tag--clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Sizes */
+.tag--sm {
+  padding: 4px 8px;
+  font-size: var(--text-xs);
+  gap: 4px;
+}
+
+.tag--md {
+  /* Default size, already set in base .tag */
+}
+
+.tag--lg {
+  padding: 8px 14px;
+  font-size: var(--text-base);
+  gap: 8px;
+}
+
+/* Variant: Filled */
+.tag--filled.tag--primary {
+  background: var(--color-primary);
+  color: var(--text-inverse);
+  border-color: var(--color-primary);
+}
+
+.tag--filled.tag--secondary {
+  background: var(--surface-raised);
+  color: var(--text-secondary);
+  border-color: var(--border-base);
+}
+
+.tag--filled.tag--success {
+  background: var(--color-success, #22c55e);
+  color: var(--text-inverse);
+}
+
+.tag--filled.tag--warning {
+  background: var(--color-warning, #f59e0b);
+  color: var(--surface-base);
+}
+
+.tag--filled.tag--danger {
+  background: var(--color-danger, #ef4444);
+  color: #ffffff;
+}
+
+.tag--filled.tag--neutral {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border-color: var(--border-base);
+}
+
+/* Variant: Outlined */
+.tag--outlined.tag--primary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.tag--outlined.tag--secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-strong);
+}
+
+.tag--outlined.tag--success {
+  background: transparent;
+  color: var(--color-success, #22c55e);
+  border-color: var(--color-success, #22c55e);
+}
+
+.tag--outlined.tag--warning {
+  background: transparent;
+  color: var(--color-warning, #f59e0b);
+  border-color: var(--color-warning, #f59e0b);
+}
+
+.tag--outlined.tag--danger {
+  background: transparent;
+  color: var(--color-danger, #ef4444);
+  border-color: var(--color-danger, #ef4444);
+}
+
+.tag--outlined.tag--neutral {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* Remove Button */
+.tag__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: currentColor;
+  opacity: 0.7;
+  transition: all var(--transition-fast);
+}
+
+.tag__remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+.tag__remove:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.tag__remove:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+  opacity: 1;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tag,
+  .tag__remove {
+    transition: none;
+  }
+
+  .tag--clickable:hover {
+    transform: none;
+  }
+}

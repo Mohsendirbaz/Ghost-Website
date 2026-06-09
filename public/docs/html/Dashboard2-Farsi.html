@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معماری اطلاعات خودروی خودران</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'ui-sans-serif', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .bg-clip-text {
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .hero-title {
+            line-height: 1.2;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
+<div id="app" class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16 space-y-4">
+        <h1 class="hero-title text-5xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text">
+            معماری اطلاعات خودروی خودران
+        </h1>
+        <p class="text-slate-300 text-lg leading-relaxed">خط لوله داده کامل از حسگر تا محرک با محدودیت‌های بلادرنگ</p>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-cyan-500 transition-all duration-300">
+            <div class="flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                <span class="text-slate-400 text-sm">پهنای باند کل</span>
+            </div>
+            <div class="text-2xl font-bold text-cyan-300">~۱.۸ گیگابایت/ثانیه</div>
+            <p class="text-xs text-slate-500 mt-1">نیازمند اتصالات پرسرعت (PCIe 4.0+)</p>
+        </div>
+
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
+            <div class="flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-400"><circle cx="12" cy="12" r="8"></circle><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M16.24 16.24l2.83 2.83"></path><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M4.93 19.07l2.83-2.83"></path><path d="M16.24 7.76l2.83-2.83"></path></svg>
+                <span class="text-slate-400 text-sm">تأخیر سرتاسری</span>
+            </div>
+            <div class="text-2xl font-bold text-purple-300">۲۰۰-۳۳۰ میلی‌ثانیه (سرتاسری)</div>
+            <p class="text-xs text-slate-500 mt-1">بحرانیت: حاشیه ایمنی ۵۰ متر در سرعت ۱۰۰ کیلومتر/ساعت</p>
+        </div>
+
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-orange-500 transition-all duration-300">
+            <div class="flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <span class="text-slate-400 text-sm">افزونگی حسگر</span>
+            </div>
+            <div class="text-2xl font-bold text-orange-300">افزونگی حسگر ۶-۷ لایه</div>
+            <p class="text-xs text-slate-500 mt-1">تحمل خطا مطابق SOTIF</p>
+        </div>
+    </div>
+
+    <!-- Sensor Inputs -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+            لایه ورودی حسگرها (پردازش ~۱-۲ میلی‌ثانیه)
+        </h2>
+        <div id="sensors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Sensors injected here -->
+        </div>
+    </div>
+
+    <!-- Processing Pipeline -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-400"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+            معماری خط لوله پردازش
+        </h2>
+
+        <div id="pipeline-list" class="space-y-3">
+            <!-- Pipeline layers injected here -->
+        </div>
+    </div>
+
+    <!-- Data Flow Diagram -->
+    <div class="bg-slate-800 border border-slate-700 rounded-lg p-8 mb-12">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            جریان خط لوله داده بلادرنگ
+        </h2>
+
+        <div id="flow-diagram" class="space-y-6">
+            <!-- Flow items injected here -->
+        </div>
+    </div>
+
+    <!-- Critical Observations -->
+    <div class="bg-gradient-to-r from-slate-800 to-slate-700 border border-slate-600 rounded-lg p-6">
+        <h3 class="text-xl font-bold mb-4 text-cyan-300">محدودیت‌های حیاتی سیستم</h3>
+        <ul class="space-y-3 text-slate-200">
+            <li class="flex gap-3">
+                <span class="text-cyan-400 font-bold">•</span>
+                <span><strong>بودجه تأخیر:</strong> مجموعاً ~۳۰۰ میلی‌ثانیه از حسگر تا محرک. در سرعت ۱۰۰ کیلومتر/ساعت، خودرو ۸.۳ متر در طول پردازش حرکت می‌کند—نیازمند سیستم‌عامل بلادرنگ و زمان‌بندی قطعی است.</span>
+            </li>
+            <li class="flex gap-3">
+                <span class="text-purple-400 font-bold">•</span>
+                <span><strong>پهنای باند داده:</strong> ترافیک درون‌خودرویی ~۱.۸ گیگابایت/ثانیه از ظرفیت PCIe 3.0 فراتر می‌رود؛ نیاز به PCIe 4.0+ و سریال‌سازی بهینه داده (Protocol Buffers، ROS 2 DDS) دارد.</span>
+            </li>
+            <li class="flex gap-3">
+                <span class="text-orange-400 font-bold">•</span>
+                <span><strong>بار محاسباتی:</strong> ~۶۰۰-۱۰۰۰ ترافلاپس برای ادراک/پیش‌بینی بلادرنگ؛ نیازمند سیستم‌های چند GPU (NVIDIA Drive Orin، کامپیوتر FSD تسلا) با بودجه توان ۵۰۰-۱۰۰۰ وات است.</span>
+            </li>
+            <li class="flex gap-3">
+                <span class="text-green-400 font-bold">•</span>
+                <span><strong>ادغام حسگر:</strong> همگام‌سازی ساعت در میان حسگرهای ناهمگن غیربدیهی است؛ رویکردهای معمول از همگام‌سازی PPS (پالس بر ثانیه) با دقت &lt;۱۰ میکروثانیه استفاده می‌کنند.</span>
+            </li>
+            <li class="flex gap-3">
+                <span class="text-red-400 font-bold">•</span>
+                <span><strong>افزونگی و ایمنی:</strong> برای انطباق با SOTIF، شیوه‌های حسگری دوگانه/سه‌گانه لازم است. معماری ایمن-خرابی مستلزم کنترل‌کننده‌های ایمنی مستقل با قابلیت ترمز خودکار است.</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const sensors = [
+        { name: 'لیدار (LiDAR)', rate: '۲۰ هرتز', bandwidth: '~۲۰۰ مگابایت/ثانیه', latency: '۵۰-۱۰۰ میلی‌ثانیه', range: '۱۰۰-۲۰۰ متر', output: 'ابر نقاط (۱M+ نقطه/ثانیه)', color: 'from-purple-600 to-purple-400' },
+        { name: 'دوربین‌ها', rate: '۳۰ هرتز', bandwidth: '~۱.۵ گیگابایت/ثانیه', latency: '۳۳-۵۰ میلی‌ثانیه', range: '۳۰-۵۰۰ متر', output: 'فریم‌های RGB/استریو', color: 'from-blue-600 to-blue-400' },
+        { name: 'رادار', rate: '۱۰-۲۰ هرتز', bandwidth: '~۵۰ مگابایت/ثانیه', latency: '۵۰-۱۰۰ میلی‌ثانیه', range: '۲۰۰-۳۰۰ متر', output: 'بردارهای سرعت', color: 'from-cyan-600 to-cyan-400' },
+        { name: 'فراصوت', rate: '۲۰ هرتز', bandwidth: '~۱ مگابایت/ثانیه', latency: '۲۰-۳۰ میلی‌ثانیه', range: '۰-۵ متر', output: 'هشدارهای مجاورت', color: 'from-green-600 to-green-400' },
+        { name: 'GPS/GNSS', rate: '۵-۱۰ هرتز', bandwidth: '~۱۰۰ کیلوبایت/ثانیه', latency: '۱۰۰-۵۰۰ میلی‌ثانیه', range: 'جهانی', output: 'موقعیت ±۵cm (RTK)', color: 'from-orange-600 to-orange-400' },
+        { name: 'IMU', rate: '۱۰۰+ هرتز', bandwidth: '~۱۰ مگابایت/ثانیه', latency: '۵-۱۰ میلی‌ثانیه', range: 'چارچوب خودرو', output: 'شتاب/چرخش', color: 'from-red-600 to-red-400' }
+    ];
+
+    const processingLayers = [
+        { id: 'perception', name: 'لایه ادراک', latency: '۱۰۰-۱۵۰ میلی‌ثانیه', description: 'ادغام حسگر، تشخیص اشیا، بخش‌بندی معنایی', tasks: ['تشخیص اشیای سه‌بعدی', 'تشخیص خط', 'تشخیص علائم راهنمایی', 'ردیابی عابران'], cpu: '۴۰%', gpu: '۸۵%' },
+        { id: 'localization', name: 'لایه موقعیت‌یابی', latency: '۵۰-۱۰۰ میلی‌ثانیه', description: 'SLAM چندمنبعی، تطبیق نقشه HD، فیلتر ذره‌ای', tasks: ['موقعیت‌یابی خودرو (±۱۰cm)', 'تبدیل چارچوب مختصات', 'پشتیبان‌گیری مرده‌حسابی'], cpu: '۲۰%', gpu: '۱۰%' },
+        { id: 'prediction', name: 'لایه پیش‌بینی', latency: '۳۰-۵۰ میلی‌ثانیه', description: 'تخمین قصد، پیش‌بینی مسیر (افق ۵-۱۰ ثانیه)', tasks: ['پیش‌بینی حرکت عامل‌ها', 'تخمین تغییر خط', 'مدل‌سازی تعامل'], cpu: '۳۰%', gpu: '۴۰%' },
+        { id: 'planning', name: 'لایه برنامه‌ریزی و کنترل', latency: '۲۰-۳۰ میلی‌ثانیه', description: 'تولید مسیر، بهینه‌سازی مسیر، کنترل بازخورد', tasks: ['برنامه‌ریزی مسیر', 'انتخاب رفتار', 'هموارسازی مسیر', 'فرمان‌های سطح پایین فرمان/گاز'], cpu: '۱۰%', gpu: '۵%' }
+    ];
+
+    const flowItems = [
+        { title: 'ماژول ادغام حسگر', color: 'cyan', text: 'ادغام ۶+ شیوه حسگری' },
+        { title: 'شبکه‌های عصبی (DNN/CNN)', color: 'purple', text: 'اشیای سه‌بعدی، خطوط، علائم راهنمایی' },
+        { title: 'SLAM + تطبیق نقشه HD', color: 'orange', text: 'موقعیت مطلق ±۵-۱۰cm' },
+        { title: 'پیش‌بینی مسیر (RNN/GNN)', color: 'blue', text: 'پیش‌بینی ۵-۱۰ ثانیه با فواصل ۱۰۰ میلی‌ثانیه' },
+        { title: 'برنامه‌ریزی حرکت + کنترل', color: 'green', text: 'مسیرهای هموار با محدودیت نوسان' },
+        { title: 'کنترل سطح پایین', color: 'red', text: 'فرمان‌های فرمان، گاز، ترمز' }
+    ];
+
+    let activeLayerId = 'perception';
+
+    function init() {
+        renderSensors();
+        renderPipeline();
+        renderFlow();
+
+        // Start data flow simulation if any
+    }
+
+    function renderSensors() {
+        const grid = document.getElementById('sensors-grid');
+        grid.innerHTML = sensors.map((sensor, idx) => `
+                <div class="bg-gradient-to-br ${sensor.color} bg-opacity-10 border border-slate-700 rounded-lg p-4 hover:border-slate-600 transition">
+                    <h3 class="font-bold text-lg mb-3">${sensor.name}</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">فرکانس:</span>
+                            <span class="font-mono text-slate-100">${sensor.rate}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">پهنای باند:</span>
+                            <span class="font-mono text-slate-100">${sensor.bandwidth}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">تأخیر:</span>
+                            <span class="font-mono text-slate-100">${sensor.latency}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">محدوده:</span>
+                            <span class="font-mono text-slate-100">${sensor.range}</span>
+                        </div>
+                        <div class="border-t border-slate-600 pt-2 mt-2">
+                            <p class="text-slate-200 text-xs">${sensor.output}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function renderPipeline() {
+        const list = document.getElementById('pipeline-list');
+        list.innerHTML = processingLayers.map(layer => `
+                <div
+                    onclick="setActiveLayer('${layer.id}')"
+                    class="cursor-pointer transition border rounded-lg p-5 ${activeLayerId === layer.id ? 'bg-slate-700 border-purple-500 shadow-lg shadow-purple-500/20' : 'bg-slate-800 border-slate-700 hover:border-slate-600'}"
+                >
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-purple-300">${layer.name}</h3>
+                            <p class="text-sm text-slate-300 mt-1">${layer.description}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-slate-400">تأخیر</div>
+                            <div class="font-mono text-sm text-cyan-300">${layer.latency}</div>
+                        </div>
+                    </div>
+
+                    <div id="details-${layer.id}" class="${activeLayerId === layer.id ? '' : 'hidden'} space-y-3 mt-4 pt-4 border-t border-slate-600">
+                        <div>
+                            <p class="text-xs text-slate-400 mb-2">وظایف اصلی:</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${layer.tasks.map(task => `
+                                    <span class="bg-slate-900 border border-slate-600 rounded px-3 py-1 text-xs text-slate-200">
+                                        ${task}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mt-3">
+                            <div>
+                                <p class="text-xs text-slate-400">بار CPU</p>
+                                <div class="w-full bg-slate-900 rounded h-2 mt-1 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-orange-600 to-orange-400 h-full" style="width: ${layer.cpu}"></div>
+                                </div>
+                                <p class="text-xs text-slate-300 mt-1">${layer.cpu}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">بار GPU</p>
+                                <div class="w-full bg-slate-900 rounded h-2 mt-1 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-full" style="width: ${layer.gpu}"></div>
+                                </div>
+                                <p class="text-xs text-slate-300 mt-1">${layer.gpu}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function setActiveLayer(id) {
+        activeLayerId = id;
+        renderPipeline();
+    }
+
+    function renderFlow() {
+        const diagram = document.getElementById('flow-diagram');
+        diagram.innerHTML = flowItems.map(item => `
+                <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                        <div class="bg-slate-900 border border-${item.color}-600 rounded px-4 py-2 inline-block">
+                            <p class="font-mono text-sm text-${item.color}-300">${item.title}</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-4 text-slate-500"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <div class="flex-1 text-right">
+                        <p class="text-xs text-slate-400">${item.text}</p>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    init();
+</script>
+</body>
+</html>

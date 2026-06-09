@@ -1,0 +1,265 @@
+/* =============================================
+   GHOST AUTONOMY — FACT ENGINE (visitor)
+   Scope: .fact-engine-container and children
+   ============================================= */
+
+.fact-engine-container {
+  border: 1px solid var(--color-border, #E5E7EB);
+  border-radius: var(--radius-3, 12px);
+  background: var(--color-surface, #FFFFFF);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,.05));
+  overflow: hidden;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.fact-engine-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2, 16px) var(--space-3, 24px);
+  cursor: pointer;
+  background: var(--color-bg-secondary, #F8F9FA);
+  border-bottom: 1px solid var(--color-border, #E5E7EB);
+  user-select: none;
+}
+
+.fact-engine-header h3 {
+  margin: 0;
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--weight-semibold, 600);
+  color: var(--color-text-secondary, #6B7280);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fact-engine-toggle {
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-text-tertiary, #9CA3AF);
+  transition: transform var(--transition-fast, 150ms ease);
+}
+
+.fact-engine-toggle.collapsed {
+  transform: rotate(-90deg);
+}
+
+.fact-engine-body {
+  padding: var(--space-3, 24px);
+  transition: all var(--transition-base, 250ms ease);
+}
+
+.fact-engine-body.collapsed {
+  display: none;
+}
+
+/* Fact card */
+.fact-card {
+  background: var(--color-bg, #FFFFFF);
+  border-radius: var(--radius-2, 8px);
+  padding: var(--space-2, 16px) var(--space-3, 24px);
+  border: 1px solid var(--color-border, #E5E7EB);
+}
+
+.fact-card.pinned {
+  background: var(--color-bg-secondary, #F8F9FA);
+  border-color: var(--color-primary-light, #FF8F66);
+}
+
+/* Animate-in when a new fact loads (skipped if prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .fact-card.new-fact {
+    animation: factSlideIn var(--transition-slow, 350ms ease) forwards;
+  }
+}
+
+@keyframes factSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fact-text {
+  margin: 0 0 var(--space-2, 16px);
+  font-size: var(--text-base, 1rem);
+  line-height: var(--line-base, 1.5);
+  color: var(--color-text-primary, #1A1D23);
+}
+
+.fact-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1, 8px);
+}
+
+/* Buttons */
+.fact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: var(--weight-medium, 500);
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid var(--color-border, #E5E7EB);
+  background: var(--color-bg-secondary, #F8F9FA);
+  color: var(--color-text-secondary, #6B7280);
+  cursor: pointer;
+  transition: background var(--transition-fast, 150ms ease),
+              color var(--transition-fast, 150ms ease),
+              border-color var(--transition-fast, 150ms ease);
+  white-space: nowrap;
+}
+
+.fact-btn:hover {
+  background: var(--color-primary, #FF6B35);
+  color: var(--color-text-inverse, #FFFFFF);
+  border-color: var(--color-primary, #FF6B35);
+}
+
+.fact-btn.pin-btn {
+  border-color: var(--color-primary-light, #FF8F66);
+  color: var(--color-primary, #FF6B35);
+}
+
+.fact-btn.pin-btn:hover {
+  background: var(--color-primary, #FF6B35);
+  color: var(--color-text-inverse, #FFFFFF);
+}
+
+.fact-btn.unpin-btn {
+  border-color: var(--color-border, #E5E7EB);
+  color: var(--color-text-tertiary, #9CA3AF);
+}
+
+.fact-btn.unpin-btn:hover {
+  background: var(--color-border, #E5E7EB);
+  color: var(--color-text-secondary, #6B7280);
+  border-color: var(--color-border-strong, #D1D5DB);
+}
+
+/* Saved board summary */
+.pinned-facts-section {
+  margin-top: var(--space-2, 16px);
+}
+
+.pinned-facts-header {
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: var(--weight-semibold, 600);
+  color: var(--color-text-tertiary, #9CA3AF);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1, 8px);
+}
+
+/* Saved Facts Board */
+.saved-facts-board {
+  margin-top: var(--space-4, 32px);
+  padding-top: var(--space-3, 24px);
+  border-top: 2px solid var(--color-border, #E5E7EB);
+}
+
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3, 24px);
+}
+
+.board-header h4 {
+  margin: 0;
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--weight-semibold, 600);
+  color: var(--color-text-primary, #1A1D23);
+}
+
+.board-count {
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: var(--weight-medium, 500);
+  color: var(--color-text-tertiary, #9CA3AF);
+  background: var(--color-bg-secondary, #F8F9FA);
+  padding: 2px 8px;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.board-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 16px);
+}
+
+.board-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 16px);
+  padding: var(--space-2, 16px);
+  background: var(--color-bg-secondary, #F8F9FA);
+  border: 1px solid var(--color-border, #E5E7EB);
+  border-radius: var(--radius-2, 8px);
+  transition: border-color var(--transition-fast, 150ms ease),
+              box-shadow var(--transition-fast, 150ms ease);
+}
+
+.board-item:hover {
+  border-color: var(--color-primary-light, #FF8F66);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,.05));
+}
+
+.board-item-text {
+  flex: 1;
+  margin: 0;
+  font-size: var(--text-sm, 0.875rem);
+  line-height: var(--line-relaxed, 1.625);
+  color: var(--color-text-primary, #1A1D23);
+}
+
+.board-item-remove {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: var(--weight-medium, 500);
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid var(--color-border, #E5E7EB);
+  background: var(--color-bg, #FFFFFF);
+  color: var(--color-text-tertiary, #9CA3AF);
+  cursor: pointer;
+  transition: background var(--transition-fast, 150ms ease),
+              color var(--transition-fast, 150ms ease),
+              border-color var(--transition-fast, 150ms ease);
+  white-space: nowrap;
+}
+
+.board-item-remove:hover {
+  background: var(--color-danger, #EF4444);
+  color: var(--color-text-inverse, #FFFFFF);
+  border-color: var(--color-danger, #EF4444);
+}
+
+.fact-btn.saved-btn {
+  border-color: var(--color-success, #10B981);
+  color: var(--color-success, #10B981);
+  cursor: default;
+}
+
+.fact-btn.saved-btn:hover {
+  background: var(--color-bg-secondary, #F8F9FA);
+  color: var(--color-success, #10B981);
+  border-color: var(--color-success, #10B981);
+}
+
+/* RTL support */
+[dir="rtl"] .fact-footer {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .board-item {
+  flex-direction: row-reverse;
+}

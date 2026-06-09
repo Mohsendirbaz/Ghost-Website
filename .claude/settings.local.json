@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nComplete six-phase styling strategy upgrade \\(Phases 3-6\\)\n\n- Phase 3: Eliminate all hardcoded colors across component CSS files\n  \\(DiagramViewer, DiagramGallery, knowledgeBase, artifacts, Page,\n  MultiAgentSystem, LibraryAssets, global\\) — replaced with CSS custom\n  property tokens; removed conflicting prefers-color-scheme dark block\n  from MultiAgentSystem.css\n\n- Phase 4: Add components.css — per-component token layer applying\n  neumorphic shadows \\(raised/pressed/elevated\\) to cards, buttons, form\n  inputs, modals, and nav active indicators; imported in global.css\n\n- Phase 5: Add color-scheme property to both theme roots; sync\n  meta[name=\"theme-color\"] on every theme toggle in ThemeContext.js\n\n- Phase 6: Accessibility and contrast validation — global focus-visible\n  ring rule; prefers-contrast:high blocks for both light and dark themes;\n  extend prefers-reduced-motion to cover neumorphic hover transforms;\n  fix MultiAgentSystem focus-visible selectors for renamed classes;\n  tokenize remaining hardcoded values in Cart.css\n\n- New files: src/context/ThemeContext.js, src/styles/components.css,\n  src/styles/tokens/{base,light-theme,dark-theme,aliases}.css,\n  src/STYLE/ reference documents\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(del nul)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(DISABLE_ESLINT_PLUGIN=true npx react-scripts:*)",
+      "Bash(npx update-browserslist-db@latest:*)"
+    ]
+  }
+}

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Vehicle Data Stream Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'ui-sans-serif', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="w-full min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100 p-6">
+    <div id="app" class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M12 22 4.5 9h15Z"></path><path d="M12 22 12 9"></path><path d="M22 9h-20"></path></svg>
+                Autonomous Vehicle Data Stream Architecture
+            </h1>
+            <p class="text-gray-400 text-lg">Real-time sensor fusion to autonomous decision-making pipeline</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-slate-700 rounded-lg p-4 mb-8 border border-slate-600">
+            <div class="flex flex-wrap gap-4 items-center">
+                <div>
+                    <label class="text-sm font-semibold text-gray-300 mr-3">Operating Scenario:</label>
+                    <select id="scenario-select" class="bg-slate-800 border border-slate-500 rounded px-3 py-2 text-gray-100 cursor-pointer">
+                        <option value="nominal">Nominal Operation</option>
+                        <option value="degraded">Sensor Degradation</option>
+                        <option value="critical">Critical Failure</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <p id="scenario-description" class="text-sm text-gray-300"></p>
+                </div>
+                <button id="toggle-simulation" class="px-4 py-2 rounded font-semibold transition bg-red-600 hover:bg-red-700">
+                    Pause
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Architecture -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Sensor Layer -->
+            <div class="lg:col-span-1">
+                <div class="bg-slate-700 rounded-lg p-6 border-2 border-red-500 border-opacity-50 h-full">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-red-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                        Sensor Input Layer
+                    </h2>
+                    <div id="sensor-list" class="space-y-3">
+                        <!-- Sensors will be injected here -->
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-600 text-xs text-gray-400">
+                        <strong>Total Sensor Bandwidth:</strong> ~4.06 GB/s
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Pipeline -->
+            <div class="lg:col-span-2">
+                <div class="bg-slate-700 rounded-lg p-6 border-2 border-cyan-500 border-opacity-50">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-cyan-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        Processing Pipeline
+                    </h2>
+                    <div id="pipeline-list" class="space-y-3">
+                        <!-- Pipeline stages will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                <h3 class="font-bold text-amber-400 mb-2">End-to-End Latency</h3>
+                <div id="metric-latency" class="text-3xl font-bold text-white">0ms</div>
+                <p id="metric-latency-desc" class="text-xs text-gray-400 mt-2"></p>
+            </div>
+
+            <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                <h3 class="font-bold text-green-400 mb-2">Active Sensors</h3>
+                <div id="metric-sensors" class="text-3xl font-bold text-white">0/6</div>
+                <p id="metric-sensors-desc" class="text-xs text-gray-400 mt-2"></p>
+            </div>
+
+            <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                <h3 class="font-bold text-purple-400 mb-2">Decision Frequency</h3>
+                <div id="metric-frequency" class="text-3xl font-bold text-white">25Hz</div>
+                <p class="text-xs text-gray-400 mt-2">Planning & Control cycle rate</p>
+            </div>
+        </div>
+
+        <!-- Model Latency Module -->
+        <div class="bg-slate-700 rounded-lg p-6 border-2 border-purple-500 border-opacity-50 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-purple-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                Model Latency Breakdown (DNN Inference)
+            </h2>
+            <div id="model-latency-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Model latencies will be injected here -->
+            </div>
+
+            <div class="bg-slate-800 p-4 rounded border border-purple-500 border-opacity-30 mt-4">
+                <h3 class="font-semibold text-purple-300 mb-3">Total Perception Pipeline Latency</h3>
+                <div id="perception-total-list" class="grid grid-cols-4 gap-3">
+                    <!-- Perception totals will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Speedup Analysis Module -->
+        <div class="bg-slate-700 rounded-lg p-6 border-2 border-orange-500 border-opacity-50 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-orange-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                Speedup Analysis (Amdahl's Law)
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-orange-300 mb-3">Hardware Platforms</h3>
+                    <div id="hardware-platforms-list" class="space-y-3">
+                        <!-- Hardware platforms will be injected here -->
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-orange-300 mb-3">Speedup Scaling</h3>
+                    <div class="bg-slate-800 p-4 rounded border border-orange-500 border-opacity-30">
+                        <div class="text-xs text-gray-400 mb-3">
+                            <strong>Amdahl's Law:</strong> S(n) = 1 / (f + (1-f)/n)
+                        </div>
+                        <div id="speedup-scaling-list" class="space-y-2">
+                            <!-- Speedup scaling items will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Design Module -->
+        <div class="bg-slate-700 rounded-lg p-6 border-2 border-indigo-500 border-opacity-50 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-indigo-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                Filter Design Architectures
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- Category 1: Throughput -->
+                <div class="bg-slate-800 p-4 rounded border border-indigo-500 border-opacity-30">
+                    <h3 class="font-semibold text-indigo-300 mb-3">1. Throughput at Fixed Latency Budget</h3>
+                    <div id="throughput-list" class="space-y-2">
+                        <!-- Throughput items will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Category 2: Sampling Density -->
+                <div class="bg-slate-800 p-4 rounded border border-indigo-500 border-opacity-30">
+                    <h3 class="font-semibold text-indigo-300 mb-3">2. Sampling Density in Parameter Space</h3>
+                    <div id="sampling-density-list" class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <!-- Sampling density items will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Category 3: Control Horizon -->
+                <div class="bg-slate-800 p-4 rounded border border-indigo-500 border-opacity-30">
+                    <h3 class="font-semibold text-indigo-300 mb-3">3. Control Horizon vs. Computational Window</h3>
+                    <div id="control-horizon-list" class="space-y-2">
+                        <!-- Control horizon items will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Category 4: Cost & Energy -->
+                <div class="bg-slate-800 p-4 rounded border border-indigo-500 border-opacity-30">
+                    <h3 class="font-semibold text-indigo-300 mb-3">4. Cost & Energy Budget</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <h4 class="text-xs font-semibold text-indigo-300 mb-2">Energy per GB (mJ)</h4>
+                            <div id="energy-list"></div>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-semibold text-indigo-300 mb-2">Hardware Cost</h4>
+                            <div id="cost-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5: Real-time Boundary -->
+                <div class="bg-slate-800 p-4 rounded border border-indigo-500 border-opacity-30">
+                    <h3 class="font-semibold text-indigo-300 mb-3">5. Real-time vs. Batch-Mode Boundary</h3>
+                    <div id="realtime-boundary-list" class="space-y-2">
+                        <!-- Real-time boundary items will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sensor Nyquist Module -->
+        <div class="bg-slate-700 rounded-lg p-6 border-2 border-cyan-500 border-opacity-50 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-cyan-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 1 0-8.48 0"></path><path d="M19.07 4.93a10 10 0 1 0-14.14 0"></path></svg>
+                Sensor Nyquist Scale & Aliasing Risk
+            </h2>
+            
+            <div id="nyquist-list" class="space-y-3">
+                <!-- Nyquist items will be injected here -->
+            </div>
+        </div>
+
+        <!-- Critical Insights -->
+        <div class="bg-slate-700 rounded-lg p-6 border-l-4 border-yellow-500">
+            <h3 class="font-bold text-yellow-400 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                Critical Insights
+            </h3>
+            <ul class="text-sm text-gray-300 space-y-2 ml-4 list-disc">
+                <li><strong>Bandwidth Bottleneck:</strong> LIDAR dominates at 2 GB/s. GPU reduces perception latency 7.5x (1455ms to 193ms).</li>
+                <li><strong>Hardware Acceleration:</strong> TPU achieves 16.4x speedup vs CPU. Amdahl's Law limits: 90-95% parallel efficiency with serial overhead less than 5%.</li>
+                <li><strong>Filter Selection:</strong> Kalman (2ms, real-time) for fusion. Particle (15ms, batch) for non-Gaussian. MPC (50ms, batch) for planning. Trade throughput vs. accuracy.</li>
+                <li><strong>Nyquist Vulnerability:</strong> Radar Doppler aliasing at speeds over 150 mph. Side cameras at poor Nyquist margin. Multi-sensor fusion is mandatory.</li>
+                <li><strong>Real-time Boundary:</strong> Filters below 8-10ms latency with less than 5% compute overhead enable closed-loop feedback. Above that: buffering required, planning decouples from sensing.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Data constants
+        const sensors = [
+            { id: 'lidar', name: 'LIDAR', bandwidth: '2.0 GB/s', latency: '40-50ms', color: '#FF6B6B', distance: '120m', fps: 10 },
+            { id: 'radar', name: 'Radar', bandwidth: '50 MB/s', latency: '30-40ms', color: '#4ECDC4', distance: '200m', fps: 20 },
+            { id: 'camera_f', name: 'Front Cameras (×3)', bandwidth: '1.5 GB/s', latency: '20-30ms', color: '#45B7D1', distance: '200m', fps: 30 },
+            { id: 'camera_s', name: 'Side Cameras (×2)', bandwidth: '500 MB/s', latency: '20-30ms', color: '#96CEB4', distance: '100m', fps: 30 },
+            { id: 'ultrasonic', name: 'Ultrasonic', bandwidth: '10 MB/s', latency: '60-80ms', color: '#FFEAA7', distance: '8m', fps: 50 },
+            { id: 'gps_imu', name: 'GPS/IMU', bandwidth: '100 KB/s', latency: '100-200ms', color: '#DDA15E', distance: 'Global', fps: 100 }
+        ];
+
+        const processingLayers = [
+            { name: 'Sensor Fusion', latency: '50-100ms', function: 'Multi-modal alignment and calibration', inputs: 6, outputSize: '500MB/s' },
+            { name: 'Perception', latency: '80-150ms', function: 'Object detection, tracking, segmentation', inputs: 1, outputSize: '50MB/s' },
+            { name: 'Localization', latency: '20-50ms', function: 'SLAM, HD map matching', inputs: 3, outputSize: '10MB/s' },
+            { name: 'Prediction', latency: '30-100ms', function: 'Trajectory forecasting for dynamic objects', inputs: 2, outputSize: '20MB/s' },
+            { name: 'Planning', latency: '50-200ms', function: 'Path generation, behavior selection', inputs: 3, outputSize: '5MB/s' },
+            { name: 'Control', latency: '10-20ms', function: 'Steering, throttle, brake commands', inputs: 1, outputSize: '1MB/s' }
+        ];
+
+        const scenarios = {
+            nominal: { label: 'Nominal Operation', description: 'Normal highway driving', failedSensors: [], latencyMultiplier: 1 },
+            degraded: { label: 'Sensor Degradation', description: 'Heavy rain, GPS denied', failedSensors: ['gps_imu', 'camera_f'], latencyMultiplier: 1.5 },
+            critical: { label: 'Critical Failure', description: 'Emergency stop scenario', failedSensors: ['lidar', 'radar'], latencyMultiplier: 2.0 }
+        };
+
+        const hardwareConfigs = {
+            cpu: { name: 'CPU Only (x86)', cores: 8, speedup: 1, power: '150W', bandwidth: '50GB/s' },
+            gpu: { name: 'GPU Accelerated (NVIDIA Orin)', cores: 12, speedup: 15, power: '45W', bandwidth: '300GB/s' },
+            fpga: { name: 'FPGA (Xilinx Kintex)', cores: 'custom', speedup: 20, power: '25W', bandwidth: '350GB/s' },
+            tpu: { name: 'Custom TPU (Tesla)', cores: 'systolic', speedup: 25, power: '30W', bandwidth: '400GB/s' }
+        };
+
+        const modelLatencies = [
+            { name: 'YOLOv8 Detection', stage: 'Perception', inputSize: '1280×720', layers: 80, cpuMs: 450, gpuMs: 35, fpgaMs: 22, tpuMs: 18, batchSize: 1, outputSize: '500KB' },
+            { name: 'ViT Segmentation', stage: 'Perception', inputSize: '1024×1024', layers: 48, cpuMs: 680, gpuMs: 85, fpgaMs: 45, tpuMs: 38, batchSize: 1, outputSize: '8.5MB' },
+            { name: 'Kalman Filter (EKF)', stage: 'Fusion', inputSize: 'State: 12x12', layers: 1, cpuMs: 5, gpuMs: 2, fpgaMs: 1, tpuMs: 1, batchSize: 'N/A', outputSize: '2KB' },
+            { name: 'LSTM Trajectory Predictor', stage: 'Prediction', inputSize: 'Sequence: 20 frames', layers: 3, cpuMs: 120, gpuMs: 28, fpgaMs: 15, tpuMs: 12, batchSize: 1, outputSize: '50KB' },
+            { name: 'MPC Path Planner', stage: 'Planning', inputSize: 'Trajectory space', layers: 1, cpuMs: 200, gpuMs: 45, fpgaMs: 25, tpuMs: 20, batchSize: 'N/A', outputSize: '5KB' }
+        ];
+
+        const filterArchitectures = [
+            { name: 'Kalman Filter', category: 'Linear State Estimator', throughputGBps: 50, latencyMs: 2.0, samplingDensity: 'Dense (coarse)', parameterGridSize: 144, controlHorizonMs: 30, computeWindowMs: 2.0, energyPerGB: 0.15, costPerUnit: '5K', realtimeBoundary: 'Pure real-time', description: 'Optimal for Gaussian state', rmse: 0.08 },
+            { name: 'Extended Kalman Filter', category: 'Nonlinear Estimator', throughputGBps: 35, latencyMs: 4.5, samplingDensity: 'Medium', parameterGridSize: 169, controlHorizonMs: 50, computeWindowMs: 4.5, energyPerGB: 0.25, costPerUnit: '8K', realtimeBoundary: 'Real-time (6Hz)', description: 'Handles nonlinearity', rmse: 0.12 },
+            { name: 'Particle Filter', category: 'Nonparametric Bayesian', throughputGBps: 8, latencyMs: 15.0, samplingDensity: 'Sparse', parameterGridSize: 1000, controlHorizonMs: 100, computeWindowMs: 15.0, energyPerGB: 1.8, costPerUnit: '15K', realtimeBoundary: 'Batch (5Hz)', description: 'Non-Gaussian posteriors', rmse: 0.05 },
+            { name: 'Exponential Moving Average', category: 'Temporal Smoother', throughputGBps: 200, latencyMs: 0.5, samplingDensity: 'Ultra-sparse', parameterGridSize: 1, controlHorizonMs: 10, computeWindowMs: 0.5, energyPerGB: 0.05, costPerUnit: '0.5K', realtimeBoundary: 'Pure streaming', description: 'Lightweight smoothing', rmse: 0.25 },
+            { name: 'Bilateral Filter', category: 'Edge-Preserving', throughputGBps: 12, latencyMs: 18.0, samplingDensity: 'Medium-dense', parameterGridSize: 256, controlHorizonMs: 120, computeWindowMs: 18.0, energyPerGB: 2.2, costPerUnit: '12K', realtimeBoundary: 'Batch (4FPS)', description: 'Spatial smoothing', rmse: 0.18 },
+            { name: 'H-infinity Filter', category: 'Robust Minimax', throughputGBps: 25, latencyMs: 8.0, samplingDensity: 'Medium', parameterGridSize: 100, controlHorizonMs: 60, computeWindowMs: 8.0, energyPerGB: 0.45, costPerUnit: '10K', realtimeBoundary: 'Real-time (10Hz)', description: 'Bounded uncertainty', rmse: 0.14 },
+            { name: 'Median Filter', category: 'Robust Rank-Based', throughputGBps: 45, latencyMs: 3.0, samplingDensity: 'Sparse', parameterGridSize: 25, controlHorizonMs: 20, computeWindowMs: 3.0, energyPerGB: 0.2, costPerUnit: '6K', realtimeBoundary: 'Real-time', description: 'Outlier rejection', rmse: 0.22 },
+            { name: 'Model Predictive Control', category: 'Optimization-Based', throughputGBps: 5, latencyMs: 50.0, samplingDensity: 'Very dense', parameterGridSize: 2500, controlHorizonMs: 200, computeWindowMs: 50.0, energyPerGB: 5.0, costPerUnit: '25K', realtimeBoundary: 'Batch (1-3Hz)', description: 'Optimal trajectories', rmse: 0.04 }
+        ];
+
+        const sensorNyquist = [
+            { id: 'lidar', name: 'LIDAR', samplingRate: 10, nyquistFreq: 5, effectiveDataRate: '2.0 GB/s', pointsPerFrame: '1.3M', antiAliasingFilter: 'Spatial clustering', riskFactors: ['Motion artifacts at high speed', 'Rain/snow scattering'], nyquistMargin: 'Adequate' },
+            { id: 'radar', name: 'Radar', samplingRate: 20, nyquistFreq: 10, effectiveDataRate: '50 MB/s', pointsPerFrame: '1500', antiAliasingFilter: 'Frequency filtering', riskFactors: ['Doppler aliasing >150 mph', 'Multipath reflections'], nyquistMargin: 'Critical' },
+            { id: 'camera_f', name: 'Front Cameras', samplingRate: 30, nyquistFreq: 15, effectiveDataRate: '1.5 GB/s', pointsPerFrame: '1.23M', antiAliasingFilter: 'Bayer demosaicing', riskFactors: ['Motion blur at >80 mph', 'Rolling shutter'], nyquistMargin: 'Marginal' },
+            { id: 'camera_s', name: 'Side Cameras', samplingRate: 30, nyquistFreq: 15, effectiveDataRate: '500 MB/s', pointsPerFrame: '307K', antiAliasingFilter: 'Bayer demosaicing', riskFactors: ['Blind spots', 'Low resolution'], nyquistMargin: 'Poor' },
+            { id: 'ultrasonic', name: 'Ultrasonic', samplingRate: 50, nyquistFreq: 25, effectiveDataRate: '10 MB/s', pointsPerFrame: '12', antiAliasingFilter: 'Pulse windowing', riskFactors: ['Multipath echoes', 'Phase shifts'], nyquistMargin: 'Adequate' },
+            { id: 'gps_imu', name: 'GPS/IMU', samplingRate: 100, nyquistFreq: 50, effectiveDataRate: '100 KB/s', pointsPerFrame: 'Mixed', antiAliasingFilter: 'Butterworth IIR', riskFactors: ['GPS multipath', 'IMU drift'], nyquistMargin: 'Sufficient' }
+        ];
+
+        // State
+        let activeLayer = null;
+        let simulationRunning = true;
+        let selectedScenario = 'nominal';
+        let dataFlowMetrics = {};
+
+        // Amdahl's Law
+        const calculateSpeedup = (parallelPercent, numProcessors) => {
+            const serialFraction = (100 - parallelPercent) / 100;
+            const parallelFraction = parallelPercent / 100;
+            return 1 / (serialFraction + parallelFraction / numProcessors);
+        };
+
+        // DOM Elements
+        const scenarioSelect = document.getElementById('scenario-select');
+        const scenarioDescription = document.getElementById('scenario-description');
+        const toggleSimulationBtn = document.getElementById('toggle-simulation');
+        const sensorList = document.getElementById('sensor-list');
+        const pipelineList = document.getElementById('pipeline-list');
+        const modelLatencyList = document.getElementById('model-latency-list');
+        const perceptionTotalList = document.getElementById('perception-total-list');
+        const hardwarePlatformsList = document.getElementById('hardware-platforms-list');
+        const speedupScalingList = document.getElementById('speedup-scaling-list');
+        const throughputList = document.getElementById('throughput-list');
+        const samplingDensityList = document.getElementById('sampling-density-list');
+        const controlHorizonList = document.getElementById('control-horizon-list');
+        const energyList = document.getElementById('energy-list');
+        const costList = document.getElementById('cost-list');
+        const realtimeBoundaryList = document.getElementById('realtime-boundary-list');
+        const nyquistList = document.getElementById('nyquist-list');
+
+        const metricLatency = document.getElementById('metric-latency');
+        const metricLatencyDesc = document.getElementById('metric-latency-desc');
+        const metricSensors = document.getElementById('metric-sensors');
+        const metricSensorsDesc = document.getElementById('metric-sensors-desc');
+        const metricFrequency = document.getElementById('metric-frequency');
+
+        // Functions
+        function init() {
+            renderSensors();
+            renderPipeline();
+            renderModelLatency();
+            renderPerceptionTotal();
+            renderHardwarePlatforms();
+            renderSpeedupScaling();
+            renderFilters();
+            renderNyquist();
+            updateMetrics();
+            
+            // Simulation interval
+            setInterval(() => {
+                if (!simulationRunning) return;
+                
+                sensors.forEach(s => {
+                    const isFailed = scenarios[selectedScenario].failedSensors.includes(s.id);
+                    dataFlowMetrics[s.id] = {
+                        load: Math.random() * (isFailed ? 10 : 90) + 10,
+                        active: !isFailed
+                    };
+                });
+                
+                updateSensorBars();
+            }, 300);
+        }
+
+        function renderSensors() {
+            sensorList.innerHTML = sensors.map(sensor => {
+                const isFailed = scenarios[selectedScenario].failedSensors.includes(sensor.id);
+                return `
+                    <div
+                        id="sensor-${sensor.id}"
+                        onclick="toggleLayer('${sensor.id}')"
+                        class="p-3 rounded border-l-4 cursor-pointer transition ${isFailed ? 'bg-slate-800 border-l-red-600 opacity-50' : 'bg-slate-800 border-opacity-75 hover:bg-slate-750'}"
+                        style="border-left-color: ${isFailed ? '#DC2626' : sensor.color}"
+                    >
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-sm">${sensor.name}</span>
+                            ${isFailed ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>' : ''}
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1 space-y-1">
+                            <div>BW: ${sensor.bandwidth}</div>
+                            <div>Latency: ${sensor.latency}</div>
+                            <div>Range: ${sensor.distance}</div>
+                            <div class="mt-2 bg-slate-700 rounded h-2 overflow-hidden">
+                                <div
+                                    id="sensor-bar-${sensor.id}"
+                                    class="h-full transition-all ${isFailed ? 'bg-red-600' : 'bg-cyan-500'}"
+                                    style="width: 0%"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateSensorBars() {
+            sensors.forEach(sensor => {
+                const bar = document.getElementById(`sensor-bar-${sensor.id}`);
+                if (bar && dataFlowMetrics[sensor.id]) {
+                    bar.style.width = `${dataFlowMetrics[sensor.id].load}%`;
+                }
+            });
+        }
+
+        function renderPipeline() {
+            const latencyMultiplier = scenarios[selectedScenario].latencyMultiplier;
+            pipelineList.innerHTML = processingLayers.map((layer, idx) => {
+                const baseLatency = parseInt(layer.latency.split('-')[0]);
+                const adjustedLatency = Math.round(baseLatency * latencyMultiplier);
+                
+                return `
+                    <div>
+                        <div
+                            onclick="toggleLayer('${layer.name}')"
+                            class="bg-slate-800 p-4 rounded border-l-4 border-cyan-500 hover:bg-slate-750 cursor-pointer transition"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-cyan-400">${idx + 1}. ${layer.name}</h3>
+                                    <p class="text-xs text-gray-400 mt-1">${layer.function}</p>
+                                </div>
+                                <div class="text-right text-xs text-gray-300">
+                                    <div class="font-semibold text-amber-400">${adjustedLatency}ms</div>
+                                    <div class="text-gray-500">${layer.outputSize}</div>
+                                </div>
+                            </div>
+                            <div id="layer-details-${layer.name.replace(/\s+/g, '-')}" class="hidden mt-3 pt-3 border-t border-slate-700 text-xs text-gray-400">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div><strong>Inputs:</strong> ${layer.inputs} streams</div>
+                                    <div><strong>Parallelization:</strong> FPGA/GPU accelerated</div>
+                                </div>
+                            </div>
+                        </div>
+                        ${idx < processingLayers.length - 1 ? '<div class="h-4 flex justify-center text-cyan-500 text-opacity-50">↓</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleLayer(name) {
+            const detailsId = `layer-details-${name.replace(/\s+/g, '-')}`;
+            const el = document.getElementById(detailsId);
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+            activeLayer = activeLayer === name ? null : name;
+        }
+
+        function renderModelLatency() {
+            modelLatencyList.innerHTML = modelLatencies.map((model, idx) => `
+                <div class="bg-slate-800 p-4 rounded border border-purple-500 border-opacity-30">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-purple-300">${model.name}</h3>
+                            <p class="text-xs text-gray-400">${model.stage}</p>
+                        </div>
+                        <span class="text-xs bg-purple-900 px-2 py-1 rounded text-purple-200">${model.layers} layers</span>
+                    </div>
+                    
+                    <div class="text-xs text-gray-400 mb-3 space-y-1">
+                        <div><strong>Input:</strong> ${model.inputSize}</div>
+                        <div><strong>Output:</strong> ${model.outputSize}</div>
+                    </div>
+
+                    <div class="space-y-2">
+                        ${renderLatencyBar('CPU', model.cpuMs, 'bg-red-600')}
+                        ${renderLatencyBar('GPU', model.gpuMs, 'bg-yellow-500', 'text-gray-900')}
+                        ${renderLatencyBar('FPGA', model.fpgaMs, 'bg-green-500', 'text-gray-900')}
+                        ${renderLatencyBar('TPU', model.tpuMs, 'bg-blue-500', 'text-gray-900')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderLatencyBar(label, value, color, textColor = 'text-white') {
+            const width = Math.min((value / 500) * 100, 100);
+            return `
+                <div class="flex items-center gap-2">
+                    <span class="text-xs w-12 text-gray-400">${label}:</span>
+                    <div class="flex-1 bg-slate-700 rounded h-4 overflow-hidden relative">
+                        <div class="h-full ${color} transition-all" style="width: ${width}%"></div>
+                        <span class="absolute inset-0 flex items-center justify-center text-xs font-bold ${textColor}">${value}ms</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPerceptionTotal() {
+            const configs = [
+                { hw: 'CPU', total: 1455, color: 'text-red-400' },
+                { hw: 'GPU', total: 193, color: 'text-yellow-400' },
+                { hw: 'FPGA', total: 108, color: 'text-green-400' },
+                { hw: 'TPU', total: 89, color: 'text-blue-400' }
+            ];
+            
+            perceptionTotalList.innerHTML = configs.map(config => `
+                <div class="bg-slate-700 p-3 rounded text-center">
+                    <div class="text-sm font-bold text-gray-300">${config.hw}</div>
+                    <div class="text-2xl font-bold ${config.color} mt-2">${config.total}ms</div>
+                    <div class="text-xs text-gray-500 mt-1">${(1455 / config.total).toFixed(1)}x speedup</div>
+                </div>
+            `).join('');
+        }
+
+        function renderHardwarePlatforms() {
+            hardwarePlatformsList.innerHTML = Object.entries(hardwareConfigs).map(([key, hw]) => {
+                const parallelPercent = { cpu: 40, gpu: 85, fpga: 90, tpu: 95 }[key];
+                const speedup = calculateSpeedup(parallelPercent, hw.speedup);
+                return `
+                    <div class="bg-slate-800 p-3 rounded border-l-4 border-orange-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-orange-300 text-sm">${hw.name}</h4>
+                            <span class="text-xs bg-orange-900 text-orange-200 px-2 py-1 rounded">${hw.speedup}x peak</span>
+                        </div>
+                        <div class="text-xs text-gray-400 space-y-1 mb-2">
+                            <div>Power: ${hw.power} | Bandwidth: ${hw.bandwidth}</div>
+                            <div>Parallelizable: ${parallelPercent}%</div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex-1 bg-slate-700 rounded h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-orange-500 to-orange-400" style="width: ${Math.min(speedup * 10, 100)}%"></div>
+                            </div>
+                            <span class="text-sm font-bold text-orange-300 w-12">${speedup.toFixed(1)}x</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderSpeedupScaling() {
+            const configs = [
+                { processors: 4, serialFraction: 0.10, label: '4-core' },
+                { processors: 8, serialFraction: 0.10, label: '8-core' },
+                { processors: 16, serialFraction: 0.08, label: '16-core' },
+                { processors: 128, serialFraction: 0.05, label: 'GPU (128 cores)' },
+                { processors: 512, serialFraction: 0.03, label: 'TPU (512 cores)' }
+            ];
+
+            speedupScalingList.innerHTML = configs.map(config => {
+                const speedup = 1 / (config.serialFraction + (1 - config.serialFraction) / config.processors);
+                return `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs w-20 text-gray-400">${config.label}</span>
+                        <div class="flex-1 bg-slate-700 rounded h-4 overflow-hidden">
+                            <div class="h-full bg-orange-500" style="width: ${Math.min(speedup * 15, 100)}%"></div>
+                        </div>
+                        <span class="text-xs font-bold text-orange-300 w-10">${speedup.toFixed(1)}x</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderFilters() {
+            // Throughput
+            throughputList.innerHTML = [...filterArchitectures].sort((a, b) => b.throughputGBps - a.throughputGBps).map(filter => `
+                <div class="flex items-center gap-3">
+                    <span class="text-xs w-28 text-gray-400 truncate">${filter.name}</span>
+                    <div class="flex-1 bg-slate-700 rounded h-5 overflow-hidden relative">
+                        <div class="h-full bg-gradient-to-r from-indigo-600 to-indigo-400" style="width: ${Math.min((filter.throughputGBps / 200) * 100, 100)}%"></div>
+                        <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">${filter.throughputGBps} GB/s</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Sampling Density
+            samplingDensityList.innerHTML = filterArchitectures.map(filter => `
+                <div class="bg-slate-700 p-2 rounded border border-indigo-500 border-opacity-20">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="text-xs font-bold text-indigo-300">${filter.name}</h4>
+                        <span class="text-xs bg-indigo-900 text-indigo-200 px-1 py-0.5 rounded">${filter.parameterGridSize} pts</span>
+                    </div>
+                    <div class="relative h-4 bg-slate-600 rounded overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-xs font-bold text-white" style="width: ${Math.min((filter.parameterGridSize / 2500) * 100, 100)}%; background: ${filter.parameterGridSize > 1000 ? 'linear-gradient(90deg, #8b5cf6, #6366f1)' : filter.parameterGridSize > 100 ? 'linear-gradient(90deg, #6366f1, #0ea5e9)' : 'linear-gradient(90deg, #0ea5e9, #10b981)'}">
+                            ${filter.parameterGridSize > 100 ? filter.parameterGridSize : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Control Horizon
+            controlHorizonList.innerHTML = [...filterArchitectures].sort((a, b) => b.controlHorizonMs - a.controlHorizonMs).map(filter => {
+                const ratio = (filter.computeWindowMs / filter.controlHorizonMs * 100).toFixed(1);
+                const overhead = (100 - parseFloat(ratio)).toFixed(1);
+                return `
+                    <div class="bg-slate-700 p-2 rounded">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs font-semibold text-indigo-300">${filter.name}</span>
+                            <span class="text-xs text-gray-400">${filter.computeWindowMs}ms / ${filter.controlHorizonMs}ms</span>
+                        </div>
+                        <div class="flex gap-1 h-3">
+                            <div class="bg-green-600 rounded transition-all" style="width: ${ratio}%"></div>
+                            <div class="bg-gray-600 rounded transition-all" style="width: ${overhead}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Energy & Cost
+            energyList.innerHTML = [...filterArchitectures].sort((a, b) => a.energyPerGB - b.energyPerGB).slice(0, 4).map(filter => `
+                <div class="flex items-center gap-2 text-xs mb-1">
+                    <span class="w-20 text-gray-400 truncate">${filter.name}</span>
+                    <div class="flex-1 bg-slate-600 rounded h-3 overflow-hidden">
+                        <div class="h-full bg-green-600" style="width: ${Math.min((filter.energyPerGB / 5) * 100, 100)}%"></div>
+                    </div>
+                    <span class="w-8 text-right text-gray-300">${filter.energyPerGB.toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            costList.innerHTML = [...filterArchitectures].sort((a, b) => parseInt(a.costPerUnit) - parseInt(b.costPerUnit)).slice(0, 4).map(filter => {
+                const cost = parseInt(filter.costPerUnit);
+                return `
+                    <div class="flex items-center gap-2 text-xs mb-1">
+                        <span class="w-20 text-gray-400 truncate">${filter.name}</span>
+                        <div class="flex-1 bg-slate-600 rounded h-3 overflow-hidden">
+                            <div class="h-full bg-orange-600" style="width: ${Math.min((cost / 25) * 100, 100)}%"></div>
+                        </div>
+                        <span class="w-8 text-right text-gray-300">$${cost}K</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Real-time Boundary
+            realtimeBoundaryList.innerHTML = filterArchitectures.map(filter => {
+                const isRealtime = filter.realtimeBoundary.includes('Pure') || (filter.realtimeBoundary.includes('Real-time') && !filter.realtimeBoundary.includes('Batch'));
+                const isBatch = filter.realtimeBoundary.includes('Batch');
+                return `
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs text-gray-400">${filter.name}</span>
+                            <span class="text-xs px-2 py-1 rounded font-semibold ${isRealtime ? 'bg-green-900 text-green-200' : isBatch ? 'bg-red-900 text-red-200' : 'bg-yellow-900 text-yellow-200'}">
+                                ${filter.realtimeBoundary}
+                            </span>
+                        </div>
+                        <div class="flex h-2 bg-slate-700 rounded overflow-hidden">
+                            <div class="${isRealtime ? 'bg-green-600' : isBatch ? 'bg-red-600' : 'bg-yellow-600'}" style="width: ${isRealtime ? '75%' : isBatch ? '25%' : '50%'}"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderNyquist() {
+            nyquistList.innerHTML = sensorNyquist.map(sensor => `
+                <div class="bg-slate-800 p-3 rounded border-l-4 border-cyan-500">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-cyan-300">${sensor.name}</h3>
+                            <p class="text-xs text-gray-400 mt-1">Sampling: ${sensor.samplingRate} Hz | Nyquist: ${sensor.nyquistFreq} Hz</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs bg-cyan-900 text-cyan-200 px-2 py-1 rounded mb-1">${sensor.effectiveDataRate}</div>
+                            <div class="text-xs text-gray-400">${sensor.pointsPerFrame} pts/frame</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="text-xs text-cyan-300 font-semibold">${sensor.nyquistMargin}</div>
+                        <div class="h-2 bg-slate-700 rounded overflow-hidden mt-1">
+                            <div class="${sensor.nyquistMargin === 'Poor' ? 'bg-red-600' : sensor.nyquistMargin === 'Marginal' ? 'bg-yellow-500' : sensor.nyquistMargin === 'Critical' ? 'bg-orange-500' : 'bg-green-500'}" style="width: ${sensor.nyquistMargin === 'Poor' ? '30%' : sensor.nyquistMargin === 'Marginal' ? '60%' : sensor.nyquistMargin === 'Critical' ? '70%' : '85%'}"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-gray-400">
+                        <strong>Anti-aliasing:</strong> ${sensor.antiAliasingFilter}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateMetrics() {
+            const scenario = scenarios[selectedScenario];
+            scenarioDescription.textContent = scenario.description;
+            
+            const totalLatency = processingLayers.reduce((sum, l) => {
+                const base = parseInt(l.latency.split('-')[0]);
+                return sum + Math.round(base * scenario.latencyMultiplier);
+            }, 0);
+            
+            metricLatency.textContent = `${totalLatency}ms`;
+            metricLatencyDesc.textContent = `Sensor → Decision: ${scenario.label}`;
+            
+            const activeSensors = sensors.length - scenario.failedSensors.length;
+            metricSensors.textContent = `${activeSensors}/${sensors.length}`;
+            metricSensorsDesc.textContent = scenario.failedSensors.length > 0
+                ? `Failed: ${scenario.failedSensors.join(', ')}`
+                : 'All sensors operational';
+                
+            metricFrequency.textContent = scenario.latencyMultiplier === 1 ? '25Hz' : scenario.latencyMultiplier === 1.5 ? '16Hz' : '10Hz';
+            
+            renderSensors();
+            renderPipeline();
+        }
+
+        // Event Listeners
+        scenarioSelect.addEventListener('change', (e) => {
+            selectedScenario = e.target.value;
+            updateMetrics();
+        });
+
+        toggleSimulationBtn.addEventListener('click', () => {
+            simulationRunning = !simulationRunning;
+            toggleSimulationBtn.textContent = simulationRunning ? 'Pause' : 'Resume';
+            toggleSimulationBtn.className = `px-4 py-2 rounded font-semibold transition ${simulationRunning ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}`;
+        });
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>

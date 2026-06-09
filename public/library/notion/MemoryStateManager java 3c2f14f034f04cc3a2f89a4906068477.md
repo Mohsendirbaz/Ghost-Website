@@ -1,0 +1,7 @@
+# MemoryStateManager.java
+
+Depth: 7
+File Type: Java
+GitHub URL: https://github.com/Mohsen-Dirbaz-Organization/AutoAgenets-2/blob/DefaultBranch/src/main/java/com/IDE/plugin/ai/multiagent/memory/core/MemoryStateManager.java
+Lines: 408
+Parent Directories: core, memory, multiagent

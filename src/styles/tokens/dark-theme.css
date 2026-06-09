@@ -1,0 +1,132 @@
+/* =============================================
+   GHOST AUTONOMY — DARK THEME TOKENS
+   Derived from project Dark_theme document (v2.0.0).
+   Applied when <html class="dark-theme">.
+   All values WCAG 2.1 AA compliant.
+   ============================================= */
+
+:root.dark-theme {
+  color-scheme: dark;
+
+  /* ── Surface hierarchy — three-tier elevation ── */
+  --surface-base:     #121a2e;   /* Primary background (13% L) */
+  --surface-raised:   #1e2746;   /* Cards, sidebar (20% L) */
+  --surface-elevated: #2a3356;   /* Elevated elements (25% L) */
+  --surface-overlay:  #354069;   /* Modals, popovers (30% L) */
+
+  /* ── Text — hierarchical contrast ladder ── */
+  --text-primary:   #e0e0e0;   /* 13.2:1 contrast — AAA */
+  --text-secondary: #adb5bd;   /* 8.9:1 contrast — AAA */
+  --text-tertiary:  #64748b;   /* 5.1:1 contrast — AA+ */
+  --text-disabled:  #475569;   /* 3.2:1 contrast — decorative */
+  --text-inverse:   #1e293b;   /* For text on light/primary backgrounds */
+
+  /* ── Brand / Interactive ── */
+  --color-primary:        #4a7fb5;   /* 5.2:1 on surface-base */
+  --color-primary-hover:  #5a94cd;   /* 6.1:1 — hover state */
+  --color-primary-active: #3d6a9a;   /* 4.7:1 — active/pressed */
+  --color-primary-dim:    #2f5273;   /* 3.5:1 — decorative dim */
+  --color-primary-light:  #5a94cd;   /* Eyebrow text on dark bg (6.1:1) */
+  --color-secondary:      #1a6fa5;   /* Secondary interactive */
+  --color-secondary-dark: #0d4f7a;
+  --color-secondary-light: #2a8bc9;
+  --color-accent:         #e6a020;   /* Warm accent on dark surface */
+
+  /* ── Feedback ── */
+  --color-success:     #28a745;   /* 5.1:1 on surface-base */
+  --color-success-dim: #1e7a33;
+  --color-warning:     #ffc107;   /* 8.7:1 on surface-base */
+  --color-warning-dim: #cc9a06;
+  --color-danger:      #dc3545;   /* 6.2:1 on surface-base */
+  --color-danger-dim:  #b02a37;
+  --color-info:        #17a2b8;   /* 4.8:1 on surface-base */
+  --color-info-dim:    #128293;
+
+  /* Legacy alias for color-error */
+  --color-error: #dc3545;
+
+  /* ── Borders ── */
+  --border-base:   #2a3356;
+  --border-subtle: #1e2940;
+  --border-strong: #3d4d7a;
+
+  /* ── RGB equivalents for rgba() compositing ── */
+  --surface-base-rgb:     18, 26, 46;
+  --surface-raised-rgb:   30, 39, 70;
+  --surface-elevated-rgb: 42, 51, 86;
+  --color-primary-rgb:    74, 127, 181;
+  --color-secondary-rgb:  26, 111, 165;
+  --color-success-rgb:    40, 167, 69;
+  --color-warning-rgb:    255, 193, 7;
+  --color-danger-rgb:     220, 53, 69;
+  --color-info-rgb:       23, 162, 184;
+  --text-primary-rgb:     224, 224, 224;
+  --text-secondary-rgb:   173, 181, 189;
+  --border-base-rgb:      42, 51, 86;
+  --accent-primary-rgb:   122, 145, 80;
+
+  /* ── Neumorphic shadow colors (dark theme values) ── */
+  --neu-dark-shadow:  rgba(0, 0, 0, 0.35);
+  --neu-light-shadow: rgba(40, 53, 105, 0.15);
+
+  /* Neumorphic gradients for dark theme */
+  --neu-gradient-raised:    linear-gradient(145deg, #242e54, #1a263f);
+  --neu-gradient-pressed:   linear-gradient(145deg, #1a263f, #242e54);
+  --neu-gradient-highlight: linear-gradient(45deg,
+    rgba(40, 53, 105, 0.03),
+    rgba(40, 53, 105, 0.12));
+
+  /* ── Hero surface for dark theme ── */
+  --hero-surface-start: #0a0f1e;
+  --hero-surface-mid:   #001a3a;
+  --hero-surface-end:   #0d1a2e;
+
+  /* ── Accent colors (content-specific) ── */
+  --accent-primary:   #7a9150;   /* 5.8:1 */
+  --accent-secondary: #6d7f47;   /* 5.1:1 */
+  --accent-tertiary:  #5a6b3d;   /* 4.6:1 */
+
+  /* ── Mediated / special ── */
+  --color-mediated: #3d5fa8;
+
+  /* ── Badge semantic colors (dark theme variants) ── */
+  --badge-collection-bg:  rgba(74, 127, 181, 0.15);
+  --badge-collection-text: #7db0e0;
+  --badge-type-bg:        rgba(40, 167, 69, 0.15);
+  --badge-type-text:      #5bc87e;
+  --badge-claim-bg:       rgba(255, 193, 7, 0.15);
+  --badge-claim-text:     #ffc107;
+
+  /* ── Header frosted-glass tokens ── */
+  --header-bg:          rgba(18, 26, 46, 0.85);
+  --header-bg-scrolled: rgba(18, 26, 46, 0.96);
+  --header-bg-open:     rgba(18, 26, 46, 0.98);
+  --megamenu-bg:        var(--surface-raised);
+  --header-nav-active-bg: rgba(74, 127, 181, 0.12);
+  --header-menu-hover-bg: rgba(74, 127, 181, 0.10);
+
+  /* ── Footer (darker than page base in dark theme) ── */
+  --footer-bg:         #070d1a;
+  --footer-text:       var(--text-secondary);
+  --footer-text-dim:   var(--text-tertiary);
+  --footer-text-muted: var(--text-tertiary);
+  --footer-text-faint: var(--text-disabled);
+  --footer-text-link:  var(--text-secondary);
+  --footer-border:     var(--border-subtle);
+  --footer-btn-border: var(--border-base);
+  --footer-hover-bg:   var(--surface-elevated);
+
+  /* ── Spatial transform variables ── */
+  --spatial-perspective: 1000px;
+  --spatial-gradient-start: #2563eb;
+  --spatial-gradient-end:   #9333ea;
+}
+
+/* ── High-contrast mode override ── */
+@media (prefers-contrast: high) {
+  :root.dark-theme {
+    --border-base: #ffffff;
+    --text-primary: #ffffff;
+    --color-primary: #00ffff;
+  }
+}

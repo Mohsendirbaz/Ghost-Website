@@ -1,0 +1,119 @@
+/* =============================================
+   GHOST AUTONOMY — LIGHT THEME TOKENS
+   Current production light appearance as an explicit theme.
+   Applied when <html class="light-theme">.
+   ============================================= */
+
+:root.light-theme {
+  color-scheme: light;
+
+  /* ── Surface hierarchy — four-tier elevation ── */
+  --surface-base:     #FFFFFF;
+  --surface-raised:   #F8F9FA;
+  --surface-elevated: #F1F3F5;
+  --surface-overlay:  #E9ECEF;
+
+  /* ── Text — hierarchical contrast ladder ── */
+  --text-primary:   #1A1D23;   /* ~13:1 on surface-base */
+  --text-secondary: #6B7280;   /* ~5.3:1 on surface-base */
+  --text-tertiary:  #9CA3AF;   /* ~3.1:1 on surface-base (decorative) */
+  --text-disabled:  #D1D5DB;   /* ~1.7:1 (decorative only) */
+  --text-inverse:   #FFFFFF;   /* For text on dark/primary backgrounds */
+
+  /* ── Brand / Interactive ── */
+  --color-primary:        #FF6B35;
+  --color-primary-hover:  #CC5529;
+  --color-primary-active: #B34A24;
+  --color-primary-dim:    rgba(255, 107, 53, 0.15);
+  --color-primary-light:  #FF8F66;   /* Eyebrow on dark backgrounds (4.5:1 on near-black) */
+  --color-secondary:      #004E89;
+  --color-secondary-dark: #003A66;
+  --color-secondary-light: #0066B3;
+  --color-accent:         #F7B32B;
+
+  /* ── Feedback ── */
+  --color-success:     #10B981;
+  --color-success-dim: rgba(16, 185, 129, 0.12);
+  --color-warning:     #F59E0B;
+  --color-warning-dim: rgba(245, 158, 11, 0.12);
+  --color-danger:      #EF4444;
+  --color-danger-dim:  rgba(239, 68, 68, 0.12);
+  --color-info:        #3B82F6;
+  --color-info-dim:    rgba(59, 130, 246, 0.12);
+
+  /* Legacy alias for color-error */
+  --color-error: #EF4444;
+
+  /* ── Borders ── */
+  --border-base:   #E5E7EB;
+  --border-subtle: #F3F4F6;
+  --border-strong: #D1D5DB;
+
+  /* ── RGB equivalents for rgba() compositing ── */
+  --surface-base-rgb:      255, 255, 255;
+  --surface-raised-rgb:    248, 249, 250;
+  --surface-elevated-rgb:  241, 243, 245;
+  --color-primary-rgb:     255, 107, 53;
+  --color-secondary-rgb:   0, 78, 137;
+  --color-success-rgb:     16, 185, 129;
+  --color-warning-rgb:     245, 158, 11;
+  --color-danger-rgb:      239, 68, 68;
+  --color-info-rgb:        59, 130, 246;
+  --text-primary-rgb:      26, 29, 35;
+  --text-secondary-rgb:    107, 114, 128;
+  --border-base-rgb:       229, 231, 235;
+
+  /* ── Neumorphic shadow colors (light theme values) ── */
+  --neu-dark-shadow:  rgba(163, 177, 198, 0.5);
+  --neu-light-shadow: rgba(255, 255, 255, 0.9);
+
+  /* Neumorphic gradients for light theme */
+  --neu-gradient-raised:    linear-gradient(145deg, #ffffff, #e8ecef);
+  --neu-gradient-pressed:   linear-gradient(145deg, #e8ecef, #ffffff);
+  --neu-gradient-highlight: linear-gradient(45deg,
+    rgba(255, 255, 255, 0.0),
+    rgba(255, 255, 255, 0.6));
+
+  /* ── Badge semantic colors (for diagram/KB badges) ── */
+  --badge-collection-bg:  #EEF2FF;
+  --badge-collection-text: #3730A3;
+  --badge-type-bg:        #F0FDF4;
+  --badge-type-text:      #166534;
+  --badge-claim-bg:       #FEF3C7;
+  --badge-claim-text:     #92400E;
+
+  /* ── Hero surface (hero stays dark even in light theme — intentional premium aesthetic) ── */
+  --hero-surface-start: #0a0f1e;
+  --hero-surface-mid:   #001a3a;
+  --hero-surface-end:   #0d1a2e;
+
+  /* ── Header frosted-glass tokens ── */
+  --header-bg:          rgba(255, 255, 255, 0.85);
+  --header-bg-scrolled: rgba(255, 255, 255, 0.96);
+  --header-bg-open:     rgba(255, 255, 255, 0.98);
+  --megamenu-bg:        #ffffff;
+  --header-nav-active-bg: rgba(255, 107, 53, 0.07);
+  --header-menu-hover-bg: rgba(255, 107, 53, 0.06);
+
+  /* ── Footer (intentionally dark in both themes) ── */
+  --footer-bg:         #1A1D23;
+  --footer-text:       rgba(255, 255, 255, 0.7);
+  --footer-text-dim:   rgba(255, 255, 255, 0.5);
+  --footer-text-muted: rgba(255, 255, 255, 0.55);
+  --footer-text-faint: rgba(255, 255, 255, 0.35);
+  --footer-text-link:  rgba(255, 255, 255, 0.65);
+  --footer-border:     rgba(255, 255, 255, 0.1);
+  --footer-btn-border: rgba(255, 255, 255, 0.25);
+  --footer-hover-bg:   rgba(255, 255, 255, 0.08);
+}
+
+/* ── High-contrast mode override ── */
+@media (prefers-contrast: high) {
+  :root.light-theme {
+    --border-base:   #000000;
+    --text-primary:  #000000;
+    --text-secondary: #1A1D23;
+    --color-primary: #CC5529;   /* Darker orange — better contrast on white */
+    --color-primary-hover: #B34A24;
+  }
+}

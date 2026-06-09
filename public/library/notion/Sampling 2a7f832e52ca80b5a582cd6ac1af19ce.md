@@ -1,0 +1,9 @@
+# Sampling
+
+[multi_scale_qa_quick_reference](multi_scale_qa_quick_reference%202a7f832e52ca81c18b97de87a73b4c7f.md)
+
+[multi_scale_qa_visual_diagrams](multi_scale_qa_visual_diagrams%202a7f832e52ca818c8eefdc01ccc85d25.md)
+
+[multi_scale_qa_research_prompt](multi_scale_qa_research_prompt%202a7f832e52ca8103b114ddeaea059f24.md)
+
+[EXECUTIVE_SUMMARY](EXECUTIVE_SUMMARY%202a7f832e52ca8192a8d6d00f27efcc9f.md)

@@ -1,0 +1,36 @@
+/* ─── Hero Minimal (Compact) ──────────────────────────────────────────────── */
+
+.hero-minimal {
+  padding: var(--space-8) 0;
+  background: var(--surface-base);
+}
+
+.hero-minimal__content {
+  max-width: 700px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hero-minimal__h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.hero-minimal__sub {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .hero-minimal {
+    padding: var(--space-6) 0;
+  }
+  .hero-minimal__h1 {
+    font-size: var(--text-2xl);
+  }
+  .hero-minimal__sub {
+    font-size: var(--text-base);
+  }
+}
