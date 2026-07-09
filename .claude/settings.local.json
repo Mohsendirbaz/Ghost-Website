@@ -12,7 +12,9 @@
       "Bash(git fetch:*)",
       "Bash(ls:*)",
       "Bash(DISABLE_ESLINT_PLUGIN=true npx react-scripts:*)",
-      "Bash(npx update-browserslist-db@latest:*)"
+      "Bash(npx update-browserslist-db@latest:*)",
+      "Bash(npx eslint *)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

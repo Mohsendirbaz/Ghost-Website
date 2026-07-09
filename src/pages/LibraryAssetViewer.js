@@ -9,6 +9,8 @@
  */
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Breadcrumb from '../components/Breadcrumb';
@@ -220,7 +222,25 @@ function MdViewer({ path, title, isRtl }) {
 
     return (
         <div className="lav-embed-body lav-embed-body--md">
-            <pre className="lav-md-content" dir={isRtl ? 'rtl' : 'ltr'}>{text}</pre>
+            <div className="lav-md-content" dir={isRtl ? 'rtl' : 'ltr'}>
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                        // Wrap every table in a scrollable container
+                        table: ({ node, ...props }) => (
+                            <div className="lav-md-table-scroll">
+                                <table {...props} />
+                            </div>
+                        ),
+                        // Open external links in new tab
+                        a: ({ node, children, ...props }) => (
+                            <a {...props} target="_blank" rel="noopener noreferrer">{children}</a>
+                        ),
+                    }}
+                >
+                    {text}
+                </ReactMarkdown>
+            </div>
         </div>
     );
 }
