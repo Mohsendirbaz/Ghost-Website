@@ -106,6 +106,15 @@ const Icons = {
       <path d="M3 18c0-3.5 3-6 7-6s7 2.5 7 6" />
     </svg>
   ),
+  multiAgent: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="5" cy="5" r="2.2" />
+      <circle cx="15" cy="5" r="2.2" />
+      <circle cx="5" cy="15" r="2.2" />
+      <circle cx="15" cy="15" r="2.2" />
+      <path d="M7.2 5h5.6M5 7.2v5.6M15 7.2v5.6M7.2 15h5.6" />
+    </svg>
+  ),
   search: (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="9" cy="9" r="6" />
@@ -260,7 +269,9 @@ export default function Header() {
       links: [
         { label: t.perspective,   to: `/${lang}/perspective`,    iconKey: 'perspective',   desc: isRtl ? 'دیدگاه صنعت' : 'Industry perspective' },
         { label: t.architecture,  to: `/${lang}/architecture`,   iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
-        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۷ فصل' : '8 parts · 47 chapters' },
+        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۳ فصل' : '8 parts · 43 chapters' },
+        { label: t.multiAgentSystem, to: `/${lang}/multi-agent-system`, iconKey: 'multiAgent', desc: isRtl ? 'آزمایشگاه پژوهشی رویدادمحور' : 'Event-sourced research laboratory' },
+        { label: t.methods, to: `/${lang}/methods`, iconKey: 'science', desc: isRtl ? 'فرامتد، برنامه اکتشاف و ممیزی بیرونی' : 'Meta-method, discovery program & external audit' },
       ],
     },
     {

@@ -47,6 +47,23 @@ export default function Science() {
         gray
       />
 
+      <SectionBlock
+        eyebrow={t.manuscriptEyebrow}
+        title={t.manuscriptTitle}
+        body={t.manuscriptBody}
+        note={t.manuscriptNote}
+        alt
+      />
+
+      <SectionBlock
+        eyebrow={t.papersEyebrow}
+        title={t.papersTitle}
+        body={t.papersBody}
+        points={t.papersPoints}
+        note={t.papersNote}
+        gray
+      />
+
       <CTABand
         title={lang === 'en' ? 'Interested in research collaboration or academic partnership?' : 'علاقه‌مند به همکاری تحقیقاتی یا شراکت دانشگاهی؟'}
         cta1={t.ctaBtn}

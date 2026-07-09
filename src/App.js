@@ -35,6 +35,7 @@ import LibraryBrowse from './pages/LibraryBrowse';
 import MultiAgentSystem from './pages/MultiAgentSystem';
 import Invest from './pages/Invest';
 import Bio from './pages/Bio';
+import Methods from './pages/Methods';
 import './styles/global.css';
 import './App.css';
 
@@ -134,6 +135,7 @@ function AppShell() {
           <Route path="/en/company" element={<PageTransition><Company /></PageTransition>} />
           <Route path="/en/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="/en/perspective" element={<PageTransition><Perspective /></PageTransition>} />
+          <Route path="/en/methods" element={<PageTransition><Methods /></PageTransition>} />
           <Route path="/en/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           {/* Knowledge Base — browse index */}
           <Route path="/en/knowledge-base" element={<PageTransition><KnowledgeBase /></PageTransition>} />
@@ -178,6 +180,7 @@ function AppShell() {
           <Route path="/fa/company" element={<PageTransition><Company /></PageTransition>} />
           <Route path="/fa/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="/fa/perspective" element={<PageTransition><Perspective /></PageTransition>} />
+          <Route path="/fa/methods" element={<PageTransition><Methods /></PageTransition>} />
           <Route path="/fa/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           <Route path="*" element={<Navigate to="/en" replace />} />
           </Routes>

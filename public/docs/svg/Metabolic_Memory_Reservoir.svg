@@ -1,0 +1,144 @@
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="var(--font-sans), system-ui, sans-serif">
+  <title id="t">BP-3 Metabolic Memory Reservoir architecture, wired to the gearbox, with revealed gaps</title>
+  <desc id="d">The write path encodes enforced causality and stratifies data by residence time into three partitions: reflexive, tactical, and strategic. A shadow-price read path retrieves under budget; eviction uses PMP recurrence; a promotion boundary at five seconds re-quantizes to digital. The strategic tier and an anti-drift governor wire to the BP-2 gearbox on a feed channel and a judge channel. Ten modules the documents do not provide are marked as revealed gaps to build.</desc>
+
+  <defs>
+    <marker id="aN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--color-border-secondary)"/></marker>
+    <marker id="aV" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7F77DD"/></marker>
+    <marker id="aO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D85A30"/></marker>
+  </defs>
+
+  <style>
+    .mod  { fill: var(--color-background-primary); stroke: var(--color-border-secondary); stroke-width:1.5; }
+    .ttl  { fill: var(--color-text-primary); font-size:12.5px; font-weight:700; }
+    .ttls { fill: var(--color-text-primary); font-size:11.5px; font-weight:700; }
+    .sub  { fill: var(--color-text-secondary); font-size:9.8px; }
+    .tag  { fill: var(--color-text-info); font-size:9.5px; font-family: var(--font-mono), monospace; }
+    .band { fill: var(--color-text-secondary); font-size:10.5px; font-weight:700; letter-spacing:1px; }
+    .lg   { fill: var(--color-text-secondary); font-size:9.5px; }
+    .eN   { stroke: var(--color-border-secondary); stroke-width:1.4; fill:none; }
+    .eV   { stroke:#7F77DD; stroke-width:2; fill:none; }
+    .eO   { stroke:#D85A30; stroke-width:1.6; fill:none; }
+    .gap  { fill:#D85A30; fill-opacity:0.07; stroke:#D85A30; stroke-width:1.3; stroke-dasharray:5 3; }
+    .gapt { fill:#993C1D; font-size:9.5px; font-weight:700; }
+    .vtxt { fill:#3C3489; }
+  </style>
+
+  <text x="30" y="20" class="band">BP-3 · METABOLIC MEMORY RESERVOIR — ARCHITECTURE</text>
+  <rect x="560" y="11" width="12" height="9" rx="2" fill="#7F77DD" fill-opacity="0.18" stroke="#7F77DD"/><text x="577" y="19" class="lg">BP-2 gearbox / coupling</text>
+  <rect x="730" y="11" width="12" height="9" rx="2" class="gap"/><text x="747" y="19" class="lg">revealed gap (to build)</text>
+  <rect x="900" y="11" width="12" height="9" rx="2" class="mod"/><text x="917" y="19" class="lg">specified component</text>
+
+  <!-- top chips -->
+  <rect x="70" y="40" width="300" height="32" rx="8" class="mod"/><text x="220" y="60" text-anchor="middle" class="ttls">S0 Trusted Substrate (BP-1)</text>
+  <rect x="820" y="40" width="340" height="32" rx="8" class="mod"/><text x="990" y="60" text-anchor="middle" class="ttls">Off-board training  ⟂  inference</text>
+
+  <!-- write path -->
+  <rect x="70" y="88" width="330" height="64" rx="10" class="mod"/>
+  <text x="84" y="110" class="ttl">A1 · Enforced-Causality Encoder</text>
+  <text x="84" y="128" class="sub">inflate threat weight w_in before classification</text>
+  <text x="84" y="144" class="sub">licensed by φ (BP-5) · antitone: may rise, never silently fall</text>
+  <rect x="70" y="166" width="330" height="48" rx="10" class="mod"/>
+  <text x="84" y="187" class="ttl">A2 · Residence-Time Stratifier</text>
+  <text x="84" y="204" class="sub">route by action-horizon τ, not by data type</text>
+  <path class="eN" d="M220 72 V88" marker-end="url(#aN)"/>
+  <path class="eN" d="M235 152 V166" marker-end="url(#aN)"/>
+
+  <!-- D3 governor -->
+  <rect x="820" y="88" width="340" height="64" rx="10" class="mod"/>
+  <text x="834" y="110" class="ttl">D3 · Anti-Silent-Drift Governor</text>
+  <text x="834" y="128" class="sub">LLC via SGLD · jump → flag / log / QUARANTINE</text>
+  <text x="834" y="144" class="sub">commits only signed, verified artifacts</text>
+  <path class="eN" d="M990 72 V88" marker-end="url(#aN)"/>
+
+  <!-- A2 fan-out bus -->
+  <path class="eN" d="M235 214 V228 H186 V244" marker-end="url(#aN)"/>
+  <path class="eN" d="M235 228 H427 V244" marker-end="url(#aN)"/>
+  <path class="eN" d="M235 228 H676 V244" marker-end="url(#aN)"/>
+
+  <!-- partitions -->
+  <text x="30" y="240" class="band">THREE PARTITIONS · verification strengthens with τ</text>
+  <rect x="70" y="246" width="232" height="166" rx="10" class="mod"/>
+  <text x="84" y="268" class="ttls">Reflexive · τ &lt; 100 ms</text>
+  <text x="84" y="288" class="sub">ring buffers · overwrite</text>
+  <text x="84" y="304" class="sub">pred: physical admissibility</text>
+  <text x="84" y="320" class="sub">substrate: volatile memristor</text>
+  <text x="84" y="336" class="sub">→ reflex + S4 analog veto</text>
+  <text x="288" y="402" text-anchor="end" class="tag">λ_reflex ≫</text>
+
+  <rect x="312" y="246" width="230" height="166" rx="10" class="mod"/>
+  <text x="326" y="268" class="ttls">Tactical · 100 ms–5 s</text>
+  <text x="326" y="288" class="sub">K-V by object · lease = ODD</text>
+  <text x="326" y="304" class="sub">pred: trajectory consensus</text>
+  <text x="326" y="320" class="sub">substrate: short-ret. crossbar</text>
+  <text x="326" y="336" class="sub">→ steward + SAE gate</text>
+  <text x="528" y="402" text-anchor="end" class="tag">λ_tac</text>
+
+  <rect x="562" y="246" width="227" height="166" rx="10" class="mod"/>
+  <text x="576" y="268" class="ttls">Strategic · τ ≥ 5 s</text>
+  <text x="576" y="288" class="sub">persistent provenance graph</text>
+  <text x="576" y="304" class="sub">pred: cross-modality conf.</text>
+  <text x="576" y="320" class="sub">DIGITAL posit/quire (ADR)</text>
+  <text x="576" y="336" class="sub">→ only tier that rewrites wts</text>
+  <text x="775" y="402" text-anchor="end" class="tag">λ_strat</text>
+
+  <!-- D2 promotion boundary -->
+  <line x1="552" y1="246" x2="552" y2="412" stroke="#D85A30" stroke-width="1.4" stroke-dasharray="5 3"/>
+  <text x="552" y="240" text-anchor="middle" class="gapt" fill="var(--color-text-secondary)">D2 · τ=5 s re-quantize→posit</text>
+
+  <!-- pulls to read path -->
+  <path class="eN" d="M186 412 V446" marker-end="url(#aN)"/>
+  <path class="eN" d="M427 412 V446" marker-end="url(#aN)"/>
+  <path class="eN" d="M676 412 V446" marker-end="url(#aN)"/>
+
+  <!-- read path C1 -->
+  <rect x="70" y="446" width="719" height="56" rx="10" class="mod"/>
+  <text x="84" y="468" class="ttl">C1 · Shadow-Price Retrieval</text>
+  <text x="84" y="486" class="sub">admit  ΔJ(dᵢ)/C(dᵢ) ≥ λ_k  · safe-side pricing · λ_reflex≫λ_tac>λ_strat  (= the cognition-gate lever)</text>
+
+  <!-- D1 eviction -->
+  <rect x="70" y="514" width="719" height="30" rx="8" fill="var(--color-text-primary)" fill-opacity="0.05" stroke="var(--color-border-tertiary)" stroke-width="1.2"/>
+  <text x="84" y="533" class="sub"><tspan font-weight="700">D1 · Eviction</tspan> — PMP costates as priorities · β-exponential τ-recurrence → return to safe set S_r (no chatter)</text>
+
+  <!-- tau axis -->
+  <path class="eN" d="M80 562 H780" marker-end="url(#aN)" stroke-opacity="0.7"/>
+  <text x="84" y="557" class="lg">fast · forget</text>
+  <text x="780" y="557" text-anchor="end" class="lg">slow · govern  (blast radius grows with τ)</text>
+
+  <!-- BP-2 gearbox -->
+  <rect x="820" y="200" width="340" height="150" rx="12" fill="#7F77DD" fill-opacity="0.12" stroke="#7F77DD" stroke-width="2"/>
+  <circle cx="852" cy="232" r="14" fill="var(--color-background-primary)" stroke="#7F77DD" stroke-width="1.8"/><circle cx="852" cy="232" r="2.6" fill="#7F77DD"/><line x1="852" y1="232" x2="862" y2="223" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+  <text x="876" y="228" class="ttl vtxt">BP-2 · Gearbox</text>
+  <text x="876" y="244" class="sub" fill="#534AB7">325-route formulation engine — training</text>
+  <text x="834" y="286" class="sub"><tspan fill="#3C3489" font-weight="700">Ch.1 feed →</tspan> route becomes a retrieval query</text>
+  <text x="834" y="306" class="sub"><tspan fill="#3C3489" font-weight="700">Ch.2 judge →</tspan> selector update 𝒲, bˡ, T</text>
+  <text x="834" y="326" class="sub">   = a strategic consolidation (LLC-gated)</text>
+
+  <!-- coupling arrows -->
+  <path class="eV" d="M789 474 H806 V300 H820" marker-end="url(#aV)"/>
+  <text x="812" y="392" class="tag" text-anchor="middle" fill="#534AB7">feed: only what the reservoir admits</text>
+  <path class="eV" d="M955 200 V170 H840 V152" marker-end="url(#aV)"/>
+  <text x="900" y="186" class="tag" text-anchor="middle" fill="#534AB7">judge: commit only what clears</text>
+  <path class="eO" d="M905 152 V172 H700 V200" stroke-dasharray="5 3" marker-end="url(#aO)"/>
+  <text x="705" y="190" class="gapt">ADMIT / QUARANTINE</text>
+  <path class="eN" d="M676 246 V224 H905 V152" marker-end="url(#aN)" stroke-opacity="0.55"/>
+  <text x="700" y="218" class="tag">strategic graph → off-board</text>
+
+  <!-- critical inline gaps -->
+  <rect x="92" y="424" width="150" height="20" rx="6" class="gap"/><text x="100" y="438" class="gapt">GAP G2 · ΔJ estimator</text>
+  <rect x="250" y="424" width="190" height="20" rx="6" class="gap"/><text x="258" y="438" class="gapt">GAP G3 · threat-geometry monitor</text>
+  <rect x="612" y="466" width="172" height="20" rx="6" class="gap"/><text x="620" y="480" class="gapt">GAP G1 · gearbox translator</text>
+
+  <!-- bottom gap strip -->
+  <text x="30" y="600" class="band" fill="#993C1D">MORE REVEALED GAPS · modules no document provides (rank: G1–G3 are existential / critical-path)</text>
+  <g>
+    <rect x="70"  y="612" width="150" height="28" rx="7" class="gap"/><text x="78" y="630" class="gapt">G4 · λ controller</text>
+    <rect x="228" y="612" width="150" height="28" rx="7" class="gap"/><text x="236" y="630" class="gapt">G5 · LLC detector</text>
+    <rect x="386" y="612" width="168" height="28" rx="7" class="gap"/><text x="394" y="630" class="gapt">G6 · promotion adjud.</text>
+    <rect x="562" y="612" width="166" height="28" rx="7" class="gap"/><text x="570" y="630" class="gapt">G7 · τ-est + ODD lease</text>
+    <rect x="736" y="612" width="150" height="28" rx="7" class="gap"/><text x="744" y="630" class="gapt">G8 · energy↔joule</text>
+    <rect x="894" y="612" width="150" height="28" rx="7" class="gap"/><text x="902" y="630" class="gapt">G9 · provenance store</text>
+    <rect x="1052" y="612" width="108" height="28" rx="7" class="gap"/><text x="1060" y="630" class="gapt">G10 · replay</text>
+  </g>
+  <text x="30" y="666" class="sub"><tspan font-weight="700">Judged-against, precisely:</tspan>  the reservoir bounds the gearbox on both ends — it can learn only from what C1 admits (feed), and commit only what D3 clears (judge).</text>
+</svg>

@@ -67,6 +67,39 @@ export default function Safety() {
       />
 
       <SectionBlock
+        eyebrow={t.refusalEyebrow}
+        title={t.refusalTitle}
+        body={t.refusalBody}
+        note={t.refusalNote}
+      />
+
+      {t.refusalStages && (
+        <section className="safety-layers">
+          <div className="container">
+            <h2 className="section-title">{t.refusalStagesTitle}</h2>
+            <div className="safety-layers__grid">
+              {t.refusalStages.map((stage, i) => (
+                <div key={i} className="layer-card">
+                  <p className="layer-card__num">{stage.num}</p>
+                  <h3 className="layer-card__title">{stage.title}</h3>
+                  <p className="layer-card__body">{stage.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <SectionBlock
+        title={t.refusalCriteriaTitle}
+        body={t.refusalCriteriaIntro}
+        points={t.refusalCriteria}
+        note={t.refusalStandingsNote}
+        gray
+        alt
+      />
+
+      <SectionBlock
         title={t.pathTitle}
         body={t.pathBody}
       />

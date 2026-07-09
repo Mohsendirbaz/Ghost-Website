@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Research Laboratory</title>
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --panel: #ffffff;
+      --panel-2: #f8faf8;
+      --ink: #17211d;
+      --muted: #5f6f68;
+      --line: #d8e0db;
+      --line-strong: #b7c4bd;
+      --green: #226f54;
+      --green-soft: #e2f2ea;
+      --blue: #315f9a;
+      --blue-soft: #e3ecf7;
+      --amber: #a76519;
+      --amber-soft: #fff0d5;
+      --red: #9f3f4f;
+      --red-soft: #fae3e7;
+      --violet: #6750a4;
+      --violet-soft: #eee8ff;
+      --teal: #0f766e;
+      --teal-soft: #dff5f2;
+      --shadow: 0 12px 32px rgba(20, 39, 31, 0.12);
+      --radius: 8px;
+      --lane-width: 152px;
+      --col-width: 176px;
+      --row-height: 136px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    button {
+      border: 1px solid transparent;
+      border-radius: 7px;
+      background: var(--green);
+      color: #ffffff;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 650;
+      line-height: 1.1;
+      min-height: 34px;
+    }
+
+    button:hover {
+      filter: brightness(0.96);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
+      filter: none;
+    }
+
+    button.secondary {
+      background: #ffffff;
+      color: var(--ink);
+      border-color: var(--line-strong);
+    }
+
+    button.blue {
+      background: var(--blue);
+    }
+
+    button.amber {
+      background: var(--amber);
+    }
+
+    button.red {
+      background: var(--red);
+    }
+
+    button.violet {
+      background: var(--violet);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--ink);
+      padding: 8px 9px;
+      min-height: 34px;
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      margin-bottom: 5px;
+    }
+
+    .app {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      height: 100vh;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #a9c7b9;
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(34, 111, 84, 0.28) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(49, 95, 154, 0.24) 50%, transparent 51%),
+        #ecf6ef;
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 344px minmax(520px, 1fr) 356px;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .left,
+    .right {
+      overflow: auto;
+      padding: 14px;
+      background: var(--panel-2);
+      border-color: var(--line);
+      min-height: 0;
+    }
+
+    .left {
+      border-right: 1px solid var(--line);
+    }
+
+    .right {
+      border-left: 1px solid var(--line);
+    }
+
+    .center {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-width: 0;
+      min-height: 0;
+      background: #edf3ef;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .panel h2 span,
+    .panel h3 span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-grid .wide {
+      grid-column: 1 / -1;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .button-row button {
+      flex: 1 1 auto;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(100px, 1fr));
+      gap: 10px;
+      padding: 12px 14px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      background: #fbfdfb;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 0;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .canvas-scroll {
+      position: relative;
+      overflow: auto;
+      min-height: 0;
+      padding: 14px;
+    }
+
+    .canvas-content {
+      position: relative;
+      min-width: calc(var(--lane-width) + (8 * var(--col-width)));
+      width: max-content;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: var(--lane-width) repeat(8, var(--col-width));
+      grid-auto-rows: var(--row-height);
+      position: relative;
+      z-index: 2;
+    }
+
+    .corner,
+    .col-head,
+    .lane-head,
+    .cell {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .corner,
+    .col-head {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      min-height: 54px;
+      background: #f5f8f6;
+    }
+
+    .corner {
+      left: 0;
+      z-index: 6;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .col-head {
+      padding: 10px;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    .col-head small {
+      display: block;
+      color: var(--muted);
+      font-weight: 650;
+      margin-top: 4px;
+      line-height: 1.25;
+    }
+
+    .lane-head {
+      position: sticky;
+      left: 0;
+      z-index: 3;
+      background: #fbfdfb;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .lane-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .lane-sub {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .cell {
+      position: relative;
+      padding: 8px;
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .cell:hover {
+      background: #f7fbf8;
+      outline: 2px solid rgba(34, 111, 84, 0.12);
+      outline-offset: -2px;
+    }
+
+    .cell.empty::after {
+      content: attr(data-cell);
+      color: #b5c3bb;
+      font-size: 11px;
+      position: absolute;
+      top: 9px;
+      right: 9px;
+    }
+
+    .node-card {
+      height: 100%;
+      border: 1px solid var(--line-strong);
+      border-left-width: 5px;
+      border-radius: 8px;
+      padding: 8px;
+      background: #ffffff;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 6px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .node-card.selected {
+      outline: 3px solid rgba(34, 111, 84, 0.24);
+      border-color: var(--green);
+    }
+
+    .node-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .node-type {
+      font-size: 10px;
+      font-weight: 850;
+      text-transform: uppercase;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .node-status {
+      font-size: 10px;
+      font-weight: 850;
+      border-radius: 999px;
+      padding: 3px 6px;
+      border: 1px solid var(--line);
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .node-title {
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .node-desc {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.28;
+      overflow: hidden;
+    }
+
+    .node-foot {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px;
+      align-items: end;
+      min-width: 0;
+    }
+
+    .agent-chip {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 11px;
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .confidence {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .status-empty { border-left-color: var(--line-strong); }
+    .status-queued { border-left-color: var(--muted); }
+    .status-ready { border-left-color: var(--blue); }
+    .status-running { border-left-color: var(--amber); }
+    .status-review { border-left-color: var(--violet); }
+    .status-quorum { border-left-color: var(--teal); }
+    .status-validated { border-left-color: var(--green); }
+    .status-committed { border-left-color: #153f31; }
+    .status-blocked { border-left-color: var(--red); }
+    .status-retired { border-left-color: #79817d; opacity: 0.72; }
+
+    .node-status.status-queued { background: #eef2f0; color: #3c4742; }
+    .node-status.status-ready { background: var(--blue-soft); color: var(--blue); }
+    .node-status.status-running { background: var(--amber-soft); color: var(--amber); }
+    .node-status.status-review { background: var(--violet-soft); color: var(--violet); }
+    .node-status.status-quorum { background: var(--teal-soft); color: var(--teal); }
+    .node-status.status-validated,
+    .node-status.status-committed { background: var(--green-soft); color: var(--green); }
+    .node-status.status-blocked { background: var(--red-soft); color: var(--red); }
+    .node-status.status-retired { background: #eef0ee; color: #5e6863; }
+
+    .edge-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .edge-path {
+      fill: none;
+      stroke-width: 2.4;
+      opacity: 0.72;
+    }
+
+    .edge-label {
+      font-size: 10px;
+      fill: #38514a;
+      paint-order: stroke;
+      stroke: #ffffff;
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+
+    .timeline {
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      padding: 10px 14px;
+      overflow-x: auto;
+      min-height: 74px;
+    }
+
+    .checkpoint-list {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: max-content;
+    }
+
+    .checkpoint-pill {
+      border: 1px solid var(--line);
+      background: #fbfdfb;
+      border-radius: 8px;
+      padding: 8px 10px;
+      min-width: 150px;
+      cursor: pointer;
+    }
+
+    .checkpoint-pill strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .checkpoint-pill span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .stream-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .stream-tab {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      border-radius: 7px;
+      padding: 7px 9px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      max-width: 152px;
+    }
+
+    .stream-tab.active {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .stream-tab span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .agent-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .agent-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px;
+      background: #ffffff;
+      display: grid;
+      gap: 7px;
+    }
+
+    .agent-card .agent-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .agent-card strong {
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .agent-card small {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #e8eee9;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: var(--green);
+    }
+
+    .bar.load span {
+      background: var(--amber);
+    }
+
+    .inspector-empty {
+      border: 1px dashed var(--line-strong);
+      border-radius: 8px;
+      padding: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      background: #fbfdfb;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .detail {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      min-width: 0;
+      background: #fbfdfb;
+    }
+
+    .detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      margin-bottom: 4px;
+    }
+
+    .detail strong {
+      display: block;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .event-list {
+      display: grid;
+      gap: 8px;
+      max-height: 346px;
+      overflow: auto;
+      padding-right: 3px;
+    }
+
+    .event-item {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 8px;
+    }
+
+    .event-item strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .event-item span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.3;
+      display: block;
+    }
+
+    .event-item.green { border-left-color: var(--green); }
+    .event-item.amber { border-left-color: var(--amber); }
+    .event-item.red { border-left-color: var(--red); }
+    .event-item.violet { border-left-color: var(--violet); }
+    .event-item.teal { border-left-color: var(--teal); }
+
+    .log-filter {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: end;
+      margin-bottom: 10px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #17211d;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 30;
+      pointer-events: none;
+      max-width: 360px;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .kbd {
+      display: inline-flex;
+      min-width: 20px;
+      justify-content: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 1px 5px;
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .mini-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.42;
+      margin: 0;
+    }
+
+    .manual-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--green);
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(34, 111, 84, 0.35);
+      padding-bottom: 1px;
+      margin-top: 7px;
+      font-size: 12px;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .policy-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      background: #fbfdfb;
+      align-items: center;
+    }
+
+    .policy-row strong {
+      font-size: 12px;
+    }
+
+    .policy-row span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    @media (max-width: 1180px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .shell {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
+
+      .left,
+      .right {
+        border: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .center {
+        min-height: 720px;
+      }
+
+      .metric-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .top-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .form-grid,
+      .detail-grid,
+      .log-filter {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .brand p {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>Multi-Agent Research Laboratory</h1>
+          <p>Active workspace: streams, cells, agents, evidence, validation, memory.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="secondary" id="templateBtn" title="Load the seeded laboratory template">Template</button>
+        <button class="secondary" id="saveLocalBtn" title="Store current lab state in browser storage">Save Local</button>
+        <button class="secondary" id="loadLocalBtn" title="Load browser-stored lab state">Load Local</button>
+        <button class="blue" id="exportBtn" title="Export the active laboratory as JSON">Export</button>
+        <button class="secondary" id="importBtn" title="Import a laboratory JSON file">Import</button>
+        <input class="file-input" type="file" id="importInput" accept="application/json,.json">
+      </div>
+    </header>
+
+    <main class="shell">
+      <aside class="left">
+        <section class="panel">
+          <h2>Streams <span id="activeStreamLabel">main</span></h2>
+          <div class="stream-tabs" id="streamTabs"></div>
+          <div class="form-grid">
+            <div class="wide">
+              <label for="streamNameInput">Stream name</label>
+              <input id="streamNameInput" type="text" placeholder="policy-variant">
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="forkStreamBtn" class="blue">Fork Stream</button>
+            <button id="deleteStreamBtn" class="secondary">Delete Stream</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Checkpoint <span>replay anchor</span></h2>
+          <div class="form-grid">
+            <div class="wide">
+              <label for="checkpointNameInput">Checkpoint name</label>
+              <input id="checkpointNameInput" type="text" placeholder="e.g. Quorum accepted evidence chain">
+            </div>
+            <div class="wide">
+              <label for="checkpointReasonInput">Reason</label>
+              <textarea id="checkpointReasonInput" placeholder="What changed in authority, evidence, memory, or policy?"></textarea>
+            </div>
+            <div class="wide">
+              <label for="checkpointSelect">Restore checkpoint</label>
+              <select id="checkpointSelect"></select>
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="saveCheckpointBtn">Save</button>
+            <button id="restoreCheckpointBtn" class="secondary">Restore</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Create Node <span>single cell</span></h2>
+          <div class="form-grid">
+            <div>
+              <label for="nodeLane">Lane</label>
+              <select id="nodeLane"></select>
+            </div>
+            <div>
+              <label for="nodeColumn">Column</label>
+              <select id="nodeColumn"></select>
+            </div>
+            <div>
+              <label for="nodeType">Type</label>
+              <select id="nodeType"></select>
+            </div>
+            <div>
+              <label for="nodeStatus">Status</label>
+              <select id="nodeStatus"></select>
+            </div>
+            <div class="wide">
+              <label for="nodeTitle">Title</label>
+              <input id="nodeTitle" type="text" placeholder="Typed research object">
+            </div>
+            <div>
+              <label for="nodeAgent">Agent</label>
+              <select id="nodeAgent"></select>
+            </div>
+            <div>
+              <label for="nodeConfidence">Confidence</label>
+              <input id="nodeConfidence" type="number" min="0" max="1" step="0.01" value="0.64">
+            </div>
+            <div class="wide">
+              <label for="nodeGuard">Guard rule</label>
+              <textarea id="nodeGuard" placeholder="confidence >= 0.68 AND agent_load < 0.75 AND dependencies_valid"></textarea>
+            </div>
+            <div class="wide">
+              <label for="nodeDescription">Description</label>
+              <textarea id="nodeDescription" placeholder="Prompt, claim, method, run note, validation target, or evidence summary"></textarea>
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="createNodeBtn">Add Node</button>
+            <button id="clearNodeFormBtn" class="secondary">Clear</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Create Edge <span>typed contract</span></h2>
+          <div class="form-grid">
+            <div class="wide">
+              <label for="edgeFrom">From</label>
+              <select id="edgeFrom"></select>
+            </div>
+            <div>
+              <label for="edgeType">Type</label>
+              <select id="edgeType"></select>
+            </div>
+            <div>
+              <label for="edgeStatus">Status</label>
+              <select id="edgeStatus"></select>
+            </div>
+            <div class="wide">
+              <label for="edgeTo">To</label>
+              <select id="edgeTo"></select>
+            </div>
+          </div>
+          <div class="button-row">
+            <button id="createEdgeBtn" class="blue">Add Edge</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Manual <span>companion file</span></h2>
+          <a class="manual-link" href="multi_agent_research_laboratory_manual.md" target="_blank" rel="noopener">Open manual</a>
+        </section>
+      </aside>
+
+      <section class="center">
+        <div class="metric-row" id="metricRow"></div>
+        <div class="canvas-scroll" id="canvasScroll">
+          <div class="canvas-content" id="canvasContent">
+            <svg class="edge-layer" id="edgeLayer" aria-hidden="true"></svg>
+            <div class="grid" id="grid"></div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="checkpoint-list" id="checkpointTimeline"></div>
+        </div>
+      </section>
+
+      <aside class="right">
+        <section class="panel">
+          <h2>Inspector <span id="selectedLabel">none</span></h2>
+          <div id="inspector"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Agent Registry <span>trust and load</span></h2>
+          <div class="agent-list" id="agentList"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Policy Surface <span>active stream</span></h2>
+          <div class="policy-list" id="policyList"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Event Stream <span id="eventCount">0</span></h2>
+          <div class="log-filter">
+            <div>
+              <label for="eventFilter">Filter</label>
+              <select id="eventFilter">
+                <option value="all">All events</option>
+                <option value="node">Node</option>
+                <option value="edge">Edge</option>
+                <option value="agent">Agent</option>
+                <option value="checkpoint">Checkpoint</option>
+                <option value="vote">Vote</option>
+                <option value="memory">Memory</option>
+                <option value="protocol">Protocol</option>
+              </select>
+            </div>
+            <button class="secondary" id="copyEventsBtn">Copy</button>
+          </div>
+          <div class="event-list" id="eventList"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const LANES = [
+      { id: "planner", name: "Planner", sub: "Decomposition and routing policy" },
+      { id: "literature", name: "Literature", sub: "Sources, searches, citations" },
+      { id: "methods", name: "Methods", sub: "Formalism, protocol, design" },
+      { id: "critic", name: "Critic", sub: "Adversarial review and concern" },
+      { id: "experiment", name: "Experiment", sub: "Runs, probes, simulations" },
+      { id: "evidence", name: "Evidence", sub: "Claims, artifacts, source chains" },
+      { id: "synthesis", name: "Synthesis", sub: "Merged conclusions" },
+      { id: "governance", name: "Governance", sub: "Quorum, vote, authority" },
+      { id: "validation", name: "Validation", sub: "Tests, certificates, dossiers" },
+      { id: "memory", name: "Memory", sub: "WAL, checkpoints, institutional state" }
+    ];
+
+    const COLUMNS = [
+      { id: 1, name: "Intake", sub: "Question or trigger" },
+      { id: 2, name: "Decompose", sub: "Tasks and routes" },
+      { id: 3, name: "Run", sub: "Agent execution" },
+      { id: 4, name: "Review", sub: "Critique and repair" },
+      { id: 5, name: "Quorum", sub: "Decision rights" },
+      { id: 6, name: "Synthesis", sub: "Merged state" },
+      { id: 7, name: "Validate", sub: "Replay and tests" },
+      { id: 8, name: "Publish", sub: "Dossier export" }
+    ];
+
+    const NODE_TYPES = [
+      "task",
+      "claim",
+      "source",
+      "evidence",
+      "hypothesis",
+      "experiment",
+      "agent_run",
+      "critique",
+      "synthesis",
+      "decision",
+      "checkpoint_artifact",
+      "protocol_event",
+      "recovery_action"
+    ];
+
+    const EDGE_TYPES = [
+      "depends_on",
+      "supports",
+      "contradicts",
+      "routes_to",
+      "consumes",
+      "produces",
+      "votes_on",
+      "requires_quorum",
+      "monitors",
+      "escalates_to",
+      "derives_from",
+      "supersedes",
+      "recovers_from",
+      "blocks"
+    ];
+
+    const STATUSES = [
+      "queued",
+      "ready",
+      "running",
+      "review",
+      "quorum",
+      "validated",
+      "committed",
+      "blocked",
+      "retired"
+    ];
+
+    const EDGE_STATUSES = ["active", "satisfied", "violated", "disputed", "superseded"];
+
+    const AGENTS = [
+      { id: "planner", name: "Planner Agent", role: "plan", trust: 0.82, load: 0.28 },
+      { id: "scout", name: "Literature Scout", role: "source", trust: 0.78, load: 0.36 },
+      { id: "method", name: "Methods Critic", role: "method", trust: 0.84, load: 0.42 },
+      { id: "experimenter", name: "Experiment Designer", role: "experiment", trust: 0.74, load: 0.31 },
+      { id: "verifier", name: "Verifier", role: "validation", trust: 0.88, load: 0.46 },
+      { id: "synth", name: "Synthesizer", role: "synthesis", trust: 0.8, load: 0.34 },
+      { id: "governor", name: "Governance Reviewer", role: "quorum", trust: 0.86, load: 0.24 },
+      { id: "recovery", name: "Recovery Coordinator", role: "recovery", trust: 0.81, load: 0.18 }
+    ];
+
+    const STATUS_NEXT = {
+      queued: "ready",
+      ready: "running",
+      running: "review",
+      review: "quorum",
+      quorum: "validated",
+      validated: "committed",
+      committed: "committed",
+      blocked: "ready",
+      retired: "retired"
+    };
+
+    const EDGE_COLORS = {
+      depends_on: "#315f9a",
+      supports: "#226f54",
+      contradicts: "#9f3f4f",
+      routes_to: "#a76519",
+      consumes: "#5f6f68",
+      produces: "#0f766e",
+      votes_on: "#6750a4",
+      requires_quorum: "#0f766e",
+      monitors: "#315f9a",
+      escalates_to: "#9f3f4f",
+      derives_from: "#226f54",
+      supersedes: "#5f6f68",
+      recovers_from: "#a76519",
+      blocks: "#9f3f4f"
+    };
+
+    const STORAGE_KEY = "multiAgentResearchLab.v1";
+    let lab = createFreshLab();
+    let selectedNodeId = null;
+    let eventFilter = "all";
+
+    function uid(prefix) {
+      return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7);
+    }
+
+    function nowIso() {
+      return new Date().toISOString();
+    }
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function createFreshLab() {
+      return {
+        schemaVersion: "marl-html-1",
+        activeStreamId: "main",
+        streams: {
+          main: {
+            id: "main",
+            name: "main",
+            color: "#226f54",
+            events: [],
+            checkpoints: [],
+            policy: {
+              trustWeight: 0.48,
+              quorumThreshold: 2,
+              salienceThreshold: 0.68,
+              explorationRate: 0.12,
+              memoryDepth: 128,
+              isolationRatio: 0.42
+            }
+          }
+        }
+      };
+    }
+
+    function activeStream() {
+      return lab.streams[lab.activeStreamId];
+    }
+
+    function appendEvent(type, payload, actor = "system") {
+      const stream = activeStream();
+      const event = {
+        id: uid("evt"),
+        seq: stream.events.length + 1,
+        ts: nowIso(),
+        type,
+        actor,
+        payload: clone(payload || {})
+      };
+      stream.events.push(event);
+      return event;
+    }
+
+    function baseProjection() {
+      const agents = {};
+      AGENTS.forEach(agent => {
+        agents[agent.id] = clone(agent);
+      });
+      return {
+        nodes: {},
+        edges: {},
+        agents,
+        cellIndex: {},
+        votes: [],
+        guardResults: {}
+      };
+    }
+
+    function reduceEvents(events) {
+      const projection = baseProjection();
+      events.forEach(event => {
+        const p = event.payload || {};
+        switch (event.type) {
+          case "node.created": {
+            const node = clone(p.node);
+            node.createdAt = event.ts;
+            node.updatedAt = event.ts;
+            node.eventIds = [event.id];
+            node.votes = [];
+            projection.nodes[node.id] = node;
+            projection.cellIndex[cellKey(node.laneId, node.column)] = node.id;
+            break;
+          }
+          case "node.updated": {
+            const node = projection.nodes[p.nodeId];
+            if (!node) break;
+            Object.assign(node, clone(p.changes));
+            node.updatedAt = event.ts;
+            node.eventIds = (node.eventIds || []).concat(event.id);
+            projection.cellIndex[cellKey(node.laneId, node.column)] = node.id;
+            break;
+          }
+          case "node.deleted": {
+            const node = projection.nodes[p.nodeId];
+            if (node) delete projection.cellIndex[cellKey(node.laneId, node.column)];
+            delete projection.nodes[p.nodeId];
+            Object.keys(projection.edges).forEach(edgeId => {
+              const edge = projection.edges[edgeId];
+              if (edge.from === p.nodeId || edge.to === p.nodeId) delete projection.edges[edgeId];
+            });
+            break;
+          }
+          case "edge.created": {
+            projection.edges[p.edge.id] = clone(p.edge);
+            break;
+          }
+          case "edge.updated": {
+            const edge = projection.edges[p.edgeId];
+            if (edge) Object.assign(edge, clone(p.changes));
+            break;
+          }
+          case "vote.cast": {
+            const vote = clone(p.vote);
+            projection.votes.push(vote);
+            const node = projection.nodes[vote.nodeId];
+            if (node) {
+              node.votes = node.votes || [];
+              node.votes.push(vote);
+              const support = node.votes.filter(v => v.value === "support").length;
+              const concern = node.votes.filter(v => v.value === "concern").length;
+              if (support >= activeStream().policy.quorumThreshold && concern === 0) node.status = "validated";
+              if (concern > 0) node.status = "review";
+            }
+            break;
+          }
+          case "agent.updated": {
+            const agent = projection.agents[p.agentId];
+            if (agent) Object.assign(agent, clone(p.changes));
+            break;
+          }
+          case "guard.evaluated": {
+            projection.guardResults[p.nodeId] = clone(p.result);
+            const node = projection.nodes[p.nodeId];
+            if (node) {
+              node.guardResult = clone(p.result);
+              node.status = p.result.pass ? "ready" : "blocked";
+              node.updatedAt = event.ts;
+            }
+            break;
+          }
+          case "agent.run.started": {
+            const node = projection.nodes[p.nodeId];
+            if (node) {
+              node.status = "running";
+              node.runState = "started";
+              node.runId = p.runId;
+            }
+            const agent = projection.agents[p.agentId];
+            if (agent) agent.load = Math.min(1, Number((agent.load + 0.18).toFixed(2)));
+            break;
+          }
+          case "agent.run.completed": {
+            const node = projection.nodes[p.nodeId];
+            if (node) {
+              node.status = "review";
+              node.runState = "completed";
+              node.confidence = Math.min(0.99, Number((Number(node.confidence || 0.5) + 0.08).toFixed(2)));
+              node.description = [node.description, p.summary].filter(Boolean).join("\n\nRun result: ");
+            }
+            const agent = projection.agents[p.agentId];
+            if (agent) {
+              agent.load = Math.max(0, Number((agent.load - 0.16).toFixed(2)));
+              agent.trust = Math.min(0.99, Number((agent.trust + 0.01).toFixed(2)));
+            }
+            break;
+          }
+          case "memory.promoted": {
+            const node = projection.nodes[p.nodeId];
+            if (node) {
+              node.memoryTier = p.tier;
+              node.salience = p.salience;
+              node.status = node.status === "queued" ? "ready" : node.status;
+            }
+            break;
+          }
+          case "recovery.triggered": {
+            const node = projection.nodes[p.nodeId];
+            if (node) {
+              node.status = "blocked";
+              node.recovery = p.reason || "recovery requested";
+            }
+            break;
+          }
+          default:
+            break;
+        }
+      });
+      return projection;
+    }
+
+    function projection() {
+      return reduceEvents(activeStream().events);
+    }
+
+    function cellKey(laneId, column) {
+      return laneId + "|" + column;
+    }
+
+    function laneById(id) {
+      return LANES.find(lane => lane.id === id);
+    }
+
+    function columnById(id) {
+      return COLUMNS.find(col => col.id === Number(id));
+    }
+
+    function nodeLabel(node) {
+      const lane = laneById(node.laneId);
+      return "[" + (lane ? lane.name : node.laneId) + " C" + node.column + "] " + node.title;
+    }
+
+    function eventClass(type) {
+      if (type.includes("checkpoint")) return "green";
+      if (type.includes("guard") || type.includes("run")) return "amber";
+      if (type.includes("recovery") || type.includes("deleted")) return "red";
+      if (type.includes("vote")) return "violet";
+      if (type.includes("memory")) return "teal";
+      return "";
+    }
+
+    function statusClass(status) {
+      return "status-" + (status || "queued");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function fillSelect(select, options, getValue, getLabel) {
+      select.innerHTML = options.map(option => {
+        const value = getValue(option);
+        const label = getLabel(option);
+        return '<option value="' + escapeHtml(value) + '">' + escapeHtml(label) + '</option>';
+      }).join("");
+    }
+
+    function populateStaticControls() {
+      fillSelect(document.getElementById("nodeLane"), LANES, x => x.id, x => x.name);
+      fillSelect(document.getElementById("nodeColumn"), COLUMNS, x => x.id, x => "C" + x.id + " - " + x.name);
+      fillSelect(document.getElementById("nodeType"), NODE_TYPES, x => x, x => x.replace(/_/g, " "));
+      fillSelect(document.getElementById("nodeStatus"), STATUSES, x => x, x => x);
+      fillSelect(document.getElementById("edgeType"), EDGE_TYPES, x => x, x => x);
+      fillSelect(document.getElementById("edgeStatus"), EDGE_STATUSES, x => x, x => x);
+      fillSelect(document.getElementById("nodeAgent"), AGENTS, x => x.id, x => x.name);
+    }
+
+    function seedTemplate() {
+      lab = createFreshLab();
+      selectedNodeId = null;
+      const nodes = [
+        { laneId: "planner", column: 1, type: "task", status: "ready", title: "Define research objective", agentId: "planner", confidence: 0.72, description: "Frame the lab question, success criteria, and scope boundaries.", guard: "objective exists AND scope bounded" },
+        { laneId: "planner", column: 2, type: "task", status: "ready", title: "Decompose into agent runs", agentId: "planner", confidence: 0.69, description: "Route literature, methods, critique, validation, and synthesis work.", guard: "confidence >= 0.68 AND planner_load < 0.75" },
+        { laneId: "literature", column: 3, type: "agent_run", status: "running", title: "Scout source landscape", agentId: "scout", confidence: 0.62, description: "Collect source candidates and flag reliability risk.", guard: "source scope set AND load < 0.75" },
+        { laneId: "methods", column: 3, type: "hypothesis", status: "ready", title: "Model typed edge contracts", agentId: "method", confidence: 0.7, description: "Specify edge semantics for support, contradiction, route, quorum, and recovery.", guard: "schema frozen" },
+        { laneId: "critic", column: 4, type: "critique", status: "review", title: "Attack hidden-state shortcuts", agentId: "method", confidence: 0.76, description: "Review whether any agent output bypasses the event log or checkpoint model.", guard: "run output exists" },
+        { laneId: "evidence", column: 4, type: "evidence", status: "review", title: "Attach source chain", agentId: "scout", confidence: 0.66, description: "Bind claims to source nodes and artifact records.", guard: "sources retrieved AND citations checked" },
+        { laneId: "governance", column: 5, type: "decision", status: "quorum", title: "Quorum accepts claim model", agentId: "governor", confidence: 0.71, description: "Two supporting votes required before claim state becomes durable.", guard: "support_votes >= 2 AND concerns == 0" },
+        { laneId: "synthesis", column: 6, type: "synthesis", status: "queued", title: "Merge evidence and critique", agentId: "synth", confidence: 0.58, description: "Synthesize only after critique and source chain are valid.", guard: "evidence_validated AND critique_resolved" },
+        { laneId: "validation", column: 7, type: "checkpoint_artifact", status: "queued", title: "Replay sufficiency test", agentId: "verifier", confidence: 0.6, description: "Verify the event stream reconstructs the visible canvas state.", guard: "checkpoint exists AND event range attached" },
+        { laneId: "memory", column: 8, type: "checkpoint_artifact", status: "queued", title: "Publish dossier checkpoint", agentId: "recovery", confidence: 0.57, description: "Export research state, event lineage, votes, and recovery notes.", guard: "validation_passed AND quorum_committed" }
+      ];
+      const created = {};
+      nodes.forEach(node => {
+        const id = uid("node");
+        created[node.title] = id;
+        appendEvent("node.created", { node: Object.assign({ id }, node) }, "template");
+      });
+      const edges = [
+        ["Define research objective", "Decompose into agent runs", "depends_on"],
+        ["Decompose into agent runs", "Scout source landscape", "routes_to"],
+        ["Decompose into agent runs", "Model typed edge contracts", "routes_to"],
+        ["Scout source landscape", "Attach source chain", "produces"],
+        ["Model typed edge contracts", "Attack hidden-state shortcuts", "monitors"],
+        ["Attach source chain", "Quorum accepts claim model", "supports"],
+        ["Attack hidden-state shortcuts", "Quorum accepts claim model", "votes_on"],
+        ["Quorum accepts claim model", "Merge evidence and critique", "requires_quorum"],
+        ["Merge evidence and critique", "Replay sufficiency test", "produces"],
+        ["Replay sufficiency test", "Publish dossier checkpoint", "supports"]
+      ];
+      edges.forEach(([fromTitle, toTitle, type]) => {
+        appendEvent("edge.created", {
+          edge: {
+            id: uid("edge"),
+            from: created[fromTitle],
+            to: created[toTitle],
+            type,
+            status: "active",
+            createdAt: nowIso()
+          }
+        }, "template");
+      });
+      saveCheckpoint("Seeded laboratory template", "Initial event-stream research lab template.", true);
+      toast("Template loaded");
+      render();
+    }
+
+    function render() {
+      const p = projection();
+      renderStreams();
+      renderMetrics(p);
+      renderGrid(p);
+      renderSelectors(p);
+      renderInspector(p);
+      renderAgents(p);
+      renderPolicy();
+      renderEvents();
+      renderCheckpoints();
+      requestAnimationFrame(() => drawEdges(p));
+    }
+
+    function renderStreams() {
+      document.getElementById("activeStreamLabel").textContent = activeStream().name;
+      const tabs = Object.values(lab.streams).map(stream => {
+        const active = stream.id === lab.activeStreamId ? " active" : "";
+        return '<button class="stream-tab' + active + '" data-stream="' + escapeHtml(stream.id) + '"><span>' + escapeHtml(stream.name) + '</span><small>' + stream.events.length + "</small></button>";
+      }).join("");
+      document.getElementById("streamTabs").innerHTML = tabs;
+      document.querySelectorAll(".stream-tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          lab.activeStreamId = btn.dataset.stream;
+          selectedNodeId = null;
+          render();
+        });
+      });
+    }
+
+    function renderMetrics(p) {
+      const nodeList = Object.values(p.nodes);
+      const events = activeStream().events;
+      const validated = nodeList.filter(n => ["validated", "committed"].includes(n.status)).length;
+      const blocked = nodeList.filter(n => n.status === "blocked").length;
+      const metrics = [
+        ["Nodes", nodeList.length],
+        ["Edges", Object.keys(p.edges).length],
+        ["Events", events.length],
+        ["Checkpoints", activeStream().checkpoints.length],
+        ["Validated", validated + " / " + Math.max(1, nodeList.length)],
+        ["Blocked", blocked],
+        ["Votes", p.votes.length],
+        ["Streams", Object.keys(lab.streams).length],
+        ["Agents", Object.keys(p.agents).length],
+        ["Schema", lab.schemaVersion]
+      ];
+      document.getElementById("metricRow").innerHTML = metrics.map(([label, value]) => {
+        return '<div class="metric"><strong>' + escapeHtml(value) + '</strong><span>' + escapeHtml(label) + '</span></div>';
+      }).join("");
+    }
+
+    function renderGrid(p) {
+      const grid = document.getElementById("grid");
+      const html = [];
+      html.push('<div class="corner">Lanes</div>');
+      COLUMNS.forEach(column => {
+        html.push('<div class="col-head">C' + column.id + " " + escapeHtml(column.name) + '<small>' + escapeHtml(column.sub) + '</small></div>');
+      });
+      LANES.forEach(lane => {
+        html.push('<div class="lane-head"><div class="lane-title">' + escapeHtml(lane.name) + '</div><div class="lane-sub">' + escapeHtml(lane.sub) + '</div></div>');
+        COLUMNS.forEach(column => {
+          const id = p.cellIndex[cellKey(lane.id, column.id)];
+          const node = id ? p.nodes[id] : null;
+          const empty = node ? "" : " empty";
+          html.push('<div class="cell' + empty + '" data-cell="' + escapeHtml(lane.name + " C" + column.id) + '" data-lane="' + lane.id + '" data-column="' + column.id + '">');
+          if (node) html.push(renderNodeCard(node, p));
+          html.push("</div>");
+        });
+      });
+      grid.innerHTML = html.join("");
+      document.querySelectorAll(".node-card").forEach(card => {
+        card.addEventListener("click", event => {
+          event.stopPropagation();
+          selectedNodeId = card.dataset.nodeId;
+          render();
+        });
+      });
+      document.querySelectorAll(".cell.empty").forEach(cell => {
+        cell.addEventListener("dblclick", () => {
+          document.getElementById("nodeLane").value = cell.dataset.lane;
+          document.getElementById("nodeColumn").value = cell.dataset.column;
+          document.getElementById("nodeTitle").focus();
+        });
+      });
+    }
+
+    function renderNodeCard(node, p) {
+      const selected = node.id === selectedNodeId ? " selected" : "";
+      const agent = p.agents[node.agentId] || { name: "Unassigned" };
+      const desc = (node.description || "").split("\n")[0];
+      return [
+        '<article class="node-card ' + statusClass(node.status) + selected + '" data-node-id="' + escapeHtml(node.id) + '" id="node-' + escapeHtml(node.id) + '">',
+        '<div class="node-top"><span class="node-type">' + escapeHtml(node.type || "node") + '</span><span class="node-status ' + statusClass(node.status) + '">' + escapeHtml(node.status || "queued") + '</span></div>',
+        '<div class="node-title">' + escapeHtml(node.title) + '</div>',
+        '<div class="node-desc">' + escapeHtml(desc || "No description") + '</div>',
+        '<div class="node-foot"><span class="agent-chip">' + escapeHtml(agent.name) + '</span><span class="confidence">' + Math.round(Number(node.confidence || 0) * 100) + "%</span></div>",
+        "</article>"
+      ].join("");
+    }
+
+    function renderSelectors(p) {
+      const nodes = Object.values(p.nodes).sort((a, b) => a.laneId.localeCompare(b.laneId) || a.column - b.column);
+      const options = nodes.map(node => '<option value="' + escapeHtml(node.id) + '">' + escapeHtml(nodeLabel(node)) + '</option>').join("");
+      document.getElementById("edgeFrom").innerHTML = options;
+      document.getElementById("edgeTo").innerHTML = options;
+      const checkpoints = activeStream().checkpoints;
+      document.getElementById("checkpointSelect").innerHTML = checkpoints.length
+        ? checkpoints.map(cp => '<option value="' + escapeHtml(cp.id) + '">' + escapeHtml(cp.name + " (" + cp.eventIndex + " events)") + '</option>').join("")
+        : '<option value="">No checkpoints</option>';
+    }
+
+    function renderInspector(p) {
+      const node = selectedNodeId ? p.nodes[selectedNodeId] : null;
+      const inspector = document.getElementById("inspector");
+      document.getElementById("selectedLabel").textContent = node ? node.type : "none";
+      if (!node) {
+        inspector.innerHTML = '<div class="inspector-empty">Select a node to inspect local state, guard result, votes, memory tier, event ancestry, and available actions.</div>';
+        return;
+      }
+      const lane = laneById(node.laneId);
+      const col = columnById(node.column);
+      const agent = p.agents[node.agentId] || {};
+      const votes = node.votes || [];
+      const support = votes.filter(v => v.value === "support").length;
+      const concern = votes.filter(v => v.value === "concern").length;
+      const incoming = Object.values(p.edges).filter(edge => edge.to === node.id);
+      const outgoing = Object.values(p.edges).filter(edge => edge.from === node.id);
+      const guardResult = node.guardResult;
+
+      inspector.innerHTML = [
+        '<div class="detail-grid">',
+        detail("Title", node.title),
+        detail("Type", node.type),
+        detail("Cell", (lane ? lane.name : node.laneId) + " / " + (col ? col.name : "C" + node.column)),
+        detail("Status", node.status),
+        detail("Agent", agent.name || "Unassigned"),
+        detail("Confidence", Math.round(Number(node.confidence || 0) * 100) + "%"),
+        detail("Votes", support + " support / " + concern + " concern"),
+        detail("Memory", node.memoryTier || "working"),
+        "</div>",
+        '<label>Description</label><textarea id="editDescription">' + escapeHtml(node.description || "") + '</textarea>',
+        '<div class="form-grid" style="margin-top:10px">',
+        '<div><label for="editStatus">Status</label><select id="editStatus">' + STATUSES.map(s => '<option value="' + s + '"' + (s === node.status ? " selected" : "") + ">" + s + "</option>").join("") + '</select></div>',
+        '<div><label for="editConfidence">Confidence</label><input id="editConfidence" type="number" min="0" max="1" step="0.01" value="' + escapeHtml(node.confidence || 0.5) + '"></div>',
+        "</div>",
+        '<div class="button-row">',
+        '<button id="updateNodeBtn">Update</button>',
+        '<button class="blue" id="advanceNodeBtn">Advance</button>',
+        '<button class="amber" id="evaluateGuardBtn">Evaluate Guard</button>',
+        "</div>",
+        '<div class="button-row">',
+        '<button class="secondary" id="startRunBtn">Start Run</button>',
+        '<button class="secondary" id="completeRunBtn">Complete Run</button>',
+        '<button class="violet" id="supportVoteBtn">Support</button>',
+        '<button class="red" id="concernVoteBtn">Concern</button>',
+        "</div>",
+        '<div class="button-row">',
+        '<button class="secondary" id="promoteMemoryBtn">Promote Memory</button>',
+        '<button class="red" id="triggerRecoveryBtn">Recovery</button>',
+        '<button class="secondary" id="deleteNodeBtn">Delete</button>',
+        "</div>",
+        '<div class="detail-grid" style="margin-top:10px">',
+        detail("Incoming", incoming.length),
+        detail("Outgoing", outgoing.length),
+        detail("Guard", guardResult ? (guardResult.pass ? "pass" : "blocked") : "not evaluated"),
+        detail("Updated", node.updatedAt ? new Date(node.updatedAt).toLocaleTimeString() : "new"),
+        "</div>"
+      ].join("");
+
+      document.getElementById("updateNodeBtn").addEventListener("click", () => updateSelectedNode());
+      document.getElementById("advanceNodeBtn").addEventListener("click", () => advanceSelectedNode(node));
+      document.getElementById("evaluateGuardBtn").addEventListener("click", () => evaluateGuard(node.id));
+      document.getElementById("startRunBtn").addEventListener("click", () => startRun(node));
+      document.getElementById("completeRunBtn").addEventListener("click", () => completeRun(node));
+      document.getElementById("supportVoteBtn").addEventListener("click", () => castVote(node.id, "support"));
+      document.getElementById("concernVoteBtn").addEventListener("click", () => castVote(node.id, "concern"));
+      document.getElementById("promoteMemoryBtn").addEventListener("click", () => promoteMemory(node.id));
+      document.getElementById("triggerRecoveryBtn").addEventListener("click", () => triggerRecovery(node.id));
+      document.getElementById("deleteNodeBtn").addEventListener("click", () => deleteSelectedNode(node.id));
+    }
+
+    function detail(label, value) {
+      return '<div class="detail"><span>' + escapeHtml(label) + '</span><strong>' + escapeHtml(value) + '</strong></div>';
+    }
+
+    function renderAgents(p) {
+      document.getElementById("agentList").innerHTML = Object.values(p.agents).map(agent => {
+        return [
+          '<div class="agent-card">',
+          '<div class="agent-head"><strong>' + escapeHtml(agent.name) + '</strong><small>' + escapeHtml(agent.role) + '</small></div>',
+          '<small>Trust ' + Math.round(agent.trust * 100) + "%</small>",
+          '<div class="bar"><span style="width:' + Math.round(agent.trust * 100) + '%"></span></div>',
+          '<small>Load ' + Math.round(agent.load * 100) + "%</small>",
+          '<div class="bar load"><span style="width:' + Math.round(agent.load * 100) + '%"></span></div>',
+          "</div>"
+        ].join("");
+      }).join("");
+    }
+
+    function renderPolicy() {
+      const policy = activeStream().policy;
+      const rows = [
+        ["Trust weight", policy.trustWeight],
+        ["Quorum threshold", policy.quorumThreshold],
+        ["Salience threshold", policy.salienceThreshold],
+        ["Exploration rate", policy.explorationRate],
+        ["Memory depth", policy.memoryDepth],
+        ["Isolation ratio", policy.isolationRatio]
+      ];
+      document.getElementById("policyList").innerHTML = rows.map(([label, value]) => {
+        return '<div class="policy-row"><strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(value) + '</span></div>';
+      }).join("");
+    }
+
+    function renderEvents() {
+      const events = activeStream().events.slice().reverse().filter(event => {
+        if (eventFilter === "all") return true;
+        return event.type.includes(eventFilter);
+      });
+      document.getElementById("eventCount").textContent = activeStream().events.length + " total";
+      document.getElementById("eventList").innerHTML = events.slice(0, 160).map(event => {
+        return [
+          '<div class="event-item ' + eventClass(event.type) + '">',
+          '<strong>#' + event.seq + " " + escapeHtml(event.type) + '</strong>',
+          '<span>' + escapeHtml(new Date(event.ts).toLocaleString()) + " by " + escapeHtml(event.actor) + '</span>',
+          '<span>' + escapeHtml(summarizePayload(event)) + '</span>',
+          "</div>"
+        ].join("");
+      }).join("") || '<div class="inspector-empty">No matching events.</div>';
+    }
+
+    function summarizePayload(event) {
+      const p = event.payload || {};
+      if (p.node) return p.node.title || p.node.id;
+      if (p.edge) return p.edge.type + " from " + shortId(p.edge.from) + " to " + shortId(p.edge.to);
+      if (p.checkpoint) return p.checkpoint.name;
+      if (p.vote) return p.vote.value + " on " + shortId(p.vote.nodeId);
+      if (p.nodeId) return shortId(p.nodeId);
+      return JSON.stringify(p).slice(0, 110);
+    }
+
+    function shortId(id) {
+      return String(id || "").slice(0, 12);
+    }
+
+    function renderCheckpoints() {
+      const cps = activeStream().checkpoints;
+      document.getElementById("checkpointTimeline").innerHTML = cps.length
+        ? cps.map(cp => {
+          return '<button class="checkpoint-pill" data-cp="' + escapeHtml(cp.id) + '"><strong>' + escapeHtml(cp.name) + '</strong><span>' + escapeHtml(cp.eventIndex + " events / " + new Date(cp.ts).toLocaleTimeString()) + '</span></button>';
+        }).join("")
+        : '<div class="inspector-empty">No checkpoints yet.</div>';
+      document.querySelectorAll(".checkpoint-pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.getElementById("checkpointSelect").value = btn.dataset.cp;
+          restoreCheckpoint(btn.dataset.cp);
+        });
+      });
+    }
+
+    function drawEdges(p) {
+      const svg = document.getElementById("edgeLayer");
+      const content = document.getElementById("canvasContent");
+      const contentRect = content.getBoundingClientRect();
+      svg.setAttribute("width", content.scrollWidth);
+      svg.setAttribute("height", content.scrollHeight);
+      svg.setAttribute("viewBox", "0 0 " + content.scrollWidth + " " + content.scrollHeight);
+      const defs = '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38514a"></path></marker></defs>';
+      const parts = [defs];
+      Object.values(p.edges).forEach(edge => {
+        const fromEl = document.getElementById("node-" + edge.from);
+        const toEl = document.getElementById("node-" + edge.to);
+        if (!fromEl || !toEl) return;
+        const a = fromEl.getBoundingClientRect();
+        const b = toEl.getBoundingClientRect();
+        const x1 = a.left - contentRect.left + a.width / 2;
+        const y1 = a.top - contentRect.top + a.height / 2;
+        const x2 = b.left - contentRect.left + b.width / 2;
+        const y2 = b.top - contentRect.top + b.height / 2;
+        const dx = Math.max(54, Math.abs(x2 - x1) * 0.36);
+        const c1 = x1 + (x2 >= x1 ? dx : -dx);
+        const c2 = x2 - (x2 >= x1 ? dx : -dx);
+        const color = EDGE_COLORS[edge.type] || "#38514a";
+        const path = "M " + x1 + " " + y1 + " C " + c1 + " " + y1 + ", " + c2 + " " + y2 + ", " + x2 + " " + y2;
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2 - 7;
+        parts.push('<path class="edge-path" d="' + path + '" stroke="' + color + '" marker-end="url(#arrow)"></path>');
+        parts.push('<text class="edge-label" x="' + mx + '" y="' + my + '" text-anchor="middle">' + escapeHtml(edge.type) + '</text>');
+      });
+      svg.innerHTML = parts.join("");
+    }
+
+    function createNode() {
+      const p = projection();
+      const laneId = document.getElementById("nodeLane").value;
+      const column = Number(document.getElementById("nodeColumn").value);
+      const occupied = p.cellIndex[cellKey(laneId, column)];
+      if (occupied) {
+        toast("Cell is occupied. Single-tenant cells cannot stack nodes.");
+        return;
+      }
+      const title = document.getElementById("nodeTitle").value.trim();
+      if (!title) {
+        toast("Add a title before creating the node.");
+        return;
+      }
+      const node = {
+        id: uid("node"),
+        laneId,
+        column,
+        type: document.getElementById("nodeType").value,
+        status: document.getElementById("nodeStatus").value,
+        title,
+        agentId: document.getElementById("nodeAgent").value,
+        confidence: clamp01(Number(document.getElementById("nodeConfidence").value || 0.5)),
+        guard: document.getElementById("nodeGuard").value.trim(),
+        description: document.getElementById("nodeDescription").value.trim(),
+        memoryTier: "working"
+      };
+      appendEvent("node.created", { node }, "operator");
+      selectedNodeId = node.id;
+      clearNodeForm(true);
+      toast("Node created");
+      render();
+    }
+
+    function clearNodeForm(resetTitle = true) {
+      if (resetTitle) document.getElementById("nodeTitle").value = "";
+      document.getElementById("nodeDescription").value = "";
+      document.getElementById("nodeGuard").value = "confidence >= 0.68 AND agent_load < 0.75";
+      document.getElementById("nodeConfidence").value = "0.64";
+    }
+
+    function createEdge() {
+      const from = document.getElementById("edgeFrom").value;
+      const to = document.getElementById("edgeTo").value;
+      if (!from || !to || from === to) {
+        toast("Choose two different nodes.");
+        return;
+      }
+      const edge = {
+        id: uid("edge"),
+        from,
+        to,
+        type: document.getElementById("edgeType").value,
+        status: document.getElementById("edgeStatus").value,
+        createdAt: nowIso()
+      };
+      appendEvent("edge.created", { edge }, "operator");
+      toast("Typed edge created");
+      render();
+    }
+
+    function updateSelectedNode() {
+      if (!selectedNodeId) return;
+      appendEvent("node.updated", {
+        nodeId: selectedNodeId,
+        changes: {
+          description: document.getElementById("editDescription").value,
+          status: document.getElementById("editStatus").value,
+          confidence: clamp01(Number(document.getElementById("editConfidence").value || 0.5))
+        }
+      }, "operator");
+      toast("Node updated");
+      render();
+    }
+
+    function advanceSelectedNode(node) {
+      const next = STATUS_NEXT[node.status] || "ready";
+      appendEvent("node.updated", { nodeId: node.id, changes: { status: next } }, "operator");
+      toast("Status advanced to " + next);
+      render();
+    }
+
+    function evaluateGuard(nodeId) {
+      const p = projection();
+      const node = p.nodes[nodeId];
+      if (!node) return;
+      const agent = p.agents[node.agentId] || { load: 0 };
+      const incoming = Object.values(p.edges).filter(edge => edge.to === nodeId && ["depends_on", "supports", "requires_quorum"].includes(edge.type));
+      const dependenciesValid = incoming.every(edge => {
+        const source = p.nodes[edge.from];
+        return source && ["validated", "committed", "review", "quorum"].includes(source.status);
+      });
+      const confidencePass = Number(node.confidence || 0) >= activeStream().policy.salienceThreshold;
+      const loadPass = Number(agent.load || 0) < 0.75;
+      const pass = confidencePass && loadPass && dependenciesValid;
+      appendEvent("guard.evaluated", {
+        nodeId,
+        result: {
+          pass,
+          confidencePass,
+          loadPass,
+          dependenciesValid,
+          evaluatedAt: nowIso()
+        }
+      }, "scheduler");
+      toast(pass ? "Guard passed" : "Guard blocked node");
+      render();
+    }
+
+    function startRun(node) {
+      appendEvent("agent.run.started", {
+        runId: uid("run"),
+        nodeId: node.id,
+        agentId: node.agentId
+      }, node.agentId || "agent");
+      toast("Agent run started");
+      render();
+    }
+
+    function completeRun(node) {
+      appendEvent("agent.run.completed", {
+        runId: node.runId || uid("run"),
+        nodeId: node.id,
+        agentId: node.agentId,
+        summary: "Completed with review-ready output and provenance placeholder."
+      }, node.agentId || "agent");
+      toast("Agent run completed");
+      render();
+    }
+
+    function castVote(nodeId, value) {
+      appendEvent("vote.cast", {
+        vote: {
+          id: uid("vote"),
+          nodeId,
+          value,
+          voter: "governance",
+          ts: nowIso()
+        }
+      }, "governance");
+      toast(value === "support" ? "Support vote recorded" : "Concern vote recorded");
+      render();
+    }
+
+    function promoteMemory(nodeId) {
+      appendEvent("memory.promoted", {
+        nodeId,
+        tier: "institutional",
+        salience: activeStream().policy.salienceThreshold
+      }, "memory");
+      toast("Memory promoted");
+      render();
+    }
+
+    function triggerRecovery(nodeId) {
+      appendEvent("recovery.triggered", {
+        nodeId,
+        reason: "Operator requested recovery workflow."
+      }, "recovery");
+      toast("Recovery event recorded");
+      render();
+    }
+
+    function deleteSelectedNode(nodeId) {
+      appendEvent("node.deleted", { nodeId }, "operator");
+      selectedNodeId = null;
+      toast("Node deleted");
+      render();
+    }
+
+    function saveCheckpoint(nameOverride, reasonOverride, quiet = false) {
+      const stream = activeStream();
+      const name = nameOverride || document.getElementById("checkpointNameInput").value.trim() || "Checkpoint " + (stream.checkpoints.length + 1);
+      const reason = reasonOverride || document.getElementById("checkpointReasonInput").value.trim();
+      const snapshot = projection();
+      const checkpoint = {
+        id: uid("cp"),
+        name,
+        reason,
+        ts: nowIso(),
+        eventIndex: stream.events.length + 1,
+        stats: {
+          nodes: Object.keys(snapshot.nodes).length,
+          edges: Object.keys(snapshot.edges).length,
+          votes: snapshot.votes.length
+        }
+      };
+      appendEvent("checkpoint.saved", { checkpoint }, "operator");
+      stream.checkpoints.push(checkpoint);
+      document.getElementById("checkpointNameInput").value = "";
+      document.getElementById("checkpointReasonInput").value = "";
+      if (!quiet) toast("Checkpoint saved");
+      render();
+      return checkpoint;
+    }
+
+    function restoreCheckpoint(id) {
+      const stream = activeStream();
+      const cpId = id || document.getElementById("checkpointSelect").value;
+      const checkpoint = stream.checkpoints.find(cp => cp.id === cpId);
+      if (!checkpoint) {
+        toast("No checkpoint selected");
+        return;
+      }
+      stream.events = stream.events.slice(0, checkpoint.eventIndex);
+      stream.checkpoints = stream.checkpoints.filter(cp => cp.eventIndex <= checkpoint.eventIndex);
+      selectedNodeId = null;
+      toast("Restored to " + checkpoint.name);
+      render();
+    }
+
+    function forkStream() {
+      const raw = document.getElementById("streamNameInput").value.trim();
+      const name = raw || "stream-" + (Object.keys(lab.streams).length + 1);
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || uid("stream");
+      if (lab.streams[id]) {
+        toast("Stream already exists");
+        return;
+      }
+      const source = activeStream();
+      lab.streams[id] = {
+        id,
+        name,
+        color: "#315f9a",
+        events: clone(source.events),
+        checkpoints: clone(source.checkpoints),
+        policy: clone(source.policy)
+      };
+      lab.activeStreamId = id;
+      appendEvent("stream.forked", { from: source.id, to: id, name }, "operator");
+      document.getElementById("streamNameInput").value = "";
+      selectedNodeId = null;
+      toast("Stream forked");
+      render();
+    }
+
+    function deleteActiveStream() {
+      if (lab.activeStreamId === "main") {
+        toast("The main stream is retained as the root stream.");
+        return;
+      }
+      delete lab.streams[lab.activeStreamId];
+      lab.activeStreamId = "main";
+      selectedNodeId = null;
+      toast("Stream deleted");
+      render();
+    }
+
+    function exportLab() {
+      const blob = new Blob([JSON.stringify(lab, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "multi_agent_research_laboratory_" + new Date().toISOString().slice(0, 10) + ".json";
+      a.click();
+      URL.revokeObjectURL(url);
+      toast("Export prepared");
+    }
+
+    function importLab(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          validateImportedLab(parsed);
+          lab = parsed;
+          selectedNodeId = null;
+          toast("Import loaded");
+          render();
+        } catch (error) {
+          toast("Import failed: " + error.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function validateImportedLab(value) {
+      if (!value || value.schemaVersion !== "marl-html-1") throw new Error("Unsupported schema");
+      if (!value.streams || !value.activeStreamId) throw new Error("Missing stream data");
+      if (!value.streams[value.activeStreamId]) throw new Error("Active stream is missing");
+      Object.values(value.streams).forEach(stream => {
+        if (!Array.isArray(stream.events)) throw new Error("Stream is missing events");
+        const p = reduceEvents(stream.events);
+        const occupied = new Set();
+        Object.values(p.nodes).forEach(node => {
+          const key = cellKey(node.laneId, node.column);
+          if (occupied.has(key)) throw new Error("Cell superposition in " + key);
+          occupied.add(key);
+        });
+      });
+    }
+
+    function saveLocal() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lab));
+      toast("Saved to browser storage");
+    }
+
+    function loadLocal() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        toast("No local save found");
+        return;
+      }
+      try {
+        const parsed = JSON.parse(stored);
+        validateImportedLab(parsed);
+        lab = parsed;
+        selectedNodeId = null;
+        toast("Local save loaded");
+        render();
+      } catch (error) {
+        toast("Local load failed: " + error.message);
+      }
+    }
+
+    function copyEvents() {
+      const text = activeStream().events.map(event => {
+        return "#" + event.seq + " " + event.ts + " " + event.type + " " + JSON.stringify(event.payload);
+      }).join("\n");
+      navigator.clipboard.writeText(text).then(() => toast("Events copied")).catch(() => toast("Clipboard unavailable"));
+    }
+
+    function clamp01(value) {
+      if (Number.isNaN(value)) return 0.5;
+      return Math.max(0, Math.min(1, value));
+    }
+
+    function toast(message) {
+      const el = document.getElementById("toast");
+      el.textContent = message;
+      el.classList.add("visible");
+      clearTimeout(toast.timer);
+      toast.timer = setTimeout(() => el.classList.remove("visible"), 2600);
+    }
+
+    function bindEvents() {
+      document.getElementById("templateBtn").addEventListener("click", seedTemplate);
+      document.getElementById("saveLocalBtn").addEventListener("click", saveLocal);
+      document.getElementById("loadLocalBtn").addEventListener("click", loadLocal);
+      document.getElementById("exportBtn").addEventListener("click", exportLab);
+      document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importInput").click());
+      document.getElementById("importInput").addEventListener("change", e => importLab(e.target.files[0]));
+      document.getElementById("forkStreamBtn").addEventListener("click", forkStream);
+      document.getElementById("deleteStreamBtn").addEventListener("click", deleteActiveStream);
+      document.getElementById("saveCheckpointBtn").addEventListener("click", () => saveCheckpoint());
+      document.getElementById("restoreCheckpointBtn").addEventListener("click", () => restoreCheckpoint());
+      document.getElementById("createNodeBtn").addEventListener("click", createNode);
+      document.getElementById("clearNodeFormBtn").addEventListener("click", () => clearNodeForm(true));
+      document.getElementById("createEdgeBtn").addEventListener("click", createEdge);
+      document.getElementById("eventFilter").addEventListener("change", e => {
+        eventFilter = e.target.value;
+        renderEvents();
+      });
+      document.getElementById("copyEventsBtn").addEventListener("click", copyEvents);
+      document.getElementById("canvasScroll").addEventListener("scroll", () => requestAnimationFrame(() => drawEdges(projection())));
+      window.addEventListener("resize", () => requestAnimationFrame(() => drawEdges(projection())));
+      document.addEventListener("keydown", e => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+          e.preventDefault();
+          saveCheckpoint();
+        }
+      });
+    }
+
+    populateStaticControls();
+    bindEvents();
+    seedTemplate();
+  </script>
+</body>
+</html>

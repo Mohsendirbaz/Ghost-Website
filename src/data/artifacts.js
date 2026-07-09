@@ -258,6 +258,122 @@ export const ARTIFACTS = [
         },
     },
 
+    // ── Multi-Agent Research Laboratory ───────────────────────────────────────
+
+    {
+        id: 'multi-agent-research-laboratory',
+        slug: 'multi-agent-research-laboratory',
+        category: 'interactive',
+        tags: ['multi-agent', 'event-sourcing', 'research-lab', 'canvas', 'governance'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Multi_Agent_Research_Laboratory.html',
+                fa: '/docs/html/Multi_Agent_Research_Laboratory.html',
+            },
+            filenames: {
+                en: 'Multi_Agent_Research_Laboratory.html',
+                fa: 'Multi_Agent_Research_Laboratory.html',
+            },
+        },
+        en: {
+            title: 'Multi-Agent Research Laboratory',
+            description:
+                'Working event-stream canvas for running and auditing multi-agent research: lanes as agents and functions, single-tenant execution cells, typed contract edges, governed streams, and replayable checkpoints — every mutation recorded as an append-only event. First prototype slice of the laboratory described on the Multi-Agent System page (English-language prototype).',
+        },
+        fa: {
+            title: 'آزمایشگاه پژوهشی چند-عامله',
+            description:
+                'بوم رویدادمحورِ کارا برای اجرا و حسابرسی پژوهش چند-عامله: لِین‌ها به‌مثابه عامل‌ها و کارکردها، سلول‌های اجرای تک‌مستأجره، یال‌های قراردادی نوع‌دار، جریان‌های حاکمیت‌شده و ایست‌بازرسی‌های بازپخش‌پذیر — هر تغییر به‌صورت رویدادی افزایشی ثبت می‌شود. نخستین برش نمونهٔ اولیه از آزمایشگاهِ توصیف‌شده در صفحهٔ «سیستم چند-عامله» (نمونهٔ اولیه به زبان انگلیسی).',
+        },
+    },
+
+    // ── Blueprint diagrams (2026) ─────────────────────────────────────────────
+
+    {
+        id: 'diagram-master-blueprint-map',
+        slug: 'master-blueprint-map',
+        category: 'diagram',
+        tags: ['blueprints', 'architecture', 'two-invariants', 'roadmap'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Master_Blueprint_Map.html',
+                fa: '/docs/html/Master_Blueprint_Map.html',
+            },
+            filenames: {
+                en: 'Master_Blueprint_Map.html',
+                fa: 'Master_Blueprint_Map.html',
+            },
+        },
+        en: {
+            title: 'Master Blueprint of Blueprints — Map',
+            description:
+                'The nine-blueprint register (BP-0 through BP-8) rendered spatially: the two invariants at the center, the organ blueprints around them, and the evidentiary standing of each — established, proposed, or research gamble.',
+        },
+        fa: {
+            title: 'نقشهٔ بلوپرینتِ بلوپرینت‌ها',
+            description:
+                'دفتر نه‌گانهٔ بلوپرینت‌ها (BP-0 تا BP-8) به‌صورت فضایی: دو ناوردا در مرکز، بلوپرینت‌های اندام‌وار پیرامون آنها، و جایگاه اثباتی هر یک — تثبیت‌شده، پیشنهادی یا قمار پژوهشی.',
+        },
+    },
+
+    {
+        id: 'diagram-epistemic-gearbox-stack',
+        slug: 'epistemic-gearbox-stack',
+        category: 'diagram',
+        tags: ['gearbox', 'formulation', 'architecture', 'stack'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Epistemic_Gearbox_Stack.html',
+                fa: '/docs/html/Epistemic_Gearbox_Stack.html',
+            },
+            filenames: {
+                en: 'Epistemic_Gearbox_Stack.html',
+                fa: 'Epistemic_Gearbox_Stack.html',
+            },
+        },
+        en: {
+            title: 'Epistemic Gearbox — Stack Schematic',
+            description:
+                'The formulation engine in context: sensing through fusion, localization, prediction, formulation (the gearbox), planning, and safety verification — with the safety boundary drawn where the monotone law takes over.',
+        },
+        fa: {
+            title: 'گیربکس معرفتی — شمای پشته',
+            description:
+                'موتور صورت‌بندی در بستر کامل: از حسگری و همجوشی و مکان‌یابی و پیش‌بینی تا صورت‌بندی (گیربکس)، برنامه‌ریزی و راستی‌آزمایی ایمنی — با مرز ایمنی در جایی که قانون یکنوا حاکم می‌شود.',
+        },
+    },
+
+    {
+        id: 'diagram-metabolic-memory-reservoir',
+        slug: 'metabolic-memory-reservoir',
+        category: 'diagram',
+        tags: ['memory', 'metabolic', 'architecture', 'governance'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/Metabolic_Memory_Reservoir.html',
+                fa: '/docs/html/Metabolic_Memory_Reservoir.html',
+            },
+            filenames: {
+                en: 'Metabolic_Memory_Reservoir.html',
+                fa: 'Metabolic_Memory_Reservoir.html',
+            },
+        },
+        en: {
+            title: 'Metabolic Memory Reservoir — Architecture',
+            description:
+                'The data-plane organ: write path with enforced-causality encoding and residence-time stratification, the three partitions, budgeted read path, and the anti-silent-drift governor — with revealed gaps marked as such.',
+        },
+        fa: {
+            title: 'مخزن حافظهٔ متابولیک — معماری',
+            description:
+                'اندام لایهٔ داده: مسیر نوشتن با رمزگذاری علیّت اجباری و لایه‌بندی بر اساس زمان اقامت، سه افراز، مسیر خواندن بودجه‌دار، و حاکم ضدرانش خاموش — با شکاف‌های آشکارشده که با همین عنوان علامت خورده‌اند.',
+        },
+    },
+
     // ── Add further entries here ──────────────────────────────────────────────
     // {
     //   id: '<uuid-or-slug>',

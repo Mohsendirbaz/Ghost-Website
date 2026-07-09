@@ -23,6 +23,7 @@ function buildPageIndex(lang) {
     { label: t.libraryAssets,    path: `/${lang}/library/assets`,     type: 'page' },
     { label: t.documentArchive,  path: `/${lang}/library`,            type: 'page' },
     { label: t.multiAgentSystem, path: `/${lang}/multi-agent-system`, type: 'page' },
+    { label: t.methods,          path: `/${lang}/methods`,            type: 'page' },
     { label: t.invest,           path: `/${lang}/invest`,             type: 'page' },
     { label: t.bio,              path: `/${lang}/bio`,                type: 'page' },
   ];

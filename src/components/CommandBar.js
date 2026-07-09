@@ -58,6 +58,7 @@ export default function CommandBar() {
     library:          'آرشیو اسناد',
     libraryAssets:    'کتابخانه فنی',
     multiAgentSystem: 'سیستم چندعاملی',
+    methods:          'روش‌شناسی پژوهش',
     invest:           'سرمایه‌گذاری',
     bio:              'بیوگرافی',
   } : {
@@ -75,6 +76,7 @@ export default function CommandBar() {
     library:          'Document Archive',
     libraryAssets:    'Technical Library',
     multiAgentSystem: 'Multi-Agent System',
+    methods:          'Research Methods',
     invest:           'Invest',
     bio:              'Bio',
   };
@@ -94,6 +96,7 @@ export default function CommandBar() {
     { label: pageLabels.libraryAssets,    path: `/${lang}/library/assets` },
     { label: pageLabels.library,          path: `/${lang}/library` },
     { label: pageLabels.multiAgentSystem, path: `/${lang}/multi-agent-system` },
+    { label: pageLabels.methods,          path: `/${lang}/methods` },
     { label: pageLabels.invest,           path: `/${lang}/invest` },
     { label: pageLabels.bio,              path: `/${lang}/bio` },
   ];

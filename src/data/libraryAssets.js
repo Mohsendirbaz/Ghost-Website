@@ -2,12 +2,17 @@
  * libraryAssets.js
  * Canonical data model for Ghost Autonomy Library of Assets
  *
- * Contains 89 high-value files identified from analysis:
- * - TIER 0 (CRITICAL): 18 files - Core PICAPD ISA and strategic documents
+ * Contains 109 high-value files identified from analysis:
+ * - TIER 0 (CRITICAL): 38 files - Foundational corpus (2026), core PICAPD ISA and strategic documents
  * - TIER 1 (HIGH): 71 files - Technical content (45 Notion + 26 Root)
  *
  * Structure: Tier → Category → Asset
  * Each asset is independently addressable and includes bilingual metadata
+ *
+ * June–July 2026 refresh: the "Foundational Corpus (2026)" category publishes the
+ * program's public research corpus. Internal syntheses, confidential/trade-secret
+ * documentation, and parameter-level hardware specifications are intentionally
+ * NOT published on the public site.
  */
 
 export const LIBRARY_TIERS = {
@@ -33,19 +38,418 @@ export const STATUS_ICONS = {
     [ASSET_STATUS.BLOCKED]: '❌'
 };
 
-// ─── TIER 0: CRITICAL ASSETS (20 files) ────────────────────────────────────
+// ─── TIER 0: CRITICAL ASSETS (38 files) ────────────────────────────────────
 
 export const CRITICAL_ASSETS = {
     id: LIBRARY_TIERS.CRITICAL,
     name: { en: 'CRITICAL', fa: 'بحرانی' },
-    count: 20,
+    count: 38,
     priority: 'P0',
     timeline: 'Weeks 1-2',
     description: {
-        en: 'Core Ghost Autonomy IP - PICAPD ISA specifications and strategic analysis',
-        fa: 'مالکیت معنوی اصلی Ghost Autonomy - مشخصات PICAPD ISA و تحلیل استراتژیک'
+        en: 'Core Ghost Autonomy IP - the 2026 foundational corpus, PICAPD ISA specifications and strategic analysis',
+        fa: 'مالکیت معنوی اصلی Ghost Autonomy - پیکره بنیادین ۲۰۲۶، مشخصات PICAPD ISA و تحلیل استراتژیک'
     },
     categories: [
+        {
+            id: 'foundational-corpus-2026',
+            name: { en: 'Foundational Corpus (2026)', fa: 'پیکره بنیادین (۲۰۲۶)' },
+            count: 10,
+            assets: [
+                {
+                    id: 'ten-articles-corpus',
+                    filename: 'Ten_Articles_Corrected.pdf',
+                    slug: 'ten-foundational-articles',
+                    title: {
+                        en: 'Provably Bounded Autonomous Driving — Ten Foundational Articles',
+                        fa: 'رانندگی خودران با کران‌های اثبات‌پذیر — ده مقاله بنیادین'
+                    },
+                    description: {
+                        en: '89-page consolidated project corpus (May 2026): constraint propagation from epistemology to actuation, the fidelity gate as a trusted scalar, risk-monotone actuation, and the timing-contracted analog veto — with explicit limitations and what remains to be built.',
+                        fa: 'پیکره تلفیقی ۸۹ صفحه‌ای پروژه (مه ۲۰۲۶): انتشار قید از معرفت‌شناسی تا عملگر، دروازه وفاداری به‌مثابه اسکالر مورد اعتماد، جبر عملگری یکنوا با ریسک، و وتوی آنالوگ با قرارداد زمانی — همراه با محدودیت‌های صریح و آنچه هنوز باید ساخته شود.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: '89 pages',
+                    targetUrl: '/docs/pdf/Ten_Articles_Corrected.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['corpus', 'bounded-autonomy', 'safety', 'synthesis'],
+                    priority: 1
+                },
+                {
+                    id: 'revised-manuscript-2026',
+                    filename: 'Special_Function_Feature_Maps_Manuscript.pdf',
+                    slug: 'special-function-feature-maps-manuscript',
+                    title: {
+                        en: 'Special-Function Feature Maps for Reduced-Order Surrogate Modeling (Revised Manuscript)',
+                        fa: 'نگاشت‌های ویژگیِ توابع خاص برای مدل‌سازی جایگزین مرتبه‌کاسته (دست‌نوشته بازنگری‌شده)'
+                    },
+                    description: {
+                        en: 'Revised manuscript (June 2026): a deterministic five-stage feature-map pipeline with provable AGM convergence, explicit conservation verification, R² ≈ 0.78–0.87 within the demonstrated envelope — and a stated non-claims section.',
+                        fa: 'دست‌نوشته بازنگری‌شده (ژوئن ۲۰۲۶): خط لوله قطعی پنج‌مرحله‌ای نگاشت ویژگی با همگرایی اثبات‌پذیر AGM، راستی‌آزمایی صریح پایستگی، و R² ≈ ۰٫۷۸–۰٫۸۷ در محدوده نشان‌داده‌شده — همراه با بخش صریح «آنچه ادعا نمی‌شود».'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Special_Function_Feature_Maps_Manuscript.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['manuscript', 'surrogate-modeling', 'elliptic-integrals', 'agm'],
+                    priority: 2
+                },
+                {
+                    id: 'quantum-info-research-statement',
+                    filename: 'Quantum_Information_Research_Statement.pdf',
+                    slug: 'computational-structures-research-statement',
+                    title: {
+                        en: 'Computational Structures and the Quantum Information Architecture of Spacetime — Research Statement',
+                        fa: 'ساختارهای محاسباتی و معماری اطلاعات کوانتومی فضازمان — بیانیه پژوهشی'
+                    },
+                    description: {
+                        en: '90-page research statement (June 2026): an explicitly exploratory, falsifiable investigation of numerical structures aligning with fundamental cosmological parameters. Presented as open research, not established result.',
+                        fa: 'بیانیه پژوهشی ۹۰ صفحه‌ای (ژوئن ۲۰۲۶): کاوشی صراحتاً اکتشافی و ابطال‌پذیر درباره هم‌راستایی ساختارهای عددی با پارامترهای بنیادی کیهان‌شناختی. به‌عنوان پژوهش باز ارائه شده است، نه یافته تثبیت‌شده.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: '90 pages',
+                    targetUrl: '/docs/pdf/Quantum_Information_Research_Statement.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['research-statement', 'elliptic-integrals', 'information-theory', 'exploratory'],
+                    priority: 3
+                },
+                {
+                    id: 'algorithm-methodology-chapter',
+                    filename: 'Algorithm_Methodology_Chapter.pdf',
+                    slug: 'methodology-algorithm-derivation',
+                    title: {
+                        en: 'Methodology — Full Algorithm Derivation and Biomass Datasets',
+                        fa: 'روش‌شناسی — استخراج کامل الگوریتم و داده‌های زیست‌توده'
+                    },
+                    description: {
+                        en: '55-page methodology chapter: canonical correlation analysis of biomass properties, the complete derivation of the special-function pipeline, and the compiled experimental datasets.',
+                        fa: 'فصل روش‌شناسی ۵۵ صفحه‌ای: تحلیل همبستگی متعارف ویژگی‌های زیست‌توده، استخراج کامل خط لوله توابع خاص، و داده‌های تجربی گردآوری‌شده.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: '55 pages',
+                    targetUrl: '/docs/pdf/Algorithm_Methodology_Chapter.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['methodology', 'cca', 'datasets', 'derivation'],
+                    priority: 4
+                },
+                {
+                    id: 'autonomous-driving-considerations',
+                    filename: 'Autonomous_Driving_Considerations_EN.md',
+                    slug: 'autonomous-driving-considerations',
+                    title: {
+                        en: 'Autonomous Driving Considerations — Complete English Corpus',
+                        fa: 'ملاحظات رانندگی خودران — پیکره کامل انگلیسی'
+                    },
+                    description: {
+                        en: 'A 45,000-word corpus of source argumentation on autonomous-driving complexity: build-time versus runtime agents, path-narrating dust, sensing regimes, and the operational edges where autonomy is actually won or lost.',
+                        fa: 'پیکره‌ای ۴۵هزار کلمه‌ای از استدلال‌های بنیادی درباره پیچیدگی رانندگی خودران: عامل‌های زمانِ ساخت در برابر زمانِ اجرا، غبار روایتگر مسیر، رژیم‌های حسگری، و لبه‌های عملیاتی‌ای که خودرانی به‌واقع در آنها برد یا باخت می‌شود.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/md/Autonomous_Driving_Considerations_EN.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['corpus', 'autonomous-driving', 'argumentation', 'sensing'],
+                    priority: 5
+                },
+                {
+                    id: 'metabolic-memory-architecture',
+                    filename: 'Metabolic_Memory_Architecture.md',
+                    slug: 'metabolic-memory-architecture',
+                    title: {
+                        en: 'The Metabolic Memory Architecture',
+                        fa: 'معماری حافظه متابولیک'
+                    },
+                    description: {
+                        en: 'Residence-time-stratified learning policy: memory as a governed metabolic organ — admission, retention, and eviction under budget, with verification burden strengthening monotonically with residence time.',
+                        fa: 'سیاست یادگیری لایه‌بندی‌شده بر اساس زمان اقامت: حافظه به‌مثابه اندام متابولیکِ حاکمیت‌شده — پذیرش، نگهداشت و حذف تحت بودجه، با بار راستی‌آزمایی‌ای که با زمان اقامت به‌طور یکنوا سنگین‌تر می‌شود.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/md/Metabolic_Memory_Architecture.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['memory', 'safety', 'learning-policy', 'governance'],
+                    priority: 6
+                },
+                {
+                    id: 'arc-sensory-architecture',
+                    filename: 'ARC_Sensory_Architecture_EN.md',
+                    slug: 'arc-sensory-architecture',
+                    title: {
+                        en: 'ARC Sensory Architecture — Reception Continuity and Fibrous Receptors',
+                        fa: 'معماری حسی ARC — پیوستگی دریافت و گیرنده‌های رشته‌ای'
+                    },
+                    description: {
+                        en: 'The reception-continuity thesis: receptors as continuous, velocity-sensitive absorption surfaces — fiber-like filaments recording momentum at different speeds without rupturing phenomenon–sensor–model synchronization.',
+                        fa: 'تز پیوستگی دریافت: گیرنده‌ها به‌مثابه سطوح جذب پیوسته و حساس به سرعت — رشته‌هایی الیاف‌گونه که تکانه را در سرعت‌های مختلف ثبت می‌کنند، بی‌آنکه هم‌زمانی پدیده–حسگر–مدل گسسته شود.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/md/ARC_Sensory_Architecture_EN.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['sensing', 'receptors', 'architecture', 'continuity'],
+                    priority: 7
+                },
+                {
+                    id: 'phd-dissertation-asset',
+                    filename: 'PhD_Dissertation_Neural_Network_Biomass_Gasification.pdf',
+                    slug: 'phd-dissertation',
+                    title: {
+                        en: 'PhD Dissertation — Neural-Network Modeling of Biomass Gasification (IIT)',
+                        fa: 'رسالهٔ دکتری — مدل‌سازی شبکهٔ عصبی گازی‌سازی زیست‌توده (IIT)'
+                    },
+                    description: {
+                        en: 'The original doctoral research (Illinois Institute of Technology): the empirical and methodological taproot from which the entire program grows. Published in full as a public academic record.',
+                        fa: 'پژوهش اصیل دکتری (مؤسسه فناوری ایلینوی): ریشهٔ تجربی و روش‌شناختی‌ای که کل برنامه از آن روییده است. به‌عنوان سند علمی عمومی به‌طور کامل منتشر شده است.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/PhD_Dissertation_Neural_Network_Biomass_Gasification.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['dissertation', 'iit', 'gasification', 'neural-networks'],
+                    priority: 8
+                },
+                {
+                    id: 'special-function-framework-asset',
+                    filename: 'Physics_Informed_Special_Function_Framework.pdf',
+                    slug: 'special-function-framework',
+                    title: {
+                        en: 'A Physics-Informed Special-Function Framework',
+                        fa: 'چارچوب توابع خاصِ فیزیک‌آگاه'
+                    },
+                    description: {
+                        en: 'The theoretical core: AGM/elliptic-integral reduced-order modeling with conservation treated by construction and verification. Refreshed edition (May 2026).',
+                        fa: 'هستهٔ نظری: مدل‌سازی مرتبه‌کاسته با انتگرال‌های بیضوی/AGM و پایستگی از راه ساختار و راستی‌آزمایی. ویراست به‌روزشده (مه ۲۰۲۶).'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Physics_Informed_Special_Function_Framework.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['elliptic-integrals', 'agm', 'framework', 'conservation'],
+                    priority: 9
+                },
+                {
+                    id: 'permanently-in-transient',
+                    filename: 'Permanently_in_Transient.pdf',
+                    slug: 'permanently-in-transient',
+                    title: {
+                        en: 'Permanently in Transient — Operationalizing Long-Memory Dynamics',
+                        fa: 'برای همیشه در گذرا — عملیاتی‌سازی دینامیک حافظه‌بلند'
+                    },
+                    description: {
+                        en: 'July 2026, the newest document in the corpus: long-memory filter dynamics turned from pathology into instrument for the AV sensory suite, with numerical demonstrations. Third companion in the elliptic/Kalman series.',
+                        fa: 'ژوئیه ۲۰۲۶، تازه‌ترین سند پیکره: دینامیک حافظه‌بلند فیلترها از یک آسیب به یک ابزار برای مجموعهٔ حسی خودرو تبدیل می‌شود، همراه با نمایش‌های عددی. سومین هم‌نشین در سری بیضوی/کالمن.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/pdf/Permanently_in_Transient.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['filters', 'kalman', 'sensing', 'signal-processing'],
+                    priority: 10
+                }
+            ]
+        },
+        {
+            id: 'safety-control-papers-2026',
+            name: { en: 'Safety & Control Papers (2026)', fa: 'مقالات ایمنی و کنترل (۲۰۲۶)' },
+            count: 5,
+            assets: [
+                {
+                    id: 'l4-consolidated-solution',
+                    filename: 'Provably_Bounded_L4_Consolidated_Solution.md',
+                    slug: 'provably-bounded-l4-consolidated-solution',
+                    title: {
+                        en: 'Provably-Bounded L4 — Consolidated Solution',
+                        fa: 'L4 با کران‌های اثبات‌پذیر — راه‌حل تلفیقی'
+                    },
+                    description: {
+                        en: 'Maps six engineering surveys onto the constraint-propagation chain, with six formal acceptance criteria (G1–G6) and an explicit Established / Proposed / Notional standing for every claim.',
+                        fa: 'نگاشت شش پیمایش مهندسی بر زنجیرهٔ انتشار قید، با شش معیار پذیرش صوری (G1–G6) و جایگاه صریح تثبیت‌شده/پیشنهادی/تصوری برای هر ادعا.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/md/Provably_Bounded_L4_Consolidated_Solution.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['safety', 'l4', 'acceptance-criteria', 'synthesis'],
+                    priority: 1
+                },
+                {
+                    id: 'architecture-of-refusal-summary',
+                    filename: 'Architecture_of_Refusal_Summary.md',
+                    slug: 'architecture-of-refusal-summary',
+                    title: {
+                        en: 'The Architecture of Refusal — One-Page Summary',
+                        fa: 'معماری امتناع — خلاصهٔ یک‌صفحه‌ای'
+                    },
+                    description: {
+                        en: 'The consequence law in one page: bound the error, don\'t eliminate it; the S0–S4 refusal chain; and the evidentiary seam between measured, projected, proposed, and notional.',
+                        fa: 'قانون پیامد در یک صفحه: خطا را کران‌دار کن، نه حذف؛ زنجیرهٔ امتناع S0–S4؛ و درز اثباتی میان اندازه‌گیری‌شده، پیش‌بینی‌شده، پیشنهادی و تصوری.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'small',
+                    targetUrl: '/docs/md/Architecture_of_Refusal_Summary.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['safety', 'refusal', 'summary', 'monotonicity'],
+                    priority: 2
+                },
+                {
+                    id: 'rmaa-paper',
+                    filename: 'Risk_Monotone_Action_Algebra.pdf',
+                    slug: 'risk-monotone-action-algebra',
+                    title: {
+                        en: 'Risk-Monotone Action Algebra (RMAA)',
+                        fa: 'جبر عملگری یکنوا با ریسک (RMAA)'
+                    },
+                    description: {
+                        en: 'A hardware-enforceable action envelope for highway driving: projection calculus, exactness-and-ordering result for the two-stage clamp, envelope-contraction guarantee, an unrepresentability theorem, and a determinism contract.',
+                        fa: 'پوش عملگری قابل‌اجرای سخت‌افزاری برای رانندگی بزرگراهی: حساب تصویر، نتیجهٔ دقت-و-ترتیب برای گیرهٔ دومرحله‌ای، تضمین انقباض پوش، قضیهٔ بازنمایی‌ناپذیری و قرارداد جبرگرایی.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Risk_Monotone_Action_Algebra.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['safety', 'actuation', 'theorems', 'hardware'],
+                    priority: 3
+                },
+                {
+                    id: 'trusted-scalar-paper',
+                    filename: 'Trusted_Scalar_Fidelity_Gate.pdf',
+                    slug: 'trusted-scalar-fidelity-gate',
+                    title: {
+                        en: 'Trusted Scalar — A Qualification Calculus for Safety-Critical Reduced-Order Scalars',
+                        fa: 'اسکالر مورد اعتماد — حساب صلاحیت برای اسکالرهای مرتبه‌کاستهٔ ایمنی‌بحرانی'
+                    },
+                    description: {
+                        en: 'Self-contained formulation treating reduced-order model outputs as certificate-like quantities: contracts, a composition algebra, invariance-preservation theorems, failure modes, and a normative specification.',
+                        fa: 'صورت‌بندی خوداتکا که خروجی‌های مدل مرتبه‌کاسته را کمیت‌هایی گواهی‌گونه می‌داند: قراردادها، جبر ترکیب، قضایای حفظ ناوردایی، حالت‌های خرابی و مشخصات هنجاری.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Trusted_Scalar_Fidelity_Gate.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['safety', 'fidelity-gate', 'theorems', 'rom'],
+                    priority: 4
+                },
+                {
+                    id: 'invariant-structured-control',
+                    filename: 'Invariant_Structured_Online_Control_Phase_First.pdf',
+                    slug: 'invariant-structured-online-control',
+                    title: {
+                        en: 'Invariant-Structured Online Control (Phase-First)',
+                        fa: 'کنترل برخط با ساختار ناوردا (فاز-نخست)'
+                    },
+                    description: {
+                        en: 'Publication-grade paper: three orthogonal invariants (ξ, S, sct) composed as constraints in MPC and control-barrier safety filters — the bridge between the mathematics and the safety chain.',
+                        fa: 'مقاله‌ای در تراز انتشار: سه ناوردای متعامد (ξ، S، sct) به‌صورت قید در MPC و فیلترهای ایمنی مبتنی بر توابع سد — پل میان ریاضیات و زنجیرهٔ ایمنی.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Invariant_Structured_Online_Control_Phase_First.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['control', 'invariants', 'mpc', 'safety'],
+                    priority: 5
+                }
+            ]
+        },
+        {
+            id: 'methods-meta-research-2026',
+            name: { en: 'Methods & Meta-Research (2026)', fa: 'روش‌ها و فراپژوهش (۲۰۲۶)' },
+            count: 3,
+            assets: [
+                {
+                    id: 'prior-art-map',
+                    filename: 'External_Assessment_Prior_Art_Map.md',
+                    slug: 'external-assessment-prior-art-map',
+                    title: {
+                        en: 'External Assessment & Prior-Art Map',
+                        fa: 'ارزیابی بیرونی و نقشهٔ پیشینه‌پژوهی'
+                    },
+                    description: {
+                        en: 'An adversarial audit of the program\'s discovery framework, published unedited: component-by-component verdicts against the prior art (Boden, TRIZ, structure-mapping, quantum cognition) — including where our own framings are judged decorative.',
+                        fa: 'ممیزی سخت‌گیرانهٔ چارچوب اکتشافی برنامه، بدون ویرایش منتشر شده: حکم مؤلفه‌به‌مؤلفه در برابر پیشینهٔ علمی (بودن، TRIZ، نگاشت ساختار، شناخت کوانتومی) — از جمله جاهایی که صورت‌بندی‌های خود ما تزئینی ارزیابی شده‌اند.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/md/External_Assessment_Prior_Art_Map.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['audit', 'prior-art', 'methods', 'meta-research'],
+                    priority: 1
+                },
+                {
+                    id: 'six-layer-framework',
+                    filename: 'Six_Layer_Linguistic_Framework_v1.pdf',
+                    slug: 'six-layer-linguistic-framework',
+                    title: {
+                        en: 'The Six-Layer Linguistic Framework v1.0',
+                        fa: 'چارچوب زبانی شش‌لایه — نسخهٔ ۱٫۰'
+                    },
+                    description: {
+                        en: 'The program\'s writing standard, issued for routine use: six layers of prose quality with one non-negotiable boundary — fidelity. Elevation may never alter what a claim says.',
+                        fa: 'استاندارد نگارش برنامه، برای استفادهٔ روزمره: شش لایهٔ کیفیت نثر با یک مرز غیرقابل‌مذاکره — وفاداری. ارتقا هرگز نباید آنچه ادعا می‌گوید را تغییر دهد.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/pdf/Six_Layer_Linguistic_Framework_v1.pdf',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['writing', 'quality', 'methods', 'standard'],
+                    priority: 2
+                },
+                {
+                    id: 'epistemic-gearbox-overview',
+                    filename: 'AV_Epistemic_Gearbox_Architecture_Overview.md',
+                    slug: 'av-epistemic-gearbox-overview',
+                    title: {
+                        en: 'AV Epistemic Gearbox — Architecture Overview (v0.1)',
+                        fa: 'گیربکس معرفتی خودرو — مرور معماری (نسخهٔ ۰٫۱)'
+                    },
+                    description: {
+                        en: 'Steerable computation for collision avoidance: five epistemic stances ordered into 325 formulation routes, selection with hysteresis, and integration with the safety chain. Module timing budgets are design targets, labeled as such.',
+                        fa: 'محاسبات قابل‌هدایت برای اجتناب از برخورد: پنج موضع معرفتی در ۳۲۵ مسیر صورت‌بندی، انتخاب با پس‌ماند، و یکپارچگی با زنجیرهٔ ایمنی. بودجه‌های زمانی ماژول‌ها هدف طراحی‌اند و با همین عنوان برچسب خورده‌اند.'
+                    },
+                    type: 'md',
+                    lang: 'en',
+                    size: 'medium',
+                    targetUrl: '/docs/md/AV_Epistemic_Gearbox_Architecture_Overview.md',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['gearbox', 'formulation', 'architecture', 'methods'],
+                    priority: 3
+                }
+            ]
+        },
         {
             id: 'picapd-isa-en',
             name: { en: 'PICAPD ISA (English)', fa: 'PICAPD ISA (انگلیسی)' },
@@ -843,11 +1247,11 @@ export const ALL_TIERS = [CRITICAL_ASSETS, HIGH_ASSETS];
 
 // Export summary statistics
 export const LIBRARY_STATS = {
-    totalAssets: 91,
-    critical: 20,
+    totalAssets: 109,
+    critical: 38,
     high: 71,
     bilingualPairs: 21,
-    readyAssets: 17,
+    readyAssets: 35,
     inProgressAssets: 3,
     needsReviewAssets: 5
 };

@@ -1,0 +1,200 @@
+<svg viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ttl dsc" font-family="var(--font-sans), system-ui, sans-serif">
+  <title id="ttl">Autonomous-vehicle stack steered by the epistemic-multiplex route-selector</title>
+  <desc id="dsc">Sensors feed a trusted-substrate fusion gate, then manifold state estimation, phase identification and prediction. These feed a central epistemic-multiplex route-selector (AD-FORM) that emits a selected framework route which configures the formulation to planning to actuation proposer chain. All commands pass a risk-monotone algebra and a terminal hardware guard before reaching the vehicle. A mathematical-foundations layer underlies the whole stack.</desc>
+
+  <defs>
+    <marker id="aN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--color-border-secondary)"/>
+    </marker>
+    <marker id="aV" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7F77DD"/>
+    </marker>
+    <marker id="aO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#D85A30"/>
+    </marker>
+  </defs>
+
+  <style>
+    .mod   { fill: var(--color-background-primary); stroke: var(--color-border-secondary); stroke-width: 1.5; }
+    .ttl   { fill: var(--color-text-primary);   font-size: 13px; font-weight: 700; }
+    .sub   { fill: var(--color-text-secondary); font-size: 10.5px; }
+    .band  { fill: var(--color-text-secondary); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; }
+    .tag   { fill: var(--color-text-info); font-size: 9.5px; font-family: var(--font-mono), monospace; }
+    .chip  { fill: var(--color-background-primary); stroke: var(--color-border-tertiary); stroke-width: 1.25; }
+    .chipt { fill: var(--color-text-secondary); font-size: 11px; font-weight: 600; }
+    .eN    { stroke: var(--color-border-secondary); stroke-width: 1.5; fill: none; }
+    .eV    { stroke: #7F77DD; stroke-width: 2; fill: none; }
+    .eO    { stroke: #D85A30; stroke-width: 1.75; fill: none; }
+    .lg    { fill: var(--color-text-secondary); font-size: 10px; }
+    .node  { font-size: 12px; font-weight: 700; }
+  </style>
+
+  <!-- legend -->
+  <text x="30" y="22" class="band">AV STACK · STEERED BY THE EPISTEMIC GEARBOX</text>
+  <rect x="690" y="11" width="14" height="10" rx="2" fill="#7F77DD" fill-opacity="0.18" stroke="#7F77DD"/>
+  <text x="710" y="20" class="lg">epistemic steering</text>
+  <rect x="833" y="11" width="14" height="10" rx="2" fill="#D85A30" fill-opacity="0.14" stroke="#D85A30"/>
+  <text x="853" y="20" class="lg">safety boundary</text>
+  <rect x="980" y="11" width="14" height="10" rx="2" class="mod"/>
+  <text x="1000" y="20" class="lg">module</text>
+
+  <!-- ============ BAND A: sensors ============ -->
+  <g>
+    <rect x="40"  y="44" width="172" height="30" rx="15" class="chip"/><text x="126" y="63" text-anchor="middle" class="chipt">Camera</text>
+    <rect x="232" y="44" width="172" height="30" rx="15" class="chip"/><text x="318" y="63" text-anchor="middle" class="chipt">Radar (FMCW)</text>
+    <rect x="424" y="44" width="172" height="30" rx="15" class="chip"/><text x="510" y="63" text-anchor="middle" class="chipt">LiDAR</text>
+    <rect x="616" y="44" width="172" height="30" rx="15" class="chip"/><text x="702" y="63" text-anchor="middle" class="chipt">Ultrasonic</text>
+    <rect x="808" y="44" width="172" height="30" rx="15" class="chip"/><text x="894" y="63" text-anchor="middle" class="chipt">IMU</text>
+  </g>
+
+  <!-- ============ BAND B: sensing + S0 ============ -->
+  <text x="30" y="100" class="band">SENSING · TRUSTED SUBSTRATE</text>
+  <rect x="70"  y="112" width="210" height="72" rx="10" class="mod"/>
+  <text x="84" y="138" class="ttl">AD-PERC · Vision</text>
+  <text x="84" y="156" class="sub">Detection, segmentation, OOD</text>
+  <text x="262" y="128" class="tag" text-anchor="end">①</text>
+
+  <rect x="300" y="112" width="210" height="72" rx="10" class="mod"/>
+  <text x="314" y="138" class="ttl">AD-RDR · Doppler</text>
+  <text x="314" y="156" class="sub">Range-rate, micro-Doppler</text>
+  <text x="492" y="128" class="tag" text-anchor="end">①</text>
+
+  <rect x="600" y="112" width="340" height="72" rx="10" class="mod"/>
+  <rect x="600" y="112" width="340" height="72" rx="10" fill="none" stroke="var(--color-text-primary)" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="616" y="138" class="ttl">AD-FUSE · Trusted Substrate</text>
+  <text x="616" y="156" class="sub">Conservative fusion, provenance, admissibility gate</text>
+  <text x="924" y="128" class="tag" text-anchor="end">S₀</text>
+
+  <path class="eN" d="M126 74 V112" marker-end="url(#aN)"/>
+  <path class="eN" d="M318 74 V112" marker-end="url(#aN)"/>
+  <path class="eN" d="M510 74 V96 H660 V112" marker-end="url(#aN)"/>
+  <path class="eN" d="M702 74 V112" marker-end="url(#aN)"/>
+  <path class="eN" d="M894 74 V96 H862 V112" marker-end="url(#aN)"/>
+  <path class="eN" d="M280 148 C 440 110, 470 110, 600 144" marker-end="url(#aN)"/>
+  <path class="eN" d="M510 150 H600" marker-end="url(#aN)"/>
+
+  <!-- ============ BAND C: manifold state ============ -->
+  <text x="30" y="214" class="band">STATE ON THE NAVIGATION MANIFOLD  M</text>
+  <rect x="70"  y="226" width="206" height="74" rx="10" class="mod"/>
+  <text x="84" y="252" class="ttl">AD-LOC · Localize</text>
+  <text x="84" y="270" class="sub">Pose / embed on M</text>
+  <text x="258" y="242" class="tag" text-anchor="end">②③</text>
+
+  <rect x="296" y="226" width="206" height="74" rx="10" class="mod"/>
+  <text x="310" y="252" class="ttl">ROM + Conserv.</text>
+  <text x="310" y="270" class="sub">Next-state, cert (MA-GEO₃)</text>
+  <text x="484" y="242" class="tag" text-anchor="end">④</text>
+
+  <rect x="522" y="226" width="206" height="74" rx="10" class="mod"/>
+  <text x="536" y="252" class="ttl">MA-TOP · Phase ID</text>
+  <text x="536" y="270" class="sub">Safe / transition / hazard</text>
+  <text x="710" y="242" class="tag" text-anchor="end">⑤</text>
+
+  <rect x="748" y="226" width="206" height="74" rx="10" class="mod"/>
+  <text x="762" y="252" class="ttl">AD-PRED · Predict</text>
+  <text x="762" y="270" class="sub">Bounded multi-modal futures</text>
+  <text x="936" y="242" class="tag" text-anchor="end">→</text>
+
+  <path class="eN" d="M770 184 V210 H173 V226" marker-end="url(#aN)"/>
+  <path class="eN" d="M276 263 H296" marker-end="url(#aN)"/>
+  <path class="eN" d="M502 263 H522" marker-end="url(#aN)"/>
+  <path class="eN" d="M820 184 V226" marker-end="url(#aN)"/>
+
+  <!-- ============ BAND D: the steering hub ============ -->
+  <text x="30" y="330" class="band">PROBLEM-FORMULATION SELECTOR  ·  THE NAVIGATIONAL KNOB</text>
+  <rect x="70" y="342" width="884" height="128" rx="14" fill="#7F77DD" fill-opacity="0.12" stroke="#7F77DD" stroke-width="2"/>
+  <text x="86" y="366" class="ttl" fill="#3C3489">AD-FORM · Epistemic-Multiplex Route-Selector</text>
+  <text x="938" y="362" class="tag" text-anchor="end" fill="#534AB7">dispatcher</text>
+
+  <!-- knob -->
+  <circle cx="168" cy="418" r="42" fill="var(--color-background-primary)" stroke="#7F77DD" stroke-width="2"/>
+  <circle cx="168" cy="418" r="6" fill="#7F77DD"/>
+  <line x1="168" y1="418" x2="196" y2="392" stroke="#7F77DD" stroke-width="3" stroke-linecap="round"/>
+  <text x="168" y="375" text-anchor="middle" class="node" fill="#3C3489">P</text>
+  <text x="214" y="414" text-anchor="middle" class="node" fill="#3C3489">F</text>
+  <text x="196" y="462" text-anchor="middle" class="node" fill="#3C3489">S</text>
+  <text x="140" y="462" text-anchor="middle" class="node" fill="#3C3489">I</text>
+  <text x="122" y="414" text-anchor="middle" class="node" fill="#3C3489">E</text>
+
+  <!-- multiplex mini -->
+  <g>
+    <text x="300" y="380" class="sub" font-weight="700">nested multiplex · 3 layers</text>
+    <rect x="300" y="388" width="190" height="20" rx="4" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)"/>
+    <text x="308" y="402" class="sub">ontological  P F S I E</text>
+    <rect x="300" y="412" width="190" height="20" rx="4" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)"/>
+    <text x="308" y="426" class="sub">epistemic   P F S I E</text>
+    <rect x="300" y="436" width="190" height="20" rx="4" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)"/>
+    <text x="308" y="450" class="sub">applicability P F S I E</text>
+  </g>
+
+  <!-- selection law -->
+  <g>
+    <text x="540" y="392" class="sub" font-weight="700">conditional selection (multilinear)</text>
+    <text x="540" y="416" class="ttl" font-size="12.5px">P(r | 𝒮) ∝ 𝟙[r∈R_adm]·exp(β·Φ(r|𝒮))</text>
+    <text x="540" y="436" class="sub">Φ = Σᵢ wᵢ·φ_sᵢ(𝒮) + λ·coherence</text>
+    <text x="540" y="454" class="sub">r* = argmax  ·  325 ordered routes</text>
+  </g>
+
+  <!-- r* output token -->
+  <rect x="812" y="400" width="126" height="40" rx="8" fill="#7F77DD" fill-opacity="0.18" stroke="#7F77DD"/>
+  <text x="875" y="418" text-anchor="middle" class="ttl" font-size="12px" fill="#3C3489">r*  selected</text>
+  <text x="875" y="433" text-anchor="middle" class="sub" fill="#534AB7">e.g. E→F→P→S→I</text>
+
+  <!-- inputs into hub -->
+  <path class="eN" d="M173 300 V342" marker-end="url(#aV)" stroke="#7F77DD"/>
+  <path class="eN" d="M625 300 V320 H520 V342" marker-end="url(#aV)" stroke="#7F77DD"/>
+  <path class="eN" d="M851 300 V320 H760 V342" marker-end="url(#aV)" stroke="#7F77DD"/>
+
+  <!-- ============ BAND E: proposer chain ============ -->
+  <text x="30" y="500" class="band">PROPOSER CHAIN · CONFIGURED BY  r*</text>
+  <rect x="70"  y="512" width="262" height="72" rx="10" class="mod"/>
+  <text x="84" y="538" class="ttl">Problem spec 𝒫</text>
+  <text x="84" y="556" class="sub">⟨ J, 𝒞ʰ∪𝒞ˢ, ℱ, σ, τ ⟩</text>
+  <text x="314" y="528" class="tag" text-anchor="end">well-posed</text>
+
+  <rect x="400" y="512" width="246" height="72" rx="10" class="mod"/>
+  <text x="414" y="538" class="ttl">AD-PLAN · Planning</text>
+  <text x="414" y="556" class="sub">Trajectory + feasibility cert</text>
+  <text x="628" y="528" class="tag" text-anchor="end">⑥</text>
+
+  <rect x="714" y="512" width="240" height="72" rx="10" class="mod"/>
+  <rect x="714" y="512" width="240" height="72" rx="10" fill="#7F77DD" fill-opacity="0.07" stroke="#7F77DD" stroke-width="1.5"/>
+  <text x="728" y="538" class="ttl">AD-CTRL · Actuation</text>
+  <text x="728" y="556" class="sub">Friction-circle command u</text>
+  <text x="940" y="528" class="tag" text-anchor="end">S₃</text>
+
+  <path class="eV" d="M232 470 V512" marker-end="url(#aV)"/>
+  <path class="eV" d="M520 470 V490 H523 V512" marker-end="url(#aV)"/>
+  <path class="eV" d="M820 470 V512" marker-end="url(#aV)"/>
+  <path class="eN" d="M332 548 H400" marker-end="url(#aN)"/>
+  <path class="eN" d="M646 548 H714" marker-end="url(#aN)"/>
+
+  <!-- ============ BAND F: safety boundary ============ -->
+  <text x="30" y="614" class="band">SAFETY BOUNDARY · NEVER ENLARGED BY THE GEARBOX</text>
+  <rect x="386" y="626" width="568" height="74" rx="12" fill="#D85A30" fill-opacity="0.07" stroke="#D85A30" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <rect x="404" y="640" width="226" height="46" rx="8" class="mod"/>
+  <text x="418" y="660" class="ttl" font-size="12px">S₃ Risk-Monotone Algebra</text>
+  <text x="418" y="676" class="sub">antitone box 𝒰(ρ), MEET</text>
+
+  <rect x="650" y="640" width="170" height="46" rx="8" class="mod"/>
+  <text x="664" y="660" class="ttl" font-size="12px">S₄ Terminal Guard</text>
+  <text x="664" y="676" class="sub">non-programmable</text>
+
+  <rect x="840" y="640" width="98" height="46" rx="8" class="mod"/>
+  <text x="889" y="668" text-anchor="middle" class="ttl" font-size="12px">Vehicle</text>
+
+  <path class="eO" d="M834 584 V612 H517 V640" marker-end="url(#aO)"/>
+  <path class="eO" d="M630 663 H650" marker-end="url(#aO)"/>
+  <path class="eO" d="M820 663 H840" marker-end="url(#aO)"/>
+
+  <!-- ============ BAND G: substrate ============ -->
+  <rect x="70" y="724" width="884" height="60" rx="12" fill="var(--color-text-primary)" fill-opacity="0.05" stroke="var(--color-border-tertiary)" stroke-width="1.25"/>
+  <text x="86" y="746" class="band" font-size="10.5px">MATHEMATICAL FOUNDATIONS SUBSTRATE</text>
+  <text x="86"  y="768" class="sub">MA-COMB · lattice + categorical</text>
+  <text x="320" y="768" class="sub">MA-GEO · manifold + symmetry</text>
+  <text x="560" y="768" class="sub">MA-TOP · phase + bifurcation</text>
+  <text x="788" y="768" class="sub">Riemannian-CBF</text>
+  <path class="eN" d="M250 724 V714" stroke-dasharray="3 3" stroke-opacity="0.55"/>
+  <path class="eN" d="M512 724 V714" stroke-dasharray="3 3" stroke-opacity="0.55"/>
+  <path class="eN" d="M774 724 V714" stroke-dasharray="3 3" stroke-opacity="0.55"/>
+</svg>

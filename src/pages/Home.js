@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import { HeroPrimary } from '../components/Hero';
@@ -62,6 +62,30 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {t.corpusDocs && (
+        <section className="section-block section-block--gray">
+          <div className="container">
+            <p className="section-eyebrow">{t.corpusEyebrow}</p>
+            <h2 className="section-title">{t.corpusTitle}</h2>
+            <p className="section-block__body">{t.corpusBody}</p>
+            <div className="safety-layers__grid">
+              {t.corpusDocs.map((doc, i) => (
+                <Link
+                  key={i}
+                  to={`/${lang}/library/assets/${doc.slug}`}
+                  className="layer-card"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <h3 className="layer-card__title">{doc.title}</h3>
+                  <p className="layer-card__body">{doc.desc}</p>
+                </Link>
+              ))}
+            </div>
+            <p className="section-block__note">{t.corpusNote}</p>
+          </div>
+        </section>
+      )}
 
       <section className="fact-engine-section container">
         <FactEngine
