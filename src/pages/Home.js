@@ -1,131 +1,94 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
-import { HeroPrimary } from '../components/Hero';
-import ThreePillars from '../components/ThreePillars';
-import SectionBlock from '../components/SectionBlock';
-import CTABand from '../components/CTABand';
-import { PhysicsAbstraction } from '../components/AbstractVisual';
-import FactEngine from '../FactEngine';
-import './Page.css';
+import './Home.css';
 
 export default function Home() {
   const { lang } = useLang();
-  const navigate = useNavigate();
   const t = copy[lang].home;
-
-  const pillars = [
-    { icon: '⚡', title: t.pillar1Title, body: t.pillar1Body },
-    { icon: '🛡', title: t.pillar2Title, body: t.pillar2Body },
-    { icon: '⚙️', title: t.pillar3Title, body: t.pillar3Body },
-  ];
+  const m = t.min || {};
+  const arrow = lang === 'fa' ? '←' : '→';
 
   return (
-    <main id="main-content">
-      <HeroPrimary
-        h1={t.heroH1}
-        subhead={t.heroSub}
-        cta1={t.cta1}
-        cta1To={`/${lang}/contact`}
-        cta2={t.cta2}
-        cta2To={`/${lang}/exhibition`}
-      />
+    <main id="main-content" className="hm">
+      <section className="hm-hero">
+        <p className="hm-eyebrow">{m.eyebrow}</p>
+        <h1 className="hm-h1">{m.h1}</h1>
+        <p className="hm-sub">{m.sub}</p>
+        <p className="hm-links">
+          <Link className="hm-link hm-link--primary" to={`/${lang}/exhibition`}>
+            {m.ctaPrimary} {arrow}
+          </Link>
+          <Link className="hm-link" to={`/${lang}/contact`}>
+            {m.ctaSecondary} {arrow}
+          </Link>
+        </p>
+      </section>
 
-      {t.platePillars && (
-        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-          <img src={t.platePillars.src} alt={t.platePillars.caption} loading="lazy"
-               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.platePillars.caption}</figcaption>
+      {m.glance && (
+        <figure className="hm-glance">
+          <img src={m.glance.src} alt={m.glance.caption} />
+          <figcaption>{m.glance.caption}</figcaption>
         </figure>
       )}
 
-      <ThreePillars pillars={pillars} />
+      {m.figures && (
+        <section className="hm-band">
+          <div className="hm-tiles">
+            {m.figures.map((f, i) => (
+              <div className="hm-tile" key={i}>
+                <p className="hm-tile__v">{f.value}</p>
+                {f.chip && <span className={`hm-chip hm-chip--${f.chip}`}>{f.chipText}</span>}
+                <p className="hm-tile__l">{f.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="hm-note">{m.figuresNote}</p>
+        </section>
+      )}
 
-      <SectionBlock
-        eyebrow={t.originEyebrow}
-        title={t.originTitle}
-        body={t.originBody}
-        gray
-      >
-        <PhysicsAbstraction />
-      </SectionBlock>
-
-      <section className="proof-strip">
-        <div className="container proof-strip__inner">
-          <div className="proof-item">
-            <span className="proof-item__icon">🎓</span>
-            <span className="proof-item__label">IIT Research Foundation</span>
-          </div>
-          <div className="proof-item">
-            <span className="proof-item__icon">🔬</span>
-            <span className="proof-item__label">Physics-First Architecture</span>
-          </div>
-          <div className="proof-item">
-            <span className="proof-item__icon">🛡</span>
-            <span className="proof-item__label">ASIL-D Design Principles</span>
-          </div>
-          <div className="proof-item">
-            <span className="proof-item__icon">💡</span>
-            <span className="proof-item__label">Purpose-Built EPU</span>
-          </div>
+      <section className="hm-row">
+        <h2 className="hm-h2">{m.exTitle}</h2>
+        <p className="hm-lead">{m.exLead}</p>
+        <div className="hm-rooms">
+          {(m.exRooms || []).map((r) => (
+            <Link key={r.key} className="hm-room" to={`/${lang}/exhibition?view=${r.key}`}>
+              {r.label}
+            </Link>
+          ))}
+          <Link className="hm-link hm-link--primary" to={`/${lang}/exhibition`}>
+            {m.exEnter} {arrow}
+          </Link>
         </div>
       </section>
 
-      {t.exhibitionTitle && (
-        <section className="section-block">
-          <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>
-            <p className="section-eyebrow">{t.exhibitionEyebrow}</p>
-            <h2 className="section-title">{t.exhibitionTitle}</h2>
-            <p className="section-block__body">{t.exhibitionBody}</p>
-            <p style={{ marginTop: '1.25rem' }}>
-              <Link to={`/${lang}/exhibition`} className="btn btn-primary">
-                {t.exhibitionCta} →
-              </Link>
-            </p>
-          </div>
-        </section>
-      )}
-
       {t.corpusDocs && (
-        <section className="section-block section-block--gray">
-          <div className="container">
-            <p className="section-eyebrow">{t.corpusEyebrow}</p>
-            <h2 className="section-title">{t.corpusTitle}</h2>
-            <p className="section-block__body">{t.corpusBody}</p>
-            <div className="safety-layers__grid">
-              {t.corpusDocs.map((doc, i) => (
-                <Link
-                  key={i}
-                  to={`/${lang}/library/assets/${doc.slug}`}
-                  className="layer-card"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <h3 className="layer-card__title">{doc.title}</h3>
-                  <p className="layer-card__body">{doc.desc}</p>
-                </Link>
-              ))}
-            </div>
-            <p className="section-block__note">{t.corpusNote}</p>
+        <section className="hm-row">
+          <h2 className="hm-h2">{t.corpusTitle}</h2>
+          <p className="hm-lead">{m.corpusLead}</p>
+          <div className="hm-docs">
+            {t.corpusDocs.map((doc, i) => (
+              <Link key={i} className="hm-doc" to={`/${lang}/library/assets/${doc.slug}`}>
+                <span className="hm-doc__t">{doc.title}</span>
+                <span className="hm-doc__d">{doc.desc}</span>
+                <span className="hm-doc__a" aria-hidden="true">{arrow}</span>
+              </Link>
+            ))}
           </div>
+          <p className="hm-more">
+            <Link className="hm-link" to={`/${lang}/library`}>
+              {m.corpusMore} {arrow}
+            </Link>
+          </p>
         </section>
       )}
 
-      <section className="fact-engine-section container">
-        <FactEngine
-          lang={lang}
-          dir={lang === 'fa' ? 'rtl' : 'ltr'}
-          context={{ tags: ['physics', 'fluids', 'general-relativity'], path: `/${lang}` }}
-          onNavigate={(path) => navigate(path)}
-        />
+      <section className="hm-close">
+        <p className="hm-close__line">{m.closeLine}</p>
+        <Link className="hm-link hm-link--primary" to={`/${lang}/contact`}>
+          {m.closeCta} {arrow}
+        </Link>
       </section>
-
-      <CTABand
-        title={t.ctaBandTitle}
-        cta1={t.ctaBandCta1}
-        cta1To={`/${lang}/contact`}
-        cta2={t.ctaBandCta2}
-        cta2To={`/${lang}/technology`}
-      />
     </main>
   );
 }

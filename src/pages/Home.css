@@ -1,0 +1,176 @@
+/* ── Minimal informative front — hm-* namespace ─────────────────────── */
+.hm {
+  --hm-ink: var(--color-text-primary, #0b2239);
+  --hm-mut: var(--color-text-secondary, #5b6b7b);
+  --hm-faint: var(--color-text-tertiary, #8a97a3);
+  --hm-line: var(--color-border, #e2e0db);
+  --hm-blue: #2a78d6;
+  --hm-aqua: #1baf7a;
+  --hm-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+.hm section,
+.hm figure.hm-glance {
+  max-width: 1060px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Hero */
+.hm-hero { padding-block: clamp(3rem, 6vh, 4.5rem) 1rem; }
+.hm-eyebrow {
+  font-family: var(--hm-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hm-mut);
+  margin: 0 0 1.1rem;
+}
+.hm-h1 {
+  font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  color: var(--hm-ink);
+  margin: 0 0 1.1rem;
+  max-width: 20ch;
+}
+.hm-sub {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--hm-mut);
+  max-width: 58ch;
+  margin: 0 0 1.9rem;
+}
+.hm-links { display: flex; gap: 2rem; flex-wrap: wrap; margin: 0; }
+.hm-link {
+  color: var(--hm-mut);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hm-line);
+  padding-bottom: 2px;
+  font-size: 0.95rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.hm-link:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
+.hm-link--primary { color: var(--hm-blue); border-color: var(--hm-blue); }
+.hm-link--primary:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
+
+/* System-at-a-glance figure */
+.hm-glance { margin-block: 2.6rem 0; }
+.hm-glance img { width: 100%; height: auto; display: block; }
+.hm-glance figcaption {
+  font-family: var(--hm-mono);
+  font-size: 0.6875rem;
+  color: var(--hm-faint);
+  text-align: center;
+  margin-top: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* Figures band — stat tiles */
+.hm-band {
+  margin-top: 3.2rem;
+  border-block: 1px solid var(--hm-line);
+  padding-block: 1.8rem 1.4rem;
+}
+.hm-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.4rem 1.2rem;
+}
+.hm-tile__v {
+  font-size: clamp(1.55rem, 2.4vw, 2rem);
+  font-weight: 600;
+  color: var(--hm-ink);
+  letter-spacing: -0.01em;
+  unicode-bidi: plaintext;
+  margin: 0 0 0.3rem;
+}
+.hm-chip {
+  display: inline-block;
+  font-family: var(--hm-mono);
+  font-size: 0.59rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.14rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.35rem;
+}
+.hm-chip--measured { color: #0c6b4a; background: rgba(27, 175, 122, 0.13); border: 1px solid var(--hm-aqua); }
+.hm-chip--proven { color: var(--hm-ink); border: 1.4px solid var(--hm-ink); }
+.hm-tile__l {
+  font-family: var(--hm-mono);
+  font-size: 0.6875rem;
+  line-height: 1.55;
+  color: var(--hm-mut);
+  margin: 0;
+}
+.hm-note {
+  font-family: var(--hm-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--hm-faint);
+  margin: 1.5rem 0 0;
+}
+
+/* Rows */
+.hm-row { margin-top: 3.6rem; }
+.hm-h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--hm-ink);
+  margin: 0 0 0.45rem;
+}
+.hm-lead { color: var(--hm-mut); line-height: 1.65; margin: 0 0 1.4rem; max-width: 62ch; }
+
+/* Exhibition rooms */
+.hm-rooms { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; align-items: center; }
+.hm-room {
+  font-family: var(--hm-mono);
+  font-size: 0.78rem;
+  color: var(--hm-ink);
+  text-decoration: none;
+  border: 1px solid var(--hm-line);
+  border-radius: 999px;
+  padding: 0.42rem 0.95rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.hm-room:hover { border-color: var(--hm-blue); color: var(--hm-blue); }
+.hm-rooms .hm-link--primary { margin-inline-start: 0.6rem; }
+
+/* Corpus rows */
+.hm-docs { border-top: 1px solid var(--hm-line); }
+.hm-doc {
+  display: grid;
+  grid-template-columns: minmax(180px, 34%) 1fr auto;
+  gap: 1.2rem;
+  align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--hm-line);
+  text-decoration: none;
+}
+.hm-doc__t { color: var(--hm-ink); font-weight: 500; line-height: 1.45; }
+.hm-doc__d { color: var(--hm-mut); font-size: 0.9rem; line-height: 1.55; }
+.hm-doc__a { color: var(--hm-faint); transition: color 0.15s ease; }
+.hm-doc:hover .hm-doc__t, .hm-doc:hover .hm-doc__a { color: var(--hm-blue); }
+.hm-more { margin-top: 1.2rem; }
+
+/* Close */
+.hm-close { padding-block: 4.2rem 5.5rem; text-align: center; }
+.hm-close__line {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--hm-ink);
+  font-weight: 500;
+  margin: 0 0 1.4rem;
+}
+
+/* RTL refinements — Persian joins poorly under tracking */
+[dir='rtl'] .hm-eyebrow,
+[dir='rtl'] .hm-note,
+[dir='rtl'] .hm-chip { letter-spacing: 0; }
+
+@media (max-width: 640px) {
+  .hm-doc { grid-template-columns: 1fr auto; }
+  .hm-doc__d { grid-column: 1 / -1; }
+}

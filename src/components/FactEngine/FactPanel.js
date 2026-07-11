@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getRandomFact } from '../../data/facts';
 import FactCard from './FactCard';
 import './FactPanel.css';
@@ -12,6 +13,7 @@ export default function FactPanel({ tags = [], onOpenSaved, className = '' }) {
   const [currentFact, setCurrentFact] = useState(null);
   const [savedFacts, setSavedFacts] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
+  const { pathname } = useLocation();
 
   // Load saved facts from localStorage on mount
   useEffect(() => {
@@ -46,6 +48,9 @@ export default function FactPanel({ tags = [], onOpenSaved, className = '' }) {
   const handleDismiss = () => {
     setIsVisible(false);
   };
+
+  // The minimal front page carries no ambient engagement strip
+  if (/^\/(en|fa)\/?$/.test(pathname)) return null;
 
   if (!isVisible || !currentFact) return null;
 

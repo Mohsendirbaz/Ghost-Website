@@ -83,6 +83,36 @@ export const copy = {
       exhibitionBody: "Four rooms of the program's own research software, executing live in your browser: an adaptive signal multiplexer solving optimization problems on 100-millisecond cycles, the eight-thread bounded-autonomy stack narrowing its command box as risk rises, a correctable Ground Truth you can challenge, and the F26 event fabric. Nothing is a recording; nothing is vehicle data.",
       exhibitionCta: "Enter the Exhibition",
       platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "Fig. H-01 — Formulate · Enforce · Remember" },
+      min: {
+        eyebrow: "Physics-first autonomy · provably bounded L4",
+        h1: "Autonomy that can refuse.",
+        sub: "A driving stack built from physics and proof: five refusal stages in front of one actuation gate, two invariants proven on paper, one latency measured in hardware.",
+        ctaPrimary: "Enter the exhibition",
+        ctaSecondary: "Contact",
+        glance: { src: "/docs/svg/plates/P0_system_at_a_glance.svg", caption: "Fig. F-00 — The system at a glance: evidence in, authority out, and the corpus's only measured number where it belongs." },
+        figures: [
+          { value: "~32 ns", label: "analog-veto latency — hardware witness", chip: "measured", chipText: "measured" },
+          { value: "2", label: "control invariants proven on paper — pose-and-select · monotone funnel", chip: "proven", chipText: "proven" },
+          { value: "5", label: "refusal stages S0–S4 ahead of a single actuation gate" },
+          { value: "6", label: "refusal-criteria families G1–G6" },
+          { value: "109", label: "documented assets in the technical library" },
+          { value: "8 · 43", label: "knowledge-base parts · chapters" }
+        ],
+        figuresNote: "IIT research foundation · physics-first architecture · ASIL-D design principles · purpose-built EPU",
+        exTitle: "The Exhibition",
+        exLead: "Four live rooms, one running simulation — the stack refusing in real time.",
+        exRooms: [
+          { key: "multiplexer", label: "Signal Multiplexer" },
+          { key: "stack", label: "Bounded Stack" },
+          { key: "constitution", label: "Constitution of Truth" },
+          { key: "eventfabric", label: "Event Fabric" }
+        ],
+        exEnter: "Enter",
+        corpusLead: "Four documents carry the program's claims; the library holds the remaining 105.",
+        corpusMore: "Browse the library",
+        closeLine: "If bounded autonomy matters to your program, we should talk.",
+        closeCta: "Start the conversation"
+      },
     },
     technology: {
       heroH1: "Computing That Respects Physics",
@@ -584,6 +614,36 @@ export const copy = {
       exhibitionBody: "چهار تالار از نرم‌افزار پژوهشی برنامه، زنده در مرورگر شما اجرا می‌شود: مالتی‌پلکسر سیگنال تطبیقی که مسائل بهینه‌سازی را در چرخه‌های ۱۰۰ میلی‌ثانیه‌ای حل می‌کند، پشتهٔ هشت‌رشته‌ایِ خودمختاری کران‌دار که با افزایش ریسک جعبهٔ فرمانش را تنگ می‌کند، حقیقتِ بنیادینِ تصحیح‌پذیری که می‌توانید به چالشش بکشید، و بافت رویداد F26. هیچ‌چیز ضبط‌شده نیست؛ هیچ‌چیز دادهٔ خودروی واقعی نیست.",
       exhibitionCta: "ورود به نمایشگاه",
       platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "شکل H-01 — صورت‌بندی · اجرا · به‌خاطرسپاری" },
+      min: {
+        eyebrow: "خودرانی فیزیک‌بنیاد · L4 با کران اثبات‌پذیر",
+        h1: "خودرانی‌ای که می‌تواند امتناع کند.",
+        sub: "پشته‌ای از فیزیک و برهان: پنج مرحلهٔ امتناع پیش از یک دروازهٔ کنش، دو ناوردای اثبات‌شده روی کاغذ، و یک تأخیر اندازه‌گیری‌شده در سخت‌افزار.",
+        ctaPrimary: "ورود به نمایشگاه",
+        ctaSecondary: "تماس",
+        glance: { src: "/docs/svg/plates/P0_system_at_a_glance.svg", caption: "شکل F-00 — سامانه در یک نگاه: شواهد به درون، اختیار به بیرون؛ تنها عدد اندازه‌گیری‌شدهٔ پیکره در جای خودش." },
+        figures: [
+          { value: "~۳۲ ns", label: "تأخیر وتوی آنالوگ — گواه سخت‌افزاری", chip: "measured", chipText: "اندازه‌گیری‌شده" },
+          { value: "۲", label: "ناوردای کنترلی اثبات‌شده روی کاغذ — صورت‌بندی‌وگزینش · قیف یکنوا", chip: "proven", chipText: "اثبات‌شده" },
+          { value: "۵", label: "مرحلهٔ امتناع S0–S4 پیش از یک دروازهٔ کنش" },
+          { value: "۶", label: "خانوادهٔ معیارهای امتناع G1–G6" },
+          { value: "۱۰۹", label: "سند مستند در کتابخانهٔ فنی" },
+          { value: "۸ · ۴۳", label: "بخش · فصل در پایگاه دانش" }
+        ],
+        figuresNote: "بنیان پژوهشی IIT · معماری فیزیک‌بنیاد · اصول طراحی ASIL-D · پردازندهٔ اختصاصی EPU",
+        exTitle: "نمایشگاه",
+        exLead: "چهار تالار زنده، یک شبیه‌سازی در حال اجرا — پشته در زمان واقعی امتناع می‌کند.",
+        exRooms: [
+          { key: "multiplexer", label: "مالتی‌پلکسر سیگنال" },
+          { key: "stack", label: "پشتهٔ کران‌دار" },
+          { key: "constitution", label: "قانون اساسی حقیقت" },
+          { key: "eventfabric", label: "بافت رویداد" }
+        ],
+        exEnter: "ورود",
+        corpusLead: "چهار سند بار ادعاهای برنامه را می‌کشند؛ ۱۰۵ سند دیگر در کتابخانه است.",
+        corpusMore: "مرور کتابخانه",
+        closeLine: "اگر خودرانی کران‌دار برای برنامهٔ شما اهمیت دارد، گفت‌وگو کنیم.",
+        closeCta: "آغاز گفت‌وگو"
+      },
     },
     technology: {
       heroH1: "محاسباتی که به فیزیک احترام می‌گذارد",
