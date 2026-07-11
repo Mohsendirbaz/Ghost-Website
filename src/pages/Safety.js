@@ -111,6 +111,8 @@ export default function Safety() {
         body={lang === 'en' ? 'If you are building systems where that distinction matters, we would like to talk.' : 'اگر شما در حال ساخت سیستم‌هایی هستید که این تمایز در آنها اهمیت دارد، خوشحال می‌شویم گفتگو کنیم.'}
         cta1={lang === 'en' ? 'Safety Inquiry' : 'پرس‌وجوی ایمنی'}
         cta1To={`/${lang}/contact`}
+        cta2={lang === 'en' ? 'Watch the chain refuse — live' : 'تماشای زندهٔ زنجیرهٔ امتناع'}
+        cta2To={`/${lang}/exhibition?view=stack`}
       />
     </main>
   );

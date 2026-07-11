@@ -12,13 +12,33 @@ import DemultiplexerVisualization from './components/DemultiplexerVisualization'
 import TimeSeriesChart from './components/TimeSeriesChart';
 import ScenarioControl from './components/ScenarioControl';
 import AdaptationMetrics from './components/AdaptationMetrics';
+import ConceptExplainer from './components/ConceptExplainer';
+import AgentDeploymentViz from './components/AgentDeploymentViz';
+import StackView from './components/StackView';
+import ConstitutionView from './components/ConstitutionView';
+import EventFabricView from './components/EventFabricView';
 import './App.css';
+
+// Website-resident exhibition variant: the internal coverage view and its
+// dataset are physically absent from this copy of the application.
+const ALLOWED_VIEWS = ['multiplexer', 'stack', 'constitution', 'eventfabric'];
+
+function initialView() {
+  try {
+    const requested = new URLSearchParams(window.location.search).get('view');
+    if (requested && ALLOWED_VIEWS.includes(requested)) return requested;
+  } catch {
+    /* no-op: default view */
+  }
+  return 'multiplexer';
+}
 
 function App() {
   const [engine] = useState(() => new MultiplexerEngine());
   const [state, setState] = useState(engine.getState());
   const [isRunning, setIsRunning] = useState(false);
   const [showCode, setShowCode] = useState(false);
+  const [activeView, setActiveView] = useState(initialView);
   const [currentScenario, setCurrentScenario] = useState({ mode: 'steady', intensity: 1.0 });
   const optimizationInterval = useRef(null);
   const processingInterval = useRef(null);
@@ -58,6 +78,17 @@ function App() {
       stopSimulation();
     };
   }, []);
+
+  // V-3 (multiplexer-lifecycle-refactor): the multiplexer simulation is
+  // view-scoped. The original engine's four intervals were App-scoped, so
+  // switching to another view left them ticking in the background. Stop the
+  // simulation whenever we navigate away from the multiplexer view.
+  useEffect(() => {
+    if (activeView !== 'multiplexer' && isRunning) {
+      stopSimulation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeView]);
 
   const updateState = () => {
     setState(engine.getState());
@@ -146,18 +177,72 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Adaptive Signal Multiplexer with Dynamic Problem Formulation</h1>
+        <h1>
+          {activeView === 'stack'
+            ? 'Bounded Autonomy on a Memristive Substrate'
+            : activeView === 'constitution'
+            ? 'The Constitution of Truth — Correctable Ground Truth'
+            : activeView === 'eventfabric'
+            ? 'F26 Autonomous-Driving Event Fabric'
+            : 'Adaptive Signal Multiplexer with Dynamic Problem Formulation'}
+        </h1>
         <p className="subtitle">
-          Real-time visualization of intelligent coordination through continuous optimization
+          {activeView === 'stack'
+            ? 'The full eight-thread safety stack: antitone monotonicity, metabolic memory, and the analog veto'
+            : activeView === 'constitution'
+            ? 'Separation of epistemic powers · correction supremacy · anti-silent-drift · temporal rollback'
+            : activeView === 'eventfabric'
+            ? 'Single timeline · twelve canvases · synchronized interaction traces · source-standing discipline'
+            : 'Real-time visualization of intelligent coordination through continuous optimization'}
         </p>
-        <div className="header-actions">
-          <button onClick={() => setShowCode(!showCode)} className="btn-secondary">
-            {showCode ? 'Hide' : 'Show'} Java Implementation
+        <nav className="view-switcher">
+          <button
+            className={`view-tab ${activeView === 'multiplexer' ? 'active' : ''}`}
+            onClick={() => setActiveView('multiplexer')}
+          >
+            Signal Multiplexer
           </button>
-        </div>
+          <button
+            className={`view-tab ${activeView === 'stack' ? 'active' : ''}`}
+            onClick={() => setActiveView('stack')}
+          >
+            Bounded Autonomy Stack
+          </button>
+          <button
+            className={`view-tab ${activeView === 'constitution' ? 'active' : ''}`}
+            onClick={() => setActiveView('constitution')}
+          >
+            Constitution of Truth
+          </button>
+          <button
+            className={`view-tab ${activeView === 'eventfabric' ? 'active' : ''}`}
+            onClick={() => setActiveView('eventfabric')}
+          >
+            Event Fabric (F26)
+          </button>
+        </nav>
+        {activeView === 'multiplexer' && (
+          <div className="header-actions">
+            <button onClick={() => setShowCode(!showCode)} className="btn-secondary">
+              {showCode ? 'Hide' : 'Show'} Java Implementation
+            </button>
+          </div>
+        )}
       </header>
 
+      {activeView === 'stack' && <StackView />}
+
+      {activeView === 'constitution' && <ConstitutionView />}
+
+      {activeView === 'eventfabric' && <EventFabricView />}
+
+      {activeView === 'multiplexer' && (
+      <>
       {showCode && <CodePanel />}
+
+      <section className="section full-width-section">
+        <ConceptExplainer currentStep={state.currentStep} />
+      </section>
 
       <div className="main-content">
         <div className="left-panel">
@@ -185,6 +270,14 @@ function App() {
             <TimeSeriesChart
               history={state.history}
               channels={state.channels}
+            />
+          </section>
+
+          <section className="section">
+            <h2>Dual-Purpose Agent Deployment</h2>
+            <AgentDeploymentViz
+              channels={state.channels}
+              state={state}
             />
           </section>
         </div>
@@ -250,6 +343,38 @@ function App() {
           structure detection, and adaptive solver selection.
         </p>
       </footer>
+      </>
+      )}
+
+      {activeView === 'stack' && (
+        <footer className="app-footer">
+          <p>
+            Architecture Philosophy: bound what an error is allowed to <em>do</em>, not whether it occurs.
+            Every quantitative figure is <strong>projected</strong> unless marked <strong>measured</strong>
+            — only the ~32 ns analog-veto witness is measured.
+          </p>
+        </footer>
+      )}
+
+      {activeView === 'constitution' && (
+        <footer className="app-footer">
+          <p>
+            Constitution of Truth (from <em>Temporal State Management</em>, Part VI): a claim that cannot be
+            challenged is not trusted — it is merely unexamined. The warrant travels with the decision.
+          </p>
+        </footer>
+      )}
+
+      {activeView === 'eventfabric' && (
+        <footer className="app-footer">
+          <p>
+            F26 Autonomous-Driving Event-Fabric Integration Plan: the base unit is a <em>synchronized
+            interaction trace</em>, not a pixel. Safety-bearing paths may only <strong>contract</strong>
+            authority; <strong>projected / notional / open</strong> claims may not expand it — and the
+            "144 unique latencies" claim is kept honestly <strong>unconfirmed</strong>.
+          </p>
+        </footer>
+      )}
     </div>
   );
 }

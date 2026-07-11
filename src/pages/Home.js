@@ -28,7 +28,7 @@ export default function Home() {
         cta1={t.cta1}
         cta1To={`/${lang}/contact`}
         cta2={t.cta2}
-        cta2To={`/${lang}/technology`}
+        cta2To={`/${lang}/exhibition`}
       />
 
       <ThreePillars pillars={pillars} />
@@ -62,6 +62,21 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {t.exhibitionTitle && (
+        <section className="section-block">
+          <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>
+            <p className="section-eyebrow">{t.exhibitionEyebrow}</p>
+            <h2 className="section-title">{t.exhibitionTitle}</h2>
+            <p className="section-block__body">{t.exhibitionBody}</p>
+            <p style={{ marginTop: '1.25rem' }}>
+              <Link to={`/${lang}/exhibition`} className="btn btn-primary">
+                {t.exhibitionCta} →
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
 
       {t.corpusDocs && (
         <section className="section-block section-block--gray">

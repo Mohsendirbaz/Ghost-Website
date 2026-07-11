@@ -94,6 +94,27 @@ export default function LibraryAssets() {
                 <div className="asset-priority">P{asset.priority}</div>
             </div>
 
+            {asset.cover && (
+                <div
+                    className="asset-cover"
+                    style={{
+                        margin: '0.5rem 0 0.75rem',
+                        borderRadius: '6px',
+                        overflow: 'hidden',
+                        border: '1px solid rgba(128,128,128,0.25)',
+                        background: '#fff',
+                        aspectRatio: '85 / 110',
+                    }}
+                >
+                    <img
+                        src={asset.cover}
+                        alt=""
+                        loading="lazy"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+                    />
+                </div>
+            )}
+
             <h4 className="asset-title">{asset.title[lang]}</h4>
             <p className="asset-description">{asset.description[lang]}</p>
 

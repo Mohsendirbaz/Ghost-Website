@@ -33,7 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "organize-library": "node scripts/organizeLibrary.js"
+    "organize-library": "node scripts/organizeLibrary.js",
+    "build:exhibition": "cd src/signal-multiplexer-viz && npm ci && npx vite build && rm -rf ../../public/exhibition && cp -r dist ../../public/exhibition"
   },
   "eslintConfig": {
     "extends": [

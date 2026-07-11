@@ -106,6 +106,13 @@ const Icons = {
       <path d="M3 18c0-3.5 3-6 7-6s7 2.5 7 6" />
     </svg>
   ),
+  exhibition: (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="3.5" width="16" height="11" rx="1.5" />
+      <path d="M8.2 7l4.2 2.5-4.2 2.5V7z" fill="currentColor" stroke="none" />
+      <path d="M7 18h6" />
+    </svg>
+  ),
   multiAgent: (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="5" cy="5" r="2.2" />
@@ -278,6 +285,7 @@ export default function Header() {
       id: 'resources',
       label: isRtl ? 'منابع' : 'Resources',
       links: [
+        { label: t.exhibition,      to: `/${lang}/exhibition`,     iconKey: 'exhibition',      desc: isRtl ? 'نرم‌افزار پژوهشی، زنده در مرورگر' : 'The research software, running live' },
         { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
         { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
         { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
