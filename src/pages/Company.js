@@ -25,6 +25,16 @@ export default function Company() {
         subhead={t.heroSub}
       />
 
+      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+        <img src="/docs/svg/plates/P6_pillars_triptych.svg" alt="" loading="lazy"
+             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+          {lang === 'en'
+          ? 'Fig. C-00 — The three commitments the company is organized around: formulate, enforce, remember.'
+          : 'شکل C-00 — سه تعهدی که شرکت حول آنها سازمان یافته است: صورت‌بندی، اعمال، به‌خاطرسپاری.'}
+        </figcaption>
+      </figure>
+
       <SectionBlock
         eyebrow={t.storyEyebrow}
         title={t.storyTitle}

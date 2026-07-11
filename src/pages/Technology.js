@@ -25,6 +25,16 @@ export default function Technology() {
         subhead={t.heroSub}
       />
 
+      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+        <img src="/docs/svg/Epistemic_Gearbox_Stack.svg" alt="" loading="lazy"
+             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+          {lang === 'en'
+          ? 'Fig. T-01 — The Epistemic Gearbox blueprint as published: module identities are deliberately withheld; the steering logic and the safety boundary are not.'
+          : 'شکل T-01 — نقشهٔ گیربکس معرفتی به همان صورت منتشرشده: هویت ماژول‌ها عمداً پوشیده است؛ منطق فرمان و مرز ایمنی نه.'}
+        </figcaption>
+      </figure>
+
       <SectionBlock
         eyebrow={t.challengeEyebrow}
         title={t.challengeTitle}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 400" font-family="'Space Grotesk','Inter',system-ui,sans-serif">
+<text x="40" y="34" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="1.5">FOUR LAYERS BETWEEN INTENT AND ACTUATION</text>
+<text x="1080" y="34" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b7b" text-anchor="end" font-weight="normal" letter-spacing="1.5">S-04</text>
+<line x1="40" y1="46" x2="1080" y2="46" stroke="#c9d2da" stroke-width="1"/>
+<rect x="180" y="86" width="800" height="56" rx="6" fill="none" stroke="#0b2239" stroke-width="1.8"/>
+<text x="198" y="110" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="12" fill="#2a78d6" text-anchor="start" font-weight="bold" letter-spacing="0">L1</text>
+<text x="232" y="110" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="13" fill="#0b2239" text-anchor="start" font-weight="600" letter-spacing="0.5">PHYSICS ENFORCEMENT</text>
+<text x="232" y="128" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">hard physical constraints at the actuation boundary</text>
+<rect x="194" y="154" width="772" height="56" rx="6" fill="none" stroke="#0b2239" stroke-width="1.6"/>
+<text x="212" y="178" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="12" fill="#2a78d6" text-anchor="start" font-weight="bold" letter-spacing="0">L2</text>
+<text x="246" y="178" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="13" fill="#0b2239" text-anchor="start" font-weight="600" letter-spacing="0.5">VALIDATION MECHANISMS</text>
+<text x="246" y="196" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">checks that run before any commitment</text>
+<rect x="208" y="222" width="744" height="56" rx="6" fill="none" stroke="#0b2239" stroke-width="1.4"/>
+<text x="226" y="246" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="12" fill="#2a78d6" text-anchor="start" font-weight="bold" letter-spacing="0">L3</text>
+<text x="260" y="246" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="13" fill="#0b2239" text-anchor="start" font-weight="600" letter-spacing="0.5">FAULT TOLERANCE</text>
+<text x="260" y="264" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">defined behavior when parts fail</text>
+<rect x="222" y="290" width="716" height="56" rx="6" fill="none" stroke="#0b2239" stroke-width="1.2"/>
+<text x="240" y="314" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="12" fill="#2a78d6" text-anchor="start" font-weight="bold" letter-spacing="0">L4</text>
+<text x="274" y="314" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="13" fill="#0b2239" text-anchor="start" font-weight="600" letter-spacing="0.5">MONITORING &amp; LOGGING</text>
+<text x="274" y="332" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">the evidence trail every decision leaves</text>
+<line x1="1016" y1="340" x2="1016" y2="99" stroke="#5b6b7b" stroke-width="1.1"/>
+<path d="M 1012 99 L 1016 92 L 1020 99 Z" fill="#5b6b7b"/>
+<text x="1028" y="150" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">closer to</text>
+<text x="1028" y="164" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.3" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="0">the vehicle</text>
+<text x="40" y="380" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.5" fill="#8a97a3" text-anchor="start" font-weight="normal" letter-spacing="0">layer titles as published on this page — the ~32 ns analog veto lives at the L1 boundary</text>
+</svg>

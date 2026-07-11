@@ -278,8 +278,8 @@ export default function KnowledgeBase() {
                     </h1>
                     <p className="kb-hero__sub">
                         {t.heroSub || (isRtl
-                                ? '۸ بخش · ۴۷ فصل · معماری PICAPD ISA، کندوی ملکه و مبانی فیزیک‌الهام‌گرفته'
-                                : '8 parts · 47 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations'
+                                ? '۸ بخش · ۴۳ فصل · معماری PICAPD ISA، کندوی ملکه و مبانی فیزیک‌الهام‌گرفته'
+                                : '8 parts · 43 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations'
                         )}
                     </p>
 
@@ -317,6 +317,16 @@ export default function KnowledgeBase() {
                     </div>
                 </div>
             </div>
+
+            <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+              <img src="/docs/svg/plates/P9_kb_map.svg" alt="" loading="lazy"
+                   style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+              <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+                {lang === 'en'
+                ? 'Fig. K-01 — The knowledge base to scale: 8 parts, 43 chapters.'
+                : 'شکل K-01 — پایگاه دانش در مقیاس: ۸ بخش، ۴۳ فصل.'}
+              </figcaption>
+            </figure>
 
             {/* ── Body ── */}
             <div className="kb-body">

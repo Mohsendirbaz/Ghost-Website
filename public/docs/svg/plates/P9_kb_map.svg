@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 430" font-family="'Space Grotesk','Inter',system-ui,sans-serif">
+<text x="40" y="34" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b7b" text-anchor="start" font-weight="normal" letter-spacing="1.5">KNOWLEDGE BASE — 8 PARTS · 43 CHAPTERS, TO SCALE</text>
+<text x="1080" y="34" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b7b" text-anchor="end" font-weight="normal" letter-spacing="1.5">K-01</text>
+<line x1="40" y1="46" x2="1080" y2="46" stroke="#c9d2da" stroke-width="1"/>
+<text x="316" y="102" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part I — Executive &amp; Strategic</text>
+<path d="M 330 86 L 886.0 86 Q 890.0 86 890.0 90 L 890.0 106 Q 890.0 110 886.0 110 L 330 110 Z" fill="#2a78d6"/>
+<text x="900.0" y="102" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">7 ch</text>
+<text x="316" y="140" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part II — Philosophy, Design &amp; Conception</text>
+<path d="M 330 124 L 406.0 124 Q 410.0 124 410.0 128 L 410.0 144 Q 410.0 148 406.0 148 L 330 148 Z" fill="#2a78d6"/>
+<text x="420.0" y="140" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">1 ch</text>
+<text x="316" y="178" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part III — Strategic Partnerships</text>
+<path d="M 330 162 L 486.0 162 Q 490.0 162 490.0 166 L 490.0 182 Q 490.0 186 486.0 186 L 330 186 Z" fill="#2a78d6"/>
+<text x="500.0" y="178" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">2 ch</text>
+<text x="316" y="216" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part IV — Technical Foundation</text>
+<path d="M 330 200 L 966.0 200 Q 970.0 200 970.0 204 L 970.0 220 Q 970.0 224 966.0 224 L 330 224 Z" fill="#2a78d6"/>
+<text x="980.0" y="216" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">8 ch</text>
+<text x="316" y="254" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part V — Architecture</text>
+<path d="M 330 238 L 886.0 238 Q 890.0 238 890.0 242 L 890.0 258 Q 890.0 262 886.0 262 L 330 262 Z" fill="#2a78d6"/>
+<text x="900.0" y="254" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">7 ch</text>
+<text x="316" y="292" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part VI — Financial &amp; Business</text>
+<path d="M 330 276 L 726.0 276 Q 730.0 276 730.0 280 L 730.0 296 Q 730.0 300 726.0 300 L 330 300 Z" fill="#2a78d6"/>
+<text x="740.0" y="292" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">5 ch</text>
+<text x="316" y="330" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part VII — Validation &amp; Results</text>
+<path d="M 330 314 L 886.0 314 Q 890.0 314 890.0 318 L 890.0 334 Q 890.0 338 886.0 338 L 330 338 Z" fill="#2a78d6"/>
+<text x="900.0" y="330" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">7 ch</text>
+<text x="316" y="368" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-size="11.5" fill="#0b2239" text-anchor="end" font-weight="normal" letter-spacing="0">Part VIII — Appendices &amp; References</text>
+<path d="M 330 352 L 806.0 352 Q 810.0 352 810.0 356 L 810.0 372 Q 810.0 376 806.0 376 L 330 376 Z" fill="#2a78d6"/>
+<text x="820.0" y="368" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="start" font-weight="normal" letter-spacing="0">6 ch</text>
+<line x1="330" y1="80" x2="330" y2="384" stroke="#c9d2da" stroke-width="1"/>
+<text x="40" y="410" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="9.5" fill="#8a97a3" text-anchor="start" font-weight="normal" letter-spacing="0">chapter counts from the published knowledge base — the de-specified public edition</text>
+<text x="1080" y="410" font-family="ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="10.5" fill="#0b2239" text-anchor="end" font-weight="bold" letter-spacing="0">8 parts · 43 chapters</text>
+</svg>

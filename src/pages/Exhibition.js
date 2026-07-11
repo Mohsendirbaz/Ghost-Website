@@ -17,8 +17,9 @@ export default function Exhibition() {
 
   const requested = searchParams.get('view');
   const [room, setRoom] = useState(
-    VALID_VIEWS.includes(requested) ? requested : null
+    VALID_VIEWS.includes(requested) ? requested : 'multiplexer'
   );
+  const userNavigated = useRef(Boolean(requested));
 
   // Keep URL in sync and scroll the viewer into place when a room opens
   useEffect(() => {
@@ -26,7 +27,10 @@ export default function Exhibition() {
       if (searchParams.get('view') !== room) {
         setSearchParams({ view: room }, { replace: true });
       }
-      viewerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (userNavigated.current) {
+        viewerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      userNavigated.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);

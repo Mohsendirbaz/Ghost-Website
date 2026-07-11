@@ -494,7 +494,7 @@ export const copy = {
     },
     knowledgeBase: {
       heroTitle: "Ghost Autonomy Documentation",
-      heroSub: "8 parts · 47 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations",
+      heroSub: "8 parts · 43 chapters · PICAPD ISA, Queen Bee architecture, physics-inspired foundations",
     },
     artifacts: {
       heroTitle: "Interactive Artifacts",
@@ -1029,7 +1029,7 @@ export const copy = {
     },
     knowledgeBase: {
       heroTitle: "مستندات Ghost Autonomy",
-      heroSub: "۸ بخش · ۴۷ فصل · معماری PICAPD ISA، کندوی ملکه و مبانی فیزیک‌الهام‌گرفته",
+      heroSub: "۸ بخش · ۴۳ فصل · معماری PICAPD ISA، کندوی ملکه و مبانی فیزیک‌الهام‌گرفته",
     },
     artifacts: {
       heroTitle: "دارایی‌های تعاملی",

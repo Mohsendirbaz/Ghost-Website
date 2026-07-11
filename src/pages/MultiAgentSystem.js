@@ -114,6 +114,18 @@ export default function MultiAgentSystem() {
                 </div>
             </section>
 
+            <figure style={{ margin: '2rem auto 0', maxWidth: '1160px', padding: '0 1rem' }}>
+              <div style={{ border: '1px solid rgba(128,128,128,0.3)', borderRadius: '10px', overflow: 'hidden', background: '#0d1117' }}>
+                <iframe src="/docs/html/Multi_Agent_Research_Laboratory.html" title="Multi-Agent Research Laboratory" loading="lazy"
+                        style={{ width: '100%', height: '72vh', border: 0, display: 'block' }} />
+              </div>
+              <figcaption style={{ marginTop: '0.6rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--color-text-secondary, #5b6b7b)' }}>
+                {lang === 'en'
+                ? 'Fig. L-01 — The Multi-Agent Research Laboratory, live — the coordination fabric this catalogue documents.'
+                : 'شکل L-01 — آزمایشگاه پژوهشی چند-عامله، به‌صورت زنده — بافت هماهنگی‌ای که این فهرست مستند می‌کند.'}
+              </figcaption>
+            </figure>
+
             {/* Architecture Layers Section */}
             <section className="mas-architecture-section container">
                 <h2 className="section-title">

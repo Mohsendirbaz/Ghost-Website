@@ -21,6 +21,16 @@ export default function Perspective() {
         subhead={t.heroSub}
       />
 
+      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+        <img src="/docs/svg/plates/P12_narrowing_funnel.svg" alt="" loading="lazy"
+             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+          {lang === 'en'
+          ? 'Fig. V-01 — The essays in one figure: possibility narrows through six gates; authority only contracts.'
+          : 'شکل V-01 — جان کلام جستارها در یک شکل: فضای امکان از شش دروازه می‌گذرد و تنگ می‌شود؛ اختیار تنها منقبض می‌شود.'}
+        </figcaption>
+      </figure>
+
       <article className="essay">
         <div className="container essay__inner">
           <p className="essay__subtitle">{t.subtitle}</p>

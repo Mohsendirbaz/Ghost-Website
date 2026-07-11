@@ -74,6 +74,16 @@ const Bio = () => {
         { label: lang === 'en' ? 'Founder' : 'بنیان‌گذار' },
       ]} />
 
+      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+        <img src="/docs/svg/plates/P11_bio_arc.svg" alt="" loading="lazy"
+             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+          {lang === 'en'
+          ? 'Fig. B-01 — One line of work, four stations — each backed by a published document.'
+          : 'شکل B-01 — یک مسیر کاری، چهار ایستگاه — هر یک متکی به سندی منتشرشده.'}
+        </figcaption>
+      </figure>
+
       {/* Compact Hero */}
       <section className="relative pt-24 pb-12 bg-gradient-to-b from-background to-background/50">
         <div className="container-ghost">

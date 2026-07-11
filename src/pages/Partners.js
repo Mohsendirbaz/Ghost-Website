@@ -22,6 +22,16 @@ export default function Partners() {
         subhead={t.heroSub}
       />
 
+      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+        <img src="/docs/svg/plates/P13_partnership_loop.svg" alt="" loading="lazy"
+             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
+          {lang === 'en'
+          ? 'Fig. C-01 — A collaboration model, drawn dashed on purpose: proposed, not claimed.'
+          : 'شکل C-01 — الگوی همکاری، عمداً خط‌چین: پیشنهادی، نه ادعایی.'}
+        </figcaption>
+      </figure>
+
       <SectionBlock
         eyebrow={t.philEyebrow}
         title={t.philTitle}
