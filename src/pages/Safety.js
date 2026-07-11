@@ -24,6 +24,14 @@ export default function Safety() {
         subhead={t.heroSub}
       />
 
+      {t.plateRefusal && (
+        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+          <img src={t.plateRefusal.src} alt={t.plateRefusal.caption} loading="lazy"
+               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateRefusal.caption}</figcaption>
+        </figure>
+      )}
+
       <SectionBlock
         eyebrow={t.philEyebrow}
         title={t.philTitle}
@@ -98,6 +106,22 @@ export default function Safety() {
         gray
         alt
       />
+
+      {t.plateCriteria && (
+        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+          <img src={t.plateCriteria.src} alt={t.plateCriteria.caption} loading="lazy"
+               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateCriteria.caption}</figcaption>
+        </figure>
+      )}
+
+      {t.plateMemory && (
+        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+          <img src={t.plateMemory.src} alt={t.plateMemory.caption} loading="lazy"
+               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateMemory.caption}</figcaption>
+        </figure>
+      )}
 
       <SectionBlock
         title={t.pathTitle}

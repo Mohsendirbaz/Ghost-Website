@@ -82,6 +82,7 @@ export const copy = {
       exhibitionTitle: "The Research, Running",
       exhibitionBody: "Four rooms of the program's own research software, executing live in your browser: an adaptive signal multiplexer solving optimization problems on 100-millisecond cycles, the eight-thread bounded-autonomy stack narrowing its command box as risk rises, a correctable Ground Truth you can challenge, and the F26 event fabric. Nothing is a recording; nothing is vehicle data.",
       exhibitionCta: "Enter the Exhibition",
+      platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "Fig. H-01 — Formulate · Enforce · Remember" },
     },
     technology: {
       heroH1: "Computing That Respects Physics",
@@ -142,6 +143,7 @@ export const copy = {
         "Permanently in Transient (July 2026) — operationalizing long-memory filter dynamics for the sensory suite, with numerical demonstrations.",
       ],
       papersNote: "An external prior-art assessment of the program's discovery methods is published in full on the Research Methods page — including where it judges some of our own framings decorative.",
+      plateManuscript: { src: "/docs/svg/plates/P4_science_pipeline.svg", caption: "Fig. C-01 — The five-stage pipeline with its standings: proven, measured-in-envelope, and explicitly not claimed." },
       ctaBtn: "Research Collaboration Inquiry",
     },
     safety: {
@@ -204,6 +206,9 @@ export const copy = {
         "G6 — Conjunctive release: actuation is authorized only if every discharge obligation is simultaneously met; a missing guarantee is itself a fault.",
       ],
       refusalStandingsNote: "Throughout the published corpus, claims carry an explicit standing — established, proposed, or notional — and figures are labeled measured or projected. The stage table and criteria above are specifications the build is tested against, not certifications.",
+      plateRefusal: { src: "/docs/svg/plates/P1_refusal_chain.svg", caption: "Fig. S-01 — The refusal chain: five stages, one narrowing set, and the only measured latency in the corpus." },
+      plateCriteria: { src: "/docs/svg/plates/P2_criteria_ring.svg", caption: "Fig. S-02 — Six acceptance criteria; actuation is authorized only when all six hold simultaneously." },
+      plateMemory: { src: "/docs/svg/plates/P5_metabolic_memory.svg", caption: "Fig. M-01 — Residence-time partitions: the burden of proof grows with how long a datum can act." },
       pathTitle: "Development Status and Deployment Path",
       pathBody: [
         "Ghost's technology is currently in active development and validation. This phase is not a limitation — it is where safety is won or lost. Every architectural decision made now determines whether a future certification path is credible or retrofitted.",
@@ -366,6 +371,7 @@ export const copy = {
       figuresTitle: "Blueprint Maps",
       figures: [
         { src: "/docs/svg/Master_Blueprint_Map.svg", caption: "Master Blueprint of Blueprints — the nine-blueprint register and its composition" },
+        { src: "/docs/svg/plates/P3_two_invariants.svg", caption: "Fig. A-01 — The two invariants: pose-and-select, and the monotone consequence law" },
         { src: "/docs/svg/Epistemic_Gearbox_Stack.svg", caption: "Epistemic Gearbox — stack schematic from sensing to actuation" },
         { src: "/docs/svg/Metabolic_Memory_Reservoir.svg", caption: "Metabolic Memory Reservoir — write path, partitions, and governance" },
       ],
@@ -577,6 +583,7 @@ export const copy = {
       exhibitionTitle: "خودِ پژوهش، در حال اجرا",
       exhibitionBody: "چهار تالار از نرم‌افزار پژوهشی برنامه، زنده در مرورگر شما اجرا می‌شود: مالتی‌پلکسر سیگنال تطبیقی که مسائل بهینه‌سازی را در چرخه‌های ۱۰۰ میلی‌ثانیه‌ای حل می‌کند، پشتهٔ هشت‌رشته‌ایِ خودمختاری کران‌دار که با افزایش ریسک جعبهٔ فرمانش را تنگ می‌کند، حقیقتِ بنیادینِ تصحیح‌پذیری که می‌توانید به چالشش بکشید، و بافت رویداد F26. هیچ‌چیز ضبط‌شده نیست؛ هیچ‌چیز دادهٔ خودروی واقعی نیست.",
       exhibitionCta: "ورود به نمایشگاه",
+      platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "شکل H-01 — صورت‌بندی · اجرا · به‌خاطرسپاری" },
     },
     technology: {
       heroH1: "محاسباتی که به فیزیک احترام می‌گذارد",
@@ -637,6 +644,7 @@ export const copy = {
         "برای همیشه در گذرا (ژوئیه ۲۰۲۶) — عملیاتی‌سازی دینامیک حافظه‌بلند فیلترها برای مجموعهٔ حسی، همراه با نمایش‌های عددی.",
       ],
       papersNote: "ارزیابی بیرونیِ پیشینه‌پژوهی روش‌های اکتشافی برنامه به‌طور کامل در صفحهٔ «روش‌شناسی پژوهش» منتشر شده است — از جمله جاهایی که برخی صورت‌بندی‌های خود ما را تزئینی می‌داند.",
+      plateManuscript: { src: "/docs/svg/plates/P4_science_pipeline.svg", caption: "شکل C-01 — خط لولهٔ پنج‌مرحله‌ای با جایگاه‌ها: اثبات‌شده، اندازه‌گیری‌شده در محدوده، و صراحتاً ادعانشده." },
       ctaBtn: "پرس‌وجوی همکاری پژوهشی",
     },
     safety: {
@@ -699,6 +707,9 @@ export const copy = {
         "G6 — آزادسازی عطفی: عملگری تنها زمانی مجاز است که همهٔ تعهدات اثباتی هم‌زمان برآورده شده باشند؛ نبودِ یک تضمین، خود یک خطاست.",
       ],
       refusalStandingsNote: "در سراسر پیکرهٔ منتشرشده، ادعاها جایگاه صریح دارند — تثبیت‌شده، پیشنهادی یا تصوری — و ارقام با برچسب اندازه‌گیری‌شده یا پیش‌بینی‌شده مشخص می‌شوند. جدول مراحل و معیارهای بالا مشخصاتی هستند که ساخت با آنها آزموده می‌شود، نه گواهینامه.",
+      plateRefusal: { src: "/docs/svg/plates/P1_refusal_chain.svg", caption: "شکل S-01 — زنجیرهٔ امتناع: پنج مرحله، یک مجموعهٔ تنگ‌شونده، و تنها تأخیر اندازه‌گیری‌شدهٔ پیکره." },
+      plateCriteria: { src: "/docs/svg/plates/P2_criteria_ring.svg", caption: "شکل S-02 — شش معیار پذیرش؛ عملگری تنها زمانی مجاز است که هر شش هم‌زمان برقرار باشند." },
+      plateMemory: { src: "/docs/svg/plates/P5_metabolic_memory.svg", caption: "شکل M-01 — افرازهای زمان اقامت: بار اثبات با طول اثر داده رشد می‌کند." },
       pathTitle: "وضعیت توسعه و مسیر استقرار",
       pathBody: [
         "فناوری Ghost در حال حاضر در مرحلهٔ توسعه و اعتبارسنجی فعال است. این مرحله یک محدودیت نیست — اینجاست که ایمنی یا به دست می‌آید یا از دست می‌رود. هر تصمیم معماری که اکنون گرفته می‌شود تعیین می‌کند که آیا مسیر آیندهٔ اخذ گواهینامه معتبر خواهد بود یا صرفاً الحاقی.",
@@ -865,6 +876,7 @@ export const copy = {
       figuresTitle: "نقشه‌های بلوپرینت",
       figures: [
         { src: "/docs/svg/Master_Blueprint_Map.svg", caption: "بلوپرینتِ بلوپرینت‌ها — دفتر نه‌گانه و ترکیب آن" },
+        { src: "/docs/svg/plates/P3_two_invariants.svg", caption: "شکل A-01 — دو ناوردا: طرح و انتخاب، و قانون پیامد یکنوا" },
         { src: "/docs/svg/Epistemic_Gearbox_Stack.svg", caption: "گیربکس معرفتی — شمای پشته از حسگری تا عملگری" },
         { src: "/docs/svg/Metabolic_Memory_Reservoir.svg", caption: "مخزن حافظهٔ متابولیک — مسیر نوشتن، افرازها و حاکمیت" },
       ],

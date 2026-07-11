@@ -47,6 +47,14 @@ export default function Science() {
         gray
       />
 
+      {t.plateManuscript && (
+        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
+          <img src={t.plateManuscript.src} alt={t.plateManuscript.caption} loading="lazy"
+               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
+          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateManuscript.caption}</figcaption>
+        </figure>
+      )}
+
       <SectionBlock
         eyebrow={t.manuscriptEyebrow}
         title={t.manuscriptTitle}
