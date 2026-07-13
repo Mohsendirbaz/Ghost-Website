@@ -166,11 +166,11 @@ export default function Footer() {
             <li><span className="footer__link">{t.footer.terms}</span></li>
           </ul>
           <div className="footer__contact">
-            <a href="mailto:contact@ghostautonomy.com" className="footer__link">
-              contact@ghostautonomy.com
+            <a href="mailto:dirbaz.sharif@gmail.com" className="footer__link">
+              dirbaz.sharif@gmail.com
             </a>
-            <a href="mailto:press@ghostautonomy.com" className="footer__link">
-              press@ghostautonomy.com
+            <a href="tel:+13129255930" className="footer__link">
+              Dr. Mohsen Dirbaz · +1-312-925-5930
             </a>
           </div>
         </div>

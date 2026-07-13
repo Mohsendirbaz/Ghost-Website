@@ -15,13 +15,16 @@ import AdaptationMetrics from './components/AdaptationMetrics';
 import ConceptExplainer from './components/ConceptExplainer';
 import AgentDeploymentViz from './components/AgentDeploymentViz';
 import StackView from './components/StackView';
+import ProgramCoverageMap from './components/ProgramCoverageMap';
 import ConstitutionView from './components/ConstitutionView';
 import EventFabricView from './components/EventFabricView';
 import './App.css';
 
-// Website-resident exhibition variant: the internal coverage view and its
-// dataset are physically absent from this copy of the application.
-const ALLOWED_VIEWS = ['multiplexer', 'stack', 'constitution', 'eventfabric'];
+const EXHIBITION = import.meta.env.VITE_EXHIBITION === '1';
+
+const ALLOWED_VIEWS = EXHIBITION
+  ? ['multiplexer', 'stack', 'constitution', 'eventfabric']
+  : ['multiplexer', 'stack', 'coverage', 'constitution', 'eventfabric'];
 
 function initialView() {
   try {
@@ -180,6 +183,8 @@ function App() {
         <h1>
           {activeView === 'stack'
             ? 'Bounded Autonomy on a Memristive Substrate'
+            : !EXHIBITION && activeView === 'coverage'
+            ? 'GHOST Autonomy — Program Coverage Map'
             : activeView === 'constitution'
             ? 'The Constitution of Truth — Correctable Ground Truth'
             : activeView === 'eventfabric'
@@ -189,6 +194,8 @@ function App() {
         <p className="subtitle">
           {activeView === 'stack'
             ? 'The full eight-thread safety stack: antitone monotonicity, metabolic memory, and the analog veto'
+            : !EXHIBITION && activeView === 'coverage'
+            ? '56 research subcategories × main(8).tex chapters × source-material availability'
             : activeView === 'constitution'
             ? 'Separation of epistemic powers · correction supremacy · anti-silent-drift · temporal rollback'
             : activeView === 'eventfabric'
@@ -208,6 +215,14 @@ function App() {
           >
             Bounded Autonomy Stack
           </button>
+          {!EXHIBITION && (
+            <button
+              className={`view-tab ${activeView === 'coverage' ? 'active' : ''}`}
+              onClick={() => setActiveView('coverage')}
+            >
+              Program Coverage Map
+            </button>
+          )}
           <button
             className={`view-tab ${activeView === 'constitution' ? 'active' : ''}`}
             onClick={() => setActiveView('constitution')}
@@ -231,6 +246,8 @@ function App() {
       </header>
 
       {activeView === 'stack' && <StackView />}
+
+      {!EXHIBITION && activeView === 'coverage' && <ProgramCoverageMap />}
 
       {activeView === 'constitution' && <ConstitutionView />}
 
@@ -352,6 +369,16 @@ function App() {
             Architecture Philosophy: bound what an error is allowed to <em>do</em>, not whether it occurs.
             Every quantitative figure is <strong>projected</strong> unless marked <strong>measured</strong>
             — only the ~32 ns analog-veto witness is measured.
+          </p>
+        </footer>
+      )}
+
+      {!EXHIBITION && activeView === 'coverage' && (
+        <footer className="app-footer">
+          <p>
+            Coverage Map: from the GHOST Autonomy <em>Research Subcategory → Document Section Mapping</em>
+            (Feb 2026). Coverage = source-material availability in project knowledge (a design corpus),
+            not fabricated or measured silicon.
           </p>
         </footer>
       )}

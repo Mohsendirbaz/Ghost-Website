@@ -208,8 +208,9 @@ export default function Contact() {
 
             <div className="contact-card">
               <h3>{t.generalTitle}</h3>
+              <p style={{ margin: 0, fontWeight: 600 }}>{t.contactName}</p>
               <a href={`mailto:${t.generalEmail}`}>{t.generalEmail}</a>
-              <a href={`mailto:${t.pressEmail}`}>{t.pressEmail}</a>
+              <a href={`tel:${(t.contactPhone || '').replace(/[^+\d]/g, '')}`}>{t.contactPhone}</a>
             </div>
           </div>
         </div>

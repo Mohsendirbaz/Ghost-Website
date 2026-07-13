@@ -1,0 +1,61 @@
+/* ═══════════════════════════════════════════════════════════════════
+   INTERACTION STANDARD — one authoritative layer for states & motion.
+   Zero-specificity (:where) so component skins keep working; this file
+   normalizes what was previously 146 ad-hoc transition declarations.
+   Tokens defer to System B (tokens/base.css) with safe fallbacks.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --motion-fast: var(--transition-fast-dur, 0.15s);
+  --motion-base: var(--transition-base-dur, 0.25s);
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --focus-ring-color: var(--color-primary, #2a78d6);
+}
+
+/* Property-scoped transitions — never `all` — on the interactive core */
+:where(a, button, [role="button"], input, select, textarea,
+       .btn, .layer-card, .kb-card, .view-tab,
+       .hm-link, .hm-room, .hm-doc,
+       .footer__link, .fact-panel__button) {
+  transition:
+    color var(--motion-base) var(--ease-standard),
+    background-color var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard),
+    opacity var(--motion-base) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+
+/* One focus signature, everywhere, in both themes and both directions */
+:where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+:where(a, button, [role="button"]):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Standard press acknowledgement */
+:where(button, .btn, [role="button"]):active {
+  transform: translateY(1px);
+}
+
+/* Standard disabled treatment */
+:where(button:disabled, input:disabled, select:disabled, textarea:disabled,
+       [aria-disabled="true"]) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Motion is a preference — one authoritative switch for the whole site */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

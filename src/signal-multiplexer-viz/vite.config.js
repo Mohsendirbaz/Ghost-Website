@@ -1,10 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { fileURLToPath, URL } from 'node:url'
 
-// Website-resident exhibition build: this copy of the application is the
-// curated public variant (the internal coverage view and its dataset are
-// physically absent from the source). Output is served from /exhibition/.
-export default defineConfig({
-  plugins: [react()],
-  base: '/exhibition/',
+// VITE_EXHIBITION=1 produces the curated public build:
+//  - served under /exhibition/
+//  - the Program Coverage view (and its internal dataset) is aliased to a stub
+//    so coverage/gap-analysis data never enters the emitted bundle.
+export default defineConfig(() => {
+  const exhibition = process.env.VITE_EXHIBITION === '1'
+  return {
+    plugins: [react()],
+    base: exhibition ? '/exhibition/' : '/',
+    resolve: {
+      alias: exhibition
+        ? [
+            {
+              find: /^\.\/components\/ProgramCoverageMap$/,
+              replacement: fileURLToPath(new URL('./src/components/ProgramCoverageMapStub.jsx', import.meta.url)),
+            },
+          ]
+        : [],
+    },
+  }
 })
