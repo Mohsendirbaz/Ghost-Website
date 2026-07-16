@@ -4,10 +4,23 @@ import { HeroSecondary } from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import SectionBlockSticky from '../components/SectionBlockSticky';
-import StatsBand from '../components/StatsBand';
 import CTABand from '../components/CTABand';
+import Figure from '../components/Figure';
+import StandingsLegend from '../components/StandingsLegend';
 import { EpuVisual } from '../components/AbstractVisual';
 import './Page.css';
+
+/* Corpus-true figures with explicit standings — replacing the former
+   unlabeled marketing multipliers (100×/10×/1000+/99.99%), which had no
+   traceable source and rendered as solid fact against the site's own
+   claim discipline. Values below already appear on Home/Safety surfaces
+   and in the published corpus. */
+const FIGURES = [
+  { v: '~32 ns', chip: 'measured', l: { en: 'analog-veto latency — the corpus’s only measured hardware timing', fa: 'تأخیر وتوی آنالوگ — تنها زمان‌سنجی اندازه‌گیری‌شدهٔ سخت‌افزار در پیکره' } },
+  { v: '2', chip: 'proven', l: { en: 'control invariants proven on paper — pose-and-select · monotone funnel', fa: 'دو ناوردای کنترلی اثبات‌شده روی کاغذ — گزینش-و-وضعیت · قیف یکنوا' } },
+  { v: '5', chip: null, l: { en: 'refusal stages S0–S4 ahead of a single actuation gate', fa: 'پنج مرحلهٔ امتناع S0–S4 پیش از یک دروازهٔ کنش' } },
+  { v: '325', chip: null, l: { en: 'admissible gearbox routes over five epistemic stances', fa: '۳۲۵ مسیر مجاز گیربکس روی پنج موضع معرفتی' } },
+];
 
 export default function Technology() {
   const { lang } = useLang();
@@ -25,15 +38,13 @@ export default function Technology() {
         subhead={t.heroSub}
       />
 
-      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-        <img src="/docs/svg/Epistemic_Gearbox_Stack.svg" alt="" loading="lazy"
-             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
-          {lang === 'en'
-          ? 'Fig. T-01 — The Epistemic Gearbox blueprint as published: module identities are deliberately withheld; the steering logic and the safety boundary are not.'
-          : 'شکل T-01 — نقشهٔ گیربکس معرفتی به همان صورت منتشرشده: هویت ماژول‌ها عمداً پوشیده است؛ منطق فرمان و مرز ایمنی نه.'}
-        </figcaption>
-      </figure>
+      <Figure
+        num="T-01"
+        src="/docs/svg/Epistemic_Gearbox_Stack.svg"
+        caption={lang === 'en'
+          ? 'The Epistemic Gearbox blueprint as published: module identities are deliberately withheld; the steering logic and the safety boundary are not.'
+          : 'نقشهٔ گیربکس معرفتی به همان صورت منتشرشده: هویت ماژول‌ها عمداً پوشیده است؛ منطق فرمان و مرز ایمنی نه.'}
+      />
 
       <SectionBlock
         eyebrow={t.challengeEyebrow}
@@ -51,12 +62,32 @@ export default function Technology() {
         <EpuVisual />
       </SectionBlockSticky>
 
-      <StatsBand stats={[
-        { value: '100', suffix: 'x', label: lang === 'en' ? 'More Efficient than GPU' : 'کارآمدتر از GPU' },
-        { value: '10', suffix: 'x', label: lang === 'en' ? 'Lower Power Consumption' : 'مصرف انرژی کمتر' },
-        { value: '1000', suffix: '+', label: lang === 'en' ? 'Physics Calculations/sec' : 'محاسبات فیزیکی در ثانیه' },
-        { value: '99.99', suffix: '%', label: lang === 'en' ? 'Reliability' : 'قابلیت اطمینان' },
-      ]} />
+      {/* Honest figures band — every number standings-labeled or plainly structural */}
+      <section className="bp-stats-band">
+        <div className="container">
+          <div className="bp-stats">
+            {FIGURES.map((f, i) => (
+              <div className="bp-stat" key={i}>
+                <p className="bp-stat__v">{f.v}</p>
+                {f.chip && (
+                  <span className={`standing-chip standing-chip--${f.chip}`}>
+                    {lang === 'fa'
+                      ? (f.chip === 'measured' ? 'اندازه‌گیری‌شده' : 'اثبات‌شده')
+                      : f.chip}
+                  </span>
+                )}
+                <p className="bp-stat__l">{lang === 'fa' ? f.l.fa : f.l.en}</p>
+              </div>
+            ))}
+          </div>
+          <StandingsLegend />
+          <p className="bp-stats-note">
+            {lang === 'en'
+              ? 'Every figure above is traceable to the published corpus; projected quantities are never rendered solid.'
+              : 'هر رقم بالا به پیکرهٔ منتشرشده قابل ردیابی است؛ کمیت‌های برآوردی هرگز توپر نمایش داده نمی‌شوند.'}
+          </p>
+        </div>
+      </section>
 
       <SectionBlock
         eyebrow={t.epuEyebrow}

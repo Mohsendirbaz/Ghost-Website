@@ -7,7 +7,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import './Page.css';
 
-const VALID_VIEWS = ['multiplexer', 'stack', 'coverage', 'constitution', 'eventfabric'];
+const VALID_VIEWS = ['multiplexer', 'stack', 'constitution', 'eventfabric'];
 
 export default function Exhibition() {
   const { lang } = useLang();

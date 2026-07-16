@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
@@ -5,7 +6,8 @@ import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABand from '../components/CTABand';
-import { SafetyLayersVisual } from '../components/AbstractVisual';
+import Figure from '../components/Figure';
+import RefusalScrollStory from '../components/visuals/RefusalScrollStory';
 import './Page.css';
 
 export default function Safety() {
@@ -25,11 +27,7 @@ export default function Safety() {
       />
 
       {t.plateRefusal && (
-        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-          <img src={t.plateRefusal.src} alt={t.plateRefusal.caption} loading="lazy"
-               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateRefusal.caption}</figcaption>
-        </figure>
+        <Figure num="S-01" src={t.plateRefusal.src} caption={t.plateRefusal.caption} />
       )}
 
       <SectionBlock
@@ -37,43 +35,33 @@ export default function Safety() {
         title={t.philTitle}
         body={t.philBody}
         gray
-      >
-        <SafetyLayersVisual />
-      </SectionBlock>
+      />
 
-      <section className="safety-layers">
-        <div className="container">
-          <p className="section-eyebrow">{t.layersEyebrow}</p>
-          <h2 className="section-title">{t.layersTitle}</h2>
-          {t.layersIntro && <p className="section-block__body">{t.layersIntro}</p>}
-          <div className="safety-layers__grid">
-            {[
-              { num: lang === 'en' ? 'Layer 1' : 'لایه ۱', title: t.layer1Title, body: t.layer1Body },
-              { num: lang === 'en' ? 'Layer 2' : 'لایه ۲', title: t.layer2Title, body: t.layer2Body },
-              { num: lang === 'en' ? 'Layer 3' : 'لایه ۳', title: t.layer3Title, body: t.layer3Body },
-              { num: lang === 'en' ? 'Layer 4' : 'لایه ۴', title: t.layer4Title, body: t.layer4Body },
-            ].map((layer, i) => (
-              <div key={i} className="layer-card">
-                <p className="layer-card__num">{layer.num}</p>
-                <h3 className="layer-card__title">{layer.title}</h3>
-                <p className="layer-card__body">{layer.body}</p>
-              </div>
-            ))}
-          </div>
+      {/* Four layers, one figure — the prose grid demoted to a caption */}
+      <Figure
+        num="S-04"
+        src="/docs/svg/plates/P14_safety_layers.svg"
+        caption={lang === 'en'
+          ? 'Four layers between intent and actuation; the measured veto guards the innermost boundary.'
+          : 'چهار لایه میان قصد و کنش؛ وتوی اندازه‌گیری‌شده از درونی‌ترین مرز پاسداری می‌کند.'}
+      />
+      {t.layersIntro && (
+        <details className="bp-details">
+          <summary>{lang === 'en' ? 'Read the four layers in full' : 'متن کامل چهار لایه'}</summary>
+          <p className="section-block__body">{t.layersIntro}</p>
+          {[
+            { num: lang === 'en' ? 'Layer 1' : 'لایه ۱', title: t.layer1Title, body: t.layer1Body },
+            { num: lang === 'en' ? 'Layer 2' : 'لایه ۲', title: t.layer2Title, body: t.layer2Body },
+            { num: lang === 'en' ? 'Layer 3' : 'لایه ۳', title: t.layer3Title, body: t.layer3Body },
+            { num: lang === 'en' ? 'Layer 4' : 'لایه ۴', title: t.layer4Title, body: t.layer4Body },
+          ].map((layer, i) => (
+            <p key={i} className="section-block__body">
+              <strong>{layer.num} — {layer.title}.</strong> {layer.body}
+            </p>
+          ))}
           {t.layersOutro && <p className="section-block__body">{t.layersOutro}</p>}
-        </div>
-      </section>
-
-
-      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-        <img src="/docs/svg/plates/P14_safety_layers.svg" alt="" loading="lazy"
-             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
-          {lang === 'en'
-          ? 'Fig. S-04 — Four layers between intent and actuation; the measured veto guards the innermost boundary.'
-          : 'شکل S-04 — چهار لایه میان قصد و کنش؛ وتوی اندازه‌گیری‌شده از درونی‌ترین مرز پاسداری می‌کند.'}
-        </figcaption>
-      </figure>
+        </details>
+      )}
 
       <SectionBlock
         eyebrow={t.validationEyebrow}
@@ -92,52 +80,28 @@ export default function Safety() {
         note={t.refusalNote}
       />
 
-      {t.refusalStages && (
-        <section className="safety-layers">
-          <div className="container">
-            <h2 className="section-title">{t.refusalStagesTitle}</h2>
-            <div className="safety-layers__grid">
-              {t.refusalStages.map((stage, i) => (
-                <div key={i} className="layer-card">
-                  <p className="layer-card__num">{stage.num}</p>
-                  <h3 className="layer-card__title">{stage.title}</h3>
-                  <p className="layer-card__body">{stage.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <SectionBlock
-        title={t.refusalCriteriaTitle}
-        body={t.refusalCriteriaIntro}
-        points={t.refusalCriteria}
-        note={t.refusalStandingsNote}
-        gray
-        alt
-      />
+      {/* The refusal chain, watched rather than read — stages accumulate
+          as you scroll; the criteria fill a conformance ring. */}
+      {t.refusalStages && <RefusalScrollStory />}
 
       {t.plateCriteria && (
-        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-          <img src={t.plateCriteria.src} alt={t.plateCriteria.caption} loading="lazy"
-               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateCriteria.caption}</figcaption>
-        </figure>
+        <Figure num="S-02" src={t.plateCriteria.src} caption={t.plateCriteria.caption} />
       )}
 
       {t.plateMemory && (
-        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-          <img src={t.plateMemory.src} alt={t.plateMemory.caption} loading="lazy"
-               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateMemory.caption}</figcaption>
-        </figure>
+        <Figure num="S-03" src={t.plateMemory.src} caption={t.plateMemory.caption} />
       )}
 
       <SectionBlock
         title={t.pathTitle}
         body={t.pathBody}
       />
+
+      <p className="bp-details">
+        <Link className="btn btn-primary" to={`/${lang}/exhibition?view=stack`}>
+          {lang === 'en' ? 'You have read the chain. Now watch it refuse →' : 'زنجیره را خواندید؛ اکنون امتناعش را تماشا کنید ←'}
+        </Link>
+      </p>
 
       <FAQAccordion title={t.faqTitle} items={t.faqs} />
 

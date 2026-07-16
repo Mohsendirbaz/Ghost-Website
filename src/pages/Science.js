@@ -4,7 +4,10 @@ import Hero from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
-import { PhysicsAbstraction } from '../components/AbstractVisual';
+import Figure from '../components/Figure';
+import StandingsLegend from '../components/StandingsLegend';
+import AgmDemo from '../components/visuals/AgmDemo';
+import EnvelopeChart from '../components/visuals/EnvelopeChart';
 import './Page.css';
 
 export default function Science() {
@@ -28,9 +31,24 @@ export default function Science() {
         title={t.originsTitle}
         body={t.originsBody}
         gray
-      >
-        <PhysicsAbstraction />
-      </SectionBlock>
+      />
+
+      {/* Proofs that run — the mathematics argued by execution, not prose */}
+      <section className="section-block">
+        <div className="container">
+          <h2 className="section-title">
+            {lang === 'en' ? 'Proofs That Run' : 'اثبات‌هایی که اجرا می‌شوند'}
+          </h2>
+          <p className="section-block__body">
+            {lang === 'en'
+              ? 'The framework’s central primitive and its central discipline, shown rather than asserted: the AGM iteration converging in your browser, and the case-study results drawn inside the only envelope where they were demonstrated.'
+              : 'اولیهٔ مرکزی چارچوب و انضباط مرکزی آن، به‌جای ادعا، به نمایش: تکرار AGM که در مرورگر شما همگرا می‌شود، و نتایج مطالعهٔ موردی که درون تنها پاکتی رسم شده‌اند که در آن اثبات شده‌اند.'}
+          </p>
+        </div>
+      </section>
+      <AgmDemo />
+      <EnvelopeChart />
+      <StandingsLegend />
 
       <SectionBlock
         eyebrow={t.mathEyebrow}
@@ -48,11 +66,7 @@ export default function Science() {
       />
 
       {t.plateManuscript && (
-        <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-          <img src={t.plateManuscript.src} alt={t.plateManuscript.caption} loading="lazy"
-               style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-          <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>{t.plateManuscript.caption}</figcaption>
-        </figure>
+        <Figure num="C-01" src={t.plateManuscript.src} caption={t.plateManuscript.caption} />
       )}
 
       <SectionBlock

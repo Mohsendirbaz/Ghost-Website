@@ -34,7 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "organize-library": "node scripts/organizeLibrary.js",
-    "build:exhibition": "cd src/signal-multiplexer-viz && npm ci && npx vite build --base=/exhibition/ && rm -rf ../../public/exhibition && cp -r dist ../../public/exhibition"
+    "build:exhibition": "cd src/signal-multiplexer-viz && npm ci && VITE_EXHIBITION=1 npx vite build --base=/exhibition/ && rm -rf ../../public/exhibition && cp -r dist ../../public/exhibition && cd ../.. && node scripts/assertExhibitionClean.js",
+    "assert:exhibition": "node scripts/assertExhibitionClean.js"
   },
   "eslintConfig": {
     "extends": [

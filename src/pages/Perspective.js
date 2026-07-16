@@ -3,7 +3,16 @@ import { copy } from '../data/copy';
 import Hero from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import CTABand from '../components/CTABand';
+import Figure from '../components/Figure';
 import './Page.css';
+
+/* Reading time from the actual paragraph text — an honest editorial
+   ornament (≈200 wpm EN, ≈180 wpm FA). */
+function readingTime(paras, lang) {
+  const words = (paras || []).join(' ').split(/\s+/).filter(Boolean).length;
+  const mins = Math.max(1, Math.round(words / (lang === 'fa' ? 180 : 200)));
+  return lang === 'fa' ? `≈ ${mins} دقیقه مطالعه` : `≈ ${mins} min read`;
+}
 
 export default function Perspective() {
   const { lang } = useLang();
@@ -21,18 +30,17 @@ export default function Perspective() {
         subhead={t.heroSub}
       />
 
-      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-        <img src="/docs/svg/plates/P12_narrowing_funnel.svg" alt="" loading="lazy"
-             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
-          {lang === 'en'
-          ? 'Fig. V-01 — The essays in one figure: possibility narrows through six gates; authority only contracts.'
-          : 'شکل V-01 — جان کلام جستارها در یک شکل: فضای امکان از شش دروازه می‌گذرد و تنگ می‌شود؛ اختیار تنها منقبض می‌شود.'}
-        </figcaption>
-      </figure>
+      <Figure
+        num="V-01"
+        src="/docs/svg/plates/P12_narrowing_funnel.svg"
+        caption={lang === 'en'
+          ? 'The essays in one figure: possibility narrows through six gates; authority only contracts.'
+          : 'جان کلام جستارها در یک شکل: فضای امکان از شش دروازه می‌گذرد و تنگ می‌شود؛ اختیار تنها منقبض می‌شود.'}
+      />
 
-      <article className="essay">
+      <article className="essay essay--editorial">
         <div className="container essay__inner">
+          <p className="essay__meta">{readingTime(t.paragraphs, lang)}</p>
           <p className="essay__subtitle">{t.subtitle}</p>
           <div className="essay__body">
             {t.paragraphs.map((para, i) => (
@@ -42,9 +50,10 @@ export default function Perspective() {
         </div>
       </article>
 
-      <article className="essay essay--alt">
+      <article className="essay essay--alt essay--editorial">
         <div className="container essay__inner">
           <p className="essay__eyebrow">{t.hypeEyebrow}</p>
+          <p className="essay__meta">{readingTime(t.hypeParas, lang)}</p>
           <p className="essay__subtitle">{t.hypeSubtitle}</p>
           <div className="essay__body">
             {t.hypeParas.map((para, i) => (
@@ -54,9 +63,10 @@ export default function Perspective() {
         </div>
       </article>
 
-      <article className="essay essay--alt">
+      <article className="essay essay--alt essay--editorial">
         <div className="container essay__inner">
           <p className="essay__eyebrow">{t.contEyebrow}</p>
+          <p className="essay__meta">{readingTime(t.contParas, lang)}</p>
           <p className="essay__subtitle">{t.contSubtitle}</p>
           <div className="essay__body">
             {t.contParas.map((para, i) => (

@@ -6,6 +6,9 @@ import SectionBlock from '../components/SectionBlock';
 import ComparisonTable from '../components/ComparisonTable';
 import CTABand from '../components/CTABand';
 import DiagramGallery from '../components/DiagramGallery';
+import Figure from '../components/Figure';
+import StandingsLegend from '../components/StandingsLegend';
+import GearboxExplorer from '../components/visuals/GearboxExplorer';
 import './Page.css';
 import './Architecture.css';
 
@@ -69,7 +72,7 @@ export default function Architecture() {
         </section>
       )}
 
-      {/* Epistemic gearbox */}
+      {/* Epistemic gearbox — the concept, then the concept made playable */}
       <SectionBlock
         eyebrow={t.gearboxEyebrow}
         title={t.gearboxTitle}
@@ -77,26 +80,18 @@ export default function Architecture() {
         note={t.gearboxNote}
         alt
       />
+      <GearboxExplorer />
 
       {/* Blueprint SVG figures */}
       {t.figures && (
         <section className="section-block">
           <div className="container">
             <h2 className="section-title">{t.figuresTitle}</h2>
-            {t.figures.map((fig, i) => (
-              <figure key={i} style={{ margin: '2rem 0', textAlign: 'center' }}>
-                <img
-                  src={fig.src}
-                  alt={fig.caption}
-                  loading="lazy"
-                  style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', background: '#fff' }}
-                />
-                <figcaption className="section-block__note" style={{ marginTop: '0.75rem' }}>
-                  {fig.caption}
-                </figcaption>
-              </figure>
-            ))}
           </div>
+          {t.figures.map((fig, i) => (
+            <Figure key={i} src={fig.src} caption={fig.caption} wide />
+          ))}
+          <StandingsLegend />
         </section>
       )}
 

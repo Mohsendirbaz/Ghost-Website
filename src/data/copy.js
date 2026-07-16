@@ -477,7 +477,6 @@ export const copy = {
       rooms: [
         { view: "multiplexer", title: "Signal Multiplexer", desc: "The original engine: problems formulated, structure detected, solvers selected, and solutions applied on 100 ms cycles — with the mathematics rendered as it runs. Press Start and inject a disturbance." },
         { view: "stack", title: "Bounded Autonomy Stack", desc: "The eight-thread safety stack, live: watch the refusal cascade narrow the command box, toggle the conservative discipline off to see violations appear, and follow the trusted scalars ξ and S." },
-        { view: "coverage", title: "Program Coverage Map", desc: "The program, mapped honestly: 56 research subcategories across 6 domains, colored by source-material coverage — 15 full, 20 high, 10 partial, and 11 explicit gaps with a prioritized closure plan. Coverage means documentation, not built silicon." },
         { view: "constitution", title: "Constitution of Truth", desc: "A correctable Ground Truth under separation of epistemic powers: challenge a canon claim and watch stronger evidence beat stored consensus — every change logged, nothing silent." },
         { view: "eventfabric", title: "Event Fabric (F26)", desc: "The autonomous-driving event fabric: one timeline, twelve canvases, synchronized interaction traces — where safety-bearing paths may only contract authority." },
       ],
@@ -1014,7 +1013,6 @@ export const copy = {
       rooms: [
         { view: "multiplexer", title: "مالتی‌پلکسر سیگنال", desc: "موتور اولیه: صورت‌بندی مسئله، تشخیص ساختار، انتخاب حل‌کننده و اعمال جواب در چرخه‌های ۱۰۰ میلی‌ثانیه‌ای — با ریاضیاتی که هم‌زمان با اجرا نمایش داده می‌شود. Start را بزنید و یک اغتشاش تزریق کنید." },
         { view: "stack", title: "پشتهٔ خودمختاری کران‌دار", desc: "پشتهٔ ایمنی هشت‌رشته‌ای، زنده: تنگ‌شدن جعبهٔ فرمان را در آبشار امتناع ببینید، انضباط محافظه‌کارانه را خاموش کنید تا تخلف‌ها ظاهر شوند، و اسکالرهای مورد اعتماد ξ و S را دنبال کنید." },
-        { view: "coverage", title: "نقشهٔ پوشش برنامه", desc: "نقشهٔ صادقانهٔ برنامه: ۵۶ زیرشاخهٔ پژوهشی در ۶ حوزه، رنگ‌بندی‌شده بر اساس پوشش منابع — ۱۵ کامل، ۲۰ بالا، ۱۰ جزئی و ۱۱ شکاف صریح با برنامهٔ اولویت‌بندی‌شدهٔ بستن. پوشش یعنی مستندسازی، نه سیلیکونِ ساخته‌شده." },
         { view: "constitution", title: "قانون اساسی حقیقت", desc: "حقیقتِ بنیادینِ تصحیح‌پذیر زیر تفکیک قوای معرفتی: یک ادعای مصوب را به چالش بکشید و ببینید شواهد قوی‌تر بر اجماع ذخیره‌شده غلبه می‌کند — هر تغییر ثبت می‌شود، هیچ‌چیز خاموش نیست." },
         { view: "eventfabric", title: "بافت رویداد (F26)", desc: "بافت رویداد رانندگی خودران: یک خط زمان، دوازده بوم، ردهای برهم‌کنش همگام — جایی که مسیرهای ایمنی‌بر تنها می‌توانند اختیار را منقبض کنند." },
       ],

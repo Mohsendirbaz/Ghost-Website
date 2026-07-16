@@ -38,6 +38,7 @@ import Bio from './pages/Bio';
 import Methods from './pages/Methods';
 import Exhibition from './pages/Exhibition';
 import './styles/global.css';
+import './styles/blueprint.css';
 import './App.css';
 
 const BASE_URL = 'https://ghost-website-kappa.vercel.app';

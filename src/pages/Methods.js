@@ -4,6 +4,8 @@ import Hero from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import SectionBlock from '../components/SectionBlock';
 import CTABand from '../components/CTABand';
+import Figure from '../components/Figure';
+import StandingsLegend from '../components/StandingsLegend';
 import './Page.css';
 
 export default function Methods() {
@@ -22,15 +24,14 @@ export default function Methods() {
         subhead={t.heroSub}
       />
 
-      <figure style={{ margin: '2.5rem auto 0', maxWidth: '1100px', padding: '0 1rem' }}>
-        <img src="/docs/svg/plates/P8_methods_pipeline.svg" alt="" loading="lazy"
-             style={{ width: '100%', height: 'auto', borderRadius: '8px', border: '1px solid rgba(128,128,128,0.25)', background: '#fcfcfb' }} />
-        <figcaption className="section-block__note" style={{ marginTop: '0.6rem', textAlign: 'center' }}>
-          {lang === 'en'
-          ? 'Fig. M-01 — One gate for every public claim: formulate, derive, witness, stand, publish.'
-          : 'شکل M-01 — یک دروازه برای هر ادعای عمومی: صورت‌بندی، استنتاج، گواهی، تعیین جایگاه، انتشار.'}
-        </figcaption>
-      </figure>
+      <Figure
+        num="M-01"
+        src="/docs/svg/plates/P8_methods_pipeline.svg"
+        caption={lang === 'en'
+          ? 'One gate for every public claim: formulate, derive, witness, stand, publish.'
+          : 'یک دروازه برای هر ادعای عمومی: صورت‌بندی، استنتاج، گواهی، تعیین جایگاه، انتشار.'}
+      />
+      <StandingsLegend />
 
       <SectionBlock
         eyebrow={t.kteEyebrow}

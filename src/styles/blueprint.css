@@ -1,0 +1,276 @@
+/* ════════════════════════════════════════════════════════════════════
+   Ghost Autonomy — Blueprint visual grammar
+   One sheet, used everywhere: blueprint tokens, standings encodings,
+   figure frames, and the shared styles for the visual instruments.
+   Standings encoding (color-independent, per visual-overhaul plan §3):
+     measured  = solid fill      proven    = solid outline
+     projected = dashed outline  proposed  = hatched
+     gamble    = dotted outline
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --bp-paper: #f7f6f1;
+  --bp-paper-raised: #fdfcf8;
+  --bp-ink: #14314f;
+  --bp-ink-soft: #3d5a78;
+  --bp-line: rgba(20, 49, 79, 0.55);
+  --bp-line-faint: rgba(20, 49, 79, 0.18);
+  --bp-grid-minor: rgba(20, 49, 79, 0.05);
+  --bp-grid-major: rgba(20, 49, 79, 0.1);
+  --bp-accent: #2a78d6;
+  --bp-good: #1baf7a;
+  --bp-scrim: rgba(247, 246, 241, 0.72);
+  --bp-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Cyanotype dark mode — near-white linework on deep blue-black */
+.dark-theme {
+  --bp-paper: #0b1626;
+  --bp-paper-raised: #101f36;
+  --bp-ink: #dbe7f4;
+  --bp-ink-soft: #a9bfd6;
+  --bp-line: rgba(219, 231, 244, 0.6);
+  --bp-line-faint: rgba(219, 231, 244, 0.22);
+  --bp-grid-minor: rgba(219, 231, 244, 0.05);
+  --bp-grid-major: rgba(219, 231, 244, 0.1);
+  --bp-accent: #6fb1ff;
+  --bp-good: #3fd2a0;
+  --bp-scrim: rgba(11, 22, 38, 0.72);
+}
+
+/* ── Graph-paper ground ─────────────────────────────────────────── */
+.bp-grid-bg {
+  background-color: var(--bp-paper);
+  background-image:
+    linear-gradient(var(--bp-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-major) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-minor) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 16px 16px, 16px 16px;
+}
+
+/* ── Technical frame with registration marks ────────────────────── */
+.bp-frame {
+  position: relative;
+  border: 1.5px solid var(--bp-line);
+  background: var(--bp-paper);
+  border-radius: 6px;
+}
+.bp-frame::before,
+.bp-frame::after {
+  content: '';
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid var(--bp-line);
+  pointer-events: none;
+}
+.bp-frame::before { top: -7px; inset-inline-start: -7px; border-inline-end: 0; border-bottom: 0; }
+.bp-frame::after { bottom: -7px; inset-inline-end: -7px; border-inline-start: 0; border-top: 0; }
+
+/* ── Figures ────────────────────────────────────────────────────── */
+.bp-figure { margin: 2.6rem auto 0; max-width: 1100px; padding-inline: 1rem; }
+.bp-figure--wide { max-width: 1240px; }
+.bp-figure .bp-frame { overflow: hidden; padding: clamp(0.6rem, 1.6vw, 1.1rem); }
+.bp-figure img,
+.bp-figure .bp-plate { width: 100%; height: auto; display: block; }
+/* Technical plates are drawn dark-on-light; in dark mode render them as
+   cyanotype instead of a glowing light card. Covers/photos are exempt. */
+.dark-theme .bp-figure--invert img { filter: invert(1) hue-rotate(180deg) brightness(1.04); }
+.bp-figcaption {
+  font-family: var(--bp-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary, var(--bp-ink-soft));
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+}
+.bp-fignum { color: var(--bp-accent); white-space: nowrap; letter-spacing: 0.04em; }
+
+/* ── Standings encoding ─────────────────────────────────────────── */
+.standing-chip {
+  font-family: var(--bp-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  color: var(--bp-ink);
+  border: 1px solid var(--bp-line-faint);
+  background: transparent;
+  white-space: nowrap;
+}
+.standing-chip::before {
+  content: '';
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 2px;
+  flex: none;
+  box-sizing: border-box;
+}
+.standing-chip--measured::before { background: var(--bp-accent); }
+.standing-chip--proven::before { border: 2px solid var(--bp-accent); }
+.standing-chip--projected::before { border: 2px dashed var(--bp-ink-soft); }
+.standing-chip--proposed::before {
+  border: 1px solid var(--bp-ink-soft);
+  background: repeating-linear-gradient(45deg, var(--bp-ink-soft) 0 1.5px, transparent 1.5px 3.5px);
+}
+.standing-chip--gamble::before { border: 2px dotted var(--bp-ink-soft); }
+
+.bp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  max-width: 1100px;
+  margin: 1.1rem auto 0;
+  padding: 0.55rem 1rem;
+  font-family: var(--bp-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-secondary, var(--bp-ink-soft));
+}
+.bp-legend__title { letter-spacing: 0.1em; text-transform: uppercase; margin-inline-end: 0.3rem; }
+
+/* ── Demoted prose (depth on demand) ────────────────────────────── */
+.bp-details { max-width: 1100px; margin: 1.4rem auto 0; padding-inline: 1rem; }
+.bp-details > summary {
+  cursor: pointer;
+  font-family: var(--bp-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--bp-accent);
+  padding: 0.5rem 0;
+  list-style-position: inside;
+}
+.bp-details[open] > summary { margin-bottom: 0.6rem; }
+
+/* ── Honest stat band (replaces unlabeled marketing multipliers) ── */
+.bp-stats-band { padding: clamp(2rem, 5vh, 3.2rem) 0; }
+.bp-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--bp-line-faint);
+  border-block: 1.5px solid var(--bp-line);
+}
+.bp-stat { background: var(--color-bg, var(--bp-paper-raised)); padding: 1.35rem 1.2rem; }
+.bp-stat__v { font-family: var(--bp-mono); font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.1; color: var(--color-text-primary, var(--bp-ink)); margin: 0 0 0.45rem; }
+.bp-stat__l { font-size: 0.83rem; line-height: 1.5; color: var(--color-text-secondary, var(--bp-ink-soft)); margin: 0.45rem 0 0; }
+.bp-stats-note { font-family: var(--bp-mono); font-size: 0.72rem; color: var(--color-text-tertiary, var(--bp-ink-soft)); margin-top: 0.7rem; }
+
+/* ── Narrowing hero band ────────────────────────────────────────── */
+.nh { max-width: 1240px; margin: 2.4rem auto 0; padding-inline: 1rem; }
+.nh__stage { position: relative; }
+.nh__canvas { display: block; width: 100%; height: clamp(280px, 42vh, 440px); }
+.nh__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.3rem;
+  padding: 0.65rem 0.9rem;
+  border-top: 1.5px solid var(--bp-line);
+  font-family: var(--bp-mono);
+  font-size: 0.74rem;
+  color: var(--color-text-secondary, var(--bp-ink-soft));
+}
+.nh__controls label { display: inline-flex; align-items: center; gap: 0.55rem; }
+.nh__controls input[type='range'] { accent-color: var(--bp-accent); width: clamp(120px, 18vw, 220px); }
+.nh__count { font-variant-numeric: tabular-nums; }
+.nh__caption { margin-inline-start: auto; }
+@media (max-width: 640px) { .nh__caption { margin-inline-start: 0; } }
+
+/* ── Refusal scroll story ───────────────────────────────────────── */
+.rss { max-width: 1160px; margin: 0 auto; padding: 1rem; display: grid; grid-template-columns: minmax(300px, 460px) 1fr; gap: clamp(1.4rem, 4vw, 3.2rem); }
+@media (max-width: 860px) { .rss { grid-template-columns: 1fr; } }
+.rss__visual { position: sticky; top: 90px; align-self: start; }
+@media (max-width: 860px) { .rss__visual { position: static; } }
+.rss__visual svg { display: block; width: 100%; height: auto; }
+.rss__steps { display: flex; flex-direction: column; gap: clamp(2.2rem, 7vh, 4.2rem); padding-block: 1rem 20vh; }
+.rss-step { border-inline-start: 2px solid var(--bp-line-faint); padding-inline-start: 1.1rem; transition: border-color 0.25s ease, opacity 0.25s ease; opacity: 0.55; }
+.rss-step.is-active { border-color: var(--bp-accent); opacity: 1; }
+.rss-step__num { font-family: var(--bp-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--bp-accent); margin: 0 0 0.35rem; }
+.rss-step__title { font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--color-text-primary, var(--bp-ink)); }
+.rss-step__body { font-size: 0.92rem; line-height: 1.65; color: var(--color-text-secondary, var(--bp-ink-soft)); margin: 0; }
+.rss--ring { margin-top: 0.5rem; }
+@media (prefers-reduced-motion: reduce) {
+  .rss-step { opacity: 1; transition: none; }
+}
+
+/* ── Gearbox explorer ───────────────────────────────────────────── */
+.gbx { max-width: 1100px; margin: 2.2rem auto 0; padding: clamp(1rem, 2.5vw, 1.6rem); }
+.gbx__zones { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1.2rem; }
+@media (max-width: 760px) { .gbx__zones { grid-template-columns: 1fr; } }
+.gbx__zone-title { font-family: var(--bp-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary, var(--bp-ink-soft)); margin: 0 0 0.6rem; }
+.gbx__pool, .gbx__train { display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 3rem; align-content: flex-start; }
+.gbx-chip {
+  font-family: var(--bp-mono);
+  font-size: 0.8rem;
+  border: 1.5px solid var(--bp-line);
+  background: var(--bp-paper-raised);
+  color: var(--color-text-primary, var(--bp-ink));
+  border-radius: 5px;
+  padding: 0.42rem 0.65rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.gbx-chip:disabled { opacity: 0.45; cursor: not-allowed; }
+.gbx-chip__k { color: var(--bp-accent); font-weight: 700; }
+.gbx-gear { border: 1.5px solid var(--bp-accent); border-radius: 6px; padding: 0.4rem 0.55rem; display: inline-flex; align-items: center; gap: 0.45rem; background: var(--bp-paper-raised); }
+.gbx-gear__ord { font-family: var(--bp-mono); font-size: 0.68rem; color: var(--bp-accent); }
+.gbx-gear__name { font-size: 0.85rem; }
+.gbx-gear__btns { display: inline-flex; gap: 0.15rem; }
+.gbx-gear__btns button { border: 1px solid var(--bp-line-faint); background: transparent; color: inherit; border-radius: 3px; font-size: 0.7rem; line-height: 1; padding: 0.22rem 0.34rem; cursor: pointer; }
+.gbx__meta { margin-top: 1.1rem; font-family: var(--bp-mono); font-size: 0.78rem; color: var(--color-text-secondary, var(--bp-ink-soft)); display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; align-items: baseline; }
+.gbx__route { font-size: 1.02rem; color: var(--color-text-primary, var(--bp-ink)); }
+.gbx__settle { height: 3px; background: var(--bp-line-faint); border-radius: 2px; overflow: hidden; margin-top: 0.8rem; }
+.gbx__settle-bar { height: 100%; width: 0; background: var(--bp-accent); }
+.gbx.is-settling .gbx__settle-bar { width: 100%; transition: width 0.65s linear; }
+.gbx__reading { margin-top: 0.9rem; font-size: 0.92rem; line-height: 1.65; color: var(--color-text-secondary, var(--bp-ink-soft)); }
+@media (prefers-reduced-motion: reduce) { .gbx.is-settling .gbx__settle-bar { transition: none; width: 100%; } }
+
+/* ── Instrument panels (AGM demo, envelope chart) ───────────────── */
+.inst { max-width: 1100px; margin: 2.2rem auto 0; padding: clamp(1rem, 2.5vw, 1.5rem); }
+.inst__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1rem; margin-bottom: 0.9rem; }
+.inst__title { font-size: 1.02rem; margin: 0; color: var(--color-text-primary, var(--bp-ink)); }
+.inst__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem; font-family: var(--bp-mono); font-size: 0.76rem; color: var(--color-text-secondary, var(--bp-ink-soft)); margin-bottom: 0.9rem; }
+.inst__controls input[type='range'] { accent-color: var(--bp-accent); width: clamp(140px, 22vw, 260px); }
+.inst svg { display: block; width: 100%; height: auto; }
+.inst__note { font-family: var(--bp-mono); font-size: 0.72rem; line-height: 1.6; color: var(--color-text-tertiary, var(--bp-ink-soft)); margin-top: 0.8rem; }
+.inst__readout { font-family: var(--bp-mono); font-size: 0.8rem; overflow-x: auto; margin-top: 0.6rem; }
+.inst__readout table { border-collapse: collapse; }
+.inst__readout td, .inst__readout th { padding: 0.18rem 0.7rem 0.18rem 0; text-align: start; font-weight: 400; white-space: nowrap; }
+.inst__match { color: var(--bp-accent); }
+
+/* ── Cover shelf (the corpus made spatial) ──────────────────────── */
+.bp-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.1rem; margin-top: 1.4rem; }
+.bp-shelf-card { text-decoration: none; color: inherit; display: block; }
+.bp-shelf-card__cover { aspect-ratio: 3 / 4; overflow: hidden; padding: 0 !important; }
+.bp-shelf-card__cover img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.bp-shelf-card__cover--text { display: flex; align-items: center; justify-content: center; padding: 1rem !important; }
+.bp-shelf-card__mono { font-family: var(--bp-mono); font-size: 0.8rem; line-height: 1.55; color: var(--bp-ink); text-align: center; }
+.bp-shelf-card__t { display: block; font-size: 0.88rem; line-height: 1.4; margin-top: 0.55rem; color: var(--color-text-primary, var(--bp-ink)); }
+.bp-shelf-card__d { display: block; font-size: 0.76rem; line-height: 1.5; margin-top: 0.25rem; color: var(--color-text-tertiary, var(--bp-ink-soft)); }
+.bp-shelf-card:hover .bp-shelf-card__t { color: var(--bp-accent); }
+
+/* ── Editorial essays (Perspective) ─────────────────────────────── */
+.essay--editorial .essay__body > p:first-of-type::first-letter {
+  font-size: 3.1em;
+  line-height: 0.85;
+  font-weight: 600;
+  float: inline-start;
+  padding-inline-end: 0.09em;
+  color: var(--bp-accent);
+}
+.essay__meta { font-family: var(--bp-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary, var(--bp-ink-soft)); margin: 0 0 0.9rem; }
+
+/* ── Motion discipline ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bp-anim, .bp-anim * { animation: none !important; transition: none !important; }
+}

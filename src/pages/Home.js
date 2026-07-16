@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
+import NarrowingHero from '../components/visuals/NarrowingHero';
+import CoverShelf from '../components/visuals/CoverShelf';
+import Figure from '../components/Figure';
+import StandingsLegend from '../components/StandingsLegend';
 import './Home.css';
 
 export default function Home() {
@@ -25,11 +29,11 @@ export default function Home() {
         </p>
       </section>
 
+      {/* The Narrowing — the monotone law as a first impression */}
+      <NarrowingHero lang={lang} />
+
       {m.glance && (
-        <figure className="hm-glance">
-          <img src={m.glance.src} alt={m.glance.caption} />
-          <figcaption>{m.glance.caption}</figcaption>
-        </figure>
+        <Figure num="F-00" src={m.glance.src} caption={m.glance.caption} />
       )}
 
       {m.figures && (
@@ -38,11 +42,12 @@ export default function Home() {
             {m.figures.map((f, i) => (
               <div className="hm-tile" key={i}>
                 <p className="hm-tile__v">{f.value}</p>
-                {f.chip && <span className={`hm-chip hm-chip--${f.chip}`}>{f.chipText}</span>}
+                {f.chip && <span className={`standing-chip standing-chip--${f.chip}`}>{f.chipText}</span>}
                 <p className="hm-tile__l">{f.label}</p>
               </div>
             ))}
           </div>
+          <StandingsLegend />
           <p className="hm-note">{m.figuresNote}</p>
         </section>
       )}
@@ -66,15 +71,7 @@ export default function Home() {
         <section className="hm-row">
           <h2 className="hm-h2">{t.corpusTitle}</h2>
           <p className="hm-lead">{m.corpusLead}</p>
-          <div className="hm-docs">
-            {t.corpusDocs.map((doc, i) => (
-              <Link key={i} className="hm-doc" to={`/${lang}/library/assets/${doc.slug}`}>
-                <span className="hm-doc__t">{doc.title}</span>
-                <span className="hm-doc__d">{doc.desc}</span>
-                <span className="hm-doc__a" aria-hidden="true">{arrow}</span>
-              </Link>
-            ))}
-          </div>
+          <CoverShelf docs={t.corpusDocs} lang={lang} />
           <p className="hm-more">
             <Link className="hm-link" to={`/${lang}/library`}>
               {m.corpusMore} {arrow}
