@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import NarrowingHero from '../components/visuals/NarrowingHero';
+import WorksCarousel from '../components/visuals/WorksCarousel';
 import CoverShelf from '../components/visuals/CoverShelf';
 import Figure from '../components/Figure';
 import MoatStrip from '../components/MoatStrip';
@@ -32,6 +33,9 @@ export default function Home() {
 
       {/* The Narrowing — the monotone law as a first impression */}
       <NarrowingHero lang={lang} />
+
+      {/* The front hall — every major work simultaneously available and open */}
+      <WorksCarousel />
 
       {m.glance && (
         <Figure num="F-00" src={m.glance.src} caption={m.glance.caption} />

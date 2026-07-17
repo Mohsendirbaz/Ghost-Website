@@ -9,8 +9,11 @@ import './Page.css';
 
 /**
  * The Memory Wing — dedicated tab for the Memory Module instruments.
- * Same interaction grammar as the Exhibition: cards select, an inline
- * viewer shows the instrument, "open full" escapes to a clean tab.
+ * Rebuilt 2026-07-17 to the open-instrument standard (viewer-first, like
+ * the Simulation Bench): the active instrument is already open on arrival,
+ * the switcher sits on the viewer, and the cards below are documentation,
+ * never a gate. ?view= deep-links a specific instrument (the home carousel
+ * and command palette land here at level one).
  * Files live in public/docs/html/memory/; entries mirror artifacts.js.
  */
 
@@ -54,16 +57,16 @@ export default function MemoryWing() {
   const [active, setActive] = useState(
     INSTRUMENTS.some((i) => i.key === requested) ? requested : 'atlas'
   );
-  const userNavigated = useRef(Boolean(requested));
+  const mounted = useRef(false);
 
   useEffect(() => {
     if (searchParams.get('view') !== active) {
       setSearchParams({ view: active }, { replace: true });
     }
-    if (userNavigated.current) {
+    if (mounted.current) {
       viewerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    userNavigated.current = true;
+    mounted.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
@@ -78,11 +81,53 @@ export default function MemoryWing() {
       <HeroMinimal
         h1={fa ? 'بال حافظه' : 'The Memory Wing'}
         subhead={fa
-          ? 'ماژول حافظه، ابزارمند: حافظه‌ای که بهای ماندگاری‌اش را می‌پردازد، بازیابی‌ای که میثاق دارد، و جست‌وجویی که بافت است. پژوهش در سطح مفهوم؛ فعلاً فقط انگلیسی؛ انضباط جایگاه ادعا برقرار است.'
-          : 'The Memory Module, instrumented: memory that pays for its persistence, retrieval under covenant, search as a governed fabric. Concept-stage research, English-only for now; the standings discipline applies throughout.'}
+          ? 'ماژول حافظه، ابزارمند: حافظه‌ای که بهای ماندگاری‌اش را می‌پردازد، بازیابی‌ای که میثاق دارد، و جست‌وجویی که بافت است. ابزار فعال از لحظهٔ ورود باز است. پژوهش در سطح مفهوم؛ فعلاً فقط انگلیسی؛ انضباط جایگاه ادعا برقرار است.'
+          : 'The Memory Module, instrumented: memory that pays for its persistence, retrieval under covenant, search as a governed fabric. The active instrument is open on arrival. Concept-stage research, English-only for now; the standings discipline applies throughout.'}
       />
 
-      {/* Instrument cards */}
+      {/* Viewer first — the instrument is open on arrival */}
+      <section ref={viewerRef} className="section-block" style={{ scrollMarginTop: '90px', paddingTop: '1rem' }}>
+        <div className="container">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
+            <div role="tablist" aria-label={fa ? 'انتخاب ابزار' : 'Choose an instrument'} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {INSTRUMENTS.map((i) => (
+                <button
+                  key={i.key}
+                  role="tab"
+                  aria-selected={active === i.key}
+                  className={active === i.key ? 'btn btn-primary' : 'btn'}
+                  onClick={() => setActive(i.key)}
+                >
+                  {active === i.key ? '▶ ' : ''}{fa ? i.fa[0] : i.en[0]}
+                </button>
+              ))}
+            </div>
+            <span style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
+              <Link className="btn" to={`/${lang}/artifacts/${inst?.slug}`} style={{ textDecoration: 'none' }}>
+                {fa ? 'صفحهٔ آرتیفکت' : 'Artifact page'}
+              </Link>
+              <a
+                href={`/docs/html/memory/${inst?.file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+              >
+                {fa ? 'تمام‌صفحه ↗' : 'Open full ↗'}
+              </a>
+            </span>
+          </div>
+          <div className="bp-frame" style={{ overflow: 'hidden' }}>
+            <iframe
+              key={active}
+              src={`/docs/html/memory/${inst?.file}`}
+              title={inst ? (fa ? inst.fa[0] : inst.en[0]) : 'Memory instrument'}
+              style={{ width: '100%', height: 'clamp(480px, 82vh, 1000px)', border: 0, display: 'block' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Documentation cards — below the viewer, never a gate */}
       <section className="safety-layers">
         <div className="container">
           <h2 className="section-title">{fa ? 'چهار ابزار' : 'The Four Instruments'}</h2>
@@ -105,39 +150,6 @@ export default function MemoryWing() {
                 </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Inline viewer */}
-      <section ref={viewerRef} className="section-block" style={{ scrollMarginTop: '90px' }}>
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
-            <h2 className="section-title" style={{ margin: 0 }}>
-              {fa ? 'در حال نمایش' : 'Now showing'}: {fa ? inst?.fa[0] : inst?.en[0]}
-            </h2>
-            <span style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
-              <Link className="btn" to={`/${lang}/artifacts/${inst?.slug}`} style={{ textDecoration: 'none' }}>
-                {fa ? 'صفحهٔ آرتیفکت' : 'Artifact page'}
-              </Link>
-              <a
-                href={`/docs/html/memory/${inst?.file}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                {fa ? 'تمام‌صفحه ↗' : 'Open full ↗'}
-              </a>
-            </span>
-          </div>
-          <div className="bp-frame" style={{ overflow: 'hidden' }}>
-            <iframe
-              key={active}
-              src={`/docs/html/memory/${inst?.file}`}
-              title={inst ? (fa ? inst.fa[0] : inst.en[0]) : 'Memory instrument'}
-              style={{ width: '100%', height: 'clamp(420px, 78vh, 900px)', border: 0, display: 'block' }}
-              loading="lazy"
-            />
           </div>
         </div>
       </section>

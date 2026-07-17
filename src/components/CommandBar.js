@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Command } from 'cmdk';
 import { useLang } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { MAJOR_WORKS } from '../data/majorWorks';
 import './CommandBar.css';
 
 /**
@@ -101,6 +102,8 @@ export default function CommandBar() {
     { label: pageLabels.careers,          path: `/${lang}/careers` },
     { label: pageLabels.bio,              path: `/${lang}/bio` },
     { label: pageLabels.finalPlate,       path: `/${lang}/epu` },
+    // Major works — level-one deep links straight into open instruments
+    ...MAJOR_WORKS.map((w) => ({ label: `${w.en.t} · ${w.en.k}`, path: `/${lang}${w.enter}` })),
   ];
 
   return (

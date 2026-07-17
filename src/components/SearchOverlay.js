@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { copy } from '../data/copy';
 import { KB_PARTS as kbParts } from '../data/knowledgeBase';
+import { MAJOR_WORKS } from '../data/majorWorks';
 import './SearchOverlay.css';
 
 // ─── Build static page index ──────────────────────────────────────────────────
@@ -28,6 +29,11 @@ function buildPageIndex(lang) {
     { label: t.careers,          path: `/${lang}/careers`,            type: 'page' },
     { label: t.bio,              path: `/${lang}/bio`,                type: 'page' },
     { label: t.finalPlate,       path: `/${lang}/epu`,                type: 'page' },
+    // Major works — level-one deep links straight into open instruments
+    ...MAJOR_WORKS.map((w) => {
+      const l = lang === 'fa' ? w.fa : w.en;
+      return { label: `${l.t} · ${l.k}`, path: `/${lang}${w.enter}`, type: 'page' };
+    }),
   ];
 }
 
