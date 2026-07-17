@@ -19,6 +19,8 @@
 - [x] **State-management / navigability repair** — root cause found: the site had **no scroll reset on route change**, so every navigation landed mid-page at the previous scroll position, which reads exactly as "circular, non-navigable." `ScrollToTop` added at the router root. Verified the other loops: header mega-menu already closes on navigation, palette/search close on select, and the fact widget is fixed above. A top-level `ErrorBoundary` now catches render crashes instead of blanking the app.
 - [x] **Basic scaffolding** — Privacy and Terms pages (bilingual, accurate to what the site actually does; footer's dead labels now link to them), a real 404 page instead of a silent redirect, `sitemap.xml` generated on every build + `robots.txt` pointer, canonical tags, `.well-known/security.txt`, and a GitHub Actions CI (build + tests + the exhibition coverage assertion) at `.github/workflows/ci.yml`.
 
+- [x] **Careers tab** — `/en/careers` + `/fa/careers`, wired across all six navigation surfaces. Eight founding-role openings mapped onto the stack; the fifteen skillsets selected from the program's own Faculty of Fifty roster (every P1 technical cluster, roster codes shown). One-step application: choose resume → one button → the visitor's own mail client opens addressed to dirbaz.sharif@gmail.com with everything prefilled and an attach reminder — nothing stored on the site, no third parties.
+
 ## Open — yours ⚠
 
 - [ ] **`git add -A && git commit && git push`** — nothing above is on the live site until you push; this is why the Memory instruments were "not found on web." Vercel deploys from the push.

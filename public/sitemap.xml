@@ -61,6 +61,16 @@
     <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/memory"/>
   </url>
   <url>
+    <loc>https://ghost-website-kappa.vercel.app/en/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/careers"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/careers"/>
+  </url>
+  <url>
+    <loc>https://ghost-website-kappa.vercel.app/fa/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/careers"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/careers"/>
+  </url>
+  <url>
     <loc>https://ghost-website-kappa.vercel.app/en/perspective</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/perspective"/>
     <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/perspective"/>

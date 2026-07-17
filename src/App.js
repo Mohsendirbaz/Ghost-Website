@@ -38,6 +38,7 @@ import Exhibition from './pages/Exhibition';
 import { Privacy, Terms } from './pages/Legal';
 import NotFound from './pages/NotFound';
 import MemoryWing from './pages/MemoryWing';
+import Careers from './pages/Careers';
 import ErrorBoundary from './components/ErrorBoundary';
 import './styles/global.css';
 import './styles/blueprint.css';
@@ -60,6 +61,7 @@ const PAGE_TITLES = {
   library: { en: 'Document Archive', fa: 'آرشیو اسناد' },
   'multi-agent-system': { en: 'Multi-Agent System', fa: 'سیستم چند-عامله' },
   bio: { en: 'Bio — Dr. Mohsen Dirbaz', fa: 'زندگی‌نامه — دکتر محسن دیرباز' },
+  careers: { en: 'Careers', fa: 'فرصت‌های همکاری' },
   privacy: { en: 'Privacy', fa: 'حریم خصوصی' },
   terms: { en: 'Terms of Use', fa: 'شرایط استفاده' },
 };
@@ -229,6 +231,8 @@ function AppShell() {
           <Route path="/fa/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           <Route path="/en/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
           <Route path="/fa/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
+          <Route path="/en/careers" element={<PageTransition><Careers /></PageTransition>} />
+          <Route path="/fa/careers" element={<PageTransition><Careers /></PageTransition>} />
           <Route path="/en/privacy" element={<PageTransition><Privacy /></PageTransition>} />
           <Route path="/fa/privacy" element={<PageTransition><Privacy /></PageTransition>} />
           <Route path="/en/terms" element={<PageTransition><Terms /></PageTransition>} />

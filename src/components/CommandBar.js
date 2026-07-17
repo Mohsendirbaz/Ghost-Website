@@ -75,6 +75,7 @@ export default function CommandBar() {
     methods:          'Research Methods',
     exhibition:       'The Exhibition',
     memoryWing:       'Memory Wing',
+    careers:          'Careers',
     bio:              'Bio',
   };
 
@@ -94,6 +95,7 @@ export default function CommandBar() {
     { label: pageLabels.methods,          path: `/${lang}/methods` },
     { label: pageLabels.exhibition,       path: `/${lang}/exhibition` },
     { label: pageLabels.memoryWing,       path: `/${lang}/memory` },
+    { label: pageLabels.careers,          path: `/${lang}/careers` },
     { label: pageLabels.bio,              path: `/${lang}/bio` },
   ];
 

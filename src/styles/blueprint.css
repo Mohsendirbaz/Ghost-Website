@@ -331,3 +331,27 @@
 .tl-cat__title { font-size: 1.05rem; margin: 0 0 0.9rem; color: var(--color-text-primary, var(--bp-ink)); }
 .tl-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.5rem; }
 .tl-meta__type { font-family: var(--bp-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--color-text-tertiary, var(--bp-ink-soft)); }
+
+/* ── Careers page ───────────────────────────────────────────────────── */
+.car-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+.car-card { display: flex; flex-direction: column; gap: 0.55rem; padding: 1.1rem 1.15rem !important; }
+.car-card__codes { font-family: var(--bp-mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--bp-accent); }
+.car-card__title { font-size: 1.02rem; margin: 0; color: var(--color-text-primary, var(--bp-ink)); }
+.car-card__line { font-size: 0.85rem; line-height: 1.6; color: var(--color-text-secondary, var(--bp-ink-soft)); margin: 0; }
+.car-card__apply { margin-top: auto; align-self: flex-start; font-family: var(--bp-mono); font-size: 0.76rem; color: var(--bp-accent); background: none; border: none; padding: 0.2rem 0; cursor: pointer; }
+.car-card__apply:hover { text-decoration: underline; }
+.car-skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.7rem; margin-top: 1.1rem; }
+.car-skill { display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.85rem !important; }
+.car-skill__code { font-family: var(--bp-mono); font-size: 0.64rem; color: var(--bp-accent); white-space: nowrap; }
+.car-skill__name { font-size: 0.83rem; line-height: 1.45; color: var(--color-text-primary, var(--bp-ink)); flex: 1; }
+.car-apply { padding: clamp(1.2rem, 3vw, 2rem) !important; margin-top: 1.4rem; }
+.car-apply__lead { font-size: 0.92rem; line-height: 1.65; color: var(--color-text-secondary, var(--bp-ink-soft)); max-width: 70ch; }
+.car-apply__row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.9rem 1.2rem; margin-top: 1.1rem; }
+.car-apply__field { display: flex; flex-direction: column; gap: 0.35rem; font-family: var(--bp-mono); font-size: 0.72rem; color: var(--color-text-tertiary, var(--bp-ink-soft)); }
+.car-apply__field select { font-family: inherit; font-size: 0.88rem; padding: 0.5rem 0.7rem; border: 1.5px solid var(--bp-line); border-radius: 6px; background: var(--bp-paper-raised); color: var(--color-text-primary, var(--bp-ink)); min-width: 230px; }
+.car-apply__file { font-family: var(--bp-mono); font-size: 0.8rem; padding: 0.55rem 0.9rem; border: 1.5px dashed var(--bp-line); border-radius: 6px; background: var(--bp-paper-raised); color: var(--color-text-primary, var(--bp-ink)); cursor: pointer; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.car-apply__file:hover { border-color: var(--bp-accent); color: var(--bp-accent); }
+.car-apply__attach { margin-top: 1rem; font-size: 0.9rem; line-height: 1.6; color: var(--bp-accent); font-weight: 500; }
+.car-apply__direct { margin-top: 1.1rem; font-family: var(--bp-mono); font-size: 0.78rem; color: var(--color-text-secondary, var(--bp-ink-soft)); }
+.car-apply__direct a { color: var(--bp-accent); text-decoration: none; }
+.car-apply__direct a:hover { text-decoration: underline; }

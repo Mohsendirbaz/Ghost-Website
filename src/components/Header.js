@@ -264,6 +264,7 @@ export default function Header() {
         { label: t.science,    to: `/${lang}/science`,    iconKey: 'science',    desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
         { label: t.safety,     to: `/${lang}/safety`,     iconKey: 'safety',     desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
         { label: t.bio,        to: `/${lang}/bio`,        iconKey: 'bio',        desc: isRtl ? 'زندگینامه بنیان‌گذار' : 'Founder biography' },
+        { label: t.careers,    to: `/${lang}/careers`,    iconKey: 'contact',    desc: isRtl ? 'نقش‌هایی که می‌جوییم' : 'Roles we are looking to fill' },
         { label: t.contact,    to: `/${lang}/contact`,    iconKey: 'contact',    desc: isRtl ? 'تماس با ما' : 'Get in touch' },
       ],
     },

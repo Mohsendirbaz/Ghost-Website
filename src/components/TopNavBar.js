@@ -21,6 +21,7 @@ export default function TopNavBar() {
         { label: t.science,    to: `/${lang}/science` },
         { label: t.safety,     to: `/${lang}/safety` },
         { label: t.bio,        to: `/${lang}/bio` },
+        { label: t.careers,    to: `/${lang}/careers` },
         { label: t.contact,    to: `/${lang}/contact` },
       ],
     },
