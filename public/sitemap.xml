@@ -21,16 +21,6 @@
     <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/technology"/>
   </url>
   <url>
-    <loc>https://ghost-website-kappa.vercel.app/en/science</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/science"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/science"/>
-  </url>
-  <url>
-    <loc>https://ghost-website-kappa.vercel.app/fa/science</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/science"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/science"/>
-  </url>
-  <url>
     <loc>https://ghost-website-kappa.vercel.app/en/safety</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ghost-website-kappa.vercel.app/en/safety"/>
     <xhtml:link rel="alternate" hreflang="fa" href="https://ghost-website-kappa.vercel.app/fa/safety"/>

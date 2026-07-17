@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
 import Breadcrumb from '../components/Breadcrumb';
 import { HeroMinimal } from '../components/Hero';
@@ -49,6 +50,7 @@ const THESES = [
 
 export default function MemoryWing() {
   const { lang } = useLang();
+  const { isDark } = useTheme();
   const fa = lang === 'fa';
   const [searchParams, setSearchParams] = useSearchParams();
   const viewerRef = useRef(null);
@@ -71,6 +73,7 @@ export default function MemoryWing() {
   }, [active]);
 
   const inst = INSTRUMENTS.find((i) => i.key === active);
+  const src = `/docs/html/memory/${inst?.file}?theme=${isDark ? 'dark' : 'light'}`;
 
   return (
     <main id="main-content">
@@ -107,7 +110,7 @@ export default function MemoryWing() {
                 {fa ? 'صفحهٔ آرتیفکت' : 'Artifact page'}
               </Link>
               <a
-                href={`/docs/html/memory/${inst?.file}`}
+                href={src}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn"
@@ -118,8 +121,8 @@ export default function MemoryWing() {
           </div>
           <div className="bp-frame" style={{ overflow: 'hidden' }}>
             <iframe
-              key={active}
-              src={`/docs/html/memory/${inst?.file}`}
+              key={`${active}-${isDark ? 'd' : 'l'}`}
+              src={src}
               title={inst ? (fa ? inst.fa[0] : inst.en[0]) : 'Memory instrument'}
               style={{ width: '100%', height: 'clamp(480px, 82vh, 1000px)', border: 0, display: 'block' }}
             />

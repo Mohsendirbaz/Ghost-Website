@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
+import { getNavGroups } from '../data/navConfig';
 import SearchOverlay from './SearchOverlay';
 import './Header.css';
 
@@ -182,7 +184,15 @@ function MegaMenuPanel({ open, groups, onClose, lang }) {
     if (focusableEls.length) focusableEls[0].focus();
   }, [open]);
 
-  return (
+  // Rendered through a portal to <body>. The header carries a backdrop-filter,
+  // which establishes a containing block for position:fixed descendants — so a
+  // backdrop rendered inside the header only covered the header strip and never
+  // received clicks below the open menu. Portaling to body restores true
+  // viewport-fixed positioning: the backdrop covers the whole page and any
+  // outside click (including below the panel) collapses the menu.
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <>
       {open && (
         <div className="header__backdrop" onClick={onClose} aria-hidden="true" />
@@ -217,7 +227,8 @@ function MegaMenuPanel({ open, groups, onClose, lang }) {
           ))}
         </div>
       </nav>
-    </>
+    </>,
+    document.body
   );
 }
 
@@ -252,47 +263,10 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Original 3-column nav groups (Company / Research / Resources)
+  // 3-column nav groups (Company / Research / Resources) — shared source of
+  // truth with the multi-level TopNavBar, so the two menus never drift.
   const isRtl = lang === 'fa';
-  const navGroups = [
-    {
-      id: 'company',
-      label: isRtl ? 'شرکت' : 'Company',
-      links: [
-        { label: t.home,       to: `/${lang}`,            iconKey: 'home',       desc: isRtl ? 'صفحه اصلی' : 'Start here' },
-        { label: t.technology, to: `/${lang}/technology`, iconKey: 'technology', desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
-        { label: t.science,    to: `/${lang}/science`,    iconKey: 'science',    desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
-        { label: t.safety,     to: `/${lang}/safety`,     iconKey: 'safety',     desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
-        { label: t.bio,        to: `/${lang}/bio`,        iconKey: 'bio',        desc: isRtl ? 'زندگینامه بنیان‌گذار' : 'Founder biography' },
-        { label: t.careers,    to: `/${lang}/careers`,    iconKey: 'contact',    desc: isRtl ? 'نقش‌هایی که می‌جوییم' : 'Roles we are looking to fill' },
-        { label: t.contact,    to: `/${lang}/contact`,    iconKey: 'contact',    desc: isRtl ? 'تماس با ما' : 'Get in touch' },
-      ],
-    },
-    {
-      id: 'research',
-      label: isRtl ? 'تحقیق و دانش' : 'Research',
-      links: [
-        { label: t.perspective,   to: `/${lang}/perspective`,    iconKey: 'perspective',   desc: isRtl ? 'دیدگاه صنعت' : 'Industry perspective' },
-        { label: t.architecture,  to: `/${lang}/architecture`,   iconKey: 'architecture',  desc: isRtl ? 'معماری سیستم' : 'System architecture deep-dive' },
-        { label: t.knowledgeBase, to: `/${lang}/knowledge-base`, iconKey: 'knowledgeBase', desc: isRtl ? '۸ بخش · ۴۳ فصل' : '8 parts · 43 chapters' },
-        { label: t.multiAgentSystem, to: `/${lang}/multi-agent-system`, iconKey: 'multiAgent', desc: isRtl ? 'آزمایشگاه پژوهشی رویدادمحور' : 'Event-sourced research laboratory' },
-        { label: t.methods, to: `/${lang}/methods`, iconKey: 'science', desc: isRtl ? 'فرامتد، برنامه اکتشاف و ممیزی بیرونی' : 'Meta-method, discovery program & external audit' },
-      ],
-    },
-    {
-      id: 'resources',
-      label: isRtl ? 'منابع' : 'Resources',
-      links: [
-        { label: t.exhibition,      to: `/${lang}/exhibition`,     iconKey: 'exhibition',      desc: isRtl ? 'نرم‌افزار پژوهشی، زنده در مرورگر' : 'The research software, running live' },
-        { label: t.memoryWing, to: `/${lang}/memory`, iconKey: 'libraryAssets', desc: isRtl ? 'ابزارهای ماژول حافظه، زنده' : 'Memory Module instruments, live' },
-        { label: t.simulation, to: `/${lang}/simulation`, iconKey: 'exhibition', desc: isRtl ? 'شبیه‌سازی‌های سطح برنامه‌ریزی، زنده' : 'Planning-stack simulations, live' },
-        { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
-        { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
-        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۶۰ سند آرشیو' : '60 archived documents' },
-        { label: t.finalPlate,      to: `/${lang}/epu`,            iconKey: 'exhibition',      desc: isRtl ? 'پوستر EPU — آخرین صفحهٔ سایت' : 'The EPU poster — the site’s last page' },
-      ],
-    },
-  ];
+  const navGroups = getNavGroups(t, lang, isRtl);
 
   return (
     <header className={`header${scrolled ? ' header--scrolled' : ''}${menuOpen ? ' header--menu-open' : ''}`} role="banner">

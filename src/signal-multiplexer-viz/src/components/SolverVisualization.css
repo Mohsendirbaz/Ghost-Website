@@ -5,13 +5,13 @@
 .structure-detection {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--x-line);
 }
 
 .structure-detection h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .structure-properties {
@@ -26,20 +26,20 @@
   flex-direction: column;
   align-items: center;
   padding: 0.75rem;
-  background: #f5f5f5;
+  background: var(--x-panel3);
   border-radius: 6px;
   border: 2px solid transparent;
   transition: all 0.3s;
 }
 
 .property.true {
-  background: #e8f5e9;
-  border-color: #4CAF50;
+  background: var(--x-good-soft);
+  border-color: var(--x-good);
 }
 
 .property.false {
-  background: #ffebee;
-  border-color: #f44336;
+  background: var(--x-bad-soft);
+  border-color: var(--x-bad);
   opacity: 0.6;
 }
 
@@ -49,23 +49,23 @@
 }
 
 .property.true .property-icon {
-  color: #4CAF50;
+  color: var(--x-good);
 }
 
 .property.false .property-icon {
-  color: #f44336;
+  color: var(--x-bad);
 }
 
 .property-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #333;
+  color: var(--x-ink);
   text-align: center;
 }
 
 .structure-class {
   padding: 1rem;
-  background: #f0f4ff;
+  background: var(--x-accent-soft);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -74,32 +74,32 @@
 
 .structure-class .label {
   font-weight: 600;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .structure-class .value {
   flex: 1;
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
 }
 
 .solver-selection {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--x-line);
 }
 
 .solver-selection h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .solver-card {
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
   padding: 1rem;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .solver-header {
@@ -112,7 +112,7 @@
 .solver-name {
   font-weight: 700;
   font-size: 1rem;
-  color: #333;
+  color: var(--x-ink);
 }
 
 .solver-type {
@@ -124,7 +124,7 @@
 }
 
 .type-convex {
-  background: #e8f5e9;
+  background: var(--x-good-soft);
   color: #2e7d32;
 }
 
@@ -134,18 +134,18 @@
 }
 
 .type-multi-objective {
-  background: #e3f2fd;
+  background: var(--x-accent-soft);
   color: #1565c0;
 }
 
 .type-heuristic {
-  background: #f3e5f5;
+  background: var(--x-accent-soft);
   color: #6a1b9a;
 }
 
 .solver-description {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--x-mut);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -164,12 +164,12 @@
 
 .property-label {
   font-weight: 600;
-  color: #555;
+  color: var(--x-sec);
   font-size: 0.85rem;
 }
 
 .property-value code {
-  background: #fff;
+  background: var(--x-panel);
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
   font-family: 'Courier New', monospace;
@@ -183,7 +183,7 @@
 
 .solver-guarantees li {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--x-mut);
   margin-bottom: 0.2rem;
 }
 
@@ -194,7 +194,7 @@
 .solution-results h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .solution-status {
@@ -210,12 +210,12 @@
 }
 
 .status-badge.feasible {
-  background: #e8f5e9;
+  background: var(--x-good-soft);
   color: #2e7d32;
 }
 
 .status-badge.infeasible {
-  background: #ffebee;
+  background: var(--x-bad-soft);
   color: #c62828;
 }
 
@@ -230,26 +230,26 @@
   display: flex;
   flex-direction: column;
   padding: 0.75rem;
-  background: #f5f5f5;
+  background: var(--x-panel3);
   border-radius: 6px;
 }
 
 .metric-label {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--x-mut);
   margin-bottom: 0.3rem;
 }
 
 .metric-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
 }
 
 .allocation-summary h4 {
   margin: 0 0 0.75rem 0;
   font-size: 0.95rem;
-  color: #555;
+  color: var(--x-sec);
 }
 
 .allocations {
@@ -263,49 +263,49 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 4px;
 }
 
 .allocation-channel {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #555;
+  color: var(--x-sec);
   min-width: 100px;
 }
 
 .allocation-value {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
   min-width: 50px;
 }
 
 .allocation-bar {
   flex: 1;
   height: 8px;
-  background: #e0e0e0;
+  background: var(--x-line);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .allocation-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, var(--x-accent) 0%, #764ba2 100%);
   transition: width 0.5s;
 }
 
 .solver-philosophy {
   margin-top: 1.5rem;
   padding: 1rem;
-  background: #f0f4ff;
+  background: var(--x-accent-soft);
   border-radius: 6px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .solver-philosophy h4 {
   margin: 0 0 0.5rem 0;
-  color: #667eea;
+  color: var(--x-accent);
   font-size: 1rem;
 }
 
@@ -313,5 +313,5 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--x-sec);
 }

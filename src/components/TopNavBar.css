@@ -1,6 +1,7 @@
-/* ─── Top Navigation Bar ─────────────────────────────────────────────────────
-   Fixed strip above the main header showing all nav items.
-   Horizontally scrollable on mobile / iPhone.
+/* ─── Top Navigation Bar — multi-level ───────────────────────────────────────
+   Fixed strip above the main header. Shows a Home link + three group triggers
+   (Company / Research / Resources); each opens a dropdown mirroring the full
+   mega-menu. Fed by src/data/navConfig.js.
    ─────────────────────────────────────────────────────────────────────────── */
 
 .topnav {
@@ -22,109 +23,115 @@
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
-/* ─── Scrollable track ── */
-
 .topnav__track {
   display: flex;
   align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;       /* Firefox */
+  overflow: visible;
   padding: 0 var(--space-3);
-  gap: 0;
-  /* Prevent height collapse on iPhone */
-  min-height: var(--topbar-height, 36px);
-}
-
-.topnav__track::-webkit-scrollbar {
-  display: none;               /* Chrome / Safari */
-}
-
-/* ─── Group (with separator) ── */
-
-.topnav__group {
-  display: flex;
-  align-items: center;
   gap: 2px;
-  flex-shrink: 0;
+  min-height: var(--topbar-height, 36px);
+  width: 100%;
 }
 
-.topnav__sep {
-  display: inline-block;
-  width: 1px;
-  height: 16px;
-  background: rgba(255, 255, 255, 0.15);
-  margin: 0 var(--space-2);
-  flex-shrink: 0;
-}
-
-/* ─── Individual links ── */
-
-.topnav__link {
+/* ─── Home quick link ── */
+.topnav__home {
   display: inline-flex;
   align-items: center;
-  padding: 0 10px;
   height: var(--topbar-height, 36px);
+  padding: 0 12px;
   font-size: 11.5px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   white-space: nowrap;
   border-radius: 0;
   transition: color 0.15s, background 0.15s;
-  flex-shrink: 0;
-  /* Tap target larger than visual on mobile */
-  position: relative;
 }
+.topnav__home:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
 
-.topnav__link:hover {
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.06);
+/* ─── Group + trigger ── */
+.topnav__group { position: relative; display: flex; align-items: stretch; }
+
+.topnav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: var(--topbar-height, 36px);
+  padding: 0 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.65);
+  background: transparent;
+  border: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
 }
+.topnav__trigger:hover,
+.topnav__trigger.is-open { color: #fff; background: rgba(255, 255, 255, 0.08); }
 
-.topnav__link--active {
-  color: var(--color-primary, #ff6b35);
-  font-weight: 600;
-}
+.topnav__caret { transition: transform 0.18s ease; opacity: 0.7; }
+.topnav__trigger.is-open .topnav__caret { transform: rotate(180deg); }
 
-.topnav__link--active::after {
-  content: '';
+.topnav__link--active { color: var(--color-primary, #ff6b35) !important; font-weight: 600; }
+
+/* ─── Dropdown menu ── */
+.topnav__menu {
   position: absolute;
-  bottom: 0;
-  left: 10px;
-  right: 10px;
-  height: 2px;
-  background: var(--color-primary, #ff6b35);
-  border-radius: 1px 1px 0 0;
+  top: 100%;
+  inset-inline-start: 0;
+  min-width: 260px;
+  max-width: 340px;
+  background: var(--megamenu-bg, #12141c);
+  border: 1px solid var(--border-base, rgba(0, 0, 0, 0.12));
+  border-top: 2px solid var(--color-primary, #ff6b35);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+  padding: 6px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  z-index: 1002;
+}
+.topnav__menu.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Keep last group's panel from overflowing the viewport edge */
+.topnav__group:last-child .topnav__menu { inset-inline-start: auto; inset-inline-end: 0; }
+
+.topnav__menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  text-decoration: none;
+  color: var(--color-text-primary, #1a1f2e);
+  transition: background 0.14s ease;
+}
+.topnav__menu-item:hover { background: var(--header-menu-hover-bg, rgba(255, 107, 53, 0.08)); }
+.topnav__menu-item.is-active { background: var(--header-nav-active-bg, rgba(255, 107, 53, 0.1)); }
+.topnav__menu-item.is-active .topnav__menu-label { color: var(--color-primary, #ff6b35); }
+
+.topnav__menu-label { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+.topnav__menu-desc {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--color-text-secondary, #667085);
+  font-family: var(--bp-mono, ui-monospace, monospace);
 }
 
-/* RTL: flip the underline position (inset-inline would be ideal but keep it simple) */
-.topnav--rtl .topnav__link--active::after {
-  left: 10px;
-  right: 10px;
+/* ─── Small screens: triggers scroll horizontally; menus stay reachable ── */
+@media (max-width: 640px) {
+  .topnav__track { overflow-x: auto; scrollbar-width: none; }
+  .topnav__track::-webkit-scrollbar { display: none; }
+  .topnav__menu { position: fixed; inset-inline: 8px; min-width: 0; max-width: none; top: calc(var(--topbar-height, 36px) + env(safe-area-inset-top, 0px)); }
+  .topnav__group:last-child .topnav__menu { inset-inline-end: 8px; }
 }
 
-/* ─── Desktop: show labels (already visible — ensure no overflow clipping) ── */
 @media (min-width: 900px) {
-  .topnav__track {
-    padding: 0 var(--space-6);
-  }
-
-  .topnav__link {
-    padding: 0 12px;
-  }
-}
-
-/* ─── iPhone / small screens: comfortable touch scroll ── */
-@media (max-width: 480px) {
-  .topnav__link {
-    padding: 0 8px;
-    font-size: 11px;
-  }
-
-  .topnav__sep {
-    margin: 0 var(--space-1);
-  }
+  .topnav__track { padding: 0 var(--space-6); }
 }

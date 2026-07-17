@@ -82,8 +82,8 @@ export default function Perspective() {
           : 'می‌خواهید ببینید این تحقیق چگونه به سیلیکون تبدیل شد؟'}
         cta1={t.ctaBtn}
         cta1To={`/${lang}/technology`}
-        cta2={lang === 'en' ? 'Our Science' : 'علم ما'}
-        cta2To={`/${lang}/science`}
+        cta2={lang === 'en' ? 'Our Technology' : 'فناوری ما'}
+        cta2To={`/${lang}/technology`}
       />
     </main>
   );

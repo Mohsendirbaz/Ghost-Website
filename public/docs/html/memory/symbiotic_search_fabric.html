@@ -4,20 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Symbiotic Search Fabric — a co-adaptive, multi-coupled-tenant, client-owned, agent-operated, time-bounded search architecture</title>
+<script>
+/* Embedded-shell theme sync: ?theme=dark|light pins the palette before first paint. */
+(function(){try{var t=new URLSearchParams(location.search).get('theme');
+if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
 <style>
   :root{
-    --bg:#0A101C; --panel:#0E1626; --panel2:#121C30; --panel3:#16223A;
-    --frame:#2A3A5C; --hair:#22304B;
-    --ink:#E9F0FC; --sec:#A7B6D4; --mut:#6E7F9F;
-    --q:#4E9AF0;        /* query / time flow   */
-    --x:#F0A81C;        /* experience flow      */
-    --d:#2FBE8A;        /* design / evolution   */
-    --v:#9085E9;        /* coupling membrane    */
-    --r:#E66767;        /* refusal / governance */
-    --g:#C9A86A;        /* charter / sovereignty*/
+    color-scheme: light;
+    --bg:#f7f6f1; --panel:#fdfcf8; --panel2:#f2f1ea; --panel3:#eae8dd;
+    --frame:rgba(20,49,79,.30); --hair:rgba(20,49,79,.14);
+    --ink:#14314f; --sec:#3d5a78; --mut:#5f7d99;
+    --q:#2a78d6;        /* query / time flow   */
+    --x:#c9761f;        /* experience flow      */
+    --d:#12946b;        /* design / evolution   */
+    --v:#7a6fd0;        /* coupling membrane    */
+    --r:#c2483a;        /* refusal / governance */
+    --g:#8a6f3a;        /* charter / sovereignty*/
     --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#0b1626; --panel:#101f36; --panel2:#0e1b30; --panel3:#16243c;
+      --frame:rgba(219,231,244,.30); --hair:rgba(219,231,244,.14);
+      --ink:#dbe7f4; --sec:#a9bfd6; --mut:#7e97b0;
+      --q:#6fb1ff; --x:#ffb066; --d:#3fd2a0; --v:#b3a4ee; --r:#ff8d7e; --g:#d9c08a;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#0b1626; --panel:#101f36; --panel2:#0e1b30; --panel3:#16243c;
+    --frame:rgba(219,231,244,.30); --hair:rgba(219,231,244,.14);
+    --ink:#dbe7f4; --sec:#a9bfd6; --mut:#7e97b0;
+    --q:#6fb1ff; --x:#ffb066; --d:#3fd2a0; --v:#b3a4ee; --r:#ff8d7e; --g:#d9c08a;
+    }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
   .wrap{max-width:1640px;margin:0 auto;padding:34px 26px 60px}

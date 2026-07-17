@@ -2,9 +2,9 @@
 
 .vf-preamble {
   margin: 0 0 1rem;
-  color: #555;
+  color: var(--x-sec);
   line-height: 1.5;
-  border-left: 3px solid #2b6cb0;
+  border-left: 3px solid var(--x-blue);
   padding-left: 0.75rem;
 }
 
@@ -18,8 +18,8 @@
 .vf-chip {
   flex: 1 1 0;
   min-width: 84px;
-  background: #f6f7fb;
-  border: 1px solid #ddd;
+  background: var(--x-panel2);
+  border: 1px solid var(--x-line);
   border-left-width: 4px;
   border-radius: 6px;
   padding: 0.5rem 0.6rem;
@@ -31,7 +31,7 @@
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
-.vf-chip-l { font-size: 0.7rem; color: #777; text-transform: uppercase; letter-spacing: 0.03em; }
+.vf-chip-l { font-size: 0.7rem; color: var(--x-faint); text-transform: uppercase; letter-spacing: 0.03em; }
 
 .vf-reg {
   display: flex;
@@ -42,12 +42,12 @@
   font-size: 0.78rem;
   white-space: nowrap;
 }
-.vf-reg.ok { background: #e8f7ee; color: #1e5631; border: 1px solid #228B22; }
-.vf-reg.bad { background: #fdecea; color: #9b2c2c; border: 1px solid #c53030; }
+.vf-reg.ok { background: var(--x-good-soft); color: #1e5631; border: 1px solid #228B22; }
+.vf-reg.bad { background: var(--x-bad-soft); color: #9b2c2c; border: 1px solid #c53030; }
 
 .vf-rerun-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
 .vf-rerun {
-  background: #2b6cb0;
+  background: var(--x-blue);
   color: white;
   border: none;
   border-radius: 6px;
@@ -57,11 +57,11 @@
   cursor: pointer;
 }
 .vf-rerun:hover { background: #245a96; }
-.vf-seed { font-size: 0.72rem; color: #999; font-variant-numeric: tabular-nums; }
+.vf-seed { font-size: 0.72rem; color: var(--x-faint); font-variant-numeric: tabular-nums; }
 
 .vf-list { list-style: none; margin: 0; padding: 0; }
 .vf-item {
-  border-bottom: 1px solid #eef0f4;
+  border-bottom: 1px solid var(--x-panel3);
   padding: 0.6rem 0;
 }
 .vf-item:last-child { border-bottom: none; }
@@ -69,12 +69,12 @@
 .vf-item-head { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.3rem; }
 .vf-id {
   font-weight: 800;
-  color: #2b6cb0;
+  color: var(--x-blue);
   font-variant-numeric: tabular-nums;
   font-size: 0.82rem;
   white-space: nowrap;
 }
-.vf-title { flex: 1; font-weight: 600; color: #333; }
+.vf-title { flex: 1; font-weight: 600; color: var(--x-ink); }
 .vf-badge {
   display: inline-block;
   color: white;
@@ -85,14 +85,14 @@
   white-space: nowrap;
 }
 
-.vf-accept { color: #777; font-size: 0.78rem; margin-bottom: 0.35rem; }
+.vf-accept { color: var(--x-faint); font-size: 0.78rem; margin-bottom: 0.35rem; }
 .vf-k {
   display: inline-block;
   font-size: 0.64rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #aaa;
-  border: 1px solid #ddd;
+  border: 1px solid var(--x-line);
   border-radius: 3px;
   padding: 0 0.3rem;
   margin-right: 0.35rem;
@@ -102,18 +102,18 @@
 .vf-metric {
   display: inline-flex;
   flex-direction: column;
-  background: #f6f7fb;
+  background: var(--x-panel2);
   border-radius: 5px;
   padding: 0.3rem 0.5rem;
 }
-.vf-mk { font-size: 0.66rem; color: #888; }
-.vf-mv { font-size: 0.8rem; font-weight: 700; color: #333; font-variant-numeric: tabular-nums; }
+.vf-mk { font-size: 0.66rem; color: var(--x-faint); }
+.vf-mv { font-size: 0.8rem; font-weight: 700; color: var(--x-ink); font-variant-numeric: tabular-nums; }
 
 .vf-caveat {
   color: #8a6d1f;
   font-size: 0.76rem;
   line-height: 1.4;
-  background: #fdf6e3;
+  background: var(--x-warn-soft);
   border-left: 3px solid #DAA520;
   padding: 0.35rem 0.6rem;
   border-radius: 0 4px 4px 0;

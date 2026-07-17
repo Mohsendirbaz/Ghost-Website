@@ -873,26 +873,6 @@ export const CRITICAL_ASSETS = {
                     processingEstimate: '2 hours',
                     tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving'],
                     priority: 6
-                },
-                {
-                    id: 'still-a-worm',
-                    filename: 'Still a Worm.pdf',
-                    slug: 'still-a-worm',
-                    title: {
-                        en: 'Still a Worm',
-                        fa: 'هنوز یک کرم'
-                    },
-                    description: {
-                        en: 'Technical analysis and research on worm malware and cybersecurity implications',
-                        fa: 'تحلیل فنی و تحقیق در مورد بدافزار کرم و پیامدهای امنیت سایبری'
-                    },
-                    type: 'pdf',
-                    lang: 'en',
-                    targetUrl: '/docs/pdf/Still a Worm.pdf',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '2 hours',
-                    tags: ['security', 'malware', 'worm', 'cybersecurity', 'analysis'],
-                    priority: 7
                 }
             ]
         }

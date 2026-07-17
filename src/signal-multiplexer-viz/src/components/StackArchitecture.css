@@ -8,7 +8,7 @@
   padding: 0.4rem 0.6rem;
   border-radius: 6px;
 }
-.sa-law.authority { background: #eef2ff; color: #4338ca; }
+.sa-law.authority { background: var(--x-accent-soft); color: var(--x-blue); }
 .sa-law.consequence { background: #fef3e8; color: #b45309; text-align: right; }
 
 .sa-lanes { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -19,12 +19,12 @@
   gap: 0.75rem;
   padding: 0.55rem 0.75rem;
   border-radius: 6px;
-  border-left: 4px solid #cbd5e1;
-  background: #f8fafc;
+  border-left: 4px solid var(--x-line-strong);
+  background: var(--x-panel2);
   transition: transform 0.15s;
 }
 .sa-lane:hover { transform: translateX(3px); }
-.sa-lane.law-authority { border-left-color: #6366f1; }
+.sa-lane.law-authority { border-left-color: var(--x-accent); }
 .sa-lane.law-consequence { border-left-color: #f59e0b; }
 
 .sa-lane-tag {
@@ -32,12 +32,12 @@
   width: 56px;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #64748b;
+  color: var(--x-mut);
   letter-spacing: 0.03em;
 }
 .sa-lane-body { flex: 1; }
-.sa-lane-name { font-weight: 700; color: #1e293b; font-size: 0.9rem; }
-.sa-lane-role { font-size: 0.78rem; color: #64748b; }
+.sa-lane-name { font-weight: 700; color: var(--x-ink); font-size: 0.9rem; }
+.sa-lane-role { font-size: 0.78rem; color: var(--x-mut); }
 
 .sa-lane-flag {
   flex: 0 0 auto;
@@ -47,12 +47,12 @@
   border-radius: 4px;
   letter-spacing: 0.05em;
 }
-.sa-lane-flag.authority { background: #e0e7ff; color: #4338ca; }
+.sa-lane-flag.authority { background: #e0e7ff; color: var(--x-blue); }
 .sa-lane-flag.consequence { background: #ffedd5; color: #c2410c; }
 
 .sa-epu {
   margin-top: 0.4rem;
-  background: linear-gradient(135deg, #1e293b, #334155);
+  background: linear-gradient(135deg, var(--x-ink), var(--x-sec));
   color: white;
   border-radius: 8px;
   padding: 1rem;

@@ -47,7 +47,6 @@ export default function CommandBar() {
   const pageLabels = lang === 'fa' ? {
     home:             'خانه',
     technology:       'فناوری',
-    science:          'علم',
     safety:           'ایمنی',
     contact:          'تماس',
     perspective:      'دیدگاه',
@@ -63,7 +62,6 @@ export default function CommandBar() {
   } : {
     home:             'Home',
     technology:       'Technology',
-    science:          'Science',
     safety:           'Safety',
     contact:          'Contact',
     perspective:      'Perspective',
@@ -85,7 +83,6 @@ export default function CommandBar() {
   const pages = [
     { label: pageLabels.home,             path: `/${lang}` },
     { label: pageLabels.technology,       path: `/${lang}/technology` },
-    { label: pageLabels.science,          path: `/${lang}/science` },
     { label: pageLabels.safety,           path: `/${lang}/safety` },
     { label: pageLabels.contact,          path: `/${lang}/contact` },
     { label: pageLabels.perspective,      path: `/${lang}/perspective` },

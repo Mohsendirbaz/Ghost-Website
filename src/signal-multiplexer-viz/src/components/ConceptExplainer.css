@@ -1,6 +1,6 @@
 .concept-explainer {
   padding: 1.5rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  background: var(--x-panel2);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -12,13 +12,13 @@
 
 .explainer-header h3 {
   margin: 0 0 0.5rem 0;
-  color: #667eea;
+  color: var(--x-accent);
   font-size: 1.4rem;
 }
 
 .explainer-subtitle {
   margin: 0;
-  color: #666;
+  color: var(--x-mut);
   font-size: 0.95rem;
 }
 
@@ -32,8 +32,8 @@
 
 .concept-tab {
   padding: 0.6rem 1rem;
-  border: 2px solid #ddd;
-  background: white;
+  border: 2px solid var(--x-line);
+  background: var(--x-panel);
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -45,20 +45,20 @@
 }
 
 .concept-tab:hover {
-  border-color: #667eea;
-  background: #f0f4ff;
+  border-color: var(--x-accent);
+  background: var(--x-accent-soft);
   transform: translateY(-2px);
 }
 
 .concept-tab.active {
-  border-color: #667eea;
-  background: #667eea;
-  color: white;
+  border-color: var(--x-accent);
+  background: var(--x-accent);
+  color: var(--x-on-accent);
   box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .concept-content {
-  background: white;
+  background: var(--x-panel);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -73,13 +73,13 @@
 
 .concept-header h4 {
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: var(--x-ink);
   font-size: 1.3rem;
 }
 
 .concept-subtitle {
   margin: 0;
-  color: #888;
+  color: var(--x-faint);
   font-size: 0.9rem;
   font-style: italic;
 }
@@ -95,15 +95,15 @@
   gap: 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--x-mut);
   padding: 0.5rem 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 6px;
   transition: background 0.3s;
 }
 
 .comparison-toggle label:hover {
-  background: #f0f0f0;
+  background: var(--x-panel3);
 }
 
 .comparison-toggle input[type="checkbox"] {
@@ -133,8 +133,8 @@
 }
 
 .comparison-arrow span {
-  background: #667eea;
-  color: white;
+  background: var(--x-accent);
+  color: var(--x-on-accent);
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-weight: 700;
@@ -146,29 +146,29 @@
   position: absolute;
   width: 2px;
   height: 100%;
-  background: linear-gradient(to bottom, #ddd, #667eea, #ddd);
+  background: linear-gradient(to bottom, var(--x-line), var(--x-accent), var(--x-line));
   z-index: 0;
 }
 
 .approach-card {
   padding: 1.25rem;
   border-radius: 10px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--x-line);
   transition: all 0.3s;
 }
 
 .approach-card.traditional {
-  background: #fff9f0;
-  border-color: #ffcc80;
+  background: var(--x-warn-soft);
+  border-color: var(--x-warn);
 }
 
 .approach-card.innovative {
-  background: #f0f8ff;
-  border-color: #667eea;
+  background: var(--x-accent-soft);
+  border-color: var(--x-accent);
 }
 
 .approach-card.innovative.standalone {
-  background: linear-gradient(135deg, #f0f8ff 0%, #e8f4ff 100%);
+  background: var(--x-accent-soft);
   border-width: 3px;
 }
 
@@ -190,13 +190,13 @@
 
 .approach-header h5 {
   margin: 0;
-  color: #333;
+  color: var(--x-ink);
   font-size: 1.1rem;
 }
 
 .approach-description {
   margin: 0 0 1rem 0;
-  color: #555;
+  color: var(--x-sec);
   font-size: 0.9rem;
   line-height: 1.6;
   font-weight: 500;
@@ -217,11 +217,11 @@
 }
 
 .limitations strong {
-  color: #f57c00;
+  color: var(--x-warn);
 }
 
 .benefits strong {
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .limitations ul,
@@ -237,7 +237,7 @@
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #555;
+  color: var(--x-sec);
   padding-left: 0.5rem;
 }
 
@@ -252,7 +252,7 @@
   content: '✓';
   position: absolute;
   left: -1.25rem;
-  color: #4CAF50;
+  color: var(--x-good);
   font-weight: 700;
 }
 
@@ -260,9 +260,9 @@
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+  background: var(--x-warn-soft);
   border-radius: 10px;
-  border-left: 4px solid #ffc107;
+  border-left: 4px solid var(--x-warn);
   margin-bottom: 1rem;
 }
 
@@ -278,13 +278,13 @@
 .analogy-content strong {
   display: block;
   margin-bottom: 0.5rem;
-  color: #f57c00;
+  color: var(--x-warn);
   font-size: 0.9rem;
 }
 
 .analogy-content p {
   margin: 0;
-  color: #555;
+  color: var(--x-sec);
   font-size: 0.9rem;
   line-height: 1.6;
   font-style: italic;
@@ -299,16 +299,16 @@
 .technical-note {
   margin: 0;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
   font-size: 0.85rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--x-sec);
 }
 
 .technical-note strong {
-  color: #667eea;
+  color: var(--x-accent);
   display: block;
   margin-bottom: 0.25rem;
 }

@@ -10,7 +10,7 @@ const path = require('path');
 const SITE = process.env.REACT_APP_SITE_URL || 'https://ghost-website-kappa.vercel.app';
 
 const PAGES = [
-  '', 'technology', 'science', 'safety', 'contact', 'memory', 'simulation', 'careers',
+  '', 'technology', 'safety', 'contact', 'memory', 'simulation', 'careers',
   'perspective', 'methods', 'exhibition', 'architecture', 'knowledge-base',
   'artifacts', 'library', 'library/assets', 'multi-agent-system', 'bio',
   'privacy', 'terms', 'epu',

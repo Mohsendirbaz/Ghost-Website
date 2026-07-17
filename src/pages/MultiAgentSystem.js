@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useLang } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
 import {
     SYSTEM_INFO,
@@ -11,6 +12,7 @@ import './MultiAgentSystem.css';
 
 export default function MultiAgentSystem() {
     const { lang } = useLang();
+    const { isDark } = useTheme();
     const [expandedCategories, setExpandedCategories] = useState(new Set(['core-multiagent-system']));
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedTag, setSelectedTag] = useState('all');
@@ -116,7 +118,7 @@ export default function MultiAgentSystem() {
 
             <figure style={{ margin: '2rem auto 0', maxWidth: '1160px', padding: '0 1rem' }}>
               <div style={{ border: '1px solid rgba(128,128,128,0.3)', borderRadius: '10px', overflow: 'hidden', background: '#0d1117' }}>
-                <iframe src="/docs/html/Multi_Agent_Research_Laboratory.html" title="Multi-Agent Research Laboratory" loading="lazy"
+                <iframe key={isDark ? 'd' : 'l'} src={`/docs/html/Multi_Agent_Research_Laboratory.html?theme=${isDark ? 'dark' : 'light'}`} title="Multi-Agent Research Laboratory" loading="lazy"
                         style={{ width: '100%', height: '72vh', border: 0, display: 'block' }} />
               </div>
               <figcaption style={{ marginTop: '0.6rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--color-text-secondary, #5b6b7b)' }}>

@@ -14,9 +14,9 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
   transition: all 0.3s;
 }
 
@@ -36,19 +36,19 @@
 
 .card-content h4 {
   margin: 0 0 0.25rem 0;
-  color: #667eea;
+  color: var(--x-accent);
   font-size: 0.95rem;
 }
 
 .card-content p {
   margin: 0;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--x-mut);
   line-height: 1.4;
 }
 
 .agent-deployment-viz svg {
-  background: white;
+  background: var(--x-panel);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: block;
@@ -63,20 +63,20 @@
 
 .insight-box {
   padding: 1rem;
-  background: #f0f4ff;
+  background: var(--x-accent-soft);
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .insight-box.highlight {
-  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
-  border-left-color: #ffc107;
+  background: var(--x-warn-soft);
+  border-left-color: var(--x-warn);
 }
 
 .insight-box strong {
   display: block;
   margin-bottom: 0.5rem;
-  color: #667eea;
+  color: var(--x-accent);
   font-size: 0.9rem;
 }
 
@@ -88,7 +88,7 @@
   margin: 0;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--x-sec);
 }
 
 @media (max-width: 900px) {

@@ -2,9 +2,9 @@
 
 .sf-preamble {
   margin: 0 0 0.9rem;
-  color: #555;
+  color: var(--x-sec);
   line-height: 1.5;
-  border-left: 3px solid #c0392b;
+  border-left: 3px solid var(--x-bad);
   padding-left: 0.75rem;
 }
 
@@ -15,7 +15,7 @@
 }
 .sf-roll {
   flex: 1;
-  background: #f6f7fb;
+  background: var(--x-panel2);
   border-radius: 6px;
   padding: 0.5rem;
   text-align: center;
@@ -27,15 +27,15 @@
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
-.sf-roll-lbl { font-size: 0.68rem; color: #888; }
+.sf-roll-lbl { font-size: 0.68rem; color: var(--x-faint); }
 
 .sf-group { margin-bottom: 0.9rem; }
 .sf-group-head {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #667eea;
-  border-bottom: 1px solid #eef0f4;
+  color: var(--x-accent);
+  border-bottom: 1px solid var(--x-panel3);
   padding-bottom: 0.25rem;
   margin-bottom: 0.5rem;
 }
@@ -46,11 +46,11 @@
   gap: 0.6rem;
   margin-bottom: 0.4rem;
 }
-.sf-name { flex: 0 0 42%; color: #444; }
+.sf-name { flex: 0 0 42%; color: var(--x-sec); }
 .sf-track {
   flex: 1;
   height: 12px;
-  background: #eef0f4;
+  background: var(--x-panel3);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -72,7 +72,7 @@
   color: #8a6d1f;
   font-size: 0.76rem;
   line-height: 1.4;
-  background: #fdf6e3;
+  background: var(--x-warn-soft);
   border-left: 3px solid #DAA520;
   padding: 0.35rem 0.6rem;
   border-radius: 0 4px 4px 0;

@@ -5,7 +5,7 @@
 .simulation-control {
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
 .btn-primary {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--x-hero1) 0%, var(--x-hero2) 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -37,7 +37,7 @@
 }
 
 .btn-primary.running {
-  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  background: linear-gradient(135deg, var(--x-bad) 0%, #e91e63 100%);
   box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
 }
 
@@ -59,7 +59,7 @@
 }
 
 .status-dot.active {
-  background: #4CAF50;
+  background: var(--x-good);
 }
 
 .status-dot.inactive {
@@ -69,7 +69,7 @@
 
 .status-text {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--x-mut);
   font-weight: 600;
 }
 
@@ -77,7 +77,7 @@
 .disturbance-control {
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
 }
 
@@ -85,7 +85,7 @@
 .disturbance-control h4 {
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
-  color: #555;
+  color: var(--x-sec);
 }
 
 .injection-controls {
@@ -103,27 +103,27 @@
 .control-group label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #555;
+  color: var(--x-sec);
 }
 
 .control-select {
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--x-line);
   border-radius: 4px;
   font-size: 0.9rem;
-  background: white;
+  background: var(--x-panel);
   cursor: pointer;
 }
 
 .control-select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--x-accent);
 }
 
 .btn-inject,
 .btn-disturbance {
   padding: 0.75rem;
-  background: #4CAF50;
+  background: var(--x-good);
   color: white;
   border: none;
   border-radius: 6px;
@@ -139,7 +139,7 @@
 }
 
 .btn-disturbance {
-  background: #FF9800;
+  background: var(--x-warn);
   width: 100%;
 }
 
@@ -151,22 +151,22 @@
 .disturbance-description {
   margin: 0.75rem 0 0 0;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--x-mut);
   text-align: center;
   font-style: italic;
 }
 
 .control-info {
   padding: 1rem;
-  background: #f0f4ff;
+  background: var(--x-accent-soft);
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .control-info h4 {
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .control-info ul {
@@ -178,7 +178,7 @@
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #555;
+  color: var(--x-sec);
 }
 
 @keyframes pulse {

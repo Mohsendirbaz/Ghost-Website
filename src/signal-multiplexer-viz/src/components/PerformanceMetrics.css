@@ -14,9 +14,9 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
-  border-left: 4px solid #ddd;
+  border-left: 4px solid var(--x-line);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -35,7 +35,7 @@
 
 .metric-name {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--x-mut);
   margin-bottom: 0.3rem;
   font-weight: 600;
 }
@@ -49,25 +49,25 @@
 .metric-value .value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
 }
 
 .metric-value .unit {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--x-mut);
 }
 
 .performance-explanation {
   margin-top: 1.5rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--x-panel2);
   border-radius: 8px;
 }
 
 .performance-explanation h4 {
   margin: 0 0 1rem 0;
   font-size: 1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .objectives-list {
@@ -78,14 +78,14 @@
 
 .objective-item {
   padding: 0.75rem;
-  background: white;
+  background: var(--x-panel);
   border-radius: 6px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .objective-item .objective-name {
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
 }
@@ -95,7 +95,7 @@
 }
 
 .objective-item .objective-formula code {
-  background: #f5f5f5;
+  background: var(--x-panel3);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   font-family: 'Courier New', monospace;
@@ -105,6 +105,6 @@
 
 .objective-item .objective-description {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--x-mut);
   line-height: 1.5;
 }

@@ -1,8 +1,8 @@
 .demultiplexer-visualization {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0f172a 0%, var(--x-ink) 100%);
   border-radius: 12px;
   padding: 24px;
-  color: #e2e8f0;
+  color: var(--x-line);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -12,7 +12,7 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--x-sec);
 }
 
 .demux-title {
@@ -22,7 +22,7 @@
 }
 
 .demux-title .icon {
-  color: #3b82f6;
+  color: var(--x-blue);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -30,7 +30,7 @@
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .demux-stats {
@@ -43,7 +43,7 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #94a3b8;
+  color: var(--x-faint);
 }
 
 .demux-stats .stat svg {
@@ -59,7 +59,7 @@
   padding: 20px;
   background: rgba(30, 41, 59, 0.5);
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--x-sec);
 }
 
 .process-step {
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, var(--x-blue), var(--x-blue));
   border-radius: 50%;
   font-weight: 600;
   font-size: 14px;
@@ -86,18 +86,18 @@
   margin: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .step-content p {
   margin: 2px 0 0 0;
   font-size: 11px;
-  color: #94a3b8;
+  color: var(--x-faint);
 }
 
 .process-arrow {
   font-size: 24px;
-  color: #64748b;
+  color: var(--x-mut);
   margin: 0 8px;
 }
 
@@ -107,7 +107,7 @@
   background: #0f172a;
   border-radius: 8px;
   padding: 16px;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--x-ink);
 }
 
 .stream-channel {
@@ -131,7 +131,7 @@
   margin: 0 0 16px 0;
   font-size: 16px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .methods-grid {
@@ -144,12 +144,12 @@
   background: rgba(30, 41, 59, 0.6);
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--x-sec);
   transition: all 0.3s ease;
 }
 
 .method:hover {
-  border-color: #3b82f6;
+  border-color: var(--x-blue);
   background: rgba(59, 130, 246, 0.1);
   transform: translateY(-2px);
 }
@@ -157,13 +157,13 @@
 .method-name {
   font-weight: 600;
   font-size: 13px;
-  color: #3b82f6;
+  color: var(--x-blue);
   margin-bottom: 8px;
 }
 
 .method-desc {
   font-size: 11px;
-  color: #94a3b8;
+  color: var(--x-faint);
   line-height: 1.5;
   margin-bottom: 10px;
 }
@@ -187,7 +187,7 @@
   margin: 0 0 16px 0;
   font-size: 16px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .quality-grid {
@@ -197,10 +197,10 @@
 }
 
 .quality-card {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+  background: linear-gradient(135deg, var(--x-ink), #0f172a);
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--x-sec);
 }
 
 .quality-header {
@@ -209,13 +209,13 @@
   align-items: center;
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--x-sec);
 }
 
 .channel-name {
   font-weight: 600;
   font-size: 13px;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .priority-badge {
@@ -240,8 +240,8 @@
 
 .priority-badge.normal {
   background: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
-  border: 1px solid #3b82f6;
+  color: var(--x-blue);
+  border: 1px solid var(--x-blue);
 }
 
 .priority-badge.low {
@@ -264,7 +264,7 @@
 
 .metric-label {
   font-size: 11px;
-  color: #64748b;
+  color: var(--x-mut);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -290,11 +290,11 @@
   padding: 16px;
   background: rgba(30, 41, 59, 0.4);
   border-radius: 8px;
-  border-left: 3px solid #3b82f6;
+  border-left: 3px solid var(--x-blue);
 }
 
 .info-section svg {
-  color: #3b82f6;
+  color: var(--x-blue);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -303,14 +303,14 @@
   margin: 0 0 6px 0;
   font-size: 13px;
   font-weight: 600;
-  color: #f1f5f9;
+  color: var(--x-panel3);
 }
 
 .info-section p {
   margin: 0;
   font-size: 12px;
   line-height: 1.5;
-  color: #94a3b8;
+  color: var(--x-faint);
 }
 
 /* Animations */

@@ -19,7 +19,6 @@ import CookieBanner from './components/CookieBanner';
 import CommandBar from './components/CommandBar';
 import Home from './pages/Home';
 import Technology from './pages/Technology';
-import Science from './pages/Science';
 import Safety from './pages/Safety';
 import Contact from './pages/Contact';
 import Perspective from './pages/Perspective';
@@ -50,7 +49,6 @@ import './App.css';
 const PAGE_TITLES = {
   '': { en: 'Ghost Autonomy — Computing That Respects Physics', fa: 'Ghost Autonomy — محاسباتی که به فیزیک احترام می‌گذارد' },
   technology: { en: 'Technology', fa: 'فناوری' },
-  science: { en: 'Science', fa: 'علم' },
   safety: { en: 'Safety', fa: 'ایمنی' },
   contact: { en: 'Contact', fa: 'تماس' },
   perspective: { en: 'Perspective', fa: 'دیدگاه' },
@@ -183,7 +181,7 @@ function AppShell() {
           <Route path="/" element={<Navigate to="/en" replace />} />
           <Route path="/en" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/en/technology" element={<PageTransition><Technology /></PageTransition>} />
-          <Route path="/en/science" element={<PageTransition><Science /></PageTransition>} />
+          <Route path="/en/science" element={<Navigate to="/en/technology" replace />} />
           <Route path="/en/safety" element={<PageTransition><Safety /></PageTransition>} />
 
           <Route path="/en/contact" element={<PageTransition><Contact /></PageTransition>} />
@@ -225,7 +223,7 @@ function AppShell() {
 <Route path="/fa/bio/:section" element={<PageTransition><Bio /></PageTransition>} />
           <Route path="/fa" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/fa/technology" element={<PageTransition><Technology /></PageTransition>} />
-          <Route path="/fa/science" element={<PageTransition><Science /></PageTransition>} />
+          <Route path="/fa/science" element={<Navigate to="/fa/technology" replace />} />
           <Route path="/fa/safety" element={<PageTransition><Safety /></PageTransition>} />
 
           <Route path="/fa/contact" element={<PageTransition><Contact /></PageTransition>} />

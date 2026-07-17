@@ -5,7 +5,7 @@
 .formulation-section {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--x-line);
 }
 
 .formulation-section:last-child {
@@ -15,11 +15,11 @@
 .formulation-section h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #667eea;
+  color: var(--x-accent);
 }
 
 .math-content {
-  background: #f9f9f9;
+  background: var(--x-panel2);
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -41,13 +41,13 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem;
-  background: #f5f5f5;
+  background: var(--x-panel3);
   border-radius: 4px;
   font-size: 0.85rem;
 }
 
 .variable-explanation code {
-  background: #667eea;
+  background: var(--x-accent);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
@@ -63,27 +63,27 @@
 
 .objective-explanation {
   padding: 0.75rem;
-  background: #f5f5f5;
+  background: var(--x-panel3);
   border-radius: 6px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .objective-name {
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
   margin-bottom: 0.3rem;
   font-size: 0.95rem;
 }
 
 .objective-description {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--x-mut);
   margin-bottom: 0.3rem;
 }
 
 .objective-weight {
   font-size: 0.8rem;
-  color: #667eea;
+  color: var(--x-accent);
   font-weight: 600;
 }
 
@@ -95,7 +95,7 @@
 
 .type-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--x-hero1) 0%, var(--x-hero2) 100%);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
@@ -106,14 +106,14 @@
 .formulation-philosophy {
   margin-top: 1.5rem;
   padding: 1rem;
-  background: #f0f4ff;
+  background: var(--x-accent-soft);
   border-radius: 6px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--x-accent);
 }
 
 .formulation-philosophy h4 {
   margin: 0 0 0.5rem 0;
-  color: #667eea;
+  color: var(--x-accent);
   font-size: 1rem;
 }
 
@@ -121,5 +121,5 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--x-sec);
 }

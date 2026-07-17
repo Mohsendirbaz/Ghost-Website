@@ -8,6 +8,11 @@
     <title>Ghost Autonomy — The Exhibition</title>
   </head>
   <body>
+    <script>
+      /* Embedded-shell theme sync: ?theme=dark|light pins the palette before first paint. */
+      (function(){try{var t=new URLSearchParams(location.search).get('theme');
+      if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

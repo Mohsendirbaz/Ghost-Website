@@ -49,7 +49,8 @@ export default function WorksCarousel() {
 
   // Visual left/right arrows map to index steps; in RTL the rail flows the other way.
   const step = fa ? -1 : 1;
-  const src = (w) => w.live + (w.themeParam ? `?theme=${isDark ? 'dark' : 'light'}` : '');
+  // All embedded instruments read ?theme= (2026-07-17); works with ?view= use &.
+  const src = (w) => w.live + (w.live.includes('?') ? '&' : '?') + `theme=${isDark ? 'dark' : 'light'}`;
 
   return (
     <section className="works" aria-label={fa ? 'کارهای اصلی' : 'The Major Works'}>
@@ -102,7 +103,7 @@ export default function WorksCarousel() {
                   {w.img ? (
                     <img src={w.img} alt={label.t} className="works__poster--contain" />
                   ) : (
-                    <iframe src={src(w)} title={label.t} className="works__live" loading="lazy" />
+                    <iframe key={isDark ? 'd' : 'l'} src={src(w)} title={label.t} className="works__live" loading="lazy" />
                   )}
                 </div>
               </article>

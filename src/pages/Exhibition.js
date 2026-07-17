@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
@@ -12,8 +13,10 @@ const VALID_VIEWS = ['multiplexer', 'stack', 'constitution', 'eventfabric'];
 export default function Exhibition() {
   const { lang } = useLang();
   const t = copy[lang].exhibition;
+  const { isDark } = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
   const viewerRef = useRef(null);
+  const roomSrc = (view) => `/exhibition/?view=${view}&theme=${isDark ? 'dark' : 'light'}`;
 
   const requested = searchParams.get('view');
   const [room, setRoom] = useState(
@@ -112,7 +115,7 @@ export default function Exhibition() {
                   {t.nowShowing}: {activeRoom?.title}
                 </h2>
                 <a
-                  href={`/exhibition/?view=${room}`}
+                  href={roomSrc(room)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary"
@@ -129,8 +132,8 @@ export default function Exhibition() {
                 }}
               >
                 <iframe
-                  key={room}
-                  src={`/exhibition/?view=${room}`}
+                  key={`${room}-${isDark ? 'd' : 'l'}`}
+                  src={roomSrc(room)}
                   title={activeRoom?.title || 'Ghost Autonomy Exhibition'}
                   style={{
                     width: '100%',

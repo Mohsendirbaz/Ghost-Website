@@ -1,3 +1,48 @@
+/* ═══ Ghost blueprint theme layer (2026-07-17) — light paper / cyanotype dark.
+   Tokens consumed across all component CSS; ?theme=dark|light pins via
+   [data-theme]; otherwise the OS preference decides. ═══ */
+:root {
+  color-scheme: light;
+  --x-bg: #f7f6f1; --x-panel: #fdfcf8; --x-panel2: #f4f2ea; --x-panel3: #ece9df;
+  --x-ink: #14314f; --x-sec: #3d5a78; --x-mut: #5f7d99; --x-faint: #8aa0b5;
+  --x-line: rgba(20, 49, 79, .16); --x-line-strong: rgba(20, 49, 79, .30);
+  --x-accent: #2a78d6; --x-blue: #2a78d6; --x-accent-soft: rgba(42, 120, 214, .10);
+  --x-on-accent: #ffffff;
+  --x-good: #1f9d61; --x-good-soft: rgba(31, 157, 97, .12);
+  --x-bad: #c0392b; --x-bad-soft: rgba(192, 57, 43, .10);
+  --x-warn: #b78007; --x-warn-soft: rgba(183, 128, 7, .12);
+  --x-deep: #14314f; --x-deep2: #1c3c5e; --x-deep-text: #dbe7f4;
+  --x-hero1: #2a78d6; --x-hero2: #14314f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --x-bg: #0b1626; --x-panel: #101f36; --x-panel2: #0e1b30; --x-panel3: #16243c;
+    --x-ink: #dbe7f4; --x-sec: #a9bfd6; --x-mut: #7e97b0; --x-faint: #628099;
+    --x-line: rgba(219, 231, 244, .16); --x-line-strong: rgba(219, 231, 244, .30);
+    --x-accent: #6fb1ff; --x-blue: #6fb1ff; --x-accent-soft: rgba(111, 177, 255, .14);
+    --x-on-accent: #0b1626;
+    --x-good: #3fd2a0; --x-good-soft: rgba(63, 210, 160, .15);
+    --x-bad: #ff8d7e; --x-bad-soft: rgba(255, 141, 126, .14);
+    --x-warn: #ffc94d; --x-warn-soft: rgba(255, 201, 77, .15);
+    --x-deep: #0e1b30; --x-deep2: #16243c; --x-deep-text: #dbe7f4;
+    --x-hero1: #1c3c5e; --x-hero2: #0b1626;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --x-bg: #0b1626; --x-panel: #101f36; --x-panel2: #0e1b30; --x-panel3: #16243c;
+  --x-ink: #dbe7f4; --x-sec: #a9bfd6; --x-mut: #7e97b0; --x-faint: #628099;
+  --x-line: rgba(219, 231, 244, .16); --x-line-strong: rgba(219, 231, 244, .30);
+  --x-accent: #6fb1ff; --x-blue: #6fb1ff; --x-accent-soft: rgba(111, 177, 255, .14);
+  --x-on-accent: #0b1626;
+  --x-good: #3fd2a0; --x-good-soft: rgba(63, 210, 160, .15);
+  --x-bad: #ff8d7e; --x-bad-soft: rgba(255, 141, 126, .14);
+  --x-warn: #ffc94d; --x-warn-soft: rgba(255, 201, 77, .15);
+  --x-deep: #0e1b30; --x-deep2: #16243c; --x-deep-text: #dbe7f4;
+  --x-hero1: #1c3c5e; --x-hero2: #0b1626;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +55,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: #213547;
-  background-color: #ffffff;
+  color: var(--x-ink);
+  background-color: var(--x-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,12 +84,12 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid var(--x-accent);
   outline-offset: 2px;
 }
 
 a {
-  color: #667eea;
+  color: var(--x-accent);
   text-decoration: none;
 }
 
@@ -63,7 +108,7 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--x-panel3);
 }
 
 ::-webkit-scrollbar-thumb {

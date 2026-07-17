@@ -1,10 +1,10 @@
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--x-bg);
 }
 
 .app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--x-hero1) 0%, var(--x-hero2) 100%);
   color: white;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -50,8 +50,8 @@
 .view-tab:hover { color: white; }
 
 .view-tab.active {
-  background: white;
-  color: #5a4496;
+  background: var(--x-panel);
+  color: var(--x-ink);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -98,7 +98,7 @@
 }
 
 .section {
-  background: white;
+  background: var(--x-panel);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -113,15 +113,15 @@
 .section h2 {
   margin: 0 0 1rem 0;
   font-size: 1.3rem;
-  color: #333;
-  border-bottom: 2px solid #667eea;
+  color: var(--x-ink);
+  border-bottom: 2px solid var(--x-accent);
   padding-bottom: 0.5rem;
 }
 
 .section h3 {
   margin: 1rem 0 0.5rem 0;
   font-size: 1.1rem;
-  color: #555;
+  color: var(--x-sec);
 }
 
 .section.full-width {
@@ -146,7 +146,7 @@
 .empty-state {
   padding: 2rem;
   text-align: center;
-  color: #666;
+  color: var(--x-mut);
   font-style: italic;
 }
 

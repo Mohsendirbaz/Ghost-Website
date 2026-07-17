@@ -212,28 +212,6 @@ export const ARTIFACTS = [
         },
     },
 
-    // ── Still a Worm ───────────────────────────────────────────────────────────
-
-    {
-        id: 'still-a-worm',
-        slug: 'still-a-worm',
-        category: 'reference',
-        tags: ['security', 'malware', 'worm', 'cybersecurity', 'analysis'],
-        localFile: {
-            type: 'pdf',
-            path: '/docs/pdf/Still a Worm.pdf',
-            filename: 'Still_a_Worm.pdf',
-        },
-        en: {
-            title: 'Still a Worm',
-            description: 'Technical analysis and research on worm malware, covering propagation mechanisms, detection strategies, and security implications for autonomous systems.',
-        },
-        fa: {
-            title: 'هنوز یک کرم',
-            description: 'تحلیل فنی و تحقیق در مورد بدافزار کرم، شامل مکانیزم‌های انتشار، استراتژی‌های تشخیص و پیامدهای امنیتی برای سیستم‌های خودران.',
-        },
-    },
-
     // ── Civic Discipline of Truth ─────────────────────────────────────────────
 
     {

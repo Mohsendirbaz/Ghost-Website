@@ -8,7 +8,7 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--x-line);
 }
 
 .cycle-counter {
@@ -19,11 +19,11 @@
 
 .cycle-counter .label {
   font-weight: 500;
-  color: #666;
+  color: var(--x-mut);
 }
 
 .cycle-counter .count {
-  background: #667eea;
+  background: var(--x-accent);
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -53,11 +53,11 @@
 }
 
 .status-indicator.formulating {
-  background: #FF9800;
+  background: var(--x-warn);
 }
 
 .status-indicator.solving {
-  background: #4CAF50;
+  background: var(--x-good);
 }
 
 .status-indicator.applying {
@@ -66,7 +66,7 @@
 
 .status-text {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--x-mut);
   text-transform: capitalize;
 }
 
@@ -89,23 +89,23 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: #f5f5f5;
+  background: var(--x-panel3);
   border-radius: 8px;
-  border-left: 4px solid #e0e0e0;
+  border-left: 4px solid var(--x-line);
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
 }
 
 .loop-step.active {
-  background: #e3f2fd;
+  background: var(--x-accent-soft);
   border-left-color: #2196F3;
   box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
 }
 
 .loop-step.completed {
-  background: #e8f5e9;
-  border-left-color: #4CAF50;
+  background: var(--x-good-soft);
+  border-left-color: var(--x-good);
 }
 
 .step-number {
@@ -114,8 +114,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ddd;
-  color: #666;
+  background: var(--x-line);
+  color: var(--x-mut);
   border-radius: 50%;
   font-weight: 700;
   font-size: 0.9rem;
@@ -127,7 +127,7 @@
 }
 
 .loop-step.completed .step-number {
-  background: #4CAF50;
+  background: var(--x-good);
   color: white;
 }
 
@@ -141,13 +141,13 @@
 
 .step-name {
   font-weight: 700;
-  color: #333;
+  color: var(--x-ink);
   font-size: 0.95rem;
 }
 
 .step-description {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--x-mut);
   margin-top: 0.2rem;
 }
 
@@ -179,7 +179,7 @@
 }
 
 .step-connector.active {
-  color: #4CAF50;
+  color: var(--x-good);
 }
 
 .connector-line {
@@ -216,8 +216,8 @@
 .loop-description {
   margin-top: 1rem;
   padding: 1rem;
-  background: #f9f9f9;
-  border-left: 4px solid #667eea;
+  background: var(--x-panel2);
+  border-left: 4px solid var(--x-accent);
   border-radius: 4px;
 }
 
@@ -225,7 +225,7 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--x-sec);
 }
 
 @keyframes pulse {

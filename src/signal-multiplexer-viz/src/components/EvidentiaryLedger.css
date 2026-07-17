@@ -2,7 +2,7 @@
 
 .el-preamble {
   margin: 0 0 1rem;
-  color: #555;
+  color: var(--x-sec);
   line-height: 1.5;
   border-left: 3px solid #DAA520;
   padding-left: 0.75rem;
@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(135deg, #e8f7ee, #d4f1de);
+  background: linear-gradient(135deg, var(--x-good-soft), #d4f1de);
   border: 1px solid #228B22;
   border-radius: 8px;
   padding: 1rem;
@@ -37,17 +37,17 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #667eea;
-  border-bottom: 2px solid #667eea;
+  color: var(--x-accent);
+  border-bottom: 2px solid var(--x-accent);
   padding: 0.4rem 0.5rem;
 }
 .el-table td {
   padding: 0.5rem;
-  border-bottom: 1px solid #eef0f4;
+  border-bottom: 1px solid var(--x-panel3);
   vertical-align: top;
 }
-.el-el { font-weight: 600; color: #333; }
-.el-note { color: #777; font-size: 0.8rem; }
+.el-el { font-weight: 600; color: var(--x-ink); }
+.el-note { color: var(--x-faint); font-size: 0.8rem; }
 
 .el-badge {
   display: inline-block;
@@ -65,7 +65,7 @@
 }
 .el-metric {
   flex: 1;
-  background: #f6f7fb;
+  background: var(--x-panel2);
   border-radius: 6px;
   padding: 0.6rem;
   text-align: center;
@@ -74,7 +74,7 @@
   display: block;
   font-size: 1.3rem;
   font-weight: 800;
-  color: #333;
+  color: var(--x-ink);
   font-variant-numeric: tabular-nums;
 }
-.el-metric-label { font-size: 0.72rem; color: #777; }
+.el-metric-label { font-size: 0.72rem; color: var(--x-faint); }

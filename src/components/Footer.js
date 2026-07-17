@@ -92,7 +92,6 @@ function buildPages(t, lang) {
   return [
     { label: t.nav.home,            to: `/${lang}`,              iconKey: 'home'            },
     { label: t.nav.technology,      to: `/${lang}/technology`,   iconKey: 'technology'      },
-    { label: t.nav.science,         to: `/${lang}/science`,      iconKey: 'science'         },
     { label: t.nav.safety,          to: `/${lang}/safety`,       iconKey: 'safety'          },
     { label: t.nav.contact,         to: `/${lang}/contact`,      iconKey: 'contact'         },
     { label: t.nav.perspective,     to: `/${lang}/perspective`,  iconKey: 'perspective'     },

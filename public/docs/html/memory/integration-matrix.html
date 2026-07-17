@@ -4,16 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Synergy Matrix — every pair of Memory Module ideas, mapped or unexamined</title>
+<script>
+/* Embedded-shell theme sync: ?theme=dark|light pins the palette before first paint. */
+(function(){try{var t=new URLSearchParams(location.search).get('theme');
+if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
 <style>
 
   :root{
-    --bg:#0A101C; --panel:#0E1626; --panel2:#121C30; --panel3:#16223A;
-    --frame:#2A3A5C; --hair:#22304B;
-    --ink:#E9F0FC; --sec:#A7B6D4; --mut:#6E7F9F;
-    --time:#3987e5; --econ:#c98500; --laws:#d55181; --gov:#008300;
-    --govUp:#12a512; --gold:#C9A86A;
+    color-scheme: light;
+    --bg:#f7f6f1; --panel:#fdfcf8; --panel2:#f2f1ea; --panel3:#eae8dd;
+    --frame:rgba(20,49,79,.30); --hair:rgba(20,49,79,.14);
+    --ink:#14314f; --sec:#3d5a78; --mut:#5f7d99;
+    --time:#2a78d6; --econ:#c9761f; --laws:#c65f8f; --gov:#12946b;
+    --govUp:#0f9d68; --gold:#8a6f3a;
     --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#0b1626; --panel:#101f36; --panel2:#0e1b30; --panel3:#16243c;
+      --frame:rgba(219,231,244,.30); --hair:rgba(219,231,244,.14);
+      --ink:#dbe7f4; --sec:#a9bfd6; --mut:#7e97b0;
+      --time:#6fb1ff; --econ:#ffb066; --laws:#f096c0; --gov:#3fd2a0;
+      --govUp:#4fe0b0; --gold:#d9c08a;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#0b1626; --panel:#101f36; --panel2:#0e1b30; --panel3:#16243c;
+    --frame:rgba(219,231,244,.30); --hair:rgba(219,231,244,.14);
+    --ink:#dbe7f4; --sec:#a9bfd6; --mut:#7e97b0;
+    --time:#6fb1ff; --econ:#ffb066; --laws:#f096c0; --gov:#3fd2a0;
+    --govUp:#4fe0b0; --gold:#d9c08a;
   }
   *{box-sizing:border-box}
   svg.sw{width:9px;height:9px;flex:0 0 auto}
@@ -109,7 +133,7 @@
   .collab:hover{fill:var(--gold)}
   .cell{cursor:pointer}
   .diag{opacity:.85}
-  .levbar{fill:#2A3A5C}
+  .levbar{fill:var(--frame)}
   .levtxt{font-family:var(--mono);font-size:8.5px;fill:var(--mut)}
   .howk{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;fill:var(--mut)}
   .howt{font-size:11px;fill:var(--sec)}

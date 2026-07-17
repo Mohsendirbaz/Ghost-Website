@@ -26,7 +26,7 @@
   border: 1px solid #e4e7ec;
   border-radius: 6px;
   padding: 0.85rem;
-  background: #fafbfc;
+  background: var(--x-panel2);
 }
 
 .scp-label {
@@ -34,7 +34,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #667eea;
+  color: var(--x-accent);
   margin-bottom: 0.6rem;
 }
 
@@ -44,13 +44,13 @@
   padding: 0.35rem 0.7rem;
   border: 1px solid #cdd3df;
   border-radius: 999px;
-  background: white;
+  background: var(--x-panel);
   font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.15s;
 }
-.scp-chip:hover { border-color: #667eea; }
-.scp-chip.active { background: #667eea; color: white; border-color: #667eea; }
+.scp-chip:hover { border-color: var(--x-accent); }
+.scp-chip.active { background: var(--x-accent); color: white; border-color: var(--x-accent); }
 
 .scp-intensity {
   display: flex;
@@ -58,10 +58,10 @@
   gap: 0.6rem;
   margin-top: 0.75rem;
   font-size: 0.82rem;
-  color: #555;
+  color: var(--x-sec);
 }
 .scp-intensity input { flex: 1; }
-.scp-intensity-val { font-variant-numeric: tabular-nums; font-weight: 600; color: #333; }
+.scp-intensity-val { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--x-ink); }
 
 .scp-toggle {
   display: flex;
@@ -76,8 +76,8 @@
   text-align: left;
   transition: all 0.2s;
 }
-.scp-toggle.on { background: #e8f7ee; border-color: #6ab04c; color: #1e6b34; }
-.scp-toggle.off { background: #fdecea; border-color: #eb4d4b; color: #a83228; }
+.scp-toggle.on { background: var(--x-good-soft); border-color: #6ab04c; color: #1e6b34; }
+.scp-toggle.off { background: var(--x-bad-soft); border-color: #eb4d4b; color: #a83228; }
 .scp-toggle-knob {
   width: 36px; height: 20px; border-radius: 999px; position: relative;
   flex: 0 0 auto; transition: background 0.2s;
@@ -86,13 +86,13 @@
 .scp-toggle.off .scp-toggle-knob { background: #eb4d4b; }
 .scp-toggle-knob::after {
   content: ''; position: absolute; top: 2px; width: 16px; height: 16px;
-  border-radius: 50%; background: white; transition: left 0.2s;
+  border-radius: 50%; background: var(--x-panel); transition: left 0.2s;
 }
 .scp-toggle.on .scp-toggle-knob::after { left: 18px; }
 .scp-toggle.off .scp-toggle-knob::after { left: 2px; }
 .scp-toggle-text { flex: 1; font-weight: 600; }
 
-.scp-help { margin: 0.6rem 0 0; font-size: 0.78rem; color: #777; line-height: 1.4; }
+.scp-help { margin: 0.6rem 0 0; font-size: 0.78rem; color: var(--x-faint); line-height: 1.4; }
 
 .scp-injectors { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .scp-inject {
@@ -101,10 +101,10 @@
   padding: 0.55rem 0.6rem;
   border: 1px solid #cdd3df;
   border-radius: 6px;
-  background: white;
+  background: var(--x-panel);
   font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.15s;
 }
-.scp-inject:hover { border-color: #667eea; background: #f3f5ff; }
-.scp-inject.danger:hover { border-color: #eb4d4b; background: #fdecea; }
+.scp-inject:hover { border-color: var(--x-accent); background: #f3f5ff; }
+.scp-inject.danger:hover { border-color: #eb4d4b; background: var(--x-bad-soft); }

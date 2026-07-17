@@ -12,7 +12,6 @@ function buildPageIndex(lang) {
   return [
     { label: t.home,            path: `/${lang}`,              type: 'page' },
     { label: t.technology,      path: `/${lang}/technology`,   type: 'page' },
-    { label: t.science,         path: `/${lang}/science`,      type: 'page' },
     { label: t.safety,          path: `/${lang}/safety`,       type: 'page' },
     { label: t.contact,         path: `/${lang}/contact`,      type: 'page' },
     { label: t.perspective,     path: `/${lang}/perspective`,  type: 'page' },
