@@ -1,0 +1,5 @@
+Contact: mailto:dirbaz.sharif@gmail.com
+Contact: tel:+1-312-925-5930
+Expires: 2027-07-16T00:00:00.000Z
+Preferred-Languages: en, fa
+Canonical: https://ghost-website-kappa.vercel.app/.well-known/security.txt
