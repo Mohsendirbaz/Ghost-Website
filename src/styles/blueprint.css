@@ -312,3 +312,22 @@
   margin-bottom: 0.7rem;
   background: #0d1117;
 }
+
+/* ── Technical Library (redesigned shelf) ───────────────────────────── */
+.tl-filter {
+  font-family: var(--bp-mono);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.8rem;
+  border: 1.5px solid var(--bp-line);
+  border-radius: 6px;
+  background: var(--bp-paper-raised);
+  color: var(--color-text-primary, var(--bp-ink));
+  min-width: clamp(220px, 30vw, 340px);
+}
+.tl-filter:focus { outline: 2px solid var(--bp-accent); outline-offset: 1px; }
+.tl-tier { max-width: 1060px; margin: 2.6rem auto 0; padding-inline: 1.25rem; }
+.tl-tier > .hm-eyebrow { border-top: 1.5px solid var(--bp-line); padding-top: 1.1rem; }
+.tl-cat { margin-top: 1.4rem; }
+.tl-cat__title { font-size: 1.05rem; margin: 0 0 0.9rem; color: var(--color-text-primary, var(--bp-ink)); }
+.tl-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.5rem; }
+.tl-meta__type { font-family: var(--bp-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--color-text-tertiary, var(--bp-ink-soft)); }

@@ -33,7 +33,7 @@ const MOATS = [
   {
     key: 'memory',
     tag: { cls: '', en: 'design · thesis', fa: 'طرح · تز' },
-    to: (l) => `/${l}/artifacts/memory-mechanism-spine`,
+    to: (l) => `/${l}/memory`,
     en: { name: 'Metabolic memory & the price of recall', line: 'Memory that pays for its persistence: verification burden grows with residence time. The Memory Wing instruments this thesis line.' },
     fa: { name: 'حافظهٔ متابولیک و بهای فراخوانی', line: 'حافظه‌ای که بهای ماندگاری‌اش را می‌پردازد: بار راستی‌آزمایی با زمانِ اقامت رشد می‌کند. «بال حافظه» همین خط تز را ابزارمند می‌کند.' },
   },

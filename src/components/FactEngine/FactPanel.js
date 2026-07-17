@@ -12,7 +12,10 @@ import './FactPanel.css';
 export default function FactPanel({ tags = [], onOpenSaved, className = '' }) {
   const [currentFact, setCurrentFact] = useState(null);
   const [savedFacts, setSavedFacts] = useState([]);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    try { return localStorage.getItem('ghost-fact-panel-dismissed') !== '1'; }
+    catch { return true; }
+  });
   const { pathname } = useLocation();
 
   // Load saved facts from localStorage on mount
@@ -47,6 +50,8 @@ export default function FactPanel({ tags = [], onOpenSaved, className = '' }) {
 
   const handleDismiss = () => {
     setIsVisible(false);
+    // Closed once → stays away (persisted; clear browser data to reset)
+    try { localStorage.setItem('ghost-fact-panel-dismissed', '1'); } catch { /* no-op */ }
   };
 
   // The minimal front page carries no ambient engagement strip

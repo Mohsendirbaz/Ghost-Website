@@ -94,8 +94,6 @@ function buildPages(t, lang) {
     { label: t.nav.technology,      to: `/${lang}/technology`,   iconKey: 'technology'      },
     { label: t.nav.science,         to: `/${lang}/science`,      iconKey: 'science'         },
     { label: t.nav.safety,          to: `/${lang}/safety`,       iconKey: 'safety'          },
-    { label: t.nav.partners,        to: `/${lang}/partners`,     iconKey: 'partners'        },
-    { label: t.nav.company,         to: `/${lang}/company`,      iconKey: 'company'         },
     { label: t.nav.contact,         to: `/${lang}/contact`,      iconKey: 'contact'         },
     { label: t.nav.perspective,     to: `/${lang}/perspective`,  iconKey: 'perspective'     },
     { label: t.nav.architecture,    to: `/${lang}/architecture`, iconKey: 'architecture'    },
@@ -162,8 +160,8 @@ export default function Footer() {
         <div className="footer__col">
           <h3 className="footer__col-title">{t.footer.legal}</h3>
           <ul className="footer__links">
-            <li><span className="footer__link">{t.footer.privacy}</span></li>
-            <li><span className="footer__link">{t.footer.terms}</span></li>
+            <li><Link className="footer__link" to={`/${lang}/privacy`}>{t.footer.privacy}</Link></li>
+            <li><Link className="footer__link" to={`/${lang}/terms`}>{t.footer.terms}</Link></li>
           </ul>
           <div className="footer__contact">
             <a href="mailto:dirbaz.sharif@gmail.com" className="footer__link">

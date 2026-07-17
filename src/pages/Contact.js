@@ -5,13 +5,6 @@ import { HeroMinimal } from '../components/Hero';
 import Breadcrumb from '../components/Breadcrumb';
 import './Page.css';
 
-// ─── Configure your Formspree form endpoint here ─────────────────────────────
-// 1. Sign up at https://formspree.io (free tier: 50 submissions/month)
-// 2. Create a new form and copy the endpoint URL (e.g. https://formspree.io/f/xabcdefg)
-// 3. Replace the placeholder below with your endpoint
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-// ─────────────────────────────────────────────────────────────────────────────
-
 function validate(form, lang) {
   const errors = {};
   const isRtl = lang === 'fa';
@@ -41,7 +34,6 @@ export default function Contact() {
 
   const [status, setStatus]     = useState('idle'); // idle | submitting | success | error
   const [errors, setErrors]     = useState({});
-  const [serverError, setServerError] = useState('');
   const [form, setForm]         = useState({ name: '', email: '', org: '', type: '', message: '' });
 
   const handleChange = e => {
@@ -51,7 +43,7 @@ export default function Contact() {
     if (errors[name]) setErrors(prev => { const next = { ...prev }; delete next[name]; return next; });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     const validationErrors = validate(form, lang);
@@ -60,41 +52,21 @@ export default function Contact() {
       return;
     }
 
-    setStatus('submitting');
-    setServerError('');
+    // All inquiries route to the one legitimate contact — no third-party
+    // form backend, no silent loss: the visitor's own mail client sends.
+    const subject = `Ghost Autonomy inquiry — ${form.type || 'General'}`;
+    const body = [
+      `Name: ${form.name.trim()}`,
+      `Email: ${form.email.trim()}`,
+      form.org.trim() ? `Organization: ${form.org.trim()}` : null,
+      form.type ? `Inquiry type: ${form.type}` : null,
+      '',
+      form.message.trim(),
+    ].filter(Boolean).join('\n');
 
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name:         form.name.trim(),
-          email:        form.email.trim(),
-          organization: form.org.trim(),
-          inquiry_type: form.type,
-          message:      form.message.trim(),
-          _language:    lang,
-        }),
-      });
-
-      if (res.ok) {
-        setStatus('success');
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setServerError(
-          data?.error ||
-          (isRtl ? 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' : 'Something went wrong. Please try again.')
-        );
-        setStatus('error');
-      }
-    } catch {
-      setServerError(
-        isRtl
-          ? 'خطای اتصال. لطفاً اتصال اینترنت خود را بررسی کنید.'
-          : 'Connection error. Please check your internet connection.'
-      );
-      setStatus('error');
-    }
+    window.location.href =
+      `mailto:${t.generalEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus('success');
   };
 
   return (
@@ -113,7 +85,14 @@ export default function Contact() {
           <div className="contact-form">
             <h2>{t.formTitle}</h2>
             {status === 'success' ? (
-              <div className="form-success">{t.successMsg}</div>
+              <div className="form-success">
+                {t.successMsg}
+                <p className="section-block__note" style={{ marginTop: '0.6rem' }}>
+                  {isRtl
+                    ? `اگر برنامهٔ ایمیل باز نشد، مستقیماً بنویسید به: ${t.generalEmail} · ${t.contactPhone}`
+                    : `If your mail client did not open, write directly: ${t.generalEmail} · ${t.contactPhone}`}
+                </p>
+              </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
@@ -177,8 +156,6 @@ export default function Contact() {
                   />
                   {errors.message && <span id="err-message" className="form-error" role="alert">{errors.message}</span>}
                 </div>
-                {serverError && (
-                  <div className="form-server-error" role="alert">{serverError}</div>
                 )}
                 <button
                   type="submit"

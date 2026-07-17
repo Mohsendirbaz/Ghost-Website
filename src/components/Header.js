@@ -263,10 +263,7 @@ export default function Header() {
         { label: t.technology, to: `/${lang}/technology`, iconKey: 'technology', desc: isRtl ? 'پشته فناوری ما' : 'Our technology stack' },
         { label: t.science,    to: `/${lang}/science`,    iconKey: 'science',    desc: isRtl ? 'علم پشت سیستم' : 'The science behind the system' },
         { label: t.safety,     to: `/${lang}/safety`,     iconKey: 'safety',     desc: isRtl ? 'رویکرد ایمنی' : 'Safety-first approach' },
-        { label: t.partners,   to: `/${lang}/partners`,   iconKey: 'partners',   desc: isRtl ? 'همکاران و شرکاء' : 'Collaborators & partners' },
-        { label: t.company,    to: `/${lang}/company`,    iconKey: 'company',    desc: isRtl ? 'درباره Ghost Autonomy' : 'About Ghost Autonomy' },
         { label: t.bio,        to: `/${lang}/bio`,        iconKey: 'bio',        desc: isRtl ? 'زندگینامه بنیان‌گذار' : 'Founder biography' },
-        { label: t.invest,     to: `/${lang}/invest`,     iconKey: 'invest',     desc: isRtl ? 'سرمایه‌گذاری و تامین مالی جمعی' : 'Investment & crowdfunding' },
         { label: t.contact,    to: `/${lang}/contact`,    iconKey: 'contact',    desc: isRtl ? 'تماس با ما' : 'Get in touch' },
       ],
     },
@@ -286,6 +283,7 @@ export default function Header() {
       label: isRtl ? 'منابع' : 'Resources',
       links: [
         { label: t.exhibition,      to: `/${lang}/exhibition`,     iconKey: 'exhibition',      desc: isRtl ? 'نرم‌افزار پژوهشی، زنده در مرورگر' : 'The research software, running live' },
+        { label: t.memoryWing, to: `/${lang}/memory`, iconKey: 'libraryAssets', desc: isRtl ? 'ابزارهای ماژول حافظه، زنده' : 'Memory Module instruments, live' },
         { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
         { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
         { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۶۰ سند آرشیو' : '60 archived documents' },

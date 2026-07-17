@@ -70,7 +70,6 @@ const Bio = () => {
     <main id="main-content">
       <Breadcrumb crumbs={[
         { label: copy[lang].breadcrumb.home, to: `/${lang}` },
-        { label: copy[lang].breadcrumb.company, to: `/${lang}/company` },
         { label: lang === 'en' ? 'Founder' : 'بنیان‌گذار' },
       ]} />
 
@@ -122,7 +121,7 @@ const Bio = () => {
                   LinkedIn
                 </a>
                 <a
-                  href="mailto:contact@ghostautonomy.com"
+                  href="mailto:dirbaz.sharif@gmail.com"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium"
                 >
                   <Mail className="w-4 h-4" />

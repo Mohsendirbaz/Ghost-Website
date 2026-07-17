@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@radix-ui/react-tabs": "^1.1.13",
-    "@supabase/supabase-js": "^2.97.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -35,7 +34,8 @@
     "eject": "react-scripts eject",
     "organize-library": "node scripts/organizeLibrary.js",
     "build:exhibition": "cd src/signal-multiplexer-viz && npm ci && VITE_EXHIBITION=1 npx vite build --base=/exhibition/ && rm -rf ../../public/exhibition && cp -r dist ../../public/exhibition && cd ../.. && node scripts/assertExhibitionClean.js",
-    "assert:exhibition": "node scripts/assertExhibitionClean.js"
+    "assert:exhibition": "node scripts/assertExhibitionClean.js",
+    "prebuild": "node scripts/generateSitemap.js"
   },
   "eslintConfig": {
     "extends": [

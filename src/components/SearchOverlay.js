@@ -13,8 +13,6 @@ function buildPageIndex(lang) {
     { label: t.technology,      path: `/${lang}/technology`,   type: 'page' },
     { label: t.science,         path: `/${lang}/science`,      type: 'page' },
     { label: t.safety,          path: `/${lang}/safety`,       type: 'page' },
-    { label: t.partners,        path: `/${lang}/partners`,     type: 'page' },
-    { label: t.company,         path: `/${lang}/company`,      type: 'page' },
     { label: t.contact,         path: `/${lang}/contact`,      type: 'page' },
     { label: t.perspective,     path: `/${lang}/perspective`,  type: 'page' },
     { label: t.architecture,    path: `/${lang}/architecture`, type: 'page' },
@@ -25,7 +23,7 @@ function buildPageIndex(lang) {
     { label: t.multiAgentSystem, path: `/${lang}/multi-agent-system`, type: 'page' },
     { label: t.methods,          path: `/${lang}/methods`,            type: 'page' },
     { label: t.exhibition,       path: `/${lang}/exhibition`,         type: 'page' },
-    { label: t.invest,           path: `/${lang}/invest`,             type: 'page' },
+    { label: t.memoryWing,       path: `/${lang}/memory`,             type: 'page' },
     { label: t.bio,              path: `/${lang}/bio`,                type: 'page' },
   ];
 }

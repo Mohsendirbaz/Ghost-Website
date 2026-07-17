@@ -43,7 +43,7 @@ async function generatePdfInvoice(items, failedFiles, lang) {
     doc.setFontSize(8.5);
     doc.setTextColor(...C_SLATE);
     doc.text('Physics-Enforced Computing Architecture', ML, 25);
-    doc.text('ghostautonomy.com', ML, 32);
+    doc.text('ghost-website-kappa.vercel.app', ML, 32);
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(14);
@@ -160,7 +160,7 @@ async function generatePdfInvoice(items, failedFiles, lang) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(...C_SLATE);
-    doc.text('Ghost Autonomy © 2026 · ghostautonomy.com', ML, footY + 9);
+    doc.text('Ghost Autonomy © 2026 · ghost-website-kappa.vercel.app', ML, footY + 9);
     doc.text(`Invoice ${sessionId}`, PAGE_W - MR, footY + 9, { align: 'right' });
 
     return doc.output('blob');

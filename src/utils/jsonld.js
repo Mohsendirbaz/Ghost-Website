@@ -13,7 +13,7 @@
  *   during client-side navigation).
  */
 
-const BASE_URL = 'https://ghostautonomy.com';
+const BASE_URL = process.env.REACT_APP_SITE_URL || 'https://ghost-website-kappa.vercel.app';
 const ORG_ID   = `${BASE_URL}/#organization`;
 const SITE_ID  = `${BASE_URL}/#website`;
 const BOOK_ID  = `${BASE_URL}/docs/#book`;

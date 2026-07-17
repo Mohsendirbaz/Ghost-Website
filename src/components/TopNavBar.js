@@ -20,10 +20,7 @@ export default function TopNavBar() {
         { label: t.technology, to: `/${lang}/technology` },
         { label: t.science,    to: `/${lang}/science` },
         { label: t.safety,     to: `/${lang}/safety` },
-        { label: t.partners,   to: `/${lang}/partners` },
-        { label: t.company,    to: `/${lang}/company` },
         { label: t.bio,        to: `/${lang}/bio` },
-        { label: t.invest,     to: `/${lang}/invest` },
         { label: t.contact,    to: `/${lang}/contact` },
       ],
     },
@@ -33,6 +30,7 @@ export default function TopNavBar() {
         { label: t.perspective,  to: `/${lang}/perspective` },
         { label: t.architecture, to: `/${lang}/architecture` },
         { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },
+        { label: t.memoryWing, to: `/${lang}/memory` },
       ],
     },
     {

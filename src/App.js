@@ -12,6 +12,7 @@ import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import CartWidget from './components/CartWidget';
 import ScrollProgress from './components/ScrollProgress';
+import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
 import { FactPanel, SavedFactsBoard } from './components/FactEngine';
 import CookieBanner from './components/CookieBanner';
@@ -20,8 +21,6 @@ import Home from './pages/Home';
 import Technology from './pages/Technology';
 import Science from './pages/Science';
 import Safety from './pages/Safety';
-import Partners from './pages/Partners';
-import Company from './pages/Company';
 import Contact from './pages/Contact';
 import Perspective from './pages/Perspective';
 import Architecture from './pages/Architecture';
@@ -33,13 +32,37 @@ import LibraryAssets from './pages/LibraryAssets';
 import LibraryAssetViewer from './pages/LibraryAssetViewer';
 import LibraryBrowse from './pages/LibraryBrowse';
 import MultiAgentSystem from './pages/MultiAgentSystem';
-import Invest from './pages/Invest';
 import Bio from './pages/Bio';
 import Methods from './pages/Methods';
 import Exhibition from './pages/Exhibition';
+import { Privacy, Terms } from './pages/Legal';
+import NotFound from './pages/NotFound';
+import MemoryWing from './pages/MemoryWing';
+import ErrorBoundary from './components/ErrorBoundary';
 import './styles/global.css';
 import './styles/blueprint.css';
 import './App.css';
+
+
+const PAGE_TITLES = {
+  '': { en: 'Ghost Autonomy — Computing That Respects Physics', fa: 'Ghost Autonomy — محاسباتی که به فیزیک احترام می‌گذارد' },
+  technology: { en: 'Technology', fa: 'فناوری' },
+  science: { en: 'Science', fa: 'علم' },
+  safety: { en: 'Safety', fa: 'ایمنی' },
+  contact: { en: 'Contact', fa: 'تماس' },
+  perspective: { en: 'Perspective', fa: 'دیدگاه' },
+  methods: { en: 'Methods', fa: 'روش‌ها' },
+  exhibition: { en: 'The Exhibition', fa: 'نمایشگاه' },
+  memory: { en: 'The Memory Wing', fa: 'بال حافظه' },
+  architecture: { en: 'Architecture', fa: 'معماری' },
+  'knowledge-base': { en: 'Knowledge Base', fa: 'پایگاه دانش' },
+  artifacts: { en: 'Artifact Gallery', fa: 'گالری آرتیفکت' },
+  library: { en: 'Document Archive', fa: 'آرشیو اسناد' },
+  'multi-agent-system': { en: 'Multi-Agent System', fa: 'سیستم چند-عامله' },
+  bio: { en: 'Bio — Dr. Mohsen Dirbaz', fa: 'زندگی‌نامه — دکتر محسن دیرباز' },
+  privacy: { en: 'Privacy', fa: 'حریم خصوصی' },
+  terms: { en: 'Terms of Use', fa: 'شرایط استفاده' },
+};
 
 const BASE_URL = process.env.REACT_APP_SITE_URL || 'https://ghost-website-kappa.vercel.app';
 
@@ -52,6 +75,21 @@ function LangSync() {
     if (segment === 'fa') setLang('fa');
     else if (segment === 'en') setLang('en');
   }, [location.pathname, setLang]);
+
+
+  // Per-page document title (was: one title for every page)
+  useEffect(() => {
+    const segs = location.pathname.split('/').filter(Boolean); // [lang, page, ...]
+    const lang = segs[0] === 'fa' ? 'fa' : 'en';
+    const key = segs[1] || '';
+    const entry = PAGE_TITLES[key];
+    const base = 'Ghost Autonomy';
+    document.title = !entry
+      ? base
+      : key === ''
+        ? entry[lang]
+        : `${entry[lang]} · ${base}`;
+  }, [location.pathname]);
 
   // Inject hreflang alternate links for SEO
   useEffect(() => {
@@ -74,6 +112,13 @@ function LangSync() {
       link.href = `${BASE_URL}${href}`;
       document.head.appendChild(link);
     };
+
+    // canonical
+    document.querySelectorAll('link[rel="canonical"]').forEach((el) => el.remove());
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = `${BASE_URL}${pathname}`;
+    document.head.appendChild(canonical);
 
     addLink('en', enPath);
     addLink('fa', faPath);
@@ -112,6 +157,7 @@ function AppShell() {
   return (
     <>
       <LangSync />
+      <ScrollToTop />
       <TopNavBar />
       <ScrollProgress />
       <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -133,8 +179,7 @@ function AppShell() {
           <Route path="/en/technology" element={<PageTransition><Technology /></PageTransition>} />
           <Route path="/en/science" element={<PageTransition><Science /></PageTransition>} />
           <Route path="/en/safety" element={<PageTransition><Safety /></PageTransition>} />
-          <Route path="/en/partners" element={<PageTransition><Partners /></PageTransition>} />
-          <Route path="/en/company" element={<PageTransition><Company /></PageTransition>} />
+
           <Route path="/en/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="/en/perspective" element={<PageTransition><Perspective /></PageTransition>} />
           <Route path="/en/methods" element={<PageTransition><Methods /></PageTransition>} />
@@ -167,9 +212,6 @@ function AppShell() {
           {/* Multi-Agent System */}
           <Route path="/en/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
           <Route path="/fa/multi-agent-system" element={<PageTransition><MultiAgentSystem /></PageTransition>} />
-          {/* Invest / Crowdsourcing */}
-          <Route path="/en/invest" element={<PageTransition><Invest /></PageTransition>} />
-          <Route path="/fa/invest" element={<PageTransition><Invest /></PageTransition>} />
           {/* Bio / Founder */}
 <Route path="/en/bio" element={<PageTransition><Bio /></PageTransition>} />
 <Route path="/en/bio/:section" element={<PageTransition><Bio /></PageTransition>} />
@@ -179,14 +221,19 @@ function AppShell() {
           <Route path="/fa/technology" element={<PageTransition><Technology /></PageTransition>} />
           <Route path="/fa/science" element={<PageTransition><Science /></PageTransition>} />
           <Route path="/fa/safety" element={<PageTransition><Safety /></PageTransition>} />
-          <Route path="/fa/partners" element={<PageTransition><Partners /></PageTransition>} />
-          <Route path="/fa/company" element={<PageTransition><Company /></PageTransition>} />
+
           <Route path="/fa/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="/fa/perspective" element={<PageTransition><Perspective /></PageTransition>} />
           <Route path="/fa/methods" element={<PageTransition><Methods /></PageTransition>} />
           <Route path="/fa/exhibition" element={<PageTransition><Exhibition /></PageTransition>} />
           <Route path="/fa/architecture" element={<PageTransition><Architecture /></PageTransition>} />
-          <Route path="*" element={<Navigate to="/en" replace />} />
+          <Route path="/en/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
+          <Route path="/fa/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
+          <Route path="/en/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+          <Route path="/fa/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+          <Route path="/en/terms" element={<PageTransition><Terms /></PageTransition>} />
+          <Route path="/fa/terms" element={<PageTransition><Terms /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
           </Routes>
         </AnimatePresence>
       </div>
@@ -208,7 +255,9 @@ export default function App() {
         <ToastProvider>
           <LanguageProvider>
             <CartProvider>
-              <AppShell />
+              <ErrorBoundary>
+                <AppShell />
+              </ErrorBoundary>
             </CartProvider>
           </LanguageProvider>
         </ToastProvider>

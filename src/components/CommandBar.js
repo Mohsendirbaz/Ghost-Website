@@ -48,8 +48,6 @@ export default function CommandBar() {
     technology:       'فناوری',
     science:          'علم',
     safety:           'ایمنی',
-    partners:         'شرکا',
-    company:          'شرکت',
     contact:          'تماس',
     perspective:      'دیدگاه',
     architecture:     'معماری',
@@ -60,15 +58,12 @@ export default function CommandBar() {
     multiAgentSystem: 'سیستم چندعاملی',
     methods:          'روش‌شناسی پژوهش',
     exhibition:       'نمایشگاه زنده',
-    invest:           'سرمایه‌گذاری',
     bio:              'بیوگرافی',
   } : {
     home:             'Home',
     technology:       'Technology',
     science:          'Science',
     safety:           'Safety',
-    partners:         'Partners',
-    company:          'Company',
     contact:          'Contact',
     perspective:      'Perspective',
     architecture:     'Architecture',
@@ -79,7 +74,7 @@ export default function CommandBar() {
     multiAgentSystem: 'Multi-Agent System',
     methods:          'Research Methods',
     exhibition:       'The Exhibition',
-    invest:           'Invest',
+    memoryWing:       'Memory Wing',
     bio:              'Bio',
   };
 
@@ -88,8 +83,6 @@ export default function CommandBar() {
     { label: pageLabels.technology,       path: `/${lang}/technology` },
     { label: pageLabels.science,          path: `/${lang}/science` },
     { label: pageLabels.safety,           path: `/${lang}/safety` },
-    { label: pageLabels.partners,         path: `/${lang}/partners` },
-    { label: pageLabels.company,          path: `/${lang}/company` },
     { label: pageLabels.contact,          path: `/${lang}/contact` },
     { label: pageLabels.perspective,      path: `/${lang}/perspective` },
     { label: pageLabels.architecture,     path: `/${lang}/architecture` },
@@ -100,7 +93,7 @@ export default function CommandBar() {
     { label: pageLabels.multiAgentSystem, path: `/${lang}/multi-agent-system` },
     { label: pageLabels.methods,          path: `/${lang}/methods` },
     { label: pageLabels.exhibition,       path: `/${lang}/exhibition` },
-    { label: pageLabels.invest,           path: `/${lang}/invest` },
+    { label: pageLabels.memoryWing,       path: `/${lang}/memory` },
     { label: pageLabels.bio,              path: `/${lang}/bio` },
   ];
 
