@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Hero from '../components/Hero';
@@ -76,6 +76,12 @@ export default function Exhibition() {
                 }}
                 aria-pressed={room === r.view}
               >
+                <img
+                  className="room-thumb"
+                  src={`/covers/exhibition/room-${r.view}.png`}
+                  alt=""
+                  loading="lazy"
+                />
                 <h3 className="layer-card__title">{r.title}</h3>
                 <p className="layer-card__body">{r.desc}</p>
                 <p className="layer-card__num" style={{ marginTop: '0.75rem' }}>
@@ -128,7 +134,7 @@ export default function Exhibition() {
                   title={activeRoom?.title || 'Ghost Autonomy Exhibition'}
                   style={{
                     width: '100%',
-                    height: '82vh',
+                    height: 'clamp(420px, 82vh, 920px)',
                     border: '0',
                     display: 'block',
                   }}
@@ -143,6 +149,47 @@ export default function Exhibition() {
                 : 'برای شروع، یکی از تالارهای بالا را انتخاب کنید.'}
             </p>
           )}
+        </div>
+      </section>
+
+      {/* ── Annex: the Memory Wing — standalone Memory Module instruments.
+             Registered in src/data/artifacts.js; files live in
+             public/docs/html/memory/. English-only, concept-stage research;
+             standings discipline applies. ── */}
+      <section className="annex" aria-label={lang === 'fa' ? 'بال حافظه' : 'The Memory Wing'}>
+        <p className="annex__eyebrow">{lang === 'fa' ? 'ضمیمهٔ نمایشگاه' : 'Exhibition Annex'}</p>
+        <h2 className="annex__title">{lang === 'fa' ? 'بال حافظه' : 'The Memory Wing'}</h2>
+        <p className="annex__lead">
+          {lang === 'fa'
+            ? 'ابزارهای ماژول حافظه — بهای فراخوانی، میثاق بازیابی و بافت جست‌وجوی هم‌زیست — به‌صورت مستقل و در سطح مفهوم. فعلاً فقط انگلیسی؛ انضباط جایگاه ادعا این‌جا هم برقرار است.'
+            : 'Standalone instruments from the Memory Module — the Price of Recall, the Retrieval Covenant, and the Symbiotic Search Fabric — concept-stage research, English-only for now. The standings discipline applies here as everywhere.'}
+        </p>
+        <div className="annex__grid">
+          {[
+            { slug: 'memory-integration-atlas', file: 'integration-atlas.html',
+              en: ['Integration Atlas', 'The module’s ideas as one governed graph.'],
+              fa: ['اطلس یکپارچگی', 'ایده‌های ماژول در قالب یک گراف حاکمیت‌دار.'] },
+            { slug: 'memory-synergy-matrix', file: 'integration-matrix.html',
+              en: ['Synergy Matrix', 'Every pair of ideas — mapped, or honestly marked unexamined.'],
+              fa: ['ماتریس هم‌افزایی', 'هر جفت ایده — نگاشته، یا صادقانه «بررسی‌نشده».'] },
+            { slug: 'memory-mechanism-spine', file: 'mechanism-spine.html',
+              en: ['Shared Mechanism Spine', 'Fifteen laws the Memory Module keeps rewriting.'],
+              fa: ['ستون سازوکارهای مشترک', 'پانزده قانونی که ماژول حافظه بازنویسی می‌کند.'] },
+            { slug: 'symbiotic-search-fabric', file: 'symbiotic_search_fabric.html',
+              en: ['Symbiotic Search Fabric', 'Retrieval as a governed, time-bounded fabric — not a lookup.'],
+              fa: ['بافت جست‌وجوی هم‌زیست', 'بازیابی به‌مثابه بافتی حاکمیت‌دار و زمان‌کران‌دار — نه یک جست‌وجوی ساده.'] },
+          ].map((a) => (
+            <div key={a.slug} className="annex-card bp-frame">
+              <span className="annex-card__t">{lang === 'fa' ? a.fa[0] : a.en[0]}</span>
+              <span className="annex-card__d">{lang === 'fa' ? a.fa[1] : a.en[1]}</span>
+              <span className="annex-card__links">
+                <Link to={`/${lang}/artifacts/${a.slug}`}>{lang === 'fa' ? 'نمایش در گالری' : 'View in gallery'}</Link>
+                <a href={`/docs/html/memory/${a.file}`} target="_blank" rel="noopener noreferrer">
+                  {lang === 'fa' ? 'تمام‌صفحه ↗' : 'Open full ↗'}
+                </a>
+              </span>
+            </div>
+          ))}
         </div>
       </section>
     </main>

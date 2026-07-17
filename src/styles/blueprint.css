@@ -274,3 +274,41 @@
 @media (prefers-reduced-motion: reduce) {
   .bp-anim, .bp-anim * { animation: none !important; transition: none !important; }
 }
+
+/* ── Moat strip (Home) ──────────────────────────────────────────────── */
+.moats { max-width: 1100px; margin: 3rem auto 0; padding-inline: 1.25rem; }
+.moats__eyebrow { font-family: var(--bp-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bp-accent); margin: 0 0 0.5rem; }
+.moats__title { font-size: 1.25rem; margin: 0 0 1.2rem; color: var(--color-text-primary, var(--bp-ink)); }
+.moats__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.moat-card { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.05rem 1.1rem !important; text-decoration: none; color: inherit; position: relative; }
+.moat-card .standing-chip { align-self: flex-start; }
+.moat-card__name { font-size: 1rem; font-weight: 600; color: var(--color-text-primary, var(--bp-ink)); }
+.moat-card__line { font-size: 0.85rem; line-height: 1.6; color: var(--color-text-secondary, var(--bp-ink-soft)); }
+.moat-card__go { font-family: var(--bp-mono); color: var(--bp-accent); margin-top: auto; }
+.moat-card:hover .moat-card__name { color: var(--bp-accent); }
+
+/* ── Exhibition annex (the Memory Wing) ─────────────────────────────── */
+.annex { max-width: 1100px; margin: 2.6rem auto 0; padding-inline: 1rem; }
+.annex__eyebrow { font-family: var(--bp-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bp-accent); margin: 0 0 0.5rem; }
+.annex__title { font-size: 1.25rem; margin: 0 0 0.5rem; color: var(--color-text-primary, var(--bp-ink)); }
+.annex__lead { font-size: 0.92rem; line-height: 1.65; color: var(--color-text-secondary, var(--bp-ink-soft)); margin: 0 0 1.2rem; max-width: 70ch; }
+.annex__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+.annex-card { display: flex; flex-direction: column; gap: 0.45rem; padding: 1rem 1.05rem !important; }
+.annex-card__t { font-size: 0.95rem; font-weight: 600; color: var(--color-text-primary, var(--bp-ink)); }
+.annex-card__d { font-size: 0.8rem; line-height: 1.55; color: var(--color-text-secondary, var(--bp-ink-soft)); }
+.annex-card__links { display: flex; gap: 1rem; margin-top: auto; padding-top: 0.5rem; font-family: var(--bp-mono); font-size: 0.78rem; }
+.annex-card__links a { color: var(--bp-accent); text-decoration: none; }
+.annex-card__links a:hover { text-decoration: underline; }
+
+/* ── Exhibition room-card live thumbnails ───────────────────────────── */
+.room-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border: 1px solid var(--bp-line-faint);
+  border-radius: 5px;
+  margin-bottom: 0.7rem;
+  background: #0d1117;
+}

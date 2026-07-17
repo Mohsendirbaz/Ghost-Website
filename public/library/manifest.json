@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-29T12:18:09.676Z",
-  "totalFiles": 65,
+  "generated": "2026-07-17T12:22:44.837Z",
+  "totalFiles": 60,
   "categories": {
     "application": {
       "count": 1,
@@ -11,7 +11,7 @@
       "icon": "📋"
     },
     "av-research": {
-      "count": 20,
+      "count": 18,
       "label": {
         "en": "AV Research",
         "fa": "تحقیقات خودرو خودران"
@@ -27,7 +27,7 @@
       "icon": "📁"
     },
     "notion": {
-      "count": 8,
+      "count": 7,
       "label": {
         "en": "Notion 2025 Exports",
         "fa": "خروجی‌های Notion 2025"
@@ -43,7 +43,7 @@
       "icon": "⚙️"
     },
     "strategic": {
-      "count": 14,
+      "count": 12,
       "label": {
         "en": "Strategic Analysis",
         "fa": "تحلیل استراتژیک"
@@ -69,6 +69,36 @@
       "lang": "en",
       "sizeBytes": 98627,
       "title": "CV 2026"
+    },
+    {
+      "id": "av-research-تحلیل-خستگی-اوج،-ماتریس-طراحی،-و-معماری-حسگر",
+      "filename": "تحلیل خستگی-اوج، ماتریس طراحی، و معماری حسگر.md",
+      "path": "/library/av-research/%D8%AA%D8%AD%D9%84%DB%8C%D9%84%20%D8%AE%D8%B3%D8%AA%DA%AF%DB%8C-%D8%A7%D9%88%D8%AC%D8%8C%20%D9%85%D8%A7%D8%AA%D8%B1%DB%8C%D8%B3%20%D8%B7%D8%B1%D8%A7%D8%AD%DB%8C%D8%8C%20%D9%88%20%D9%85%D8%B9%D9%85%D8%A7%D8%B1%DB%8C%20%D8%AD%D8%B3%DA%AF%D8%B1.md",
+      "type": "md",
+      "category": "av-research",
+      "lang": "fa",
+      "sizeBytes": 71798,
+      "title": "تحلیل خستگی اوج، ماتریس طراحی، و معماری حسگر"
+    },
+    {
+      "id": "av-research-روش-سیستماتیک-پیمایش",
+      "filename": "روش سیستماتیک پیمایش.md",
+      "path": "/library/av-research/%D8%B1%D9%88%D8%B4%20%D8%B3%DB%8C%D8%B3%D8%AA%D9%85%D8%A7%D8%AA%DB%8C%DA%A9%20%D9%BE%DB%8C%D9%85%D8%A7%DB%8C%D8%B4.md",
+      "type": "md",
+      "category": "av-research",
+      "lang": "fa",
+      "sizeBytes": 86093,
+      "title": "روش سیستماتیک پیمایش"
+    },
+    {
+      "id": "av-research-نرم-افزار-و-الکترونیک-خودرو-۲۰۳۰",
+      "filename": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰.md",
+      "path": "/library/av-research/%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1%20%D9%88%20%D8%A7%D9%84%DA%A9%D8%AA%D8%B1%D9%88%D9%86%DB%8C%DA%A9%20%D8%AE%D9%88%D8%AF%D8%B1%D9%88%20%DB%B2%DB%B0%DB%B3%DB%B0.md",
+      "type": "md",
+      "category": "av-research",
+      "lang": "fa",
+      "sizeBytes": 133793,
+      "title": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰"
     },
     {
       "id": "av-research-architecture_of_trust",
@@ -124,7 +154,7 @@
       "id": "av-research-deepseek_html_20260205_4cd679",
       "filename": "deepseek_html_20260205_4cd679.html",
       "path": "/library/av-research/deepseek_html_20260205_4cd679.html",
-      "type": "html",
+      "type": "htmll",
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 43053,
@@ -141,16 +171,6 @@
       "title": "document pdf"
     },
     {
-      "id": "av-research-overlay-collection_compressed",
-      "filename": "Overlay Collection_compressed.pdf",
-      "path": "/library/av-research/Overlay%20Collection_compressed.pdf",
-      "type": "pdf",
-      "category": "av-research",
-      "lang": "en",
-      "sizeBytes": 1988861,
-      "title": "Overlay Collection compressed"
-    },
-    {
       "id": "av-research-overlay-archipelago-brute-force-schedule",
       "filename": "overlay-archipelago-brute-force-schedule.md",
       "path": "/library/av-research/overlay-archipelago-brute-force-schedule.md",
@@ -159,16 +179,6 @@
       "lang": "en",
       "sizeBytes": 36919,
       "title": "overlay archipelago brute force schedule"
-    },
-    {
-      "id": "av-research-overlay-archipelago-synthesis-1",
-      "filename": "overlay-archipelago-synthesis (1).md",
-      "path": "/library/av-research/overlay-archipelago-synthesis%20(1).md",
-      "type": "md",
-      "category": "av-research",
-      "lang": "en",
-      "sizeBytes": 44434,
-      "title": "overlay archipelago synthesis (1)"
     },
     {
       "id": "av-research-overlay-archipelago-synthesis",
@@ -191,14 +201,14 @@
       "title": "overlay master enhancement table"
     },
     {
-      "id": "av-research-qs-for-av-research-560-resources",
-      "filename": "QS for AV Research - 560 Resources.md",
-      "path": "/library/av-research/QS%20for%20AV%20Research%20-%20560%20Resources.md",
-      "type": "md",
+      "id": "av-research-overlay-collection_compressed",
+      "filename": "Overlay Collection_compressed.pdf",
+      "path": "/library/av-research/Overlay%20Collection_compressed.pdf",
+      "type": "pdf",
       "category": "av-research",
       "lang": "en",
-      "sizeBytes": 184127,
-      "title": "QS for AV Research 560 Resources"
+      "sizeBytes": 1988861,
+      "title": "Overlay Collection compressed"
     },
     {
       "id": "av-research-qs-for-av",
@@ -209,6 +219,16 @@
       "lang": "en",
       "sizeBytes": 5225388,
       "title": "QS for AV"
+    },
+    {
+      "id": "av-research-qs-for-av-research-560-resources",
+      "filename": "QS for AV Research - 560 Resources.md",
+      "path": "/library/av-research/QS%20for%20AV%20Research%20-%20560%20Resources.md",
+      "type": "md",
+      "category": "av-research",
+      "lang": "en",
+      "sizeBytes": 184127,
+      "title": "QS for AV Research 560 Resources"
     },
     {
       "id": "av-research-r1-quantum-sensing-for-autonomous-vehicles",
@@ -229,46 +249,6 @@
       "lang": "en",
       "sizeBytes": 20139,
       "title": "truth governance matrix"
-    },
-    {
-      "id": "av-research-تحلیل-خستگی-اوج،-ماتریس-طراحی،-و-معماری-حسگر",
-      "filename": "تحلیل خستگی-اوج، ماتریس طراحی، و معماری حسگر.md",
-      "path": "/library/av-research/%D8%AA%D8%AD%D9%84%DB%8C%D9%84%20%D8%AE%D8%B3%D8%AA%DA%AF%DB%8C-%D8%A7%D9%88%D8%AC%D8%8C%20%D9%85%D8%A7%D8%AA%D8%B1%DB%8C%D8%B3%20%D8%B7%D8%B1%D8%A7%D8%AD%DB%8C%D8%8C%20%D9%88%20%D9%85%D8%B9%D9%85%D8%A7%D8%B1%DB%8C%20%D8%AD%D8%B3%DA%AF%D8%B1.md",
-      "type": "md",
-      "category": "av-research",
-      "lang": "fa",
-      "sizeBytes": 71798,
-      "title": "تحلیل خستگی اوج، ماتریس طراحی، و معماری حسگر"
-    },
-    {
-      "id": "av-research-روش-سیستماتیک-پیمایش",
-      "filename": "روش سیستماتیک پیمایش.md",
-      "path": "/library/av-research/%D8%B1%D9%88%D8%B4%20%D8%B3%DB%8C%D8%B3%D8%AA%D9%85%D8%A7%D8%AA%DB%8C%DA%A9%20%D9%BE%DB%8C%D9%85%D8%A7%DB%8C%D8%B4.md",
-      "type": "md",
-      "category": "av-research",
-      "lang": "fa",
-      "sizeBytes": 86093,
-      "title": "روش سیستماتیک پیمایش"
-    },
-    {
-      "id": "av-research-سند-تبدیل-دانش",
-      "filename": "سند تبدیل دانش.pdf",
-      "path": "/library/av-research/%D8%B3%D9%86%D8%AF%20%D8%AA%D8%A8%D8%AF%DB%8C%D9%84%20%D8%AF%D8%A7%D9%86%D8%B4.pdf",
-      "type": "pdf",
-      "category": "av-research",
-      "lang": "fa",
-      "sizeBytes": 419245,
-      "title": "سند تبدیل دانش"
-    },
-    {
-      "id": "av-research-نرم-افزار-و-الکترونیک-خودرو-۲۰۳۰",
-      "filename": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰.md",
-      "path": "/library/av-research/%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1%20%D9%88%20%D8%A7%D9%84%DA%A9%D8%AA%D8%B1%D9%88%D9%86%DB%8C%DA%A9%20%D8%AE%D9%88%D8%AF%D8%B1%D9%88%20%DB%B2%DB%B0%DB%B3%DB%B0.md",
-      "type": "md",
-      "category": "av-research",
-      "lang": "fa",
-      "sizeBytes": 133793,
-      "title": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰"
     },
     {
       "id": "misc-isa",
@@ -361,22 +341,11 @@
       "title": "Physics Informed Architecture Equation Sensor Cont 97d2931724e84e649d5d6aab025efa35"
     },
     {
-      "id": "notion-samsung-initial-draft-2b1f832e52ca80968776f93eddaa5420",
-      "filename": "Samsung initial draft 2b1f832e52ca80968776f93eddaa5420.md",
-      "path": "/library/notion/Samsung%20initial%20draft%202b1f832e52ca80968776f93eddaa5420.md",
-      "type": "md",
-      "category": "notion",
-      "lang": "en",
-      "sizeBytes": 6806,
-      "title": "Samsung initial draft 2b1f832e52ca80968776f93eddaa5420"
-    },
-    {
       "id": "picapd-en-hardware-isa",
       "filename": "Hardware ISA.pdf",
       "path": "/library/picapd/en/Hardware%20ISA.pdf",
       "type": "pdf",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 478839,
       "title": "Hardware ISA"
@@ -387,21 +356,9 @@
       "path": "/library/picapd/en/Highest-impact%20spec%20fixes%20for%20ISA.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 6508,
       "title": "Highest impact spec fixes for ISA"
-    },
-    {
-      "id": "picapd-en-picapd-instruction-set-architecture",
-      "filename": "PICAPD INSTRUCTION SET ARCHITECTURE.md",
-      "path": "/library/picapd/en/PICAPD%20INSTRUCTION%20SET%20ARCHITECTURE.md",
-      "type": "md",
-      "category": "picapd",
-      "subcategory": "en",
-      "lang": "en",
-      "sizeBytes": 33683,
-      "title": "PICAPD INSTRUCTION SET ARCHITECTURE"
     },
     {
       "id": "picapd-en-picapd_compressed",
@@ -409,7 +366,6 @@
       "path": "/library/picapd/en/PICAPD_compressed.pdf",
       "type": "pdf",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 6290713,
       "title": "PICAPD compressed"
@@ -420,7 +376,6 @@
       "path": "/library/picapd/en/PICAPD_ISA_Rectification_Main_Context.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 29075,
       "title": "PICAPD ISA Rectification Main Context"
@@ -431,7 +386,6 @@
       "path": "/library/picapd/en/PICAPD_Platform_Profile_STOP5_Automotive_Perception.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 3885,
       "title": "PICAPD Platform Profile STOP5 Automotive Perception"
@@ -442,7 +396,6 @@
       "path": "/library/picapd/en/PICAPD_Silicon.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 74087,
       "title": "PICAPD Silicon"
@@ -453,7 +406,6 @@
       "path": "/library/picapd/en/PICAPD_v1_0_1_Errata_PatchText.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 6498,
       "title": "PICAPD v1 0 1 Errata PatchText"
@@ -464,10 +416,19 @@
       "path": "/library/picapd/en/PICAPD_v1_1_Annex_Drafts.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 9212,
       "title": "PICAPD v1 1 Annex Drafts"
+    },
+    {
+      "id": "picapd-en-picapd-instruction-set-architecture",
+      "filename": "PICAPD INSTRUCTION SET ARCHITECTURE.md",
+      "path": "/library/picapd/en/PICAPD%20INSTRUCTION%20SET%20ARCHITECTURE.md",
+      "type": "md",
+      "category": "picapd",
+      "lang": "en",
+      "sizeBytes": 33683,
+      "title": "PICAPD INSTRUCTION SET ARCHITECTURE"
     },
     {
       "id": "picapd-en-r2-evolutionary-co-design-for-the-picapd-platform-where-sili",
@@ -475,7 +436,6 @@
       "path": "/library/picapd/en/R2-Evolutionary%20co-design%20for%20the%20PICAPD%20platform%20where%20silicon%20meets%20software.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 23962,
       "title": "R2 Evolutionary co design for the PICAPD platform where silicon meets software"
@@ -486,21 +446,9 @@
       "path": "/library/picapd/en/STOP_5_Bitvector_Index.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "en",
       "lang": "en",
       "sizeBytes": 27073,
       "title": "STOP 5 Bitvector Index"
-    },
-    {
-      "id": "picapd-fa-picapdسیلیکون-فارسی",
-      "filename": "PICAPDسیلیکون فارسی.md",
-      "path": "/library/picapd/fa/PICAPD%D8%B3%DB%8C%D9%84%DB%8C%DA%A9%D9%88%D9%86%20%D9%81%D8%A7%D8%B1%D8%B3%DB%8C.md",
-      "type": "md",
-      "category": "picapd",
-      "subcategory": "fa",
-      "lang": "fa",
-      "sizeBytes": 110546,
-      "title": "PICAPDسیلیکون فارسی"
     },
     {
       "id": "picapd-fa-دستورالعمل",
@@ -508,7 +456,6 @@
       "path": "/library/picapd/fa/%D8%AF%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%84%D8%B9%D9%85%D9%84.pdf",
       "type": "pdf",
       "category": "picapd",
-      "subcategory": "fa",
       "lang": "fa",
       "sizeBytes": 258826,
       "title": "دستورالعمل"
@@ -519,7 +466,6 @@
       "path": "/library/picapd/fa/%D8%B3%DB%8C%D9%84%DB%8C%DA%A9%D9%88%D9%86.pdf",
       "type": "pdf",
       "category": "picapd",
-      "subcategory": "fa",
       "lang": "fa",
       "sizeBytes": 549361,
       "title": "سیلیکون"
@@ -530,20 +476,29 @@
       "path": "/library/picapd/fa/%D9%85%D8%AC%D9%85%D9%88%D8%B9%D9%87%20%D8%AF%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%84%D8%B9%D9%85%D9%84%20PICAPD.md",
       "type": "md",
       "category": "picapd",
-      "subcategory": "fa",
       "lang": "fa",
       "sizeBytes": 33521,
       "title": "مجموعه دستورالعمل PICAPD"
     },
     {
-      "id": "strategic-epu-autonomous-driving-integration",
-      "filename": "EPU Autonomous Driving Integration.pdf",
-      "path": "/library/strategic/EPU%20Autonomous%20Driving%20Integration.pdf",
-      "type": "pdf",
+      "id": "picapd-fa-picapdسیلیکون-فارسی",
+      "filename": "PICAPDسیلیکون فارسی.md",
+      "path": "/library/picapd/fa/PICAPD%D8%B3%DB%8C%D9%84%DB%8C%DA%A9%D9%88%D9%86%20%D9%81%D8%A7%D8%B1%D8%B3%DB%8C.md",
+      "type": "md",
+      "category": "picapd",
+      "lang": "fa",
+      "sizeBytes": 110546,
+      "title": "PICAPDسیلیکون فارسی"
+    },
+    {
+      "id": "strategic-تحلیل-رقابتی-فنی-یکپارچه",
+      "filename": "تحلیل رقابتی فنی یکپارچه.md",
+      "path": "/library/strategic/%D8%AA%D8%AD%D9%84%DB%8C%D9%84%20%D8%B1%D9%82%D8%A7%D8%A8%D8%AA%DB%8C%20%D9%81%D9%86%DB%8C%20%DB%8C%DA%A9%D9%BE%D8%A7%D8%B1%DA%86%D9%87.md",
+      "type": "md",
       "category": "strategic",
-      "lang": "en",
-      "sizeBytes": 11863283,
-      "title": "EPU Autonomous Driving Integration"
+      "lang": "fa",
+      "sizeBytes": 236278,
+      "title": "تحلیل رقابتی فنی یکپارچه"
     },
     {
       "id": "strategic-epu_document_farsi",
@@ -566,24 +521,14 @@
       "title": "EPU Initiative Alignment Matrix"
     },
     {
-      "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4",
-      "filename": "Ghost Autonomy - Unified Technical Competitive Analysis V4.md",
-      "path": "/library/strategic/Ghost%20Autonomy%20-%20Unified%20Technical%20Competitive%20Analysis%20V4.md",
-      "type": "md",
-      "category": "strategic",
-      "lang": "en",
-      "sizeBytes": 136752,
-      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
-    },
-    {
-      "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4-08c2635c",
-      "filename": "Ghost Autonomy - Unified Technical Competitive Analysis V4.pdf",
-      "path": "/library/strategic/Ghost%20Autonomy%20-%20Unified%20Technical%20Competitive%20Analysis%20V4.pdf",
+      "id": "strategic-epu-autonomous-driving-integration",
+      "filename": "EPU Autonomous Driving Integration.pdf",
+      "path": "/library/strategic/EPU%20Autonomous%20Driving%20Integration.pdf",
       "type": "pdf",
       "category": "strategic",
       "lang": "en",
-      "sizeBytes": 14200582,
-      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
+      "sizeBytes": 11863283,
+      "title": "EPU Autonomous Driving Integration"
     },
     {
       "id": "strategic-ghost_autonomy_unified_technical_analysis_v3",
@@ -606,6 +551,26 @@
       "title": "Ghost Autonomy Unified Technical Analysis V4"
     },
     {
+      "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4",
+      "filename": "Ghost Autonomy - Unified Technical Competitive Analysis V4.md",
+      "path": "/library/strategic/Ghost%20Autonomy%20-%20Unified%20Technical%20Competitive%20Analysis%20V4.md",
+      "type": "md",
+      "category": "strategic",
+      "lang": "en",
+      "sizeBytes": 136752,
+      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
+    },
+    {
+      "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4-08c2635c",
+      "filename": "Ghost Autonomy - Unified Technical Competitive Analysis V4.pdf",
+      "path": "/library/strategic/Ghost%20Autonomy%20-%20Unified%20Technical%20Competitive%20Analysis%20V4.pdf",
+      "type": "pdf",
+      "category": "strategic",
+      "lang": "en",
+      "sizeBytes": 14200582,
+      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
+    },
+    {
       "id": "strategic-implementation_readiness_matrix",
       "filename": "implementation_readiness_matrix.md",
       "path": "/library/strategic/implementation_readiness_matrix.md",
@@ -626,16 +591,6 @@
       "title": "NASDAQ Pathways"
     },
     {
-      "id": "strategic-samsung_letter",
-      "filename": "Samsung_Letter.md",
-      "path": "/library/strategic/Samsung_Letter.md",
-      "type": "md",
-      "category": "strategic",
-      "lang": "en",
-      "sizeBytes": 0,
-      "title": "Samsung Letter"
-    },
-    {
       "id": "strategic-summary-of-projects-at-5-stops",
       "filename": "summary of projects at 5 stops.md",
       "path": "/library/strategic/summary%20of%20projects%20at%205%20stops.md",
@@ -654,26 +609,6 @@
       "lang": "en",
       "sizeBytes": 9774,
       "title": "visitor retention booster updated analysis"
-    },
-    {
-      "id": "strategic-تحلیل-رقابتی-فنی-یکپارچه",
-      "filename": "تحلیل رقابتی فنی یکپارچه.md",
-      "path": "/library/strategic/%D8%AA%D8%AD%D9%84%DB%8C%D9%84%20%D8%B1%D9%82%D8%A7%D8%A8%D8%AA%DB%8C%20%D9%81%D9%86%DB%8C%20%DB%8C%DA%A9%D9%BE%D8%A7%D8%B1%DA%86%D9%87.md",
-      "type": "md",
-      "category": "strategic",
-      "lang": "fa",
-      "sizeBytes": 236278,
-      "title": "تحلیل رقابتی فنی یکپارچه"
-    },
-    {
-      "id": "strategic-نامه-رسمی-پیشنهاد-همکاری-epu",
-      "filename": "نامه رسمی پیشنهاد همکاری EPU.md",
-      "path": "/library/strategic/%D9%86%D8%A7%D9%85%D9%87%20%D8%B1%D8%B3%D9%85%DB%8C%20%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF%20%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C%20EPU.md",
-      "type": "md",
-      "category": "strategic",
-      "lang": "fa",
-      "sizeBytes": 22066,
-      "title": "نامه رسمی پیشنهاد همکاری EPU"
     },
     {
       "id": "thesis-research-chip-manufacturing-process-transcript",

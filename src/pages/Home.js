@@ -4,6 +4,7 @@ import { copy } from '../data/copy';
 import NarrowingHero from '../components/visuals/NarrowingHero';
 import CoverShelf from '../components/visuals/CoverShelf';
 import Figure from '../components/Figure';
+import MoatStrip from '../components/MoatStrip';
 import StandingsLegend from '../components/StandingsLegend';
 import './Home.css';
 
@@ -35,6 +36,9 @@ export default function Home() {
       {m.glance && (
         <Figure num="F-00" src={m.glance.src} caption={m.glance.caption} />
       )}
+
+      {/* The moats — original ideas, each linked to its living proof */}
+      <MoatStrip />
 
       {m.figures && (
         <section className="hm-band">

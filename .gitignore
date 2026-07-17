@@ -11,6 +11,10 @@
 # production
 /build
 
+# exhibition sub-app residue (never commit from inside src/)
+/src/signal-multiplexer-viz/node_modules/
+/src/signal-multiplexer-viz/dist/
+
 # misc
 .DS_Store
 .env.local
@@ -26,6 +30,7 @@ yarn-error.log*
 
 # IDE
 .idea/
-nul
-.idea/
-Lovable/
+
+# local cleanup staging (emptied manually)
+/_to_delete/
+/private-not-served/

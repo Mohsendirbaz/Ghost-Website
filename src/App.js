@@ -41,7 +41,7 @@ import './styles/global.css';
 import './styles/blueprint.css';
 import './App.css';
 
-const BASE_URL = 'https://ghost-website-kappa.vercel.app';
+const BASE_URL = process.env.REACT_APP_SITE_URL || 'https://ghost-website-kappa.vercel.app';
 
 function LangSync() {
   const { setLang } = useLang();

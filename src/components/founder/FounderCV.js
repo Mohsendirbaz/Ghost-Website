@@ -165,7 +165,7 @@ export function FounderCV() {
             { href: "/PhD_Transcript_Mohsen_Dirbaz.pdf", en: "PhD Transcript", fa: "ریزنمرات دکتری" },
             { href: "/MS_Transcript.pdf", en: "M.S. Transcript", fa: "ریزنمرات کارشناسی ارشد" },
             { href: "/Recommendation_Letter.pdf", en: "Recommendation Letter 1", fa: "توصیه‌نامه ۱" },
-            { href: "/Recommandation_Letter_2.pdf", en: "Recommendation Letter 2", fa: "توصیه‌نامه ۲" },
+            { href: "/Recommendation_Letter_2.pdf", en: "Recommendation Letter 2", fa: "توصیه‌نامه ۲" },
             { href: "/Recommendation_Letter_3.pdf", en: "Recommendation Letter 3", fa: "توصیه‌نامه ۳" },
             { href: "/Professional_Contacts.pdf", en: "Professional Contacts", fa: "تماس‌های حرفه‌ای" },
           ].map((doc, i) => (

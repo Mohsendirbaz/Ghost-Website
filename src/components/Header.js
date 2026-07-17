@@ -288,7 +288,7 @@ export default function Header() {
         { label: t.exhibition,      to: `/${lang}/exhibition`,     iconKey: 'exhibition',      desc: isRtl ? 'نرم‌افزار پژوهشی، زنده در مرورگر' : 'The research software, running live' },
         { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
         { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
-        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۱٬۷۵۱ سند آرشیو' : '1,751 archived documents' },
+        { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۶۰ سند آرشیو' : '60 archived documents' },
       ],
     },
   ];

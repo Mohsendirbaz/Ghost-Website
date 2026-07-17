@@ -95,7 +95,7 @@ export const copy = {
           { value: "2", label: "control invariants proven on paper — pose-and-select · monotone funnel", chip: "proven", chipText: "proven" },
           { value: "5", label: "refusal stages S0–S4 ahead of a single actuation gate" },
           { value: "6", label: "refusal-criteria families G1–G6" },
-          { value: "109", label: "documented assets in the technical library" },
+          { value: "50", label: "curated assets in the technical library" },
           { value: "8 · 43", label: "knowledge-base parts · chapters" }
         ],
         figuresNote: "IIT research foundation · physics-first architecture · ASIL-D design principles · purpose-built EPU",
@@ -108,7 +108,7 @@ export const copy = {
           { key: "eventfabric", label: "Event Fabric" }
         ],
         exEnter: "Enter",
-        corpusLead: "Four documents carry the program's claims; the library holds the remaining 105.",
+        corpusLead: "Four documents carry the program's claims; the library holds the other 46 curated assets.",
         corpusMore: "Browse the library",
         closeLine: "If bounded autonomy matters to your program, we should talk.",
         closeCta: "Start the conversation"
@@ -627,7 +627,7 @@ export const copy = {
           { value: "۲", label: "ناوردای کنترلی اثبات‌شده روی کاغذ — صورت‌بندی‌وگزینش · قیف یکنوا", chip: "proven", chipText: "اثبات‌شده" },
           { value: "۵", label: "مرحلهٔ امتناع S0–S4 پیش از یک دروازهٔ کنش" },
           { value: "۶", label: "خانوادهٔ معیارهای امتناع G1–G6" },
-          { value: "۱۰۹", label: "سند مستند در کتابخانهٔ فنی" },
+          { value: "۵۰", label: "سند منتخب در کتابخانهٔ فنی" },
           { value: "۸ · ۴۳", label: "بخش · فصل در پایگاه دانش" }
         ],
         figuresNote: "بنیان پژوهشی IIT · معماری فیزیک‌بنیاد · اصول طراحی ASIL-D · پردازندهٔ اختصاصی EPU",
@@ -640,7 +640,7 @@ export const copy = {
           { key: "eventfabric", label: "بافت رویداد" }
         ],
         exEnter: "ورود",
-        corpusLead: "چهار سند بار ادعاهای برنامه را می‌کشند؛ ۱۰۵ سند دیگر در کتابخانه است.",
+        corpusLead: "چهار سند بار ادعاهای برنامه را می‌کشند؛ ۴۶ سند منتخب دیگر در کتابخانه است.",
         corpusMore: "مرور کتابخانه",
         closeLine: "اگر خودرانی کران‌دار برای برنامهٔ شما اهمیت دارد، گفت‌وگو کنیم.",
         closeCta: "آغاز گفت‌وگو"

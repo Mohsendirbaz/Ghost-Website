@@ -869,7 +869,7 @@ export const CRITICAL_ASSETS = {
                     type: 'pdf',
                     lang: 'en',
                     targetUrl: '/docs/pdf/forensic_case_of_Tesla.pdf',
-                    status: ASSET_STATUS.READY,
+                    status: ASSET_STATUS.QUEUED,
                     processingEstimate: '2 hours',
                     tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving'],
                     priority: 6
@@ -889,7 +889,7 @@ export const CRITICAL_ASSETS = {
                     type: 'pdf',
                     lang: 'en',
                     targetUrl: '/docs/pdf/Still a Worm.pdf',
-                    status: ASSET_STATUS.READY,
+                    status: ASSET_STATUS.QUEUED,
                     processingEstimate: '2 hours',
                     tags: ['security', 'malware', 'worm', 'cybersecurity', 'analysis'],
                     priority: 7
@@ -904,7 +904,7 @@ export const CRITICAL_ASSETS = {
 export const HIGH_ASSETS = {
     id: LIBRARY_TIERS.HIGH,
     name: { en: 'HIGH', fa: 'بالا' },
-    count: 71,
+    count: 75,
     priority: 'P1-P2',
     timeline: 'Weeks 3-8',
     description: {
@@ -912,6 +912,94 @@ export const HIGH_ASSETS = {
         fa: 'محتوای فنی - تحقیقات خودروهای خودران و کاربردهای L4 AV'
     },
     categories: [
+        {
+            id: 'governed-knowledge-systems',
+            name: { en: 'Memory Module — Governed Knowledge Systems', fa: 'ماژول حافظه — نظام‌های دانش حاکمیت‌دار' },
+            count: 4,
+            source: 'Memory Module (July 2026)',
+            assets: [
+                {
+                    id: 'symbiotic-search-fabric-thesis',
+                    filename: 'Symbiotic_Search_Fabric_Thesis.pdf',
+                    slug: 'symbiotic-search-fabric-thesis',
+                    title: {
+                        en: 'The Symbiotic Search Fabric — Thesis',
+                        fa: 'بافت جست\u200cوجوی هم\u200cزیست — تز'
+                    },
+                    description: {
+                        en: 'A co-adaptive, multi-coupled-tenant, client-owned, agent-operated, time-bounded architecture for search: retrieval reframed as a governed fabric. Companion instruments run in the Exhibition\u2019s Memory Wing.',
+                        fa: 'معماری هم\u200cسازگار، چندمستأجری هم\u200cبسته، در مالکیت کارفرما، عامل\u200cگردان و زمان\u200cکران\u200cدار برای جست\u200cوجو: بازیابی در قالب بافتی حاکمیت\u200cدار. ابزارهای همراه در «بال حافظه» نمایشگاه اجرا می\u200cشوند.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/Symbiotic_Search_Fabric_Thesis.pdf',
+                    cover: '/covers/Symbiotic_Search_Fabric_Thesis.png',
+                    status: ASSET_STATUS.READY,
+                    tags: ['memory-module', 'search-fabric', 'architecture', 'thesis'],
+                    priority: 1
+                },
+                {
+                    id: 'retrieval-covenant-thesis',
+                    filename: 'Retrieval_Covenant_Thesis_II.pdf',
+                    slug: 'retrieval-covenant-thesis',
+                    title: {
+                        en: 'The Retrieval Covenant — Thesis II',
+                        fa: 'میثاق بازیابی — تز دوم'
+                    },
+                    description: {
+                        en: 'A contract calculus for warranted recall: what a memory system owes the caller, and what the caller owes the memory \u2014 Governed Knowledge Systems companion series.',
+                        fa: 'حساب قراردادی برای فراخوانی ضمانت\u200cدار: آنچه نظام حافظه به فراخواننده بدهکار است و آنچه فراخواننده به حافظه — از مجموعهٔ همراه «نظام\u200cهای دانش حاکمیت\u200cدار».'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/Retrieval_Covenant_Thesis_II.pdf',
+                    cover: '/covers/Retrieval_Covenant_Thesis_II.png',
+                    status: ASSET_STATUS.READY,
+                    tags: ['memory-module', 'retrieval', 'contracts', 'thesis'],
+                    priority: 2
+                },
+                {
+                    id: 'price-of-recall-thesis',
+                    filename: 'Price_of_Recall_Thesis_III.pdf',
+                    slug: 'price-of-recall-thesis',
+                    title: {
+                        en: 'The Price of Recall — Thesis III',
+                        fa: 'بهای فراخوانی — تز سوم'
+                    },
+                    description: {
+                        en: 'Shadow-priced cost optimization for contracted recall: remembering as a priced act, the economic face of metabolic memory\u2019s verification inversion.',
+                        fa: 'بهینه\u200cسازی هزینه با قیمت سایه برای فراخوانی قراردادی: به\u200cیادآوردن به\u200cمثابه کنشی بهادار — چهرهٔ اقتصادی وارونگی راستی\u200cآزمایی در حافظهٔ متابولیک.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/Price_of_Recall_Thesis_III.pdf',
+                    cover: '/covers/Price_of_Recall_Thesis_III.png',
+                    status: ASSET_STATUS.READY,
+                    tags: ['memory-module', 'price-of-recall', 'optimization', 'thesis'],
+                    priority: 3
+                },
+                {
+                    id: 'symbiotic-search-fabric-white-paper',
+                    filename: 'Symbiotic_Search_Fabric_White_Paper.pdf',
+                    slug: 'symbiotic-search-fabric-white-paper',
+                    title: {
+                        en: 'The Symbiotic Search Fabric — White Paper No. 1',
+                        fa: 'بافت جست\u200cوجوی هم\u200cزیست — وایت\u200cپیپر شمارهٔ ۱'
+                    },
+                    description: {
+                        en: 'The architecture-series white paper: the mature end-to-end framework distilled from the thesis line, written for an engineering audience.',
+                        fa: 'وایت\u200cپیپر مجموعهٔ معماری: چارچوب سرتاسری بالیده، برگرفته از خط تز، نوشته\u200cشده برای مخاطب مهندسی.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    targetUrl: '/docs/pdf/Symbiotic_Search_Fabric_White_Paper.pdf',
+                    cover: '/covers/Symbiotic_Search_Fabric_White_Paper.png',
+                    status: ASSET_STATUS.READY,
+                    tags: ['memory-module', 'search-fabric', 'white-paper'],
+                    priority: 4
+                }
+            ]
+        },
         {
             id: 'av-core-decision-making',
             name: { en: 'AV Core Decision-Making', fa: 'تصمیم‌گیری اصلی خودرو خودران' },

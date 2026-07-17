@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Symbiotic Search Fabric — a co-adaptive, multi-coupled-tenant, client-owned, agent-operated, time-bounded search architecture</title>
+<style>
+  :root{
+    --bg:#0A101C; --panel:#0E1626; --panel2:#121C30; --panel3:#16223A;
+    --frame:#2A3A5C; --hair:#22304B;
+    --ink:#E9F0FC; --sec:#A7B6D4; --mut:#6E7F9F;
+    --q:#4E9AF0;        /* query / time flow   */
+    --x:#F0A81C;        /* experience flow      */
+    --d:#2FBE8A;        /* design / evolution   */
+    --v:#9085E9;        /* coupling membrane    */
+    --r:#E66767;        /* refusal / governance */
+    --g:#C9A86A;        /* charter / sovereignty*/
+    --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  .wrap{max-width:1640px;margin:0 auto;padding:34px 26px 60px}
+  header{border-bottom:1px solid var(--hair);padding-bottom:22px;margin-bottom:8px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--mut);text-transform:uppercase}
+  h1{font-size:30px;margin:10px 0 6px;letter-spacing:.01em;font-weight:650}
+  .sub{font-size:14px;color:var(--sec);max-width:1060px;line-height:1.55}
+  .sub b{color:var(--ink);font-weight:600}
+  .epi{margin-top:12px;font-size:13px;color:var(--mut);font-style:italic;max-width:1000px;line-height:1.5}
+  .stamp{margin-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--g);letter-spacing:.06em}
+  .scroll{overflow-x:auto;margin-top:6px}
+  .canvas{min-width:1380px}
+  svg{display:block;width:100%;height:auto}
+  footer{border-top:1px solid var(--hair);margin-top:8px;padding-top:18px;color:var(--sec);font-size:12.5px;line-height:1.6;max-width:1180px}
+  footer .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--mut);margin-bottom:8px}
+  footer p{margin:6px 0}
+  footer .kin{color:var(--mut);font-size:11.5px;margin-top:12px}
+  /* ---- SVG type roles ---- */
+  text{font-family:var(--sans)}
+  .t-plane{font-family:var(--mono);font-size:9px;letter-spacing:.2em;fill:var(--mut)}
+  .t-h1{font-size:12.5px;font-weight:650;fill:var(--ink)}
+  .t-h2{font-size:10.5px;font-weight:650;fill:var(--ink)}
+  .t-h3{font-size:9.5px;font-weight:650;fill:var(--ink)}
+  .t-sub{font-size:8.5px;fill:var(--sec)}
+  .t-min{font-size:7.8px;fill:var(--mut)}
+  .t-mono{font-family:var(--mono)}
+  .t-q{fill:var(--q)} .t-x{fill:var(--x)} .t-d{fill:var(--d)} .t-v{fill:var(--v)} .t-r{fill:var(--r)} .t-g{fill:var(--g)}
+  /* ---- flows ---- */
+  .fq{stroke:var(--q);fill:none;stroke-width:1.6;stroke-dasharray:5 7;animation:march 2.6s linear infinite}
+  .fx{stroke:var(--x);fill:none;stroke-width:1.6;stroke-dasharray:4 8;animation:march 3.4s linear infinite}
+  .fd{stroke:var(--d);fill:none;stroke-width:1.7;stroke-dasharray:6 8;animation:march 4s linear infinite}
+  .fr{stroke:var(--r);fill:none;stroke-width:1.1;stroke-dasharray:3 5;animation:march 5s linear infinite}
+  .fg{stroke:var(--g);fill:none;stroke-width:1;stroke-dasharray:2 5;animation:march 6s linear infinite}
+  .compiling{animation:march 14s linear infinite}
+  .pulse{animation:pulse 2.8s ease-in-out infinite}
+  @keyframes march{to{stroke-dashoffset:-120}}
+  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .fq,.fx,.fd,.fr,.fg,.compiling{animation:none}
+    .pulse{animation:none;opacity:.9}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Envisioned system blueprint · one figure, end-to-end</div>
+  <h1>The Symbiotic Search Fabric</h1>
+  <div class="sub">A mature architecture for <b>co-adaptive</b> · <b>multi-coupled-tenant</b> · <b>client-owned</b> · <b>agent-operated</b> · <b>time-bounded</b> search — in which the residue of agent experience is the raw material of the system's next design.</div>
+  <div class="epi">Search here is not a service that agents call; it is a habitat they inhabit, own under charter, and rebuild from the record of their own foraging. Warp threads are sovereign tenant estates; weft threads are governed coupling channels; agents are the shuttles; and the loom re-strings itself, one adjudicated generation at a time.</div>
+  <div class="stamp">DESIGN GENERATION G8 · compiled 2026-07-14 from 41.3M experience traces of G7 · rollback rail armed · next frame G9 compiling</div>
+</header>
+
+<div class="scroll"><div class="canvas">
+<svg viewBox="0 0 1600 1780" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Blueprint of the Symbiotic Search Fabric: three client-owned tenant estates operated by agent crews, joined by a graded coupling membrane, served by an operator substrate, governed by a temporal contract spine on the left and an experience-to-design evolution pipeline on the right.">
+  <defs>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#233350" opacity="0.55"/>
+    </pattern>
+    <pattern id="dotsDense" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="0.8" fill="#8FA7DA" opacity="0.34"/>
+    </pattern>
+    <pattern id="dotsMid" width="11" height="11" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#8FA7DA" opacity="0.26"/>
+    </pattern>
+    <pattern id="dotsSparse" width="17" height="17" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#8FA7DA" opacity="0.18"/>
+    </pattern>
+    <marker id="mQ" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#4E9AF0"/>
+    </marker>
+    <marker id="mX" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#F0A81C"/>
+    </marker>
+    <marker id="mD" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#2FBE8A"/>
+    </marker>
+    <marker id="mR" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#E66767"/>
+    </marker>
+    <marker id="mG" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#C9A86A"/>
+    </marker>
+    <marker id="mV" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0.5 0.5 L7.5 4 L0.5 7.5 Z" fill="#9085E9"/>
+    </marker>
+  </defs>
+
+  <!-- ======================= BACKDROP ======================= -->
+  <rect x="0" y="0" width="1600" height="1780" fill="url(#grid)"/>
+
+  <!-- ======================= CHARTER PLANE ======================= -->
+  <text class="t-plane" x="200" y="38">PLANE 0 · CHARTER</text>
+  <rect x="200" y="48" width="1160" height="84" rx="10" fill="var(--panel)" stroke="var(--g)" stroke-opacity="0.55"/>
+  <text class="t-h1" x="236" y="76">HUMAN CHARTER PLANE</text>
+  <text class="t-sub" x="236" y="94">clients own the estates; humans set ⟨budgets B · quality floors q<tspan baseline-shift="sub" font-size="6.5">min</tspan> · coupling consents κ⟩ and sit in adjudication — they govern, never operate</text>
+  <!-- seats -->
+  <g stroke="var(--g)" fill="none" stroke-width="1.3">
+    <g transform="translate(395,0)"><circle cx="0" cy="110" r="5"/><path d="M-8 126 Q0 116 8 126"/></g>
+    <g transform="translate(780,0)"><circle cx="0" cy="110" r="5"/><path d="M-8 126 Q0 116 8 126"/></g>
+    <g transform="translate(1165,0)"><circle cx="0" cy="110" r="5"/><path d="M-8 126 Q0 116 8 126"/></g>
+  </g>
+  <path class="fg" d="M395 132 V236" marker-end="url(#mG)"/>
+  <path class="fg" d="M780 132 V236" marker-end="url(#mG)"/>
+  <path class="fg" d="M1165 132 V236" marker-end="url(#mG)"/>
+  <text class="t-min t-g" x="403" y="170">charter ⟨B, q_min, κ⟩</text>
+  <!-- council line to adjudication -->
+  <path class="fg" d="M1360 90 H1584 V622 H1566" marker-end="url(#mG)"/>
+  <text class="t-min t-g" transform="translate(1594,360) rotate(-90)" text-anchor="middle">council sits in adjudication (E5)</text>
+
+  <!-- ======================= GENERATION FRAMES ======================= -->
+  <!-- G9 arriving -->
+  <rect class="compiling" x="168" y="178" width="1200" height="1100" rx="14" fill="none" stroke="var(--d)" stroke-opacity="0.6" stroke-dasharray="7 9"/>
+  <text class="t-min t-d pulse" x="184" y="172">G9 — compiling from G8's ledgers…</text>
+  <!-- G7 / G6 ghosts -->
+  <rect x="192" y="202" width="1200" height="1100" rx="14" fill="none" stroke="var(--frame)" stroke-opacity="0.4" stroke-dasharray="3 6"/>
+  <rect x="204" y="214" width="1200" height="1100" rx="14" fill="none" stroke="var(--frame)" stroke-opacity="0.2" stroke-dasharray="3 6"/>
+  <!-- G8 current -->
+  <rect x="180" y="190" width="1200" height="1100" rx="14" fill="var(--panel)" fill-opacity="0.55" stroke="var(--frame)" stroke-width="1.6"/>
+  <text class="t-min t-mono" x="196" y="212" fill="var(--sec)">DESIGN GENERATION G8 — the frame itself is a compiled artifact: schema · strata · API verbs · valve types · prices</text>
+  <text class="t-min t-mono" x="1364" y="212" text-anchor="end" fill="var(--mut)">signed · rollback armed</text>
+
+  <!-- ======================= TEMPORAL CONTRACT SPINE (left) ======================= -->
+  <text class="t-plane" transform="translate(56,760) rotate(-90)" text-anchor="middle">TEMPORAL CONTRACT SPINE</text>
+  <rect x="60" y="196" width="104" height="44" rx="8" fill="var(--panel2)" stroke="var(--q)"/>
+  <text class="t-h3 t-q" x="112" y="214" text-anchor="middle">QUERY</text>
+  <text class="t-min t-mono" x="112" y="230" text-anchor="middle" fill="var(--sec)">⟨d · q_min · b⟩</text>
+  <path class="fq" d="M112 240 V252 Q112 262 124 262 H136 V1114" />
+  <!-- gates -->
+  <g fill="var(--panel3)" stroke="var(--q)" stroke-width="1.2">
+    <path d="M136 410 l8 8 -8 8 -8 -8 Z"/>
+    <path d="M136 484 l8 8 -8 8 -8 -8 Z"/>
+    <path d="M136 570 l8 8 -8 8 -8 -8 Z"/>
+    <path d="M136 1112 l8 8 -8 8 -8 -8 Z"/>
+  </g>
+  <!-- rung labels -->
+  <g text-anchor="end">
+    <text class="t-h3" x="120" y="406">R0 REFLEX</text>
+    <text class="t-min t-mono t-q" x="120" y="418">≤ 10 ms</text>
+    <text class="t-min" x="120" y="430">sketch-or-silence</text>
+    <text class="t-h3" x="120" y="480">R1 INTERACTIVE</text>
+    <text class="t-min t-mono t-q" x="120" y="492">≤ 1 s</text>
+    <text class="t-min" x="120" y="504">early-exit descent</text>
+    <text class="t-h3" x="120" y="566">R2 DELIBERATIVE</text>
+    <text class="t-min t-mono t-q" x="120" y="578">≤ 60 s</text>
+    <text class="t-min" x="120" y="590">multi-hop foraging</text>
+    <text class="t-h3" x="120" y="1108">R3 CAMPAIGN</text>
+    <text class="t-min t-mono t-q" x="120" y="1120">≤ 24 h</text>
+    <text class="t-min" x="120" y="1132">archive sweep ·</text>
+    <text class="t-min" x="120" y="1143">coupled recall</text>
+  </g>
+  <!-- admission arrows into estate A / membrane -->
+  <path class="fq" d="M144 418 H212" marker-end="url(#mQ)"/>
+  <path class="fq" d="M144 492 H212" marker-end="url(#mQ)"/>
+  <path class="fq" d="M144 578 H212" marker-end="url(#mQ)"/>
+  <path class="fq" d="M144 1120 H212" marker-end="url(#mQ)"/>
+  <!-- refusal capability at every gate -->
+  <g stroke="var(--r)" fill="none" stroke-width="1.2">
+    <circle cx="154" cy="434" r="4.5"/><line x1="150.8" y1="437.2" x2="157.2" y2="430.8"/>
+    <circle cx="154" cy="508" r="4.5"/><line x1="150.8" y1="511.2" x2="157.2" y2="504.8"/>
+    <circle cx="154" cy="594" r="4.5"/><line x1="150.8" y1="597.2" x2="157.2" y2="590.8"/>
+    <circle cx="154" cy="1136" r="4.5"/><line x1="150.8" y1="1139.2" x2="157.2" y2="1132.8"/>
+  </g>
+  <path class="fr" d="M136 1132 L118 1190" marker-end="url(#mR)"/>
+  <rect x="40" y="1196" width="136" height="84" rx="8" fill="var(--panel2)" stroke="var(--r)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-r" x="52" y="1216">HONEST REFUSAL</text>
+  <text class="t-min" x="52" y="1232">every gate may ⊘ —</text>
+  <text class="t-min" x="52" y="1245">if E[q | d, b] &lt; q_min :</text>
+  <text class="t-min" x="52" y="1258">decline + counter-offer</text>
+  <text class="t-min" x="52" y="1271">⟨d′, q′⟩ · logged (I2)</text>
+
+  <!-- ======================= TENANT ESTATES ======================= -->
+  <text class="t-plane" x="220" y="236">PLANE 1 · SOVEREIGN ESTATES — client-owned matter &amp; memory</text>
+
+  <!-- ~~~~~~~~ ESTATE A (fully annotated) ~~~~~~~~ -->
+  <g>
+    <rect x="220" y="240" width="350" height="760" rx="12" fill="var(--panel2)" stroke="var(--g)" stroke-opacity="0.8" stroke-width="1.4"/>
+    <text class="t-h1" x="236" y="266">TENANT ESTATE A</text>
+    <text class="t-sub" x="236" y="284">client-owned · keys K_A · biomedical corpus</text>
+    <g stroke="var(--g)" fill="none" stroke-width="1.4" transform="translate(534,258)">
+      <circle cx="0" cy="0" r="5"/><path d="M5 0 H18 M12 0 V5 M16 0 V6"/>
+    </g>
+    <!-- crew -->
+    <g fill="var(--panel3)" stroke="var(--q)" stroke-width="1.2">
+      <path d="M282 311 l16.5 9.5 v19 L282 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M362 311 l16.5 9.5 v19 L362 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M442 311 l16.5 9.5 v19 L442 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M522 311 l16.5 9.5 v19 L522 349 l-16.5 -9.5 v-19 Z"/>
+    </g>
+    <g class="t-h3" text-anchor="middle" fill="var(--ink)">
+      <text x="282" y="334">F</text><text x="362" y="334">C</text><text x="442" y="334">T</text><text x="522" y="334">A</text>
+    </g>
+    <g class="t-min" text-anchor="middle">
+      <text x="282" y="364">FORAGER</text><text x="362" y="364">CURATOR</text><text x="442" y="364">TUNER</text><text x="522" y="364">AUDITOR</text>
+    </g>
+    <!-- strata -->
+    <rect x="236" y="388" width="300" height="60" rx="7" fill="url(#dotsDense)" stroke="var(--hair)"/>
+    <text class="t-h2" x="246" y="406">HOT LATTICE</text>
+    <text class="t-min" x="246" y="422"><tspan class="t-mono t-q">τ ≈ ms</tspan> · sketches · caches · sanity, not scholarship</text>
+    <rect x="236" y="456" width="300" height="72" rx="7" fill="url(#dotsMid)" stroke="var(--hair)"/>
+    <text class="t-h2" x="246" y="474">WORKING INDEX</text>
+    <text class="t-min" x="246" y="490"><tspan class="t-mono t-q">τ ≈ s</tspan> · ANN graph · early-exit descent</text>
+    <rect x="236" y="536" width="300" height="84" rx="7" fill="url(#dotsSparse)" stroke="var(--hair)"/>
+    <text class="t-h2" x="246" y="554">DEEP ARCHIVE</text>
+    <text class="t-min" x="246" y="570"><tspan class="t-mono t-q">τ ≈ min–d</tspan> · exhaustive · cold · campaign-only</text>
+    <!-- estate A flows -->
+    <path class="fq" d="M282 351 V606" marker-end="url(#mQ)"/>
+    <text class="t-min t-q" x="292" y="604">descend until d</text>
+    <path class="fq" d="M282 612 H546 V404 H534" marker-end="url(#mQ)" stroke-opacity="0.8"/>
+    <text class="t-min t-q" transform="translate(542,516) rotate(-90)" text-anchor="middle">anytime answer improves</text>
+    <rect x="416" y="390" width="112" height="22" rx="6" fill="var(--panel3)" stroke="var(--q)"/>
+    <text class="t-min t-mono t-q" x="472" y="404" text-anchor="middle">answer ⟨TTL · conf⟩</text>
+    <path class="fx" d="M528 408 H560 V716 L540 724" marker-end="url(#mX)"/>
+    <!-- relevance organ -->
+    <rect x="236" y="634" width="300" height="72" rx="8" fill="var(--panel3)" stroke="var(--hair)"/>
+    <text class="t-h2" x="246" y="654">RELEVANCE ORGAN θ_A</text>
+    <text class="t-min" x="246" y="674">client-signed ranker ·</text>
+    <text class="t-min" x="246" y="688">updates enter only via cell →</text>
+    <rect x="356" y="662" width="104" height="34" rx="5" fill="none" stroke="var(--r)" stroke-dasharray="4 4" stroke-opacity="0.9"/>
+    <text class="t-min t-r" x="408" y="676" text-anchor="middle">QUARANTINE</text>
+    <text class="t-min" x="408" y="689" text-anchor="middle">hold between missions</text>
+    <g stroke="var(--sec)" fill="none" stroke-width="1.2">
+      <path d="M492 690 A15 15 0 1 1 512 690"/>
+      <line x1="502" y1="688" x2="510" y2="676" stroke="var(--x)"/>
+      <circle cx="502" cy="688" r="1.8" fill="var(--sec)"/>
+    </g>
+    <text class="t-min" x="502" y="703" text-anchor="middle">λ̂ drift</text>
+    <!-- ledger -->
+    <rect x="236" y="720" width="300" height="110" rx="8" fill="var(--panel3)" stroke="var(--x)" stroke-opacity="0.55"/>
+    <text class="t-h2" x="246" y="740">EXPERIENCE LEDGER</text>
+    <text class="t-min" x="246" y="756">append-only · regret traces · dead-ends · reformulation chains</text>
+    <g stroke="var(--x)" stroke-width="2" stroke-linecap="round" opacity="0.55">
+      <line x1="246" y1="772" x2="486" y2="772"/>
+      <line x1="246" y1="784" x2="426" y2="784"/>
+      <line x1="246" y1="796" x2="510" y2="796"/>
+      <line x1="246" y1="808" x2="396" y2="808"/>
+    </g>
+    <line class="fx" x1="246" y1="820" x2="456" y2="820" stroke-width="2"/>
+    <path class="fx" d="M256 720 V708" marker-end="url(#mX)" stroke-width="1.2"/>
+    <text class="t-min t-x" x="264" y="714">θ̇</text>
+    <!-- fast loop caption -->
+    <g stroke="var(--q)" fill="none" stroke-width="1.3">
+      <path d="M248 872 a14 14 0 1 1 -4 18" marker-end="url(#mQ)"/>
+    </g>
+    <text class="t-min" x="278" y="862">FAST LOOP (seconds–hours):</text>
+    <text class="t-min" x="278" y="876">crew re-tunes foraging policy and budget bids;</text>
+    <text class="t-min" x="278" y="890">it touches strategy, never design.</text>
+    <!-- secede -->
+    <rect x="236" y="952" width="212" height="30" rx="6" fill="none" stroke="var(--g)" stroke-dasharray="5 4"/>
+    <text class="t-min t-g" x="246" y="971">⏏ SECEDE — export all · signed · zero residue</text>
+  </g>
+
+  <!-- ~~~~~~~~ ESTATE B (compact) ~~~~~~~~ -->
+  <g>
+    <rect x="605" y="240" width="350" height="760" rx="12" fill="var(--panel2)" stroke="var(--g)" stroke-opacity="0.8" stroke-width="1.4"/>
+    <text class="t-h1" x="621" y="266">TENANT ESTATE B</text>
+    <text class="t-sub" x="621" y="284">client-owned · keys K_B · patents &amp; materials</text>
+    <g stroke="var(--g)" fill="none" stroke-width="1.4" transform="translate(919,258)">
+      <circle cx="0" cy="0" r="5"/><path d="M5 0 H18 M12 0 V5 M16 0 V6"/>
+    </g>
+    <g fill="var(--panel3)" stroke="var(--q)" stroke-width="1.2">
+      <path d="M667 311 l16.5 9.5 v19 L667 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M747 311 l16.5 9.5 v19 L747 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M827 311 l16.5 9.5 v19 L827 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M907 311 l16.5 9.5 v19 L907 349 l-16.5 -9.5 v-19 Z"/>
+    </g>
+    <g class="t-h3" text-anchor="middle" fill="var(--ink)">
+      <text x="667" y="334">F</text><text x="747" y="334">C</text><text x="827" y="334">T</text><text x="907" y="334">A</text>
+    </g>
+    <text class="t-min" x="787" y="364" text-anchor="middle">agent crew — same constitution, different habits</text>
+    <rect x="621" y="388" width="300" height="60" rx="7" fill="url(#dotsDense)" stroke="var(--hair)"/>
+    <text class="t-h2" x="631" y="406">HOT LATTICE</text>
+    <text class="t-min" x="631" y="422"><tspan class="t-mono t-q">τ ≈ ms</tspan> · sketches · caches</text>
+    <rect x="621" y="456" width="300" height="72" rx="7" fill="url(#dotsMid)" stroke="var(--hair)"/>
+    <text class="t-h2" x="631" y="474">WORKING INDEX</text>
+    <text class="t-min" x="631" y="490"><tspan class="t-mono t-q">τ ≈ s</tspan> · ANN graph · early-exit</text>
+    <rect x="621" y="536" width="300" height="84" rx="7" fill="url(#dotsSparse)" stroke="var(--hair)"/>
+    <text class="t-h2" x="631" y="554">DEEP ARCHIVE</text>
+    <text class="t-min" x="631" y="570"><tspan class="t-mono t-q">τ ≈ min–d</tspan> · exhaustive · cold</text>
+    <rect x="621" y="634" width="300" height="72" rx="8" fill="var(--panel3)" stroke="var(--hair)"/>
+    <text class="t-h2" x="631" y="654">RELEVANCE ORGAN θ_B</text>
+    <rect x="741" y="662" width="104" height="34" rx="5" fill="none" stroke="var(--r)" stroke-dasharray="4 4" stroke-opacity="0.9"/>
+    <text class="t-min t-r" x="793" y="682" text-anchor="middle">QUARANTINE</text>
+    <g stroke="var(--sec)" fill="none" stroke-width="1.2">
+      <path d="M877 690 A15 15 0 1 1 897 690"/>
+      <line x1="887" y1="688" x2="895" y2="676" stroke="var(--x)"/>
+      <circle cx="887" cy="688" r="1.8" fill="var(--sec)"/>
+    </g>
+    <text class="t-min" x="887" y="703" text-anchor="middle">λ̂ drift</text>
+    <rect x="621" y="720" width="300" height="110" rx="8" fill="var(--panel3)" stroke="var(--x)" stroke-opacity="0.55"/>
+    <text class="t-h2" x="631" y="740">EXPERIENCE LEDGER</text>
+    <text class="t-min" x="631" y="756">append-only · every search deposits a trace (I4)</text>
+    <g stroke="var(--x)" stroke-width="2" stroke-linecap="round" opacity="0.55">
+      <line x1="631" y1="772" x2="841" y2="772"/>
+      <line x1="631" y1="784" x2="891" y2="784"/>
+      <line x1="631" y1="796" x2="771" y2="796"/>
+      <line x1="631" y1="808" x2="865" y2="808"/>
+    </g>
+    <line class="fx" x1="631" y1="820" x2="811" y2="820" stroke-width="2"/>
+    <g stroke="var(--q)" fill="none" stroke-width="1.3">
+      <path d="M633 872 a14 14 0 1 1 -4 18" marker-end="url(#mQ)"/>
+    </g>
+    <text class="t-min" x="663" y="876">fast loop ↺ strategy, never design</text>
+    <rect x="621" y="952" width="120" height="30" rx="6" fill="none" stroke="var(--g)" stroke-dasharray="5 4"/>
+    <text class="t-min t-g" x="631" y="971">⏏ SECEDE</text>
+  </g>
+
+  <!-- ~~~~~~~~ ESTATE C (compact) ~~~~~~~~ -->
+  <g>
+    <rect x="990" y="240" width="350" height="760" rx="12" fill="var(--panel2)" stroke="var(--g)" stroke-opacity="0.8" stroke-width="1.4"/>
+    <text class="t-h1" x="1006" y="266">TENANT ESTATE C</text>
+    <text class="t-sub" x="1006" y="284">client-owned · keys K_C · case law &amp; regulation</text>
+    <g stroke="var(--g)" fill="none" stroke-width="1.4" transform="translate(1304,258)">
+      <circle cx="0" cy="0" r="5"/><path d="M5 0 H18 M12 0 V5 M16 0 V6"/>
+    </g>
+    <g fill="var(--panel3)" stroke="var(--q)" stroke-width="1.2">
+      <path d="M1052 311 l16.5 9.5 v19 L1052 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M1132 311 l16.5 9.5 v19 L1132 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M1212 311 l16.5 9.5 v19 L1212 349 l-16.5 -9.5 v-19 Z"/>
+      <path d="M1292 311 l16.5 9.5 v19 L1292 349 l-16.5 -9.5 v-19 Z"/>
+    </g>
+    <g class="t-h3" text-anchor="middle" fill="var(--ink)">
+      <text x="1052" y="334">F</text><text x="1132" y="334">C</text><text x="1212" y="334">T</text><text x="1292" y="334">A</text>
+    </g>
+    <text class="t-min" x="1172" y="364" text-anchor="middle">agent crew — clients may bring their own</text>
+    <rect x="1006" y="388" width="300" height="60" rx="7" fill="url(#dotsDense)" stroke="var(--hair)"/>
+    <text class="t-h2" x="1016" y="406">HOT LATTICE</text>
+    <text class="t-min" x="1016" y="422"><tspan class="t-mono t-q">τ ≈ ms</tspan> · sketches · caches</text>
+    <rect x="1006" y="456" width="300" height="72" rx="7" fill="url(#dotsMid)" stroke="var(--hair)"/>
+    <text class="t-h2" x="1016" y="474">WORKING INDEX</text>
+    <text class="t-min" x="1016" y="490"><tspan class="t-mono t-q">τ ≈ s</tspan> · ANN graph · early-exit</text>
+    <rect x="1006" y="536" width="300" height="84" rx="7" fill="url(#dotsSparse)" stroke="var(--hair)"/>
+    <text class="t-h2" x="1016" y="554">DEEP ARCHIVE</text>
+    <text class="t-min" x="1016" y="570"><tspan class="t-mono t-q">τ ≈ min–d</tspan> · exhaustive · cold</text>
+    <rect x="1006" y="634" width="300" height="72" rx="8" fill="var(--panel3)" stroke="var(--hair)"/>
+    <text class="t-h2" x="1016" y="654">RELEVANCE ORGAN θ_C</text>
+    <rect x="1126" y="662" width="104" height="34" rx="5" fill="none" stroke="var(--r)" stroke-dasharray="4 4" stroke-opacity="0.9"/>
+    <text class="t-min t-r" x="1178" y="682" text-anchor="middle">QUARANTINE</text>
+    <g stroke="var(--sec)" fill="none" stroke-width="1.2">
+      <path d="M1262 690 A15 15 0 1 1 1282 690"/>
+      <line x1="1272" y1="688" x2="1280" y2="676" stroke="var(--x)"/>
+      <circle cx="1272" cy="688" r="1.8" fill="var(--sec)"/>
+    </g>
+    <text class="t-min" x="1272" y="703" text-anchor="middle">λ̂ drift</text>
+    <rect x="1006" y="720" width="300" height="110" rx="8" fill="var(--panel3)" stroke="var(--x)" stroke-opacity="0.55"/>
+    <text class="t-h2" x="1016" y="740">EXPERIENCE LEDGER</text>
+    <text class="t-min" x="1016" y="756">append-only · dead-ends are assets, not shame (I4)</text>
+    <g stroke="var(--x)" stroke-width="2" stroke-linecap="round" opacity="0.55">
+      <line x1="1016" y1="772" x2="1196" y2="772"/>
+      <line x1="1016" y1="784" x2="1276" y2="784"/>
+      <line x1="1016" y1="796" x2="1236" y2="796"/>
+      <line x1="1016" y1="808" x2="1156" y2="808"/>
+    </g>
+    <line class="fx" x1="1016" y1="820" x2="1226" y2="820" stroke-width="2"/>
+    <g stroke="var(--q)" fill="none" stroke-width="1.3">
+      <path d="M1018 872 a14 14 0 1 1 -4 18" marker-end="url(#mQ)"/>
+    </g>
+    <text class="t-min" x="1048" y="876">fast loop ↺ strategy, never design</text>
+    <rect x="1006" y="952" width="120" height="30" rx="6" fill="none" stroke="var(--g)" stroke-dasharray="5 4"/>
+    <text class="t-min t-g" x="1016" y="971">⏏ SECEDE</text>
+  </g>
+
+  <!-- ======================= COUPLING MEMBRANE ======================= -->
+  <text class="t-plane" x="430" y="1036">PLANE 2 · COUPLING MEMBRANE</text>
+  <!-- estate taps -->
+  <g stroke="var(--v)" stroke-width="1.6">
+    <line x1="395" y1="1000" x2="395" y2="1040"/>
+    <line x1="780" y1="1000" x2="780" y2="1040"/>
+    <line x1="1165" y1="1000" x2="1165" y2="1040"/>
+  </g>
+  <g fill="none" stroke="var(--v)" stroke-dasharray="3 3">
+    <rect x="379" y="1002" width="32" height="16" rx="3"/>
+    <rect x="764" y="1002" width="32" height="16" rx="3"/>
+    <rect x="1149" y="1002" width="32" height="16" rx="3"/>
+  </g>
+  <text class="t-min t-v" x="417" y="1013">incubate inbound</text>
+  <rect x="220" y="1040" width="1120" height="160" rx="12" fill="#151230" fill-opacity="0.5" stroke="var(--v)" stroke-opacity="0.6"/>
+  <text class="t-h1" x="236" y="1064">COUPLING MEMBRANE</text>
+  <text class="t-sub" x="440" y="1064">graded · consented (κ) · ε-metered · revocable — coupled, never merged</text>
+  <!-- channels -->
+  <g stroke="var(--v)">
+    <line x1="250" y1="1100" x2="1180" y2="1100" stroke-width="1"/>
+    <line x1="250" y1="1124" x2="1180" y2="1124" stroke-width="1.8"/>
+    <line x1="250" y1="1148" x2="1180" y2="1148" stroke-width="2.6"/>
+    <line x1="250" y1="1172" x2="1180" y2="1172" stroke-width="3.4" stroke-opacity="0.85"/>
+  </g>
+  <g class="t-min">
+    <text x="252" y="1094"><tspan class="t-mono t-v">C0 PULSE</tspan> — DP telemetry aggregates · always on</text>
+    <text x="252" y="1118"><tspan class="t-mono t-v">C1 VOID-MAPS</tspan> — shared negative knowledge · dead-end atlases</text>
+    <text x="252" y="1142"><tspan class="t-mono t-v">C2 GRADIENT FEDERATION</tspan> — signed deltas · secure aggregation</text>
+    <text x="252" y="1166"><tspan class="t-mono t-v">C3 CONSORTIUM SHARDS</tspan> — opt-in shared sub-indexes</text>
+  </g>
+  <!-- taps into channels -->
+  <g stroke="var(--v)" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.8">
+    <line x1="395" y1="1040" x2="395" y2="1172"/>
+    <line x1="780" y1="1040" x2="780" y2="1172"/>
+    <line x1="1165" y1="1040" x2="1165" y2="1172"/>
+  </g>
+  <g fill="var(--v)">
+    <circle cx="395" cy="1100" r="2.4"/><circle cx="395" cy="1124" r="2.4"/><circle cx="395" cy="1148" r="2.4"/><circle cx="395" cy="1172" r="2.4"/>
+    <circle cx="780" cy="1100" r="2.4"/><circle cx="780" cy="1124" r="2.4"/><circle cx="780" cy="1148" r="2.4"/><circle cx="780" cy="1172" r="2.4"/>
+    <circle cx="1165" cy="1100" r="2.4"/><circle cx="1165" cy="1124" r="2.4"/><circle cx="1165" cy="1148" r="2.4"/><circle cx="1165" cy="1172" r="2.4"/>
+  </g>
+  <!-- valves -->
+  <g class="pulse" fill="var(--panel)" stroke="var(--v)" stroke-width="1.2">
+    <path d="M580 1094 v12 l14 -12 v12 Z"/><path d="M580 1118 v12 l14 -12 v12 Z"/>
+    <path d="M580 1142 v12 l14 -12 v12 Z"/><path d="M580 1166 v12 l14 -12 v12 Z"/>
+    <path d="M963 1094 v12 l14 -12 v12 Z"/><path d="M963 1118 v12 l14 -12 v12 Z"/>
+    <path d="M963 1142 v12 l14 -12 v12 Z"/><path d="M963 1166 v12 l14 -12 v12 Z"/>
+  </g>
+  <text class="t-min t-mono t-v" x="587" y="1086" text-anchor="middle">κ_AB · ε 3.2 / 5.0</text>
+  <text class="t-min t-mono t-v" x="970" y="1086" text-anchor="middle">κ_BC · ε 1.1 / 5.0</text>
+  <!-- right chips -->
+  <rect x="1196" y="1088" width="134" height="48" rx="6" fill="var(--panel3)" stroke="var(--hair)"/>
+  <text class="t-min t-h3" x="1204" y="1104" fill="var(--ink)">CONTRIBUTION</text>
+  <text class="t-min" x="1204" y="1117">accounts — give ⇄ take,</text>
+  <text class="t-min" x="1204" y="1129">Shapley-metered</text>
+  <rect x="1196" y="1144" width="134" height="42" rx="6" fill="none" stroke="var(--r)" stroke-dasharray="4 4"/>
+  <text class="t-min t-r" x="1204" y="1160">REVOKE κ — unilateral,</text>
+  <text class="t-min t-r" x="1204" y="1173">immediate · logged</text>
+  <text class="t-min" x="780" y="1224" text-anchor="middle" fill="var(--mut)">I3 — coupling bandwidth is earned: it widens only with demonstrated benefit and bounded leakage, and narrows instantly on revocation</text>
+
+  <!-- ======================= EXPERIENCE COLLECTOR (amber) ======================= -->
+  <path class="fx" d="M536 826 H578 V1022"/>
+  <path class="fx" d="M921 826 H962 V1022"/>
+  <path class="fx" d="M1306 826 H1352 V1022"/>
+  <path class="fx" d="M578 1022 H774 A6 6 0 0 1 786 1022 H1159 A6 6 0 0 1 1171 1022 H1394 V1112 H1510 V1140" marker-end="url(#mX)"/>
+  <circle cx="578" cy="1022" r="2.6" fill="var(--x)"/>
+  <circle cx="962" cy="1022" r="2.6" fill="var(--x)"/>
+  <circle cx="1352" cy="1022" r="2.6" fill="var(--x)"/>
+  <text class="t-min t-x" x="600" y="1014">experience residue → distillery</text>
+
+  <!-- ======================= SUBSTRATE PLANE ======================= -->
+  <text class="t-plane" x="220" y="1322">PLANE 3 · SUBSTRATE — operator-run protocol: owns the loom, never the thread</text>
+  <g stroke="var(--hair)">
+    <line x1="350" y1="1290" x2="350" y2="1330"/>
+    <line x1="637" y1="1290" x2="637" y2="1330"/>
+    <line x1="924" y1="1290" x2="924" y2="1330"/>
+    <line x1="1211" y1="1290" x2="1211" y2="1330"/>
+  </g>
+  <rect x="220" y="1330" width="260" height="150" rx="10" fill="var(--panel)" stroke="var(--frame)"/>
+  <text class="t-h2" x="236" y="1354">ANYTIME KERNELS</text>
+  <text class="t-min" x="236" y="1372">early-exit ANN · sketch→sweep ladders ·</text>
+  <text class="t-min" x="236" y="1386">every algorithm interruptible at d</text>
+  <g stroke="var(--q)" fill="none" opacity="0.8">
+    <path d="M300 1450 a26 26 0 0 1 52 0"/>
+    <path d="M310 1450 a16 16 0 0 1 32 0"/>
+    <path d="M319 1450 a7 7 0 0 1 14 0"/>
+  </g>
+  <rect x="507" y="1330" width="260" height="150" rx="10" fill="var(--panel)" stroke="var(--frame)"/>
+  <text class="t-h2" x="523" y="1354">λ AUCTION</text>
+  <text class="t-min" x="523" y="1372">one shadow price rations compute &amp; recall;</text>
+  <text class="t-min" x="523" y="1386">agents bid — admit iff Δvalue⁄cost ≥ λ</text>
+  <polyline points="523,1452 553,1440 583,1446 613,1428 643,1436 673,1420 703,1430" fill="none" stroke="var(--x)" stroke-width="1.4" opacity="0.9"/>
+  <text class="t-min t-mono t-x" x="711" y="1426">λ(t)</text>
+  <rect x="794" y="1330" width="260" height="150" rx="10" fill="var(--panel)" stroke="var(--frame)"/>
+  <text class="t-h2" x="810" y="1354">TWIN WORLD</text>
+  <text class="t-min" x="810" y="1372">shadow replica · workload replay ·</text>
+  <text class="t-min" x="810" y="1386">counterfactual load — where E3 trials run</text>
+  <g fill="none" stroke="var(--d)" stroke-dasharray="3 3" opacity="0.8">
+    <rect x="822" y="1408" width="52" height="42" rx="4"/>
+    <rect x="888" y="1408" width="52" height="42" rx="4"/>
+    <rect x="954" y="1408" width="52" height="42" rx="4"/>
+    <line x1="830" y1="1422" x2="866" y2="1422"/><line x1="830" y1="1432" x2="866" y2="1432"/><line x1="830" y1="1442" x2="866" y2="1442"/>
+    <line x1="896" y1="1422" x2="932" y2="1422"/><line x1="896" y1="1432" x2="932" y2="1432"/><line x1="896" y1="1442" x2="932" y2="1442"/>
+    <line x1="962" y1="1422" x2="998" y2="1422"/><line x1="962" y1="1432" x2="998" y2="1432"/><line x1="962" y1="1442" x2="998" y2="1442"/>
+  </g>
+  <rect x="1081" y="1330" width="260" height="150" rx="10" fill="var(--panel)" stroke="var(--frame)"/>
+  <text class="t-h2" x="1097" y="1354">PROVENANCE CHAIN</text>
+  <text class="t-min" x="1097" y="1372">hash-linked · third-party auditable · every</text>
+  <text class="t-min" x="1097" y="1386">admission, eviction, refusal, rollout</text>
+  <g fill="none" stroke="var(--g)" stroke-width="1.3" opacity="0.85">
+    <rect x="1113" y="1424" width="34" height="20" rx="9"/>
+    <rect x="1155" y="1424" width="34" height="20" rx="9"/>
+    <rect x="1197" y="1424" width="34" height="20" rx="9"/>
+    <line x1="1147" y1="1434" x2="1155" y2="1434"/>
+    <line x1="1189" y1="1434" x2="1197" y2="1434"/>
+  </g>
+
+  <!-- ======================= EVOLUTION PIPELINE (right) ======================= -->
+  <text class="t-plane" x="1408" y="236">SLOW LOOP · WEEKS</text>
+  <text class="t-min" x="1408" y="252" fill="var(--sec)">experience → design</text>
+
+  <rect class="pulse" x="1408" y="336" width="152" height="64" rx="8" fill="var(--panel2)" stroke="var(--d)"/>
+  <text class="t-h3 t-d" x="1484" y="358" text-anchor="middle">RESONANCE DAMPER</text>
+  <text class="t-min" x="1484" y="374" text-anchor="middle">co-adaptive loop gain</text>
+  <text class="t-min t-mono" x="1484" y="388" text-anchor="middle" fill="var(--sec)">‖G ∘ E‖ &lt; 1 (I7)</text>
+
+  <rect x="1408" y="446" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--d)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-d" x="1420" y="466">E6 · COMPILE G9</text>
+  <text class="t-min" x="1420" y="482">staged rollout · rollback</text>
+  <text class="t-min" x="1420" y="495">rail · signed release —</text>
+  <text class="t-min" x="1420" y="508">the frame is the artifact</text>
+
+  <rect x="1408" y="586" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--d)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-d" x="1420" y="606">E5 · ADJUDICATION</text>
+  <text class="t-min" x="1420" y="622">charter council counter-</text>
+  <text class="t-min" x="1420" y="635">signs; dissent is logged,</text>
+  <text class="t-min" x="1420" y="648">not overwritten</text>
+
+  <rect x="1408" y="726" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--d)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-d" x="1420" y="746">E4 · GAUNTLET</text>
+  <text class="t-min" x="1420" y="762">adversarial verifiers try to</text>
+  <text class="t-min" x="1420" y="775">refute: leakage · regression</text>
+  <text class="t-min" x="1420" y="788">· goal capture</text>
+
+  <rect x="1408" y="866" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--d)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-d" x="1420" y="886">E3 · TWIN TRIALS</text>
+  <text class="t-min" x="1420" y="902">candidate designs replay</text>
+  <text class="t-min" x="1420" y="915">real workloads in the</text>
+  <text class="t-min" x="1420" y="928">twin world (substrate)</text>
+
+  <rect x="1408" y="1006" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--d)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-d" x="1420" y="1026">E2 · PROPOSAL FORGE</text>
+  <text class="t-min" x="1420" y="1042">index / schema / API / valve</text>
+  <text class="t-min" x="1420" y="1055">mutations — no proposal</text>
+  <text class="t-min" x="1420" y="1068">without cited traces (I5)</text>
+
+  <rect x="1408" y="1146" width="152" height="72" rx="8" fill="var(--panel2)" stroke="var(--x)" stroke-opacity="0.8"/>
+  <text class="t-h3 t-x" x="1420" y="1166">E1 · DISTILLERY</text>
+  <text class="t-min" x="1420" y="1182">ledgers → regret spectra ·</text>
+  <text class="t-min" x="1420" y="1195">friction maps · API pain</text>
+  <text class="t-min" x="1420" y="1208">points · tail-event vault</text>
+
+  <!-- ascent arrows -->
+  <path class="fd" d="M1452 1146 V1086" marker-end="url(#mD)"/>
+  <path class="fd" d="M1452 1006 V946" marker-end="url(#mD)"/>
+  <path class="fd" d="M1452 866 V806" marker-end="url(#mD)"/>
+  <path class="fd" d="M1452 726 V666" marker-end="url(#mD)"/>
+  <path class="fd" d="M1452 586 V526" marker-end="url(#mD)"/>
+  <path class="fd" d="M1452 446 V408" marker-end="url(#mD)"/>
+  <!-- ship G9 -->
+  <path class="fd" d="M1484 336 V308 H1394 V210 L1380 200" marker-end="url(#mD)"/>
+  <text class="t-min t-d" x="1408" y="300">G9 ships — becomes the next frame</text>
+
+  <!-- refuted → fossil -->
+  <path class="fr" d="M1560 792 H1576 V1290 L1562 1298" marker-end="url(#mR)"/>
+  <text class="t-min t-r" transform="translate(1586,1010) rotate(-90)" text-anchor="middle">refuted proposals</text>
+  <rect x="1408" y="1258" width="152" height="84" rx="8" fill="none" stroke="var(--mut)" stroke-dasharray="4 4"/>
+  <text class="t-h3" x="1420" y="1278" fill="var(--sec)">FOSSIL RECORD</text>
+  <text class="t-min" x="1420" y="1294">retired organs, kept legible:</text>
+  <text class="t-min" x="1420" y="1307">G4 flat index · G5 sync API</text>
+  <text class="t-min" x="1420" y="1320">· G6 unpriced recall — the</text>
+  <text class="t-min" x="1420" y="1333">API is a record of struggle</text>
+
+  <!-- ======================= INVARIANTS ======================= -->
+  <text class="t-plane" x="220" y="1530">THE SEVEN INVARIANTS — the physics the fabric may never violate</text>
+  <g>
+    <rect x="220" y="1540" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--g)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-g" x="232" y="1560">I1 · SOVEREIGNTY</text>
+    <text class="t-min" x="232" y="1576">every byte exportable &amp; client-signed;</text>
+    <text class="t-min" x="232" y="1589">secession leaves zero residue</text>
+
+    <rect x="504" y="1540" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--q)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-q" x="516" y="1560">I2 · HONEST TIME</text>
+    <text class="t-min" x="516" y="1576">meet the deadline, degrade to the floor,</text>
+    <text class="t-min" x="516" y="1589">or refuse aloud — never silently late</text>
+
+    <rect x="788" y="1540" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--v)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-v" x="800" y="1560">I3 · GRADED COUPLING</text>
+    <text class="t-min" x="800" y="1576">bandwidth is earned, ε-metered, and</text>
+    <text class="t-min" x="800" y="1589">unilaterally revocable at any hour</text>
+
+    <rect x="1072" y="1540" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--x)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-x" x="1084" y="1560">I4 · EXPERIENCE IS CAPITAL</text>
+    <text class="t-min" x="1084" y="1576">every search deposits a trace; dead-ends</text>
+    <text class="t-min" x="1084" y="1589">and regret are assets, not shame</text>
+
+    <rect x="220" y="1618" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--d)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-d" x="232" y="1638">I5 · DESIGN PROVENANCE</text>
+    <text class="t-min" x="232" y="1654">no mutation without cited traces, a twin</text>
+    <text class="t-min" x="232" y="1667">trial, and countersigned adjudication</text>
+
+    <rect x="504" y="1618" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--r)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-r" x="516" y="1638">I6 · DRIFT QUARANTINE</text>
+    <text class="t-min" x="516" y="1654">capability jumps (λ̂ spikes) are held</text>
+    <text class="t-min" x="516" y="1667">between missions until verified</text>
+
+    <rect x="788" y="1618" width="268" height="64" rx="8" fill="var(--panel)" stroke="var(--d)" stroke-opacity="0.6"/>
+    <text class="t-h3 t-d" x="800" y="1638">I7 · BOUNDED RESONANCE</text>
+    <text class="t-min" x="800" y="1654">the co-adaptive loop wears a damper;</text>
+    <text class="t-min" x="800" y="1667">agent⇄design feedback gain stays &lt; 1</text>
+
+    <rect x="1072" y="1618" width="268" height="64" rx="8" fill="var(--panel2)" stroke="var(--hair)"/>
+    <g stroke-width="2" stroke-linecap="round">
+      <line x1="1086" y1="1638" x2="1114" y2="1638" stroke="var(--q)"/>
+      <line x1="1086" y1="1653" x2="1114" y2="1653" stroke="var(--x)"/>
+      <line x1="1086" y1="1668" x2="1114" y2="1668" stroke="var(--d)"/>
+    </g>
+    <text class="t-min" x="1122" y="1641">queries — descend under contract</text>
+    <text class="t-min" x="1122" y="1656">experience — rises as residue</text>
+    <text class="t-min" x="1122" y="1671">design — returns as the next frame</text>
+  </g>
+
+  <!-- reading line -->
+  <text class="t-sub" x="790" y="1738" text-anchor="middle" fill="var(--sec)">CIRCULATION — blue descends (queries under deadline contract) · amber ascends (the residue of foraging) · green returns (the adjudicated next design). The loom re-strings itself; the estates never stop being owned.</text>
+</svg>
+</div></div>
+
+<footer>
+  <div class="h">HOW TO READ THE FABRIC</div>
+  <p><b>1 · Follow blue down.</b> A query enters the temporal contract spine as ⟨deadline, quality floor, budget⟩, clears an admission gate priced by the shadow auction, and descends only as deep into the strata as its deadline warrants. What cannot be answered within contract is refused aloud, with a counter-offer — never delivered silently late.</p>
+  <p><b>2 · Follow amber up.</b> Every search — success or dead end — deposits a trace in its estate's append-only experience ledger. Ledger residue drains rightward into the distillery, where regret spectra and friction maps become the only legitimate fuel for design proposals.</p>
+  <p><b>3 · Follow green back.</b> Proposals citing that experience pass twin trials, an adversarial gauntlet, and countersigned adjudication before compiling into generation G9 — a new frame, shipped with a rollback rail, that re-shapes the very strata, verbs, and prices the agents will forage under tomorrow. Co-adaptation is the point; the damper (loop gain &lt; 1) is what keeps it from becoming resonance.</p>
+  <p class="kin">Kinship: the fabric deliberately imports the metabolic doctrine — residence-time stratification, shadow-priced recall, drift quarantine, honest refusal — and extends it from a single system's memory to a federation's shared habitat, where verification burden grows with a change's blast radius.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -387,6 +387,107 @@ export const ARTIFACTS = [
     //   en: { title: '...', description: '...' },
     //   fa: { title: '...', description: '...' },
     // },
+
+    // ─── The Memory Wing — Memory Module instruments (added 2026-07-16) ──────
+    // Standalone research visualizations, served from /docs/html/memory/.
+    // English-only for now; concept-stage research — standings discipline
+    // applies: these are published design and thesis work, not vehicle data.
+
+    {
+        id: 'memory-integration-atlas',
+        slug: 'memory-integration-atlas',
+        category: 'visualization',
+        tags: ['memory-module', 'moat', 'atlas', 'governed-graph'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/memory/integration-atlas.html',
+                fa: '/docs/html/memory/integration-atlas.html',
+            },
+        },
+        en: {
+            title: 'Integration Atlas — the Memory Module as one governed graph',
+            description:
+                'Every idea in the Memory Module drawn as one governed graph: nodes are the module\u2019s concepts, edges are their documented couplings, and governance is visible rather than implied. Runs in the browser; English-only for now.',
+        },
+        fa: {
+            title: 'اطلس یکپارچگی — ماژول حافظه به‌مثابه یک گراف حاکمیت‌دار',
+            description:
+                'همهٔ ایده‌های ماژول حافظه در قالب یک گراف حاکمیت‌دار: گره‌ها مفاهیم ماژول‌اند، یال‌ها پیوندهای مستندشان، و حاکمیت دیدنی است نه تلویحی. در مرورگر اجرا می‌شود؛ فعلاً فقط انگلیسی.',
+        },
+    },
+
+    {
+        id: 'memory-synergy-matrix',
+        slug: 'memory-synergy-matrix',
+        category: 'analysis',
+        tags: ['memory-module', 'moat', 'matrix', 'claim-discipline'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/memory/integration-matrix.html',
+                fa: '/docs/html/memory/integration-matrix.html',
+            },
+        },
+        en: {
+            title: 'Synergy Matrix — every pair of ideas, mapped or unexamined',
+            description:
+                'The Memory Module\u2019s ideas crossed pairwise, with each cell honestly marked mapped or unexamined \u2014 the claim-discipline habit applied to the module\u2019s own integration state. English-only for now.',
+        },
+        fa: {
+            title: 'ماتریس هم‌افزایی — هر جفت ایده؛ نگاشته یا بررسی‌نشده',
+            description:
+                'ایده‌های ماژول حافظه به‌صورت دوبه‌دو، و هر خانه صادقانه علامت خورده: نگاشته یا بررسی‌نشده — همان انضباط ادعا، این‌بار دربارهٔ وضعیت یکپارچگیِ خود ماژول. فعلاً فقط انگلیسی.',
+        },
+    },
+
+    {
+        id: 'memory-mechanism-spine',
+        slug: 'memory-mechanism-spine',
+        category: 'reference',
+        tags: ['memory-module', 'moat', 'mechanisms', 'price-of-recall'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/memory/mechanism-spine.html',
+                fa: '/docs/html/memory/mechanism-spine.html',
+            },
+        },
+        en: {
+            title: 'Shared Mechanism Spine — fifteen laws the Memory Module keeps rewriting',
+            description:
+                'The recurring mechanisms beneath the Memory Module\u2019s theses \u2014 the laws that memory, recall, and verification keep re-deriving \u2014 laid out as one spine. Companion to the Price of Recall and Retrieval Covenant theses. English-only for now.',
+        },
+        fa: {
+            title: 'ستون سازوکارهای مشترک — پانزده قانونی که ماژول حافظه بازنویسی می‌کند',
+            description:
+                'سازوکارهای تکرارشونده در زیر تزهای ماژول حافظه — قوانینی که حافظه، فراخوانی و راستی‌آزمایی بارها به آن‌ها می‌رسند — در قالب یک ستون. همراهِ تزهای «بهای فراخوانی» و «میثاق بازیابی». فعلاً فقط انگلیسی.',
+        },
+    },
+
+    {
+        id: 'symbiotic-search-fabric',
+        slug: 'symbiotic-search-fabric',
+        category: 'interactive',
+        tags: ['memory-module', 'moat', 'search-fabric', 'architecture'],
+        localFile: {
+            type: 'html',
+            paths: {
+                en: '/docs/html/memory/symbiotic_search_fabric.html',
+                fa: '/docs/html/memory/symbiotic_search_fabric.html',
+            },
+        },
+        en: {
+            title: 'The Symbiotic Search Fabric',
+            description:
+                'A co-adaptive, multi-coupled-tenant, client-owned, agent-operated, time-bounded search architecture \u2014 the Memory Module\u2019s framing of retrieval as a governed fabric rather than a lookup. English-only for now.',
+        },
+        fa: {
+            title: 'بافت جست‌وجوی هم‌زیست',
+            description:
+                'معماری جست‌وجوی هم‌سازگار، چندمستأجریِ هم‌بسته، در مالکیت کارفرما، عامل‌گردان و زمان‌کران‌دار — روایت ماژول حافظه از بازیابی به‌مثابه بافتی حاکمیت‌دار، نه یک جست‌وجوی ساده. فعلاً فقط انگلیسی.',
+        },
+    },
 ];
 
 // ─── Derived lookups ─────────────────────────────────────────────────────────

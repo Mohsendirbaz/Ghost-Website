@@ -92,6 +92,14 @@ export default function Safety() {
         <Figure num="S-03" src={t.plateMemory.src} caption={t.plateMemory.caption} />
       )}
 
+      <p className="bp-details">
+        <Link className="hm-link hm-link--primary" to={`/${lang}/exhibition`}>
+          {lang === 'en'
+            ? 'The price of recall, instrumented — visit the Memory Wing →'
+            : 'بهای فراخوانی، ابزارمند — دیدار از بال حافظه ←'}
+        </Link>
+      </p>
+
       <SectionBlock
         title={t.pathTitle}
         body={t.pathBody}

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integration Atlas — Memory Module ideas as one governed graph</title>
+<style>
+
+  :root{
+    --bg:#0A101C; --panel:#0E1626; --panel2:#121C30; --panel3:#16223A;
+    --frame:#2A3A5C; --hair:#22304B;
+    --ink:#E9F0FC; --sec:#A7B6D4; --mut:#6E7F9F;
+    --time:#3987e5; --econ:#c98500; --laws:#d55181; --gov:#008300;
+    --govUp:#12a512; --gold:#C9A86A;
+    --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  svg.sw{width:9px;height:9px;flex:0 0 auto}
+  svg.shp{width:11px;height:11px;flex:0 0 auto}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  .wrap{max-width:1680px;margin:0 auto;padding:30px 26px 60px}
+  header{border-bottom:1px solid var(--hair);padding-bottom:18px;margin-bottom:14px;position:relative}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--mut);text-transform:uppercase}
+  h1{font-size:28px;margin:8px 0 6px;letter-spacing:.01em;font-weight:650}
+  .sub{font-size:13.5px;color:var(--sec);max-width:1050px;line-height:1.55}
+  .sub b{color:var(--ink);font-weight:600}
+  .stamp{margin-top:10px;font-family:var(--mono);font-size:10.5px;color:var(--gold);letter-spacing:.06em}
+  nav.views{position:absolute;top:2px;right:0;display:flex;gap:8px}
+  nav.views a{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-decoration:none;color:var(--sec);
+    border:1px solid var(--hair);border-radius:999px;padding:6px 13px;background:var(--panel)}
+  nav.views a:hover{border-color:var(--frame);color:var(--ink)}
+  nav.views a.active{color:var(--bg);background:var(--gold);border-color:var(--gold);font-weight:700}
+  main{display:flex;gap:18px;align-items:flex-start;margin-top:6px}
+  .stage{flex:1;min-width:0}
+  .controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0 12px}
+  .ck{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--mut);margin-right:2px}
+  .chip{cursor:pointer;user-select:none;font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--sec);
+    border:1px solid var(--hair);border-radius:999px;padding:4px 10px;background:var(--panel);display:inline-flex;gap:6px;align-items:center}
+  .chip:hover{border-color:var(--frame);color:var(--ink)}
+  .chip.off{opacity:.32}
+  .chip .sw{width:9px;height:9px;display:inline-block;flex:0 0 auto}
+  .chip.btn{color:var(--mut)}
+  .scroll{overflow-x:auto}
+  svg{display:block}
+  svg text{font-family:var(--sans)}
+  .svg-mono{font-family:var(--mono)}
+  aside#dossier{width:392px;flex:0 0 392px;background:var(--panel);border:1px solid var(--hair);border-radius:10px;
+    padding:18px 18px 20px;position:sticky;top:14px;max-height:calc(100vh - 40px);overflow-y:auto}
+  aside#dossier .dosk{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--mut);margin-bottom:10px}
+  aside#dossier h3{font-size:16px;margin:0 0 8px;line-height:1.35;font-weight:650}
+  aside#dossier p{font-size:12.5px;color:var(--sec);line-height:1.6;margin:8px 0}
+  aside#dossier p b{color:var(--ink);font-weight:600}
+  .stamp-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 10px}
+  .st{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid;border-radius:3px;padding:2.5px 7px}
+  .st-written{color:var(--gold);border-color:var(--gold)}
+  .st-proposed{color:var(--sec);border-color:var(--frame);border-style:dashed}
+  .st-notional{color:var(--mut);border-color:var(--hair);border-style:dotted}
+  .st-ev{color:var(--sec);border-color:var(--frame)}
+  .strength{font-family:var(--mono);font-size:9.5px;color:var(--mut);letter-spacing:.1em}
+  .pairrow{display:flex;gap:8px;align-items:center;margin:8px 0 4px;flex-wrap:wrap}
+  .ideachip{cursor:pointer;font-size:11px;color:var(--ink);border:1px solid var(--frame);background:var(--panel2);
+    border-radius:6px;padding:4px 9px;display:inline-flex;gap:7px;align-items:center}
+  .ideachip:hover{border-color:var(--gold)}
+  .ideachip .shp{width:10px;height:10px;flex:0 0 auto}
+  .lnk{color:var(--mut);font-family:var(--mono);font-size:10px}
+  .mechrow{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+  .mchip{cursor:pointer;font-family:var(--mono);font-size:9.5px;color:var(--sec);border:1px solid var(--hair);
+    border-left-width:3px;border-radius:4px;padding:3px 8px;background:var(--panel2);display:inline-flex;gap:6px;align-items:center}
+  .mchip:hover{color:var(--ink);border-color:var(--frame)}
+  .mchip .g{color:var(--ink);font-weight:600}
+  .artbox{border:1px solid var(--hair);border-left:3px solid var(--gold);background:var(--panel2);border-radius:6px;padding:10px 12px;margin:12px 0}
+  .artbox .k{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--gold);margin-bottom:4px}
+  .artbox p{margin:2px 0;font-size:12px;color:var(--sec)}
+  .refs{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px}
+  .refs .k{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--mut);margin-bottom:5px}
+  .refs div{font-size:11px;color:var(--mut);line-height:1.65}
+  .objrow{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+  .obj{font-family:var(--mono);font-size:9.5px;color:var(--sec);border:1px solid var(--hair);border-radius:4px;padding:3px 7px;background:var(--panel2)}
+  .meter{height:4px;background:var(--panel3);border-radius:2px;margin:6px 0 2px;overflow:hidden}
+  .meter i{display:block;height:100%;background:var(--gold);border-radius:2px}
+  .mlab{font-family:var(--mono);font-size:9px;color:var(--mut);letter-spacing:.1em}
+  .elist{margin-top:10px}
+  .eitem{cursor:pointer;border:1px solid var(--hair);border-radius:7px;padding:9px 11px;margin:7px 0;background:var(--panel2)}
+  .eitem:hover{border-color:var(--frame)}
+  .eitem .t{font-size:12px;color:var(--ink);line-height:1.4}
+  .eitem .m{font-family:var(--mono);font-size:9px;color:var(--mut);margin-top:4px;letter-spacing:.06em}
+  .inst{border-top:1px solid var(--hair);padding:8px 0}
+  .inst .who{font-size:11.5px;color:var(--ink);font-weight:600;margin-bottom:2px;cursor:pointer}
+  .inst .who:hover{color:var(--gold)}
+  .inst .what{font-size:11.5px;color:var(--sec);line-height:1.55}
+  .law{font-style:italic;color:var(--sec);font-size:12.5px;border-left:3px solid var(--frame);padding:2px 0 2px 10px;margin:10px 0;line-height:1.55}
+  footer{border-top:1px solid var(--hair);margin-top:26px;padding-top:16px;color:var(--sec);font-size:12px;line-height:1.65;max-width:1250px}
+  footer .h{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mut);margin-bottom:6px}
+  footer p{margin:5px 0}
+  #tip{position:fixed;pointer-events:none;z-index:50;background:#050a14ee;border:1px solid var(--frame);border-radius:7px;
+    padding:8px 11px;font-size:11px;color:var(--ink);max-width:300px;line-height:1.5;display:none}
+  #tip .tk{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--mut);margin-bottom:3px}
+  #tip .ts{color:var(--sec)}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:12px;padding:11px 14px;border:1px solid var(--hair);border-radius:8px;background:var(--panel)}
+  .legend .grp{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .legend .lk{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--mut)}
+  .legend .li{display:inline-flex;gap:6px;align-items:center;font-size:10.5px;color:var(--sec)}
+  @media (max-width:1100px){ main{flex-direction:column} aside#dossier{width:100%;flex:auto;position:static;max-height:none} nav.views{position:static;margin-top:10px} }
+
+  .node{cursor:grab}
+  .node:active{cursor:grabbing}
+  .node .body{fill:var(--panel3);stroke:#8FA7DA;stroke-width:1.4}
+  .node text.nm{font-size:11px;fill:var(--ink);font-weight:600;text-anchor:middle}
+  .node text.ns{font-size:8px;fill:var(--mut);text-anchor:middle}
+  .edge{fill:none;cursor:pointer}
+  .edgehit{fill:none;stroke:#000;stroke-opacity:0;stroke-width:16;cursor:pointer}
+  .hull-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;fill:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Memory Module · Integration discovery · View ① of ③</div>
+  <nav class="views" aria-label="views"><a href="integration-atlas.html" class="active">① ATLAS · the graph</a><a href="integration-matrix.html">② MATRIX · every pair</a><a href="mechanism-spine.html">③ SPINE · shared laws</a></nav>
+  <h1>The Integration Atlas</h1>
+  <div class="sub">Thirteen ideas from the module — the governed-knowledge trilogy, the assessed research portfolio, the coherence
+      instruments — drawn as <b>one graph</b>. Twenty-seven integration points are mapped. Line style carries epistemic status
+      (<b>solid</b> written · <b>dashed</b> proposed · <b>dotted</b> notional); color carries the mechanism family doing the joining;
+      node size carries assessed promise. <b>Click any node or link.</b></div>
+  <div class="stamp">COMPILED 2026-07-15 · EVIDENTIARY SEAM PRESERVED · SIX STARTING MOVES RANKED IN THE PANEL →</div>
+</header>
+
+<main>
+  <div class="stage">
+    <div class="controls" id="ctl">
+      <span class="ck">FAMILY</span>
+      <span class="chip fam" data-fam="TIME"></span>
+      <span class="chip fam" data-fam="ECON"></span>
+      <span class="chip fam" data-fam="LAWS"></span>
+      <span class="chip fam" data-fam="GOV"></span>
+      <span class="ck" style="margin-left:10px">STATUS</span>
+      <span class="chip sta" data-sta="written"></span>
+      <span class="chip sta" data-sta="proposed"></span>
+      <span class="chip sta" data-sta="notional"></span>
+      <span class="chip btn" id="resetBtn">RESET</span>
+      <span class="chip btn" id="listBtn">LIST ALL LINKS</span>
+    </div>
+    <div class="scroll"><svg id="atlas" viewBox="0 0 1180 850" role="img" style="min-width:1050px"
+      aria-label="Force-directed graph of thirteen Memory Module ideas joined by twenty-seven typed integration points."></svg></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <aside id="dossier" aria-live="polite"></aside>
+</main>
+
+
+<footer>
+  <div class="h">READING NOTES · EVIDENTIARY SEAM PRESERVED</div>
+  <p><b>Status of a link</b> is not the status of its endpoints. <b>WRITTEN</b> means a source document already makes the binding;
+     <b>PROPOSED</b> means the pairing is a defensible synthesis prepared for this atlas and carries a verification obligation;
+     <b>NOTIONAL</b> means a speculative sketch that must not bear load. Node stamps mark evidence the other way:
+     RUNS/MEASURED · SPECIFIED · NOTIONAL · RETIRED.</p>
+  <p><b>Color follows mechanism family, never rank:</b> <span style="color:#7fb2ef">time &amp; contracts</span> ·
+     <span style="color:#d9a54a">economy &amp; coupling</span> · <span style="color:#e08aa9">algebraic laws</span> ·
+     <span style="color:#5fbf5f">governance, evidence &amp; instruments</span>. Bead shapes repeat the family for color-blind reading
+     (● time · ■ economy · ▲ laws · ◆ governance). Line style carries link status: solid written · dashed proposed · dotted notional.</p>
+  <p class="knote" style="color:var(--mut);font-size:11px">Compiled 2026-07-15 from: the three theses (Symbiotic Search Fabric · Retrieval Covenant · Price of Recall, Jul 2026),
+     the CEO Research Opportunity Assessment (9 Jul 2026), and the Multilayer Network Coherence Engine package (Oct 2025).
+     Sibling views: the <a href="integration-atlas.html" style="color:var(--gold)">Atlas</a>, the
+     <a href="integration-matrix.html" style="color:var(--gold)">Matrix</a>, and the
+     <a href="mechanism-spine.html" style="color:var(--gold)">Spine</a> — same dataset, three discovery surfaces.</p>
+</footer>
+
+</div>
+<script>
+const DATA = {"meta":{"compiled":"2026-07-15","seam":"WRITTEN / PROPOSED / NOTIONAL","sources":["The Symbiotic Search Fabric (Thesis I, Jul 2026)","The Retrieval Covenant (Thesis II, Jul 2026)","The Price of Recall (Thesis III, Jul 2026)","CEO Research Opportunity Assessment (9 Jul 2026)","Multilayer Network Coherence Engine package (Oct 2025)"]},"clusters":{"memory":{"name":"Memory Module core","sub":"the governed-knowledge trilogy + metabolic doctrine","shape":"circle"},"portfolio":{"name":"Research portfolio","sub":"the seven CEO-assessed opportunity areas","shape":"diamond"},"coherence":{"name":"Coherence engine","sub":"multilayer metrics, visualization, set-theoretic frame","shape":"square"}},"families":{"TIME":{"name":"Time & contracts","color":"#3987e5","dash":"","hint":"residence, deadlines, refusal"},"ECON":{"name":"Economy & coupling","color":"#c98500","dash":"7 4","hint":"prices, duality, metered flow"},"LAWS":{"name":"Algebraic laws","color":"#d55181","dash":"2 3","hint":"meet, monotone, conservative, conserved"},"GOV":{"name":"Governance, evidence & instruments","color":"#008300","dash":"9 3 2 3","hint":"quarantine, ledgers, drift, metrics, selection"}},"statuses":{"written":{"name":"WRITTEN","hint":"binding already made in a source document"},"proposed":{"name":"PROPOSED","hint":"defensible synthesis — carries a verification obligation"},"notional":{"name":"NOTIONAL","hint":"speculative sketch — do not load-bear"}},"evidence":{"runs":{"name":"RUNS / MEASURED","hint":"working code or a bench measurement exists"},"specified":{"name":"SPECIFIED","hint":"design synthesis / spec complete, no measured artifact"},"notional":{"name":"NOTIONAL","hint":"projected numbers only"},"retired":{"name":"RETIRED","hint":"flagged decorative by external review"}},"ideas":[{"id":"MM","name":"Metabolic Memory","sub":"residence-time doctrine","cluster":"memory","evidence":"specified","promise":0.86,"desc":"Retention stratified by residence time τ — reflexive (<100 ms), tactical (100 ms–5 s), strategic (≥5 s) — with admission predicates that strengthen with a datum's blast radius. Recall is budgeted optimization against a shadow price; capability drift is detected and new learning is quarantined between missions. Appears twice in the corpus: as the memory-side parent of the Retrieval Covenant, and as CEO Opportunity 5 (learning governance for bounded autonomy, aimed at ISO/PAS 8800).","objects":["τ strata","blast-radius verification","budgeted recall","SGLD drift detector","between-missions quarantine"],"refs":["Retrieval Covenant · abstract & ch. 2.5","CEO Assessment · Opportunity 5"]},{"id":"SSF","name":"Symbiotic Search Fabric","sub":"Thesis I · architecture","cluster":"memory","evidence":"specified","promise":0.88,"desc":"Agent-operated, client-owned, time-bounded search: four planes (human charter · sovereign estates · coupling membrane · operator substrate) crossed by a temporal contract spine ⟨d, q_min, b⟩ with honest refusal and a six-stage evolution pipeline that compiles distilled agent experience into countersigned, versioned design. Closed-world interface registry of 29 edges; invariants I1–I7; 589,824 stance combinations collapsing to seven archetypes under a lexical selection rule (sovereignty ≻ honest time ≻ co-adaptation ≻ efficiency).","objects":["four planes","contract spine ⟨d,q,b⟩","evolution pipeline","interface registry (29 edges)","I1–I7"],"refs":["Symbiotic Search Fabric · Thesis I","Symbiotic Search Fabric white paper & blueprint HTML"]},{"id":"RC","name":"Retrieval Covenant","sub":"Thesis II · contract calculus","cluster":"memory","evidence":"specified","promise":0.9,"desc":"The common chapter of memory and search, written once: a bilateral contract joining a query's demand triple ⟨d, q_min, b⟩ to a stratum's supply triple ⟨τ, V, c⟩. A rung–stratum admissibility lattice establishes which deadline classes may bind which residence tiers — depth purchased, never presumed. A warrant algebra derives every answer's ⟨TTL, confidence, provenance⟩ by meet, never by average. The duality: eviction is refusal issued in advance; storage is pre-paid retrieval; consolidation is caching under another name.","objects":["covenant ⟨d,q,b⟩↔⟨τ,V,c⟩","rung–stratum lattice","warrant algebra","duality schema","six invariants"],"refs":["Retrieval Covenant · Thesis II"]},{"id":"PR","name":"Price of Recall","sub":"Thesis III · retrieval economics","cluster":"memory","evidence":"specified","promise":0.85,"desc":"Where λ(t) comes from: a five-component cost vector (compute, I/O · bandwidth, staleness, privacy ε, opportunity) scalarized under charter weights with conservative rounding — under uncertainty the system understates value and overstates cost, so ambiguity starves rather than floods. A shadow-price controller with stability and starvation-freedom obligations; knapsack and prophet admission regimes; placement as capital under rent-to-buy; a tail-risk reserve exempting what the federation can least afford to lose; ε-metered price disclosure and a standing Goodhart audit. Market invariants M1–M6.","objects":["λ(t) controller","conservative rounding valve","tail-risk reserve","pre-paid recall","M1–M6"],"refs":["Price of Recall · Thesis III"]},{"id":"CE","name":"Coherence Engine","sub":"8-dim metrics · clustering","cluster":"coherence","evidence":"runs","promise":0.6,"desc":"Multilayer-network coherence instrument: eight coherence dimensions (structural, entity-based, semantic, discourse, multi-scale Jaccard, reference topology, temporal, unified), MCL / Louvain / hierarchical clustering with coherence weights, and temporal stability prediction — a break-probability estimate from coherence history. The Python library (coherence_analysis.py) runs today.","objects":["8-dim coherence","unified score bands","MCL/Louvain","stability & break probability"],"refs":["Coherence Engine package","coherence_analysis.py","Set-Theoretic Foundations · §II"]},{"id":"VIZ","name":"3D Multilayer Visualization","sub":"WebGL engine","cluster":"coherence","evidence":"runs","promise":0.5,"desc":"Three.js force-directed renderer for 5-layer hierarchies (Portfolio→Goal→Project→Task→Subtask) with coherence-weighted physics, interactive clustering, temporal animation, and 10⁴–10⁵-node scale. The corpus's existing visual instrument.","objects":["coherence-weighted layout","layer hierarchy","temporal animation"],"refs":["multilayer-coherence-3d.html","Coherence Engine package"]},{"id":"DST","name":"Set-Theoretic Frame","sub":"Borel taxonomy · retired axioms","cluster":"coherence","evidence":"retired","promise":0.25,"desc":"Polish-space model with Borel-classified edge relations (Σ⁰₁ direct citation → Π⁰₂ weak thematic overlap). The large-cardinal superstructure (Woodin cardinals, projective determinacy) was flagged by the programme's own external review as decorative and is retired from load-bearing claims. The salvage: the Borel hierarchy as an edge-typing discipline.","objects":["Borel edge classes","coherence metric d = 1 − coherence"],"refs":["Set-Theoretic Foundations · §I","CEO Assessment · decorative-math note","descriptive-set-theoretic-engine.html"]},{"id":"RMAA","name":"Actuation Boundary (RMAA)","sub":"CEO rank 1 · flagship","cluster":"portfolio","evidence":"runs","promise":0.95,"desc":"Risk-Monotone Action Algebra: closed convex admissible-command envelopes, antitone in risk; a two-stage clamp (magnitude then rate, rate last) proven non-expansive; composition across envelopes by intersection, never averaging; asymmetric hysteresis; and a fail-closed, non-programmable guard carrying the programme's only measured number — ≈32 ns FPGA intervention. Owed: the friction-circle exactness (or conservative inner-approximation) theorem and a one-sided fidelity bound under safe-rounding arithmetic.","objects":["antitone envelopes","non-expansive projection","intersection composition","32 ns guard","unrepresentability theorem"],"refs":["CEO Assessment · Opportunity 1"]},{"id":"ROM","name":"Special-Function ROM","sub":"CEO rank 2 · crown jewel","cluster":"portfolio","evidence":"runs","promise":0.85,"desc":"Conservation-by-construction surrogate modeling: elliptic-integral / AGM physics kernels with conservation enforced through transfer-function structure H(s); dimensional reduction via CCA; two invariants ξ and S extracted from transfer-function topology, correlating monotonically with observables. Validated on 200+ gasification datasets; manuscript at publication grade once the Λ-scale decoration is excised.","objects":["AGM kernels (~5 iterations)","H(s) conservation closure","invariants ξ, S"],"refs":["CEO Assessment · Opportunity 2"]},{"id":"DYN","name":"dynamod","sub":"CEO rank 3 · the one that runs","cluster":"portfolio","evidence":"runs","promise":0.8,"desc":"A manuscript as a finite measure space: word-count measure over the filtration book ⊃ chapter ⊃ section ⊃ paragraph; tone allocations as measures; composition as the Radon–Nikodym derivative; semantic surface tension γ and narrative tortuosity τₙ over the tone simplex; conservation certified to ~1e-12; an adaptive rebalancer and an ephemeral-agent context runtime. 40 tests pass — the only running system in the portfolio. Missing: the tone classifier and human-agreement validation.","objects":["measure filtration","Radon–Nikodym tone derivative","γ · τₙ flow metrics","agent context runtime"],"refs":["CEO Assessment · Opportunity 3"]},{"id":"KTE","name":"KTE Reproducibility","sub":"CEO rank 4 · gated","cluster":"portfolio","evidence":"specified","promise":0.6,"desc":"A process discipline for LLM knowledge work: protocol blocks (extract / synthesize / validate / compose / refine) with explicit specs and failure modes, minted UIDs, a steward registry, and the E/P/N evidentiary ladder. The honest contribution must be a measured reproducibility delta over ad-hoc prompting — the vocabulary alone reinvents METHONTOLOGY, zettelkasten, and nanopublications. Asset: the programme's own corpus as a worked dataset.","objects":["protocol blocks","minted UIDs","steward registry","E/P/N ladder"],"refs":["CEO Assessment · Opportunity 4"]},{"id":"GBX","name":"Epistemic Gearbox","sub":"CEO rank 6 · probe only","cluster":"portfolio","evidence":"notional","promise":0.35,"desc":"A steerable problem-formulation layer: a 325-route selector over five philosophy-of-mathematics stances chooses which optimization problem to pose before solving, with gear engagement bounded by admissibility and hysteresis. Original framing; wholly uncalibrated — held as a cheap research probe (3-route vs fixed-formulation sim) until it earns more.","objects":["325 framework routes","stance selector","admissibility bounds"],"refs":["CEO Assessment · Opportunity 6"]},{"id":"ISA","name":"PICAPD ISA","sub":"CEO rank 7 · FPGA-honest hold","cluster":"portfolio","evidence":"notional","promise":0.3,"desc":"Conservation-law checking as a hardware primitive: event-processing units, moment registers, AGM/elliptic units, transfer-function evaluators. Every silicon figure (≈3.4 ns, 116 pJ, $2.53/die…) is projected; the only measured hardware number in the programme belongs to the RMAA guard. Held at FPGA + requirements sketch; never cite notional silicon as achievement.","objects":["conservation primitives","AGM/elliptic units","FPGA reflex path"],"refs":["CEO Assessment · Opportunity 7"]}],"mechanisms":[{"id":"Mtau","family":"TIME","glyph":"τ","name":"Residence-time stratification","law":"Sort by how long it must live, not by what it is — and let obligations strengthen with residence.","instances":[{"idea":"MM","note":"The doctrine itself: reflexive <100 ms · tactical 100 ms–5 s · strategic ≥5 s, admission predicates per tier."},{"idea":"SSF","note":"Sovereign estates carry residence-time-stratified indexes as their internal law (Plane 1)."},{"idea":"RC","note":"Supply triple ⟨τ, V, c⟩; the rung–stratum lattice decides which deadlines may bind which tiers."},{"idea":"PR","note":"Stratum sizing treated as capital allocation under the one governed price."},{"idea":"DYN","note":"The ephemeral-agent context runtime — the natural first host for τ-strata in running code."}]},{"id":"Mdqb","family":"TIME","glyph":"⟨d,q,b⟩","name":"Deadline contracts & honest refusal","law":"Every request carries deadline, quality floor, budget; the honest answer to an unmeetable contract is refusal, not silent degradation.","instances":[{"idea":"SSF","note":"The temporal contract spine: every query is ⟨d, q_min, b⟩; unmeetable contracts are refused aloud."},{"idea":"RC","note":"The covenant's demand triple; the refusal warrant is a first-class answer."},{"idea":"PR","note":"Starvation-freedom (M4): the price may not refuse a traffic class forever."},{"idea":"RMAA","note":"The timing contract (intervention ≪ sensor window ≪ decision window); the fail-closed veto is refusal in hardware."},{"idea":"MM","note":"The reflexive tier is a hard deadline class: physical admissibility decided inside 100 ms."}]},{"id":"Mlam","family":"ECON","glyph":"λ(t)","name":"Shadow price & budgeted admission","law":"Remembering, recalling and computing ration themselves against one price; admission is an optimization act, not a default.","instances":[{"idea":"PR","note":"The controller: λ(t) with stability and starvation obligations; knapsack and prophet admission regimes."},{"idea":"MM","note":"A datum is recalled only when expected contribution per unit cost clears the shadow price."},{"idea":"RC","note":"The one-price consequence: remembering and recalling settle in the same currency."},{"idea":"SSF","note":"Market-based scheduling on the operator substrate (adopt, not invent)."}]},{"id":"Mdual","family":"ECON","glyph":"≙","name":"Storage–retrieval duality","law":"Eviction is refusal issued in advance; storage is pre-paid retrieval; consolidation is caching under another name.","instances":[{"idea":"RC","note":"The duality schema itself — four mirrored pairs with settlement symmetry."},{"idea":"PR","note":"Pre-paid recall as capital: rent-to-buy discipline, break-even law, depreciation and write-off."},{"idea":"MM","note":"Consolidation and forgetting become priced acts, not background housekeeping."}]},{"id":"Meps","family":"ECON","glyph":"ε","name":"Metered coupling","law":"Anything that crosses a boundary — data, learning, even a price — spends an explicit, revocable disclosure budget.","instances":[{"idea":"SSF","note":"The coupling membrane: consented, privacy-metered, unilaterally revocable."},{"idea":"PR","note":"Prices leak information, so price disclosure is ε-metered like any other coupling (M3)."},{"idea":"RC","note":"Coupled recall across estates rides conditional lattice cells, never bare access."}]},{"id":"Mmeet","family":"LAWS","glyph":"∧","name":"Compose by meet, never average","law":"A joint guarantee is the meet of its parts; averaging forges a warrant no constituent ever issued.","instances":[{"idea":"RC","note":"Warrant algebra: a composite answer's ⟨TTL, confidence, provenance⟩ is the meet of its parts."},{"idea":"RMAA","note":"Envelopes compose by intersection — the average of two safe commands can be unsafe."},{"idea":"KTE","note":"A composed knowledge product inherits its weakest constituent's evidence tier (E/P/N)."},{"idea":"PR","note":"Lexical floors sit above the scalarization: no weighted sum may buy out a floor (M1)."}]},{"id":"Mmono","family":"LAWS","glyph":"⪯","name":"Monotone / graduated burden","law":"Guarantees, burdens and admissibility move one way along risk, residence and depth — and never re-expand on their own.","instances":[{"idea":"RMAA","note":"Admissible envelopes antitone in risk; asymmetric hysteresis re-expands only slowly."},{"idea":"MM","note":"Verification burden strengthens with residence time — long-lived data has blast radius."},{"idea":"RC","note":"Lattice monotonicity: deeper recall is purchased rung by rung, never presumed."},{"idea":"ROM","note":"Invariants ξ and S correlate monotonically with observables — the order is the signal."},{"idea":"SSF","note":"Graded membrane, damped evolution: coupling and change move in ordered steps."}]},{"id":"Mcons","family":"LAWS","glyph":"≤!","name":"Conservative one-sided bounds","law":"Under uncertainty, understate value and overstate cost; ambiguity must starve, never flood.","instances":[{"idea":"PR","note":"The conservative rounding valve — a structural, not procedural, property of the cost model."},{"idea":"RMAA","note":"The fidelity scalar is owed as a one-sided (never optimistic) bound under safe rounding."},{"idea":"RC","note":"Depth purchased, not presumed; warrant stamps are never rounded upward."}]},{"id":"Minv","family":"LAWS","glyph":"∮","name":"Conservation & unrepresentability","law":"Make violation structurally impossible — a conserved quantity or an unrepresentable command, never a penalty term.","instances":[{"idea":"ROM","note":"Conservation enforced by transfer-function structure H(s): closure by construction."},{"idea":"ISA","note":"Conservation-law violation unrepresentable at instruction level (notional until measured)."},{"idea":"RMAA","note":"The unrepresentability theorem: unsafe commands have no encoding downstream of the guard."},{"idea":"DYN","note":"The compositional measure is certified countably additive to ~1e-12."},{"idea":"PR","note":"The tail-risk reserve is an inviolable set-aside — optimization cannot spend it."}]},{"id":"Mquar","family":"GOV","glyph":"⊘","name":"Quarantine-gated evolution","law":"Nothing learned enters the live system directly: distill, quarantine, verify, countersign, version — with a rollback rail armed.","instances":[{"idea":"SSF","note":"The six-stage pipeline: distilled experience → quarantine → adjudication → countersigned, versioned design."},{"idea":"MM","note":"New learning quarantined between missions; deployment is a governed, recorded event."},{"idea":"KTE","note":"Steward countersignature before a knowledge product enters the graph."}]},{"id":"Mledg","family":"GOV","glyph":"☰","name":"Ledgers, warrants & audit","law":"Every act leaves an unconditional, attributable record; every answer carries its warrant.","instances":[{"idea":"SSF","note":"Unconditional experience ledgers — the act is recorded even when the answer is refusal."},{"idea":"RC","note":"Every answer ships ⟨TTL, confidence, provenance⟩ — the warrant is the audit unit."},{"idea":"KTE","note":"Minted UIDs and a steward registry over a continuous knowledge graph."},{"idea":"PR","note":"A standing Goodhart audit between the metric and the law (M6)."},{"idea":"MM","note":"Learning events recorded as challengeable — the ISO/PAS 8800 monitoring posture."}]},{"id":"Mdrift","family":"GOV","glyph":"∂t","name":"Drift & stability watch","law":"Capability change is a safety-relevant event: detect it, measure it, gate on it.","instances":[{"idea":"MM","note":"Drift detector specified — the SGLD learning-coefficient estimator (adopt, not invent)."},{"idea":"CE","note":"Temporal coherence history → stability score and break probability. Runs today."},{"idea":"SSF","note":"Generational damping: evolution gated on measured drift, not enthusiasm."},{"idea":"DYN","note":"The Hurst-exponent multi-scale test over tonal flow."}]},{"id":"Mcoh","family":"GOV","glyph":"γ","name":"Coherence & flow metrics","law":"Structure over a stratified whole is measurable: coherence across layers, tension and tortuosity across segments.","instances":[{"idea":"CE","note":"Eight dimensions over multilayer structure; a unified score with target bands."},{"idea":"DYN","note":"Semantic surface tension γ and narrative tortuosity τₙ over the tone simplex."},{"idea":"VIZ","note":"Coherence-weighted force layout — the metric becomes geometry."},{"idea":"DST","note":"Borel classes type edge strength: Σ⁰₁ direct citation → Π⁰₂ weak thematic overlap."}]},{"id":"Mstan","family":"GOV","glyph":"≻","name":"Stance-space enumeration & lexical selection","law":"Enumerate the whole space, prune by admissibility, quotient by equivalence — then select lexically, floors before efficiency.","instances":[{"idea":"SSF","note":"589,824 stance combinations → admissibility pruning → seven archetypes → the lexical rule."},{"idea":"GBX","note":"325 routes over five epistemic stances select which problem to pose before solving."},{"idea":"PR","note":"The lexical exemption precedes optimization: floors first, efficiency after."},{"idea":"RMAA","note":"Ordering as law: magnitude clamp then rate clamp, rate last; safety before liveness."}]},{"id":"Mseam","family":"GOV","glyph":"E/P/N","name":"Evidentiary seam & falsifiers","law":"Established, Proposed, Notional — marked in-line; every claim ships with its falsifier and its validation phase.","instances":[{"idea":"KTE","note":"The seam as a discipline: the E/P/N ladder, UIDs and provenance are the house method itself."},{"idea":"SSF","note":"Ch. 10 falsification criteria — refusable honestly, with a counter-offer."},{"idea":"RC","note":"Validation phases α–δ with pre-registered falsifiers."},{"idea":"PR","note":"Phases π0–π3; dynamic pricing must beat the static tariff by a stated margin or be retired."},{"idea":"RMAA","note":"Open problems scoped honestly; the only measured number labelled as such."},{"idea":"ROM","note":"Cross-domain transfer of ξ/S is a falsifiable conjecture; the Λ-scale claim is excised."}]}],"edges":[{"a":"RC","b":"SSF","mechs":["Mdqb","Mlam","Mledg","Mseam"],"strength":3,"status":"written","title":"The covenant's demand side is the fabric's contract spine","note":"Thesis II imports ⟨d, q_min, b⟩ verbatim from the fabric's temporal contract spine and binds through a closed-world registry — integration without amendment to either parent. Honest refusal becomes the refusal warrant.","artifact":"Phase α kernel: one estate, one stratum, stamps flowing end-to-end.","refs":["Retrieval Covenant · ch. 4 & 8"]},{"a":"RC","b":"MM","mechs":["Mtau","Mdual","Mmeet"],"strength":3,"status":"written","title":"The covenant's supply side is the metabolic stratum","note":"⟨τ, V, c⟩ is the metabolic tier made contractible. The rung–stratum lattice turns the doctrine's residence tiers into an admissibility structure, and stratum validity predicates become answer warrants.","artifact":"Rung–stratum conformance table with forbidden-cell tests.","refs":["Retrieval Covenant · ch. 5"]},{"a":"PR","b":"RC","mechs":["Mlam","Mcons","Minv"],"strength":3,"status":"written","title":"Thesis III prices the covenant Thesis II wrote","note":"The covenant assumes λ(t) exists; the Price of Recall derives it, aggregates the five-component cost vector under charter weights, and exempts covenant-critical classes through the tail reserve. Falsifier pre-registered: the dynamic price must beat a static tariff or be retired.","artifact":"Phase π1→π2: static tariff baseline, then the governed price against it.","refs":["Price of Recall · ch. 3–5, 10"]},{"a":"PR","b":"SSF","mechs":["Meps","Mlam","Mledg"],"strength":3,"status":"written","title":"Prices travel only through the membrane","note":"Federation pricing runs with local prices and no global auctioneer; because prices leak information, disclosure is ε-metered through the fabric's coupling membrane, and the Goodhart audit stands as a charter organ.","artifact":"ε-budget ledger entry type for price disclosure events.","refs":["Price of Recall · ch. 9"]},{"a":"MM","b":"SSF","mechs":["Mtau","Mquar"],"strength":3,"status":"written","title":"Estates metabolize: stratified indexes, quarantined learning","note":"Plane 1 estates carry residence-time-stratified indexes and quarantined relevance learning — the metabolic doctrine operating as each estate's internal law, with the experience ledger as its record.","artifact":"Estate anatomy spec cross-referencing the metabolic tiers (already drawn in the blueprint HTML).","refs":["Symbiotic Search Fabric · §5.2"]},{"a":"MM","b":"PR","mechs":["Mlam","Mdual"],"strength":3,"status":"written","title":"Remembering and recalling clear one price","note":"Budgeted recall is admission under λ(t); stratum sizing is capital allocation; the break-even law governs consolidation. The metabolic budget and the retrieval economy are one ledger read from two sides.","artifact":"Replay of a memory trace through the π0 cost model.","refs":["Price of Recall · ch. 7","Retrieval Covenant · abstract"]},{"a":"CE","b":"VIZ","mechs":["Mcoh"],"strength":3,"status":"written","title":"One package: the metrics compute, the engine renders","note":"Coherence weights drive the force layout and layer placement; clustering results and temporal snapshots stream straight into the 3D scene.","artifact":"Already shipped — the Complete Package.","refs":["Coherence Engine package"]},{"a":"CE","b":"DST","mechs":["Mcoh"],"strength":2,"status":"written","title":"Borel typing classifies what coherence quantifies","note":"Edge relations typed Σ⁰₁→Π⁰₂ give the metric taxonomy its referential-strength classes. External review's verdict stands: keep the taxonomy, retire the large-cardinal axioms from load-bearing claims.","artifact":"A one-page 'salvage note': Borel classes as a typing discipline, axioms removed.","refs":["Set-Theoretic Foundations · §1.2","CEO Assessment · decorative-math note"]},{"a":"DST","b":"VIZ","mechs":["Mcoh"],"strength":1,"status":"written","title":"Edge classes are already fields in the scene","note":"Layer and Edge objects carry borel_class attributes through coherence_analysis.py into the renderer — the taxonomy survives as styling and filtering metadata even after the axioms retire.","artifact":"Keep the field; drop the theorem citations.","refs":["coherence_analysis.py"]},{"a":"RMAA","b":"ISA","mechs":["Minv","Mdqb"],"strength":2,"status":"written","title":"The guard is the ISA's only measured organ","note":"The ≈32 ns FPGA intervention belongs to the actuation boundary; the ISA remains a requirements sketch around it. The honest posture: FPGA-real, silicon-notional — the reflex path is kept alive for Opportunity 1, nothing more is funded.","artifact":"Re-run the 32 ns measurement with fault injection and reported variance (the 90-day milestone).","refs":["CEO Assessment · Opportunities 1 & 7"]},{"a":"ROM","b":"ISA","mechs":["Minv"],"strength":2,"status":"written","title":"AGM/elliptic units execute ROM kernels","note":"The ISA's compute units are the ROM's special-function kernels imagined in silicon — transfer-function evaluators included. Real only if placed-and-routed numbers ever exist; until then it is the clearest notional-numbers case in the portfolio.","artifact":"An FPGA-honest microbenchmark of one AGM kernel, if ever funded.","refs":["CEO Assessment · Opportunity 7"]},{"a":"RMAA","b":"ROM","mechs":["Mcons","Minv","Mseam"],"strength":2,"status":"written","title":"The crown jewel underwrites the flagship's numerics","note":"The CEO assessment is explicit: the special-function programme underwrites the numerics claims Opportunity 1 depends on. Conservative arithmetic, AGM evaluation cost, and conservation-by-structure are the shared substrate of the owed fidelity-scalar proof.","artifact":"Pair the safe-rounding workstream with the ROM benchmark push in one numerics review.","refs":["CEO Assessment · Opportunity 2 §7"]},{"a":"MM","b":"RMAA","mechs":["Mmono","Mdqb","Mquar"],"strength":3,"status":"written","title":"Same monotone-contraction spine; governance completes the safety story","note":"The assessment states it directly: metabolic-memory governance plugs into the same monotone-contraction spine as the actuation boundary. The reflexive stratum's admissibility predicate is the guard's language; the honest timescale split — microsecond veto vs slow-loop governor — is itself part of the contribution.","artifact":"Drift-detector prototype + ISO/PAS 8800 crosswalk (the funded 90-day milestone).","refs":["CEO Assessment · Opportunity 5 §2"]},{"a":"DYN","b":"KTE","mechs":["Mcoh","Mledg"],"strength":3,"status":"written","title":"dynamod is KTE's measurement substrate","note":"KTE's quality gates cite the same machinery dynamod implements; γ and τₙ are the candidate protocol-block metrics. Without the instrument, the discipline has no numbers; without the discipline, the instrument has no customer.","artifact":"One KTE protocol block scored end-to-end by dynamod metrics.","refs":["CEO Assessment · Opportunity 3 §7"]},{"a":"RC","b":"RMAA","mechs":["Mmeet","Mmono"],"strength":3,"status":"proposed","title":"One meet-lemma, proved once, cited twice","note":"Warrant meet and envelope intersection are the same lattice operation wearing two coats: never average what must be jointly guaranteed. A single non-expansive meet-composition lemma serves both — the covenant gains a safety-grade proof pattern, the boundary gains a warrant story in which every actuation carries provenance.","artifact":"A short shared lemma note + a tiny meet-composition kernel both documents cite.","refs":["Retrieval Covenant · ch. 6.3","CEO Assessment · Opportunity 1 (RMAA composition)"]},{"a":"PR","b":"RMAA","mechs":["Mcons","Minv","Mstan"],"strength":2,"status":"proposed","title":"The tail reserve is the liveness problem's economic twin","note":"'Never shed what you can least afford to lose' and 'a filter that parks the car forever passes every safety clause' are the same open frontier — worst-case protection vs ordinary usefulness. One starvation/drivability baseline, designed once, would serve both programmes.","artifact":"A joint liveness-and-starvation benchmark note naming shared metrics.","refs":["Price of Recall · ch. 8","CEO Assessment · Opportunity 1 §6"]},{"a":"MM","b":"DYN","mechs":["Mtau","Mcoh"],"strength":3,"status":"proposed","title":"dynamod's context runtime is the doctrine's first running host","note":"The only running code adjacent to the trilogy already manages ephemeral agent context over a certified conserved measure. Implementing τ-strata and budgeted recall there turns the Memory Module from three specifications into one measurable artifact — in the LLM-agent theater, where no HIL bench is needed.","artifact":"τ-stratified context runtime prototype + a replay benchmark in the π0 style.","refs":["CEO Assessment · Opportunity 3 (context runtime)","Retrieval Covenant · validation α"]},{"a":"CE","b":"MM","mechs":["Mdrift"],"strength":3,"status":"proposed","title":"Break probability is a drift signal that already runs","note":"The coherence engine's temporal stability predictor is a working ancestor of the metabolic drift detector. Benchmarking it beside the planned SGLD estimator on continual-learning traces converts a paper milestone into a code milestone.","artifact":"Detection/false-alarm curve on a public continual-learning dataset — the CEO 90-day deliverable, using code that exists.","refs":["coherence_analysis.py · TemporalAnalysis","CEO Assessment · Opportunity 5 §8"]},{"a":"CE","b":"SSF","mechs":["Mcoh","Mdrift"],"strength":2,"status":"proposed","title":"Coherence as estate health — and as an evolution gate","note":"Eight-dimensional coherence over an estate's index becomes a health metric; a design generation clears the evolution pipeline only if unified coherence does not regress. MCL/Louvain organize index shards along the way.","artifact":"A coherence-gate stage spec for the pipeline, with target bands from the package.","refs":["Coherence Engine package · target ranges","Symbiotic Search Fabric · §6.2"]},{"a":"VIZ","b":"SSF","mechs":["Mcoh"],"strength":2,"status":"proposed","title":"Render the registry: the fabric's observability console","note":"The 29-edge interface registry, the estates, and the rung–stratum lattice are a multilayer network by construction — planes as layers. The existing WebGL engine can render the fabric's anatomy and, later, its live circulations.","artifact":"registry JSON → VIZ importer; one scene per plane.","refs":["Symbiotic Search Fabric · ch. 7","multilayer-coherence-3d.html"]},{"a":"KTE","b":"SSF","mechs":["Mquar","Mledg","Mseam"],"strength":3,"status":"proposed","title":"The evolution pipeline is a KTE pathway — and its first study corpus","note":"Distill → quarantine → adjudicate → countersign is extract → validate → compose → refine wearing architecture clothes. The fabric's unconditional ledgers are exactly the auditable worked dataset the pre-registered reproducibility study needs.","artifact":"Run the KTE study protocol over evolution-pipeline records as the task battery.","refs":["CEO Assessment · Opportunity 4 §5","Symbiotic Search Fabric · §6.2"]},{"a":"KTE","b":"RC","mechs":["Mledg","Mmeet"],"strength":2,"status":"proposed","title":"Warrant stamps are nanopub-grade provenance","note":"The covenant's ⟨TTL, confidence, provenance⟩ stamps need identity semantics; KTE's minted UIDs and steward registry supply them. In return the warrant algebra gives KTE its weakest-claim propagation rule as a formal meet.","artifact":"One shared stamp grammar document serving both specifications.","refs":["Retrieval Covenant · ch. 6","CEO Assessment · Opportunity 4"]},{"a":"GBX","b":"SSF","mechs":["Mstan"],"strength":2,"status":"proposed","title":"One stance-space method: enumerate, prune, quotient, select","note":"Thesis I §8 is the gearbox's method applied to architecture — 589,824 combinations pruned to seven archetypes under a lexical functional. A single stance-space toolkit serves the fabric's design-space analysis and the gearbox's 3-route probe; the probe then validates both.","artifact":"Shared stance-space toolkit + the 3-route vs fixed-formulation sim.","refs":["Symbiotic Search Fabric · ch. 8","CEO Assessment · Opportunity 6 §8"]},{"a":"DYN","b":"CE","mechs":["Mcoh"],"strength":2,"status":"proposed","title":"A manuscript is a multilayer network","note":"The filtration book ⊃ chapter ⊃ section ⊃ paragraph is a layer hierarchy; tone vectors are node attributes; γ-discontinuities are weak inter-layer edges. One tone classifier — the missing load-bearing input on both sides — feeds both instruments and shares a single κ study.","artifact":"manuscript → multilayer-graph exporter + the joint tone-classifier calibration.","refs":["CEO Assessment · Opportunity 3 §1","Coherence Engine package · metrics II"]},{"a":"MM","b":"KTE","mechs":["Mmono","Mledg"],"strength":1,"status":"proposed","title":"Blast radius and claim tier are one graduated-verification doctrine","note":"Metabolic memory scales verification with a datum's residence and blast radius; KTE scales scrutiny with a claim's evidence tier. Written once as a single doctrine, each becomes the other's precedent.","artifact":"A one-page graduated-verification doctrine cited by both.","refs":["CEO Assessment · Opportunities 4 & 5"]},{"a":"PR","b":"ROM","mechs":["Minv"],"strength":1,"status":"notional","title":"Transfer-function stability for the price controller","note":"λ(t) rate control is a feedback loop; the ROM programme's H(s) machinery — passivity, stability, causality — is a candidate language for proving the controller's stability obligation. Speculative: do not load-bear.","artifact":"A stability note, only if the π2 controller misbehaves.","refs":["Price of Recall · ch. 5.2","CEO Assessment · Opportunity 2"]},{"a":"DYN","b":"SSF","mechs":["Mcoh","Mquar"],"strength":1,"status":"notional","title":"γ/τₙ as a distillation-quality gate","note":"Before distilled experience briefs enter the evolution pipeline, tonal-flow metrics could screen them for incoherent or padded distillations — an instrument reading on the pipeline's raw material. Unvalidated on this text genre.","artifact":"Score one generation's distillation set; inspect against editor judgment.","refs":["Symbiotic Search Fabric · §6.2","CEO Assessment · Opportunity 3"]}],"starts":[{"edge":["MM","DYN"],"why":"Highest leverage per dollar: the only running code adjacent to the trilogy becomes the doctrine's first measurable host."},{"edge":["CE","MM"],"why":"Turns the funded 90-day drift-detector milestone into a benchmark of code that already runs."},{"edge":["RC","RMAA"],"why":"One lattice lemma serves two theses — cheapest theory unification on the board."},{"edge":["KTE","SSF"],"why":"The reproducibility study designs itself: the corpus (ledgers) and the pathway (pipeline) already exist."},{"edge":["MM","RMAA"],"why":"Already CEO-endorsed: governance completes the flagship's safety story on the same monotone spine."},{"edge":["VIZ","SSF"],"why":"Cheap observability win: the registry is a multilayer network and the renderer is built."}],"recipes":[{"id":"R1","name":"The constitution stack","ideas":["SSF","RC","PR","RMAA"],"mechs":["Mmono","Mmeet","Mseam"],"note":"Cross-map the four invariant sets — fabric I1–I7, the covenant's six, market M1–M6, and the RMAA determinism contract — into one ordered lattice. Where they agree, one law is stated once; where they conflict, the conflict is a finding."},{"id":"R2","name":"The τ-runtime","ideas":["DYN","MM","RC","PR"],"mechs":["Mtau","Mlam","Mdual"],"note":"dynamod's agent context runtime hosting metabolic τ-strata, serving covenant contracts, admitting under a toy λ(t): the Memory Module's first end-to-end running artifact, entirely in the LLM-agent theater."},{"id":"R3","name":"The drift instrument","ideas":["CE","DYN","MM"],"mechs":["Mdrift"],"note":"Benchmark the coherence engine's break-probability predictor and dynamod's Hurst test as candidate drift detectors against the planned SGLD estimator — a detection/false-alarm curve on a public continual-learning dataset."},{"id":"R4","name":"The registry atlas","ideas":["VIZ","SSF","RC"],"mechs":["Mcoh"],"note":"Render the fabric's 29-edge interface registry and the covenant's rung–stratum lattice as multilayer scenes in the existing WebGL engine — the observability console the architecture deserves."},{"id":"R5","name":"The study that uses itself","ideas":["KTE","SSF","DYN"],"mechs":["Mledg","Mquar","Mseam"],"note":"The pre-registered KTE reproducibility study run over evolution-pipeline ledgers, with dynamod metrics as instrument — three gated bets, one experiment."},{"id":"R6","name":"The meet lemma","ideas":["RC","RMAA","KTE"],"mechs":["Mmeet"],"note":"Prove non-expansive meet-composition once; cite it from the warrant algebra, the envelope composition, and KTE's weakest-claim propagation. One page of mathematics, three programmes."}]};
+
+/* ---------- indexes & helpers ---------- */
+const IDEA={},MECH={},FAM=DATA.families,CL=DATA.clusters,STA=DATA.statuses,EVD=DATA.evidence;
+DATA.ideas.forEach(i=>IDEA[i.id]=i); DATA.mechanisms.forEach(m=>MECH[m.id]=m);
+const famColor=f=>FAM[f].color;
+const mColor=mid=>famColor(MECH[mid].family);
+const edgeColor=e=>mColor(e.mechs[0]);
+const edgeDash=e=>e.status==='written'?'':(e.status==='proposed'?'8 5':'2 4.5');
+const edgeW=e=>e.strength===3?3:(e.strength===2?2:1.2);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const NS='http://www.w3.org/2000/svg';
+function el(n,at,parent){const d=document.createElementNS(NS,n);for(const k in at)d.setAttribute(k,at[k]);if(parent)parent.appendChild(d);return d}
+function ideaMechs(id){return DATA.mechanisms.filter(m=>m.instances.some(x=>x.idea===id))}
+function ideaEdges(id){return DATA.edges.filter(e=>e.a===id||e.b===id)}
+function edgeKey(e){return [e.a,e.b].sort().join('|')}
+function findEdge(a,b){const k=[a,b].sort().join('|');return DATA.edges.find(e=>edgeKey(e)===k)}
+function sharedMechs(a,b){return DATA.mechanisms.filter(m=>m.instances.some(x=>x.idea===a)&&m.instances.some(x=>x.idea===b))}
+/* family bead shapes: TIME circle · ECON square · LAWS triangle · GOV diamond (CVD-safe secondary encoding) */
+function beadPath(f,x,y,r){
+  if(f==='TIME')return `M ${x-r},${y} a ${r},${r} 0 1,0 ${2*r},0 a ${r},${r} 0 1,0 ${-2*r},0`;
+  if(f==='ECON')return `M ${x-r},${y-r} h ${2*r} v ${2*r} h ${-2*r} Z`;
+  if(f==='LAWS')return `M ${x},${y-r*1.2} L ${x+r*1.15},${y+r*0.9} L ${x-r*1.15},${y+r*0.9} Z`;
+  return `M ${x},${y-r*1.3} L ${x+r*1.3},${y} L ${x},${y+r*1.3} L ${x-r*1.3},${y} Z`;
+}
+function beadHTML(f){ /* inline svg bead for chips/legend */
+  return `<svg class="sw" viewBox="-6 -6 12 12" aria-hidden="true"><path d="${beadPath(f,0,0,4)}" fill="${famColor(f)}"/></svg>`;
+}
+function shapeHTML(cluster){
+  const s=CL[cluster].shape;
+  const inner = s==='circle' ? '<circle cx="0" cy="0" r="4.6" />'
+    : s==='diamond' ? '<path d="M0,-5.6 L5.6,0 L0,5.6 L-5.6,0 Z"/>'
+    : '<rect x="-4.4" y="-4.4" width="8.8" height="8.8"/>';
+  return `<svg class="shp" viewBox="-7 -7 14 14" aria-hidden="true"><g fill="none" stroke="#A7B6D4" stroke-width="1.5">${inner}</g></svg>`;
+}
+function ideaChip(id){const i=IDEA[id];return `<span class="ideachip" data-idea="${id}">${shapeHTML(i.cluster)}${esc(i.name)}</span>`}
+function mechChip(mid){const m=MECH[mid];return `<span class="mchip" data-mech="${mid}" style="border-left-color:${mColor(mid)}">${beadHTML(m.family)}<span class="g">${esc(m.glyph)}</span> ${esc(m.name)}</span>`}
+function stStamp(st){return `<span class="st st-${st}">${STA[st].name}</span>`}
+function strDots(s){return `<span class="strength">STRENGTH ${'●'.repeat(s)}${'○'.repeat(3-s)}</span>`}
+
+/* ---------- tooltip ---------- */
+const tip=document.createElement('div');tip.id='tip';document.body.appendChild(tip);
+function tipShow(html,ev){tip.innerHTML=html;tip.style.display='block';tipMove(ev)}
+function tipMove(ev){const pad=14;let x=ev.clientX+pad,y=ev.clientY+pad;
+  const r=tip.getBoundingClientRect();
+  if(x+r.width>innerWidth-8)x=ev.clientX-r.width-pad;
+  if(y+r.height>innerHeight-8)y=ev.clientY-r.height-pad;
+  tip.style.left=x+'px';tip.style.top=y+'px'}
+function tipHide(){tip.style.display='none'}
+
+/* ---------- dossier renderers ---------- */
+const dossier=()=>document.getElementById('dossier');
+function refsHTML(refs){return refs&&refs.length?`<div class="refs"><div class="k">SOURCES</div>${refs.map(r=>`<div>· ${esc(r)}</div>`).join('')}</div>`:''}
+function renderEdgeDossier(e){
+  dossier().innerHTML=`
+    <div class="dosk">INTEGRATION POINT</div>
+    <h3>${esc(e.title)}</h3>
+    <div class="stamp-row">${stStamp(e.status)} ${strDots(e.strength)}</div>
+    <div class="pairrow">${ideaChip(e.a)}<span class="lnk">⟷</span>${ideaChip(e.b)}</div>
+    <div class="mechrow">${e.mechs.map(mechChip).join('')}</div>
+    <p>${esc(e.note)}</p>
+    <div class="artbox"><div class="k">FIRST ARTIFACT</div><p>${esc(e.artifact)}</p></div>
+    ${refsHTML(e.refs)}`;
+  wireDossier();
+}
+function renderIdeaDossier(id){
+  const i=IDEA[id],mechs=ideaMechs(id),edges=ideaEdges(id);
+  dossier().innerHTML=`
+    <div class="dosk">${esc(CL[i.cluster].name).toUpperCase()} · IDEA</div>
+    <h3>${esc(i.name)} <span style="color:var(--mut);font-weight:400;font-size:12px">· ${esc(i.sub)}</span></h3>
+    <div class="stamp-row"><span class="st st-ev">${EVD[i.evidence].name}</span></div>
+    <div class="meter"><i style="width:${Math.round(i.promise*100)}%"></i></div>
+    <div class="mlab">ASSESSED PROMISE ${Math.round(i.promise*100)}/100</div>
+    <p>${esc(i.desc)}</p>
+    <div class="objrow">${(i.objects||[]).map(o=>`<span class="obj">${esc(o)}</span>`).join('')}</div>
+    <div class="dosk" style="margin-top:14px">MECHANISMS IT INSTANTIATES (${mechs.length})</div>
+    <div class="mechrow">${mechs.map(m=>mechChip(m.id)).join('')}</div>
+    <div class="dosk" style="margin-top:14px">MAPPED INTEGRATIONS (${edges.length})</div>
+    <div class="elist">${edges.map(e=>{const o=e.a===id?e.b:e.a;return `<div class="eitem" data-edge="${edgeKey(e)}"><div class="t">↔ <b>${esc(IDEA[o].name)}</b> — ${esc(e.title)}</div><div class="m">${STA[e.status].name} · ${'●'.repeat(e.strength)}</div></div>`}).join('')}</div>
+    ${refsHTML(i.refs)}`;
+  wireDossier();
+}
+function renderMechDossier(mid){
+  const m=MECH[mid];
+  const edges=DATA.edges.filter(e=>e.mechs.includes(mid));
+  const recs=(DATA.recipes||[]).filter(r=>r.mechs.includes(mid));
+  dossier().innerHTML=`
+    <div class="dosk">SHARED MECHANISM · ${esc(FAM[m.family].name).toUpperCase()}</div>
+    <h3><span class="svg-mono" style="color:${mColor(mid)}">${esc(m.glyph)}</span>&ensp;${esc(m.name)}</h3>
+    <div class="law">${esc(m.law)}</div>
+    <div class="dosk" style="margin-top:12px">WHERE IT LIVES (${m.instances.length})</div>
+    ${m.instances.map(x=>`<div class="inst"><div class="who" data-idea="${x.idea}">${esc(IDEA[x.idea].name)}</div><div class="what">${esc(x.note)}</div></div>`).join('')}
+    ${edges.length?`<div class="dosk" style="margin-top:12px">INTEGRATIONS CARRYING IT (${edges.length})</div>
+    <div class="elist">${edges.map(e=>`<div class="eitem" data-edge="${edgeKey(e)}"><div class="t">${esc(IDEA[e.a].name)} ⟷ ${esc(IDEA[e.b].name)}</div><div class="m">${STA[e.status].name} · ${'●'.repeat(e.strength)}</div></div>`).join('')}</div>`:''}
+    ${recs.length?`<div class="dosk" style="margin-top:12px">RECIPES</div>${recs.map(r=>`<div class="eitem" data-recipe="${r.id}"><div class="t"><b>${esc(r.name)}</b></div><div class="m">${r.ideas.map(x=>IDEA[x].name).join(' + ')}</div></div>`).join('')}`:''}`;
+  wireDossier();
+}
+function renderCandidateDossier(a,b){
+  const sm=sharedMechs(a,b);
+  dossier().innerHTML=`
+    <div class="dosk">UNMAPPED PAIR · CANDIDATE</div>
+    <h3>${esc(IDEA[a].name)} ⟷ ${esc(IDEA[b].name)}</h3>
+    <div class="stamp-row"><span class="st st-notional">NOT YET MAPPED</span></div>
+    <p>No integration point is written or proposed for this pair — but the two ideas already instantiate
+       <b>${sm.length}</b> mechanism${sm.length>1?'s':''} in common. That overlap is a discovery lead, not a claim.</p>
+    ${sm.map(m=>{
+      const na=m.instances.find(x=>x.idea===a),nb=m.instances.find(x=>x.idea===b);
+      return `<div class="artbox" style="border-left-color:${mColor(m.id)}">
+        <div class="k" style="color:${'var(--sec)'}">${esc(m.glyph)} · ${esc(m.name).toUpperCase()}</div>
+        <p><b>${esc(IDEA[a].name)}:</b> ${esc(na.note)}</p>
+        <p><b>${esc(IDEA[b].name)}:</b> ${esc(nb.note)}</p>
+        <p style="color:var(--mut)">If these two instantiations compose, write the pairing down and give it a falsifier.</p>
+      </div>`}).join('')}`;
+  wireDossier();
+}
+function renderRecipeDossier(rid){
+  const r=DATA.recipes.find(x=>x.id===rid);
+  dossier().innerHTML=`
+    <div class="dosk">MULTI-IDEA RECIPE · ${esc(r.id)}</div>
+    <h3>${esc(r.name)}</h3>
+    <div class="pairrow">${r.ideas.map(ideaChip).join('')}</div>
+    <div class="mechrow">${r.mechs.map(mechChip).join('')}</div>
+    <p>${esc(r.note)}</p>`;
+  wireDossier();
+}
+function wireDossier(){
+  dossier().querySelectorAll('[data-idea]').forEach(n=>n.onclick=()=>selectIdea&&selectIdea(n.dataset.idea));
+  dossier().querySelectorAll('[data-mech]').forEach(n=>n.onclick=()=>selectMech&&selectMech(n.dataset.mech));
+  dossier().querySelectorAll('[data-edge]').forEach(n=>n.onclick=()=>{const e=DATA.edges.find(x=>edgeKey(x)===n.dataset.edge);selectEdge&&selectEdge(e)});
+  dossier().querySelectorAll('[data-recipe]').forEach(n=>n.onclick=()=>selectRecipe&&selectRecipe(n.dataset.recipe));
+}
+/* pages define selectIdea / selectMech / selectEdge / selectRecipe */
+var selectIdea=null,selectMech=null,selectEdge=null,selectRecipe=null;
+
+
+/* ================= atlas page ================= */
+const svg=document.getElementById('atlas');
+const W=1180,H=850;
+const ANCH={memory:[275,295],portfolio:[895,315],coherence:[610,655]};
+const nodes=DATA.ideas.map(i=>({...i,r:15+i.promise*16,x:0,y:0,vx:0,vy:0}));
+const N={};nodes.forEach(n=>N[n.id]=n);
+
+/* deterministic layout */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd=mulberry32(20260715);
+nodes.forEach(n=>{const A=ANCH[n.cluster];n.x=A[0]+(rnd()-0.5)*200;n.y=A[1]+(rnd()-0.5)*180});
+const springs=DATA.edges.map(e=>({s:N[e.a],t:N[e.b],rest:195+(3-e.strength)*45,k:0.009+0.005*e.strength}));
+for(let it=0;it<1200;it++){
+  const heat=Math.max(0.1,1-it/950);
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+    const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y;
+    const d2=dx*dx+dy*dy*1.9;const d=Math.sqrt(d2)||1;   /* labels hang below: repel harder vertically */
+    const min=a.r+b.r+80;
+    let f=15500/d2; if(d<min)f+=(min-d)*0.12;
+    dx/=d;dy/=d; a.vx-=dx*f*heat;a.vy-=dy*f*heat;b.vx+=dx*f*heat;b.vy+=dy*f*heat;
+  }
+  springs.forEach(s=>{let dx=s.t.x-s.s.x,dy=s.t.y-s.s.y;const d=Math.sqrt(dx*dx+dy*dy)||1;
+    const f=(d-s.rest)*s.k*heat;dx/=d;dy/=d;
+    s.s.vx+=dx*f;s.s.vy+=dy*f;s.t.vx-=dx*f;s.t.vy-=dy*f});
+  nodes.forEach(n=>{const A=ANCH[n.cluster];
+    n.vx+=(A[0]-n.x)*0.028*heat;n.vy+=(A[1]-n.y)*0.028*heat;
+    n.x+=n.vx;n.y+=n.vy;n.vx*=0.82;n.vy*=0.82;
+    n.x=Math.max(100,Math.min(W-105,n.x));n.y=Math.max(85,Math.min(H-128,n.y))});
+}
+
+/* draw order: hulls, edges, beads, nodes */
+const gHull=el('g',{},svg),gE=el('g',{},svg),gB=el('g',{},svg),gN=el('g',{},svg);
+
+const HSIDE={memory:'top',portfolio:'top',coherence:'bottom'};
+function hulls(){
+  gHull.innerHTML='';
+  for(const c in ANCH){
+    const pts=nodes.filter(n=>n.cluster===c);
+    let cx=ANCH[c][0];cx=Math.max(325,Math.min(W-325,cx));
+    const yy=HSIDE[c]==='top'?Math.min(...pts.map(n=>n.y-n.r))-38:Math.max(...pts.map(n=>n.y+n.r))+52;
+    el('text',{x:cx,y:Math.max(22,Math.min(H-10,yy)),'text-anchor':'middle',class:'hull-label'},gHull)
+      .textContent=CL[c].name.toUpperCase()+' · '+CL[c].sub.toUpperCase();
+  }
+}
+
+const edgeEls=[];
+function edgePath(e){
+  const a=N[e.a],b=N[e.b];
+  const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+  let dx=b.x-a.x,dy=b.y-a.y;const d=Math.sqrt(dx*dx+dy*dy)||1;
+  const off=d*0.10*((e._i%2)?1:-1);
+  const cx=mx-dy/d*off,cy=my+dx/d*off;
+  return {d:`M ${a.x},${a.y} Q ${cx},${cy} ${b.x},${b.y}`};
+}
+function drawEdges(){
+  gE.innerHTML='';gB.innerHTML='';edgeEls.length=0;
+  DATA.edges.forEach((e,i)=>{e._i=i;
+    const p=edgePath(e);
+    const path=el('path',{d:p.d,class:'edge',stroke:edgeColor(e),'stroke-width':edgeW(e),
+      'stroke-dasharray':edgeDash(e),'stroke-linecap':'round',opacity:0.62},gE);
+    const hit=el('path',{d:p.d,class:'edgehit'},gE);
+    /* family beads at midpoint (CVD-safe secondary encoding) */
+    const tl=path.getTotalLength(),mid=path.getPointAtLength(tl/2);
+    const fams=[...new Set(e.mechs.map(m=>MECH[m].family))];
+    const bg=el('g',{class:'beads','pointer-events':'none'},gB);
+    fams.forEach((f,k)=>{
+      const bx=mid.x+(k-(fams.length-1)/2)*11;
+      el('path',{d:beadPath(f,bx,mid.y,k===0?3.4:2.7),fill:famColor(f),stroke:'#0A101C','stroke-width':1},bg);
+    });
+    const rec={e,path,hit,bg};
+    edgeEls.push(rec);
+    const over=ev=>{tipShow(`<div class="tk">${STA[e.status].name} · ${'●'.repeat(e.strength)} · ${fams.map(f=>FAM[f].name).join(' + ')}</div>${esc(IDEA[e.a].name)} ⟷ ${esc(IDEA[e.b].name)}<div class="ts">${esc(e.title)}</div>`,ev);
+      if(sel.type!=='edge'||sel.ref!==e){path.setAttribute('opacity',1);path.setAttribute('stroke-width',edgeW(e)+1.2)}};
+    const out=()=>{tipHide();applyState()};
+    hit.addEventListener('mousemove',ev=>{tipMove(ev)});
+    hit.addEventListener('mouseenter',over);hit.addEventListener('mouseleave',out);
+    hit.addEventListener('click',()=>selectEdge(e));
+  });
+}
+
+const nodeEls={};
+function nodeShape(n,g){
+  const r=n.r;
+  const dashes=n.evidence==='runs'?'':(n.evidence==='specified'?'6 4':'2 3.5');
+  let body;
+  if(CL[n.cluster].shape==='circle')body=el('circle',{cx:0,cy:0,r:r,class:'body'},g);
+  else if(CL[n.cluster].shape==='diamond')body=el('path',{d:`M 0,${-r*1.12} L ${r*1.12},0 L 0,${r*1.12} L ${-r*1.12},0 Z`,class:'body'},g);
+  else body=el('rect',{x:-r*0.92,y:-r*0.92,width:r*1.84,height:r*1.84,rx:4,class:'body'},g);
+  if(dashes)body.setAttribute('stroke-dasharray',dashes);
+  if(n.evidence==='retired')body.setAttribute('opacity',0.55);
+  return body;
+}
+function drawNodes(){
+  gN.innerHTML='';
+  nodes.forEach(n=>{
+    const g=el('g',{class:'node',transform:`translate(${n.x},${n.y})`},gN);
+    const body=nodeShape(n,g);
+    const t1=el('text',{class:'nm',y:n.r+15},g);t1.textContent=n.name;
+    const t2=el('text',{class:'ns',y:n.r+26},g);t2.textContent=n.sub.toUpperCase();
+    nodeEls[n.id]={g,body};
+    g.addEventListener('mouseenter',ev=>{
+      tipShow(`<div class="tk">${EVD[n.evidence].name} · PROMISE ${Math.round(n.promise*100)}</div><b>${esc(n.name)}</b><div class="ts">${esc(n.sub)} — click for dossier</div>`,ev);
+      edgeEls.forEach(r=>{const on=(r.e.a===n.id||r.e.b===n.id);r.path.setAttribute('opacity',on?1:0.10);r.bg.setAttribute('opacity',on?1:0.12)});
+    });
+    g.addEventListener('mousemove',tipMove);
+    g.addEventListener('mouseleave',()=>{tipHide();applyState()});
+    g.addEventListener('click',ev=>{if(!drag.moved)selectIdea(n.id)});
+    /* drag */
+    g.addEventListener('pointerdown',ev=>{drag.n=n;drag.moved=false;drag.ox=ev.clientX;drag.oy=ev.clientY;g.setPointerCapture(ev.pointerId)});
+    g.addEventListener('pointermove',ev=>{if(!drag.n)return;
+      const sc=svg.getBoundingClientRect().width/W;
+      n.x+=(ev.clientX-drag.ox)/sc;n.y+=(ev.clientY-drag.oy)/sc;drag.ox=ev.clientX;drag.oy=ev.clientY;
+      if(Math.abs(ev.movementX)+Math.abs(ev.movementY)>0)drag.moved=true;
+      g.setAttribute('transform',`translate(${n.x},${n.y})`);drawEdges();applyState();hulls()});
+    g.addEventListener('pointerup',()=>{drag.n=null;setTimeout(()=>drag.moved=false,50)});
+  });
+}
+const drag={n:null,moved:false};
+
+/* -------- filters & selection state -------- */
+const activeFams=new Set(Object.keys(FAM)),activeStas=new Set(Object.keys(STA));
+let sel={type:null,ref:null};
+function edgeVisible(e){
+  return e.mechs.some(m=>activeFams.has(MECH[m].family)) && activeStas.has(e.status);
+}
+function applyState(){
+  edgeEls.forEach(r=>{
+    const vis=edgeVisible(r.e);
+    const isSel=sel.type==='edge'&&sel.ref===r.e;
+    r.path.setAttribute('opacity',isSel?1:(vis?0.62:0.05));
+    r.path.setAttribute('stroke-width',isSel?edgeW(r.e)+1.6:edgeW(r.e));
+    r.path.setAttribute('stroke',isSel?'#E9F0FC':edgeColor(r.e));
+    r.bg.setAttribute('opacity',vis||isSel?1:0.06);
+    if(sel.type==='idea'){const on=(r.e.a===sel.ref||r.e.b===sel.ref)&&vis;
+      r.path.setAttribute('opacity',on?1:0.07);r.bg.setAttribute('opacity',on?1:0.08)}
+  });
+  nodes.forEach(n=>{
+    const touched=DATA.edges.some(e=>(e.a===n.id||e.b===n.id)&&edgeVisible(e));
+    const isSel=sel.type==='idea'&&sel.ref===n.id;
+    nodeEls[n.id].g.setAttribute('opacity',touched||isSel?1:0.35);
+    nodeEls[n.id].body.setAttribute('stroke',isSel?'#C9A86A':'#8FA7DA');
+    nodeEls[n.id].body.setAttribute('stroke-width',isSel?2.4:1.4);
+  });
+}
+selectEdge=e=>{sel={type:'edge',ref:e};applyState();renderEdgeDossier(e)};
+selectIdea=id=>{sel={type:'idea',ref:id};applyState();renderIdeaDossier(id)};
+selectMech=mid=>{ /* mech chips: filter to that family + dossier */ renderMechDossier(mid)};
+selectRecipe=rid=>renderRecipeDossier(rid);
+
+/* -------- controls -------- */
+document.querySelectorAll('.chip.fam').forEach(c=>{
+  const f=c.dataset.fam;c.innerHTML=`${beadHTML(f)} ${FAM[f].name}`;
+  c.onclick=()=>{activeFams.has(f)?activeFams.delete(f):activeFams.add(f);c.classList.toggle('off',!activeFams.has(f));applyState()};
+});
+document.querySelectorAll('.chip.sta').forEach(c=>{
+  const s=c.dataset.sta;
+  const dash=s==='written'?'':(s==='proposed'?'5,4':'2,3');
+  c.innerHTML=`<svg class="sw" viewBox="0 0 18 8"><line x1="1" y1="4" x2="17" y2="4" stroke="#A7B6D4" stroke-width="2" ${dash?`stroke-dasharray="${dash}"`:''}/></svg> ${STA[s].name}`;
+  c.onclick=()=>{activeStas.has(s)?activeStas.delete(s):activeStas.add(s);c.classList.toggle('off',!activeStas.has(s));applyState()};
+});
+document.getElementById('resetBtn').onclick=()=>{
+  Object.keys(FAM).forEach(f=>activeFams.add(f));Object.keys(STA).forEach(s=>activeStas.add(s));
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('off'));
+  sel={type:null,ref:null};applyState();introDossier();
+};
+document.getElementById('listBtn').onclick=()=>listDossier();
+
+/* -------- legend -------- */
+(function(){
+  const L=document.getElementById('legend');
+  const fam=Object.keys(FAM).map(f=>`<span class="li">${beadHTML(f)}${FAM[f].name}</span>`).join('');
+  L.innerHTML=`
+   <div class="grp"><span class="lk">LINK FAMILY</span>${fam}</div>
+   <div class="grp"><span class="lk">LINK STATUS</span>
+     <span class="li"><svg class="sw" viewBox="0 0 20 8" width="20"><line x1="1" y1="4" x2="19" y2="4" stroke="#A7B6D4" stroke-width="2"/></svg>written</span>
+     <span class="li"><svg class="sw" viewBox="0 0 20 8" width="20"><line x1="1" y1="4" x2="19" y2="4" stroke="#A7B6D4" stroke-width="2" stroke-dasharray="5,4"/></svg>proposed</span>
+     <span class="li"><svg class="sw" viewBox="0 0 20 8" width="20"><line x1="1" y1="4" x2="19" y2="4" stroke="#A7B6D4" stroke-width="2" stroke-dasharray="2,3"/></svg>notional</span></div>
+   <div class="grp"><span class="lk">CLUSTER</span>
+     <span class="li">${shapeHTML('memory')}memory core</span>
+     <span class="li">${shapeHTML('portfolio')}portfolio</span>
+     <span class="li">${shapeHTML('coherence')}coherence</span></div>
+   <div class="grp"><span class="lk">NODE</span>
+     <span class="li">size = assessed promise</span>
+     <span class="li">ring: solid runs/measured · dashed specified · dotted notional</span></div>`;
+})();
+
+/* -------- default & list dossiers -------- */
+function introDossier(){
+  dossier().innerHTML=`
+    <div class="dosk">START HERE · SIX HIGHEST-LEVERAGE MOVES</div>
+    <h3>Where integration pays first</h3>
+    <p>Ranked by leverage — strength of the pairing × promise of its endpoints × how cheaply the first artifact
+       can exist. Click a move to open its dossier; click nodes and links in the graph to wander.</p>
+    <div class="elist">${DATA.starts.map((s,i)=>{const e=findEdge(s.edge[0],s.edge[1]);
+      return `<div class="eitem" data-edge="${edgeKey(e)}">
+        <div class="t"><b>${i+1} · ${esc(IDEA[e.a].name)} ⟷ ${esc(IDEA[e.b].name)}</b></div>
+        <div class="m">${STA[e.status].name} · ${'●'.repeat(e.strength)}</div>
+        <div class="t" style="color:var(--sec);font-size:11.5px;margin-top:4px">${esc(s.why)}</div></div>`}).join('')}</div>
+    <p style="color:var(--mut);font-size:11px;margin-top:12px">The Matrix view shows the pairs nobody has examined yet;
+       the Spine view shows the fifteen laws these links are made of.</p>`;
+  wireDossier();
+}
+function listDossier(){
+  const by=s=>DATA.edges.filter(e=>e.status===s);
+  const block=s=>`<div class="dosk" style="margin-top:12px">${STA[s].name} (${by(s).length})</div>`+
+    by(s).map(e=>`<div class="eitem" data-edge="${edgeKey(e)}"><div class="t">${esc(IDEA[e.a].name)} ⟷ ${esc(IDEA[e.b].name)} — ${esc(e.title)}</div><div class="m">${'●'.repeat(e.strength)} · ${e.mechs.map(m=>MECH[m].glyph).join(' · ')}</div></div>`).join('');
+  dossier().innerHTML=`<div class="dosk">ALL MAPPED INTEGRATION POINTS (${DATA.edges.length})</div>
+    <h3>The full ledger</h3>${block('written')}${block('proposed')}${block('notional')}`;
+  wireDossier();
+}
+
+hulls();drawEdges();drawNodes();applyState();introDossier();
+</script>
+</body>
+</html>
