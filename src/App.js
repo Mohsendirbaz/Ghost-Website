@@ -38,6 +38,8 @@ import Exhibition from './pages/Exhibition';
 import { Privacy, Terms } from './pages/Legal';
 import NotFound from './pages/NotFound';
 import MemoryWing from './pages/MemoryWing';
+import Simulation from './pages/Simulation';
+import FinalPlate from './pages/FinalPlate';
 import Careers from './pages/Careers';
 import ErrorBoundary from './components/ErrorBoundary';
 import './styles/global.css';
@@ -55,6 +57,8 @@ const PAGE_TITLES = {
   methods: { en: 'Methods', fa: 'روش‌ها' },
   exhibition: { en: 'The Exhibition', fa: 'نمایشگاه' },
   memory: { en: 'The Memory Wing', fa: 'بال حافظه' },
+  simulation: { en: 'The Simulation Bench', fa: 'میز شبیه‌سازی' },
+  epu: { en: 'EPU — The Final Plate', fa: 'EPU — برگ پایانی' },
   architecture: { en: 'Architecture', fa: 'معماری' },
   'knowledge-base': { en: 'Knowledge Base', fa: 'پایگاه دانش' },
   artifacts: { en: 'Artifact Gallery', fa: 'گالری آرتیفکت' },
@@ -231,6 +235,10 @@ function AppShell() {
           <Route path="/fa/architecture" element={<PageTransition><Architecture /></PageTransition>} />
           <Route path="/en/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
           <Route path="/fa/memory" element={<PageTransition><MemoryWing /></PageTransition>} />
+          <Route path="/en/simulation" element={<PageTransition><Simulation /></PageTransition>} />
+          <Route path="/fa/simulation" element={<PageTransition><Simulation /></PageTransition>} />
+          <Route path="/en/epu" element={<PageTransition><FinalPlate /></PageTransition>} />
+          <Route path="/fa/epu" element={<PageTransition><FinalPlate /></PageTransition>} />
           <Route path="/en/careers" element={<PageTransition><Careers /></PageTransition>} />
           <Route path="/fa/careers" element={<PageTransition><Careers /></PageTransition>} />
           <Route path="/en/privacy" element={<PageTransition><Privacy /></PageTransition>} />

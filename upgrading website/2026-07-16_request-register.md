@@ -21,6 +21,12 @@
 
 - [x] **Careers tab** — `/en/careers` + `/fa/careers`, wired across all six navigation surfaces. Eight founding-role openings mapped onto the stack; the fifteen skillsets selected from the program's own Faculty of Fifty roster (every P1 technical cluster, roster codes shown). One-step application: choose resume → one button → the visitor's own mail client opens addressed to dirbaz.sharif@gmail.com with everything prefilled and an attach reminder — nothing stored on the site, no third parties.
 
+- [x] **EPU poster as the last page (July 17)** — new **Final Plate** page at `/en/epu` + `/fa/epu`: the poster you supplied (`public/posters/epu-poster.png`) framed as the site's deliberate closing exhibit — last entry in all six navigation surfaces, last sitemap URL, and the closing "EPU — The Final Plate →" link in the footer of every page. Open on arrival, honest PROPOSED standing chip and caption ("states the program's direction, not a measurement"), one-click "Open full" to your original, "Back to the beginning" to close the loop; a 419 KB optimized derivative serves inline so the page stays fast.
+
+- [x] **All-visuals effortless-access plan (July 17)** — full inventory of every visual surface scored against the ten-rule standard: compliant (Simulation Bench, Final Plate, Exhibition, six in-page instruments, MAS page), near-compliant (Memory Wing — Phase 1, ready on your word), and the 12 legacy plates formally exempted as fixed-palette plates. Delivered as `upgrading website/2026-07-17_all-visuals-effortless-plan.md`.
+
+- [x] **Simulation tab + restyled visual abstracts (July 17)** — the three uploaded interactive visual abstracts (vehicle dynamics · symmetry & smoothness · actuation-space smoothness) restyled to the blueprint grammar (drafting-paper light / cyanotype dark, mono kickers, registration-mark frames, site accent) with every control and live RK4 simulation intact; placed at `public/docs/html/simulation/` and given their own **Simulation** tab at `/en/simulation` + `/fa/simulation`, wired across all six navigation surfaces and the sitemap (40 URLs). The page is viewer-first: the instrument is already running on arrival, the switcher sits on the viewer, `?view=` deep-links it, and the site theme follows into the iframe (`?theme=`). Companion design standard delivered: `upgrading website/2026-07-17_effortless-interaction.md` — the ten-rule open-instrument standard that retires double/triple-click ceremonies.
+
 ## Open — yours ⚠
 
 - [ ] **`git add -A && git commit && git push`** — nothing above is on the live site until you push; this is why the Memory instruments were "not found on web." Vercel deploys from the push.
@@ -30,7 +36,7 @@
 - [ ] **Empty `_to_delete/`** (~7 MB now, including the retired leaked bundle and removed pages).
 - [ ] **Branch cleanup** (from the janitorial register): make `main` the Vercel production branch; delete `Main-R` and the stale backup tags.
 - [ ] **Two queued library entries** (`forensic-case-tesla`, `still-a-worm`) await their PDFs.
-- [ ] Optional: publish the two held-back Memory HTMLs after polish; Persian variants of the Memory instruments.
+- [ ] Optional: publish the two held-back Memory HTMLs after polish; Persian variants of the Memory instruments; bring the Memory Wing to the open-instrument standard (viewer-first layout + `?theme=` inheritance, per the July 17 document).
 
 ## Extensive audit for the same defect class (July 16, later)
 

@@ -176,8 +176,9 @@ export default function Footer() {
       </div>
 
       <div className="footer__bottom">
-        <div className="container">
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
           <p className="footer__copy">{t.footer.copyright}</p>
+          <Link className="footer__link" to={`/${lang}/epu`}>{t.footer.finalPlate} →</Link>
         </div>
       </div>
     </footer>

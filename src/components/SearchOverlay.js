@@ -24,8 +24,10 @@ function buildPageIndex(lang) {
     { label: t.methods,          path: `/${lang}/methods`,            type: 'page' },
     { label: t.exhibition,       path: `/${lang}/exhibition`,         type: 'page' },
     { label: t.memoryWing,       path: `/${lang}/memory`,             type: 'page' },
+    { label: t.simulation,       path: `/${lang}/simulation`,         type: 'page' },
     { label: t.careers,          path: `/${lang}/careers`,            type: 'page' },
     { label: t.bio,              path: `/${lang}/bio`,                type: 'page' },
+    { label: t.finalPlate,       path: `/${lang}/epu`,                type: 'page' },
   ];
 }
 

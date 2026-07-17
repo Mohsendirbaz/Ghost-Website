@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three-Axis Actuation-Space Smoothness — Interactive Visual Abstract</title>
+<script>
+/* Embedded-shell theme sync: ?theme=dark|light pins the palette before first paint. */
+(function(){try{var t=new URLSearchParams(location.search).get('theme');
+if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+<style>
+  /* ---------- palette · Ghost blueprint grammar (drafting paper / cyanotype dark) ---------- */
+  .viz-root{
+    color-scheme: light;
+    --page:#f7f6f1; --surface-1:#fdfcf8;
+    --ink:#14314f; --ink-2:#3d5a78; --muted:#5f7d99;
+    --grid:rgba(20,49,79,.12); --axis:rgba(20,49,79,.30); --border:rgba(20,49,79,.16);
+    --gridline-major:rgba(20,49,79,.08); --gridline-minor:rgba(20,49,79,.04);
+    --accent:#2a78d6;    /* blueprint accent — matches the site shell */
+    --mono:ui-monospace,'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+    --c-steer:#12946b;   /* δ  · steering channel  */
+    --c-brake:#c65f8f;   /* b  · brake channel     */
+    --c-accel:#2a78d6;   /* a  · acceleration      */
+    --c-joint:#c9761f;   /* joint actuation-space metrics ν_q, κ_q, j_y */
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])) .viz-root{
+      color-scheme: dark;
+      --page:#0b1626; --surface-1:#101f36;
+      --ink:#dbe7f4; --ink-2:#a9bfd6; --muted:#7e97b0;
+      --grid:rgba(219,231,244,.13); --axis:rgba(219,231,244,.34); --border:rgba(219,231,244,.18);
+      --gridline-major:rgba(219,231,244,.09); --gridline-minor:rgba(219,231,244,.045);
+      --accent:#6fb1ff;
+      --c-steer:#3fd2a0; --c-brake:#f096c0; --c-accel:#6fb1ff; --c-joint:#ffb066;
+    }
+  }
+  :root[data-theme="dark"] .viz-root{
+    color-scheme: dark;
+    --page:#0b1626; --surface-1:#101f36;
+    --ink:#dbe7f4; --ink-2:#a9bfd6; --muted:#7e97b0;
+    --grid:rgba(219,231,244,.13); --axis:rgba(219,231,244,.34); --border:rgba(219,231,244,.18);
+    --gridline-major:rgba(219,231,244,.09); --gridline-minor:rgba(219,231,244,.045);
+    --accent:#6fb1ff;
+    --c-steer:#3fd2a0; --c-brake:#f096c0; --c-accel:#6fb1ff; --c-joint:#ffb066;
+  }
+
+  /* ---------- base ---------- */
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body.viz-root{background:var(--page); color:var(--ink); font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .frame{max-width:1160px;margin:0 auto;padding:20px 18px 30px}
+  .m{font-family:"STIX Two Math","Cambria Math",Georgia,"Times New Roman",serif;font-style:italic}
+  .mn{font-family:"STIX Two Math","Cambria Math",Georgia,"Times New Roman",serif;font-style:normal}
+  .od{position:relative;display:inline-block}
+  .od::after{content:"\02D9";position:absolute;left:50%;transform:translateX(-50%);top:-0.58em;font-style:normal;font-size:.9em;line-height:1}
+  .odd{position:relative;display:inline-block}
+  .odd::after{content:"\00A8";position:absolute;left:50%;transform:translateX(-50%);top:-0.50em;font-style:normal;font-size:.95em;line-height:1}
+  sub,sup{font-size:.68em}
+  .nw{white-space:nowrap}
+
+  header.abs-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .abs-head .t-wrap{flex:1 1 480px;min-width:300px}
+  .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  h1{font-size:22px;line-height:1.2;margin:0 0 5px;font-weight:650}
+  .subtitle{color:var(--ink-2);font-size:13.5px;max-width:78ch}
+  .head-actions{display:flex;gap:8px;align-items:center;margin-top:4px}
+
+  main.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:16px 18px;min-width:0}
+  .card.wide{grid-column:1 / -1}
+  .plabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+  .plabel .chip{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;
+    background:var(--ink);color:var(--surface-1);font-size:11.5px;font-weight:700;transform:translateY(2px)}
+  .plabel .pt{font-size:13.5px;font-weight:650}
+  .plabel .ps{font-size:12px;color:var(--muted)}
+  @media (max-width: 900px){ main.grid{grid-template-columns:1fr} }
+
+  /* ---------- panel A: coordinates & hierarchy ---------- */
+  .eq-vecs{font-size:14.5px;margin:2px 0 12px;line-height:1.7}
+  .chain{display:flex;flex-direction:column;gap:12px}
+  .chain-sec{display:flex;flex-direction:column;gap:5px}
+  .chain-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .chain-tag{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+    border-left:3px solid var(--c,var(--axis));padding-left:7px;line-height:1.25}
+  .cbox{border:1px solid var(--border);border-left:3px solid var(--c,var(--axis));border-radius:8px;
+    padding:3px 9px 5px;display:flex;flex-direction:column;align-items:center;min-width:52px;background:var(--surface-1)}
+  .cbox .sym{font-size:14px;padding-top:8px}
+  .cbox .sub{font-size:9px;color:var(--muted);margin-top:1px;white-space:nowrap}
+  .dif{border:1px solid var(--axis);border-radius:99px;padding:1px 7px;font-size:10px;color:var(--ink-2);flex:none;font-style:italic}
+  .arr{color:var(--muted);font-size:13px}
+  .caveat{font-size:12px;color:var(--muted);margin-top:11px;border-top:1px solid var(--grid);padding-top:9px}
+  .normline{font-size:13px;color:var(--ink-2);margin-top:11px;border-top:1px solid var(--grid);padding-top:9px}
+
+  /* ---------- panel B: triad ---------- */
+  .triad{display:flex;flex-direction:column;gap:9px}
+  .tcard{border:1px solid var(--border);border-left:3px solid var(--c-joint);border-radius:8px;padding:8px 12px 9px}
+  .tcard .th{font-size:12px;font-weight:650;margin-bottom:2px}
+  .tcard .th .tn{color:var(--muted);font-weight:400}
+  .tcard .frm{font-size:14px;margin:3px 0 2px}
+  .tcard .note{font-size:11.5px;color:var(--muted)}
+  .mapline{font-size:12.5px;color:var(--ink-2);margin-top:10px;border-top:1px solid var(--grid);padding-top:9px}
+
+  /* ---------- controls / tiles ---------- */
+  .controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:flex-end;padding-bottom:10px;border-bottom:1px solid var(--grid);margin-bottom:8px}
+  .ctl{display:flex;flex-direction:column;gap:2px}
+  .ctl label{font-size:11px;color:var(--muted)}
+  .ctl .val{color:var(--ink);font-weight:600}
+  select,button{font:inherit;color:var(--ink);background:var(--surface-1);border:1px solid var(--axis);border-radius:7px;padding:5px 10px}
+  select:hover,button:hover{border-color:var(--muted);cursor:pointer}
+  button.primary{background:var(--ink);color:var(--surface-1);border-color:var(--ink);font-weight:600;min-width:84px}
+  input[type=range]{accent-color:var(--c-accel);width:120px;margin:6px 0 2px}
+  .ctl-group{display:flex;gap:10px;align-items:flex-end;padding-left:12px;border-left:1px solid var(--grid)}
+  .preset-note{font-size:12.5px;color:var(--ink-2);margin:0 0 12px}
+  .preset-note b{font-weight:650}
+
+  .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+  .tile{border:1px solid var(--border);border-radius:8px;padding:8px 11px 7px;background:var(--surface-1)}
+  .tile .tl{font-size:11px;color:var(--muted);white-space:nowrap}
+  .tile .tv{font-size:20px;font-weight:600;line-height:1.15;margin-top:1px}
+  .tile .tu{font-size:11px;color:var(--muted);font-weight:400;margin-left:3px}
+  @media (max-width:760px){ .tiles{grid-template-columns:repeat(2,1fr)} }
+
+  /* ---------- 3D + minimap ---------- */
+  .space-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:10px}
+  @media (max-width:900px){ .space-grid{grid-template-columns:1fr} }
+  .d3box{border:1px solid var(--grid);border-radius:8px;background:var(--surface-1);overflow:hidden}
+  .d3box svg{display:block;width:100%;height:auto;cursor:grab;touch-action:none}
+  .d3box svg.dragging{cursor:grabbing}
+  .sidecol{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .minibox{border:1px solid var(--grid);border-radius:8px;background:var(--surface-1);overflow:hidden}
+  .minibox svg{display:block;width:100%;height:auto}
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:12px;padding:2px 2px 0}
+  .legend .li{display:flex;align-items:center;gap:6px}
+  .legend .key{width:14px;height:0;border-top:2.5px solid var(--c);border-radius:2px;flex:none}
+  .readcurve{font-size:11.5px;color:var(--muted);line-height:1.5;padding:0 2px}
+
+  .playbar{display:flex;align-items:center;gap:10px;margin:2px 0 12px}
+  .playbar input[type=range]{flex:1;width:auto}
+  .playbar .tclock{font-size:12.5px;color:var(--ink-2);min-width:74px;font-variant-numeric:tabular-nums}
+
+  /* ---------- strips ---------- */
+  .strips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px}
+  @media (max-width:900px){ .strips{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .strips{grid-template-columns:1fr} }
+  .strip{min-width:0}
+  .strip-head{display:flex;align-items:center;gap:7px;font-size:12px;margin-bottom:2px}
+  .strip-head .key{width:14px;height:0;border-top:2.5px solid var(--c);border-radius:2px;flex:none}
+  .strip-head .nm{font-weight:650}
+  .strip-head .un{color:var(--muted)}
+  .strip-head .role-chip{margin-left:auto;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    border:1px solid var(--border);border-radius:99px;padding:1px 7px;white-space:nowrap}
+  .strip svg{display:block;width:100%;height:auto}
+
+  /* ---------- tooltip ---------- */
+  #ttip{position:fixed;z-index:30;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);
+    border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.13);padding:7px 10px;font-size:12px;display:none;min-width:140px}
+  #ttip .tt-t{color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+  #ttip .row{display:flex;align-items:center;gap:6px;padding:1px 0;font-variant-numeric:tabular-nums}
+  #ttip .row .key{width:11px;height:0;border-top:2.5px solid var(--c);border-radius:2px;flex:none}
+  #ttip .row .v{font-weight:650;min-width:54px;text-align:right}
+  #ttip .row .n{color:var(--ink-2)}
+
+  /* ---------- table view ---------- */
+  .tablewrap{margin-top:12px;display:none}
+  .tablewrap.open{display:block}
+  .tablewrap .tcap{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .tscroll{max-height:240px;overflow:auto;border:1px solid var(--grid);border-radius:8px}
+  table.data{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+  table.data th{position:sticky;top:0;background:var(--surface-1);color:var(--muted);font-weight:600;text-align:right;
+    padding:6px 10px;border-bottom:1px solid var(--grid);white-space:nowrap}
+  table.data td{text-align:right;padding:3.5px 10px;border-bottom:1px solid var(--grid);color:var(--ink-2)}
+  table.data td:first-child,table.data th:first-child{text-align:left}
+  table.data tr:last-child td{border-bottom:none}
+
+  footer.principle{margin-top:14px;border:1px solid var(--border);border-left:3px solid var(--ink);border-radius:10px;
+    background:var(--surface-1);padding:13px 18px}
+  footer.principle .pr-main{font-size:14.5px;font-weight:600}
+  footer.principle .pr-sub{font-size:12.5px;color:var(--ink-2);margin-top:5px}
+  .svg-ink{fill:var(--ink)} .svg-ink2{fill:var(--ink-2)} .svg-muted{fill:var(--muted)}
+
+  /* ═══════ Ghost blueprint appearance layer (2026-07-17) ═══════
+     Typography, drafting-paper ground, and frame treatment aligned with
+     the site-wide blueprint grammar (src/styles/blueprint.css). Palette
+     values live in the .viz-root blocks above; mechanics are untouched. */
+  body.viz-root{
+    background-color:var(--page);
+    background-image:
+      linear-gradient(var(--gridline-major) 1px,transparent 1px),
+      linear-gradient(90deg,var(--gridline-major) 1px,transparent 1px),
+      linear-gradient(var(--gridline-minor) 1px,transparent 1px),
+      linear-gradient(90deg,var(--gridline-minor) 1px,transparent 1px);
+    background-size:96px 96px,96px 96px,16px 16px,16px 16px;
+    background-attachment:fixed;
+  }
+  header.abs-head{border-bottom:1.5px solid var(--axis);padding-bottom:12px;margin-bottom:18px}
+  .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent)}
+  h1{letter-spacing:-.012em}
+  .card,.tile,.cbox,.sform,.tcard,.chartbox,.d3box,.minibox,.traj-box,.tscroll,#ttip,select,button,.dif{border-radius:6px}
+  .card{border:1.5px solid var(--axis)}
+  .card.wide{position:relative}
+  .card.wide::before,.card.wide::after{content:'';position:absolute;width:13px;height:13px;border:1.5px solid var(--axis);pointer-events:none}
+  .card.wide::before{top:-7px;left:-7px;border-right:0;border-bottom:0}
+  .card.wide::after{bottom:-7px;right:-7px;border-left:0;border-top:0}
+  .plabel .chip{border-radius:4px;font-family:var(--mono);background:var(--accent);color:var(--page)}
+  .chain-tag,.strip-head .role-chip,.cbox .sub,.cbox.input .role{font-family:var(--mono);letter-spacing:.1em}
+  button,select{transition:border-color .15s ease,background-color .15s ease}
+  select:hover,button:hover{border-color:var(--accent)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:var(--page)}
+  button.primary:hover{filter:brightness(1.06)}
+  .tile{background:color-mix(in srgb,var(--surface-1) 78%,transparent)}
+  .tile .tv,.playbar .tclock,.ctl .val,table.data,#ttip{font-family:var(--mono)}
+  .tile .tv{font-size:19px}
+  table.data th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  #ttip{border-color:var(--axis);box-shadow:0 6px 18px rgba(11,22,38,.16)}
+  footer.principle{border:1.5px solid var(--axis);border-left:4px solid var(--accent);border-radius:6px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body class="viz-root">
+<div class="frame" id="root">
+
+  <header class="abs-head">
+    <div class="t-wrap">
+      <div class="kicker">Interactive visual abstract · vehicle dynamics · actuation-space smoothness</div>
+      <h1>Three-Axis Actuation-Space Smoothness: the Command Vector <span class="m">q</span> = [<span class="m">δ, b, a</span>]<sup>⊤</sup> as a Curve</h1>
+      <div class="subtitle">
+        Steering, brake, and acceleration form one trajectory <span class="m">z</span>(<span class="m">t</span>) = <span class="m">D</span><sup>−1</sup><span class="m">q</span>(<span class="m">t</span>) through normalized actuation space.
+        Smoothness decomposes as <b>regularity</b> (<span class="m">z</span> ∈ <span class="m">C</span><sup> r</sup>) + <b>intensity</b> (small ‖<span class="m"><span class="od">z</span></span>‖) + <b>coordination</b> (low curvature <span class="m">κ<sub>q</sub></span>). Drag the 3-D view; hover any chart.
+      </div>
+    </div>
+    <div class="head-actions">
+      <button id="themeBtn" title="Cycle color theme">Theme: auto</button>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <!-- ============ PANEL A — coordinates & derivative hierarchy ============ -->
+    <section class="card" id="panelA">
+      <div class="plabel"><span class="chip">A</span><span class="pt">Actuation coordinates</span><span class="ps">three channels, one joint state</span></div>
+      <div class="eq-vecs">
+        <span class="nw"><span class="m">q</span>(<span class="m">t</span>) = [<span class="m">δ, b, a</span>]<sup>⊤</sup></span> —
+        <span style="color:var(--c-steer)">■</span><span style="font-size:12.5px;color:var(--ink-2)"> steering angle</span> ·
+        <span style="color:var(--c-brake)">■</span><span style="font-size:12.5px;color:var(--ink-2)"> continuous brake demand</span> ·
+        <span style="color:var(--c-accel)">■</span><span style="font-size:12.5px;color:var(--ink-2)"> realized longitudinal acceleration</span><br>
+        <span class="nw"><span class="m"><span class="od">q</span></span> = [<span class="m"><span class="od">δ</span>, <span class="od">b</span>, j</span>]<sup>⊤</sup></span>,&nbsp;
+        <span class="nw"><span class="m"><span class="odd">q</span></span> = [<span class="m"><span class="odd">δ</span>, <span class="odd">b</span>, <span class="od">j</span></span>]<sup>⊤</sup></span>
+        <span style="font-size:12px;color:var(--muted)">&nbsp;— a binary flag <span class="m">b</span> ∈ {0, 1} admits no derivative-based smoothness; <span class="m">b</span> must be continuous.</span>
+      </div>
+      <div class="chain">
+        <div class="chain-sec">
+          <span class="chain-tag" style="--c:var(--c-steer)">Steering</span>
+          <div class="chain-row">
+            <div class="cbox" style="--c:var(--c-steer)"><span class="sym"><span class="m">δ</span></span><span class="sub">angle</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-steer)"><span class="sym"><span class="m"><span class="od">δ</span></span></span><span class="sub">steering rate</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-steer)"><span class="sym"><span class="m"><span class="odd">δ</span></span></span><span class="sub">steering acceleration</span></div>
+          </div>
+        </div>
+        <div class="chain-sec">
+          <span class="chain-tag" style="--c:var(--c-brake)">Brake</span>
+          <div class="chain-row">
+            <div class="cbox" style="--c:var(--c-brake)"><span class="sym"><span class="m">b</span></span><span class="sub">demand ∈ [0, 1]</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-brake)"><span class="sym"><span class="m"><span class="od">b</span></span></span><span class="sub">application rate</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-brake)"><span class="sym"><span class="m"><span class="odd">b</span></span></span><span class="sub">rate acceleration</span></div>
+          </div>
+        </div>
+        <div class="chain-sec">
+          <span class="chain-tag" style="--c:var(--c-accel)">Acceleration</span>
+          <div class="chain-row">
+            <div class="cbox" style="--c:var(--c-accel)"><span class="sym"><span class="m">a</span></span><span class="sub">realized accel</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-accel)"><span class="sym"><span class="m">j</span></span><span class="sub">jerk</span></div>
+            <span class="arr">→</span><span class="dif">d/dt</span><span class="arr">→</span>
+            <div class="cbox" style="--c:var(--c-accel)"><span class="sym"><span class="m"><span class="od">j</span></span></span><span class="sub">snap</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="normline">
+        Units differ, so normalize first:&nbsp;
+        <span class="nw"><span class="m">z</span>(<span class="m">t</span>) = <span class="m">D</span><sup>−1</sup><span class="m">q</span>(<span class="m">t</span>)</span>,&nbsp;
+        <span class="nw"><span class="m">D</span> = diag(<span class="m">δ</span><sub>ref</sub>, <span class="m">b</span><sub>ref</sub>, <span class="m">a</span><sub>ref</sub>)</span>
+        <span style="color:var(--muted);font-size:12px">&nbsp;— here 30°, 1, 6 m/s².</span>
+      </div>
+      <div class="caveat">
+        Coupling caveat: <span class="m">b</span> and <span class="m">a</span> are not independent controls —
+        <span class="nw"><span class="m">a</span> = <span class="m">f</span>(<span class="m">b</span>, drive torque, <span class="m">v</span>, grade, …)</span>;
+        this simulation uses <span class="nw"><span class="m">a</span> = <span class="m">a</span><sub>drive</sub> − <span class="m">a</span><sub>b,max</sub><span class="m">b</span></span> with <span class="m">a</span><sub>b,max</sub> = 7 m/s².
+        [<span class="m">δ, b, a</span>] is therefore a joint actuator–response coordinate, not three independent commands.
+      </div>
+    </section>
+
+    <!-- ============ PANEL B — smoothness triad ============ -->
+    <section class="card" id="panelB">
+      <div class="plabel"><span class="chip">B</span><span class="pt">The smoothness triad</span><span class="ps">what “smooth” means, mathematically</span></div>
+      <div class="triad">
+        <div class="tcard">
+          <div class="th">1 · Regularity <span class="tn">— derivative continuity</span></div>
+          <div class="frm"><span class="m">z</span> ∈ <span class="m">C</span><sup> r</sup> :&nbsp;
+            <span class="nw"><span class="m">C</span><sup> 0</sup> no jumps in <span class="m">δ, b, a</span></span> ·
+            <span class="nw"><span class="m">C</span><sup> 1</sup> continuous <span class="m"><span class="od">δ</span>, <span class="od">b</span>, j</span></span> ·
+            <span class="nw"><span class="m">C</span><sup> 2</sup> continuous <span class="m"><span class="odd">δ</span>, <span class="odd">b</span>, <span class="od">j</span></span></span></div>
+          <div class="note">Working requirement: <span class="m">z</span> ∈ <span class="m">C</span><sup> 1</sup> with <span class="m"><span class="od">z</span></span>, <span class="m"><span class="odd">z</span></span> bounded; <span class="m">C</span><sup> 2</sup> preferred when actuator dynamics and passenger comfort matter.</div>
+        </div>
+        <div class="tcard">
+          <div class="th">2 · Intensity <span class="tn">— magnitude of combined change</span></div>
+          <div class="frm">
+            <span class="nw"><span class="m">ν<sub>q</sub></span>(<span class="m">t</span>) = √(<span class="m"><span class="od">z</span></span><sup>⊤</sup><span class="m">W</span> <span class="m"><span class="od">z</span></span>)</span>&nbsp;·&nbsp;
+            <span class="nw"><span class="m">J</span><sub>smooth</sub> = ∫₀<sup><span class="m">T</span></sup> (<span class="m"><span class="od">z</span></span><sup>⊤</sup><span class="m">W</span>₁<span class="m"><span class="od">z</span></span> + <span class="m"><span class="odd">z</span></span><sup>⊤</sup><span class="m">W</span>₂<span class="m"><span class="odd">z</span></span>) d<span class="m">t</span></span>
+          </div>
+          <div class="note">The speed of travel through actuation space, and the trajectory cost penalizing rapid actuation and rapid changes of actuation rate (here <span class="m">W</span> = <span class="m">W</span>₁ = <span class="m">W</span>₂ = <span class="m">I</span>).</div>
+        </div>
+        <div class="tcard">
+          <div class="th">3 · Coordination <span class="tn">— how the mixture of channels turns</span></div>
+          <div class="frm">
+            <span class="nw"><span class="m">κ<sub>q</sub></span> = ‖<span class="m"><span class="od">z</span></span> × <span class="m"><span class="odd">z</span></span>‖ / ‖<span class="m"><span class="od">z</span></span>‖³</span>&nbsp;·&nbsp;
+            <span class="nw"><span class="m">τ<sub>q</sub></span> = det(<span class="m"><span class="od">z</span>, <span class="odd">z</span>, z</span><sup>(3)</sup>) / ‖<span class="m"><span class="od">z</span></span> × <span class="m"><span class="odd">z</span></span>‖²</span>
+          </div>
+          <div class="note">Low <span class="m">κ<sub>q</sub></span>: the steering–brake–acceleration mixture rotates gradually. High <span class="m">κ<sub>q</sub></span>: abrupt switching — hard braking handed straight into sharp steering. Torsion <span class="m">τ<sub>q</sub></span> captures three-way re-coordination. <span class="m">κ<sub>q</sub></span> is geometric; traversed at speed, the felt re-aiming is the normal acceleration <span class="m">κ<sub>q</sub>ν<sub>q</sub></span>².</div>
+        </div>
+      </div>
+      <div class="mapline">
+        Physical mapping (kinematic bicycle, <span class="nw"><span class="m">a<sub>y</sub></span> ≈ (<span class="m">v</span>²/<span class="m">L</span>) tan <span class="m">δ</span></span>):&nbsp;
+        <span class="nw"><span class="m">j<sub>y</sub></span> ≈ (2<span class="m">va</span>/<span class="m">L</span>) tan <span class="m">δ</span> + (<span class="m">v</span>²/<span class="m">L</span>) sec²<span class="m">δ</span> · <span class="m"><span class="od">δ</span></span></span>
+        — lateral jerk couples <span class="m">a</span>, <span class="m">δ</span>, and <span class="m"><span class="od">δ</span></span>: even with <span class="m">j</span> = 0, a fast steering rate produces large lateral jerk.
+      </div>
+    </section>
+
+    <!-- ============ PANEL C — simulation ============ -->
+    <section class="card wide" id="panelC">
+      <div class="plabel"><span class="chip">C</span><span class="pt">Simulation</span><span class="ps">Δt = 10 ms · quintic (C²) command primitives; “abrupt” presets use 50 ms actuator ramps · hover any chart</span></div>
+
+      <div class="controls" id="controls">
+        <div class="ctl">
+          <label for="preset">Maneuver</label>
+          <select id="preset">
+            <option value="coord" selected>Coordinated avoidance (C²)</option>
+            <option value="abrupt">Abrupt brake-then-steer</option>
+            <option value="estop">Emergency stop (brake only)</option>
+            <option value="slalom">Slalom (j = 0)</option>
+          </select>
+        </div>
+        <div class="ctl"><label><span class="m">v</span>₀ · initial speed <span class="val" id="v0v"></span></label><input type="range" id="v0" min="8" max="30" step="0.5"></div>
+        <div class="ctl-group">
+          <button class="primary" id="play">Pause</button>
+          <button id="reset">Reset</button>
+          <button id="tbtn" aria-expanded="false">Table view</button>
+        </div>
+      </div>
+      <p class="preset-note" id="presetNote"></p>
+
+      <div class="tiles" aria-live="off">
+        <div class="tile"><div class="tl"><span class="m">J</span><sub>smooth</sub> · trajectory cost</div><div class="tv"><span id="tJ">–</span><span class="tu">s⁻¹</span></div></div>
+        <div class="tile"><div class="tl">peak <span class="m">ν<sub>q</sub></span> · intensity</div><div class="tv"><span id="tNu">–</span><span class="tu">s⁻¹</span></div></div>
+        <div class="tile"><div class="tl">peak <span class="m">κ<sub>q</sub>ν<sub>q</sub></span>² · switching accel</div><div class="tv"><span id="tKa">–</span><span class="tu">s⁻²</span></div></div>
+        <div class="tile"><div class="tl">peak |<span class="m">j<sub>y</sub></span>| · lateral jerk</div><div class="tv"><span id="tJy">–</span><span class="tu">m/s³</span></div></div>
+        <div class="tile"><div class="tl">regularity class</div><div class="tv" style="font-size:17px;padding-top:3px"><span id="tReg">–</span></div><div class="tl" id="tRegSub"></div></div>
+      </div>
+
+      <div class="space-grid">
+        <div class="d3box" id="d3box"></div>
+        <div class="sidecol">
+          <div class="minibox" id="miniBox"></div>
+          <div class="legend">
+            <span class="li"><span class="key" style="--c:var(--c-steer)"></span><span class="m">δ</span>&nbsp;steering</span>
+            <span class="li"><span class="key" style="--c:var(--c-brake)"></span><span class="m">b</span>&nbsp;brake</span>
+            <span class="li"><span class="key" style="--c:var(--c-accel)"></span><span class="m">a</span>&nbsp;acceleration</span>
+            <span class="li"><span class="key" style="--c:var(--c-joint)"></span>joint metrics <span class="m">ν<sub>q</sub></span>, <span class="m">κ<sub>q</sub></span>, <span class="m">j<sub>y</sub></span></span>
+          </div>
+          <div class="readcurve">
+            Reading the actuation curve: motion along one axis = a single channel acting · a bend = the channel mixture turning (<span class="m">κ<sub>q</sub></span>) ·
+            fast traversal = high <span class="m">ν<sub>q</sub></span> · a straight, slowly-traversed curve is the smooth ideal.
+          </div>
+        </div>
+      </div>
+
+      <div class="playbar">
+        <span class="tclock" id="clock">t = 0.00 s</span>
+        <input type="range" id="scrub" min="0" max="1" step="1" value="0" aria-label="Scrub simulation time">
+      </div>
+
+      <div class="strips" id="strips"></div>
+
+      <div class="tablewrap" id="tableWrap">
+        <div class="tcap">Sampled channels &amp; joint metrics (every 0.25 s) — the accessible twin of the charts above.</div>
+        <div class="tscroll"><table class="data" id="tableBox"></table></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="principle">
+    <div class="pr-main">Smoothness = derivative continuity (regularity) + small derivative norms (intensity) + low actuation-space curvature (coordination).</div>
+    <div class="pr-sub">
+      <span class="m">j</span> = 0 freezes only the acceleration coordinate — steering and brake may still change violently; full constancy is
+      <span class="nw"><span class="m"><span class="od">q</span></span> = 0 ⇔ <span class="m"><span class="od">δ</span></span> = <span class="m"><span class="od">b</span></span> = <span class="m">j</span> = 0</span>.
+      And because brake demand shapes realized acceleration, <span class="m">q</span> = [<span class="m">δ, b, a</span>]<sup>⊤</sup> is a joint actuator–response state:
+      lateral, longitudinal, and rotational smoothness must be judged together.
+    </div>
+  </footer>
+
+  <div id="ttip" role="status"></div>
+</div>
+<script>
+"use strict";
+/* ================= helpers ================= */
+const D2R=Math.PI/180, R2D=180/Math.PI, SVGNS="http://www.w3.org/2000/svg";
+const $=id=>document.getElementById(id);
+const clamp=(x,lo,hi)=>x<lo?lo:(x>hi?hi:x);
+const fmt=(x,d=2)=>(Math.abs(x)<5e-3*Math.pow(10,-d+2)?0:x).toFixed(d);
+const fmtBig=x=> x>=1000 ? Math.round(x).toLocaleString('en-US') : +x.toPrecision(3)+'';
+function qstep(t,t0,dur,from,to){ let s=clamp((t-t0)/dur,0,1); s=s*s*s*(10+s*(6*s-15)); return from+(to-from)*s; }
+const mkProfile=(init,segs)=>t=>{ let v=init, from=init;
+  for(const g of segs){ if(t>=g[0]) v=qstep(t,g[0],g[1],from,g[2]); from=g[2]; } return v; };
+
+/* ================= parameters & presets ================= */
+const P={ preset:'coord', v0:20, L:2.9, dRef:30*D2R, bRef:1, aRef:6, aBmax:7 };
+const PRESETS={
+  coord:{ v0:20, T:12, reg:['C²','quintic commands'],
+    note:'<b>Coordinated:</b> brake eases off before steering builds — C² quintic commands; the actuation curve bends gently and is traversed slowly (low ν_q, low κ_q).',
+    delta:mkProfile(0,[[4.4,1.2,0.05],[5.6,1.6,-0.05],[7.2,1.2,0]]),
+    brake:mkProfile(0,[[1.0,1.4,0.35],[3.8,1.6,0]]), aDr:()=>0 },
+  abrupt:{ v0:20, T:12, reg:['≈C⁰','50 ms actuator ramps'],
+    note:'<b>Abrupt:</b> hard brake, snap release handed straight into step steering — rate spikes (high ν_q) and a sharp bend taken at speed (enormous κ_qν_q²). Same avoidance intent, orders-of-magnitude higher J_smooth.',
+    delta:mkProfile(0,[[3.43,0.05,0.06],[5.0,0.05,-0.06],[6.5,0.05,0]]),
+    brake:mkProfile(0,[[1.0,0.05,0.8],[3.40,0.05,0]]), aDr:()=>0 },
+  estop:{ v0:25, T:10, reg:['C²','quintic brake ramp'],
+    note:'<b>Emergency stop:</b> one effective direction of motion. Intense (large ḃ and j, so large ν_q) yet perfectly coordinated — a = −a_b,max·b keeps the actuation path straight, so κ_q ≈ 0: intensity and coordination are independent axes of smoothness.',
+    delta:()=>0, brake:mkProfile(0,[[1.0,0.5,1.0]]), aDr:()=>0 },
+  slalom:{ v0:15, T:12, reg:['C²','tapered sinusoid · j = 0'],
+    note:'<b>Slalom:</b> j = 0 throughout, yet the command is far from constant — all motion lives in the δ coordinate (ν_q > 0, κ_q = 0). Constancy requires δ̇ = ḃ = j = 0, not merely j = 0.',
+    delta:t=>{ const w=qstep(t,1,0.8,0,1)*(1-qstep(t,9.8,0.8,0,1)); return 0.035*w*Math.sin(2*Math.PI*(t-1)/3.2); },
+    brake:()=>0, aDr:()=>0 }
+};
+
+/* ================= simulation ================= */
+const DT=0.01;
+let SIM=null;
+function simulate(){
+  const pd=PRESETS[P.preset], T=pd.T, N=Math.round(T/DT);
+  const A=()=>new Float64Array(N+1);
+  const o={N,T,t:A(),X:A(),Y:A(),psi:A(),v:A(),dl:A(),bb:A(),aa:A(),
+           nu:A(),ka:A(),jy:A(),dld:A()};
+  const aRaw=t=>pd.aDr(t)-P.aBmax*pd.brake(t);
+  let s=[0,0,0,P.v0];                                  /* X, Y, psi, v */
+  let k0=-1;                                            /* standstill index */
+  for(let k=0;k<=N;k++){
+    const tk=k*DT;
+    o.t[k]=tk; o.X[k]=s[0]; o.Y[k]=s[1]; o.psi[k]=s[2]; o.v[k]=s[3];
+    o.dl[k]=pd.delta(tk); o.bb[k]=pd.brake(tk); o.aa[k]=aRaw(tk);
+    if(k0<0 && s[3]<=0 && o.aa[k]<0) k0=k;
+    if(k===N) break;
+    const f=(t,ss)=>{ const d=pd.delta(t), a=aRaw(t);
+      const aE=(ss[3]<=0&&a<0)?0:a;
+      return [ss[3]*Math.cos(ss[2]), ss[3]*Math.sin(ss[2]), (ss[3]<=0?0:ss[3])/P.L*Math.tan(d), aE]; };
+    const k1=f(tk,s), s2=s.map((x,i)=>x+DT/2*k1[i]), k2=f(tk+DT/2,s2),
+          s3=s.map((x,i)=>x+DT/2*k2[i]), k3=f(tk+DT/2,s3),
+          s4=s.map((x,i)=>x+DT*k3[i]),  k4=f(tk+DT,s4);
+    s=s.map((x,i)=>x+DT/6*(k1[i]+2*k2[i]+2*k3[i]+k4[i]));
+    if(s[3]<0) s[3]=0;
+  }
+  /* standstill: realized deceleration relaxes to 0 over ~120 ms once v = 0 */
+  if(k0>=0){ const t0=k0*DT;
+    for(let k=k0;k<=N;k++) o.aa[k]*= (1-qstep(o.t[k],t0,0.12,0,1));
+  }
+  /* normalized z and derivatives (central differences) */
+  const z1=A(),z2=A(),z3=A();
+  for(let k=0;k<=N;k++){ z1[k]=o.dl[k]/P.dRef; z2[k]=o.bb[k]/P.bRef; z3[k]=o.aa[k]/P.aRef; }
+  const dfc=(arr)=>{ const d=A();
+    for(let k=1;k<N;k++) d[k]=(arr[k+1]-arr[k-1])/(2*DT);
+    d[0]=(arr[1]-arr[0])/DT; d[N]=(arr[N]-arr[N-1])/DT; return d; };
+  const z1d=dfc(z1), z2d=dfc(z2), z3d=dfc(z3);
+  const z1dd=dfc(z1d), z2dd=dfc(z2d), z3dd=dfc(z3d);
+  let J=0, pNu=0, pKa=0, pJy=0, pAn=0;
+  for(let k=0;k<=N;k++){
+    const nd2=z1d[k]**2+z2d[k]**2+z3d[k]**2, ndd2=z1dd[k]**2+z2dd[k]**2+z3dd[k]**2;
+    const nu=Math.sqrt(nd2); o.nu[k]=nu;
+    const cx=z2d[k]*z3dd[k]-z3d[k]*z2dd[k],
+          cy=z3d[k]*z1dd[k]-z1d[k]*z3dd[k],
+          cz=z1d[k]*z2dd[k]-z2d[k]*z1dd[k];
+    o.ka[k]= nu<0.02 ? NaN : Math.sqrt(cx*cx+cy*cy+cz*cz)/(nu*nu*nu);
+    o.dld[k]=z1d[k]*P.dRef;
+    const sec=1/Math.cos(o.dl[k]);
+    o.jy[k]=(2*o.v[k]*o.aa[k]/P.L)*Math.tan(o.dl[k])+(o.v[k]**2/P.L)*sec*sec*o.dld[k];
+    J+=(nd2+ndd2)*DT;
+    if(nu>pNu)pNu=nu;
+    if(isFinite(o.ka[k])){ if(o.ka[k]>pKa)pKa=o.ka[k];
+      const an=o.ka[k]*nu*nu; if(an>pAn)pAn=an; }
+    if(Math.abs(o.jy[k])>pJy)pJy=Math.abs(o.jy[k]);
+  }
+  o.z1=z1;o.z2=z2;o.z3=z3; o.J=J; o.pNu=pNu; o.pKa=pKa; o.pJy=pJy; o.pAn=pAn;
+  SIM=o;
+}
+
+/* ================= 3-D actuation-space view ================= */
+const D3={W:640,H:430,Aang:0.62,Pang:0.42,sx:null,sy:null,svg:null,g:null,cur:null,hov:null,live:null,box:null};
+/* axes: x = δ/δref · up = b · depth = a/aref — box auto-fits each run */
+function computeBox(){
+  const N=SIM.N;
+  let x1=0,u1=0,d0=0,d1=0;
+  for(let k=0;k<=N;k++){ const q=Math.abs(SIM.z1[k]); if(q>x1)x1=q;
+    if(SIM.z2[k]>u1)u1=SIM.z2[k];
+    if(SIM.z3[k]<d0)d0=SIM.z3[k]; if(SIM.z3[k]>d1)d1=SIM.z3[k]; }
+  const xm=Math.max(0.15, x1*1.25);
+  const uh=Math.min(1.05, Math.max(0.3, u1*1.25));
+  let dl=Math.min(d0,0), dh=Math.max(d1,0);
+  { const s=dh-dl, need=Math.max(0.3, s*1.25)-s; dl-=need*0.75; dh+=need*0.25; }
+  const ticks=(lo,hi)=>{ const span=hi-lo;
+    const st=[0.05,0.1,0.2,0.25,0.5,1].find(s=>span/s<=4.5)||1;
+    const out=[]; for(let v=Math.ceil(lo/st-1e-9)*st; v<=hi+1e-9; v+=st) out.push(+v.toFixed(3));
+    return out; };
+  D3.box={x:[-xm,xm], u:[0,uh], d:[dl,dh],
+          tx:ticks(-xm,xm), tu:ticks(0,uh), td:ticks(dl,dh)};
+}
+function proj3(x,u,d,cA,sA,cP,sP){ const xr=x*cA+d*sA, dr=-x*sA+d*cA;
+  return [xr, u*cP - dr*sP]; }
+function buildSpace(){
+  const box=$('d3box'); box.innerHTML='';
+  const svg=document.createElementNS(SVGNS,'svg');
+  svg.setAttribute('viewBox',`0 0 ${D3.W} ${D3.H}`);
+  svg.setAttribute('role','img');
+  svg.setAttribute('aria-label','Trajectory of the normalized actuation vector in three dimensions: steering, brake, acceleration');
+  svg.innerHTML=`<g id="g3d"></g>
+    <circle id="d3hov" r="4.5" fill="none" stroke="var(--c-joint)" stroke-width="2" style="display:none"/>
+    <circle id="d3cur" r="4.5" fill="var(--c-joint)" stroke="var(--surface-1)" stroke-width="2"/>
+    <text id="d3live" x="12" y="20" font-size="11.5" fill="var(--ink-2)" font-variant-numeric="tabular-nums"></text>
+    <text x="12" y="${D3.H-10}" font-size="10.5" fill="var(--muted)">drag to rotate · hover the curve</text>`;
+  box.append(svg);
+  D3.svg=svg; D3.g=svg.querySelector('#g3d');
+  D3.cur=svg.querySelector('#d3cur'); D3.hov=svg.querySelector('#d3hov'); D3.live=svg.querySelector('#d3live');
+  let dragging=false,lx=0,ly=0,moved=false;
+  svg.addEventListener('pointerdown',e=>{dragging=true;moved=false;lx=e.clientX;ly=e.clientY;svg.classList.add('dragging');svg.setPointerCapture(e.pointerId);});
+  svg.addEventListener('pointermove',e=>{
+    if(dragging){
+      D3.Aang+=(e.clientX-lx)*0.008; D3.Pang=clamp(D3.Pang+(e.clientY-ly)*0.006,0.08,1.25);
+      lx=e.clientX;ly=e.clientY;moved=true; draw3d(); clearHover();
+    } else if(SIM){
+      const r=svg.getBoundingClientRect(),k=D3.W/r.width;
+      const mx=(e.clientX-r.left)*k,my=(e.clientY-r.top)*k;
+      let best=-1,bd=26*26;
+      for(let i=0;i<=SIM.N;i+=3){const dx=D3.sx[i]-mx,dy=D3.sy[i]-my,q=dx*dx+dy*dy;if(q<bd){bd=q;best=i;}}
+      if(best>=0) setHover(best,e.clientX,e.clientY); else clearHover();
+    }
+  });
+  const up=e=>{dragging=false;svg.classList.remove('dragging');};
+  svg.addEventListener('pointerup',up); svg.addEventListener('pointercancel',up);
+  svg.addEventListener('pointerleave',()=>{ if(!dragging) clearHover(); });
+}
+function draw3d(){
+  if(!SIM||!D3.box) return;
+  const B=D3.box;
+  const cA=Math.cos(D3.Aang),sA=Math.sin(D3.Aang),cP=Math.cos(D3.Pang),sP=Math.sin(D3.Pang);
+  /* fit the box */
+  const corners=[];
+  for(const x of B.x)for(const u of B.u)for(const d of B.d)corners.push(proj3(x,u,d,cA,sA,cP,sP));
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+  for(const c of corners){x0=Math.min(x0,c[0]);x1=Math.max(x1,c[0]);y0=Math.min(y0,c[1]);y1=Math.max(y1,c[1]);}
+  const S=Math.min((D3.W-116)/(x1-x0),(D3.H-96)/(y1-y0));
+  const cx=D3.W/2-S*(x0+x1)/2, cy=D3.H/2+S*(y0+y1)/2;
+  const PX=(x,u,d)=>{const p=proj3(x,u,d,cA,sA,cP,sP);return [cx+S*p[0], cy-S*p[1]];};
+  const spX=B.x[1]-B.x[0], spU=B.u[1]-B.u[0], spD=B.d[1]-B.d[0];
+  let g='';
+  /* floor grid (u = 0) */
+  for(const gx of B.tx){
+    const a=PX(gx,0,B.d[0]), b=PX(gx,0,B.d[1]);
+    g+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--grid)" stroke-width="1"/>`;
+  }
+  for(const gd of B.td){
+    const a=PX(B.x[0],0,gd), b=PX(B.x[1],0,gd);
+    g+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--grid)" stroke-width="1"/>`;
+  }
+  /* box edges */
+  const E=[];
+  for(const u of B.u){ E.push([[B.x[0],u,B.d[0]],[B.x[1],u,B.d[0]]],[[B.x[0],u,B.d[1]],[B.x[1],u,B.d[1]]],
+                              [[B.x[0],u,B.d[0]],[B.x[0],u,B.d[1]]],[[B.x[1],u,B.d[0]],[B.x[1],u,B.d[1]]]); }
+  for(const x of B.x)for(const d of B.d) E.push([[x,B.u[0],d],[x,B.u[1],d]]);
+  for(const e of E){const a=PX(...e[0]),b=PX(...e[1]);
+    g+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--axis)" stroke-width="1" stroke-opacity=".55"/>`;}
+  /* axis titles + tick labels (fixed pixel offsets outside the box) */
+  const lbp=(pt,dx,dy,txt,anchor='middle',cls='svg-muted',fs=9.5)=>
+    `<text x="${pt[0]+dx}" y="${pt[1]+dy}" text-anchor="${anchor}" font-size="${fs}" class="${cls}">${txt}</text>`;
+  const tfmt=v=>{const s=+v.toFixed(2);return (s>0?'+':'')+s;};
+  for(const tv of B.tx) g+=lbp(PX(tv,0,B.d[1]),0,15,tfmt(tv));
+  for(const tv of B.td) g+=lbp(PX(B.x[1],0,tv),20,4,tfmt(tv));
+  { const tvTop=B.tu[B.tu.length-1];
+    if(tvTop>0) g+=lbp(PX(B.x[0],tvTop,B.d[1]),-9,3,tfmt(tvTop),'end'); }
+  g+=lbp(PX(0,0,B.d[1]),0,32,'<tspan class="m">δ</tspan> / <tspan class="m">δ</tspan><tspan font-size="8">ref</tspan>','middle','svg-ink2',11);
+  g+=lbp(PX(B.x[1],0,(B.d[0]+B.d[1])/2),46,4,'<tspan class="m">a</tspan> / <tspan class="m">a</tspan><tspan font-size="8">ref</tspan>','middle','svg-ink2',11);
+  g+=lbp(PX(B.x[0],B.u[1],B.d[1]),-9,-9,'<tspan class="m">b</tspan>','end','svg-ink2',11);
+  /* origin q = 0 */
+  const pO=PX(0,0,0);
+  g+=`<circle cx="${pO[0]}" cy="${pO[1]}" r="2.6" fill="none" stroke="var(--ink-2)" stroke-width="1.4"/>`;
+  /* floor shadow of the curve */
+  const N=SIM.N, stride=Math.max(1,Math.round(N/650));
+  let sd='M';
+  for(let k=0;k<=N;k+=stride){const p=PX(SIM.z1[k],0,SIM.z3[k]);sd+=`${p[0].toFixed(1)},${p[1].toFixed(1)} `;}
+  g+=`<path d="${sd}" fill="none" stroke="var(--axis)" stroke-width="1.25" stroke-opacity=".7"/>`;
+  /* the actuation curve */
+  D3.sx=new Float64Array(N+1); D3.sy=new Float64Array(N+1);
+  let cd='M';
+  for(let k=0;k<=N;k++){const p=PX(SIM.z1[k],SIM.z2[k],SIM.z3[k]);D3.sx[k]=p[0];D3.sy[k]=p[1];
+    if(k%stride===0||k===N)cd+=`${p[0].toFixed(1)},${p[1].toFixed(1)} `;}
+  g+=`<path d="${cd}" fill="none" stroke="var(--c-joint)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  /* start marker + q=0 label + κ-peak marker (selective labels, collision-suppressed) */
+  g+=`<circle cx="${D3.sx[0]}" cy="${D3.sy[0]}" r="4" fill="var(--surface-1)" stroke="var(--c-joint)" stroke-width="2"/>`;
+  g+=`<text x="${D3.sx[0]-9}" y="${D3.sy[0]+14}" text-anchor="end" font-size="10" class="svg-muted">start</text>`;
+  if(Math.hypot(pO[0]-D3.sx[0],pO[1]-D3.sy[0])>26)
+    g+=`<text x="${pO[0]+7}" y="${pO[1]+12}" font-size="10" class="svg-muted"><tspan class="m">q</tspan> = 0</text>`;
+  if(SIM.pKa>0.05){
+    let ki=0,kb=-1;
+    for(let k=0;k<=N;k++) if(isFinite(SIM.ka[k])&&SIM.ka[k]>kb){kb=SIM.ka[k];ki=k;}
+    g+=`<circle cx="${D3.sx[ki]}" cy="${D3.sy[ki]}" r="5" fill="none" stroke="var(--c-joint)" stroke-width="1.5" stroke-dasharray="2 2"/>`;
+    if(Math.hypot(D3.sx[ki]-D3.sx[0],D3.sy[ki]-D3.sy[0])>30)
+      g+=`<text x="${D3.sx[ki]+9}" y="${D3.sy[ki]-8}" font-size="10" class="svg-ink2">peak <tspan class="m">κ</tspan><tspan font-size="8">q</tspan></text>`;
+  }
+  D3.g.innerHTML=g;
+  placeD3Markers();
+}
+function placeD3Markers(){
+  const i=Math.min(Math.round(idx),SIM.N);
+  D3.cur.setAttribute('cx',D3.sx[i]); D3.cur.setAttribute('cy',D3.sy[i]);
+}
+
+/* ================= physical-plane minimap ================= */
+const MM={W:420,H:250,ml:36,mr:10,mt:12,mb:22};
+let mmRef=null;
+function gridStep(scale,target){ for(const st of [1,2,5,10,20,50,100,200]) if(st*scale>=target) return st; return 500; }
+function buildMini(){
+  const {W,H,ml,mr,mt,mb}=MM, pw=W-ml-mr, ph=H-mt-mb;
+  const xs=SIM.X, ys=SIM.Y, N=SIM.N;
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+  for(let k=0;k<=N;k++){if(xs[k]<x0)x0=xs[k];if(xs[k]>x1)x1=xs[k];if(ys[k]<y0)y0=ys[k];if(ys[k]>y1)y1=ys[k];}
+  const rawSpanY=y1-y0;
+  const sx0=(x1-x0)||1, sy0=(y1-y0)||1;
+  x0-=sx0*.07+2;x1+=sx0*.07+2;y0-=sy0*.07+2;y1+=sy0*.07+2;
+  const midX=(x0+x1)/2, midY=(y0+y1)/2;
+  const spanX=Math.max(x1-x0,12), spanY=Math.max(y1-y0,6);
+  const fx=pw/spanX, fy=ph/spanY;
+  let sXu=Math.min(fx,fy), sYu=sXu;
+  if(fy>fx*1.8 && rawSpanY<spanX*0.25) sYu=Math.min(fy,fx*6);
+  const ex=sYu/sXu;
+  const px=x=>ml+pw/2+(x-midX)*sXu, py=y=>mt+ph/2-(y-midY)*sYu;
+  const xlo=midX-pw/2/sXu,xhi=midX+pw/2/sXu,ylo=midY-ph/2/sYu,yhi=midY+ph/2/sYu;
+  const stX=gridStep(sXu,46), stY=gridStep(sYu,26);
+  let g='';
+  for(let gx=Math.ceil(xlo/stX)*stX;gx<=xhi;gx+=stX){
+    g+=`<line x1="${px(gx)}" y1="${mt}" x2="${px(gx)}" y2="${mt+ph}" stroke="var(--grid)" stroke-width="1"/>`;
+    g+=`<text x="${px(gx)}" y="${H-8}" text-anchor="middle" font-size="9" fill="var(--muted)" font-variant-numeric="tabular-nums">${gx}</text>`;}
+  for(let gy=Math.ceil(ylo/stY)*stY;gy<=yhi;gy+=stY){
+    g+=`<line x1="${ml}" y1="${py(gy)}" x2="${ml+pw}" y2="${py(gy)}" stroke="var(--grid)" stroke-width="1"/>`;
+    g+=`<text x="${ml-5}" y="${py(gy)+3}" text-anchor="end" font-size="9" fill="var(--muted)" font-variant-numeric="tabular-nums">${gy}</text>`;}
+  let d='M'; const stride=Math.max(1,Math.round(N/500));
+  for(let k=0;k<=N;k+=stride)d+=`${px(xs[k]).toFixed(1)},${py(ys[k]).toFixed(1)} `;
+  d+=`${px(xs[N]).toFixed(1)},${py(ys[N]).toFixed(1)}`;
+  const exNote=(ex>1.05&&rawSpanY>0.8)?`<text x="${ml+pw-4}" y="${mt+22}" text-anchor="end" font-size="9" fill="var(--muted)"><tspan font-style="italic">Y</tspan> ×${ex.toFixed(1)}</text>`:'';
+  $('miniBox').innerHTML=
+`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Physical plane trajectory, X versus Y in meters">
+  ${g}
+  <text x="${ml+6}" y="${mt+12}" font-size="10" fill="var(--muted)">physical plane · <tspan font-style="italic">X</tspan>, <tspan font-style="italic">Y</tspan> (m)</text>
+  ${exNote}
+  <path d="${d}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="${px(xs[0])}" cy="${py(ys[0])}" r="3.5" fill="var(--surface-1)" stroke="var(--muted)" stroke-width="1.8"/>
+  <circle id="mmHov" r="4" fill="none" stroke="var(--ink)" stroke-width="1.6" style="display:none"/>
+  <circle id="mmCur" r="3.5" fill="var(--ink)" stroke="var(--surface-1)" stroke-width="1.8"/>
+</svg>`;
+  mmRef={px,py,cur:$('mmCur'),hov:$('mmHov')};
+}
+
+/* ================= strips ================= */
+const SW=380, SH=92, sml=46, smr=44, smt=7, smb=16;
+let stripRefs=[];
+function stripCfgs(){
+  return [
+    {key:'d', name:'δ · steering',            unit:'°',    cvar:'--c-steer', role:'command',  arr:SIM.dl, k:R2D, floor:1},
+    {key:'b', name:'b · brake demand',        unit:'0–1',  cvar:'--c-brake', role:'command',  arr:SIM.bb, min0:true, floor:1, tick1:true},
+    {key:'a', name:'a · realized accel',      unit:'m/s²', cvar:'--c-accel', role:'response', arr:SIM.aa, floor:0.5},
+    {key:'nu',name:'ν_q · actuation speed',   unit:'1/s',  cvar:'--c-joint', role:'intensity',arr:SIM.nu, min0:true, floor:0.1},
+    {key:'ka',name:'κ_q · curvature',         unit:'–',    cvar:'--c-joint', role:'coordination', arr:SIM.ka, min0:true, floor:0.1, note:'masked where ν_q ≈ 0'},
+    {key:'jy',name:'j_y · lateral jerk',      unit:'m/s³', cvar:'--c-joint', role:'response', arr:SIM.jy, floor:0.2}
+  ];
+}
+function buildStrips(){
+  const box=$('strips'); box.innerHTML=''; stripRefs=[];
+  const N=SIM.N, T=SIM.T, pw=SW-sml-smr, ph=SH-smt-smb;
+  const sx=t=>sml+(t/T)*pw;
+  for(const c of stripCfgs()){
+    const k=c.k||1, vals=c.arr;
+    let amax=0, lastF=0;
+    for(let i=0;i<=N;i++){ const q=vals[i]*k; if(isFinite(q)){ if(Math.abs(q)>amax)amax=Math.abs(q); lastF=q; } }
+    let lo,hi;
+    if(c.tick1){ hi=Math.max(amax*1.1,1.06); lo=0; }
+    else if(c.min0){ hi=Math.max(amax*1.1,c.floor); lo=0; }
+    else { const m=Math.max(amax*1.1,c.floor); lo=-m; hi=m; }
+    const sy=v=>smt+(1-(v-lo)/(hi-lo))*ph;
+    let inner='';
+    if(lo<0) inner+=`<line x1="${sml}" y1="${sy(0)}" x2="${sml+pw}" y2="${sy(0)}" stroke="var(--axis)" stroke-width="1"/>`;
+    else     inner+=`<line x1="${sml}" y1="${smt+ph}" x2="${sml+pw}" y2="${smt+ph}" stroke="var(--axis)" stroke-width="1"/>`;
+    if(c.note) inner+=`<text x="${sml+5}" y="${smt+10}" font-size="8.5" fill="var(--muted)">${c.note}</text>`;
+    const niceR=v=>{const m=Math.pow(10,Math.floor(Math.log10(Math.abs(v)||1)));return Math.round(v/m)*m;};
+    const tickv=c.tick1?[0,1]:c.min0?[0,niceR(hi*0.9)]:[niceR(hi*0.85),0,-niceR(hi*0.85)];
+    for(const tv of tickv){
+      inner+=`<text x="${sml-5}" y="${sy(tv)+3.5}" text-anchor="end" font-size="9.5" fill="var(--muted)" font-variant-numeric="tabular-nums">${+(+tv).toPrecision(3)}</text>`;
+      if(tv!==0) inner+=`<line x1="${sml}" y1="${sy(tv)}" x2="${sml+pw}" y2="${sy(tv)}" stroke="var(--grid)" stroke-width="1"/>`;
+    }
+    const xstep=T>14?4:2;
+    for(let tx=0;tx<=T+1e-9;tx+=xstep)
+      inner+=`<text x="${sx(Math.min(tx,T))}" y="${SH-3}" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-variant-numeric="tabular-nums">${tx}</text>`;
+    /* series path with NaN gaps */
+    let d='', pen=false; const stride=Math.max(1,Math.round(N/650));
+    for(let i=0;i<=N;i+=stride){
+      const q=vals[i]*k;
+      if(!isFinite(q)){ pen=false; continue; }
+      d+=(pen?'L':'M')+sx(SIM.t[i]).toFixed(1)+','+sy(q).toFixed(1)+' '; pen=true;
+    }
+    inner+=`<path d="${d}" fill="none" stroke="var(${c.cvar})" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const endv=isFinite(vals[N]*k)?vals[N]*k:lastF;
+    inner+=`<circle cx="${sx(T)}" cy="${sy(endv)}" r="3.5" fill="var(${c.cvar})" stroke="var(--surface-1)" stroke-width="2"/>`;
+    inner+=`<text x="${sml+pw+4}" y="${clamp(sy(endv)+3.5,smt+9,SH-6)}" font-size="10" fill="var(--ink-2)" font-variant-numeric="tabular-nums">${fmt(endv,1)}</text>`;
+    inner+=`<line class="playline" x1="${sml}" y1="${smt}" x2="${sml}" y2="${smt+ph}" stroke="var(--muted)" stroke-opacity=".55" stroke-width="1"/>`;
+    inner+=`<line class="crossline" x1="0" y1="${smt}" x2="0" y2="${smt+ph}" stroke="var(--ink-2)" stroke-width="1" style="display:none"/>`;
+    inner+=`<circle class="crossdot" r="3.5" fill="var(${c.cvar})" stroke="var(--surface-1)" stroke-width="2" style="display:none"/>`;
+    const wrap=document.createElement('div'); wrap.className='strip';
+    const head=document.createElement('div'); head.className='strip-head';
+    const keyEl=document.createElement('span'); keyEl.className='key'; keyEl.style.setProperty('--c',`var(${c.cvar})`);
+    const nm=document.createElement('span'); nm.className='nm'; nm.textContent=c.name;
+    const un=document.createElement('span'); un.className='un'; un.textContent='('+c.unit+')';
+    const chip=document.createElement('span'); chip.className='role-chip'; chip.textContent=c.role;
+    head.append(keyEl,nm,un,chip); wrap.append(head);
+    const svg=document.createElementNS(SVGNS,'svg');
+    svg.setAttribute('viewBox',`0 0 ${SW} ${SH}`);
+    svg.setAttribute('role','img'); svg.setAttribute('aria-label',`${c.name} versus time, ${c.unit}`);
+    svg.innerHTML=inner; wrap.append(svg); box.append(wrap);
+    const ref={cfg:c,k,sy,svg,play:svg.querySelector('.playline'),cross:svg.querySelector('.crossline'),dot:svg.querySelector('.crossdot')};
+    stripRefs.push(ref);
+    svg.addEventListener('pointermove',e=>{
+      const r=svg.getBoundingClientRect(),q=SW/r.width;
+      const t=clamp(((e.clientX-r.left)*q-sml)/pw*T,0,T);
+      setHover(Math.round(t/DT),e.clientX,e.clientY);
+    });
+    svg.addEventListener('pointerleave',clearHover);
+  }
+  stripRefs.sx=sx;
+}
+
+/* ================= hover / tooltip ================= */
+const ttip=$('ttip');
+function ttRow(cvar,val,name){
+  const row=document.createElement('div'); row.className='row'; row.style.setProperty('--c',`var(${cvar})`);
+  const key=document.createElement('span'); key.className='key';
+  const v=document.createElement('span'); v.className='v'; v.textContent=val;
+  const n=document.createElement('span'); n.className='n'; n.textContent=name;
+  row.append(key,v,n); return row;
+}
+function setHover(i,cx,cy){
+  i=clamp(i,0,SIM.N);
+  const x=stripRefs.sx(SIM.t[i]);
+  for(const r of stripRefs){
+    r.cross.style.display=''; r.cross.setAttribute('x1',x); r.cross.setAttribute('x2',x);
+    const q=r.cfg.arr[i]*r.k;
+    if(isFinite(q)){ r.dot.style.display=''; r.dot.setAttribute('cx',x); r.dot.setAttribute('cy',r.sy(q)); }
+    else r.dot.style.display='none';
+  }
+  D3.hov.style.display=''; D3.hov.setAttribute('cx',D3.sx[i]); D3.hov.setAttribute('cy',D3.sy[i]);
+  mmRef.hov.style.display=''; mmRef.hov.setAttribute('cx',mmRef.px(SIM.X[i])); mmRef.hov.setAttribute('cy',mmRef.py(SIM.Y[i]));
+  ttip.textContent='';
+  const th=document.createElement('div'); th.className='tt-t'; th.textContent=`t = ${fmt(SIM.t[i])} s · v = ${fmt(SIM.v[i],1)} m/s`; ttip.append(th);
+  ttip.append(ttRow('--c-steer',fmt(SIM.dl[i]*R2D),'δ (°)'));
+  ttip.append(ttRow('--c-brake',fmt(SIM.bb[i]),'b (0–1)'));
+  ttip.append(ttRow('--c-accel',fmt(SIM.aa[i]),'a (m/s²)'));
+  ttip.append(ttRow('--c-joint',fmt(SIM.nu[i]),'ν_q (1/s)'));
+  ttip.append(ttRow('--c-joint',isFinite(SIM.ka[i])?fmt(SIM.ka[i]):'—','κ_q (–)'));
+  ttip.append(ttRow('--c-joint',fmt(SIM.jy[i]),'j_y (m/s³)'));
+  ttip.style.display='block';
+  const vw=window.innerWidth,tw=ttip.offsetWidth;
+  ttip.style.left=Math.min(cx+16,vw-tw-8)+'px';
+  ttip.style.top=Math.max(cy-ttip.offsetHeight-14,8)+'px';
+}
+function clearHover(){
+  for(const r of stripRefs){r.cross.style.display='none';r.dot.style.display='none';}
+  if(D3.hov)D3.hov.style.display='none';
+  if(mmRef)mmRef.hov.style.display='none';
+  ttip.style.display='none';
+}
+
+/* ================= table ================= */
+function buildTable(){
+  const tb=$('tableBox'); tb.textContent='';
+  const cols=['t (s)','δ (°)','b (0–1)','a (m/s²)','v (m/s)','ν_q (1/s)','κ_q (–)','j_y (m/s³)'];
+  const thead=document.createElement('thead'),trh=document.createElement('tr');
+  for(const c of cols){const th=document.createElement('th');th.textContent=c;trh.append(th);}
+  thead.append(trh); tb.append(thead);
+  const tbody=document.createElement('tbody'), step=Math.round(0.25/DT);
+  for(let i=0;i<=SIM.N;i+=step){
+    const tr=document.createElement('tr');
+    const cells=[fmt(SIM.t[i]),fmt(SIM.dl[i]*R2D),fmt(SIM.bb[i]),fmt(SIM.aa[i]),fmt(SIM.v[i],1),
+                 fmt(SIM.nu[i]),isFinite(SIM.ka[i])?fmt(SIM.ka[i]):'—',fmt(SIM.jy[i])];
+    for(const c of cells){const td=document.createElement('td');td.textContent=c;tr.append(td);}
+    tbody.append(tr);
+  }
+  tb.append(tbody);
+}
+
+/* ================= playback ================= */
+let idx=0, playing=true, lastTs=null;
+function drawFrame(){
+  const i=Math.min(Math.round(idx),SIM.N);
+  placeD3Markers();
+  mmRef.cur.setAttribute('cx',mmRef.px(SIM.X[i])); mmRef.cur.setAttribute('cy',mmRef.py(SIM.Y[i]));
+  const x=stripRefs.sx(SIM.t[i]);
+  for(const r of stripRefs){r.play.setAttribute('x1',x);r.play.setAttribute('x2',x);}
+  $('scrub').value=i;
+  $('clock').textContent=`t = ${fmt(SIM.t[i])} s`;
+  D3.live.textContent=`t = ${fmt(SIM.t[i])} s · ν_q = ${fmt(SIM.nu[i])} s⁻¹ · κ_q = ${isFinite(SIM.ka[i])?fmt(SIM.ka[i]):'—'}`;
+}
+function loop(ts){
+  if(lastTs==null)lastTs=ts;
+  const dts=(ts-lastTs)/1000; lastTs=ts;
+  if(playing&&SIM){ idx+=dts/DT; if(idx>SIM.N+60)idx=0; drawFrame(); }
+  requestAnimationFrame(loop);
+}
+
+/* ================= tiles & controls ================= */
+function updateTiles(){
+  const pd=PRESETS[P.preset];
+  $('tJ').textContent=fmtBig(SIM.J);
+  $('tNu').textContent=+SIM.pNu.toPrecision(3);
+  $('tKa').textContent=SIM.pAn>0?fmtBig(SIM.pAn):'0';
+  $('tJy').textContent=+SIM.pJy.toPrecision(3);
+  $('tReg').textContent=pd.reg[0]; $('tRegSub').textContent=pd.reg[1];
+  $('presetNote').innerHTML=pd.note;
+}
+function runAll(){
+  simulate(); computeBox();
+  draw3d(); buildMini(); buildStrips(); buildTable(); updateTiles();
+  $('scrub').max=SIM.N; idx=0; drawFrame();
+}
+$('v0').addEventListener('input',()=>{P.v0=+$('v0').value;$('v0v').textContent=fmt(P.v0,1)+' m/s';runAll();});
+function applyPresetDefaults(){
+  const pd=PRESETS[P.preset];
+  $('v0').value=pd.v0; P.v0=pd.v0; $('v0v').textContent=fmt(pd.v0,1)+' m/s';
+}
+$('preset').addEventListener('change',()=>{P.preset=$('preset').value;applyPresetDefaults();playing=true;$('play').textContent='Pause';runAll();});
+$('play').addEventListener('click',()=>{playing=!playing;$('play').textContent=playing?'Pause':'Play';});
+$('reset').addEventListener('click',()=>{idx=0;playing=true;$('play').textContent='Pause';drawFrame();});
+$('scrub').addEventListener('input',()=>{playing=false;$('play').textContent='Play';idx=+$('scrub').value;drawFrame();});
+$('tbtn').addEventListener('click',()=>{
+  const w=$('tableWrap'),open=!w.classList.contains('open');
+  w.classList.toggle('open',open);$('tbtn').setAttribute('aria-expanded',String(open));
+});
+const themes=['auto','light','dark'];
+let themeI=Math.max(0,themes.indexOf(document.documentElement.dataset.theme||'auto'));
+if(themeI) $('themeBtn').textContent='Theme: '+themes[themeI];
+$('themeBtn').addEventListener('click',()=>{
+  themeI=(themeI+1)%3; const t=themes[themeI];
+  if(t==='auto')delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme=t;
+  $('themeBtn').textContent='Theme: '+t;
+});
+
+/* ================= init ================= */
+buildSpace();
+applyPresetDefaults();
+runAll();
+requestAnimationFrame(loop);
+
+window.__AS={P,sim:()=>SIM,run:(preset)=>{if(preset){P.preset=preset;$('preset').value=preset;applyPresetDefaults();}runAll();return SIM;}};
+</script>
+</body>
+</html>

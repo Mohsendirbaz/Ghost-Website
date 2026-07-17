@@ -75,8 +75,10 @@ export default function CommandBar() {
     methods:          'Research Methods',
     exhibition:       'The Exhibition',
     memoryWing:       'Memory Wing',
+    simulation:       'Simulation',
     careers:          'Careers',
     bio:              'Bio',
+    finalPlate:       'EPU — The Final Plate',
   };
 
   const pages = [
@@ -95,8 +97,10 @@ export default function CommandBar() {
     { label: pageLabels.methods,          path: `/${lang}/methods` },
     { label: pageLabels.exhibition,       path: `/${lang}/exhibition` },
     { label: pageLabels.memoryWing,       path: `/${lang}/memory` },
+    { label: pageLabels.simulation,       path: `/${lang}/simulation` },
     { label: pageLabels.careers,          path: `/${lang}/careers` },
     { label: pageLabels.bio,              path: `/${lang}/bio` },
+    { label: pageLabels.finalPlate,       path: `/${lang}/epu` },
   ];
 
   return (

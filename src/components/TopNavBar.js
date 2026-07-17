@@ -32,6 +32,7 @@ export default function TopNavBar() {
         { label: t.architecture, to: `/${lang}/architecture` },
         { label: t.knowledgeBase, to: `/${lang}/knowledge-base` },
         { label: t.memoryWing, to: `/${lang}/memory` },
+        { label: t.simulation, to: `/${lang}/simulation` },
       ],
     },
     {
@@ -40,6 +41,7 @@ export default function TopNavBar() {
         { label: t.artifacts,       to: `/${lang}/artifacts` },
         { label: t.libraryAssets,   to: `/${lang}/library/assets` },
         { label: t.documentArchive, to: `/${lang}/library` },
+        { label: t.finalPlate,      to: `/${lang}/epu` },
       ],
     },
   ];

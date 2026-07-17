@@ -285,9 +285,11 @@ export default function Header() {
       links: [
         { label: t.exhibition,      to: `/${lang}/exhibition`,     iconKey: 'exhibition',      desc: isRtl ? 'نرم‌افزار پژوهشی، زنده در مرورگر' : 'The research software, running live' },
         { label: t.memoryWing, to: `/${lang}/memory`, iconKey: 'libraryAssets', desc: isRtl ? 'ابزارهای ماژول حافظه، زنده' : 'Memory Module instruments, live' },
+        { label: t.simulation, to: `/${lang}/simulation`, iconKey: 'exhibition', desc: isRtl ? 'شبیه‌سازی‌های سطح برنامه‌ریزی، زنده' : 'Planning-stack simulations, live' },
         { label: t.artifacts,       to: `/${lang}/artifacts`,      iconKey: 'artifacts',       desc: isRtl ? 'تصویرسازی‌های تعاملی' : 'Interactive visualizations' },
         { label: t.libraryAssets,   to: `/${lang}/library/assets`, iconKey: 'libraryAssets',   desc: isRtl ? 'دارایی‌های فنی منتخب' : 'Curated technical assets' },
         { label: t.documentArchive, to: `/${lang}/library`,        iconKey: 'documentArchive', desc: isRtl ? '۶۰ سند آرشیو' : '60 archived documents' },
+        { label: t.finalPlate,      to: `/${lang}/epu`,            iconKey: 'exhibition',      desc: isRtl ? 'پوستر EPU — آخرین صفحهٔ سایت' : 'The EPU poster — the site’s last page' },
       ],
     },
   ];
