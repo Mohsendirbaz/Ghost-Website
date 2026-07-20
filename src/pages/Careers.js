@@ -21,54 +21,39 @@ import './Page.css';
 const EMAIL = 'dirbaz.sharif@gmail.com';
 const PHONE = '+1-312-925-5930';
 
+/* Five vacancies — the meaningful set (2026-07-17): three technical roles
+   keyed to the Faculty of Fifty roster, two executive roles that build the
+   organization around the stack. */
 const OPENINGS = [
   {
-    key: 'perception',
-    codes: 'AD-PERC · AD-RDR · AD-FUSE · AD-LOC',
-    en: { title: 'Perception & Sensor Fusion Lead', line: 'Own the evidence side of the stack: camera, radar and Doppler processing, physics-diverse multi-sensor fusion with provenance, and localization on the navigation manifold.' },
-    fa: { title: 'سرپرست ادراک و همجوشی حسگرها', line: 'مالکیت سمتِ شواهد در پشته: پردازش دوربین، رادار و داپلر، همجوشی چندحسگری با تنوع فیزیکی و شجره‌نامهٔ داده، و مکان‌یابی روی منیفولد ناوبری.' },
+    key: 'vehicle-dynamics',
+    codes: 'AD-CTRL · SIMULATION BENCH',
+    en: { title: 'Vehicle Dynamics Specialist', line: 'The planning-level models already run live on the Simulation Bench; make them true at the tire. Kinematic-to-dynamic fidelity, friction-circle behavior, jerk- and steering-rate-bounded maneuvering — owned end to end, from instrument to asphalt.' },
+    fa: { title: 'متخصص دینامیک خودرو', line: 'مدل‌های سطح برنامه‌ریزی هم‌اکنون روی میز شبیه‌سازی زنده اجرا می‌شوند؛ آن‌ها را در تماس لاستیک با جاده حقیقی کنید. وفاداری از سینماتیک تا دینامیک، رفتار دایرهٔ اصطکاک، و مانور با قید تکانه و نرخ فرمان — سرتاسر، از ابزار تا آسفالت.' },
   },
   {
-    key: 'planning',
-    codes: 'AD-FORM · AD-PLAN · AD-PRED · AD-CTRL',
-    en: { title: 'Planning & Control Lead', line: 'Formulation before solving: dynamic problem-formulation, anytime trajectory optimization with certificates, game-theoretic behavior prediction, and friction-circle-aware actuation.' },
-    fa: { title: 'سرپرست برنامه‌ریزی و کنترل', line: 'صورت‌بندی پیش از حل: صورت‌بندی پویای مسئله، بهینه‌سازی مسیر با گواهی، پیش‌بینی رفتار بازی‌نظرانه، و کنشگری آگاه از دایرهٔ اصطکاک.' },
+    key: 'advanced-control',
+    codes: 'AD-PLAN · AD-FORM · SAF-MONO·FILT',
+    en: { title: 'Principal Advanced Control Engineer — Multidisciplinary', line: 'Control carried across disciplines: MPC and CBF safety filtering, the two proven invariants, trajectory optimization with certificates, actuation under hard bounds — by someone equally fluent in dynamics, optimization, and the hardware the mathematics must survive on.' },
+    fa: { title: 'مهندس ارشد کنترل پیشرفته — میان‌رشته‌ای', line: 'کنترل در گسترهٔ چند رشته: پالایش ایمنی MPC و CBF، دو ناوردای اثبات‌شده، بهینه‌سازی مسیر با گواهی، و کنشگری زیر قیدهای سخت — به‌دست کسی که به یک اندازه به دینامیک، بهینه‌سازی و سخت‌افزاری که ریاضیات باید روی آن دوام بیاورد مسلط است.' },
   },
   {
-    key: 'safety',
-    codes: 'SAF-MONO · SAF-FILT · SAF-FORMAL',
-    en: { title: 'Safety Boundary Architect', line: 'The verifier side: the antitone admissible-command set, reduced-order CBF synthesis, the fidelity scalar, and formal proofs of bounded actuation with runtime OOD monitoring.' },
-    fa: { title: 'معمار مرز ایمنی', line: 'سمتِ راستی‌آزما: مجموعهٔ فرمان مجاز پادتون، سنتز CBF مرتبه‌کاسته، اسکالر وفاداری، و اثبات صوری کنش کران‌دار با پایش برخط خارج-از-توزیع.' },
+    key: 'ic-design',
+    codes: 'HW-ISA · HW-NUM · HW-SIL · SAF-GUARD',
+    en: { title: 'Integrated Circuit Design Principal Engineer', line: 'The EPU from architecture to tape-out discipline: the PICAPD instruction set, conservation-check primitives, numerically-safe posit/quire arithmetic under WCET, and the ~32 ns hardwired analog veto path — FPGA and lockstep RISC-V now, ASIC later.' },
+    fa: { title: 'مهندس اصلی طراحی مدار مجتمع', line: 'EPU از معماری تا انضباط ساخت: مجموعه‌دستور PICAPD، اولیه‌های بررسی بقا، محاسبات امن عددی posit/quire با انضباط WCET، و مسیر وتوی آنالوگ سخت‌سیم ~۳۲ نانوثانیه‌ای — اکنون FPGA و RISC-V هم‌گام، سپس ASIC.' },
   },
   {
-    key: 'analog',
-    codes: 'SAF-GUARD',
-    en: { title: 'Analog / Mixed-Signal Guard Engineer', line: 'The hardwired terminal guard: an electrically isolated, non-programmable pass-through that must reach the actuator first — nanosecond-scale timing as a design discipline.' },
-    fa: { title: 'مهندس نگهبان آنالوگ / سیگنال مختلط', line: 'نگهبان پایانی سخت‌سیم: گذرگاه ایزوله و غیرقابل‌برنامه‌ریزی که باید پیش از همه به عملگر برسد — زمان‌بندی نانوثانیه‌ای به‌مثابه انضباط طراحی.' },
+    key: 'sustainability',
+    codes: 'EXECUTIVE · C-SUITE',
+    en: { title: 'Chief Sustainability Officer', line: 'The program’s taproot is biomass-gasification research and its stated vision is equitable decarbonization. Own that thread as strategy: sustainability and impact accounting, responsible-technology governance, and the bridge from research program to accountable enterprise.' },
+    fa: { title: 'مدیر ارشد پایداری', line: 'ریشهٔ برنامه در پژوهش گازی‌سازی زیست‌توده است و چشم‌اندازش کربن‌زدایی عادلانه. این رشته را به‌مثابه راهبرد در اختیار بگیرید: حسابداری پایداری و اثر، حکمرانی فناوری مسئولانه، و پل از برنامهٔ پژوهشی تا بنگاه پاسخگو.' },
   },
   {
-    key: 'cert',
-    codes: 'SAF-CERT',
-    en: { title: 'Functional-Safety & Certification Lead', line: 'The ISO 26262 and SOTIF (ISO 21448) strategy: turning a provably-bounded architecture into a certifiable one, with the unknown-unsafe treated as a first-class object.' },
-    fa: { title: 'سرپرست ایمنی عملکردی و صدور گواهی', line: 'راهبرد ISO 26262 و SOTIF (ISO 21448): تبدیل معماری با کران اثبات‌پذیر به معماری قابل‌گواهی، با «ناایمنِ ناشناخته» به‌مثابه موضوع درجه‌یک.' },
-  },
-  {
-    key: 'silicon',
-    codes: 'HW-ISA · HW-NUM · HW-SIL',
-    en: { title: 'Silicon & ISA Engineer', line: 'The PICAPD instruction set made real: conservation-check primitives, posit/quire numerically-safe arithmetic under WCET discipline, FPGA + lockstep RISC-V now, ASIC later.' },
-    fa: { title: 'مهندس سیلیکون و معماری دستورالعمل', line: 'تحقق مجموعه‌دستور PICAPD: اولیه‌های بررسی بقا، محاسبات امن عددی posit/quire با انضباط WCET، اکنون FPGA و RISC-V هم‌گام، سپس ASIC.' },
-  },
-  {
-    key: 'math',
-    codes: 'MA-GEO · MA-TOP · MA-UQ · ROM-PI',
-    en: { title: 'Applied Mathematician — Geometry, UQ & Physics-Informed ROM', line: 'Riemannian optimization, symmetry reduction and persistent homology in service of driving; uncertainty quantification on manifolds; the dissertation’s reduced-order machinery earning its keep.' },
-    fa: { title: 'ریاضی‌دان کاربردی — هندسه، UQ و مدل مرتبه‌کاستهٔ فیزیک‌آگاه', line: 'بهینه‌سازی ریمانی، کاهش تقارن و همولوژی پایا در خدمت رانندگی؛ کمّی‌سازی عدم‌قطعیت روی منیفولدها؛ و ماشین مرتبه‌کاستهٔ رساله در کارِ نان‌آور.' },
-  },
-  {
-    key: 'knowledge',
-    codes: 'GOV-KTE · GOV-EVD · Memory Module',
-    en: { title: 'Research Engineer — Governed Knowledge Systems', line: 'The procedural spine and the Memory Wing: knowledge transformation engineering, the evidentiary seam that keeps projection from posing as measurement, and the retrieval-covenant line of work.' },
-    fa: { title: 'مهندس پژوهش — نظام‌های دانش حاکمیت‌دار', line: 'ستون رویه‌ای و بال حافظه: مهندسی تبدیل دانش، درز شواهدی که نمی‌گذارد برآورد خود را اندازه‌گیری جا بزند، و خط پژوهشی میثاق بازیابی.' },
+    key: 'talent',
+    codes: 'EXECUTIVE · TALENT · FACULTY OF FIFTY',
+    en: { title: 'Head of Talent — Head-hunter', line: 'The Faculty of Fifty is a roster before it is a team. Find the P1 specialists this page names, court them, and close them — executive search as the program’s first growth discipline, run with the same rigor as the stack it staffs.' },
+    fa: { title: 'سرپرست جذب استعداد — شکارچی استعداد', line: 'هیئت پنجاه‌گانه پیش از آن‌که تیم باشد، یک فهرست است. متخصصان P1 همین صفحه را بیابید، جذبشان کنید و کار را تمام کنید — جست‌وجوی اجرایی به‌مثابه نخستین انضباط رشد برنامه، با همان سخت‌گیریِ پشته‌ای که برایش نیرو می‌چیند.' },
   },
 ];
 
@@ -103,9 +88,9 @@ export default function Careers() {
     eyebrow: fa ? 'Ghost Autonomy · فرصت‌های همکاری' : 'Ghost Autonomy · Careers',
     h1: fa ? 'به برنامه بپیوندید' : 'Join the Program',
     sub: fa
-      ? 'Ghost Autonomy یک برنامهٔ پژوهشی مرحلهٔ آغازین است که تیم بنیان‌گذار فنی‌اش را می‌سازد. نقش‌ها از «هیئت پنجاه‌گانهٔ» خود برنامه استخراج شده‌اند؛ ساختار همکاری و جبران مستقیماً با بنیان‌گذار تنظیم می‌شود.'
-      : 'Ghost Autonomy is an early-stage research program assembling its founding technical team. The roles below derive from the program’s own Faculty of Fifty roster; collaboration and compensation structure is arranged directly with the founder.',
-    openingsTitle: fa ? 'نقش‌هایی که به‌دنبال پرکردنشان هستیم' : 'The Roles We Are Looking to Fill',
+      ? 'Ghost Autonomy یک برنامهٔ پژوهشی مرحلهٔ آغازین است که تیم بنیان‌گذارش را می‌سازد — پنج جای خالی معنادار، نه بیشتر. سه نقش فنی از «هیئت پنجاه‌گانهٔ» خود برنامه استخراج شده‌اند؛ دو نقش اجرایی سازمان را گرد پشته بنا می‌کنند. ساختار همکاری و جبران مستقیماً با بنیان‌گذار تنظیم می‌شود.'
+      : 'Ghost Autonomy is an early-stage research program assembling its founding team — five meaningful vacancies, no more. Three technical roles derive from the program’s own Faculty of Fifty roster; two executive roles build the organization around the stack. Collaboration and compensation structure is arranged directly with the founder.',
+    openingsTitle: fa ? 'پنج نقشی که به‌دنبال پرکردنشان هستیم' : 'The Five Roles We Are Looking to Fill',
     skillsTitle: fa ? 'پانزده مهارتی که این پشته می‌طلبد' : 'The Fifteen Skillsets the Stack Demands',
     skillsLead: fa
       ? 'برگزیده از پنجاه تخصص فهرست‌شده در رجیستر مهارت‌های برنامه (نسخهٔ ۰.۱، مه ۲۰۲۶) — هر پانزده مورد در سطح اولویت P1.'

@@ -421,3 +421,14 @@
     display: none;
   }
 }
+
+/* ─── Founder button (identity anchor beside search) ────────────────────────── */
+.header__founder-btn { text-decoration: none; }
+.header__founder-img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-base, rgba(0, 0, 0, 0.15));
+  display: block;
+}

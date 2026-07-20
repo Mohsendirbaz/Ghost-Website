@@ -284,6 +284,18 @@ export default function Header() {
         />
 
         <div className="header__actions">
+          {/* Visit the founder — the identity anchor beside search */}
+          <Link
+            to={`/${lang}/bio`}
+            className="header__search-btn header__founder-btn"
+            aria-label={isRtl ? 'دیدار با بنیان‌گذار' : 'Visit the founder'}
+          >
+            <img src="/founder/avatar.jpg" alt="" className="header__founder-img" />
+            <span className="header__search-btn-label header__search-label-desktop">
+              {isRtl ? 'بنیان‌گذار' : 'Founder'}
+            </span>
+          </Link>
+
           {/* Search trigger */}
           <button
             className="header__search-btn"

@@ -26,6 +26,16 @@ const BIO_SECTION_IDS = [
   "achievements",
   "publications",
 ];
+
+/* ── The founder's album — the site's identity layer, kept deliberately
+   plain. To add photographs: drop the optimized file in
+   public/founder/album/ and append an entry here. The first entry
+   (graduation) doubles as the portrait at the top of this page. ── */
+const FOUNDER_ALBUM = [
+  { src: '/founder/album/graduation.jpg', cap: { en: 'Doctoral commencement — with family', fa: 'جشن دانش‌آموختگی دکتری — در کنار خانواده' } },
+  { src: '/founder/album/poster-session.jpg', cap: { en: 'At a research poster session', fa: 'در نشست پوستر پژوهشی' } },
+  { src: '/founder/album/overlook.jpg', cap: { en: 'City overlook, with a friend', fa: 'بر فراز شهر، با یک دوست' } },
+];
 const Bio = () => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
@@ -83,9 +93,17 @@ const Bio = () => {
               animate={{ opacity: 1, y: 0 }}
               className="neu-elevated p-6 text-center lg:sticky lg:top-24"
             >
-              <div className="w-40 h-40 mx-auto mb-4 rounded-2xl bg-gradient-primary flex items-center justify-center text-6xl font-bold text-primary-foreground shadow-lg">
-                MD
-              </div>
+              <img
+                src="/founder/album/graduation.jpg"
+                alt={lang === 'en'
+                  ? 'Dr. Mohsen Dirbaz in doctoral regalia at commencement, with family, under a blossoming tree'
+                  : 'دکتر محسن دیرباز در ردای دکتری در جشن دانش‌آموختگی، در کنار خانواده، زیر درخت شکوفه'}
+                className="w-full mx-auto mb-2 rounded-2xl shadow-lg"
+                style={{ maxWidth: '15rem' }}
+              />
+              <p className="text-xs text-muted-foreground mb-4">
+                {lang === 'en' ? 'Doctoral commencement — with family' : 'جشن دانش‌آموختگی دکتری — در کنار خانواده'}
+              </p>
               <h1 className="font-display text-2xl font-bold text-foreground mb-1">
                 {t(founderName, lang)}
               </h1>
@@ -339,6 +357,41 @@ onClick={() => handleSectionChange(item.id)}
               )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The Album — a quiet personal record; grows via FOUNDER_ALBUM ── */}
+      <section className="py-12" aria-label={lang === 'en' ? 'Album' : 'آلبوم'}>
+        <div className="container-ghost">
+          <h2 className="text-2xl font-display font-bold text-foreground mb-1">
+            {lang === 'en' ? 'Album' : 'آلبوم'}
+          </h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            {lang === 'en'
+              ? 'A few photographs behind the program — kept deliberately plain.'
+              : 'چند عکس از پشتِ برنامه — عمداً ساده نگه داشته شده.'}
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4" style={{ maxWidth: '860px' }}>
+            {FOUNDER_ALBUM.map((p) => (
+              <a
+                key={p.src}
+                href={p.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block neu-raised p-2 rounded-xl"
+                title={p.cap[lang]}
+              >
+                <img
+                  src={p.src}
+                  alt={p.cap[lang]}
+                  loading="lazy"
+                  className="w-full rounded-lg"
+                  style={{ aspectRatio: '3 / 4', objectFit: 'cover' }}
+                />
+                <p className="text-xs text-muted-foreground mt-2 mb-1">{p.cap[lang]}</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>
