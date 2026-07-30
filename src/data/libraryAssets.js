@@ -234,12 +234,12 @@ export const CRITICAL_ASSETS = {
                     filename: 'Physics_Informed_Special_Function_Framework.pdf',
                     slug: 'special-function-framework',
                     title: {
-                        en: 'A Physics-Informed Special-Function Framework',
-                        fa: 'چارچوب توابع خاصِ فیزیک‌آگاه'
+                        en: 'A Special-Function-Parameterized Heuristic Reduced-Order Model (Revised)',
+                        fa: 'مدل مرتبه‌کاستهٔ اکتشافی با پارامتری‌سازی توابع خاص (بازنگری‌شده)'
                     },
                     description: {
-                        en: 'The theoretical core: AGM/elliptic-integral reduced-order modeling with conservation treated by construction and verification. Refreshed edition (May 2026).',
-                        fa: 'هستهٔ نظری: مدل‌سازی مرتبه‌کاسته با انتگرال‌های بیضوی/AGM و پایستگی از راه ساختار و راستی‌آزمایی. ویراست به‌روزشده (مه ۲۰۲۶).'
+                        en: 'The theoretical core, revised edition (2026): AGM/elliptic-integral parameterizations of a learned reduced model, validated on biomass gasification — with an explicit scope statement of what is and is not claimed; conservation is checked separately, not assumed from the form.',
+                        fa: 'هستهٔ نظری، ویراست بازنگری‌شده (۲۰۲۶): پارامتری‌سازی AGM/بیضوی یک مدل کاستهٔ آموخته، اعتبارسنجی‌شده بر گازی‌سازی زیست‌توده — با بیانیهٔ صریح دامنهٔ ادعا؛ پایستگی جداگانه بررسی می‌شود، نه مفروض از فرم.'
                     },
                     type: 'pdf',
                     lang: 'en',
@@ -272,6 +272,28 @@ export const CRITICAL_ASSETS = {
                     processingEstimate: 'published',
                     tags: ['filters', 'kalman', 'sensing', 'signal-processing'],
                     priority: 10
+                },
+                {
+                    id: 'climate-policy-benefit-distribution',
+                    filename: 'Climate_Policy_Benefit_Distribution.pdf',
+                    slug: 'climate-policy-benefit-distribution',
+                    title: {
+                        en: 'Benefit Distribution in Climate Investment (Revised)',
+                        fa: 'توزیع منافع در سرمایه‌گذاری اقلیمی (بازنگری‌شده)'
+                    },
+                    description: {
+                        en: 'Allocation architecture and a techno-economic assessment of distributed biomass-to-hydrogen pathways (revised, July 2026): institutional economics, policy guardrails against categorical framing, and modeled levelized costs stated with their financing assumptions — evidence graded strong / moderate / suggestive throughout.',
+                        fa: 'معماری تخصیص و ارزیابی فنی-اقتصادی مسیرهای توزیع‌شدهٔ زیست‌توده به هیدروژن (بازنگری، ژوئیهٔ ۲۰۲۶): اقتصاد نهادی، ریل‌های محافظ سیاستی در برابر قاب‌بندی مقوله‌ای، و هزینه‌های ترازشدهٔ مدل‌شده همراه با مفروضات تأمین مالی — شواهد در سراسر متن درجه‌بندی شده‌اند.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Climate_Policy_Benefit_Distribution.pdf',
+                    cover: '/covers/Climate_Policy_Benefit_Distribution.png',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['climate-policy', 'techno-economics', 'hydrogen', 'gasification', 'allocation'],
+                    priority: 9
                 }
             ]
         },
@@ -437,6 +459,28 @@ export const CRITICAL_ASSETS = {
                     processingEstimate: 'published',
                     tags: ['writing', 'quality', 'methods', 'standard'],
                     priority: 2
+                },
+                {
+                    id: 'extraction-structured-derivatives-protocol',
+                    filename: 'Extraction_of_Structured_Derivatives_Protocol_V3.pdf',
+                    slug: 'extraction-structured-derivatives-protocol',
+                    title: {
+                        en: 'Extraction of Structured Derivatives from Intertwined Texts — Protocol v3',
+                        fa: 'استخراج مشتقات ساخت‌یافته از متن‌های درهم‌تنیده — پروتکل نسخهٔ ۳'
+                    },
+                    description: {
+                        en: 'The knowledge-transformation protocol in full: a comprehensive framework for decomposing dense, multi-concept prose into modular, queryable, reusable knowledge units while preserving internal coherence — the working method behind the corpus.',
+                        fa: 'پروتکل تبدیل دانش به‌تمامی: چارچوبی جامع برای تجزیهٔ نثر متراکم و چندمفهومی به واحدهای دانشی ماژولار، پرسش‌پذیر و بازمصرف‌پذیر با حفظ انسجام درونی — روش کاریِ پشت پیکره.'
+                    },
+                    type: 'pdf',
+                    lang: 'en',
+                    size: 'large',
+                    targetUrl: '/docs/pdf/Extraction_of_Structured_Derivatives_Protocol_V3.pdf',
+                    cover: '/covers/Extraction_of_Structured_Derivatives_Protocol_V3.png',
+                    status: ASSET_STATUS.READY,
+                    processingEstimate: 'published',
+                    tags: ['kte', 'protocol', 'knowledge-engineering', 'methods'],
+                    priority: 3
                 },
                 {
                     id: 'epistemic-gearbox-overview',

@@ -166,3 +166,9 @@
     padding: var(--space-2) 0;
   }
 }
+
+/* Rebuilt search (2026-07-22): many groups can return — keep the list scrollable */
+.search-overlay__results {
+  max-height: min(62vh, 560px);
+  overflow-y: auto;
+}

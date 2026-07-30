@@ -14,7 +14,11 @@
       "Bash(DISABLE_ESLINT_PLUGIN=true npx react-scripts:*)",
       "Bash(npx update-browserslist-db@latest:*)",
       "Bash(npx eslint *)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(grep -rhoE \"['\\\\\"\\\\`]/\\(docs|covers|founder|posters|library|exhibition|data\\)/[^'\\\\\"\\\\`]*\" src/)",
+      "Bash(grep -rnoE '`/\\(docs|covers|founder|posters|library|exhibition\\)/[^`]*\\\\$\\\\{[^`]*`' src/)",
+      "Bash(node -e ' *)",
+      "Bash(node scripts/verifyAssets.js)"
     ]
   }
 }

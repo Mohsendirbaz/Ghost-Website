@@ -1,0 +1,16 @@
+{
+  "_comment": [
+    "Known-open asset findings, accepted so CI can go green on the day the",
+    "guard lands. scripts/verifyAssets.js fails on anything NOT listed here.",
+    "This list may shrink, never grow: removing an entry means the flaw was",
+    "fixed. Each entry records why it is still open and what closes it.",
+    "Wave 3 of the target-architecture migration is where these resolve."
+  ],
+  "orphans": [
+    {
+      "path": "docs/svg/plates/P13_partnership_loop.svg",
+      "why": "Plate drawn for a Partners page that no longer exists (audit F7).",
+      "closes": "Wave 3 — delete, or give the plate a home on a live page. Mohsen's call."
+    }
+  ]
+}

@@ -85,8 +85,13 @@ export const copy = {
       exhibitionCta: "Enter the Exhibition",
       platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "Fig. H-01 — Formulate · Enforce · Remember" },
       min: {
-        eyebrow: "Physics-first autonomy · provably bounded L4",
-        h1: "Autonomy that can refuse.",
+        eyebrow: "A processor designed by process engineers",
+        h1: "EPU — probably the most efficient processor ever designed for automotive applications.",
+        manifesto: {
+          kicker: "14 nm · 7 nm · 3 nm · … · ?",
+          lines: ["With hardware", "already hitting", "physical limits,", "startups with strong", "algorithmic innovation", "are destined to shine."],
+          accent: 4,
+        },
         sub: "A driving stack built from physics and proof: five refusal stages in front of one actuation gate, two invariants proven on paper, one latency measured in hardware.",
         ctaPrimary: "Enter the exhibition",
         ctaSecondary: "Contact",
@@ -619,8 +624,13 @@ export const copy = {
       exhibitionCta: "ورود به نمایشگاه",
       platePillars: { src: "/docs/svg/plates/P6_pillars_triptych.svg", caption: "شکل H-01 — صورت‌بندی · اجرا · به‌خاطرسپاری" },
       min: {
-        eyebrow: "خودرانی فیزیک‌بنیاد · L4 با کران اثبات‌پذیر",
-        h1: "خودرانی‌ای که می‌تواند امتناع کند.",
+        eyebrow: "پردازنده‌ای به طراحی مهندسان فرایند",
+        h1: "EPU — به‌احتمال، بهینه‌ترین پردازنده‌ای که تاکنون برای کاربردهای خودرویی طراحی شده است.",
+        manifesto: {
+          kicker: "14 nm · 7 nm · 3 nm · … · ?",
+          lines: ["حالا که سخت‌افزار", "به مرزهای فیزیکی رسیده است،", "استارتاپ‌هایی با", "نوآوری الگوریتمی قوی", "مقدّر است بدرخشند."],
+          accent: 3,
+        },
         sub: "پشته‌ای از فیزیک و برهان: پنج مرحلهٔ امتناع پیش از یک دروازهٔ کنش، دو ناوردای اثبات‌شده روی کاغذ، و یک تأخیر اندازه‌گیری‌شده در سخت‌افزار.",
         ctaPrimary: "ورود به نمایشگاه",
         ctaSecondary: "تماس",

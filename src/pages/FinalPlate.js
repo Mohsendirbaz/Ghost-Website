@@ -21,7 +21,7 @@ import './Page.css';
  */
 
 const POSTER = '/posters/epu-poster.web.jpg';
-const POSTER_FULL = '/posters/epu-poster.png';
+const POSTER_FULL = '/posters/epu-poster.jpg';
 
 export default function FinalPlate() {
   const { lang } = useLang();

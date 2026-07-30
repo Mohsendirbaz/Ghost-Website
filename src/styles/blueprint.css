@@ -387,3 +387,46 @@
   .works__stage { height: clamp(300px, 52vh, 480px); }
   .works__slide { flex-basis: 94%; }
 }
+
+/* ── Vertical manifesto — the algorithmic-innovation statement (2026-07-22) ── */
+.manifesto { padding: clamp(3rem, 7vw, 5.5rem) 1rem; }
+.manifesto__kicker {
+  font-family: var(--bp-mono);
+  font-size: clamp(0.9rem, 1.9vw, 1.35rem);
+  letter-spacing: 0.22em;
+  color: var(--color-text-secondary, var(--bp-ink-soft));
+  text-align: center;
+  margin: 0 0 clamp(1.6rem, 3.5vw, 2.6rem);
+  white-space: nowrap;
+  direction: ltr;          /* the node sequence reads 14 → ? in both locales */
+  unicode-bidi: isolate;
+}
+.manifesto__kicker b { color: var(--bp-accent); font-weight: 700; }
+.manifesto__inner {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: clamp(0.9rem, 2.6vw, 2rem);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.manifesto__line {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: clamp(1.45rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  color: var(--color-text-primary, var(--bp-ink));
+  margin: 0;
+}
+.manifesto__line--accent { color: var(--bp-accent); }
+/* Persian typesetting has no vertical tradition — the FA build renders the
+   same statement horizontally, stacked, equally large and bold. */
+[dir="rtl"] .manifesto__inner { flex-direction: column; gap: 0.35rem; }
+[dir="rtl"] .manifesto__line { writing-mode: horizontal-tb; transform: none; text-align: center; }
+@media (max-width: 720px) {
+  .manifesto__inner { flex-direction: column; gap: 0.35rem; }
+  .manifesto__line { writing-mode: horizontal-tb; transform: none; text-align: center; font-size: clamp(1.4rem, 6.4vw, 2rem); }
+  .manifesto__kicker { white-space: normal; }
+}

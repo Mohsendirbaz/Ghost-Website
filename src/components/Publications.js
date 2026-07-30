@@ -2,38 +2,40 @@ import { motion } from "framer-motion";
 import { FileText, Download, ExternalLink } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
+/* Revised editions (July 2026). Single canonical copies live in
+   /docs/pdf/ alongside the Technical Library entries. */
 const publications = [
   {
     id: 1,
     title: {
-      en: "A Physics-Informed Special Function Framework Paper",
-      fa: "مقاله چارچوب تابع خاص مطلع از فیزیک"
+      en: "A Special-Function-Parameterized Heuristic Reduced-Order Model for Thermochemical Conversion Systems",
+      fa: "مدل مرتبه‌کاستهٔ اکتشافی با پارامتری‌سازی توابع خاص برای سیستم‌های تبدیل ترموشیمیایی"
     },
     description: {
-      en: "Advanced mathematical framework integrating physics principles with special function theory for computational applications.",
-      fa: "چارچوب ریاضی پیشرفته که اصول فیزیک را با نظریه تابع خاص برای کاربردهای محاسباتی ادغام می‌کند."
+      en: "An exploratory framework validated empirically on biomass gasification: AGM-computed elliptic integrals as deterministic parameterizations of a learned reduced model, with an explicit what-is-and-is-not-claimed scope statement. Revised edition, 2026.",
+      fa: "چارچوبی اکتشافی با اعتبارسنجی تجربی بر گازی‌سازی زیست‌توده: انتگرال‌های بیضوی محاسبه‌شده با AGM به‌مثابه پارامتری‌سازی قطعی یک مدل کاستهٔ آموخته، همراه با بیانیهٔ صریح دامنهٔ ادعا. ویراست بازنگری‌شده، ۲۰۲۶."
     },
-    pdfUrl: "/Technical_Paper.pdf",
-    downloadUrl: "/Technical_Paper.pdf",
-    filename: "Technical_Paper.pdf",
-    size: "486 KB",
-    year: 2024
+    pdfUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
+    downloadUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
+    filename: "Physics_Informed_Special_Function_Framework.pdf",
+    size: "481 KB · 53 pp",
+    year: 2026
   },
   {
     id: 2,
     title: {
-      en: "Climate Policy Paper",
-      fa: "مقاله سیاست آب‌و‌هوایی"
+      en: "Benefit Distribution in Climate Investment: Allocation Architecture and a Techno-Economic Assessment of Distributed Biomass-to-Hydrogen Pathways",
+      fa: "توزیع منافع در سرمایه‌گذاری اقلیمی: معماری تخصیص و ارزیابی فنی-اقتصادی مسیرهای توزیع‌شدهٔ زیست‌توده به هیدروژن"
     },
     description: {
-      en: "Comprehensive analysis of climate policy frameworks with focus on technological solutions and implementation strategies.",
-      fa: "تجزیه و تحلیل جامع چارچوب‌های سیاست آب‌و‌هوایی با تمرکز بر راه‌حل‌های فناوری و استراتژی‌های اجرایی."
+      en: "Institutional economics, policy architecture, and techno-economic modeling integrated: how the design of climate investment structures shapes the distribution of their benefits — with a comparative assessment of modular gasification clusters and explicit epistemic labeling of the evidence. Revised edition, July 2026.",
+      fa: "تلفیق اقتصاد نهادی، معماری سیاست و مدل‌سازی فنی-اقتصادی: چگونه طراحی ساختارهای سرمایه‌گذاری اقلیمی توزیع منافع آن‌ها را شکل می‌دهد — همراه با ارزیابی مقایسه‌ای خوشه‌های گازی‌سازی ماژولار و برچسب‌گذاری صریح معرفتی شواهد. ویراست بازنگری‌شده، ژوئیهٔ ۲۰۲۶."
     },
-    pdfUrl: "/Policy_Paper.pdf",
-    downloadUrl: "/Policy_Paper.pdf",
-    filename: "Policy_Paper.pdf",
-    size: "2.3 MB",
-    year: 2024
+    pdfUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
+    downloadUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
+    filename: "Climate_Policy_Benefit_Distribution.pdf",
+    size: "1.9 MB · 53 pp",
+    year: 2026
   }
 ];
 
