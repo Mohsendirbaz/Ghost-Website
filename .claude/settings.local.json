@@ -18,7 +18,9 @@
       "Bash(grep -rhoE \"['\\\\\"\\\\`]/\\(docs|covers|founder|posters|library|exhibition|data\\)/[^'\\\\\"\\\\`]*\" src/)",
       "Bash(grep -rnoE '`/\\(docs|covers|founder|posters|library|exhibition\\)/[^`]*\\\\$\\\\{[^`]*`' src/)",
       "Bash(node -e ' *)",
-      "Bash(node scripts/verifyAssets.js)"
+      "Bash(node scripts/verifyAssets.js)",
+      "Bash(git config *)",
+      "Bash(:)"
     ]
   }
 }
