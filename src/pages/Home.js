@@ -46,6 +46,9 @@ export default function Home() {
               </p>
             ))}
           </div>
+          {m.manifesto.afterword && (
+            <p className="manifesto__afterword">{m.manifesto.afterword}</p>
+          )}
         </section>
       )}
 
