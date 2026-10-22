@@ -3,6 +3,7 @@ import { LanguageProvider } from "../context/LanguageContext";
 import Publications from "./Publications";
 
 test("shows view and download actions for the first two papers and contact for the new collection", () => {
+  document.cookie = "preferred_lang=en; path=/";
   render(
     <LanguageProvider>
       <Publications />
@@ -47,4 +48,25 @@ test("shows view and download actions for the first two papers and contact for t
     "href",
     "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf"
   );
+});
+
+test("renders Persian titles and subtitles for every publication in Farsi mode", () => {
+  document.cookie = "preferred_lang=fa; path=/";
+  const { container } = render(
+    <LanguageProvider>
+      <Publications />
+    </LanguageProvider>
+  );
+
+  const containsPersian = (text) => /[\u0600-\u06FF]/.test(text);
+  const titles = screen.getAllByRole("heading", { level: 3 });
+  const subtitles = container.querySelectorAll(".neu-raised p");
+
+  expect(titles).toHaveLength(42);
+  expect(titles.every((title) => containsPersian(title.textContent))).toBe(true);
+  expect(subtitles).toHaveLength(42);
+  expect(
+    Array.from(subtitles).every((subtitle) => containsPersian(subtitle.textContent))
+  ).toBe(true);
+  expect(document.documentElement).toHaveAttribute("dir", "rtl");
 });

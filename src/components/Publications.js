@@ -37,203 +37,443 @@ const publications = [
   },
   {
     id: 3,
-    title: { en: "Constitutional Geometry of Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Admissibility, State, Evidence, and Governed Transformation" }
+    title: {
+      en: "Constitutional Geometry of Adaptive Systems",
+      fa: "هندسهٔ قانون اساسیِ سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Admissibility, State, Evidence, and Governed Transformation",
+      fa: "نظریه‌ای صوری دربارهٔ پذیرش‌پذیری، حالت، شواهد و دگرگونیِ تحت حاکمیت"
+    }
   },
   {
     id: 4,
-    title: { en: "From State Space to Decision Space" },
-    subtitle: { en: "A General Formal Theory of Geometry-Native Computation Under Constraints and Finite Resources" }
+    title: {
+      en: "From State Space to Decision Space",
+      fa: "از فضای حالت تا فضای تصمیم"
+    },
+    subtitle: {
+      en: "A General Formal Theory of Geometry-Native Computation Under Constraints and Finite Resources",
+      fa: "نظریه‌ای صوری و عام برای محاسباتِ هندسه‌محور با وجود قیود و منابع محدود"
+    }
   },
   {
     id: 5,
-    title: { en: "The Calculus of Sufficient Distinction" },
-    subtitle: { en: "Necessary and Sufficient Conditions for Identifiability, Admissibility, and Task-Relative Resolution" }
+    title: {
+      en: "The Calculus of Sufficient Distinction",
+      fa: "حسابِ تمایزِ بسنده"
+    },
+    subtitle: {
+      en: "Necessary and Sufficient Conditions for Identifiability, Admissibility, and Task-Relative Resolution",
+      fa: "شرط‌های لازم و کافی برای شناسایی‌پذیری، پذیرش‌پذیری و تفکیک‌پذیری متناسب با وظیفه"
+    }
   },
   {
     id: 6,
-    title: { en: "Proof-Carrying Optimization" },
-    subtitle: { en: "A Formal Theory of Joint Optimization, Verification, Certification, and Stopping Under Finite Resources" }
+    title: {
+      en: "Proof-Carrying Optimization",
+      fa: "بهینه‌سازیِ همراه با اثبات"
+    },
+    subtitle: {
+      en: "A Formal Theory of Joint Optimization, Verification, Certification, and Stopping Under Finite Resources",
+      fa: "نظریه‌ای صوری برای بهینه‌سازی، راستی‌آزمایی، گواهی‌سازی و توقفِ مشترک با منابع محدود"
+    }
   },
   {
     id: 7,
-    title: { en: "Decomposition Without Loss" },
-    subtitle: { en: "Characterization Theorems for Exact Local Decomposition, Interface Invariants, and Global Decomposition" }
+    title: {
+      en: "Decomposition Without Loss",
+      fa: "تجزیه بدون اتلاف"
+    },
+    subtitle: {
+      en: "Characterization Theorems for Exact Local Decomposition, Interface Invariants, and Global Decomposition",
+      fa: "قضیه‌های مشخصه‌سازی برای تجزیهٔ موضعیِ دقیق، ناورداهای رابط و تجزیهٔ سراسری"
+    }
   },
   {
     id: 8,
-    title: { en: "Jacobian-Metric-Energy Geometry" },
-    subtitle: { en: "A Differential Theory of Sensitivity, Transformation Cost, Invariants, and Constrained Evolution" }
+    title: {
+      en: "Jacobian-Metric-Energy Geometry",
+      fa: "هندسهٔ ژاکوبی، متریک و انرژی"
+    },
+    subtitle: {
+      en: "A Differential Theory of Sensitivity, Transformation Cost, Invariants, and Constrained Evolution",
+      fa: "نظریه‌ای دیفرانسیلی دربارهٔ حساسیت، هزینهٔ دگرگونی، ناورداها و تحولِ مقید"
+    }
   },
   {
     id: 9,
-    title: { en: "Thermodynamic Length as Transformational Geometry" },
-    subtitle: { en: "A Formal Theory of Metric Cost, Geodesic Structure, and Optimal Transformation Paths" }
+    title: {
+      en: "Thermodynamic Length as Transformational Geometry",
+      fa: "طول ترمودینامیکی به‌مثابهٔ هندسهٔ دگرگونی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Metric Cost, Geodesic Structure, and Optimal Transformation Paths",
+      fa: "نظریه‌ای صوری دربارهٔ هزینهٔ متریک، ساختار ژئودزیک و مسیرهای بهینهٔ دگرگونی"
+    }
   },
   {
     id: 10,
-    title: { en: "Temporal Closure as a Coordination Invariant" },
-    subtitle: { en: "A Formal Theory of Validity, Synchronization, Freshness, and Causal Consistency in Time-Indexed Systems" }
+    title: {
+      en: "Temporal Closure as a Coordination Invariant",
+      fa: "بستار زمانی به‌مثابهٔ ناوردای هماهنگی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Validity, Synchronization, Freshness, and Causal Consistency in Time-Indexed Systems",
+      fa: "نظریه‌ای صوری دربارهٔ اعتبار، هم‌زمان‌سازی، تازگی و سازگاری علّی در سامانه‌های زمان‌مند"
+    }
   },
   {
     id: 11,
-    title: { en: "The Geometry of Receptors" },
-    subtitle: { en: "A Formal Theory of Resolution, Distinguishability, Information Capacity, and State-Space Embedding" }
+    title: {
+      en: "The Geometry of Receptors",
+      fa: "هندسهٔ گیرنده‌ها"
+    },
+    subtitle: {
+      en: "A Formal Theory of Resolution, Distinguishability, Information Capacity, and State-Space Embedding",
+      fa: "نظریه‌ای صوری دربارهٔ تفکیک‌پذیری، تمایزپذیری، ظرفیت اطلاعاتی و جاسازی در فضای حالت"
+    }
   },
   {
     id: 12,
-    title: { en: "Identity Before Inference" },
-    subtitle: { en: "An Impossibility and Characterization Theory of Recognition Under Observational Ambiguity" }
+    title: {
+      en: "Identity Before Inference",
+      fa: "هویت پیش از استنتاج"
+    },
+    subtitle: {
+      en: "An Impossibility and Characterization Theory of Recognition Under Observational Ambiguity",
+      fa: "نظریه‌ای دربارهٔ ناممکنی و مشخصه‌سازیِ بازشناسی در شرایط ابهام مشاهده‌ای"
+    }
   },
   {
     id: 13,
-    title: { en: "Admissibility Before Probability" },
-    subtitle: { en: "A Formal Theory of Constrained Hypothesis Spaces, Inference, and Decision" }
+    title: {
+      en: "Admissibility Before Probability",
+      fa: "پذیرش‌پذیری پیش از احتمال"
+    },
+    subtitle: {
+      en: "A Formal Theory of Constrained Hypothesis Spaces, Inference, and Decision",
+      fa: "نظریه‌ای صوری دربارهٔ فضاهای فرضیهٔ مقید، استنتاج و تصمیم"
+    }
   },
   {
     id: 14,
-    title: { en: "The Choreography of Computational Change" },
-    subtitle: { en: "A Formal Theory of Typed, Timed, Reversible, and Constitutionally Valid State Transitions" }
+    title: {
+      en: "The Choreography of Computational Change",
+      fa: "هم‌آراییِ دگرگونی محاسباتی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Typed, Timed, Reversible, and Constitutionally Valid State Transitions",
+      fa: "نظریه‌ای صوری دربارهٔ گذارهای حالتِ نوع‌مند، زمان‌مند، بازگشت‌پذیر و معتبر از نظر قانون اساسی"
+    }
   },
   {
     id: 15,
-    title: { en: "Invariant-Driven Computational Dynamics" },
-    subtitle: { en: "A Formal Theory of Event-Native Computation, Collective State, Geometric Invariants, and Closure" }
+    title: {
+      en: "Invariant-Driven Computational Dynamics",
+      fa: "دینامیک محاسباتیِ هدایت‌شده با ناورداها"
+    },
+    subtitle: {
+      en: "A Formal Theory of Event-Native Computation, Collective State, Geometric Invariants, and Closure",
+      fa: "نظریه‌ای صوری دربارهٔ محاسباتِ رویدادبنیاد، حالت جمعی، ناورداهای هندسی و بستار"
+    }
   },
   {
     id: 16,
-    title: { en: "Nullification as a Primitive of System Evolution" },
-    subtitle: { en: "A Formal Theory of Absence, Perturbation Propagation, Structural Reorganization, and Invariant Change" }
+    title: {
+      en: "Nullification as a Primitive of System Evolution",
+      fa: "ابطال به‌مثابهٔ بنیادی برای تحول سامانه"
+    },
+    subtitle: {
+      en: "A Formal Theory of Absence, Perturbation Propagation, Structural Reorganization, and Invariant Change",
+      fa: "نظریه‌ای صوری دربارهٔ غیاب، انتشار اغتشاش، بازسازمان‌دهی ساختاری و تغییر ناوردا"
+    }
   },
   {
     id: 17,
-    title: { en: "A General Theory of Adaptive Repair" },
-    subtitle: { en: "Characterization of Admissible Reconstruction, Identity Preservation, Sufficiency, and Valid Successor States" }
+    title: {
+      en: "A General Theory of Adaptive Repair",
+      fa: "نظریه‌ای عام دربارهٔ ترمیم تطبیقی"
+    },
+    subtitle: {
+      en: "Characterization of Admissible Reconstruction, Identity Preservation, Sufficiency, and Valid Successor States",
+      fa: "مشخصه‌سازیِ بازسازیِ پذیرفتنی، حفظ هویت، بسندگی و حالت‌های جانشینِ معتبر"
+    }
   },
   {
     id: 18,
-    title: { en: "The Geometry of Evidence" },
-    subtitle: { en: "A Formal Theory of Provenance, Authority, Uncertainty, Distinguishability, and Justified Inference" }
+    title: {
+      en: "The Geometry of Evidence",
+      fa: "هندسهٔ شواهد"
+    },
+    subtitle: {
+      en: "A Formal Theory of Provenance, Authority, Uncertainty, Distinguishability, and Justified Inference",
+      fa: "نظریه‌ای صوری دربارهٔ خاستگاه، مرجعیت، عدم‌قطعیت، تمایزپذیری و استنتاجِ موجه"
+    }
   },
   {
     id: 19,
-    title: { en: "Finite-Budget Intelligence" },
-    subtitle: { en: "A Formal Theory of Joint Allocation Across Representation, Search, Computation, Verification, Proof, and Stopping" }
+    title: {
+      en: "Finite-Budget Intelligence",
+      fa: "هوشمندی با بودجهٔ محدود"
+    },
+    subtitle: {
+      en: "A Formal Theory of Joint Allocation Across Representation, Search, Computation, Verification, Proof, and Stopping",
+      fa: "نظریه‌ای صوری برای تخصیص مشترک منابع میان بازنمایی، جست‌وجو، محاسبه، راستی‌آزمایی، اثبات و توقف"
+    }
   },
   {
     id: 20,
-    title: { en: "From Observation to Constitutional Action" },
-    subtitle: { en: "A Formal Theory of Evidence-Constrained State Reconstruction and Governed Transformation" }
+    title: {
+      en: "From Observation to Constitutional Action",
+      fa: "از مشاهده تا کنشِ قانون‌مند"
+    },
+    subtitle: {
+      en: "A Formal Theory of Evidence-Constrained State Reconstruction and Governed Transformation",
+      fa: "نظریه‌ای صوری دربارهٔ بازسازی حالتِ مقید به شواهد و دگرگونیِ تحت حاکمیت"
+    }
   },
   {
     id: 21,
-    title: { en: "The Calculus of Governed Transformation" },
-    subtitle: { en: "A Unified Formalism for Differential Change, Discrete Transitions, Topological Reorganization, and Valid Successor States" }
+    title: {
+      en: "The Calculus of Governed Transformation",
+      fa: "حسابِ دگرگونیِ تحت حاکمیت"
+    },
+    subtitle: {
+      en: "A Unified Formalism for Differential Change, Discrete Transitions, Topological Reorganization, and Valid Successor States",
+      fa: "صوری‌سازیِ یکپارچه برای تغییر دیفرانسیلی، گذارهای گسسته، بازسازمان‌دهی توپولوژیک و حالت‌های جانشینِ معتبر"
+    }
   },
   {
     id: 22,
-    title: { en: "Toward a General Theory of Adaptive Systems" },
-    subtitle: { en: "Formal Foundations of Geometry, Identity, Temporal Closure, Evidence, Optimization, and Constitutional Computation" }
+    title: {
+      en: "Toward a General Theory of Adaptive Systems",
+      fa: "به‌سوی نظریه‌ای عام دربارهٔ سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "Formal Foundations of Geometry, Identity, Temporal Closure, Evidence, Optimization, and Constitutional Computation",
+      fa: "بنیان‌های صوریِ هندسه، هویت، بستار زمانی، شواهد، بهینه‌سازی و محاسباتِ قانون‌مند"
+    }
   },
   {
     id: 23,
-    title: { en: "The Learning Dynamics of Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Structure Acquisition, Credit Assignment, and Constitutional Plasticity" }
+    title: {
+      en: "The Learning Dynamics of Adaptive Systems",
+      fa: "دینامیک یادگیریِ سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Structure Acquisition, Credit Assignment, and Constitutional Plasticity",
+      fa: "نظریه‌ای صوری دربارهٔ کسب ساختار، تخصیص اعتبار و انعطاف‌پذیریِ قانون‌مند"
+    }
   },
   {
     id: 24,
-    title: { en: "Causal Inference in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Intervention, Counterfactual, and Structural Discovery Under Constitutional Constraints" }
+    title: {
+      en: "Causal Inference in Adaptive Systems",
+      fa: "استنتاج علّی در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Intervention, Counterfactual, and Structural Discovery Under Constitutional Constraints",
+      fa: "نظریه‌ای صوری دربارهٔ مداخله، خلاف‌واقع و کشف ساختار تحت قیود قانون‌مند"
+    }
   },
   {
     id: 25,
-    title: { en: "Information-Theoretic Limits of Adaptive Computation" },
-    subtitle: { en: "A Formal Theory of Entropy Bounds, Rate-Distortion, and Constitutional Capacity" }
+    title: {
+      en: "Information-Theoretic Limits of Adaptive Computation",
+      fa: "کران‌های نظریهٔ اطلاعاتیِ محاسبات تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Entropy Bounds, Rate-Distortion, and Constitutional Capacity",
+      fa: "نظریه‌ای صوری دربارهٔ کران‌های آنتروپی، نرخ-اعوجاج و ظرفیتِ قانون‌مند"
+    }
   },
   {
     id: 26,
-    title: { en: "Consensus and Coordination in Distributed Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Agreement, Byzantine Faults, and Constitutional Synchronization" }
+    title: {
+      en: "Consensus and Coordination in Distributed Adaptive Systems",
+      fa: "اجماع و هماهنگی در سامانه‌های تطبیقیِ توزیع‌شده"
+    },
+    subtitle: {
+      en: "A Formal Theory of Agreement, Byzantine Faults, and Constitutional Synchronization",
+      fa: "نظریه‌ای صوری دربارهٔ توافق، خطاهای بیزانسی و هم‌زمان‌سازیِ قانون‌مند"
+    }
   },
   {
     id: 27,
-    title: { en: "Scaling Laws and Finite-Size Effects in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Asymptotic Behavior, Critical Size, and Constitutional Scaling" }
+    title: {
+      en: "Scaling Laws and Finite-Size Effects in Adaptive Systems",
+      fa: "قوانین مقیاس‌پذیری و اثرهای اندازهٔ محدود در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Asymptotic Behavior, Critical Size, and Constitutional Scaling",
+      fa: "نظریه‌ای صوری دربارهٔ رفتار مجانبی، اندازهٔ بحرانی و مقیاس‌پذیریِ قانون‌مند"
+    }
   },
   {
     id: 28,
-    title: { en: "Symmetry, Invariance, and Symmetry Breaking in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Group Actions, Orbits, and Constitutional Symmetry" }
+    title: {
+      en: "Symmetry, Invariance, and Symmetry Breaking in Adaptive Systems",
+      fa: "تقارن، ناوردایی و شکست تقارن در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Group Actions, Orbits, and Constitutional Symmetry",
+      fa: "نظریه‌ای صوری دربارهٔ کنش‌های گروهی، مدارها و تقارنِ قانون‌مند"
+    }
   },
   {
     id: 29,
-    title: { en: "Renormalization and Multi-Scale Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Coarse-Graining, Fixed Points, and Constitutional Universality" }
+    title: {
+      en: "Renormalization and Multi-Scale Adaptive Systems",
+      fa: "بهنجارش و سامانه‌های تطبیقیِ چندمقیاسی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Coarse-Graining, Fixed Points, and Constitutional Universality",
+      fa: "نظریه‌ای صوری دربارهٔ درشت‌دانه‌سازی، نقاط ثابت و جهان‌شمولیِ قانون‌مند"
+    }
   },
   {
     id: 30,
-    title: { en: "Stochastic Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Noise, Fluctuation, and Constitutional Stability" }
+    title: {
+      en: "Stochastic Adaptive Systems",
+      fa: "سامانه‌های تطبیقیِ تصادفی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Noise, Fluctuation, and Constitutional Stability",
+      fa: "نظریه‌ای صوری دربارهٔ نویز، نوسان و پایداریِ قانون‌مند"
+    }
   },
   {
     id: 31,
-    title: { en: "Fault-Tolerant Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Error Models, Redundancy, and Constitutional Recoverability" }
+    title: {
+      en: "Fault-Tolerant Adaptive Systems",
+      fa: "سامانه‌های تطبیقیِ مقاوم در برابر خطا"
+    },
+    subtitle: {
+      en: "A Formal Theory of Error Models, Redundancy, and Constitutional Recoverability",
+      fa: "نظریه‌ای صوری دربارهٔ مدل‌های خطا، افزونگی و بازیابی‌پذیریِ قانون‌مند"
+    }
   },
   {
     id: 32,
-    title: { en: "Robust Fault-Tolerant Policies in Reinforcement Learning" },
-    subtitle: { en: "A Formal Theory of Policy Redundancy, Adversarial Fault Tolerance, and the Hand-in-Hand Nature of Adaptivity and Robustness" }
+    title: {
+      en: "Robust Fault-Tolerant Policies in Reinforcement Learning",
+      fa: "سیاست‌های مقاوم و خطاپذیر در یادگیری تقویتی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Policy Redundancy, Adversarial Fault Tolerance, and the Hand-in-Hand Nature of Adaptivity and Robustness",
+      fa: "نظریه‌ای صوری دربارهٔ افزونگی سیاست، تحمل خطای خصمانه و پیوند ناگسستنیِ تطبیق‌پذیری و استواری"
+    }
   },
   {
     id: 33,
-    title: { en: "Adversarial Robustness and Security in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Perturbation, Information Leakage, and Constitutional Integrity" }
+    title: {
+      en: "Adversarial Robustness and Security in Adaptive Systems",
+      fa: "استواری در برابر خصم و امنیت در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Perturbation, Information Leakage, and Constitutional Integrity",
+      fa: "نظریه‌ای صوری دربارهٔ اغتشاش، نشت اطلاعات و یکپارچگیِ قانون‌مند"
+    }
   },
   {
     id: 34,
-    title: { en: "The Thermodynamics of Adaptive Computation" },
-    subtitle: { en: "A Formal Theory of Landauer Bounds, Entropy Cost, and Constitutional Reversibility" }
+    title: {
+      en: "The Thermodynamics of Adaptive Computation",
+      fa: "ترمودینامیکِ محاسبات تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Landauer Bounds, Entropy Cost, and Constitutional Reversibility",
+      fa: "نظریه‌ای صوری دربارهٔ کران‌های لانداور، هزینهٔ آنتروپی و بازگشت‌پذیریِ قانون‌مند"
+    }
   },
   {
     id: 35,
-    title: { en: "Generalization and Sample Complexity in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Learning Bounds, Empirical Risk, and Constitutional Regularization" }
+    title: {
+      en: "Generalization and Sample Complexity in Adaptive Systems",
+      fa: "تعمیم‌پذیری و پیچیدگی نمونه در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Learning Bounds, Empirical Risk, and Constitutional Regularization",
+      fa: "نظریه‌ای صوری دربارهٔ کران‌های یادگیری، ریسک تجربی و منظم‌سازیِ قانون‌مند"
+    }
   },
   {
     id: 36,
-    title: { en: "Meta-Adaptation and Learning to Learn" },
-    subtitle: { en: "A Formal Theory of Higher-Order Plasticity, Constitutional Meta-Structure, and Adaptive Adaptation" }
+    title: {
+      en: "Meta-Adaptation and Learning to Learn",
+      fa: "فرا‌تطبیق و یادگیریِ یادگرفتن"
+    },
+    subtitle: {
+      en: "A Formal Theory of Higher-Order Plasticity, Constitutional Meta-Structure, and Adaptive Adaptation",
+      fa: "نظریه‌ای صوری دربارهٔ انعطاف‌پذیری مرتبه‌بالا، فراساختارِ قانون‌مند و تطبیق‌پذیریِ تطبیقی"
+    }
   },
   {
     id: 37,
-    title: { en: "Open-Ended Evolution and Novelty Generation" },
-    subtitle: { en: "A Formal Theory of Unbounded Adaptation, Structural Innovation, and Constitutional Openness" }
+    title: {
+      en: "Open-Ended Evolution and Novelty Generation",
+      fa: "تکاملِ بی‌انتها و تولید نوآوری"
+    },
+    subtitle: {
+      en: "A Formal Theory of Unbounded Adaptation, Structural Innovation, and Constitutional Openness",
+      fa: "نظریه‌ای صوری دربارهٔ تطبیق‌پذیریِ بی‌کران، نوآوری ساختاری و گشودگیِ قانون‌مند"
+    }
   },
   {
     id: 38,
-    title: { en: "The Dynamical Flow and Spectral Theory of the Interface Hypersurface" },
-    subtitle: { en: "Installment V: Transport, Conservation, Heat Kernel, Index, and the Semiclassical Bridge" }
+    title: {
+      en: "The Dynamical Flow and Spectral Theory of the Interface Hypersurface",
+      fa: "جریان دینامیکی و نظریهٔ طیفیِ ابرسطحِ رابط"
+    },
+    subtitle: {
+      en: "Installment V: Transport, Conservation, Heat Kernel, Index, and the Semiclassical Bridge",
+      fa: "بخش پنجم: انتقال، پایستگی، هستهٔ گرما، اندیس و پل نیمه‌کلاسیک"
+    }
   },
   {
     id: 39,
-    title: { en: "Criticality and Phase Transitions in Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Order Parameters, Susceptibility, and Constitutional Criticality" }
+    title: {
+      en: "Criticality and Phase Transitions in Adaptive Systems",
+      fa: "بحرانی‌شدن و گذارهای فازی در سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Order Parameters, Susceptibility, and Constitutional Criticality",
+      fa: "نظریه‌ای صوری دربارهٔ پارامترهای نظم، پاسخ‌پذیری و بحرانی‌شدنِ قانون‌مند"
+    }
   },
   {
     id: 40,
-    title: { en: "Network Topology and Adaptive Capacity" },
-    subtitle: { en: "A Formal Theory of Connectivity, Robustness, and Constitutional Information Flow" }
+    title: {
+      en: "Network Topology and Adaptive Capacity",
+      fa: "توپولوژی شبکه و ظرفیت تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Connectivity, Robustness, and Constitutional Information Flow",
+      fa: "نظریه‌ای صوری دربارهٔ اتصال‌پذیری، استواری و جریان اطلاعاتِ قانون‌مند"
+    }
   },
   {
     id: 41,
-    title: { en: "The Belief Complex" },
-    subtitle: { en: "A Unified Theory of Adaptive Systems Under Partial Observation" }
+    title: {
+      en: "The Belief Complex",
+      fa: "مجموعهٔ باور"
+    },
+    subtitle: {
+      en: "A Unified Theory of Adaptive Systems Under Partial Observation",
+      fa: "نظریه‌ای یکپارچه دربارهٔ سامانه‌های تطبیقی تحت مشاهدهٔ جزئی"
+    }
   },
   {
     id: 42,
-    title: { en: "Temporal Logics for Adaptive Systems" },
-    subtitle: { en: "A Formal Theory of Specification, Model Checking, and Constitutional Verification" }
+    title: {
+      en: "Temporal Logics for Adaptive Systems",
+      fa: "منطق‌های زمانی برای سامانه‌های تطبیقی"
+    },
+    subtitle: {
+      en: "A Formal Theory of Specification, Model Checking, and Constitutional Verification",
+      fa: "نظریه‌ای صوری دربارهٔ مشخصه‌سازی، وارسی مدل و راستی‌آزماییِ قانون‌مند"
+    }
   }
 ];
 

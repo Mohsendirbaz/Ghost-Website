@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";import { motion } from "framer-motion";
-import { Download, Linkedin, GraduationCap, Briefcase, Award, Mail, Sparkles, BookOpen } from "lucide-react";
+import { GraduationCap, Briefcase, Award, Sparkles, BookOpen } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { copy } from '../data/copy';
 import Breadcrumb from '../components/Breadcrumb';
@@ -10,8 +10,6 @@ import {
   founderName,
   founderTitle,
   founderTagline,
-  linkedInUrl,
-  cvDownloadUrl,
   cvEducation,
   cvExperience,
   cvAwards,
@@ -86,61 +84,17 @@ const Bio = () => {
       {/* Compact Hero */}
       <section className="relative pt-24 pb-12 bg-gradient-to-b from-background to-background/50">
         <div className="container-ghost">
-          <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
-            {/* Left: Avatar + Quick Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="neu-elevated p-6 text-center lg:sticky lg:top-24"
-            >
-              <img
-                src="/founder/album/graduation.jpg"
-                alt={lang === 'en'
-                  ? 'Dr. Mohsen Dirbaz in doctoral regalia at commencement, with family, under a blossoming tree'
-                  : 'دکتر محسن دیرباز در ردای دکتری در جشن دانش‌آموختگی، در کنار خانواده، زیر درخت شکوفه'}
-                className="w-full mx-auto mb-2 rounded-2xl shadow-lg"
-                style={{ maxWidth: '15rem' }}
-              />
-              <p className="text-xs text-muted-foreground mb-4">
-                {lang === 'en' ? 'Doctoral commencement — with family' : 'جشن دانش‌آموختگی دکتری — در کنار خانواده'}
-              </p>
-              <h1 className="font-display text-2xl font-bold text-foreground mb-1">
-                {t(founderName, lang)}
-              </h1>
-              <p className="text-sm text-primary font-medium mb-4">
-                {t(founderTitle, lang)}
-              </p>
-              <div className="flex flex-col gap-2">
-                <a
-                  href={cvDownloadUrl}
-                  download
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-                >
-                  <Download className="w-4 h-4" />
-                  {lang === "en" ? "Download CV" : "دانلود رزومه"}
-                </a>
-                <a
-                  href={linkedInUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="mailto:dirbaz.sharif@gmail.com"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium"
-                >
-                  <Mail className="w-4 h-4" />
-                  {lang === "en" ? "Contact" : "تماس"}
-                </a>
-              </div>
-
-            </motion.div>
-
+          <div className="grid gap-8 items-start">
             {/* Right: Bio + Navigation + Content */}
             <div className="flex flex-col gap-6">
+              <div>
+                <h1 className="font-display text-3xl font-bold text-foreground mb-1">
+                  {t(founderName, lang)}
+                </h1>
+                <p className="text-sm text-primary font-medium">
+                  {t(founderTitle, lang)}
+                </p>
+              </div>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
