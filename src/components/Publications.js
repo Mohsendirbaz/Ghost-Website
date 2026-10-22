@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, Mail } from "lucide-react";
+import { Download, ExternalLink, FileText, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 const publications = [
@@ -12,7 +12,12 @@ const publications = [
     description: {
       en: "An exploratory framework validated empirically on biomass gasification: AGM-computed elliptic integrals as deterministic parameterizations of a learned reduced model, with an explicit what-is-and-is-not-claimed scope statement. Revised edition, 2026.",
       fa: "چارچوبی اکتشافی با اعتبارسنجی تجربی بر گازی‌سازی زیست‌توده: انتگرال‌های بیضوی محاسبه‌شده با AGM به‌مثابه پارامتری‌سازی قطعی یک مدل کاستهٔ آموخته، همراه با بیانیهٔ صریح دامنهٔ ادعا. ویراست بازنگری‌شده، ۲۰۲۶."
-    }
+    },
+    pdfUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
+    downloadUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
+    filename: "Physics_Informed_Special_Function_Framework.pdf",
+    size: "481 KB · 53 pp",
+    year: 2026
   },
   {
     id: 2,
@@ -23,7 +28,12 @@ const publications = [
     description: {
       en: "Institutional economics, policy architecture, and techno-economic modeling integrated: how the design of climate investment structures shapes the distribution of their benefits — with a comparative assessment of modular gasification clusters and explicit epistemic labeling of the evidence. Revised edition, July 2026.",
       fa: "تلفیق اقتصاد نهادی، معماری سیاست و مدل‌سازی فنی-اقتصادی: چگونه طراحی ساختارهای سرمایه‌گذاری اقلیمی توزیع منافع آن‌ها را شکل می‌دهد — همراه با ارزیابی مقایسه‌ای خوشه‌های گازی‌سازی ماژولار و برچسب‌گذاری صریح معرفتی شواهد. ویراست بازنگری‌شده، ژوئیهٔ ۲۰۲۶."
-    }
+    },
+    pdfUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
+    downloadUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
+    filename: "Climate_Policy_Benefit_Distribution.pdf",
+    size: "1.9 MB · 53 pp",
+    year: 2026
   },
   {
     id: 3,
@@ -277,14 +287,42 @@ const Publications = () => {
               </div>
             </div>
 
-            <div className="border-t border-border/50 pt-4">
-              <a
-                href="mailto:dirbaz.sharif@gmail.com"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
-              >
-                <Mail className="w-4 h-4" />
-                {lang === "en" ? "Contact us" : "تماس با ما"}
-              </a>
+            <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-border/50">
+              {pub.pdfUrl ? (
+                <>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className="font-mono">{pub.year}</span>
+                    <span>•</span>
+                    <span>{pub.size}</span>
+                  </div>
+                  <div className="flex-1" />
+                  <a
+                    href={pub.downloadUrl}
+                    download={pub.filename}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+                  >
+                    <Download className="w-4 h-4" />
+                    {lang === "en" ? "Download PDF" : "دانلود PDF"}
+                  </a>
+                  <a
+                    href={pub.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    {lang === "en" ? "View" : "مشاهده"}
+                  </a>
+                </>
+              ) : (
+                <a
+                  href="mailto:dirbaz.sharif@gmail.com"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
+                >
+                  <Mail className="w-4 h-4" />
+                  {lang === "en" ? "Contact us" : "تماس با ما"}
+                </a>
+              )}
             </div>
           </motion.div>
         ))}
