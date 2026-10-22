@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { LanguageProvider } from "../context/LanguageContext";
 import Publications from "./Publications";
 
-test("renders all 42 publications and marks unavailable PDFs", () => {
+test("renders all 42 publications consistently with contact information", () => {
   render(
     <LanguageProvider>
       <Publications />
@@ -14,8 +14,8 @@ test("renders all 42 publications and marks unavailable PDFs", () => {
   expect(entries[2]).toHaveTextContent("Constitutional Geometry of Adaptive Systems");
   expect(screen.getByText(
     "A Formal Theory of Admissibility, State, Evidence, and Governed Transformation"
-  )).toBeInTheDocument();
-  expect(screen.getAllByText("PDF coming soon")).toHaveLength(40);
-  expect(screen.getAllByRole("link", { name: /Download PDF/i })).toHaveLength(2);
-  expect(screen.getAllByRole("link", { name: /^View$/i })).toHaveLength(2);
+  )).toHaveClass("text-foreground");
+  expect(screen.getAllByRole("link", { name: /Contact us/i })).toHaveLength(42);
+  expect(screen.queryByText("PDF coming soon")).not.toBeInTheDocument();
+  expect(screen.queryByRole("link", { name: /Download PDF|View/i })).not.toBeInTheDocument();
 });

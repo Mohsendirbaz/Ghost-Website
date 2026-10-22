@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-import { FileText, Download, ExternalLink } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
-/* Revised editions (July 2026). Single canonical copies live in
-   /docs/pdf/ alongside the Technical Library entries. */
 const publications = [
   {
     id: 1,
@@ -14,12 +12,7 @@ const publications = [
     description: {
       en: "An exploratory framework validated empirically on biomass gasification: AGM-computed elliptic integrals as deterministic parameterizations of a learned reduced model, with an explicit what-is-and-is-not-claimed scope statement. Revised edition, 2026.",
       fa: "چارچوبی اکتشافی با اعتبارسنجی تجربی بر گازی‌سازی زیست‌توده: انتگرال‌های بیضوی محاسبه‌شده با AGM به‌مثابه پارامتری‌سازی قطعی یک مدل کاستهٔ آموخته، همراه با بیانیهٔ صریح دامنهٔ ادعا. ویراست بازنگری‌شده، ۲۰۲۶."
-    },
-    pdfUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
-    downloadUrl: "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf",
-    filename: "Physics_Informed_Special_Function_Framework.pdf",
-    size: "481 KB · 53 pp",
-    year: 2026
+    }
   },
   {
     id: 2,
@@ -30,12 +23,7 @@ const publications = [
     description: {
       en: "Institutional economics, policy architecture, and techno-economic modeling integrated: how the design of climate investment structures shapes the distribution of their benefits — with a comparative assessment of modular gasification clusters and explicit epistemic labeling of the evidence. Revised edition, July 2026.",
       fa: "تلفیق اقتصاد نهادی، معماری سیاست و مدل‌سازی فنی-اقتصادی: چگونه طراحی ساختارهای سرمایه‌گذاری اقلیمی توزیع منافع آن‌ها را شکل می‌دهد — همراه با ارزیابی مقایسه‌ای خوشه‌های گازی‌سازی ماژولار و برچسب‌گذاری صریح معرفتی شواهد. ویراست بازنگری‌شده، ژوئیهٔ ۲۰۲۶."
-    },
-    pdfUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
-    downloadUrl: "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf",
-    filename: "Climate_Policy_Benefit_Distribution.pdf",
-    size: "1.9 MB · 53 pp",
-    year: 2026
+    }
   },
   {
     id: 3,
@@ -282,66 +270,24 @@ const Publications = () => {
                   {localizedText(pub.title, lang)}
                 </h3>
                 {(pub.subtitle || pub.description) && (
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-sm text-foreground mb-3">
                     {localizedText(pub.subtitle || pub.description, lang)}
                   </p>
                 )}
               </div>
             </div>
 
-            {(pub.pdfUrl || pub.year || pub.size) && (
-              <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-border/50">
-                {(pub.year || pub.size) && (
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    {pub.year && <span className="font-mono">{pub.year}</span>}
-                    {pub.year && pub.size && <span>•</span>}
-                    {pub.size && <span>{pub.size}</span>}
-                  </div>
-                )}
-
-                <div className="flex-1" />
-
-                {pub.downloadUrl && (
-                  <a
-                    href={pub.downloadUrl}
-                    download={pub.filename}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-                  >
-                    <Download className="w-4 h-4" />
-                    {lang === "en" ? "Download PDF" : "دانلود PDF"}
-                  </a>
-                )}
-
-                {pub.pdfUrl && (
-                  <a
-                    href={pub.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    {lang === "en" ? "View" : "مشاهده"}
-                  </a>
-                )}
-              </div>
-            )}
-
-            {!pub.pdfUrl && (
-              <p className="text-xs text-muted-foreground border-t border-border/50 pt-4">
-                {lang === "en" ? "PDF coming soon" : "فایل PDF به‌زودی"}
-              </p>
-            )}
+            <div className="border-t border-border/50 pt-4">
+              <a
+                href="mailto:dirbaz.sharif@gmail.com"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg neu-interactive text-sm font-medium hover:shadow-md transition-all"
+              >
+                <Mail className="w-4 h-4" />
+                {lang === "en" ? "Contact us" : "تماس با ما"}
+              </a>
+            </div>
           </motion.div>
         ))}
-      </div>
-
-      <div className="neu-raised p-6 bg-gradient-to-br from-background to-primary/5">
-        <p className="text-sm text-muted-foreground">
-          {lang === "en"
-            ? "PDFs are available for the first two publications. PDFs for the remaining titles will be added soon."
-            : "فایل‌های PDF برای دو عنوان نخست در دسترس هستند. فایل‌های PDF سایر عناوین به‌زودی اضافه خواهند شد."
-          }
-        </p>
       </div>
     </div>
   );
