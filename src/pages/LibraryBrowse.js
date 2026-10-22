@@ -15,6 +15,7 @@ import {
     useLibraryManifest,
     useFileSearch,
     CATEGORY_META,
+    getFileTitle,
 } from '../data/libraryManifest';
 import '../styles/libraryBrowse.css';
 
@@ -24,6 +25,7 @@ function FileCard({ file, lang }) {
     const isRtl = lang === 'fa';
     const catMeta = CATEGORY_META[file.category] || { en: file.category, fa: file.category, icon: '📄' };
     const catLabel = isRtl ? catMeta.fa : catMeta.en;
+    const title = getFileTitle(file, lang);
 
     const sizeLabel = file.sizeBytes
         ? file.sizeBytes > 1024 * 1024
@@ -36,7 +38,7 @@ function FileCard({ file, lang }) {
         filename:   file.filename,
         path:       file.path,
         type:       file.type,
-        title:      { en: file.title, fa: file.title },
+        title:      { en: getFileTitle(file, 'en'), fa: getFileTitle(file, 'fa') },
         category:   file.category,
         keywords:   [],
     };
@@ -47,7 +49,7 @@ function FileCard({ file, lang }) {
                 {file.type === 'pdf' ? '📄' : file.type === 'html' ? '🌐' : '📝'}
             </div>
             <div className="lb-file-card__body">
-                <div className="lb-file-card__title">{file.title}</div>
+                <div className="lb-file-card__title">{title}</div>
                 <div className="lb-file-card__meta">
                     <span className={`lb-badge lb-badge--${file.type}`}>{file.type.toUpperCase()}</span>
                     <span className="lb-file-card__cat">{catLabel}</span>
@@ -60,7 +62,7 @@ function FileCard({ file, lang }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="lb-view-link"
-                    aria-label={`Open ${file.title}`}
+                    aria-label={`${isRtl ? 'باز کردن' : 'Open'} ${title}`}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {isRtl ? 'باز کردن' : 'Open'}

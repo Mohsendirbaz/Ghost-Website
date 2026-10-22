@@ -16,6 +16,11 @@
 
 import { useState, useEffect, useMemo } from 'react';
 
+export function getFileTitle(file, lang) {
+    if (typeof file.title === 'string') return file.title;
+    return file.title?.[lang] || file.title?.en || file.title?.fa || file.filename;
+}
+
 // ─── Module-level cache (single fetch per browser session) ────────────────────
 
 let _promise = null;
@@ -98,7 +103,8 @@ export function useFileSearch(query) {
         const q = query.toLowerCase().trim();
         return data.files.filter((f) =>
             f.filename.toLowerCase().includes(q) ||
-            f.title.toLowerCase().includes(q) ||
+            getFileTitle(f, 'en').toLowerCase().includes(q) ||
+            getFileTitle(f, 'fa').toLowerCase().includes(q) ||
             f.category.toLowerCase().includes(q)
         );
     }, [data, query]);

@@ -68,7 +68,7 @@
       "category": "application",
       "lang": "en",
       "sizeBytes": 98627,
-      "title": "CV 2026"
+      "title": { "en": "CV 2026", "fa": "رزومه ۲۰۲۶" }
     },
     {
       "id": "av-research-تحلیل-خستگی-اوج،-ماتریس-طراحی،-و-معماری-حسگر",
@@ -78,7 +78,7 @@
       "category": "av-research",
       "lang": "fa",
       "sizeBytes": 71798,
-      "title": "تحلیل خستگی اوج، ماتریس طراحی، و معماری حسگر"
+      "title": { "en": "تحلیل خستگی اوج، ماتریس طراحی، و معماری حسگر", "fa": "تحلیل خستگی اوج، ماتریس طراحی، و معماری حسگر" }
     },
     {
       "id": "av-research-روش-سیستماتیک-پیمایش",
@@ -88,7 +88,7 @@
       "category": "av-research",
       "lang": "fa",
       "sizeBytes": 86093,
-      "title": "روش سیستماتیک پیمایش"
+      "title": { "en": "روش سیستماتیک پیمایش", "fa": "روش سیستماتیک پیمایش" }
     },
     {
       "id": "av-research-نرم-افزار-و-الکترونیک-خودرو-۲۰۳۰",
@@ -98,7 +98,7 @@
       "category": "av-research",
       "lang": "fa",
       "sizeBytes": 133793,
-      "title": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰"
+      "title": { "en": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰", "fa": "نرم‌افزار و الکترونیک خودرو ۲۰۳۰" }
     },
     {
       "id": "av-research-architecture_of_trust",
@@ -108,7 +108,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 23742,
-      "title": "architecture of trust"
+      "title": { "en": "architecture of trust", "fa": "معماری اعتماد" }
     },
     {
       "id": "av-research-automated-evaluation-tools",
@@ -118,7 +118,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 14107,
-      "title": "Automated Evaluation Tools"
+      "title": { "en": "Automated Evaluation Tools", "fa": "ابزارهای ارزیابی خودکار" }
     },
     {
       "id": "av-research-bilinear-coupling-map",
@@ -128,7 +128,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 103510,
-      "title": "bilinear coupling map"
+      "title": { "en": "bilinear coupling map", "fa": "نگاشت جفت‌شدگی دوخطی" }
     },
     {
       "id": "av-research-constraint_stress_theory",
@@ -138,7 +138,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 39374,
-      "title": "constraint stress theory"
+      "title": { "en": "constraint stress theory", "fa": "نظریه تنش قید" }
     },
     {
       "id": "av-research-continuation_bet",
@@ -148,7 +148,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 8815,
-      "title": "continuation bet"
+      "title": { "en": "continuation bet", "fa": "شرط ادامه" }
     },
     {
       "id": "av-research-deepseek_html_20260205_4cd679",
@@ -158,7 +158,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 43053,
-      "title": "deepseek html 20260205 4cd679"
+      "title": { "en": "deepseek html 20260205 4cd679", "fa": "سند HTML دیپ‌سیک · ۲۰۲۶-۰۲-۰۵" }
     },
     {
       "id": "av-research-document_pdf",
@@ -168,7 +168,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 419245,
-      "title": "document pdf"
+      "title": { "en": "document pdf", "fa": "سند PDF" }
     },
     {
       "id": "av-research-overlay-archipelago-brute-force-schedule",
@@ -178,7 +178,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 36919,
-      "title": "overlay archipelago brute force schedule"
+      "title": { "en": "overlay archipelago brute force schedule", "fa": "زمان‌بندی جست‌وجوی فراگیر مجمع‌الجزایر Overlay" }
     },
     {
       "id": "av-research-overlay-archipelago-synthesis",
@@ -188,7 +188,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 44434,
-      "title": "overlay archipelago synthesis"
+      "title": { "en": "overlay archipelago synthesis", "fa": "تلفیق مجمع‌الجزایر Overlay" }
     },
     {
       "id": "av-research-overlay-master-enhancement-table",
@@ -198,7 +198,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 43571,
-      "title": "overlay master enhancement table"
+      "title": { "en": "overlay master enhancement table", "fa": "جدول اصلی بهبود Overlay" }
     },
     {
       "id": "av-research-overlay-collection_compressed",
@@ -208,7 +208,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 1988861,
-      "title": "Overlay Collection compressed"
+      "title": { "en": "Overlay Collection compressed", "fa": "مجموعه فشرده Overlay" }
     },
     {
       "id": "av-research-qs-for-av",
@@ -218,7 +218,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 5225388,
-      "title": "QS for AV"
+      "title": { "en": "QS for AV", "fa": "حسگری کوانتومی برای خودروهای خودران" }
     },
     {
       "id": "av-research-qs-for-av-research-560-resources",
@@ -228,7 +228,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 184127,
-      "title": "QS for AV Research 560 Resources"
+      "title": { "en": "QS for AV Research 560 Resources", "fa": "پژوهش حسگری کوانتومی برای خودروهای خودران · ۵۶۰ منبع" }
     },
     {
       "id": "av-research-r1-quantum-sensing-for-autonomous-vehicles",
@@ -238,7 +238,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 27255,
-      "title": "R1 Quantum sensing for autonomous vehicles"
+      "title": { "en": "R1 Quantum sensing for autonomous vehicles", "fa": "R1 · حسگری کوانتومی برای خودروهای خودران" }
     },
     {
       "id": "av-research-truth_governance_matrix",
@@ -248,7 +248,7 @@
       "category": "av-research",
       "lang": "en",
       "sizeBytes": 20139,
-      "title": "truth governance matrix"
+      "title": { "en": "truth governance matrix", "fa": "ماتریس حاکمیت حقیقت" }
     },
     {
       "id": "misc-isa",
@@ -258,7 +258,7 @@
       "category": "misc",
       "lang": "en",
       "sizeBytes": 165809,
-      "title": "ISA"
+      "title": { "en": "ISA", "fa": "معماری مجموعه دستورالعمل‌ها (ISA)" }
     },
     {
       "id": "misc-temporal-state-management",
@@ -268,7 +268,7 @@
       "category": "misc",
       "lang": "en",
       "sizeBytes": 491066,
-      "title": "Temporal State Management"
+      "title": { "en": "Temporal State Management", "fa": "مدیریت حالت زمانی" }
     },
     {
       "id": "notion-adaptive-group-coordination-framework-companion-085d0ad001f2",
@@ -278,7 +278,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 41806,
-      "title": "Adaptive Group Coordination Framework — Companion 085d0ad001f24044a51ccd2244763a42"
+      "title": { "en": "Adaptive Group Coordination Framework — Companion 085d0ad001f24044a51ccd2244763a42", "fa": "چارچوب هماهنگی گروهی تطبیقی — سند همراه 085d0ad001f24044a51ccd2244763a42" }
     },
     {
       "id": "notion-adaptive-signal-multiplexer-with-dynamic-problem-f-7615112ab",
@@ -288,7 +288,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 46688,
-      "title": "Adaptive Signal Multiplexer with Dynamic Problem F 7615112ab78b4713aa2f5b4703746ba4"
+      "title": { "en": "Adaptive Signal Multiplexer with Dynamic Problem F 7615112ab78b4713aa2f5b4703746ba4", "fa": "مالتی‌پلکسر سیگنال تطبیقی با مسئله پویا F 7615112ab78b4713aa2f5b4703746ba4" }
     },
     {
       "id": "notion-autonomous-vehicles-research-note-d874800c8ee44ec9b68c37c9df",
@@ -298,7 +298,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 4350,
-      "title": "Autonomous Vehicles — Research Note d874800c8ee44ec9b68c37c9df50998d"
+      "title": { "en": "Autonomous Vehicles — Research Note d874800c8ee44ec9b68c37c9df50998d", "fa": "خودروهای خودران — یادداشت پژوهشی d874800c8ee44ec9b68c37c9df50998d" }
     },
     {
       "id": "notion-autonomy-research-a8c4d94b800f41b0a973387f236792e0",
@@ -308,7 +308,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 19,
-      "title": "Autonomy Research a8c4d94b800f41b0a973387f236792e0"
+      "title": { "en": "Autonomy Research a8c4d94b800f41b0a973387f236792e0", "fa": "پژوهش خودرانی a8c4d94b800f41b0a973387f236792e0" }
     },
     {
       "id": "notion-conflict-resolution-architecture-complete-lecture-e314cbb8ea",
@@ -318,7 +318,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 105922,
-      "title": "Conflict Resolution Architecture Complete Lecture e314cbb8ea4b4c0bb415cdade0d04eb9"
+      "title": { "en": "Conflict Resolution Architecture Complete Lecture e314cbb8ea4b4c0bb415cdade0d04eb9", "fa": "معماری حل تعارض — درس‌نامه کامل e314cbb8ea4b4c0bb415cdade0d04eb9" }
     },
     {
       "id": "notion-fascinating-fields-that-benefit-from-physics-infor-2b3f832e5",
@@ -328,7 +328,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 20221,
-      "title": "Fascinating fields that benefit from physics infor 2b3f832e52ca8089a72ef9f74a2f81e6"
+      "title": { "en": "Fascinating fields that benefit from physics infor 2b3f832e52ca8089a72ef9f74a2f81e6", "fa": "حوزه‌های جذابِ بهره‌مند از اطلاعات فیزیکی 2b3f832e52ca8089a72ef9f74a2f81e6" }
     },
     {
       "id": "notion-physics-informed-architecture-equation-sensor-cont-97d293172",
@@ -338,7 +338,7 @@
       "category": "notion",
       "lang": "en",
       "sizeBytes": 9987,
-      "title": "Physics Informed Architecture Equation Sensor Cont 97d2931724e84e649d5d6aab025efa35"
+      "title": { "en": "Physics Informed Architecture Equation Sensor Cont 97d2931724e84e649d5d6aab025efa35", "fa": "معماری آگاه از فیزیک: معادله، حسگر و کنترل 97d2931724e84e649d5d6aab025efa35" }
     },
     {
       "id": "picapd-en-hardware-isa",
@@ -348,7 +348,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 478839,
-      "title": "Hardware ISA"
+      "title": { "en": "Hardware ISA", "fa": "معماری مجموعه دستورالعمل سخت‌افزار" }
     },
     {
       "id": "picapd-en-highest-impact-spec-fixes-for-isa",
@@ -358,7 +358,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 6508,
-      "title": "Highest impact spec fixes for ISA"
+      "title": { "en": "Highest impact spec fixes for ISA", "fa": "اصلاحات پربازده مشخصات ISA" }
     },
     {
       "id": "picapd-en-picapd_compressed",
@@ -368,7 +368,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 6290713,
-      "title": "PICAPD compressed"
+      "title": { "en": "PICAPD compressed", "fa": "نسخه فشرده PICAPD" }
     },
     {
       "id": "picapd-en-picapd_isa_rectification_main_context",
@@ -378,7 +378,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 29075,
-      "title": "PICAPD ISA Rectification Main Context"
+      "title": { "en": "PICAPD ISA Rectification Main Context", "fa": "زمینه اصلی اصلاح معماری PICAPD ISA" }
     },
     {
       "id": "picapd-en-picapd_platform_profile_stop5_automotive_perception",
@@ -388,7 +388,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 3885,
-      "title": "PICAPD Platform Profile STOP5 Automotive Perception"
+      "title": { "en": "PICAPD Platform Profile STOP5 Automotive Perception", "fa": "نمایه پلتفرم PICAPD STOP5 برای ادراک خودرو" }
     },
     {
       "id": "picapd-en-picapd_silicon",
@@ -398,7 +398,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 74087,
-      "title": "PICAPD Silicon"
+      "title": { "en": "PICAPD Silicon", "fa": "سیلیکون PICAPD" }
     },
     {
       "id": "picapd-en-picapd_v1_0_1_errata_patchtext",
@@ -408,7 +408,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 6498,
-      "title": "PICAPD v1 0 1 Errata PatchText"
+      "title": { "en": "PICAPD v1 0 1 Errata PatchText", "fa": "متن اصلاحیه خطاهای PICAPD نسخه ۱.۰.۱" }
     },
     {
       "id": "picapd-en-picapd_v1_1_annex_drafts",
@@ -418,7 +418,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 9212,
-      "title": "PICAPD v1 1 Annex Drafts"
+      "title": { "en": "PICAPD v1 1 Annex Drafts", "fa": "پیش‌نویس پیوست‌های PICAPD نسخه ۱.۱" }
     },
     {
       "id": "picapd-en-picapd-instruction-set-architecture",
@@ -428,7 +428,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 33683,
-      "title": "PICAPD INSTRUCTION SET ARCHITECTURE"
+      "title": { "en": "PICAPD INSTRUCTION SET ARCHITECTURE", "fa": "معماری مجموعه دستورالعمل PICAPD" }
     },
     {
       "id": "picapd-en-r2-evolutionary-co-design-for-the-picapd-platform-where-sili",
@@ -438,7 +438,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 23962,
-      "title": "R2 Evolutionary co design for the PICAPD platform where silicon meets software"
+      "title": { "en": "R2 Evolutionary co design for the PICAPD platform where silicon meets software", "fa": "R2 · هم‌طراحی تکاملی برای پلتفرم PICAPD؛ پیوند سیلیکون و نرم‌افزار" }
     },
     {
       "id": "picapd-en-stop_5_bitvector_index",
@@ -448,7 +448,7 @@
       "category": "picapd",
       "lang": "en",
       "sizeBytes": 27073,
-      "title": "STOP 5 Bitvector Index"
+      "title": { "en": "STOP 5 Bitvector Index", "fa": "نمایه بردار بیتی STOP 5" }
     },
     {
       "id": "picapd-fa-دستورالعمل",
@@ -458,7 +458,7 @@
       "category": "picapd",
       "lang": "fa",
       "sizeBytes": 258826,
-      "title": "دستورالعمل"
+      "title": { "en": "دستورالعمل", "fa": "دستورالعمل" }
     },
     {
       "id": "picapd-fa-سیلیکون",
@@ -468,7 +468,7 @@
       "category": "picapd",
       "lang": "fa",
       "sizeBytes": 549361,
-      "title": "سیلیکون"
+      "title": { "en": "سیلیکون", "fa": "سیلیکون" }
     },
     {
       "id": "picapd-fa-مجموعه-دستورالعمل-picapd",
@@ -478,7 +478,7 @@
       "category": "picapd",
       "lang": "fa",
       "sizeBytes": 33521,
-      "title": "مجموعه دستورالعمل PICAPD"
+      "title": { "en": "مجموعه دستورالعمل PICAPD", "fa": "مجموعه دستورالعمل PICAPD" }
     },
     {
       "id": "picapd-fa-picapdسیلیکون-فارسی",
@@ -488,7 +488,7 @@
       "category": "picapd",
       "lang": "fa",
       "sizeBytes": 110546,
-      "title": "PICAPDسیلیکون فارسی"
+      "title": { "en": "PICAPDسیلیکون فارسی", "fa": "PICAPDسیلیکون فارسی" }
     },
     {
       "id": "strategic-تحلیل-رقابتی-فنی-یکپارچه",
@@ -498,7 +498,7 @@
       "category": "strategic",
       "lang": "fa",
       "sizeBytes": 236278,
-      "title": "تحلیل رقابتی فنی یکپارچه"
+      "title": { "en": "تحلیل رقابتی فنی یکپارچه", "fa": "تحلیل رقابتی فنی یکپارچه" }
     },
     {
       "id": "strategic-epu_document_farsi",
@@ -508,7 +508,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 75099,
-      "title": "EPU Document Farsi"
+      "title": { "en": "EPU Document Farsi", "fa": "سند فارسی EPU" }
     },
     {
       "id": "strategic-epu_initiative_alignment_matrix",
@@ -518,7 +518,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 23461,
-      "title": "EPU Initiative Alignment Matrix"
+      "title": { "en": "EPU Initiative Alignment Matrix", "fa": "ماتریس هم‌راستایی ابتکار EPU" }
     },
     {
       "id": "strategic-epu-autonomous-driving-integration",
@@ -528,7 +528,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 11863283,
-      "title": "EPU Autonomous Driving Integration"
+      "title": { "en": "EPU Autonomous Driving Integration", "fa": "یکپارچه‌سازی رانندگی خودران EPU" }
     },
     {
       "id": "strategic-ghost_autonomy_unified_technical_analysis_v3",
@@ -538,7 +538,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 40772,
-      "title": "Ghost Autonomy Unified Technical Analysis V3"
+      "title": { "en": "Ghost Autonomy Unified Technical Analysis V3", "fa": "تحلیل فنی یکپارچه Ghost Autonomy · نسخه ۳" }
     },
     {
       "id": "strategic-ghost_autonomy_unified_technical_analysis_v4",
@@ -548,7 +548,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 118748,
-      "title": "Ghost Autonomy Unified Technical Analysis V4"
+      "title": { "en": "Ghost Autonomy Unified Technical Analysis V4", "fa": "تحلیل فنی یکپارچه Ghost Autonomy · نسخه ۴" }
     },
     {
       "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4",
@@ -558,7 +558,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 136752,
-      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
+      "title": { "en": "Ghost Autonomy Unified Technical Competitive Analysis V4", "fa": "تحلیل فنی رقابتی یکپارچه Ghost Autonomy · نسخه ۴" }
     },
     {
       "id": "strategic-ghost-autonomy-unified-technical-competitive-analysis-v4-08c2635c",
@@ -568,7 +568,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 14200582,
-      "title": "Ghost Autonomy Unified Technical Competitive Analysis V4"
+      "title": { "en": "Ghost Autonomy Unified Technical Competitive Analysis V4", "fa": "تحلیل فنی رقابتی یکپارچه Ghost Autonomy · نسخه ۴" }
     },
     {
       "id": "strategic-implementation_readiness_matrix",
@@ -578,7 +578,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 54191,
-      "title": "implementation readiness matrix"
+      "title": { "en": "implementation readiness matrix", "fa": "ماتریس آمادگی پیاده‌سازی" }
     },
     {
       "id": "strategic-nasdaq_pathways",
@@ -588,7 +588,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 965977,
-      "title": "NASDAQ Pathways"
+      "title": { "en": "NASDAQ Pathways", "fa": "مسیرهای ورود به نزدک" }
     },
     {
       "id": "strategic-summary-of-projects-at-5-stops",
@@ -598,7 +598,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 7270,
-      "title": "summary of projects at 5 stops"
+      "title": { "en": "summary of projects at 5 stops", "fa": "خلاصه پروژه‌ها در ۵ ایستگاه" }
     },
     {
       "id": "strategic-visitor_retention_booster_updated_analysis",
@@ -608,7 +608,7 @@
       "category": "strategic",
       "lang": "en",
       "sizeBytes": 9774,
-      "title": "visitor retention booster updated analysis"
+      "title": { "en": "visitor retention booster updated analysis", "fa": "تحلیل به‌روزشده تقویت‌کننده ماندگاری بازدیدکننده" }
     },
     {
       "id": "thesis-research-chip-manufacturing-process-transcript",
@@ -618,7 +618,7 @@
       "category": "thesis-research",
       "lang": "en",
       "sizeBytes": 26822,
-      "title": "chip manufacturing process transcript"
+      "title": { "en": "chip manufacturing process transcript", "fa": "متن فرایند ساخت تراشه" }
     },
     {
       "id": "thesis-research-functionally-driven-refinement-schedule",
@@ -628,7 +628,7 @@
       "category": "thesis-research",
       "lang": "en",
       "sizeBytes": 4388711,
-      "title": "Functionally Driven Refinement Schedule"
+      "title": { "en": "Functionally Driven Refinement Schedule", "fa": "برنامه پالایش مبتنی بر کارکرد" }
     },
     {
       "id": "thesis-research-ga_impl_2026_001_source_package-1-11",
@@ -638,7 +638,7 @@
       "category": "thesis-research",
       "lang": "en",
       "sizeBytes": 2519314,
-      "title": "GA IMPL 2026 001 Source Package 1 11"
+      "title": { "en": "GA IMPL 2026 001 Source Package 1 11", "fa": "بسته منبع GA IMPL 2026 001 · نسخه ۱.۱" }
     },
     {
       "id": "thesis-research-knowledge-transformation-engineering-kte-comprehenisve-resea",
@@ -648,7 +648,7 @@
       "category": "thesis-research",
       "lang": "en",
       "sizeBytes": 12268616,
-      "title": "Knowledge Transformation Engineering (KTE) Comprehenisve Research Plan"
+      "title": { "en": "Knowledge Transformation Engineering (KTE) Comprehenisve Research Plan", "fa": "برنامه جامع پژوهشی مهندسی دگرگونی دانش (KTE)" }
     },
     {
       "id": "thesis-research-measure-theoretic-multi-scale-compositional-framework",
@@ -658,7 +658,7 @@
       "category": "thesis-research",
       "lang": "en",
       "sizeBytes": 18663,
-      "title": "Measure Theoretic Multi Scale Compositional Framework"
+      "title": { "en": "Measure Theoretic Multi Scale Compositional Framework", "fa": "چارچوب ترکیبی چندمقیاسیِ نظریه اندازه" }
     }
   ]
 }

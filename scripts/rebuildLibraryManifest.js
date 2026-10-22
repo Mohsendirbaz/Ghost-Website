@@ -64,6 +64,13 @@ const files = walk(DEST)
     const category = rel.includes('/') ? rel.split('/')[0] : 'misc';
     const prev = previous[urlPath] || {};
     const name = path.basename(abs);
+    const previousTitle = prev.title;
+    const title = typeof previousTitle === 'string'
+      ? { en: previousTitle, fa: previous.titleFa || previousTitle }
+      : {
+        en: previousTitle?.en || humanTitle(name),
+        fa: previousTitle?.fa || previousTitle?.en || humanTitle(name),
+      };
     return {
       id: prev.id || `${category}-${name.toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9؀-ۿ]+/gi, '-').replace(/^-|-$/g, '')}`,
       filename: name,
@@ -72,7 +79,7 @@ const files = walk(DEST)
       category,
       lang: prev.lang || (FARSI_RE.test(name) ? 'fa' : 'en'),
       sizeBytes: fs.statSync(abs).size,
-      title: prev.title || humanTitle(name),
+      title,
     };
   })
   .sort((a, b) => a.path.localeCompare(b.path));

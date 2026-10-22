@@ -177,7 +177,7 @@ Routes are language-prefixed (`/en/...`, `/fa/...`). `LangSync` in `App.js` read
 ## Internationalization
 
 - `LanguageContext` holds the active language, persists it to a cookie, and keeps `<html lang>` and `<html dir>` in sync (Persian → `rtl`).
-- Translations live in `src/data/copy.js` (and per-feature data files), keyed by language.
+- Translations live in `src/data/copy.js` and per-feature data files, keyed by language. Document Archive titles use `{ en, fa }` metadata in `public/library/manifest.json`.
 - `App.js` injects `hreflang` alternates (`en`, `fa`, `x-default`) on every navigation.
 - Fonts: Inter (Latin) and Vazirmatn (Persian).
 
@@ -202,7 +202,7 @@ All primary content is static and lives under `src/data/`:
 - **`copy.js`** — site-wide copy and translations.
 - **`knowledgeBase.js`** — the knowledge base tree (Part → Chapter → Section), consumed by the reader.
 - **`artifacts.js`** / **`diagrams.js`** — interactive artifacts and Mermaid diagram definitions.
-- **`libraryAssets.js`** / **`libraryManifest.js`** — metadata for the document/asset library.
+- **`libraryAssets.js`** / **`libraryManifest.js`** — metadata and language-aware lookup for the document/asset library; archive titles are localized in `public/library/manifest.json`.
 - **`facts.js`** — content for the Fact Engine retention feature.
 - **`founder-bio.js`**, **`multiAgentSystem.js`** — long-form content for the Bio and Multi-Agent System pages.
 
