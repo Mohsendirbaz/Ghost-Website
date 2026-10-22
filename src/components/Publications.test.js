@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { LanguageProvider } from "../context/LanguageContext";
 import Publications from "./Publications";
 
-test("shows view and download actions for the first two papers and contact for the new collection", () => {
+test("shows view and download actions for the first two papers and five English collection papers", () => {
   document.cookie = "preferred_lang=en; path=/";
   render(
     <LanguageProvider>
@@ -17,15 +17,15 @@ test("shows view and download actions for the first two papers and contact for t
     "A Formal Theory of Admissibility, State, Evidence, and Governed Transformation"
   )).toHaveClass("text-foreground");
   const contacts = screen.getAllByRole("link", { name: /Contact us/i });
-  expect(contacts).toHaveLength(40);
+  expect(contacts).toHaveLength(35);
   expect(
     contacts.every((link) => link.getAttribute("href") === "mailto:dirbaz.sharif@gmail.com")
   ).toBe(true);
   expect(screen.queryByText("PDF coming soon")).not.toBeInTheDocument();
   const downloads = screen.getAllByRole("link", { name: "Download PDF" });
   const views = screen.getAllByRole("link", { name: "View" });
-  expect(downloads).toHaveLength(2);
-  expect(views).toHaveLength(2);
+  expect(downloads).toHaveLength(7);
+  expect(views).toHaveLength(7);
   expect(downloads[0]).toHaveAttribute(
     "href",
     "/docs/pdf/Physics_Informed_Special_Function_Framework.pdf"
@@ -48,6 +48,20 @@ test("shows view and download actions for the first two papers and contact for t
     "href",
     "/docs/pdf/Climate_Policy_Benefit_Distribution.pdf"
   );
+
+  const newlyAvailablePapers = [
+    "2-From State Space to Decision Space.pdf",
+    "6-Jacobian–Metric–Energy Geometry.pdf",
+    "20-Toward a General Theory of Adaptive Systems.pdf",
+    "31-Robust Fault-Tolerant Policies in Reinforcement Learning.pdf",
+    "36-The Dynamical Flow and Spectral Theory of the Interface Hypersurface.pdf",
+  ];
+  newlyAvailablePapers.forEach((filename, index) => {
+    const pdfPath = `/docs/pdf/${filename}`;
+    expect(downloads[index + 2]).toHaveAttribute("href", pdfPath);
+    expect(downloads[index + 2]).toHaveAttribute("download", filename);
+    expect(views[index + 2]).toHaveAttribute("href", pdfPath);
+  });
 });
 
 test("renders Persian titles and subtitles for every publication in Farsi mode", () => {
@@ -68,5 +82,8 @@ test("renders Persian titles and subtitles for every publication in Farsi mode",
   expect(
     Array.from(subtitles).every((subtitle) => containsPersian(subtitle.textContent))
   ).toBe(true);
+  expect(screen.getAllByRole("link", { name: /Contact us/i })).toHaveLength(40);
+  expect(screen.getAllByRole("link", { name: "Download PDF" })).toHaveLength(2);
+  expect(screen.getAllByRole("link", { name: "View" })).toHaveLength(2);
   expect(document.documentElement).toHaveAttribute("dir", "rtl");
 });

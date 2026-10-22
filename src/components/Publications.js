@@ -55,7 +55,11 @@ const publications = [
     subtitle: {
       en: "A General Formal Theory of Geometry-Native Computation Under Constraints and Finite Resources",
       fa: "نظریه‌ای صوری و عام برای محاسباتِ هندسه‌محور با وجود قیود و منابع محدود"
-    }
+    },
+    pdfUrl: "/docs/pdf/2-From State Space to Decision Space.pdf",
+    downloadUrl: "/docs/pdf/2-From State Space to Decision Space.pdf",
+    filename: "2-From State Space to Decision Space.pdf",
+    englishOnly: true
   },
   {
     id: 5,
@@ -99,7 +103,11 @@ const publications = [
     subtitle: {
       en: "A Differential Theory of Sensitivity, Transformation Cost, Invariants, and Constrained Evolution",
       fa: "نظریه‌ای دیفرانسیلی دربارهٔ حساسیت، هزینهٔ دگرگونی، ناورداها و تحولِ مقید"
-    }
+    },
+    pdfUrl: "/docs/pdf/6-Jacobian–Metric–Energy Geometry.pdf",
+    downloadUrl: "/docs/pdf/6-Jacobian–Metric–Energy Geometry.pdf",
+    filename: "6-Jacobian–Metric–Energy Geometry.pdf",
+    englishOnly: true
   },
   {
     id: 9,
@@ -253,7 +261,11 @@ const publications = [
     subtitle: {
       en: "Formal Foundations of Geometry, Identity, Temporal Closure, Evidence, Optimization, and Constitutional Computation",
       fa: "بنیان‌های صوریِ هندسه، هویت، بستار زمانی، شواهد، بهینه‌سازی و محاسباتِ قانون‌مند"
-    }
+    },
+    pdfUrl: "/docs/pdf/20-Toward a General Theory of Adaptive Systems.pdf",
+    downloadUrl: "/docs/pdf/20-Toward a General Theory of Adaptive Systems.pdf",
+    filename: "20-Toward a General Theory of Adaptive Systems.pdf",
+    englishOnly: true
   },
   {
     id: 23,
@@ -363,7 +375,11 @@ const publications = [
     subtitle: {
       en: "A Formal Theory of Policy Redundancy, Adversarial Fault Tolerance, and the Hand-in-Hand Nature of Adaptivity and Robustness",
       fa: "نظریه‌ای صوری دربارهٔ افزونگی سیاست، تحمل خطای خصمانه و پیوند ناگسستنیِ تطبیق‌پذیری و استواری"
-    }
+    },
+    pdfUrl: "/docs/pdf/31-Robust Fault-Tolerant Policies in Reinforcement Learning.pdf",
+    downloadUrl: "/docs/pdf/31-Robust Fault-Tolerant Policies in Reinforcement Learning.pdf",
+    filename: "31-Robust Fault-Tolerant Policies in Reinforcement Learning.pdf",
+    englishOnly: true
   },
   {
     id: 33,
@@ -429,7 +445,11 @@ const publications = [
     subtitle: {
       en: "Installment V: Transport, Conservation, Heat Kernel, Index, and the Semiclassical Bridge",
       fa: "بخش پنجم: انتقال، پایستگی، هستهٔ گرما، اندیس و پل نیمه‌کلاسیک"
-    }
+    },
+    pdfUrl: "/docs/pdf/36-The Dynamical Flow and Spectral Theory of the Interface Hypersurface.pdf",
+    downloadUrl: "/docs/pdf/36-The Dynamical Flow and Spectral Theory of the Interface Hypersurface.pdf",
+    filename: "36-The Dynamical Flow and Spectral Theory of the Interface Hypersurface.pdf",
+    englishOnly: true
   },
   {
     id: 39,
@@ -528,13 +548,15 @@ const Publications = () => {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-border/50">
-              {pub.pdfUrl ? (
+              {pub.pdfUrl && (!pub.englishOnly || lang === "en") ? (
                 <>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <span className="font-mono">{pub.year}</span>
-                    <span>•</span>
-                    <span>{pub.size}</span>
-                  </div>
+                  {(pub.year || pub.size) && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      {pub.year && <span className="font-mono">{pub.year}</span>}
+                      {pub.year && pub.size && <span>•</span>}
+                      {pub.size && <span>{pub.size}</span>}
+                    </div>
+                  )}
                   <div className="flex-1" />
                   <a
                     href={pub.downloadUrl}
