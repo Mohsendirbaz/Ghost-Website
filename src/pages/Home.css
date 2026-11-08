@@ -55,6 +55,43 @@
 .hm-link--primary { color: var(--hm-blue); border-color: var(--hm-blue); }
 .hm-link--primary:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
 
+/* Interactive research canvas */
+.hm-canvas { margin-top: 2rem; }
+.hm-canvas__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.hm-canvas__heading .hm-h2 { margin-bottom: 0.45rem; }
+.hm-canvas__heading .hm-lead { margin-bottom: 0; }
+.hm-canvas__downloads {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem 1rem;
+  flex: 0 0 auto;
+  padding-bottom: 0.15rem;
+}
+.hm-canvas__download {
+  color: var(--hm-blue);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hm-blue);
+  padding-bottom: 2px;
+  font-size: 0.82rem;
+}
+.hm-canvas__download:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
+.hm-canvas__frame {
+  display: block;
+  width: 100%;
+  height: min(82vh, 900px);
+  min-height: 640px;
+  border: 1px solid var(--hm-line);
+  border-radius: 0.65rem;
+  background: #f5f5f5;
+}
+
 /* System-at-a-glance figure */
 .hm-glance { margin-block: 2.6rem 0; }
 .hm-glance img { width: 100%; height: auto; display: block; }
@@ -173,4 +210,7 @@
 @media (max-width: 640px) {
   .hm-doc { grid-template-columns: 1fr auto; }
   .hm-doc__d { grid-column: 1 / -1; }
+  .hm-canvas__heading { align-items: flex-start; flex-direction: column; }
+  .hm-canvas__downloads { justify-content: flex-start; }
+  .hm-canvas__frame { height: 75vh; min-height: 560px; }
 }

@@ -52,6 +52,41 @@ export default function Home() {
         </section>
       )}
 
+      <section className="hm-canvas" aria-label="Interactive Canvas (How Ghost Research Has Evolved)">
+        <div className="hm-canvas__heading">
+          <div>
+            <h2 className="hm-h2">Interactive Canvas (How Ghost Research Has Evolved)</h2>
+            <p className="hm-lead">
+              {lang === 'fa'
+                ? 'نقشهٔ تعاملی پژوهش به‌طور خودکار بارگذاری می‌شود و تغییرات شما پس از بازخوانی صفحه حفظ خواهد شد.'
+                : 'Explore the research graph. It loads automatically, and your canvas changes are retained when you return.'}
+            </p>
+          </div>
+          <div className="hm-canvas__downloads">
+            <a
+              className="hm-canvas__download"
+              href="/canvas/Canvas_ORGANON.html"
+              download="Interactive Canvas (How Ghost Research Has Evolved).html"
+            >
+              {lang === 'fa' ? 'دریافت بوم تعاملی' : 'Download interactive canvas'}
+            </a>
+            <a
+              className="hm-canvas__download"
+              href="/canvas/Notion_L5_Canvas_VCS_Streams_Checkpoints.json"
+              download="Notion_L5_Canvas_VCS_Streams_Checkpoints.json"
+            >
+              {lang === 'fa' ? 'دریافت فایل JSON (۳۵ مگابایت)' : 'Download JSON file (35 MB)'}
+            </a>
+          </div>
+        </div>
+        <iframe
+          className="hm-canvas__frame"
+          src="/canvas/Canvas_ORGANON.html"
+          title="Interactive Canvas (How Ghost Research Has Evolved)"
+          loading="eager"
+        />
+      </section>
+
       {/* The Narrowing — the monotone law as a first impression */}
       <NarrowingHero lang={lang} />
 
