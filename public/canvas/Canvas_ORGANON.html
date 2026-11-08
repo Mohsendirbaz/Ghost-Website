@@ -4673,6 +4673,7 @@ class StateManager {
                         if (typeof restoreTooltipUiState === 'function') {
                             restoreTooltipUiState(importData.ui || null);
                         }
+                        canvasProjectMap = importData.project_map || null;
 
                         return true;
                     } catch (error) {
@@ -4838,7 +4839,9 @@ function buildCanvasSnapshot(manager) {
         nodes: liveNodes,
         edges: manager.edges,
         vcs: vcsState,
-        ui: (typeof captureTooltipUiState === 'function') ? captureTooltipUiState() : null
+        ui: (typeof captureTooltipUiState === 'function') ? captureTooltipUiState() : null,
+        project_map: canvasProjectMap,
+        canvas_source_version: CANVAS_SOURCE_VERSION
     };
 }
 
@@ -6803,6 +6806,8 @@ document.addEventListener('keydown', e => {
 
 const CANVAS_STATE_DB_NAME = 'ghostResearchCanvas';
 const CANVAS_STATE_STORE_NAME = 'canvas';
+const CANVAS_SOURCE_VERSION = 'b265c1157e968a9c50ca1f3348b5f217d4222f4e4d8b73a8ad6ebafd9850ab5b';
+let canvasProjectMap = null;
 let canvasStateDb = null;
 let canvasPersistenceReady = false;
 let canvasPersistenceTimer = null;
@@ -6867,6 +6872,41 @@ function queueCanvasPersistence() {
     }, 700);
 }
 
+function preservePreviousCanvasStreams(previousState) {
+    const previousStreams = previousState?.vcs?.streams;
+    if (!Array.isArray(previousStreams) || previousStreams.length === 0) return;
+
+    previousStreams.forEach((previousStream) => {
+        const name = `previous-${previousStream.name}`;
+        const checkpoints = (previousStream.checkpoints || []).map((checkpoint) => ({
+            ...checkpoint,
+            id: `previous-${checkpoint.id}`,
+            stream: name
+        }));
+        const checkpointIds = new Map(
+            (previousStream.checkpoints || []).map(checkpoint => [
+                checkpoint.id,
+                `previous-${checkpoint.id}`
+            ])
+        );
+        const record = {
+            name,
+            color: previousStream.color || '#64748b',
+            headId: checkpointIds.get(previousStream.headId) || null,
+            workingState: previousStream.workingState || {
+                threads: previousState.threads || [],
+                nodes: previousState.nodes || [],
+                edges: previousState.edges || [],
+                ui: previousState.ui || null
+            },
+            checkpoints
+        };
+        vcs._streams.set(name, record);
+        checkpoints.forEach(checkpoint => vcs._allCheckpoints.set(checkpoint.id, checkpoint));
+    });
+    vcsRender();
+}
+
 async function initializeCanvasPersistence() {
     let savedState = null;
     try {
@@ -6878,20 +6918,29 @@ async function initializeCanvasPersistence() {
     }
 
     try {
-        if (savedState) {
+        if (savedState?.canvas_source_version === CANVAS_SOURCE_VERSION) {
             if (stateManager.executeService('IMPORT_GRAPH', savedState, { silent: true }) !== true) {
                 throw new Error('The saved canvas state could not be restored.');
             }
             canvasPersistenceReady = !!canvasStateDb;
             return;
         }
+        if (savedState) {
+            console.info('Loading the updated canvas source; preserving previous local streams.');
+        }
 
-        const response = await fetch('Notion_L5_Canvas_VCS_Streams_Checkpoints.json');
+        const response = await fetch('ORGANON_Projectwide_L5_Relationship_Map_Canvas_compact.json.gz');
         if (!response.ok) throw new Error(`Could not load the canvas JSON (HTTP ${response.status}).`);
-        const initialState = await response.json();
+        if (!response.body || !window.DecompressionStream) {
+            throw new Error('This browser cannot decompress the bundled canvas JSON.');
+        }
+        const initialState = await new Response(
+            response.body.pipeThrough(new DecompressionStream('gzip'))
+        ).json();
         if (stateManager.executeService('IMPORT_GRAPH', initialState, { silent: true }) !== true) {
             throw new Error('The bundled canvas JSON could not be imported.');
         }
+        if (savedState) preservePreviousCanvasStreams(savedState);
         canvasView.zoom = 0.19;
         canvasView.syncSvgSize();
         canvasView.updateIndicator();

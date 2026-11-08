@@ -82,6 +82,7 @@
   font-size: 0.82rem;
 }
 .hm-canvas__download:hover { color: var(--hm-ink); border-color: var(--hm-ink); }
+.hm-canvas__download-status { margin: 0 0 0.75rem; color: var(--hm-mut); font-size: 0.82rem; }
 .hm-canvas__frame {
   display: block;
   width: 100%;

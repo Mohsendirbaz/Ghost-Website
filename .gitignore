@@ -34,3 +34,6 @@ yarn-error.log*
 # local cleanup staging (emptied manually)
 /_to_delete/
 /private-not-served/
+
+# Source export is larger than GitHub's per-file limit; public copy is gzip-compressed
+/ORGANON_Projectwide_L5_Relationship_Map_Canvas_compact.json

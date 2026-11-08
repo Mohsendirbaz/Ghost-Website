@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
@@ -14,6 +15,35 @@ export default function Home() {
   const t = copy[lang].home;
   const m = t.min || {};
   const arrow = lang === 'fa' ? '←' : '→';
+  const [canvasJsonDownload, setCanvasJsonDownload] = useState('idle');
+
+  const downloadCanvasJson = async (event) => {
+    event.preventDefault();
+    setCanvasJsonDownload('loading');
+    try {
+      if (!window.DecompressionStream) {
+        throw new Error('This browser does not support downloading the compressed canvas JSON.');
+      }
+      const response = await fetch('/canvas/ORGANON_Projectwide_L5_Relationship_Map_Canvas_compact.json.gz');
+      if (!response.ok || !response.body) {
+        throw new Error(`Could not download the canvas JSON (HTTP ${response.status}).`);
+      }
+      const blob = await new Response(
+        response.body.pipeThrough(new DecompressionStream('gzip')),
+        { headers: { 'Content-Type': 'application/json' } }
+      ).blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'ORGANON_Projectwide_L5_Relationship_Map_Canvas_compact.json';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      setCanvasJsonDownload('done');
+    } catch (error) {
+      console.error('Canvas JSON download failed:', error);
+      setCanvasJsonDownload('error');
+    }
+  };
 
   return (
     <main id="main-content" className="hm">
@@ -72,13 +102,22 @@ export default function Home() {
             </a>
             <a
               className="hm-canvas__download"
-              href="/canvas/Notion_L5_Canvas_VCS_Streams_Checkpoints.json"
-              download="Notion_L5_Canvas_VCS_Streams_Checkpoints.json"
+              href="/canvas/ORGANON_Projectwide_L5_Relationship_Map_Canvas_compact.json.gz"
+              onClick={downloadCanvasJson}
             >
-              {lang === 'fa' ? 'دریافت فایل JSON (۳۵ مگابایت)' : 'Download JSON file (35 MB)'}
+              {lang === 'fa' ? 'دریافت فایل JSON (۱۲۴ مگابایت)' : 'Download JSON file (124 MB)'}
             </a>
           </div>
         </div>
+        {canvasJsonDownload !== 'idle' && (
+          <p className="hm-canvas__download-status" aria-live="polite">
+            {canvasJsonDownload === 'loading'
+              ? (lang === 'fa' ? 'در حال آماده‌سازی فایل JSON...' : 'Preparing JSON download…')
+              : canvasJsonDownload === 'done'
+                ? (lang === 'fa' ? 'دانلود فایل JSON آغاز شد.' : 'JSON download started.')
+                : (lang === 'fa' ? 'دانلود فایل JSON انجام نشد.' : 'JSON download failed. Please try again.')}
+          </p>
+        )}
         <iframe
           className="hm-canvas__frame"
           src="/canvas/Canvas_ORGANON.html"
