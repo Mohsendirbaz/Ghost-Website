@@ -58,13 +58,13 @@
 .lav-badge--type.lav-badge--pdf   { background: rgba(185, 28, 28, 0.12);  color: #991b1b; }
 .lav-badge--type.lav-badge--md    { background: rgba(29, 112, 184, 0.12); color: #1d4ed8; }
 .lav-badge--type.lav-badge--html  { background: rgba(21, 128, 61, 0.12);  color: #15803d; }
-.lav-badge--priority              { background: rgba(124, 58, 237, 0.10); color: #6d28d9; }
+.lav-badge--priority              { background: rgba(var(--color-warning-rgb), 0.14); color: var(--color-text-primary); }
 
 /* Dark mode badge overrides */
 :root.dark-theme .lav-badge--type.lav-badge--pdf   { background: rgba(239,68,68,0.18);   color: #fca5a5; }
 :root.dark-theme .lav-badge--type.lav-badge--md    { background: rgba(96,165,250,0.18);  color: #93c5fd; }
 :root.dark-theme .lav-badge--type.lav-badge--html  { background: rgba(74,222,128,0.18);  color: #86efac; }
-:root.dark-theme .lav-badge--priority              { background: rgba(167,139,250,0.18); color: #c4b5fd; }
+:root.dark-theme .lav-badge--priority              { background: rgba(var(--color-warning-rgb), 0.18); color: var(--color-text-primary); }
 
 .lav-header__title {
   font-size: var(--text-2xl);
@@ -150,14 +150,26 @@
   font-weight: 500;
 }
 
-.lav-status-banner--in-progress  { background: rgba(245,158,11,0.10); color: #92400e; border: 1px solid rgba(245,158,11,0.3); }
-.lav-status-banner--queued        { background: rgba(99,102,241,0.08); color: #3730a3; border: 1px solid rgba(99,102,241,0.25); }
-.lav-status-banner--needs-review  { background: rgba(239,68,68,0.08);  color: #991b1b; border: 1px solid rgba(239,68,68,0.25); }
-.lav-status-banner--blocked       { background: rgba(107,114,128,0.1); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
-
-:root.dark-theme .lav-status-banner--in-progress { color: #fcd34d; }
-:root.dark-theme .lav-status-banner--queued       { color: #a5b4fc; }
-:root.dark-theme .lav-status-banner--needs-review { color: #fca5a5; }
+.lav-status-banner--in-progress {
+  background: rgba(var(--color-warning-rgb), 0.10);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(var(--color-warning-rgb), 0.35);
+}
+.lav-status-banner--queued {
+  background: rgba(var(--color-info-rgb), 0.10);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(var(--color-info-rgb), 0.35);
+}
+.lav-status-banner--needs-review {
+  background: rgba(var(--color-warning-rgb), 0.10);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(var(--color-warning-rgb), 0.35);
+}
+.lav-status-banner--blocked {
+  background: rgba(var(--color-danger-rgb), 0.10);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(var(--color-danger-rgb), 0.35);
+}
 
 /* ── Viewer area ── */
 

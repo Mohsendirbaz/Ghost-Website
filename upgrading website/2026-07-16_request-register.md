@@ -71,13 +71,13 @@
 - [ ] **Domain & naming**: decide on an owned domain (and whether the Ghost Autonomy name collision with the defunct company is acceptable); then set `REACT_APP_SITE_URL` in Vercel and regenerate the social card.
 - [ ] **Empty `_to_delete/`** (~7 MB now, including the retired leaked bundle and removed pages).
 - [ ] **Branch cleanup** (from the janitorial register): make `main` the Vercel production branch; delete `Main-R` and the stale backup tags.
-- [ ] **Two queued library entries** (`forensic-case-tesla`, `still-a-worm`) await their PDFs.
+- [x] **Missing Tesla library entry** removed from the catalogue; source is absent. `still-a-worm` is not present in the current library catalogue.
 - [ ] Optional: publish the two held-back Memory HTMLs after polish; Persian variants of the Memory instruments; bring the Memory Wing to the open-instrument standard (viewer-first layout + `?theme=` inheritance, per the July 17 document).
 
 ## Extensive audit for the same defect class (July 16, later)
 
 - [x] **TopNavBar — the second navigation bar — still linked all three deleted pages** (Partners, Company, Invest → each a 404). Removed; Memory Wing added. This was the exact same miss-class as the original report.
-- [x] **30 circular `targetUrl`s in the library data** — assets whose "file" pointed back at their own viewer page ("circular logic," literally). 20 rewired to their real archive files via the manifest; the other 10 have **no source file anywhere on disk** (six L4 .docx surveys, four Notion exports) and now carry honest non-READY statuses. The asset viewer already banners non-ready items instead of fetching, so nothing renders broken.
+- [x] **30 circular `targetUrl`s in the library data** — assets whose "file" pointed back at their own viewer page ("circular logic," literally). 20 were rewired to their real archive files via the manifest. The six L4 surveys and three unavailable Notion exports have been removed from the public catalogue; the Autonomous Vehicles Research Note was matched to its existing manifest file and marked ready.
 - [x] **Unlabeled "247× GPU speedup" claim** in a library description — same class as the removed StatsBand multipliers; reworded to standings-compliant framing (EN + FA). A sweep found no other multiplier claims in copy or data.
 - [x] **`document.title` was never set per page** — every tab, bookmark, and analytics entry shared one title. Bilingual per-page titles now set on navigation.
 - [x] **Orphaned `public/data/facts.bundle.json`** (superseded fact source) retired; dead Partners/Company/Invest nav labels removed from copy.

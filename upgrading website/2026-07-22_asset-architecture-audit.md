@@ -25,7 +25,7 @@ The Bio tab serves its documents from **two different stores**: the two Publicat
 
 **F7 · Orphans and a live breakage from unmanaged renames.** `P13_partnership_loop.svg` still ships although the Partners page it illustrated was deleted. And the poster file was renamed on disk (`epu-poster.png` → `epu-poster.jpg`) after the page referencing it was written — the Final Plate's "Open full" has been returning 404 since. (Reference fixed in this batch; the class remains: string-literal paths with no existence check.)
 
-**F8 · A knowingly broken data reference.** `forensic_case_of_Tesla.pdf` has been referenced by a QUEUED library entry since the redesign; the file exists nowhere in the corpus. The viewer gates it honestly, but a reference without a file is still a standing IOU.
+**F8 · A knowingly broken data reference (fixed).** `forensic_case_of_Tesla.pdf` was referenced by a QUEUED library entry despite being absent from the corpus. The library entry has been removed; it can be restored if the source is supplied.
 
 **F9 · No automated guard for any of the above.** CI checks the build, the tests, the exhibition-leak assertion, and (since this week) nav ⇄ sitemap — but nothing verifies that every referenced asset exists and every shipped asset is referenced. Every flaw above was findable mechanically; none had a machine watching for it.
 

@@ -2,17 +2,15 @@
  * libraryAssets.js
  * Canonical data model for Ghost Autonomy Library of Assets
  *
- * Contains 109 high-value files identified from analysis:
- * - TIER 0 (CRITICAL): 38 files - Foundational corpus (2026), core PICAPD ISA and strategic documents
- * - TIER 1 (HIGH): 71 files - Technical content (45 Notion + 26 Root)
+ * Contains curated high-value files identified from analysis.
  *
  * Structure: Tier → Category → Asset
  * Each asset is independently addressable and includes bilingual metadata
  *
  * June–July 2026 refresh: the "Foundational Corpus (2026)" category publishes the
  * program's public research corpus. Internal syntheses, confidential/trade-secret
- * documentation, and parameter-level hardware specifications are intentionally
- * NOT published on the public site.
+ * documentation, and unapproved parameter-level hardware specifications are
+ * intentionally NOT published on the public site.
  */
 
 export const LIBRARY_TIERS = {
@@ -38,7 +36,7 @@ export const STATUS_ICONS = {
     [ASSET_STATUS.BLOCKED]: '❌'
 };
 
-// ─── TIER 0: CRITICAL ASSETS (38 files) ────────────────────────────────────
+// ─── TIER 0: CRITICAL ASSETS ───────────────────────────────────────────────
 
 export const CRITICAL_ASSETS = {
     id: LIBRARY_TIERS.CRITICAL,
@@ -542,15 +540,14 @@ export const CRITICAL_ASSETS = {
                         fa: 'راهنمای مرجع سخت‌افزار ISA'
                     },
                     description: {
-                        en: '54-page technical reference manual v1.0; the benchmark figures it reports are the document\u2019s own projections, not measured silicon',
-                        fa: 'راهنمای مرجع فنی ۵۴ صفحه‌ای نسخه ۱.۰؛ ارقام بنچمارک آن برآوردهای خود سند است، نه سیلیکون اندازه‌گیری‌شده'
+                        en: '8-page technical reference manual v1.0; the benchmark figures it reports are the document\u2019s own projections, not measured silicon',
+                        fa: 'راهنمای مرجع فنی ۸ صفحه‌ای نسخه ۱.۰؛ ارقام بنچمارک آن برآوردهای خود سند است، نه سیلیکون اندازه‌گیری‌شده'
                     },
                     type: 'pdf',
                     lang: 'en',
-                    size: '54 pages',
+                    size: '8 pages',
                     targetUrl: '/library/picapd/en/Hardware%20ISA.pdf',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '2 days',
+                    status: ASSET_STATUS.READY,
                     tags: ['PICAPD-ISA', 'hardware', 'benchmarks', 'GPU-comparison'],
                     priority: 2
                 },
@@ -898,32 +895,12 @@ export const CRITICAL_ASSETS = {
                     tags: ['autonomous-driving', 'bitvector', 'STOP-5', 'algorithm'],
                     priority: 5
                 },
-                {
-                    id: 'forensic-case-tesla',
-                    filename: 'forensic_case_of_Tesla.pdf',
-                    slug: 'forensic-case-tesla',
-                    title: {
-                        en: 'Forensic Case of Tesla',
-                        fa: 'مورد پزشکی قانونی تسلا'
-                    },
-                    description: {
-                        en: 'Forensic analysis and case study of Tesla autonomous driving systems',
-                        fa: 'تحلیل پزشکی قانونی و مطالعه موردی سیستم‌های رانندگی خودکار تسلا'
-                    },
-                    type: 'pdf',
-                    lang: 'en',
-                    targetUrl: '/docs/pdf/forensic_case_of_Tesla.pdf',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '2 hours',
-                    tags: ['forensic-analysis', 'tesla', 'case-study', 'autonomous-driving'],
-                    priority: 6
-                }
             ]
         }
     ]
 };
 
-// ─── TIER 1: HIGH PRIORITY ASSETS (71 files) ───────────────────────────────
+// ─── TIER 1: HIGH PRIORITY ASSETS ──────────────────────────────────────────
 
 export const HIGH_ASSETS = {
     id: LIBRARY_TIERS.HIGH,
@@ -1032,7 +1009,7 @@ export const HIGH_ASSETS = {
             assets: [
                 {
                     id: 'av-research-note',
-                    filename: 'Autonomous Vehicles — Research Note.md',
+                    filename: 'Autonomous Vehicles — Research Note d874800c8ee44ec9b68c37c9df50998d.md',
                     slug: 'av-research-note',
                     title: {
                         en: 'Autonomous Vehicles — Research Note',
@@ -1044,9 +1021,8 @@ export const HIGH_ASSETS = {
                     },
                     type: 'md',
                     lang: 'en',
-                    targetUrl: '/en/library/assets/av-research-note',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '6 hours',
+                    targetUrl: '/library/notion/Autonomous%20Vehicles%20%E2%80%94%20Research%20Note%20d874800c8ee44ec9b68c37c9df50998d.md',
+                    status: ASSET_STATUS.READY,
                     tags: ['autonomous-driving', 'decision-making', 'optimization', 'collision-avoidance'],
                     priority: 1
                 },
@@ -1092,206 +1068,10 @@ export const HIGH_ASSETS = {
                 }
             ]
         },
-        {
-            id: 'mathematical-foundations',
-            name: { en: 'Mathematical Foundations', fa: 'مبانی ریاضی' },
-            count: 3,
-            source: 'Notion 2025',
-            assets: [
-                {
-                    id: 'invariant-discovery',
-                    filename: 'Invariant Discovery & Validation 9866838a120b4a9284715fb7f20f817a.md',
-                    slug: 'invariant-discovery',
-                    title: {
-                        en: 'Invariant Discovery & Validation',
-                        fa: 'کشف و اعتبارسنجی ناوردا'
-                    },
-                    description: {
-                        en: 'Mathematical invariants, cross-GT validation, framework calibration, coherence budget',
-                        fa: 'ناورداهای ریاضی، اعتبارسنجی متقابل GT، کالیبراسیون چارچوب، بودجه انسجام'
-                    },
-                    type: 'md',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/invariant-discovery',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '6 hours',
-                    tags: ['mathematics', 'validation', 'invariants', 'calibration'],
-                    priority: 1
-                },
-                {
-                    id: 'severity-weighted-optimization',
-                    filename: 'Optimization Algorithm Leaving no stone unturned 2a6f832e52ca80089370ffe01876d4af.md',
-                    slug: 'severity-weighted-optimization',
-                    title: {
-                        en: 'Optimization Algorithm: Leaving No Stone Unturned',
-                        fa: 'الگوریتم بهینه‌سازی: بررسی همه جوانب'
-                    },
-                    description: {
-                        en: 'Severity-weighted multi-dimensional optimization with critical dominance property',
-                        fa: 'بهینه‌سازی چندبعدی وزن‌دار شدت با ویژگی سلطه بحرانی'
-                    },
-                    type: 'md',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/severity-weighted-optimization',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '6 hours',
-                    tags: ['optimization', 'algorithms', 'severity-weighting', 'multi-dimensional'],
-                    priority: 2
-                },
-                {
-                    id: 'predictive-temporal-framework',
-                    filename: 'A mathematical framework with predictive temporal  2b9f832e52ca80558e27d58907cf130e.md',
-                    slug: 'predictive-temporal-framework',
-                    title: {
-                        en: 'Mathematical Framework with Predictive Temporal Elements',
-                        fa: 'چارچوب ریاضی با عناصر زمانی پیش‌بینی‌کننده'
-                    },
-                    description: {
-                        en: 'Physics-informed special functions, conservation laws, reduced-order modeling, AGM algorithm',
-                        fa: 'توابع ویژه فیزیک-محور، قوانین بقا، مدل‌سازی مرتبه کاهش‌یافته، الگوریتم AGM'
-                    },
-                    type: 'md',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/predictive-temporal-framework',
-                    status: ASSET_STATUS.QUEUED,
-                    processingEstimate: '8 hours',
-                    tags: ['mathematics', 'physics-computing', 'conservation-laws', 'AGM'],
-                    priority: 3
-                }
-            ]
-        },
-        {
-            id: 'l4-av-documentation',
-            name: { en: 'L4 Autonomous Vehicle Documentation', fa: 'مستندات خودروی خودران سطح ۴' },
-            count: 6,
-            source: 'Root Directory',
-            assets: [
-                {
-                    id: 'l4-emerging-technologies',
-                    filename: 'Advanced and Emerging Technologies for L4 Autonomous Vehicles.docx',
-                    slug: 'l4-emerging-technologies',
-                    title: {
-                        en: 'Advanced and Emerging Technologies for L4 Autonomous Vehicles',
-                        fa: 'فناوری‌های پیشرفته و نوظهور برای خودروهای خودران سطح ۴'
-                    },
-                    description: {
-                        en: 'Comprehensive overview of emerging technologies for L4 autonomous driving',
-                        fa: 'بررسی جامع فناوری‌های نوظهور برای رانندگی خودکار سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-emerging-technologies',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'emerging-tech', 'overview'],
-                    priority: 1
-                },
-                {
-                    id: 'l4-computing-architectures',
-                    filename: 'Processor & Computing Architectures for L4 Autonomous Vehicles.docx',
-                    slug: 'l4-computing-architectures',
-                    title: {
-                        en: 'Processor & Computing Architectures for L4 Autonomous Vehicles',
-                        fa: 'پردازنده و معماری‌های محاسباتی برای خودروهای خودران سطح ۴'
-                    },
-                    description: {
-                        en: 'Computing architecture requirements and options for L4 autonomous systems',
-                        fa: 'نیازمندی‌ها و گزینه‌های معماری محاسباتی برای سیستم‌های خودران سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-computing-architectures',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'computing', 'architecture'],
-                    priority: 2
-                },
-                {
-                    id: 'l4-sensor-fusion',
-                    filename: 'Sensors & Sensing Technologies for Level 4 Autonomous Vehicles.docx',
-                    slug: 'l4-sensor-fusion',
-                    title: {
-                        en: 'Sensors & Sensing Technologies for Level 4 Autonomous Vehicles',
-                        fa: 'حسگرها و فناوری‌های حسگری برای خودروهای خودران سطح ۴'
-                    },
-                    description: {
-                        en: 'Sensor modalities, fusion strategies, and perception systems for L4 AVs',
-                        fa: 'روش‌های حسگری، استراتژی‌های ترکیب، و سیستم‌های ادراک برای خودروهای خودران سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-sensor-fusion',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'sensors', 'fusion', 'perception'],
-                    priority: 3
-                },
-                {
-                    id: 'l4-functional-safety',
-                    filename: 'Functional Safety & Standards for L4 Autonomous Systems.docx',
-                    slug: 'l4-functional-safety',
-                    title: {
-                        en: 'Functional Safety & Standards for L4 Autonomous Systems',
-                        fa: 'ایمنی عملکردی و استانداردها برای سیستم‌های خودران سطح ۴'
-                    },
-                    description: {
-                        en: 'Safety standards, certification requirements, and functional safety for L4 systems',
-                        fa: 'استانداردهای ایمنی، نیازمندی‌های گواهی، و ایمنی عملکردی برای سیستم‌های سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-functional-safety',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'safety', 'standards', 'ASIL-D'],
-                    priority: 4
-                },
-                {
-                    id: 'l4-automotive-systems',
-                    filename: 'Automotive-Specific Systems & Applications for L4 Autonomy.docx',
-                    slug: 'l4-automotive-systems',
-                    title: {
-                        en: 'Automotive-Specific Systems & Applications for L4 Autonomy',
-                        fa: 'سیستم‌ها و کاربردهای ویژه خودرویی برای خودمختاری سطح ۴'
-                    },
-                    description: {
-                        en: 'Automotive-specific systems integration for L4 autonomous vehicles',
-                        fa: 'یکپارچه‌سازی سیستم‌های ویژه خودرویی برای خودروهای خودران سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-automotive-systems',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'automotive', 'systems-integration'],
-                    priority: 5
-                },
-                {
-                    id: 'l4-numerical-methods',
-                    filename: 'Numerical Methods & Precision in L4 Autonomous Systems.docx',
-                    slug: 'l4-numerical-methods',
-                    title: {
-                        en: 'Numerical Methods & Precision in L4 Autonomous Systems',
-                        fa: 'روش‌های عددی و دقت در سیستم‌های خودران سطح ۴'
-                    },
-                    description: {
-                        en: 'Numerical computation methods and precision requirements for L4 systems',
-                        fa: 'روش‌های محاسبات عددی و نیازمندی‌های دقت برای سیستم‌های سطح ۴'
-                    },
-                    type: 'docx',
-                    lang: 'en',
-                    targetUrl: '/en/library/assets/l4-numerical-methods',
-                    status: ASSET_STATUS.NEEDS_REVIEW,
-                    processingEstimate: '4 hours',
-                    tags: ['autonomous-driving', 'L4', 'numerical-methods', 'precision'],
-                    priority: 6
-                }
-            ]
-        }
     ]
 };
 
-// Note: Remaining 59 HIGH assets (from Notion 2025) can be added incrementally
+// Note: Additional HIGH assets from Notion 2025 can be added incrementally
 // Full list available in: notion-2025-analysis-for-ghost-autonomy-website.md
 
 // ─── Utility Functions ──────────────────────────────────────────────────────
@@ -1368,13 +1148,18 @@ export function filterByTags(assets, tags) {
 // Export all tiers for easy import
 export const ALL_TIERS = [CRITICAL_ASSETS, HIGH_ASSETS];
 
-// Export summary statistics
+const allLibraryAssets = flattenAssets(ALL_TIERS);
+const matchedBilateralAssets = allLibraryAssets.filter(
+    asset => asset.bilateralPair
+        && allLibraryAssets.some(candidate => candidate.filename === asset.bilateralPair)
+);
+
 export const LIBRARY_STATS = {
-    totalAssets: 109,
-    critical: 38,
-    high: 71,
-    bilingualPairs: 21,
-    readyAssets: 35,
-    inProgressAssets: 3,
-    needsReviewAssets: 5
+    totalAssets: allLibraryAssets.length,
+    critical: allLibraryAssets.filter(asset => asset.tierId === CRITICAL_ASSETS.id).length,
+    high: allLibraryAssets.filter(asset => asset.tierId === HIGH_ASSETS.id).length,
+    bilingualPairs: Math.floor(matchedBilateralAssets.length / 2),
+    readyAssets: allLibraryAssets.filter(asset => asset.status === ASSET_STATUS.READY).length,
+    inProgressAssets: allLibraryAssets.filter(asset => asset.status === ASSET_STATUS.IN_PROGRESS).length,
+    needsReviewAssets: allLibraryAssets.filter(asset => asset.status === ASSET_STATUS.NEEDS_REVIEW).length
 };

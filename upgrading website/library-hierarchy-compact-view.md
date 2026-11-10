@@ -49,10 +49,10 @@
 
 2. ⚠️ Hardware ISA.pdf
    → /knowledge-base/picapd-isa/hardware-reference
-   │  54 pages | 247× GPU speedup benchmarks | v1.0 technical reference
+   │  Repository copy: 8 pages | Older catalogue claim: 54 pages | v1.0 technical reference
    │  Bilateral pair: None (English only)
-   │  Status: Needs PDF→web conversion + figure extraction
-   │  Processing estimate: 2 days
+   │  Status: Public release approved; native PDF viewer and download enabled
+   │  Follow-up: Confirm the 8-page repository copy against the older 54-page claim
 
 3. ✅ PICAPD_Silicon.md
    → /knowledge-base/picapd-isa/silicon-implementation
@@ -255,39 +255,9 @@
 
 ### 🔷 Category 2: L4 Autonomous Vehicle Applications (26 files from Root)
 
-#### Subcategory: L4 AV Technical Documentation (Tier 1E - Priority P1)
+#### Subcategory: L4 AV Technical Documentation
 
-```
-46. ⚠️ Advanced and Emerging Technologies for L4 Autonomous Vehicles.docx
-    → /technology/l4-emerging-technologies
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-
-47. ⚠️ Processor & Computing Architectures for L4 Autonomous Vehicles.docx
-    → /technology/l4-computing-architectures
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-
-48. ⚠️ Sensors & Sensing Technologies for Level 4 Autonomous Vehicles.docx
-    → /technology/l4-sensor-fusion
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-
-49. ⚠️ Functional Safety & Standards for L4 Autonomous Systems.docx
-    → /safety/l4-functional-safety
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-
-50. ⚠️ Automotive-Specific Systems & Applications for L4 Autonomy.docx
-    → /technology/l4-automotive-systems
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-
-51. ⚠️ Numerical Methods & Precision in L4 Autonomous Systems.docx
-    → /science/l4-numerical-methods
-    │  Status: Needs DOCX→Markdown conversion
-    │  Processing estimate: 4 hours
-```
+The six DOCX files previously listed here were not found in the repository and have been removed from the public library catalogue. Do not schedule conversion or restore their entries unless the source files are supplied.
 
 #### Subcategory: Theoretical Foundations (Tier 1F - Priority P2)
 
@@ -466,7 +436,7 @@
 ### Queued (Week 2)
 - ⏳ LaTeX booktabs formatting for 175+ ISA tables
 - ⏳ Mermaid diagram rendering (Physics-Informed Architecture)
-- ⏳ PDF→web conversion (Hardware ISA.pdf, 54 pages)
+- ⏳ Hardware ISA.pdf: confirm the repository revision against the older 54-page claim
 - ⏳ Bilingual navigation component (React + CSS)
 
 ---

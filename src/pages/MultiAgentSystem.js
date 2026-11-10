@@ -116,12 +116,12 @@ export default function MultiAgentSystem() {
                 </div>
             </section>
 
-            <figure style={{ margin: '2rem auto 0', maxWidth: '1160px', padding: '0 1rem' }}>
-              <div style={{ border: '1px solid rgba(128,128,128,0.3)', borderRadius: '10px', overflow: 'hidden', background: '#0d1117' }}>
+            <figure className="mas-lab-figure">
+              <div className="mas-lab-frame">
                 <iframe key={isDark ? 'd' : 'l'} src={`/docs/html/Multi_Agent_Research_Laboratory.html?theme=${isDark ? 'dark' : 'light'}`} title="Multi-Agent Research Laboratory" loading="lazy"
-                        style={{ width: '100%', height: '72vh', border: 0, display: 'block' }} />
+                        className="mas-lab-iframe" />
               </div>
-              <figcaption style={{ marginTop: '0.6rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--color-text-secondary, #5b6b7b)' }}>
+              <figcaption className="mas-lab-caption">
                 {lang === 'en'
                 ? 'Fig. L-01 — The Multi-Agent Research Laboratory, live — the coordination fabric this catalogue documents.'
                 : 'شکل L-01 — آزمایشگاه پژوهشی چند-عامله، به‌صورت زنده — بافت هماهنگی‌ای که این فهرست مستند می‌کند.'}
@@ -164,14 +164,14 @@ export default function MultiAgentSystem() {
                         {lang === 'en' ? 'Component Library' : 'کتابخانه اجزا'}
                     </h2>
                     <div className="filter-actions">
-                        <button onClick={expandAll} className="btn-secondary">
+                        <button onClick={expandAll} className="mas-btn-secondary">
                             {lang === 'en' ? 'Expand All' : 'باز کردن همه'}
                         </button>
-                        <button onClick={collapseAll} className="btn-secondary">
+                        <button onClick={collapseAll} className="mas-btn-secondary">
                             {lang === 'en' ? 'Collapse All' : 'بستن همه'}
                         </button>
                         {(searchQuery || selectedTag !== 'all') && (
-                            <button onClick={clearFilters} className="btn-clear">
+                            <button onClick={clearFilters} className="mas-btn-secondary">
                                 {lang === 'en' ? 'Clear Filters' : 'پاک کردن فیلترها'}
                             </button>
                         )}
@@ -328,7 +328,7 @@ export default function MultiAgentSystem() {
                             ? 'No components found matching your filters.'
                             : 'هیچ جزئی با فیلترهای شما یافت نشد.'}
                     </p>
-                    <button onClick={clearFilters} className="btn-primary">
+                    <button onClick={clearFilters} className="mas-btn-primary">
                         {lang === 'en' ? 'Clear Filters' : 'پاک کردن فیلترها'}
                     </button>
                 </section>

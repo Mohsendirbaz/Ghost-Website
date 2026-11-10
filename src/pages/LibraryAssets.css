@@ -85,11 +85,9 @@
 }
 
 .stat-card.stat-lang {
-    border-color: #7c3aed;
-    background: linear-gradient(to bottom, var(--surface-base), rgba(139, 92, 246, 0.08));
+    border-color: var(--color-accent);
+    background: linear-gradient(to bottom, var(--surface-base), rgba(var(--color-warning-rgb), 0.08));
 }
-
-:root.dark-theme .stat-card.stat-lang { border-color: #a78bfa; }
 
 .stat-value {
     font-size: var(--text-3xl);
@@ -512,11 +510,9 @@
     align-items: center;
     gap: var(--space-1);
     font-size: var(--text-xs);
-    color: #7c3aed;
+    color: var(--color-text-secondary);
     font-weight: 600;
 }
-
-:root.dark-theme .asset-bilateral { color: #c4b5fd; }
 
 .bilateral-icon {
     font-size: var(--text-sm);

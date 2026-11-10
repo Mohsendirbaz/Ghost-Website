@@ -19,6 +19,7 @@ import remarkGfm from 'remark-gfm';
 import { useLang } from '../context/LanguageContext';
 import { ARTIFACT_BY_SLUG, ARTIFACT_CATEGORIES, artifactUrl } from '../data/artifacts';
 import AddToCartButton from '../components/AddToCartButton';
+import { normalizeUrlPath } from '../utils/normalizeUrlPath';
 import '../styles/artifacts.css';
 
 const TAB_PREVIEW = 'preview';
@@ -94,7 +95,7 @@ function HtmlViewer({ path, title, isRtl }) {
     useEffect(() => {
         setState('loading');
         setSrcdoc('');
-        fetch(encodeURI(path))
+        fetch(normalizeUrlPath(path))
             .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
             .then((html) => { setSrcdoc(html); setState('ready'); })
             .catch(() => setState('error'));
@@ -144,7 +145,7 @@ function PdfViewer({ path, filename, title, isRtl }) {
         setBlobUrl(null);
         const ctrl = new AbortController();
 
-        fetch(encodeURI(path), { signal: ctrl.signal })
+        fetch(normalizeUrlPath(path), { signal: ctrl.signal })
             .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.blob(); })
             .then((blob) => {
                 if (blobRef.current) URL.revokeObjectURL(blobRef.current);

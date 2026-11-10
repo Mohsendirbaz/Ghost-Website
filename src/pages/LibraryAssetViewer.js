@@ -15,6 +15,7 @@ import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import Breadcrumb from '../components/Breadcrumb';
 import AddToCartButton from '../components/AddToCartButton';
+import { normalizeUrlPath } from '../utils/normalizeUrlPath';
 import {
     CRITICAL_ASSETS,
     HIGH_ASSETS,
@@ -38,7 +39,7 @@ function resolveFilePath(asset, manifestData) {
 
     // 1. targetUrl that points to an actual file (e.g. /docs/pdf/…)
     if (isActualFilePath(asset.targetUrl)) {
-        return encodeURI(asset.targetUrl);
+        return normalizeUrlPath(asset.targetUrl);
     }
 
     // 2. Manifest lookup by exact filename
@@ -46,7 +47,7 @@ function resolveFilePath(asset, manifestData) {
         const entry = manifestData.files.find(
             (f) => f.filename === asset.filename
         );
-        if (entry?.path) return encodeURI(entry.path);
+        if (entry?.path) return normalizeUrlPath(entry.path);
     }
 
     return null;
@@ -131,7 +132,7 @@ function HtmlViewer({ path, title, isRtl }) {
         setState('loading');
         setSrcdoc('');
 
-        fetch(encodeURI(path))
+        fetch(path)
             .then((r) => {
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 return r.text();
@@ -187,7 +188,7 @@ function MdViewer({ path, title, isRtl }) {
         setState('loading');
         setText('');
 
-        fetch(encodeURI(path))
+        fetch(path)
             .then((r) => {
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 return r.text();
