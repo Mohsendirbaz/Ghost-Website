@@ -61,27 +61,6 @@ export default function Home() {
         </p>
       </section>
 
-      {/* The manifesto — hardware's endgame, algorithm's opening (vertical set) */}
-      {m.manifesto && (
-        <section className="manifesto" aria-label={m.manifesto.lines.join(' ')}>
-          {m.manifesto.kicker && (
-            <p className="manifesto__kicker" aria-hidden="true">
-              {m.manifesto.kicker.split('?')[0]}<b>?</b>
-            </p>
-          )}
-          <div className="manifesto__inner">
-            {m.manifesto.lines.map((line, i) => (
-              <p key={i} className={`manifesto__line${i === m.manifesto.accent ? ' manifesto__line--accent' : ''}`}>
-                {line}
-              </p>
-            ))}
-          </div>
-          {m.manifesto.afterword && (
-            <p className="manifesto__afterword">{m.manifesto.afterword}</p>
-          )}
-        </section>
-      )}
-
       <section className="hm-canvas" aria-label="Interactive Canvas (How Ghost Research Has Evolved)">
         <div className="hm-canvas__heading">
           <div>

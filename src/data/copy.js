@@ -87,12 +87,6 @@ export const copy = {
       min: {
         eyebrow: "A processor designed by process engineers",
         h1: "EPU — probably the most efficient processor ever designed for automotive applications.",
-        manifesto: {
-          kicker: "14 nm · 7 nm · 3 nm · … · ?",
-          lines: ["With hardware", "already hitting", "physical limits,", "startups with strong", "algorithmic innovation", "are destined to shine."],
-          accent: 4,
-          afterword: "An industry extractive in one dimension only, oblivious to the optimization of software — which is mined differently: with cerebral power, talent retention, and long-term vision. It has learned to move mountains of ore; it finds the keeping of minds harder than the mining of metals.",
-        },
         sub: "A driving stack built from physics and proof: five refusal stages in front of one actuation gate, two invariants proven on paper, one latency measured in hardware.",
         ctaPrimary: "Enter the exhibition",
         ctaSecondary: "Contact",
@@ -627,12 +621,6 @@ export const copy = {
       min: {
         eyebrow: "پردازنده‌ای به طراحی مهندسان فرایند",
         h1: "EPU — به‌احتمال، بهینه‌ترین پردازنده‌ای که تاکنون برای کاربردهای خودرویی طراحی شده است.",
-        manifesto: {
-          kicker: "14 nm · 7 nm · 3 nm · … · ?",
-          lines: ["حالا که سخت‌افزار", "به مرزهای فیزیکی رسیده است،", "استارتاپ‌هایی با", "نوآوری الگوریتمی قوی", "مقدّر است بدرخشند."],
-          accent: 3,
-          afterword: "صنعتی که تنها در یک بُعد استخراج‌گر است و از بهینه‌سازی نرم‌افزار غافل — بهینه‌سازی‌ای که جور دیگری استخراج می‌شود: با توان مغزی، نگه‌داشت استعداد و چشم‌انداز بلندمدت. این صنعت جابه‌جا کردن کوه‌های سنگ را آموخته است؛ اما نگه‌داشتن ذهن‌ها را دشوارتر از استخراج فلزها می‌یابد.",
-        },
         sub: "پشته‌ای از فیزیک و برهان: پنج مرحلهٔ امتناع پیش از یک دروازهٔ کنش، دو ناوردای اثبات‌شده روی کاغذ، و یک تأخیر اندازه‌گیری‌شده در سخت‌افزار.",
         ctaPrimary: "ورود به نمایشگاه",
         ctaSecondary: "تماس",
