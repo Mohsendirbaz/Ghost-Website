@@ -4,7 +4,6 @@ import { useLang } from '../context/LanguageContext';
 import { copy } from '../data/copy';
 import NarrowingHero from '../components/visuals/NarrowingHero';
 import WorksCarousel from '../components/visuals/WorksCarousel';
-import CoverShelf from '../components/visuals/CoverShelf';
 import Figure from '../components/Figure';
 import MoatStrip from '../components/MoatStrip';
 import StandingsLegend from '../components/StandingsLegend';
@@ -12,8 +11,7 @@ import './Home.css';
 
 export default function Home() {
   const { lang } = useLang();
-  const t = copy[lang].home;
-  const m = t.min || {};
+  const m = copy[lang].home.min || {};
   const arrow = lang === 'fa' ? '←' : '→';
   const [canvasJsonDownload, setCanvasJsonDownload] = useState('idle');
 
@@ -149,21 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      {t.corpusDocs && (
-        <section className="hm-row">
-          <h2 className="hm-h2">{t.corpusTitle}</h2>
-          <p className="hm-lead">{m.corpusLead}</p>
-          <CoverShelf docs={t.corpusDocs} lang={lang} />
-          <p className="hm-more">
-            <Link className="hm-link" to={`/${lang}/library`}>
-              {m.corpusMore} {arrow}
-            </Link>
-          </p>
-        </section>
-      )}
-
       <section className="hm-close">
-        <p className="hm-close__line">{m.closeLine}</p>
         <Link className="hm-link hm-link--primary" to={`/${lang}/contact`}>
           {m.closeCta} {arrow}
         </Link>

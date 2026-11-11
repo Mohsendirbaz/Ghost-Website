@@ -69,16 +69,6 @@ export const copy = {
       ctaBandTitle: "Ready to explore how physics-based computing can transform autonomous systems?",
       ctaBandCta1: "Request Information",
       ctaBandCta2: "Our Technology",
-      corpusEyebrow: "The Written Record",
-      corpusTitle: "Start with the Corpus",
-      corpusBody: "The program's position is documented, ranked, and published. These four documents are the load-bearing record — begin with any of them.",
-      corpusDocs: [
-        { slug: "phd-dissertation", title: "PhD Dissertation (IIT)", desc: "Neural-network modeling of biomass gasification — the empirical and methodological taproot." },
-        { slug: "special-function-framework", title: "Physics-Informed Special-Function Framework", desc: "The AGM/elliptic reduced-order framework — the theoretical core." },
-        { slug: "ten-foundational-articles", title: "Ten Foundational Articles", desc: "The 89-page consolidated corpus on provably bounded autonomous driving." },
-        { slug: "provably-bounded-l4-consolidated-solution", title: "Provably-Bounded L4 Consolidated Solution", desc: "Six engineering surveys mapped onto the constraint-propagation chain, with six testable acceptance criteria." },
-      ],
-      corpusNote: "The full corpus, with each document's scope and standing, lives in the Technical Library.",
       exhibitionEyebrow: "The Main Exhibition",
       exhibitionTitle: "The Research, Running",
       exhibitionBody: "Four rooms of the program's own research software, executing live in your browser: an adaptive signal multiplexer solving optimization problems on 100-millisecond cycles, the eight-thread bounded-autonomy stack narrowing its command box as risk rises, a correctable Ground Truth you can challenge, and the F26 event fabric. Nothing is a recording; nothing is vehicle data.",
@@ -109,9 +99,6 @@ export const copy = {
           { key: "eventfabric", label: "Event Fabric" }
         ],
         exEnter: "Enter",
-        corpusLead: "Four documents carry the program's claims; the library holds the other 46 curated assets.",
-        corpusMore: "Browse the library",
-        closeLine: "If bounded autonomy matters to your program, we should talk.",
         closeCta: "Start the conversation"
       },
     },
@@ -603,16 +590,6 @@ export const copy = {
       ctaBandTitle: "آماده‌اید تا کاوش کنید که چگونه محاسبات مبتنی بر فیزیک می‌تواند سامانه‌های خودمختار را تحول دهد؟",
       ctaBandCta1: "درخواست اطلاعات",
       ctaBandCta2: "فناوری ما",
-      corpusEyebrow: "کارنامهٔ مکتوب",
-      corpusTitle: "از پیکره آغاز کنید",
-      corpusBody: "موضع این برنامه مستند، رتبه‌بندی‌شده و منتشرشده است. این چهار سند، ستون‌های کارنامهٔ مکتوب‌اند — از هر کدام می‌توانید آغاز کنید.",
-      corpusDocs: [
-        { slug: "phd-dissertation", title: "رسالهٔ دکتری (IIT)", desc: "مدل‌سازی شبکهٔ عصبی گازی‌سازی زیست‌توده — ریشهٔ تجربی و روش‌شناختی برنامه." },
-        { slug: "special-function-framework", title: "چارچوب توابع خاصِ فیزیک‌آگاه", desc: "چارچوب مرتبه‌کاستهٔ AGM/بیضوی — هستهٔ نظری." },
-        { slug: "ten-foundational-articles", title: "ده مقالهٔ بنیادین", desc: "پیکرهٔ تلفیقی ۸۹ صفحه‌ای دربارهٔ رانندگی خودرانِ با کران‌های اثبات‌پذیر." },
-        { slug: "provably-bounded-l4-consolidated-solution", title: "راه‌حل تلفیقی L4 با کران‌های اثبات‌پذیر", desc: "نگاشت شش پیمایش مهندسی بر زنجیرهٔ انتشار قید، با شش معیار پذیرش آزمون‌پذیر." },
-      ],
-      corpusNote: "پیکرهٔ کامل، همراه با دامنه و جایگاه هر سند، در کتابخانهٔ فنی در دسترس است.",
       exhibitionEyebrow: "نمایشگاه اصلی",
       exhibitionTitle: "خودِ پژوهش، در حال اجرا",
       exhibitionBody: "چهار تالار از نرم‌افزار پژوهشی برنامه، زنده در مرورگر شما اجرا می‌شود: مالتی‌پلکسر سیگنال تطبیقی که مسائل بهینه‌سازی را در چرخه‌های ۱۰۰ میلی‌ثانیه‌ای حل می‌کند، پشتهٔ هشت‌رشته‌ایِ خودمختاری کران‌دار که با افزایش ریسک جعبهٔ فرمانش را تنگ می‌کند، حقیقتِ بنیادینِ تصحیح‌پذیری که می‌توانید به چالشش بکشید، و بافت رویداد F26. هیچ‌چیز ضبط‌شده نیست؛ هیچ‌چیز دادهٔ خودروی واقعی نیست.",
@@ -643,9 +620,6 @@ export const copy = {
           { key: "eventfabric", label: "بافت رویداد" }
         ],
         exEnter: "ورود",
-        corpusLead: "چهار سند بار ادعاهای برنامه را می‌کشند؛ ۴۶ سند منتخب دیگر در کتابخانه است.",
-        corpusMore: "مرور کتابخانه",
-        closeLine: "اگر خودرانی کران‌دار برای برنامهٔ شما اهمیت دارد، گفت‌وگو کنیم.",
         closeCta: "آغاز گفت‌وگو"
       },
     },

@@ -196,12 +196,6 @@
 
 /* Close */
 .hm-close { padding-block: 4.2rem 5.5rem; text-align: center; }
-.hm-close__line {
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  color: var(--hm-ink);
-  font-weight: 500;
-  margin: 0 0 1.4rem;
-}
 
 /* RTL refinements — Persian joins poorly under tracking */
 [dir='rtl'] .hm-eyebrow,
