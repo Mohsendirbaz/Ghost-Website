@@ -15,7 +15,7 @@
 
   /* ── Text — hierarchical contrast ladder ── */
   --text-primary:   #1A1D23;   /* ~13:1 on surface-base */
-  --text-secondary: #6B7280;   /* ~5.3:1 on surface-base */
+  --text-secondary: #555B66;   /* Stronger contrast while remaining subordinate to primary */
   --text-tertiary:  #9CA3AF;   /* ~3.1:1 on surface-base (decorative) */
   --text-disabled:  #D1D5DB;   /* ~1.7:1 (decorative only) */
   --text-inverse:   #FFFFFF;   /* For text on dark/primary backgrounds */

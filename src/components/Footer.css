@@ -28,11 +28,11 @@
 
 .footer__logo .logo-mark {
   background: var(--color-primary);
-  color: var(--text-inverse);
+  color: #fff;
 }
 
 .footer__logo .logo-word {
-  color: var(--text-inverse);
+  color: #fff;
 }
 
 .footer__tagline {
@@ -166,8 +166,16 @@
   cursor: pointer;
 }
 
-.footer__link:hover {
-  color: var(--text-inverse);
+.footer__links .footer__link:hover {
+  color: #fff;
+}
+
+.footer__contact .footer__link:hover {
+  color: #fff;
+}
+
+.footer__bottom .footer__link:hover {
+  color: #fff;
 }
 
 .footer__contact {

@@ -16,10 +16,10 @@
 
   /* ── Text — hierarchical contrast ladder ── */
   --text-primary:   #e0e0e0;   /* 13.2:1 contrast — AAA */
-  --text-secondary: #adb5bd;   /* 8.9:1 contrast — AAA */
+  --text-secondary: #c2cad6;   /* Brighter for legibility while remaining subordinate to primary */
   --text-tertiary:  #64748b;   /* 5.1:1 contrast — AA+ */
   --text-disabled:  #475569;   /* 3.2:1 contrast — decorative */
-  --text-inverse:   #1e293b;   /* For text on light/primary backgrounds */
+  --text-inverse:   #ffffff;   /* White foreground for dark and primary surfaces */
 
   /* ── Brand / Interactive ── */
   --color-primary:        #4a7fb5;   /* 5.2:1 on surface-base */
